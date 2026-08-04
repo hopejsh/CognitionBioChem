@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Three.js for 3D Molecular WebGL Rendering -->
@@ -26,17 +26,17 @@
                 <i class="fa-solid fa-dna glow-icon"></i>
             </div>
             <div class="logo-text">
-                <h1>NeuroCognition <span>BioChem</span></h1>
+                <h1>Cognition <span>BioChem</span></h1>
                 <p class="subtitle">DeepMind Structural Pharmacology & AlphaFold3 De Novo Platform</p>
             </div>
         </div>
         <nav class="nav-links">
-            <button class="nav-btn active" data-tab="overview"><i class="fa-solid fa-chart-line"></i> 개요 대시보드</button>
-            <button class="nav-btn" data-tab="natural-products"><i class="fa-solid fa-flask-vial"></i> 천연물 결합 구조</button>
-            <button class="nav-btn" data-tab="brain-regions"><i class="fa-solid fa-brain"></i> 뇌 영역 타깃</button>
-            <button class="nav-btn" data-tab="signaling"><i class="fa-solid fa-diagram-project"></i> 세포 신호전달</button>
-            <button class="nav-btn highlight" data-tab="af3-candidates"><i class="fa-solid fa-cube"></i> AF3 TOP 10 후보군</button>
-            <button class="nav-btn highlight-gold" data-tab="full-brain-pipeline"><i class="fa-solid fa-pills"></i> 5대 뇌 영역 표적 신약 25종 센터</button>
+            <button class="nav-btn active" data-tab="overview"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+            <button class="nav-btn" data-tab="natural-products"><i class="fa-solid fa-flask-vial"></i> Natural Pharmacophores</button>
+            <button class="nav-btn" data-tab="brain-regions"><i class="fa-solid fa-brain"></i> Brain Targets</button>
+            <button class="nav-btn" data-tab="signaling"><i class="fa-solid fa-diagram-project"></i> Signaling Cascades</button>
+            <button class="nav-btn highlight" data-tab="af3-candidates"><i class="fa-solid fa-cube"></i> AF3 TOP 10 Candidates</button>
+            <button class="nav-btn highlight-gold" data-tab="full-brain-pipeline"><i class="fa-solid fa-pills"></i> 25 De Novo Drug Center</button>
         </nav>
         <div class="header-actions">
             <a href="https://alphafoldserver.com/" target="_blank" class="status-badge link-badge"><i class="fa-solid fa-server"></i> AlphaFold Server Live Connected</a>
@@ -50,63 +50,63 @@
             <div class="hero-banner">
                 <div class="hero-text">
                     <span class="badge-tag"><i class="fa-solid fa-microscope"></i> Structural Biology & Computational Neuro-Medicine</span>
-                    <h2>동양의학 천연물 분자 약리학 및 <br>AlphaFold3 실시간 3D 서열 연동 신약 개발 플랫폼</h2>
-                    <p>인삼, 은행엽, 뱀톱, 황금, 강황 등 전통 동양의학의 대표 인지 기능 향상 천연물 성분의 3D 결합 구조를 분석하고, 해마, 전두엽 피질, 콜린성 기저전뇌, 미세아교세포, 아스트로사이트 등 5대 뇌 영역을 표적하는 25종 신약의 고유 FASTA 서열 기반 <strong>AlphaFold3 3D 입체 결정 구조(pLDDT 색상 스펙트럼) 렌더링 및 AlphaFold Server 실시간 연결 서비스</strong>를 제공합니다.</p>
+                    <h2>Eastern Natural Product Pharmacology & <br>AlphaFold3 Sequence-Driven Drug Discovery Platform</h2>
+                    <p>Investigating the 3D binding structures and pharmacophoric moieties of cognition-enhancing natural products (Ginsenosides, Huperzine A, Ginkgolide B, Baicalein, Curcumin, Onjisaponin V, Salvianolic Acid B, Asiatic Acid). Modeling 25 De Novo therapeutics via <strong>AlphaFold3 sequence-driven 3D structural topology parsing and live AlphaFold Server integration</strong> across 5 targeted brain regions.</p>
                 </div>
                 <div class="hero-stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon"><i class="fa-solid fa-brain"></i></div>
-                        <div class="stat-value">5개 영역</div>
-                        <div class="stat-label">뇌 실질 특이적 표적</div>
+                        <div class="stat-value">5 Regions</div>
+                        <div class="stat-label">Targeted CNS Subfields</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon"><i class="fa-solid fa-capsules"></i></div>
-                        <div class="stat-value">25개 신약</div>
-                        <div class="stat-label">De Novo 파이프라인</div>
+                        <div class="stat-value">25 Drugs</div>
+                        <div class="stat-label">De Novo Bio-Conjugates</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon"><i class="fa-solid fa-server"></i></div>
-                        <div class="stat-value">AF3 Server</div>
-                        <div class="stat-label">실시간 연동 엔진</div>
+                        <div class="stat-value">AF3 Engine</div>
+                        <div class="stat-label">Live AlphaFold Integration</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon"><i class="fa-solid fa-gauge-high"></i></div>
                         <div class="stat-value">-19.5 kcal</div>
-                        <div class="stat-label">최고 결합 자유에너지 ($\Delta G$)</div>
+                        <div class="stat-label">Peak Binding Energy ($\Delta G$)</div>
                     </div>
                 </div>
             </div>
 
             <!-- Key Paradigm Summary Grid -->
             <div class="section-title-box">
-                <h3><i class="fa-solid fa-layer-group"></i> 핵심 바이오메디컬 도메인 요약</h3>
-                <p>화학 구조, 3D 수용체 결합 부위, 뇌 세포/조직 위치 및 하위 신호전달 경로 통합 맵</p>
+                <h3><i class="fa-solid fa-layer-group"></i> Core Biomedical Research Domains</h3>
+                <p>Comprehensive integration of chemical structures, 3D receptor binding sites, cellular subfield mapping, and intracellular signaling pathways</p>
             </div>
 
             <div class="card-grid-3">
                 <div class="glass-card">
                     <div class="card-header">
                         <i class="fa-solid fa-flask-vial"></i>
-                        <h4>천연물 결합 구조 (Pharmacophore)</h4>
+                        <h4>Natural Pharmacophores</h4>
                     </div>
-                    <p>Huperzine A(AChE CAS/PAS), Ginsenosides(TrkB/GR), Curcumin(Keap1/Aβ), Baicalein(GSK-3β) 등의 Cation-π 결합 및 소수성 사슬 삽입 메커니즘 정밀 분석.</p>
-                    <button class="card-action-btn" onclick="switchTab('natural-products')">자세히 탐색 <i class="fa-solid fa-arrow-right"></i></button>
+                    <p>In-depth analysis of cation-π anchoring, hydrophobic cage insertion, and covalent alkylation mechanics across 8 traditional Eastern medicine compounds.</p>
+                    <button class="card-action-btn" onclick="switchTab('natural-products')">Explore Pharmacophores <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
                 <div class="glass-card">
                     <div class="card-header">
                         <i class="fa-solid fa-brain"></i>
-                        <h4>뇌 영역 & 세포 타깃 (Brain & Cell Mapping)</h4>
+                        <h4>Brain Subfield Mapping</h4>
                     </div>
-                    <p>해마 CA1/CA3 피라미드 신경세포, 전두엽 피질, 콜린성 기저전뇌, 미세아교세포(M1/M2 극성화), 아스트로사이트 세포 특이성 맵.</p>
-                    <button class="card-action-btn" onclick="switchTab('brain-regions')">자세히 탐색 <i class="fa-solid fa-arrow-right"></i></button>
+                    <p>Cellular targeting across Hippocampus (CA1/CA3/DG), Prefrontal Cortex, Basal Forebrain, Microglia M2 polarization, and Astrocytes & BBB.</p>
+                    <button class="card-action-btn" onclick="switchTab('brain-regions')">Explore Brain Targets <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
                 <div class="glass-card highlight-card">
                     <div class="card-header">
                         <i class="fa-solid fa-pills"></i>
-                        <h4>5대 뇌 영역 표적 신약 25종 센터</h4>
+                        <h4>25 De Novo Drug Center</h4>
                     </div>
-                    <p>실제 FASTA 서열로 파싱되는 3D 3D 단백질 결정 구조 및 AlphaFold Server 직접 런처 내장 뷰어.</p>
-                    <button class="card-action-btn" onclick="switchTab('full-brain-pipeline')">신약 25종 센터 열기 <i class="fa-solid fa-arrow-right"></i></button>
+                    <p>Interactive 3-column drug hub featuring real FASTA sequence 3D WebGL structural viewers and direct AlphaFold Server launch integration.</p>
+                    <button class="card-action-btn" onclick="switchTab('full-brain-pipeline')">Open 25 Drug Center <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </section>
@@ -114,42 +114,42 @@
         <!-- Tab 2: Natural Products Pharmacophore & Binding Structures -->
         <section id="natural-products" class="tab-content">
             <div class="section-title-box">
-                <h2><i class="fa-solid fa-flask-vial"></i> 동양의학 인지 기능 향상 천연물 화학 구조 & 결합 분석</h2>
-                <p>화합물별 SMILES, 약동학적 Pharmacophore, 수용체 결합 잔기(Binding Residues) 및 입체 화학 분석</p>
+                <h2><i class="fa-solid fa-flask-vial"></i> Cognition-Enhancing Natural Products Chemical Structures & Binding Moieties</h2>
+                <p>Detailed SMILES formulation, pharmacophoric moieties, receptor binding residue coordinates, and stereochemistry</p>
             </div>
 
             <div class="split-view">
                 <div class="sidebar-selector">
                     <div class="selector-item active" onclick="selectNaturalProduct(0)">
-                        <div class="item-title">Huperzine A (뱀톱/석송)</div>
+                        <div class="item-title">Huperzine A</div>
                         <div class="item-sub">Sesquiterpene Alkaloid | AChE & NMDA</div>
                     </div>
                     <div class="selector-item" onclick="selectNaturalProduct(1)">
-                        <div class="item-title">Ginsenoside Rg1 (인삼/홍삼)</div>
+                        <div class="item-title">Ginsenoside Rg1</div>
                         <div class="item-sub">Dammarane Triterpenoid | TrkB & GR</div>
                     </div>
                     <div class="selector-item" onclick="selectNaturalProduct(2)">
-                        <div class="item-title">Ginkgolide B (은행엽)</div>
+                        <div class="item-title">Ginkgolide B</div>
                         <div class="item-sub">Diterpene Tri-lactone | PAFR & GABA_A</div>
                     </div>
                     <div class="selector-item" onclick="selectNaturalProduct(3)">
-                        <div class="item-title">Baicalein (황금)</div>
+                        <div class="item-title">Baicalein</div>
                         <div class="item-sub">Trihydroxyflavone | GSK-3β & LOX</div>
                     </div>
                     <div class="selector-item" onclick="selectNaturalProduct(4)">
-                        <div class="item-title">Curcumin (강황/울금)</div>
+                        <div class="item-title">Curcumin</div>
                         <div class="item-sub">Diarylheptanoid | Keap1 & Aβ Oligomers</div>
                     </div>
                     <div class="selector-item" onclick="selectNaturalProduct(5)">
-                        <div class="item-title">Onjisaponin V / DISS (원지)</div>
+                        <div class="item-title">Onjisaponin V / DISS</div>
                         <div class="item-sub">Triterpenoid Saponin | TrkB & Autophagy</div>
                     </div>
                     <div class="selector-item" onclick="selectNaturalProduct(6)">
-                        <div class="item-title">Salvianolic Acid B (단삼)</div>
+                        <div class="item-title">Salvianolic Acid B</div>
                         <div class="item-sub">Polyphenolic Tetramer | AChE PAS & ER-β</div>
                     </div>
                     <div class="selector-item" onclick="selectNaturalProduct(7)">
-                        <div class="item-title">Asiatic Acid (적설초/고투콜라)</div>
+                        <div class="item-title">Asiatic Acid</div>
                         <div class="item-sub">Ursane Triterpenoid | TrkB & Nrf2</div>
                     </div>
                 </div>
@@ -163,31 +163,31 @@
         <!-- Tab 3: Brain Regions & Cell Types Mapping -->
         <section id="brain-regions" class="tab-content">
             <div class="section-title-box">
-                <h2><i class="fa-solid fa-brain"></i> 뇌 특정 영역 & 신경 세포 타깃 매핑</h2>
-                <p>인지 기능(기억력, 주의력, 신경재생)과 관련된 뇌 실질 영역 및 자극 세포군 분석</p>
+                <h2><i class="fa-solid fa-brain"></i> Target Brain Regions & Cellular Subfields Mapping</h2>
+                <p>Mapping cognitive functions (memory consolidation, executive focus, adult neurogenesis) to specific CNS anatomical regions</p>
             </div>
 
             <div class="brain-map-container glass-card">
                 <div class="brain-regions-interactive">
                     <div class="region-node active" data-region="hippocampus" onclick="selectBrainRegion('hippocampus')">
                         <i class="fa-solid fa-synapse"></i>
-                        <span>해마 (Hippocampus CA1/CA3/DG)</span>
+                        <span>Hippocampus (CA1/CA3/DG)</span>
                     </div>
                     <div class="region-node" data-region="pfc" onclick="selectBrainRegion('pfc')">
                         <i class="fa-solid fa-lightbulb"></i>
-                        <span>전두엽 피질 (Prefrontal Cortex)</span>
+                        <span>Prefrontal Cortex (PFC)</span>
                     </div>
                     <div class="region-node" data-region="basal-forebrain" onclick="selectBrainRegion('basal-forebrain')">
                         <i class="fa-solid fa-bolt-lightning"></i>
-                        <span>콜린성 기저전뇌 (Basal Forebrain)</span>
+                        <span>Basal Forebrain (NBM)</span>
                     </div>
                     <div class="region-node" data-region="microglia" onclick="selectBrainRegion('microglia')">
                         <i class="fa-solid fa-shield-halved"></i>
-                        <span>미세아교세포 (Microglia M1/M2)</span>
+                        <span>Microglia (M1/M2 State)</span>
                     </div>
                     <div class="region-node" data-region="astrocytes" onclick="selectBrainRegion('astrocytes')">
                         <i class="fa-solid fa-star"></i>
-                        <span>아스트로사이트 (Astrocytes & BBB)</span>
+                        <span>Astrocytes & BBB Unit</span>
                     </div>
                 </div>
 
@@ -198,62 +198,62 @@
         <!-- Tab 4: Intracellular Downstream Signaling Cascades -->
         <section id="signaling" class="tab-content">
             <div class="section-title-box">
-                <h2><i class="fa-solid fa-diagram-project"></i> 세포 내 하위 신호전달 경로 (Intracellular Signaling)</h2>
-                <p>수용체 결합 후 이뤄지는 세포 내 키나아제 캐스케이드, 유전자 전사 유도 및 신경 가소성 메커니즘</p>
+                <h2><i class="fa-solid fa-diagram-project"></i> Intracellular Downstream Signaling Pathways</h2>
+                <p>Post-binding kinase cascades, gene transcription induction, and synaptic plasticity mechanisms</p>
             </div>
 
             <div class="pathway-grid">
                 <div class="pathway-card glass-card">
                     <div class="pathway-header">
                         <span class="pathway-badge p1">Pathway 01</span>
-                        <h3>TrkB-PI3K-Akt-CREB 신호전달 (신경 가소성 & LTP)</h3>
+                        <h3>TrkB-PI3K-Akt-CREB Signaling (Synaptic Plasticity & LTP)</h3>
                     </div>
                     <div class="pathway-flow">
-                        <div class="flow-step">TrkB 수용체 활성화 (Tyr515/816 Autophosphorylation)</div>
+                        <div class="flow-step">TrkB Receptor Activation (Tyr515/816 Autophosphorylation)</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">PI3K 활성화 → PIP3 생성 → Akt (Ser473) 인산화</div>
+                        <div class="flow-step">PI3K Activation → PIP3 Generation → Akt (Ser473) Phosphorylation</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">MEK1/2 → ERK1/2 인산화 & MSK1/p90RSK 전사 키나아제 활성</div>
+                        <div class="flow-step">MEK1/2 → ERK1/2 Phosphorylation & MSK1/p90RSK Kinase Cascade</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step highlight-step">CREB (Ser133) 인산화 → BDNF & Synaptophysin / PSD-95 전사 유도</div>
+                        <div class="flow-step highlight-step">CREB (Ser133) Phosphorylation → BDNF & Synaptophysin / PSD-95 Gene Transcription</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-result">결과: 해마 LTP 지속 시간 연장, 수상돌기 가시 밀도 증가 & 기억 형성</div>
+                        <div class="flow-result">Outcome: Prolonged Hippocampal LTP Duration, Dendritic Spine Density Increase & Memory Formation</div>
                     </div>
                 </div>
 
                 <div class="pathway-card glass-card">
                     <div class="pathway-header">
                         <span class="pathway-badge p2">Pathway 02</span>
-                        <h3>Nrf2/Keap1-ARE 경로 (항산화 & 신경 보호)</h3>
+                        <h3>Nrf2/Keap1-ARE Pathway (Antioxidant Defense & Neuroprotection)</h3>
                     </div>
                     <div class="pathway-flow">
-                        <div class="flow-step">Keap1 Cys151 알킬화 / 디코이 결합에 의한 Nrf2 해리</div>
+                        <div class="flow-step">Keap1 Cys151 Alkylation / Decoy Binding Nrf2 Dissociation</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">Nrf2 유비퀴틴화 유발 E3 ligase 분해 복합체 탈출</div>
+                        <div class="flow-step">Nrf2 Escape from Ubiquitin E3 Ligase Proteasomal Degradation Complex</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">Nrf2 세포핵 내 이동 & Maf 단백질과의 헤테로다이머 형성</div>
+                        <div class="flow-step">Nrf2 Nuclear Translocation & Heterodimerization with Maf Proteins</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step highlight-step">ARE (Antioxidant Response Element) DNA 프로모터 결합</div>
+                        <div class="flow-step highlight-step">Binding to ARE (Antioxidant Response Element) DNA Promoter Region</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-result">결과: HO-1, NQO1, GSH 대량 발현 → 활성산소(ROS) 제거 & 신경사멸 방지</div>
+                        <div class="flow-result">Outcome: Massive HO-1, NQO1, GSH Expression → ROS Scavenging & Prevention of Dendritic Atrophy</div>
                     </div>
                 </div>
 
                 <div class="pathway-card glass-card">
                     <div class="pathway-header">
                         <span class="pathway-badge p3">Pathway 03</span>
-                        <h3>GSK-3β 억제 & Wnt/β-Catenin 경로 (Tau & Aβ 억제)</h3>
+                        <h3>GSK-3β Inhibition & Wnt/β-Catenin Pathway (Tau & Aβ Suppression)</h3>
                     </div>
                     <div class="pathway-flow">
-                        <div class="flow-step">GSK-3β 활성 포켓 바인딩 / Ser9 억제성 인산화 유도</div>
+                        <div class="flow-step">GSK-3β ATP Pocket Binding / Ser9 Inhibitory Phosphorylation Induction</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">Tau 단백질 과인산화(Hyperphosphorylation) 차단</div>
+                        <div class="flow-step">Blockade of Tau Protein Hyperphosphorylation</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">세포질 내 β-Catenin 안정화 & 핵 내 이동</div>
+                        <div class="flow-step">Cytoplasmic β-Catenin Stabilization & Nuclear Translocation</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step highlight-step">TCF/LEF 전사인자 복합체 활성화 → Cyclin D1 & Wnt 유전자 발현</div>
+                        <div class="flow-step highlight-step">TCF/LEF Transcription Factor Complex Activation → Cyclin D1 & Wnt Gene Expression</div>
                         <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-result">결과: 신경섬유 엉킴(NFT) 형성 억제 및 성체 해마 신경세포 분화 촉진</div>
+                        <div class="flow-result">Outcome: Neurofibrillary Tangle (NFT) Suppression & Adult Neural Stem Cell Differentiation</div>
                     </div>
                 </div>
             </div>
@@ -262,8 +262,8 @@
         <!-- Tab 5: AlphaFold3 De Novo Candidates Leaderboard & 3D Viewer -->
         <section id="af3-candidates" class="tab-content">
             <div class="section-title-box">
-                <h2><i class="fa-solid fa-cube"></i> AlphaFold3 De Novo 인지 기능 향상 단백질 TOP 10</h2>
-                <p>인공지능 De Novo 계산 구조 설계를 통해 창출된 최상위 10개 후보 단백질/펩타이드 시뮬레이션 및 3D WebGL 시각화</p>
+                <h2><i class="fa-solid fa-cube"></i> AlphaFold3 De Novo Engineered Candidates TOP 10</h2>
+                <p>AI De Novo computational structure design leaderboard ranking and interactive 3D WebGL visualization</p>
             </div>
 
             <div class="af3-dashboard-grid">
@@ -271,10 +271,10 @@
                     <div class="viewer-header">
                         <div class="viewer-title">
                             <i class="fa-solid fa-cube glow-icon"></i>
-                            <h3 id="current-candidate-name">CogDual-TrkB-PAS-10 (1위)</h3>
+                            <h3 id="current-candidate-name">CogDual-TrkB-PAS-10 (Rank #1)</h3>
                         </div>
                         <div class="viewer-controls">
-                            <button id="reset-cam-btn" class="mini-btn"><i class="fa-solid fa-arrows-rotate"></i> 시점 초기화</button>
+                            <button id="reset-cam-btn" class="mini-btn"><i class="fa-solid fa-arrows-rotate"></i> Reset Camera</button>
                             <span class="plddt-pill" id="current-plddt">pLDDT: 93.2 (AF3 Confidence: Very High)</span>
                         </div>
                     </div>
@@ -298,12 +298,12 @@
                         <table class="leaderboard-table">
                             <thead>
                                 <tr>
-                                    <th>순위</th>
-                                    <th>후보 코드</th>
-                                    <th>표적 수용체</th>
+                                    <th>Rank</th>
+                                    <th>Candidate Code</th>
+                                    <th>Target Receptor</th>
                                     <th>AF3 pLDDT</th>
                                     <th>$\Delta G$ (kcal/mol)</th>
-                                    <th>CEI 점수</th>
+                                    <th>CEI Score</th>
                                 </tr>
                             </thead>
                             <tbody id="leaderboard-tbody"></tbody>
@@ -313,7 +313,7 @@
             </div>
 
             <div class="chart-container-card glass-card">
-                <h3><i class="fa-solid fa-chart-bar"></i> TOP 10 후보군 컴퓨테이셔널 시뮬레이션 벤치마크 (CEI vs Binding Affinity)</h3>
+                <h3><i class="fa-solid fa-chart-bar"></i> TOP 10 Candidate Computational Benchmark (CEI vs Binding Affinity)</h3>
                 <div class="chart-wrapper">
                     <canvas id="benchmark-chart"></canvas>
                 </div>
@@ -323,18 +323,18 @@
         <!-- Tab 6: 5-Brain-Region Targeted 25 De Novo Drug Therapeutics Pipeline -->
         <section id="full-brain-pipeline" class="tab-content">
             <div class="section-title-box">
-                <h2><i class="fa-solid fa-pills"></i> 5대 뇌 영역 표적 25종 De Novo 신약 정밀 사양 센터</h2>
-                <p>각 신약의 화학적 구조, FASTA 서열, 3D 결합 잔기(Binding Sites), 표적 조직/세포 및 AlphaFold Server 3D 연동</p>
+                <h2><i class="fa-solid fa-pills"></i> 25 De Novo Targeted Therapeutics Precision Center</h2>
+                <p>Complete chemical formulations, FASTA sequences, 3D binding site coordinates, target cellular subfields, and live AlphaFold Server integration</p>
             </div>
 
             <!-- Region Filter Bar -->
             <div class="region-filter-bar">
-                <button class="filter-btn active" onclick="filterBrainPipeline('all')"><i class="fa-solid fa-border-all"></i> 전체 25종 신약</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('hippocampus')"><i class="fa-solid fa-synapse"></i> 1. 해마 (Hippocampus)</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('pfc')"><i class="fa-solid fa-lightbulb"></i> 2. 전두엽 피질 (PFC)</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('basal')"><i class="fa-solid fa-bolt-lightning"></i> 3. 기저전뇌 (Basal Forebrain)</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('microglia')"><i class="fa-solid fa-shield-halved"></i> 4. 미세아교세포 (Microglia)</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('astrocyte')"><i class="fa-solid fa-star"></i> 5. 아스트로사이트 & BBB</button>
+                <button class="filter-btn active" onclick="filterBrainPipeline('all')"><i class="fa-solid fa-border-all"></i> All 25 Therapeutics</button>
+                <button class="filter-btn" onclick="filterBrainPipeline('hippocampus')"><i class="fa-solid fa-synapse"></i> 1. Hippocampus</button>
+                <button class="filter-btn" onclick="filterBrainPipeline('pfc')"><i class="fa-solid fa-lightbulb"></i> 2. Prefrontal Cortex (PFC)</button>
+                <button class="filter-btn" onclick="filterBrainPipeline('basal')"><i class="fa-solid fa-bolt-lightning"></i> 3. Basal Forebrain</button>
+                <button class="filter-btn" onclick="filterBrainPipeline('microglia')"><i class="fa-solid fa-shield-halved"></i> 4. Microglia M2</button>
+                <button class="filter-btn" onclick="filterBrainPipeline('astrocyte')"><i class="fa-solid fa-star"></i> 5. Astrocytes & BBB</button>
             </div>
 
             <!-- Pipeline Cards Container -->
@@ -356,11 +356,11 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                     <div>
                         <h4 style="color: var(--accent-cyan); font-weight: 800; font-size: 1.1rem;"><i class="fa-solid fa-server"></i> AlphaFold Server Live 3D Pipeline</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">본 후보 물질의 FASTA 서열을 AlphaFold Server로 전송하여 실질적 3D 분자 구조 시뮬레이션을 실행합니다.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Submit this candidate's FASTA sequence directly to AlphaFold Server for live 3D prediction and PDB/CIF download.</p>
                     </div>
                     <div style="display: flex; gap: 0.6rem;">
-                        <button class="card-action-btn" style="margin-top: 0; width: auto;" id="btn-copy-fasta" onclick="copyModalFasta()"><i class="fa-solid fa-copy"></i> FASTA 서열 복사</button>
-                        <a href="https://alphafoldserver.com/" target="_blank" class="card-action-btn" style="margin-top: 0; width: auto; background: var(--grad-primary); color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> AlphaFold Server 실행</a>
+                        <button class="card-action-btn" style="margin-top: 0; width: auto;" id="btn-copy-fasta" onclick="copyModalFasta()"><i class="fa-solid fa-copy"></i> Copy FASTA Sequence</button>
+                        <a href="https://alphafoldserver.com/" target="_blank" class="card-action-btn" style="margin-top: 0; width: auto; background: var(--grad-primary); color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Launch AlphaFold Server</a>
                     </div>
                 </div>
             </div>
@@ -406,7 +406,7 @@
 
     <!-- Footer -->
     <footer class="app-footer">
-        <p>© 2026 Google DeepMind Advanced Agentic Coding - NeuroCognition BioChem Intelligence</p>
+        <p>© 2026 Google DeepMind Advanced Agentic Coding - CognitionBioChem Intelligence</p>
         <p class="footer-sub">Generated with AlphaFold3 3D Structural Modeling & Structural Pharmacology Algorithms.</p>
     </footer>
 

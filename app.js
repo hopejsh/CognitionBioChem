@@ -1,126 +1,126 @@
 /* ==========================================================================
-   NeuroCognition BioChem - Application Logic (JavaScript & Three.js WebGL)
+   CognitionBioChem - Application Logic (JavaScript & Three.js WebGL)
    ========================================================================== */
 
-// --- Natural Products Data ---
+// --- Natural Products Data (100% English) ---
 const NATURAL_PRODUCTS_DATA = [
     {
-        name: "Huperzine A (뱀톱/석송)",
+        name: "Huperzine A (Lycopodium serratum)",
         class: "Sesquiterpene Lycopodium Alkaloid",
         smiles: "CC1=CC2C(=C)C3C(=O)NC(=C2CC3(C)N)C",
         target: "AChE Catalytic Anionic Site (CAS) & NMDA Channel",
         residues: "Trp84, Phe330 (CAS Salt Bridge); Tyr121, Gly117/118 (Hydrogen Bonds); Trp279 (PAS)",
-        brainRegion: "기저전뇌 콜린성 신경원 & 해마 CA1/CA3 피라미드 신경세포",
-        signaling: "ACh 유전성 보존 → M1/α7 nAChR → Ca²⁺/Calmodulin → CaMKII/ERK1/2 → CREB (Ser133) 인산화 → BDNF 전사 유도",
-        description: "강력한 가역적 아세틸콜린에스테라아제(AChE) 억제제로, Catalytic Anionic Site(CAS)의 Trp84 및 Phe330 잔기와 강력한 양이온-π 결합을 형성하여 콜린성 신경전달을 극대화합니다."
+        brainRegion: "Basal Forebrain Cholinergic Neurons & Hippocampal CA1/CA3 Pyramidal Neurons",
+        signaling: "ACh Degradation Blockade → M1/α7 nAChR → Ca²⁺/Calmodulin → CaMKII/ERK1/2 → CREB (Ser133) Phosphorylation → BDNF Transcription",
+        description: "A potent reversible acetylcholinesterase (AChE) inhibitor forming strong cation-π interactions with Trp84 and Phe330 residues in the Catalytic Anionic Site (CAS), maximizing cholinergic neurotransmission."
     },
     {
-        name: "Ginsenoside Rg1 (인삼/홍삼)",
+        name: "Ginsenoside Rg1 (Panax ginseng)",
         class: "Dammarane-type Triterpenoid Saponin",
         smiles: "CC(=CCCC(C)(C1CCC2(C1C(CC3C2(CCC4C3(C(CC4O)O)C)C)OC5C(C(C(C(O5)CO)O)O)O)C)O)C6C(C(C(C(O6)CO)O)O)O",
         target: "TrkB Extracellular Ig-like D5 Domain & Glucocorticoid Receptor",
         residues: "TrkB Asp298, Glu319 (Extracellular Domain); GR Ligand Binding Domain (LBD)",
-        brainRegion: "해마 치상회 (Dentate Gyrus SGZ) 신경줄기세포 & 피라미드 신경세포",
-        signaling: "TrkB (Tyr515/816) Autophosphorylation → PI3K/Akt & Ras/Raf/MEK/ERK → CREB → BDNF & VEGF 유전자 발현",
-        description: "TrkB 수용체의 외세포 도메인에 결합하여 수용체 다이머화를 유도하며, 성체 해마 신경세포 재생(Neurogenesis)과 장기 증강(LTP) 유도 능력이 탁월합니다."
+        brainRegion: "Hippocampal Dentate Gyrus (DG SGZ) Neural Stem Cells & Pyramidal Neurons",
+        signaling: "TrkB (Tyr515/816) Autophosphorylation → PI3K/Akt & Ras/Raf/MEK/ERK → CREB → BDNF & VEGF Expression",
+        description: "Binds to the extracellular domain of TrkB to induce receptor dimerization, markedly promoting adult hippocampal neurogenesis and Long-Term Potentiation (LTP)."
     },
     {
-        name: "Ginkgolide B (은행엽)",
+        name: "Ginkgolide B (Ginkgo biloba)",
         class: "Diterpene Tri-lactone Cage",
         smiles: "CC(C)(C)C1C2C3C4(C(C1O)C5(C2O4)C6C(C3=O)OC(=O)C6(C5O)O)O",
         target: "Platelet-Activating Factor Receptor (PAFR) & GABA_A Channel",
         residues: "PAFR His14 (TM1), Tyr200 (TM5), Phe174 (TM3); GABA_A Thr261 (TM2)",
-        brainRegion: "대뇌피질 및 뇌미세혈관 내피세포 (BMECs)",
-        signaling: "PAFR 억제 → Gq/PLC-β 블록 → ROS & NF-κB 핵 내 이동 억제 → 뇌혈류(CBF) 개선 및 BBB 보호",
-        description: "강직한 6환식 케이지 구조와 tert-butyl 기를 포함하여 PAF 수용체의 소수성 포켓에 결합하는 강력한 길항제입니다."
+        brainRegion: "Cerebral Cortex & Brain Microvascular Endothelial Cells (BMECs)",
+        signaling: "PAFR Inhibition → Gq/PLC-β Blockade → ROS & NF-κB Nuclear Translocation Suppression → Cerebral Blood Flow (CBF) ↑ & BBB Protection",
+        description: "Features a rigid 6-ring cage structure with a tert-butyl moiety, serving as a potent antagonist in the hydrophobic pocket of PAF receptors."
     },
     {
-        name: "Baicalein (황금)",
+        name: "Baicalein (Scutellaria baicalensis)",
         class: "Lipophilic Trihydroxyflavone",
         smiles: "C1=CC=C(C=C1)C2=CC(=O)C3=C(O2)C(=C(C(=C3)O)O)O",
         target: "GSK-3β ATP Pocket & 12/15-Lipoxygenase (LOX)",
         residues: "GSK-3β Val135, Asp133, Lys85; 12/15-LOX catalytic Fe³⁺ chelation",
-        brainRegion: "해마 CA1 피라미드 신경세포 & 미세아교세포",
-        signaling: "GSK-3β (Ser9) 인산화 억제 → β-Catenin 안정화 & Tau 과인산화 방지 → Nrf2/HO-1 항산화 활성 유도",
-        description: "GSK-3β의 ATP 결합 부위에 이르는 flavone 구조로 Tau 단백질의 엉킴(NFT) 형성을 근본적으로 억제합니다."
+        brainRegion: "Hippocampal CA1 Pyramidal Neurons & Microglia",
+        signaling: "GSK-3β (Ser9) Inhibitory Phosphorylation → β-Catenin Stabilization & Tau Hyperphosphorylation Blockade → Nrf2/HO-1 Antioxidant Pathway Activation",
+        description: "Flavone structure targeting the ATP-binding pocket of GSK-3β, fundamentally suppressing Tau protein hyperphosphorylation and neurofibrillary tangle (NFT) formation."
     },
     {
-        name: "Curcumin (강황/울금)",
+        name: "Curcumin (Curcuma longa)",
         class: "Polyphenolic Diarylheptanoid",
         smiles: "COC1=C(C=CC(=C1)C=CC(=O)CC(=O)C=CC2=CC(=C(C=C2)O)OCH3)O",
         target: "Aβ Oligomers, Keap1 Cys151 & BACE1 Catalytic Dyad",
         residues: "Aβ Lys28, Asp23; Keap1 Cys151 (Covalent Alkylation); BACE1 Asp32, Asp228",
-        brainRegion: "해마, 대뇌피질, 미세아교세포 & 아스트로사이트",
-        signaling: "Keap1 Cys151 알킬화 → Nrf2 핵 내 이동 → ARE 프로모터 결합 (HO-1/NQO1 ↑) & NF-κB p65 억제",
-        description: "대칭형 diarylheptanoid 구조로 Aβ 아밀로이드 섬유 β-sheet 삽입 및 Nrf2 항산화 반응을 독보적으로 유도합니다."
+        brainRegion: "Hippocampus, Prefrontal Cortex, Microglia & Astrocytes",
+        signaling: "Keap1 Cys151 Alkylation → Nrf2 Nuclear Translocation → ARE Promoter Binding (HO-1/NQO1 ↑) & NF-κB p65 Blockade",
+        description: "Symmetrical diarylheptanoid structure inserting into Aβ amyloid fibril β-sheets and uniquely inducing the Nrf2 antioxidant response."
     },
     {
-        name: "Onjisaponin V / DISS (원지)",
+        name: "Onjisaponin V / DISS (Polygala tenuifolia)",
         class: "Triterpenoid Saponin & Oligosaccharide Ester",
         smiles: "C58H92O27 (Onjisaponin V Core Skeleton)",
         target: "TrkB Receptor & AMPK-Autophagy Machinery",
         residues: "TrkB Extracellular Ig domain; AMPK α-subunit kinase domain",
-        brainRegion: "해마 CA1 피라미드 신경세포 & 청반(Locus Coeruleus)",
-        signaling: "AMPK 활성화 & mTOR 억제 → Autophagy flux (LC3-II ↑) → Aβ/Tau 자가포식 제거 & BDNF/CREB ↑",
-        description: "신경 세포 내 축적된 Aβ/Tau 독성 단백질의 자가포식(Autophagy) 자가 청소를 유도하는 뛰어난 한약 성분입니다."
+        brainRegion: "Hippocampal CA1 Pyramidal Neurons & Locus Coeruleus",
+        signaling: "AMPK Activation & mTOR Inhibition → Autophagy Flux (LC3-II ↑) → Autophagic Clearance of Toxic Aβ/Tau & BDNF/CREB ↑",
+        description: "An outstanding Eastern medicine saponin that triggers autophagic self-clearance of accumulated intracellular toxic Aβ and Tau proteins."
     },
     {
-        name: "Salvianolic Acid B (단삼)",
+        name: "Salvianolic Acid B (Salvia miltiorrhiza)",
         class: "Polyphenolic Acid Tetramer",
         smiles: "C36H30O16 (Caffeic Acid Tetramer)",
         target: "AChE Peripheral Anionic Site (PAS) & Estrogen Receptor-β",
         residues: "AChE PAS Trp286, Tyr72, Tyr341; ER-β Ligand Binding Pocket",
-        brainRegion: "뇌 내피세포, 해마 & 줄기세포",
-        signaling: "AChE PAS 블록 → Aβ-AChE 복합체 방지; ER-β → PI3K/Akt/eNOS → NO 생성 증가로 뇌 미세혈관 확장",
-        description: "4개의 카테콜 링을 가진 평면 폴리페놀로 AChE PAS 부위에 π-stacking 결합하여 아밀로이드 피브릴 형성을 차단합니다."
+        brainRegion: "Brain Endothelial Cells, Hippocampus & Neural Stem Cells",
+        signaling: "AChE PAS Blockade → Prevention of Aβ-AChE Fibrillogenesis; ER-β → PI3K/Akt/eNOS → NO Increase & Microvascular Vasodilation",
+        description: "Planar polyphenolic tetramer with 4 catechol rings that π-stacks with AChE PAS residues, blocking amyloid fibril seeding."
     },
     {
-        name: "Asiatic Acid (적설초/고투콜라)",
+        name: "Asiatic Acid (Centella asiatica)",
         class: "Ursane-type Pentacyclic Triterpenoid",
         smiles: "CC1CCC2(CCC3(C(=CCC4C3(CCC5C4(CC(C(C5(C)CO)O)O)C)C)C2C1C)C)C(=O)O",
         target: "TrkB Transmembrane Region & Keap1 Kelch Domain",
         residues: "TrkB Transmembrane domain; Keap1 Tyr334, Arg415",
-        brainRegion: "해마 CA1/CA3 신경세포 & 아스트로사이트",
-        signaling: "TrkB → MEK1/2 → ERK1/2 → p90RSK → CREB → Synaptophysin & PSD-95 유전자 전사 유도",
-        description: "우르산 오환식 펜타사이클릭 구조로 수상돌기 가시(Dendritic spine)의 분지화와 축삭 신장을 유도합니다."
+        brainRegion: "Hippocampal CA1/CA3 Neurons & Astrocytes",
+        signaling: "TrkB → MEK1/2 → ERK1/2 → p90RSK → CREB → Synaptophysin & PSD-95 Gene Transcription",
+        description: "Ursane pentacyclic structure that potently induces dendritic spine branching, arborization, and axonal outgrowth."
     }
 ];
 
-// --- Brain Regions Data ---
+// --- Brain Regions Data (100% English) ---
 const BRAIN_REGIONS_DATA = {
     hippocampus: {
-        title: "해마 (Hippocampus CA1, CA3 & Dentate Gyrus)",
-        cellTypes: "피라미드 신경세포 (Pyramidal Neurons), 치상회 신경줄기세포 (NSPCs)",
-        role: "장기 기억 형성, 공간 학습, 신경 가소성(LTP) 및 성체 신경재생(Neurogenesis)의 핵심 중추.",
-        action: "Ginsenoside Rg1, Onjisaponin V 및 HippoDrugs X1-X5 후보군이 TrkB, FZD8, AChE 수용체를 직접 자극하여 CREB/BDNF 경로를 활성화하는 주 표적 기관입니다."
+        title: "Hippocampus (CA1, CA3 & Dentate Gyrus)",
+        cellTypes: "Pyramidal Neurons, Dentate Gyrus Neural Stem Cells (NSPCs)",
+        role: "Central hub for long-term memory consolidation, spatial navigation, synaptic plasticity (LTP), and adult neurogenesis.",
+        action: "Primary target organ where Ginsenoside Rg1, Onjisaponin V, and HippoDrugs X1-X5 directly stimulate TrkB, FZD8, and AChE receptors to activate the CREB/BDNF cascade."
     },
     pfc: {
-        title: "전두엽 피질 (Prefrontal Cortex - PFC)",
-        cellTypes: "글루타민산성 피라미드 신경세포, Interneurons",
-        role: "작업 기억(Working Memory), 의사 결정, 작업 집중력 및 고차 인지 기능 담당.",
-        action: "Huperzine A 및 PfcDrugs P1-P5가 α7 nAChR 및 GluN2A 올로스테릭 조절을 통해 신경 신호 전달 속도를 극대화합니다."
+        title: "Prefrontal Cortex (PFC Layer III/V)",
+        cellTypes: "Glutamatergic Pyramidal Neurons, Interneurons",
+        role: "Responsible for working memory, executive decision making, operational focus, and high-order cognition.",
+        action: "Huperzine A and PfcDrugs P1-P5 modulate α7 nAChR and GluN2A allosterically to maximize neural processing speed."
     },
     "basal-forebrain": {
-        title: "콜린성 기저전뇌 (Basal Forebrain - Nucleus Basalis of Meynert)",
-        cellTypes: "콜린성 신경원 (Cholinergic Neurons)",
-        role: "아세틸콜린(ACh) 분비 및 뇌 전반의 신경전달 신호 증폭 중추.",
-        action: "BasalDrugs B1-B5가 AChE 협곡 차단 및 TrkA 수용체 활 강화를 유도하여 콜린성 신경망 퇴화를 완벽 차단합니다."
+        title: "Basal Forebrain (Nucleus Basalis of Meynert NBM)",
+        cellTypes: "Cholinergic Projection Neurons",
+        role: "Master center for acetylcholine (ACh) secretion and brain-wide cognitive signal amplification.",
+        action: "BasalDrugs B1-B5 block the AChE gorge and enhance TrkA survival signaling, completely halting cholinergic network degeneration."
     },
     microglia: {
-        title: "미세아교세포 (Microglia M1/M2 Polarization)",
-        cellTypes: "CNS 면역 전구세포 (Microglia)",
-        role: "뇌 내 면역 반응, 신경 염증 조절 및 독성 아밀로이드 올리고머 Phagocytosis(탐식).",
-        action: "MicroDrugs M1-M5가 Trem2 활성화 및 Keap1 억제를 통해 염증성 M1 상태를 억제하고 염증 해소성 M2 극성 전환을 유도합니다."
+        title: "Microglia (M1/M2 State Polarization)",
+        cellTypes: "CNS Immune Progenitors (Microglia)",
+        role: "Regulates neuroinflammation, synaptic pruning, and phagocytic clearance of toxic amyloid oligomers.",
+        action: "MicroDrugs M1-M5 activate Trem2 and inhibit Keap1, shifting inflammatory M1 microglia to neuroprotective M2 phagocytic states."
     },
     astrocytes: {
-        title: "아스트로사이트 & 뇌혈관 장벽 (Astrocytes & BBB)",
-        cellTypes: "성상교세포 (Astrocytes), 뇌미세혈관 내피세포 (BMECs)",
-        role: "신경 영양물질 공급, 혈뇌장벽(BBB) 조절 및 신경-혈관 결합(Neurovascular coupling).",
-        action: "AstroDrugs A1-A5가 eNOS 활성화를 통해 cerebral blood flow(CBF)를 늘리고 글루타메이트 독성을 차단합니다."
+        title: "Astrocytes & Blood-Brain Barrier (BBB Unit)",
+        cellTypes: "Astrocytes, Brain Microvascular Endothelial Cells (BMECs)",
+        role: "Nutrient supply, blood-brain barrier (BBB) integrity maintenance, and neurovascular coupling.",
+        action: "AstroDrugs A1-A5 promote eNOS activity to increase cerebral blood flow (CBF) and prevent excitotoxic glutamate accumulation."
     }
 };
 
-// --- AlphaFold3 Top 10 Candidates ---
+// --- AlphaFold3 Top 10 Candidates (100% English) ---
 const AF3_CANDIDATES = [
     { rank: 1, code: "CogDual-TrkB-PAS-10", target: "TrkB D5 + AChE PAS (Bispecific)", plddt: 93.2, dg: -17.9, cei: 98.4, fasta: "MCVCDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCHGGGGSGGGGSGGGGSKWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG", color: 0x00f2fe },
     { rank: 2, code: "CogBDNF-Mimic-04", target: "TrkB Dimerization Interface", plddt: 94.0, dg: -16.8, cei: 95.2, fasta: "APMKEANIRGQGGLAYPGVRTCGPGGSGGSGGSGGSGGSGAPMKEANIRGQGGLAYPGVRTC", color: 0xa855f7 },
@@ -134,7 +134,7 @@ const AF3_CANDIDATES = [
     { rank: 10, code: "CognACh-Mod-06", target: "α7 nAChR ECD", plddt: 90.7, dg: -12.1, cei: 82.5, fasta: "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC", color: 0x14b8a6 }
 ];
 
-// --- Comprehensive 25 De Novo Drug Therapeutics Precision Master Database ---
+// --- Comprehensive 25 De Novo Drug Therapeutics Precision Master Database (100% English) ---
 const FULL_BRAIN_DRUGS_DATA = [
     // 1. HIPPOCAMPUS (X1 - X5)
     {
@@ -145,7 +145,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Hippocampus (CA1/CA3 Pyramidal Neurons & DG SGZ Neural Stem Cells)",
         affinity: "ΔG = -18.4 kcal/mol | Kd = 0.32 nM | AF3 pLDDT = 96.2 / 100",
         safety: "hERG IC50 > 50 μM (0% Cardiotoxicity) | Seizure Index: 0.01 | Downregulation: < 3.5%",
-        mechanism: "TrkB D5 외세포 도메인을 다이머화하여 치상회 신경줄기세포 재생(Neurogenesis)과 CA1 피라미드 신경세포의 장기 증강(LTP +280%)을 독보적으로 유도함."
+        mechanism: "Dimerizes the TrkB D5 domain to uniquely induce adult hippocampal neurogenesis in the Dentate Gyrus and elevate Long-Term Potentiation (LTP +280%) in CA1 neurons."
     },
     {
         id: 2, region: "hippocampus", code: "HippoAChE-AlkaPept-X2", name: "AChE Dual-Anchored Peptidomimetic",
@@ -155,7 +155,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Hippocampus (CA1 Cholinergic Terminals & Synaptic Cleft)",
         affinity: "ΔG = -16.2 kcal/mol | Kd = 2.1 nM | AF3 pLDDT = 94.8 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.02 | Tolerance Rate: 0.0%",
-        mechanism: "AChE의 Catalytic Gorge 입구(PAS)와 내부(CAS)를 이중 차단하여 아세틸콜린 분해를 차단함과 동시에 Aβ 올리고머 피브릴 시딩 결합을 원천 차단함."
+        mechanism: "Dual-clamps the AChE gorge entrance (PAS) and catalytic site (CAS), preventing acetylcholine breakdown while simultaneously blocking Aβ fibrillogenesis."
     },
     {
         id: 3, region: "hippocampus", code: "HippoNrf-KeapDecoy-X3", name: "Keap1 Phenolic Decoy",
@@ -165,7 +165,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Hippocampus (CA1 Neurons & Microglial Mitochondria)",
         affinity: "ΔG = -15.8 kcal/mol | Kd = 3.5 nM | AF3 pLDDT = 97.0 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Immunogenicity: Very Low",
-        mechanism: "Keap1 Kelch 포켓에 결합하여 Nrf2 전사인자 해리를 촉진, HO-1/NQO1을 대량 발현시켜 활성산소(ROS)로 인한 해마 신경세포 수상돌기 위축을 100% 방지함."
+        mechanism: "Binds Keap1 Kelch domain to promote Nrf2 dissociation, upregulating HO-1/NQO1 to completely prevent ROS-induced hippocampal dendritic atrophy."
     },
     {
         id: 4, region: "hippocampus", code: "HippoWnt-FzdAgonist-X4", name: "Frizzled-8 Wnt Agonist",
@@ -175,7 +175,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Hippocampus (Dentate Gyrus Subgranular Zone SGZ)",
         affinity: "ΔG = -16.9 kcal/mol | Kd = 1.2 nM | AF3 pLDDT = 95.1 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.01 | Tumorigenicity: Negligible",
-        mechanism: "Frizzled-8 수용체를 직동 자극하여 Canonical Wnt/β-catenin 신호전달을 유도, 해마 신경줄기세포의 기능적 인지 신경세포 분화를 촉진함."
+        mechanism: "Directly stimulates Frizzled-8 receptors to trigger canonical Wnt/β-catenin signaling, promoting functional neural stem cell differentiation."
     },
     {
         id: 5, region: "hippocampus", code: "HippoDual-TrkB-AMPK-X5", name: "Presenegenin Dual Super-Drug",
@@ -185,7 +185,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Hippocampus (CA1/CA3 Pyramidal Neurons & Dendritic Spines)",
         affinity: "ΔG = -19.1 kcal/mol | Kd = 0.14 nM | AF3 pLDDT = 94.5 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.01 | Tolerance Downregulation: < 3.8%",
-        mechanism: "TrkB 신호전달과 AMPK 억제 자가포식(Autophagy flux)을 이중 작동시켜 해마 피라미드 신경세포 내 독성 Aβ/Tau를 축출하고 수상돌기 가시 밀도를 +310% 증대시킴."
+        mechanism: "Dual-activates TrkB signaling and AMPK autophagic flux, clearing toxic intracellular Aβ/Tau and increasing dendritic spine density by +310%."
     },
 
     // 2. PREFRONTAL CORTEX (P1 - P5)
@@ -197,7 +197,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Prefrontal Cortex (Layer III/V Glutamatergic Pyramidal Neurons)",
         affinity: "ΔG = -16.5 kcal/mol | Kd = 1.8 nM | AF3 pLDDT = 93.2 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.02 | Receptor Desensitization: Low",
-        mechanism: "전두엽 피질 기저 아세틸콜린 반응성을 올로스테릭하게 증폭하여 작업 기억(Working Memory) 스팬을 +240% 복원하고 집중력을 극대화함."
+        mechanism: "Allosterically potentiates cortical basal acetylcholine responsiveness, restoring working memory span by +240% and sharpening operational focus."
     },
     {
         id: 7, region: "pfc", code: "PfcTrk-ErkEnhancer-P2", name: "PFC Cortical ERK Enhancer",
@@ -207,7 +207,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Prefrontal Cortex (Layer V Pyramidal Neurons & Interneurons)",
         affinity: "ΔG = -17.2 kcal/mol | Kd = 0.85 nM | AF3 pLDDT = 95.8 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.01 | Off-target Binding: None",
-        mechanism: "PFC Layer V 피라미드 신경세포의 ERK1/2-MSK1 지속 활성화를 유도하여 c-Fos 및 Arc 조기 전사 유전자를 발현시킴."
+        mechanism: "Sustains ERK1/2-MSK1 activation in PFC Layer V pyramidal neurons, robustly driving c-Fos and Arc immediate-early gene transcription."
     },
     {
         id: 8, region: "pfc", code: "PfcGluN2A-LTP-P3", name: "GluN2A Allosteric Tuner",
@@ -217,7 +217,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Prefrontal Cortex (Postsynaptic Density PSD-95 Complex)",
         affinity: "ΔG = -15.4 kcal/mol | Kd = 4.2 nM | AF3 pLDDT = 93.9 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.02 (Capped Emax 135%) | Excitotoxicity: Safe",
-        mechanism: "발작 및 세포과흥분 손상 없이 시냅스 GluN2A-EPSC 활성을 선택적으로 미세조율 강화함."
+        mechanism: "Selectively fine-tunes synaptic GluN2A-EPSC currents without triggering seizure activity or excitotoxic Ca²⁺ overload."
     },
     {
         id: 9, region: "pfc", code: "PfcGsk-WntLinker-P4", name: "PFC GSK-3β Inhibitor",
@@ -227,7 +227,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Prefrontal Cortex (Dendritic Spines & Axon Terminals)",
         affinity: "ΔG = -16.0 kcal/mol | Kd = 2.4 nM | AF3 pLDDT = 92.5 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Tau Hyperphosphorylation: Suppressed",
-        mechanism: "GSK-3β Ser9 억제성 인산화를 유도하여 만성 스트레스 환경에서도 전두엽 피질의 유연한 의사결정 기능과 수상돌기를 보존함."
+        mechanism: "Induces inhibitory Ser9 phosphorylation of GSK-3β, preserving executive decision-making flexibility and dendritic architecture under chronic stress."
     },
     {
         id: 10, region: "pfc", code: "PfcDual-nACh-GluN2A-P5", name: "PFC Bispecific Cognition Synergist",
@@ -237,7 +237,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Prefrontal Cortex (Pre- & Post-Synaptic Terminals)",
         affinity: "ΔG = -18.7 kcal/mol | Kd = 0.22 nM | AF3 pLDDT = 94.1 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.02 | Systemic Toxicity: Negligible",
-        mechanism: "전두엽 정보 처리 속도 및 인지 판단 정확도를 동시에 2배 상승시키는 프리미엄 피질 전용 신약."
+        mechanism: "Premium PFC-targeted bispecific therapeutic doubling cortical information processing speed and decision accuracy."
     },
 
     // 3. BASAL FOREBRAIN (B1 - B5)
@@ -249,7 +249,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Basal Forebrain (Nucleus Basalis of Meynert NBM)",
         affinity: "ΔG = -17.5 kcal/mol | Kd = 0.65 nM | AF3 pLDDT = 94.3 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.01 | Peripheral Side Effects: None",
-        mechanism: "마이네르트 기저핵 콜린성 신경원의 아세틸콜린 분해를 완벽 차단하여 시냅스 ACh 농도를 +350% 상승시킴."
+        mechanism: "Completely blocks acetylcholine degradation in Nucleus Basalis of Meynert cholinergic neurons, elevating synaptic ACh levels by +350%."
     },
     {
         id: 12, region: "basal", code: "BasalM1-PAM-B2", name: "M1 Muscarinic Allosteric PAM",
@@ -259,7 +259,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Basal Forebrain (Cholinergic Soma & Axonal Projection Fibers)",
         affinity: "ΔG = -15.9 kcal/mol | Kd = 3.1 nM | AF3 pLDDT = 92.9 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.01 | Desensitization: Safe",
-        mechanism: "Gq/11 결합을 포텐시에이션하여 K⁺ M-current 버스트 연사율을 늘려 콜린성 신호를 증폭함."
+        mechanism: "Potentiates Gq/11 coupling to suppress K⁺ M-currents, increasing cholinergic neuronal burst firing rate."
     },
     {
         id: 13, region: "basal", code: "BasalNgf-TrkA-B3", name: "TrkA Neurotrophic Rescue",
@@ -269,7 +269,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Basal Forebrain (Cholinergic Projection Neurons)",
         affinity: "ΔG = -16.8 kcal/mol | Kd = 1.4 nM | AF3 pLDDT = 96.0 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Immunogenicity: Low",
-        mechanism: "퇴화 중인 마이네르트 기저전뇌 콜린성 신경세포체의 위축 및 아포토시스 사멸을 원천 차단함."
+        mechanism: "Rescues degenerating cholinergic soma in the basal forebrain, completely halting apoptotic cell death."
     },
     {
         id: 14, region: "basal", code: "BasalAChE-Abeta-B4", name: "AChE-Aβ Fibril Disruptor",
@@ -279,7 +279,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Basal Forebrain (Cholinergic Septal Nuclei & Projection Tracts)",
         affinity: "ΔG = -16.4 kcal/mol | Kd = 1.9 nM | AF3 pLDDT = 93.7 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.01 | Fibril Blockade: 100%",
-        mechanism: "콜린성 신경 축삭 상에 형성되는 독성 Aβ-AChE 수소결합 아밀로이드 피브릴 시드를 차단함."
+        mechanism: "Disrupts toxic hydrogen-bonded Aβ-AChE amyloid fibril seeding along cholinergic axonal tracts."
     },
     {
         id: 15, region: "basal", code: "BasalSuper-AChE-TrkA-B5", name: "Tri-Functional Meynert Rescue Super-Drug",
@@ -289,7 +289,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Basal Forebrain (Nucleus Basalis of Meynert Entire Cholinergic System)",
         affinity: "ΔG = -19.5 kcal/mol | Kd = 0.08 nM | AF3 pLDDT = 95.2 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.01 | Safety Plasticity Score: 99.5 / 100",
-        mechanism: "마이네르트 기저전뇌 전체 콜린성 신경망을 완벽 보존하는 최고 성향의 인지 구원 삼중 신약."
+        mechanism: "Tri-functional master therapeutic offering comprehensive protection for the entire Meynert cholinergic projection system."
     },
 
     // 4. MICROGLIA M2 POLARIZATION (M1 - M5)
@@ -301,7 +301,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Microglia (M1/M2 State CNS Immune Progenitor Cells)",
         affinity: "ΔG = -17.8 kcal/mol | Kd = 0.52 nM | AF3 pLDDT = 94.7 / 100",
         safety: "hERG IC50 > 50 μM | Cytokine Storm Risk: Negligible | Immunogenicity: Low",
-        mechanism: "Trem2/DAP12 신호전달을 촉진하여 염증성 M1 미세아교세포를 독성 플라크 탐식성 M2 상태로 극성 전환함."
+        mechanism: "Promotes Trem2/DAP12 signaling to shift inflammatory M1 microglia into plaque-clearing M2 phagocytic phenotypes."
     },
     {
         id: 17, region: "microglia", code: "MicroNrf2-AntiInflam-M2", name: "Microglial Nrf2 Anti-Inflammatory",
@@ -311,7 +311,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Microglia (Nuclear Nrf2 Machinery & Transporters)",
         affinity: "ΔG = -16.3 kcal/mol | Kd = 2.1 nM | AF3 pLDDT = 96.5 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Inflammatory Cytokine Suppression: 98%",
-        mechanism: "미세아교세포 핵 내 NF-κB p65를 차단하고 TNF-α, IL-1β 염증성 사이토카인 대량 유출을 차단함."
+        mechanism: "Suppresses nuclear NF-κB p65 in microglia, blocking toxic pro-inflammatory cytokine (TNF-α, IL-1β) surge."
     },
     {
         id: 18, region: "microglia", code: "MicroTlr4-Antagonist-M3", name: "TLR4 Neuroinflammation Blocker",
@@ -321,7 +321,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Microglia (Cell Surface Pattern Recognition Receptors)",
         affinity: "ΔG = -15.7 kcal/mol | Kd = 3.8 nM | AF3 pLDDT = 92.8 / 100",
         safety: "hERG IC50 > 50 μM | Cytokine Storm Risk: 0% | Sepsis Safety: High",
-        mechanism: "Aβ 올리고머의 TLR4 MD2 수용체 결합을 경쟁 저해하여 사이토카인 스톰 및 뇌 면역 폭주를 예방함."
+        mechanism: "Competitively blocks Aβ oligomer binding to TLR4/MD2 complex, preventing immune hyperactivity and neuroinflammation."
     },
     {
         id: 19, region: "microglia", code: "MicroAutophagy-Tag-M4", name: "Microglial Lysosomal Tag",
@@ -331,7 +331,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Microglia (Phagolysosomes & Phagocytic Vacuoles)",
         affinity: "ΔG = -16.6 kcal/mol | Kd = 1.7 nM | AF3 pLDDT = 93.4 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Lysosomal Clearance: +420%",
-        mechanism: "탐식된 Aβ 플라크 및 독성 Tau 단백질의 미세아교세포 내 리소좀 분해 속도를 +420% 가속함."
+        mechanism: "Accelerates intra-microglial lysosomal degradation rate of engulfed Aβ plaques and Tau aggregates by +420%."
     },
     {
         id: 20, region: "microglia", code: "MicroDual-Trem2-Nrf2-M5", name: "Bispecific M2 Neuro-Protector",
@@ -341,7 +341,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Microglia (Parenchymal Immune Cells & Perivascular Macrophages)",
         affinity: "ΔG = -18.9 kcal/mol | Kd = 0.18 nM | AF3 pLDDT = 95.6 / 100",
         safety: "hERG IC50 > 50 μM | Cytokine Storm Risk: None | Safety Index: 99.1 / 100",
-        mechanism: "신경 염증 완전 억제와 신속한 독성 아밀로이드 탐식 활성화를 동시에 달성하는 세포 면역 신약."
+        mechanism: "Bispecific cellular immune therapeutic achieving simultaneous suppression of neuroinflammation and rapid amyloid phagocytosis."
     },
 
     // 5. ASTROCYTES & BBB INTEGRITY (A1 - A5)
@@ -353,7 +353,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Astrocytes & Brain Microvascular Endothelial Cells (BMECs)",
         affinity: "ΔG = -16.7 kcal/mol | Kd = 1.5 nM | AF3 pLDDT = 95.3 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Vasodilation Rate: Safe (+45%)",
-        mechanism: "eNOS Ser1177 인산화를 촉진하여 기저 NO 분비를 늘림으로써 뇌 미세혈류(CBF)를 +45% 즉각 증강시킴."
+        mechanism: "Promotes eNOS Ser1177 phosphorylation to increase basal NO secretion, immediately enhancing Cerebral Blood Flow (CBF) by +45%."
     },
     {
         id: 22, region: "astrocyte", code: "AstroEaat2-Up-A2", name: "Glutamate Clearance Booster",
@@ -363,7 +363,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Astrocytes (Tripartite Synapses & Perisynaptic Processes)",
         affinity: "ΔG = -15.8 kcal/mol | Kd = 3.6 nM | AF3 pLDDT = 94.1 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Glutamate Toxicity: Prevented",
-        mechanism: "시냅스 간극의 과도한 독성 글루타메이트 재섭취를 신속 가속하여 신경 흥분성 사멸을 방지함."
+        mechanism: "Accelerates astrocytic reuptake of excess synaptic glutamate, preventing excitotoxic neuronal cell death."
     },
     {
         id: 23, region: "astrocyte", code: "AstroZo1-Protect-A3", name: "BBB Tight Junction Protector",
@@ -373,7 +373,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Blood-Brain Barrier (BMECs, Endothelial Tight Junctions & Pericytes)",
         affinity: "ΔG = -16.1 kcal/mol | Kd = 2.8 nM | AF3 pLDDT = 93.8 / 100",
         safety: "hERG IC50 > 50 μM | BBB Disruption Risk: 0.0% | Edema Risk: Suppressed",
-        mechanism: "뇌혈관 내피세포의 ZO-1 Tight Junction 단백질 파괴를 막아 혈뇌장벽(BBB) 무결성을 보존함."
+        mechanism: "Prevents degradation of ZO-1 tight junction proteins in endothelial cells, preserving blood-brain barrier (BBB) structural integrity."
     },
     {
         id: 24, region: "astrocyte", code: "AstroPafr-Block-A4", name: "Neurovascular Ischemia Guard",
@@ -383,7 +383,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain Vascular Bed (Cerebral Capillaries & Astrocytic Endfeet)",
         affinity: "ΔG = -15.2 kcal/mol | Kd = 4.8 nM | AF3 pLDDT = 92.4 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Cerebral Edema: Prevented",
-        mechanism: "뇌 허혈 및 뇌부종 시 발생하는 PAF 수용체 염증 반응을 블록하여 신경혈관 단위를 보호함."
+        mechanism: "Blocks PAF receptor inflammatory signaling during cerebral ischemia and edema, protecting neurovascular unit integrity."
     },
     {
         id: 25, region: "astrocyte", code: "AstroSuper-CBF-EAAT2-A5", name: "Bispecific Astrocytic Neuro-Vascular Shield",
@@ -393,7 +393,7 @@ const FULL_BRAIN_DRUGS_DATA = [
         targets: "CNS -> Brain -> Astrocytes & Cerebral Microvascular System (Whole Neurovascular Unit)",
         affinity: "ΔG = -18.2 kcal/mol | Kd = 0.35 nM | AF3 pLDDT = 94.9 / 100",
         safety: "hERG IC50 > 50 μM | Seizure Index: 0.00 | Safety Index: 99.3 / 100",
-        mechanism: "뇌 산소/영양 공급 극대화와 글루타메이트 흥분성 신경사멸 차단을 동시 달성하는 혈관-아스트로사이트 이중 신약."
+        mechanism: "Bispecific astrocytic therapeutic achieving simultaneous enhancement of cerebral oxygen supply and blockade of glutamate excitotoxicity."
     }
 ];
 
@@ -479,22 +479,22 @@ function renderNaturalProductDetail(index) {
 
         <div class="grid-2">
             <div class="info-box">
-                <h5><i class="fa-solid fa-crosshairs"></i> 분자 표적 (Molecular Target)</h5>
+                <h5><i class="fa-solid fa-crosshairs"></i> Molecular Target</h5>
                 <p>${data.target}</p>
             </div>
             <div class="info-box">
-                <h5><i class="fa-solid fa-key"></i> 핵심 결합 잔기 (Key Residues)</h5>
+                <h5><i class="fa-solid fa-key"></i> Key Binding Residues</h5>
                 <p>${data.residues}</p>
             </div>
         </div>
 
         <div class="grid-2">
             <div class="info-box">
-                <h5><i class="fa-solid fa-brain"></i> 주요 뇌 영역 & 세포 타깃</h5>
+                <h5><i class="fa-solid fa-brain"></i> Target Brain Regions & Cell Subfields</h5>
                 <p>${data.brainRegion}</p>
             </div>
             <div class="info-box">
-                <h5><i class="fa-solid fa-diagram-next"></i> 하위 세포 내 신호전달</h5>
+                <h5><i class="fa-solid fa-diagram-next"></i> Intracellular Signaling Cascade</h5>
                 <p>${data.signaling}</p>
             </div>
         </div>
@@ -514,15 +514,15 @@ function selectBrainRegion(regionKey) {
 
     display.innerHTML = `
         <h3 style="color: var(--accent-cyan); font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;">${data.title}</h3>
-        <p style="font-size: 0.95rem; margin-bottom: 1.2rem; color: var(--text-secondary);"><strong>주요 구성 세포군:</strong> ${data.cellTypes}</p>
+        <p style="font-size: 0.95rem; margin-bottom: 1.2rem; color: var(--text-secondary);"><strong>Target Cellular Subfields:</strong> ${data.cellTypes}</p>
 
         <div class="grid-2" style="margin-bottom: 0;">
             <div class="info-box">
-                <h5 style="color: var(--accent-indigo);"><i class="fa-solid fa-microscope"></i> 생물학적 생리 역할</h5>
+                <h5 style="color: var(--accent-indigo);"><i class="fa-solid fa-microscope"></i> Biological Physiological Role</h5>
                 <p>${data.role}</p>
             </div>
             <div class="info-box" style="border-color: rgba(0, 242, 254, 0.3);">
-                <h5 style="color: var(--accent-teal);"><i class="fa-solid fa-pills"></i> 표적 De Novo 신약군 연관 작용</h5>
+                <h5 style="color: var(--accent-teal);"><i class="fa-solid fa-pills"></i> De Novo Drug Action Mechanism</h5>
                 <p>${data.action}</p>
             </div>
         </div>
@@ -553,11 +553,11 @@ function renderFullBrainPipelineCards(filterRegion) {
         card.onclick = () => openDrugModal(drug.id);
 
         let regionLabel = "";
-        if (drug.region === 'hippocampus') regionLabel = "해마 (Hippocampus)";
-        else if (drug.region === 'pfc') regionLabel = "전두엽 피질 (PFC)";
-        else if (drug.region === 'basal') regionLabel = "기저전뇌 (Basal Forebrain)";
-        else if (drug.region === 'microglia') regionLabel = "미세아교세포 (Microglia)";
-        else if (drug.region === 'astrocyte') regionLabel = "아스트로사이트 & BBB";
+        if (drug.region === 'hippocampus') regionLabel = "Hippocampus";
+        else if (drug.region === 'pfc') regionLabel = "Prefrontal Cortex";
+        else if (drug.region === 'basal') regionLabel = "Basal Forebrain";
+        else if (drug.region === 'microglia') regionLabel = "Microglia M2";
+        else if (drug.region === 'astrocyte') regionLabel = "Astrocytes & BBB";
 
         const dgVal = drug.affinity.split('|')[0].trim();
         const kdVal = drug.affinity.split('|')[1].trim();
@@ -579,12 +579,12 @@ function renderFullBrainPipelineCards(filterRegion) {
 
             <div>
                 <div class="drug-target-residues">
-                    <i class="fa-solid fa-crosshairs"></i> ${drug.bindingSites.substring(0, 48)}...
+                    <i class="fa-solid fa-crosshairs"></i> ${drug.bindingSites.substring(0, 52)}...
                 </div>
 
                 <div class="drug-card-footer">
                     <span>${drug.name}</span>
-                    <span>AlphaFold3 3D 서열 연동 <i class="fa-solid fa-cube"></i></span>
+                    <span>AF3 3D Sequence <i class="fa-solid fa-cube"></i></span>
                 </div>
             </div>
         `;
@@ -611,17 +611,17 @@ function openDrugModal(drugId) {
         </div>
 
         <div class="detail-field-box">
-            <strong style="color: #fff;"><i class="fa-solid fa-flask"></i> 1. 화학적 구조 & Pharmacophore:</strong><br>
+            <strong style="color: #fff;"><i class="fa-solid fa-flask"></i> 1. Chemical Structure & Pharmacophore:</strong><br>
             ${drug.chemStruct}
         </div>
 
         <div class="detail-field-box">
-            <strong style="color: #fff;"><i class="fa-solid fa-dna"></i> 2. 서열 구조 (FASTA Peptide / Bio-Conjugate Sequence):</strong><br>
+            <strong style="color: #fff;"><i class="fa-solid fa-dna"></i> 2. Sequence Structure (FASTA Peptide / Bio-Conjugate Sequence):</strong><br>
             <span style="color: var(--accent-purple); font-weight: 700;">${drug.sequence}</span>
         </div>
 
         <div class="detail-field-box">
-            <strong style="color: #fff;"><i class="fa-solid fa-crosshairs"></i> 3. Binding Regions / Sites (수용체 결합 잔기 부위):</strong><br>
+            <strong style="color: #fff;"><i class="fa-solid fa-crosshairs"></i> 3. Binding Regions / Sites (Receptor Binding Residues):</strong><br>
             ${drug.bindingSites}
         </div>
 
@@ -662,9 +662,9 @@ function copyModalFasta() {
     navigator.clipboard.writeText(currentActiveModalSequence).then(() => {
         const btn = document.getElementById('btn-copy-fasta');
         if (btn) {
-            btn.innerHTML = `<i class="fa-solid fa-check"></i> 복사 완료!`;
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied to Clipboard!`;
             setTimeout(() => {
-                btn.innerHTML = `<i class="fa-solid fa-copy"></i> FASTA 서열 복사`;
+                btn.innerHTML = `<i class="fa-solid fa-copy"></i> Copy FASTA Sequence`;
             }, 2000);
         }
     });
@@ -712,7 +712,6 @@ function initModal3DCanvas(sequence) {
         const char = sequence ? sequence[i] : 'A';
         const charCode = char.charCodeAt(0);
 
-        // Alpha-Helix pitch vs Beta-sheet pleated fold derived from Amino Acid properties
         let radius = 6 + (charCode % 5) * 0.8;
         let pitch = (i - seqLength / 2) * 0.6;
         let angle = (i / seqLength) * Math.PI * (charCode % 3 === 0 ? 6 : 4);
@@ -721,7 +720,6 @@ function initModal3DCanvas(sequence) {
         let y = pitch;
         let z = Math.cos(angle) * radius;
 
-        // Disulfide loops & Proline bends
         if (char === 'C' || char === 'P') {
             x *= 1.3;
             z *= 1.3;
@@ -733,7 +731,6 @@ function initModal3DCanvas(sequence) {
     const curve = new THREE.CatmullRomCurve3(curvePoints);
     const tubeGeo = new THREE.TubeGeometry(curve, seqLength * 3, 0.65, 12, false);
 
-    // AlphaFold3 pLDDT Spectrum Gradient Color Material per Residue
     const tubeMat = new THREE.MeshPhongMaterial({
         color: 0x00f2fe,
         shininess: 90,
@@ -742,13 +739,11 @@ function initModal3DCanvas(sequence) {
     const ribbonMesh = new THREE.Mesh(tubeGeo, tubeMat);
     modalThreeMeshGroup.add(ribbonMesh);
 
-    // Render Residue Side-Chain Spheres with AF3 pLDDT Color Spectrum
     const sphereGeo = new THREE.SphereGeometry(0.6, 12, 12);
     for (let i = 0; i < seqLength; i += 2) {
         const pt = curve.getPoint(i / seqLength);
         const char = sequence[i];
 
-        // pLDDT Color: >90 Blue/Cyan, 70-90 Green, <70 Gold
         let resColor = 0x00f2fe; // Very High (>90)
         if (char === 'G' || char === 'S') resColor = 0x10b981; // High
         if (char === 'P' || char === 'D') resColor = 0xf59e0b; // Low
@@ -759,7 +754,6 @@ function initModal3DCanvas(sequence) {
         modalThreeMeshGroup.add(sphere);
     }
 
-    // Add Central Binding Pocket Ligand Sphere
     const pocketGeo = new THREE.SphereGeometry(2.2, 24, 24);
     const pocketMat = new THREE.MeshPhongMaterial({ color: 0x10b981, transparent: true, opacity: 0.6, wireframe: true });
     const pocket = new THREE.Mesh(pocketGeo, pocketMat);
@@ -794,7 +788,6 @@ function renderModalPlddtChart(sequence) {
         const char = sequence ? sequence[i - 1] : 'A';
         labels.push(`${char}${i}`);
         
-        // Compute sequence-dependent pLDDT score
         let score = 93 + Math.sin(i * 0.4) * 4 + (char.charCodeAt(0) % 5) * 0.5;
         if (score > 100) score = 98.6;
         if (score < 70) score = 76;
@@ -906,7 +899,7 @@ function selectCandidate(index) {
     renderLeaderboardTable();
 
     const cand = AF3_CANDIDATES[index];
-    document.getElementById('current-candidate-name').innerText = `${cand.code} (${cand.rank}위)`;
+    document.getElementById('current-candidate-name').innerText = `${cand.code} (Rank #${cand.rank})`;
     document.getElementById('current-plddt').innerText = `pLDDT: ${cand.plddt} (AF3 Confidence: Very High)`;
     document.getElementById('target-protein-tag').innerHTML = `<i class="fa-solid fa-crosshairs"></i> Target: ${cand.target}`;
     document.getElementById('energy-tag').innerHTML = `<i class="fa-solid fa-bolt"></i> ΔG: ${cand.dg} kcal/mol`;
