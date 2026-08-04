@@ -1,16 +1,27 @@
 # 🧬 CognitionBioChem: Structural Pharmacology & AlphaFold3 De Novo Drug Discovery Platform
 
-[![AlphaFold3](https://img.shields.io/badge/AlphaFold3-DeepMind-00f2fe?style=for-the-badge&logo=google)](https://alphafoldserver.com/)
-[![License](https://img.shields.io/badge/License-Private_Research-10b981?style=for-the-badge)]()
-[![Platform](https://img.shields.io/badge/Platform-HTML5_Three.js_WebGL-a855f7?style=for-the-badge)]()
+[![AlphaFold3](https://img.shields.io/badge/AlphaFold3-DeepMind_Server-00f2fe?style=for-the-badge&logo=google)](https://alphafoldserver.com/)
+[![License](https://img.shields.io/badge/License-Private_Research-10b981?style=for-the-badge)](https://github.com/hopejsh/CognitionBioChem)
+[![Repository](https://img.shields.io/badge/GitHub-CognitionBioChem-a855f7?style=for-the-badge&logo=github)](https://github.com/hopejsh/CognitionBioChem)
+
+---
+
+## 📋 Table of Contents
+
+* [📌 Executive Overview](#-executive-overview)
+* [🧪 Section 1: Cognition-Enhancing Natural Products Pharmacophore Matrix](#-section-1-cognition-enhancing-natural-products-pharmacophore-matrix)
+* [🧠 Section 2: 5-Brain-Region Targeted De Novo Therapeutics Pipeline (25 Candidates)](#-section-2-5-brain-region-targeted-de-novo-therapeutics-pipeline-25-candidates)
+* [📊 Section 3: In Silico ADMET & Safety Risk Profile Assessment](#-section-3-in-silico-admet--safety-risk-profile-assessment)
+* [🧊 Section 4: AlphaFold3 Structural Visualization & Server Integration](#-section-4-alphafold3-structural-visualization--server-integration)
+* [💻 Section 5: Web Platform Quick Start Guide](#-section-5-web-platform-quick-start-guide)
 
 ---
 
 ## 📌 Executive Overview
 
-**CognitionBioChem** is a state-of-the-art computational biology, structural pharmacology, and artificial intelligence-driven drug discovery platform. It investigates cognition-enhancing Eastern medicine natural products and models **25 De Novo Targeted Bio-Conjugate Therapeutics** designed via **AlphaFold3** across 5 specific brain regions and cell types.
+**[CognitionBioChem](https://github.com/hopejsh/CognitionBioChem)** is a state-of-the-art computational biology, structural pharmacology, and artificial intelligence-driven drug discovery platform. It investigates cognition-enhancing Eastern medicine natural products and models **25 De Novo Targeted Bio-Conjugate Therapeutics** designed via **AlphaFold3** across 5 specific brain regions and cell types.
 
-The platform provides interactive 3D WebGL protein visualization, residue-level pLDDT confidence curves, 2D PAE (Predicted Aligned Error) heatmaps, and direct integration with the official **AlphaFold Server**.
+The platform provides interactive 3D WebGL protein visualization, residue-level pLDDT confidence curves, 2D PAE (Predicted Aligned Error) heatmaps, and direct live integration with the official **[AlphaFold Server](https://alphafoldserver.com/)**.
 
 ---
 
