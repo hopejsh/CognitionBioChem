@@ -18,14 +18,14 @@ The platform provides interactive 3D WebGL protein visualization, residue-level 
 
 We analyzed 8 major natural compound classes from Eastern traditional medicine to map their 3D binding structures, key pharmacophoric moieties, and downstream signaling cascades:
 
-1. **Huperzine A (뱀톱/석송)**: Sesquiterpene alkaloid. Targets AChE Catalytic Anionic Site (**CAS: Trp84, Phe330**) & **PAS (Trp286)** via cation-π interactions. Preserves acetylcholine and activates M1/α7 nAChR → CREB/BDNF.
-2. **Ginsenoside Rg1 (인삼/홍삼)**: Dammarane-type triterpenoid saponin. Binds TrkB extracellular D5 domain (**Asp298, Glu319**), driving adult hippocampal neurogenesis in the Dentate Gyrus.
-3. **Ginkgolide B (은행엽)**: 6-ring tri-lactone cage. Blocks PAFR (**His14, Tyr200**) and GABA_A channels, improving cerebral blood flow (CBF) and tight junction integrity.
-4. **Baicalein (황금)**: Lipophilic trihydroxyflavone. Targets GSK-3β ATP pocket (**Val135, Asp133**) and 12/15-LOX, preventing Tau hyperphosphorylation and neurofibrillary tangles (NFT).
-5. **Curcumin (강황/울금)**: Polyphenolic diarylheptanoid. Alkylates Keap1 **Cys151**, inducing Nrf2 nuclear translocation, HO-1/NQO1 expression, and Aβ β-sheet insertion.
-6. **Onjisaponin V / DISS (원지)**: Triterpenoid saponin ester. Activates AMPK and inhibits mTOR, triggering autophagic flux (LC3-II) to clear toxic intracellular Aβ/Tau.
-7. **Salvianolic Acid B (단삼)**: Polyphenolic acid tetramer. Blocks AChE PAS (**Trp286, Tyr72**) via π-stacking, preventing Aβ-AChE fibrillogenesis, and stimulates ER-β/eNOS vasodilation.
-8. **Asiatic Acid (적설초/고투콜라)**: Ursane pentacyclic triterpenoid. Binds TrkB and Keap1, promoting dendritic spine branching and synaptogenesis (PSD-95/Synaptophysin ↑).
+1. **Huperzine A (Lycopodium serratum)**: Sesquiterpene alkaloid. Targets AChE Catalytic Anionic Site (**CAS: Trp84, Phe330**) & **PAS (Trp286)** via cation-π interactions. Preserves acetylcholine and activates M1/α7 nAChR → CREB/BDNF.
+2. **Ginsenoside Rg1 (Panax ginseng)**: Dammarane-type triterpenoid saponin. Binds TrkB extracellular D5 domain (**Asp298, Glu319**), driving adult hippocampal neurogenesis in the Dentate Gyrus.
+3. **Ginkgolide B (Ginkgo biloba)**: 6-ring tri-lactone cage. Blocks PAFR (**His14, Tyr200**) and GABA_A channels, improving cerebral blood flow (CBF) and tight junction integrity.
+4. **Baicalein (Scutellaria baicalensis)**: Lipophilic trihydroxyflavone. Targets GSK-3β ATP pocket (**Val135, Asp133**) and 12/15-LOX, preventing Tau hyperphosphorylation and neurofibrillary tangles (NFT).
+5. **Curcumin (Curcuma longa)**: Polyphenolic diarylheptanoid. Alkylates Keap1 **Cys151**, inducing Nrf2 nuclear translocation, HO-1/NQO1 expression, and Aβ β-sheet insertion.
+6. **Onjisaponin V / DISS (Polygala tenuifolia)**: Triterpenoid saponin ester. Activates AMPK and inhibits mTOR, triggering autophagic flux (LC3-II) to clear toxic intracellular Aβ/Tau.
+7. **Salvianolic Acid B (Salvia miltiorrhiza)**: Polyphenolic acid tetramer. Blocks AChE PAS (**Trp286, Tyr72**) via π-stacking, preventing Aβ-AChE fibrillogenesis, and stimulates ER-β/eNOS vasodilation.
+8. **Asiatic Acid (Centella asiatica)**: Ursane pentacyclic triterpenoid. Binds TrkB and Keap1, promoting dendritic spine branching and synaptogenesis (PSD-95/Synaptophysin ↑).
 
 ---
 
@@ -112,13 +112,13 @@ The platform is built using pure Vanilla HTML5, CSS3 Glassmorphism, JavaScript, 
    file:///Users/seunghojung/Documents/DeepMind_Bio/index.html
    ```
 3. Navigate through the top navigation tabs:
-   * **개요 대시보드**: High-level computational biology summary.
-   * **천연물 결합 구조**: Split-view pharmacophore explorer for 8 natural products.
-   * **뇌 영역 타깃**: Interactive mapping of 5 brain regions and cellular subfields.
-   * **세포 신호전달**: Intracellular kinase cascades (TrkB/CREB, Nrf2/ARE, Wnt/β-Catenin).
-   * **AF3 TOP 10 후보군**: 3D WebGL viewer & leaderboard ranking.
-   * **5대 뇌 영역 표적 신약 25종 센터**: 3-column drug grid with interactive 3D/2D AlphaFold3 modal popups.
+   * **Dashboard**: High-level computational biology summary.
+   * **Natural Pharmacophores**: Split-view pharmacophore explorer for 8 natural products.
+   * **Brain Targets**: Interactive mapping of 5 brain regions and cellular subfields.
+   * **Signaling Cascades**: Intracellular kinase cascades (TrkB/CREB, Nrf2/ARE, Wnt/β-Catenin).
+   * **AF3 TOP 10 Candidates**: 3D WebGL viewer & leaderboard ranking.
+   * **25 De Novo Drug Center**: 3-column drug grid with interactive 3D/2D AlphaFold3 modal popups.
 
 ---
 
-© 2026 Google DeepMind Advanced Agentic Coding - **CognitionBioChem Intelligence**
+© 2026 Seung H. Jung - **CognitionBioChem Intelligence**
