@@ -1,0 +1,378 @@
+{
+ "entryType": "UniProtKB reviewed (Swiss-Prot)",
+ "primaryAccession": "Q9NZC2",
+ "uniProtkbId": "TREM2_HUMAN",
+ "organism": {
+  "scientificName": "Homo sapiens",
+  "commonName": "Human",
+  "taxonId": 9606,
+  "lineage": [
+   "Eukaryota",
+   "Metazoa",
+   "Chordata",
+   "Craniata",
+   "Vertebrata",
+   "Euteleostomi",
+   "Mammalia",
+   "Eutheria",
+   "Euarchontoglires",
+   "Primates",
+   "Haplorrhini",
+   "Catarrhini",
+   "Hominidae",
+   "Homo"
+  ]
+ },
+ "proteinDescription": {
+  "recommendedName": {
+   "fullName": {
+    "value": "Triggering receptor expressed on myeloid cells 2"
+   },
+   "shortNames": [
+    {
+     "value": "TREM-2"
+    }
+   ]
+  },
+  "alternativeNames": [
+   {
+    "fullName": {
+     "value": "Triggering receptor expressed on monocytes 2"
+    }
+   }
+  ],
+  "flag": "Precursor"
+ },
+ "features": [
+  {
+   "type": "Signal",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 18,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
+   "type": "Chain",
+   "location": {
+    "start": {
+     "value": 19,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 230,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Triggering receptor expressed on myeloid cells 2",
+   "featureId": "PRO_0000014987"
+  },
+  {
+   "type": "Domain",
+   "location": {
+    "start": {
+     "value": 29,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 112,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Ig-like V-type"
+  }
+ ],
+ "uniProtKBCrossReferences": [
+  {
+   "database": "PDB",
+   "id": "5ELI",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.10 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B=19-133"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "5UD7",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.20 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B/C/D/E/F=19-174"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "5UD8",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.80 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B=19-130"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6B8O",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.20 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B/C/D/E/F=19-174"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6XDS",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.47 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=18-135"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6Y6C",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.26 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B=19-174"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6YMQ",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.07 A"
+    },
+    {
+     "key": "Chains",
+     "value": "D000/G/H/I/J/K=19-131"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6YYE",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.36 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B=19-131"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6Z0G",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "NMR"
+    },
+    {
+     "key": "Resolution",
+     "value": "-"
+    },
+    {
+     "key": "Chains",
+     "value": "A=161-206"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6Z0H",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "NMR"
+    },
+    {
+     "key": "Resolution",
+     "value": "-"
+    },
+    {
+     "key": "Chains",
+     "value": "A=161-206"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6Z0I",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "NMR"
+    },
+    {
+     "key": "Resolution",
+     "value": "-"
+    },
+    {
+     "key": "Chains",
+     "value": "A=161-206"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "8T51",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.90 A"
+    },
+    {
+     "key": "Chains",
+     "value": "E/F=148-166"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "8T59",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.00 A"
+    },
+    {
+     "key": "Chains",
+     "value": "E/F=148-166"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "9PWN",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.80 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=131-148"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "9PX5",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.70 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=18-135"
+    }
+   ]
+  }
+ ],
+ "sequence": {
+  "value": "MEPLRLLILLFVTELSGAHNTTVFQGVAGQSLQVSCPYDSMKHWGRRKAWCRQLGEKGPCQRVVSTHNLWLLSFLRRWNGSTAITDDTLGGTLTITLRNLQPHDAGLYQCQSLHGSEADTLRKVLVEVLADPLDHRDAGDLWFPGESESFEDAHVEHSISRSLLEGEIPFPPTSILLLLACIFLIKILAASALWAAAWHGQKPGTHPPSELDCGHDPGYQLQTLPGLRDT",
+  "length": 230,
+  "molWeight": 25447,
+  "crc64": "C894AA210F708AF7",
+  "md5": "DD8DFDD6A6D085C29693A282ED1644DC"
+ },
+ "extraAttributes": {
+  "uniParcId": "UPI0000071EEB"
+ }
+}

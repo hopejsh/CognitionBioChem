@@ -24,14 +24,15 @@ SUITES = [
      "74 checks: 16-writer concurrency, idempotency, torn-tail recovery, and one test "
      "per flaw the three critics found in the rejected v1 spec"),
     ("Platform regression suite", [PY, "platform/tests/test_platform.py"], 0,
-     "93 checks: thermodynamics, peptide properties, RDKit validation, provenance "
-     "enforcement, and predictor parsing against real AlphaFold output"),
+     "109 checks: thermodynamics, peptide properties, RDKit validation, provenance "
+     "enforcement, predictor parsing, and target numbering-convention resolution"),
     ("Front-end contract verification", [PY, "platform/verify_frontend.py"], 0,
      "48 checks: DOM contract, data contract, fabricated-renderer removal, "
      "resource lifecycle"),
     ("Data-integrity gate (expected to FAIL on legacy data)",
      [PY, "platform/validate.py"], 1,
-     "91 violations across 13 categories — the gate correctly rejects the original data"),
+     "124 violations across 13 categories — 45 residue identities are wrong under every "
+     "numbering convention, resolved live against the UniProt registry"),
     ("Dataset build + provenance audit", [PY, "platform/build_dataset.py"], 0,
      "every numeric value carries a provenance record"),
     ("Naming guard (pooled potency must not be rendered as free energy)",

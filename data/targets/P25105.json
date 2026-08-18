@@ -1,0 +1,124 @@
+{
+ "entryType": "UniProtKB reviewed (Swiss-Prot)",
+ "primaryAccession": "P25105",
+ "uniProtkbId": "PTAFR_HUMAN",
+ "organism": {
+  "scientificName": "Homo sapiens",
+  "commonName": "Human",
+  "taxonId": 9606,
+  "lineage": [
+   "Eukaryota",
+   "Metazoa",
+   "Chordata",
+   "Craniata",
+   "Vertebrata",
+   "Euteleostomi",
+   "Mammalia",
+   "Eutheria",
+   "Euarchontoglires",
+   "Primates",
+   "Haplorrhini",
+   "Catarrhini",
+   "Hominidae",
+   "Homo"
+  ]
+ },
+ "proteinDescription": {
+  "recommendedName": {
+   "fullName": {
+    "value": "Platelet-activating factor receptor"
+   },
+   "shortNames": [
+    {
+     "value": "PAF-R"
+    },
+    {
+     "value": "PAFr"
+    }
+   ]
+  }
+ },
+ "features": [
+  {
+   "type": "Chain",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 342,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Platelet-activating factor receptor",
+   "featureId": "PRO_0000070092"
+  }
+ ],
+ "uniProtKBCrossReferences": [
+  {
+   "database": "PDB",
+   "id": "5ZKP",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.81 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=6-216"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "5ZKQ",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.90 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B=2-218"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "8XYD",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.90 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=1-342"
+    }
+   ]
+  }
+ ],
+ "sequence": {
+  "value": "MEPHDSSHMDSEFRYTLFPIVYSIIFVLGVIANGYVLWVFARLYPCKKFNEIKIFMVNLTMADMLFLITLPLWIVYYQNQGNWILPKFLCNVAGCLFFINTYCSVAFLGVITYNRFQAVTRPIKTAQANTRKRGISLSLVIWVAIVGAASYFLILDSTNTVPDSAGSGNVTRCFEHYEKGSVPVLIIHIFIVFSFFLVFLIILFCNLVIIRTLLMQPVQQQRNAEVKRRALWMVCTVLAVFIICFVPHHVVQLPWTLAELGFQDSKFHQAINDAHQVTLCLLSTNCVLDPVIYCFLTKKFRKHLTEKFYSMRSSRKCSRATTDTVTEVVVPFNQIPGNSLKN",
+  "length": 342,
+  "molWeight": 39203,
+  "crc64": "890073C9EBA79228",
+  "md5": "D78B89884A58668FE270605FF5BC0E95"
+ },
+ "extraAttributes": {
+  "uniParcId": "UPI0000000DD3"
+ }
+}

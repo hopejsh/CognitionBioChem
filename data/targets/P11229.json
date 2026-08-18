@@ -1,0 +1,188 @@
+{
+ "entryType": "UniProtKB reviewed (Swiss-Prot)",
+ "primaryAccession": "P11229",
+ "uniProtkbId": "ACM1_HUMAN",
+ "organism": {
+  "scientificName": "Homo sapiens",
+  "commonName": "Human",
+  "taxonId": 9606,
+  "lineage": [
+   "Eukaryota",
+   "Metazoa",
+   "Chordata",
+   "Craniata",
+   "Vertebrata",
+   "Euteleostomi",
+   "Mammalia",
+   "Eutheria",
+   "Euarchontoglires",
+   "Primates",
+   "Haplorrhini",
+   "Catarrhini",
+   "Hominidae",
+   "Homo"
+  ]
+ },
+ "proteinDescription": {
+  "recommendedName": {
+   "fullName": {
+    "value": "Muscarinic acetylcholine receptor M1"
+   }
+  }
+ },
+ "features": [
+  {
+   "type": "Chain",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 460,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Muscarinic acetylcholine receptor M1",
+   "featureId": "PRO_0000069015"
+  }
+ ],
+ "uniProtKBCrossReferences": [
+  {
+   "database": "PDB",
+   "id": "5CXV",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.70 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=2-218, A=355-460"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6OIJ",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.30 A"
+    },
+    {
+     "key": "Chains",
+     "value": "R=2-460"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6WJC",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.55 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=2-218, A=355-460"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6ZFZ",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.17 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=27-219, A=355-438"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6ZG4",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.33 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=27-219, A=355-438"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6ZG9",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.50 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=27-219, A=355-438"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "9JEA",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.40 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=25-412, A=414-417"
+    }
+   ]
+  }
+ ],
+ "sequence": {
+  "value": "MNTSAPPAVSPNITVLAPGKGPWQVAFIGITTGLLSLATVTGNLLVLISFKVNTELKTVNNYFLLSLACADLIIGTFSMNLYTTYLLMGHWALGTLACDLWLALDYVASNASVMNLLLISFDRYFSVTRPLSYRAKRTPRRAALMIGLAWLVSFVLWAPAILFWQYLVGERTVLAGQCYIQFLSQPIITFGTAMAAFYLPVTVMCTLYWRIYRETENRARELAALQGSETPGKGGGSSSSSERSQPGAEGSPETPPGRCCRCCRAPRLLQAYSWKEEEEEDEGSMESLTSSEGEEPGSEVVIKMPMVDPEAQAPTKQPPRSSPNTVKRPTKKGRDRAGKGQKPRGKEQLAKRKTFSLVKEKKAARTLSAILLAFILTWTPYNIMVLVSTFCKDCVPETLWELGYWLCYVNSTINPMCYALCNKAFRDTFRLLLLCRWDKRRWRKIPKRPGSVHRTPSRQC",
+  "length": 460,
+  "molWeight": 51421,
+  "crc64": "567C20F63541C8D0",
+  "md5": "C30092595D83FFDE9E19D52C845922D1"
+ },
+ "extraAttributes": {
+  "uniParcId": "UPI00001252AB"
+ }
+}

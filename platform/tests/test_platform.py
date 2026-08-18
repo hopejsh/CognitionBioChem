@@ -386,6 +386,61 @@ def test_predictor_on_real_data():
     check("no spurious warnings on genuine data", not p.warnings, str(p.warnings))
 
 
+
+# --------------------------------------------------------------------------- #
+# Target registry (slate #4)
+# --------------------------------------------------------------------------- #
+
+def test_registry_numbering():
+    print("\n[registry] numbering conventions resolve against real sequences")
+    import json as _json
+    from cbc import registry as R
+    p = REPO / "data" / "target_registry.json"
+    if not p.exists():
+        print("  SKIP  registry not built")
+        return
+    reg = _json.loads(p.read_text())
+
+    def rec(sym):
+        t = reg["targets"][sym]
+        return R.TargetRecord(
+            symbol=sym, uniprot=t["uniprot"], length=t["length"], sequence=t["sequence"],
+            signal_peptide=tuple(t["signal_peptide"]) if t["signal_peptide"] else None,
+            chain=tuple(t["chain"]) if t["chain"] else None)
+
+    check("all 16 targets present", len(reg["targets"]) == 16, str(len(reg["targets"])))
+    check("every sequence matches its stated length",
+          all(t["sequence_length_checked"] for t in reg["targets"].values()))
+
+    # The offset must be DERIVED from the CHAIN feature, not assumed.
+    check("ACHE offset is 31 (SIGNAL 1-31)", rec("ACHE").mature_offset == 31)
+    check("CHRNA7 offset is 22", rec("CHRNA7").mature_offset == 22)
+    check("PTAFR has no signal peptide, so offset is 0",
+          rec("PTAFR").mature_offset == 0)
+
+    # The AChE string mixes conventions: this is the defect the registry exists to expose.
+    a = rec("ACHE")
+    check("Trp286 resolves ONLY in mature numbering",
+          a.check_annotation("Trp286")["resolves_in"] == ["mature"])
+    check("Trp317 resolves ONLY in canonical numbering",
+          a.check_annotation("Trp317")["resolves_in"] == ["canonical"])
+    check("Trp84 (Torpedo) resolves in NEITHER convention",
+          not a.check_annotation("Trp84")["valid"])
+
+    # A wrong residue identity is distinguishable from a numbering problem.
+    for sym, ann in (("PTAFR", "His14"), ("TREM2", "Lys112"), ("FZD8", "Arg104")):
+        check(f"{sym} {ann} is wrong under every convention",
+              not rec(sym).check_annotation(ann)["valid"])
+    for sym, ann in (("FZD8", "Phe72"), ("TLR4", "Arg264"), ("KEAP1", "Tyr334")):
+        check(f"{sym} {ann} is confirmed correct", rec(sym).check_annotation(ann)["valid"])
+
+    # Round-trip conversion.
+    check("mature->canonical->mature round-trips",
+          a.convert(a.convert(286, "mature", "canonical"), "canonical", "mature") == 286)
+    check("canonical 317 == mature 286 for AChE",
+          a.convert(286, "mature", "canonical") == 317)
+
+
 def main() -> int:
     print("=" * 76)
     print("CognitionBioChem platform regression suite")

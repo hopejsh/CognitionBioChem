@@ -1,0 +1,355 @@
+{
+ "entryType": "UniProtKB reviewed (Swiss-Prot)",
+ "primaryAccession": "Q16620",
+ "uniProtkbId": "NTRK2_HUMAN",
+ "organism": {
+  "scientificName": "Homo sapiens",
+  "commonName": "Human",
+  "taxonId": 9606,
+  "lineage": [
+   "Eukaryota",
+   "Metazoa",
+   "Chordata",
+   "Craniata",
+   "Vertebrata",
+   "Euteleostomi",
+   "Mammalia",
+   "Eutheria",
+   "Euarchontoglires",
+   "Primates",
+   "Haplorrhini",
+   "Catarrhini",
+   "Hominidae",
+   "Homo"
+  ]
+ },
+ "proteinDescription": {
+  "recommendedName": {
+   "fullName": {
+    "value": "BDNF/NT-3 growth factors receptor"
+   },
+   "ecNumbers": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15494731"
+      }
+     ],
+     "value": "2.7.10.1"
+    }
+   ]
+  },
+  "alternativeNames": [
+   {
+    "fullName": {
+     "value": "GP145-TrkB"
+    },
+    "shortNames": [
+     {
+      "value": "Trk-B"
+     }
+    ]
+   },
+   {
+    "fullName": {
+     "value": "Neurotrophic tyrosine kinase receptor type 2"
+    }
+   },
+   {
+    "fullName": {
+     "value": "TrkB tyrosine kinase"
+    }
+   },
+   {
+    "fullName": {
+     "value": "Tropomyosin-related kinase B"
+    }
+   }
+  ],
+  "flag": "Precursor"
+ },
+ "features": [
+  {
+   "type": "Signal",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 31,
+     "modifier": "EXACT"
+    }
+   },
+   "description": ""
+  },
+  {
+   "type": "Chain",
+   "location": {
+    "start": {
+     "value": 32,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 822,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "BDNF/NT-3 growth factors receptor",
+   "featureId": "PRO_0000016727"
+  },
+  {
+   "type": "Domain",
+   "location": {
+    "start": {
+     "value": 32,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 61,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "LRRNT"
+  },
+  {
+   "type": "Domain",
+   "location": {
+    "start": {
+     "value": 148,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 196,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "LRRCT"
+  },
+  {
+   "type": "Domain",
+   "location": {
+    "start": {
+     "value": 197,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 282,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Ig-like C2-type 1"
+  },
+  {
+   "type": "Domain",
+   "location": {
+    "start": {
+     "value": 295,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 365,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Ig-like C2-type 2"
+  },
+  {
+   "type": "Domain",
+   "location": {
+    "start": {
+     "value": 538,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 807,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Protein kinase",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255",
+     "source": "PROSITE-ProRule",
+     "id": "PRU00159"
+    }
+   ]
+  }
+ ],
+ "uniProtKBCrossReferences": [
+  {
+   "database": "PDB",
+   "id": "1HCF",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.70 A"
+    },
+    {
+     "key": "Chains",
+     "value": "X/Y=286-383"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "1WWB",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.10 A"
+    },
+    {
+     "key": "Chains",
+     "value": "X=283-385"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "2MFQ",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "NMR"
+    },
+    {
+     "key": "Resolution",
+     "value": "-"
+    },
+    {
+     "key": "Chains",
+     "value": "B=497-519"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "4ASZ",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.70 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=527-822"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "4AT3",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.77 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=527-822"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "4AT4",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.36 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=527-822"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "4AT5",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.71 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=527-822"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "5MO9",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.59 A"
+    },
+    {
+     "key": "Chains",
+     "value": "X=278-426"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "8OYD",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "NMR"
+    },
+    {
+     "key": "Resolution",
+     "value": "-"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B=422-466"
+    }
+   ]
+  }
+ ],
+ "sequence": {
+  "value": "MSSWIRWHGPAMARLWGFCWLVVGFWRAAFACPTSCKCSASRIWCSDPSPGIVAFPRLEPNSVDPENITEIFIANQKRLEIINEDDVEAYVGLRNLTIVDSGLKFVAHKAFLKNSNLQHINFTRNKLTSLSRKHFRHLDLSELILVGNPFTCSCDIMWIKTLQEAKSSPDTQDLYCLNESSKNIPLANLQIPNCGLPSANLAAPNLTVEEGKSITLSCSVAGDPVPNMYWDVGNLVSKHMNETSHTQGSLRITNISSDDSGKQISCVAENLVGEDQDSVNLTVHFAPTITFLESPTSDHHWCIPFTVKGNPKPALQWFYNGAILNESKYICTKIHVTNHTEYHGCLQLDNPTHMNNGDYTLIAKNEYGKDEKQISAHFMGWPGIDDGANPNYPDVIYEDYGTAANDIGDTTNRSNEIPSTDVTDKTGREHLSVYAVVVIASVVGFCLLVMLFLLKLARHSKFGMKGPASVISNDDDSASPLHHISNGSNTPSSSEGGPDAVIIGMTKIPVIENPQYFGITNSQLKPDTFVQHIKRHNIVLKRELGEGAFGKVFLAECYNLCPEQDKILVAVKTLKDASDNARKDFHREAELLTNLQHEHIVKFYGVCVEGDPLIMVFEYMKHGDLNKFLRAHGPDAVLMAEGNPPTELTQSQMLHIAQQIAAGMVYLASQHFVHRDLATRNCLVGENLLVKIGDFGMSRDVYSTDYYRVGGHTMLPIRWMPPESIMYRKFTTESDVWSLGVVLWEIFTYGKQPWYQLSNNEVIECITQGRVLQRPRTCPQEVYELMLGCWQREPHMRKNIKGIHTLLQNLAKASPVYLDILG",
+  "length": 822,
+  "molWeight": 91999,
+  "crc64": "2FEB9159948F0D13",
+  "md5": "7E8FFAA24C4C9DBF3298FA9DE914FB5A"
+ },
+ "extraAttributes": {
+  "uniParcId": "UPI0000000C0E"
+ }
+}

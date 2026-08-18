@@ -1,0 +1,501 @@
+{
+ "entryType": "UniProtKB reviewed (Swiss-Prot)",
+ "primaryAccession": "Q16236",
+ "uniProtkbId": "NF2L2_HUMAN",
+ "organism": {
+  "scientificName": "Homo sapiens",
+  "commonName": "Human",
+  "taxonId": 9606,
+  "lineage": [
+   "Eukaryota",
+   "Metazoa",
+   "Chordata",
+   "Craniata",
+   "Vertebrata",
+   "Euteleostomi",
+   "Mammalia",
+   "Eutheria",
+   "Euarchontoglires",
+   "Primates",
+   "Haplorrhini",
+   "Catarrhini",
+   "Hominidae",
+   "Homo"
+  ]
+ },
+ "proteinDescription": {
+  "recommendedName": {
+   "fullName": {
+    "evidences": [
+     {
+      "evidenceCode": "ECO:0000303",
+      "source": "PubMed",
+      "id": "11035812"
+     }
+    ],
+    "value": "Nuclear factor erythroid 2-related factor 2"
+   },
+   "shortNames": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000303",
+       "source": "PubMed",
+       "id": "11035812"
+      }
+     ],
+     "value": "NF-E2-related factor 2"
+    },
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000303",
+       "source": "PubMed",
+       "id": "11035812"
+      }
+     ],
+     "value": "NFE2-related factor 2"
+    },
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000303",
+       "source": "PubMed",
+       "id": "11256947"
+      }
+     ],
+     "value": "Nrf-2"
+    }
+   ]
+  },
+  "alternativeNames": [
+   {
+    "fullName": {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000303",
+       "source": "PubMed",
+       "id": "33009401"
+      },
+      {
+       "evidenceCode": "ECO:0000303",
+       "source": "PubMed",
+       "id": "7937919"
+      }
+     ],
+     "value": "Nuclear factor, erythroid derived 2, like 2"
+    }
+   }
+  ]
+ },
+ "features": [
+  {
+   "type": "Chain",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 605,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Nuclear factor erythroid 2-related factor 2",
+   "featureId": "PRO_0000076449"
+  },
+  {
+   "type": "Domain",
+   "location": {
+    "start": {
+     "value": 497,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 560,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "bZIP",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255",
+     "source": "PROSITE-ProRule",
+     "id": "PRU00978"
+    }
+   ]
+  }
+ ],
+ "uniProtKBCrossReferences": [
+  {
+   "database": "PDB",
+   "id": "2FLU",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.50 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=69-84"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "2LZ1",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "NMR"
+    },
+    {
+     "key": "Resolution",
+     "value": "-"
+    },
+    {
+     "key": "Chains",
+     "value": "A=445-523"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "3ZGC",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.20 A"
+    },
+    {
+     "key": "Chains",
+     "value": "C=76-82"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "4IFL",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.80 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=69-84"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "5WFV",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.91 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=76-84"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "6T7V",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.60 A"
+    },
+    {
+     "key": "Chains",
+     "value": "I=76-84"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7K28",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.15 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=77-84"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7K29",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.20 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=76-84"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7K2A",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.90 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=76-83"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7K2B",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.31 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=77-83"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7K2C",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.11 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=77-82"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7K2D",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.21 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=77-82"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7K2E",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.03 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=77-82"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7K2K",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "1.98 A"
+    },
+    {
+     "key": "Chains",
+     "value": "P=77-82"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7O7B",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "NMR"
+    },
+    {
+     "key": "Resolution",
+     "value": "-"
+    },
+    {
+     "key": "Chains",
+     "value": "A=445-523"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7X5E",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.30 A"
+    },
+    {
+     "key": "Chains",
+     "value": "B/F=452-560"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7X5F",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.60 A"
+    },
+    {
+     "key": "Chains",
+     "value": "B/F=452-560"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7X5G",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.30 A"
+    },
+    {
+     "key": "Chains",
+     "value": "B/F=452-560"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "8EJR",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.08 A"
+    },
+    {
+     "key": "Chains",
+     "value": "C=76-82"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "8EJS",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "X-ray"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.82 A"
+    },
+    {
+     "key": "Chains",
+     "value": "C=76-82"
+    }
+   ]
+  }
+ ],
+ "sequence": {
+  "value": "MMDLELPPPGLPSQQDMDLIDILWRQDIDLGVSREVFDFSQRRKEYELEKQKKLEKERQEQLQKEQEKAFFAQLQLDEETGEFLPIQPAQHIQSETSGSANYSQVAHIPKSDALYFDDCMQLLAQTFPFVDDNEVSSATFQSLVPDIPGHIESPVFIATNQAQSPETSVAQVAPVDLDGMQQDIEQVWEELLSIPELQCLNIENDKLVETTMVPSPEAKLTEVDNYHFYSSIPSMEKEVGNCSPHFLNAFEDSFSSILSTEDPNQLTVNSLNSDATVNTDFGDEFYSAFIAEPSISNSMPSPATLSHSLSELLNGPIDVSDLSLCKAFNQNHPESTAEFNDSDSGISLNTSPSVASPEHSVESSSYGDTLLGLSDSEVEELDSAPGSVKQNGPKTPVHSSGDMVQPLSPSQGQSTHVHDAQCENTPEKELPVSPGHRKTPFTKDKHSSRLEAHLTRDELRAKALHIPFPVEKIINLPVVDFNEMMSKEQFNEAQLALIRDIRRRGKNKVAAQNCRKRKLENIVELEQDLDHLKDEKEKLLKEKGENDKSLHLLKKQLSTLYLEVFSMLRDEDGKPYSPSEYSLQQTRDGNVFLVPKSKKPDVKKN",
+  "length": 605,
+  "molWeight": 67827,
+  "crc64": "99FAFD811B6C1416",
+  "md5": "117B97A399E87BE2F7924CE56F248F54"
+ },
+ "extraAttributes": {
+  "uniParcId": "UPI000012FFD0"
+ }
+}

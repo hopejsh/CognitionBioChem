@@ -1,0 +1,210 @@
+{
+ "entryType": "UniProtKB reviewed (Swiss-Prot)",
+ "primaryAccession": "P43004",
+ "uniProtkbId": "EAA2_HUMAN",
+ "organism": {
+  "scientificName": "Homo sapiens",
+  "commonName": "Human",
+  "taxonId": 9606,
+  "lineage": [
+   "Eukaryota",
+   "Metazoa",
+   "Chordata",
+   "Craniata",
+   "Vertebrata",
+   "Euteleostomi",
+   "Mammalia",
+   "Eutheria",
+   "Euarchontoglires",
+   "Primates",
+   "Haplorrhini",
+   "Catarrhini",
+   "Hominidae",
+   "Homo"
+  ]
+ },
+ "proteinDescription": {
+  "recommendedName": {
+   "fullName": {
+    "evidences": [
+     {
+      "evidenceCode": "ECO:0000305"
+     }
+    ],
+    "value": "Excitatory amino acid transporter 2"
+   }
+  },
+  "alternativeNames": [
+   {
+    "fullName": {
+     "value": "Glutamate/aspartate transporter II"
+    }
+   },
+   {
+    "fullName": {
+     "value": "Sodium-dependent glutamate/aspartate transporter 2"
+    }
+   },
+   {
+    "fullName": {
+     "value": "Solute carrier family 1 member 2"
+    }
+   }
+  ]
+ },
+ "features": [
+  {
+   "type": "Chain",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 574,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Excitatory amino acid transporter 2",
+   "featureId": "PRO_0000202061"
+  }
+ ],
+ "uniProtKBCrossReferences": [
+  {
+   "database": "PDB",
+   "id": "7VR7",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.80 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=1-574"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7VR8",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.20 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A=1-574"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7XR4",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.40 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B/C=1-574"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "7XR6",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.40 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B/C=1-574"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "9JVV",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "2.82 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B/C=1-574"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "9JVW",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.41 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B/C=1-574"
+    }
+   ]
+  },
+  {
+   "database": "PDB",
+   "id": "9JVX",
+   "properties": [
+    {
+     "key": "Method",
+     "value": "EM"
+    },
+    {
+     "key": "Resolution",
+     "value": "3.97 A"
+    },
+    {
+     "key": "Chains",
+     "value": "A/B/C=1-574"
+    }
+   ]
+  }
+ ],
+ "sequence": {
+  "value": "MASTEGANNMPKQVEVRMHDSHLGSEEPKHRHLGLRLCDKLGKNLLLTLTVFGVILGAVCGGLLRLASPIHPDVVMLIAFPGDILMRMLKMLILPLIISSLITGLSGLDAKASGRLGTRAMVYYMSTTIIAAVLGVILVLAIHPGNPKLKKQLGPGKKNDEVSSLDAFLDLIRNLFPENLVQACFQQIQTVTKKVLVAPPPDEEANATSAVVSLLNETVTEVPEETKMVIKKGLEFKDGMNVLGLIGFFIAFGIAMGKMGDQAKLMVDFFNILNEIVMKLVIMIMWYSPLGIACLICGKIIAIKDLEVVARQLGMYMVTVIIGLIIHGGIFLPLIYFVVTRKNPFSFFAGIFQAWITALGTASSAGTLPVTFRCLEENLGIDKRVTRFVLPVGATINMDGTALYEAVAAIFIAQMNGVVLDGGQIVTVSLTATLASVGAASIPSAGLVTMLLILTAVGLPTEDISLLVAVDWLLDRMRTSVNVVGDSFGAGIVYHLSKSELDTIDSQHRVHEDIEMTKTQSIYDDMKNHRESNSNQCVYAAHNSVIVDECKVTLAANGKSADCSVEEEPWKREK",
+  "length": 574,
+  "molWeight": 62104,
+  "crc64": "C8104E6727979435",
+  "md5": "A6F697C1B6392DDD8AB8A98F7000E781"
+ },
+ "extraAttributes": {
+  "uniParcId": "UPI0000129B12"
+ }
+}

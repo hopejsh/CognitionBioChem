@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -138,28 +139,75 @@ class Gate:
                           "An extracellular peptide cannot reach a cytosolic protein.")
 
     def check_residues(self, records: list[tuple[str, str]]) -> None:
-        """Residue identities asserted by the data, checked against the real sequence.
+        """Resolve every residue annotation against the target registry.
 
-        Each entry in data/residue_audit.json was verified by retrieving the UniProt
-        sequence and slicing it at the cited position, so a hit here means the dataset
-        names an amino acid that is not at that position in any numbering convention.
+        This replaces a static list of eight known-bad annotations with live resolution:
+        each `Xaa123` token in a binding-site string is looked up in the UniProt sequence
+        under both the canonical and the mature-chain convention, and the annotation is a
+        failure only if it is false under BOTH. That distinction is the whole point — a
+        mismatch under one convention is a numbering problem, a mismatch under every
+        convention is a wrong residue identity.
+
+        Resolving live also catches annotations nobody thought to audit, and catches the
+        subtler case where an annotation happens to resolve under a convention different
+        from the one its neighbours in the same string use.
         """
-        audit_path = REPO / "data" / "residue_audit.json"
-        if not audit_path.exists():
+        reg_path = REPO / "data" / "target_registry.json"
+        if not reg_path.exists():
             return
-        audit = json.loads(audit_path.read_text())
+        from cbc import registry as R
+        reg = json.loads(reg_path.read_text())
+
+        def record_for(sym: str):
+            t = reg["targets"][sym]
+            return R.TargetRecord(
+                symbol=sym, uniprot=t["uniprot"], length=t["length"],
+                sequence=t["sequence"],
+                signal_peptide=tuple(t["signal_peptide"]) if t["signal_peptide"] else None,
+                chain=tuple(t["chain"]) if t["chain"] else None)
+
+        # Which target a binding-site string refers to, by the aliases that appear in it.
+        ALIASES = {
+            "ACHE": ("AChE", "acetylcholinesterase"), "NTRK2": ("TrkB",),
+            "NTRK1": ("TrkA",), "KEAP1": ("Keap1",), "TREM2": ("Trem2", "TREM2"),
+            "FZD8": ("Frizzled-8", "FZD8", "Fzd"), "GRIN2A": ("GluN2A",),
+            "GRIN2B": ("GluN2B",), "CHRNA7": ("nAChR", "α7", "alpha-7"),
+            "TLR4": ("TLR4",), "PTAFR": ("PAFR",), "CHRM1": ("M1",),
+            "GSK3B": ("GSK-3", "GSK3"), "SLC1A2": ("EAAT2",), "NOS3": ("eNOS",),
+            "NFE2L2": ("Nrf2",),
+        }
+        token = re.compile(r"\b([A-Z][a-z]{2})(\d+)\b")
+
         for name, sites in records:
-            for f in audit["fabricated"]:
-                if f["asserted"] in sites:
-                    self.fail("fabricated_residue", name,
-                              f"asserts {f['asserted']} for {f['target']}, but "
-                              f"{f['uniprot']} position {f['asserted'][3:]} is "
-                              f"{f['actual']}. {f['note']}")
-            for n in audit["numbering_convention_errors"]:
-                if all(r in sites for r in ("Trp84", "Trp286")):
-                    self.fail("mixed_numbering_convention", name, n["problem"] + ". "
-                              + n["resolution"][:200])
-                    break
+            for sym, aliases in ALIASES.items():
+                if sym not in reg["targets"]:
+                    continue
+                if not any(a.lower() in sites.lower() for a in aliases):
+                    continue
+                rec = record_for(sym)
+                conventions_used: set[str] = set()
+                for m in token.finditer(sites):
+                    ann = m.group(0)
+                    res = rec.check_annotation(ann)
+                    if not res.get("parsed"):
+                        continue
+                    if not res["valid"]:
+                        self.fail(
+                            "fabricated_residue", name,
+                            f"asserts {ann} for {sym} ({rec.uniprot}), but position "
+                            f"{res['position']} is {res['canonical']} in canonical "
+                            f"numbering and {res['mature']} in mature numbering. Wrong "
+                            f"under every convention, so this is a residue-identity error, "
+                            f"not a numbering-convention one.")
+                    elif len(res["resolves_in"]) == 1:
+                        conventions_used.add(res["resolves_in"][0])
+                if len(conventions_used) > 1:
+                    self.fail(
+                        "mixed_numbering_convention", name,
+                        f"a single {sym} binding-site string uses more than one numbering "
+                        f"convention ({sorted(conventions_used)}). Every residue position "
+                        f"must be accompanied by its (accession, convention) pair; "
+                        f"see data/target_registry.json.")
 
     def check_placeholder_text(self, records: list[tuple[str, str]]) -> None:
         for name, seq in records:
