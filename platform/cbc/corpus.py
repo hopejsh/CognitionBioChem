@@ -511,3 +511,78 @@ def build_target_corpus(target_chembl_id: str, protocol: InclusionProtocol,
         },
         "compounds": [e.to_dict() for e in entries.values()],
     }
+
+
+# --------------------------------------------------------------------------- #
+# Complete activity retrieval
+# --------------------------------------------------------------------------- #
+
+CHEMBL_ES = "https://www.ebi.ac.uk/chembl/elk/es/chembl_activity/_search"
+
+
+def all_activities(molecule_chembl_id: str, target_chembl_id: str,
+                   size: int = 500) -> list[dict]:
+    """EVERY measured activity for one compound-target pair.
+
+    `build_target_corpus` draws a flat activity budget across a whole target, so an
+    individual compound gets whatever records happen to fall inside that window. Measured
+    consequence: huperzine A x AChE was represented by ONE record at 5.0 nM when ChEMBL holds
+    23 IC50 records spanning 3.99 log10 units with a median of 47 nM — the captured value sat
+    at the 17th percentile, and roughly 40% of a headline error attributed to the model was
+    really an artefact of that sampling.
+
+    The public REST endpoint returned HTTP 500 throughout this work, so the Elasticsearch
+    backend is used directly.
+    """
+    body = {
+        "size": size,
+        "query": {"bool": {"filter": [
+            {"term": {"molecule_chembl_id": molecule_chembl_id}},
+            {"term": {"target_chembl_id": target_chembl_id}}]}},
+        "_source": ["standard_type", "standard_value", "standard_units", "pchembl_value",
+                    "assay_chembl_id", "document_chembl_id", "target_organism",
+                    "assay_type", "standard_relation"],
+    }
+    req = urllib.request.Request(
+        CHEMBL_ES, data=json.dumps(body).encode(),
+        headers={"Content-Type": "application/json", "User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=120, context=_ssl_context()) as fh:
+            data = json.loads(fh.read())
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+        raise SourceError(f"ChEMBL Elasticsearch query failed: {exc}") from exc
+
+    out = []
+    for h in data.get("hits", {}).get("hits", []):
+        s = h["_source"]
+        v, u, t = s.get("standard_value"), s.get("standard_units"), s.get("standard_type")
+        if not v or u != "nM" or t not in POTENCY_TYPES:
+            continue
+        # An inequality is a bound, not a measurement, and averaging it with real values
+        # biases the reference.
+        if s.get("standard_relation") not in (None, "=", ""):
+            continue
+        out.append({"type": t, "value_nm": float(v),
+                    "assay": s.get("assay_chembl_id"),
+                    "document": s.get("document_chembl_id"),
+                    "pchembl": s.get("pchembl_value"),
+                    "organism": s.get("target_organism")})
+    return out
+
+
+def reference_potency(molecule_chembl_id: str, target_chembl_id: str) -> dict:
+    """A reference value with its own dispersion, so the model's error can be compared
+    against the measurement's."""
+    import statistics as _st
+    acts = all_activities(molecule_chembl_id, target_chembl_id)
+    if not acts:
+        return {"n": 0, "median_nm": None}
+    vals = [a["value_nm"] for a in acts]
+    logs = [__import__("math").log10(v) for v in vals if v > 0]
+    return {
+        "n": len(vals), "n_assays": len({a["assay"] for a in acts}),
+        "median_nm": _st.median(vals), "min_nm": min(vals), "max_nm": max(vals),
+        "log10_spread": round(max(logs) - min(logs), 3) if len(logs) > 1 else 0.0,
+        "log10_sd": round(_st.stdev(logs), 3) if len(logs) > 1 else None,
+        "types": sorted({a["type"] for a in acts}),
+    }

@@ -1,0 +1,56 @@
+{
+ "hash": "0b098bfae8051a42403665c72635c3e0e77a45a9473a207ac6ff16f9af4b343d",
+ "registered_utc": "2026-08-18T05:28:14+00:00",
+ "min_attainable_p": 0.0,
+ "content": {
+  "study_id": "affinity-corrected-v1",
+  "question": "Does the Boltz-2 affinity head rank AChE inhibitor potency once each reference value is the median over ALL ChEMBL records for that compound-target pair rather than whichever single record a flat activity budget happened to capture? And how does the model's error compare with the measured dispersion of the references themselves?",
+  "primary_metric": "spearman_rho_corrected",
+  "primary_metric_justification": "Rank correlation against corrected references is the direct successor to study v1's primary metric, so the two are comparable and the effect of the reference fix is readable as a difference. Rank rather than absolute error because the head is fitted to pooled Ki/Kd/IC50/EC50 labels and its absolute level is an uncalibrated corpus-average offset, so only its ordering has a defined referent. The same predictions are reused deliberately: with the model output held fixed, any change in rho is attributable to the references alone.",
+  "decision_threshold": "H1 confirmed if Spearman rho with corrected references exceeds 0.5 and its bootstrap 95% CI excludes zero; H2 confirmed if rho improves by more than 0.15 over study v1's 0.304; H3 confirmed if the model's median absolute error exceeds the median reference dispersion, i.e. the model is the larger error term.",
+  "n_planned": 15,
+  "n_comparisons": 3,
+  "multiplicity_correction": "holm",
+  "alpha": 0.05,
+  "stopping_rule": "Fixed: every compound scored in study v1 that also returns at least one ChEMBL activity record under complete retrieval is included, exactly once. No new prediction is made and no compound is added. Compounds whose complete retrieval returns nothing are excluded with the reason recorded.",
+  "analysis_plan": "For each compound from study v1, retrieve every IC50/Ki/Kd/EC50/AC50/XC50 record against CHEMBL220 via the ChEMBL Elasticsearch backend, discarding inequality-qualified values because a bound is not a measurement. The reference is the median in nM; the reference dispersion is the standard deviation of log10 values across records. Predicted pIC50 is 6 - affinity_pred_value, unchanged from v1. Report Spearman rho with a bootstrap 95% CI (10000 resamples, seed 0), the change from v1, and the model error against the reference dispersion. Holm across the three hypotheses.",
+  "hypotheses": [
+   {
+    "name": "H1_ranking_with_good_references",
+    "statement": "With complete references the affinity head ranks AChE potency better than chance.",
+    "predicted_by": "the hypothesis that reference quality was v1's binding limit",
+    "confirmed_if": "Spearman rho > 0.5 and the bootstrap 95% CI excludes zero",
+    "falsified_if": "rho <= 0.5 or the CI includes zero"
+   },
+   {
+    "name": "H2_reference_fix_matters",
+    "statement": "Correcting the references materially improves the measured correlation, i.e. v1 was measuring reference noise.",
+    "predicted_by": "the reference-quality explanation of v1's null result",
+    "confirmed_if": "rho improves by more than 0.15 over v1's 0.304",
+    "falsified_if": "rho improves by 0.15 or less, which would mean the references were not the limit and the model is"
+   },
+   {
+    "name": "H3_model_dominates_error",
+    "statement": "The model's error is larger than the measurement's, so the model is the term worth improving.",
+    "predicted_by": "the alternative explanation, that the model rather than the references limits v1",
+    "confirmed_if": "median |predicted - reference| in log10 exceeds the median reference log10 dispersion",
+    "falsified_if": "model error does not exceed reference dispersion, in which case the two are not separable at this n and no claim about model accuracy is licensed"
+   }
+  ],
+  "test_type": "parametric",
+  "n_permutations": 0,
+  "secondary_metrics": [
+   "rho_v1",
+   "delta_rho",
+   "median_absolute_error_log10",
+   "median_reference_log10_sd",
+   "median_records_per_compound",
+   "n_compounds_with_single_record",
+   "max_reference_log10_spread",
+   "pearson_r",
+   "kendall_tau"
+  ],
+  "exclusions": "Compounds from study v1 for which complete retrieval returns no usable record are excluded and listed. Inequality-qualified activities (>, <) are discarded before forming the reference because a bound averaged with measurements biases the result.",
+  "known_confounds": "1. The predictions are reused from study v1 and were made in single-sequence mode, so their absolute quality is a lower bound; only the reference variable changed. 2. Medians pool IC50, Ki and Kd, which are different physical quantities \u2014 this is the same pooling the head itself was trained under, so it is consistent, but it is not a clean thermodynamic reference. 3. One target only, so nothing generalises beyond AChE. 4. n is under 20, so the bootstrap interval on rho is wide and H2's 0.15 threshold is comparable to the sampling noise on rho itself."
+ }
+}
