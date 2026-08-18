@@ -1,0 +1,1949 @@
+{
+ "natural_products": [
+  {
+   "name": "Huperzine A (Lycopodium serratum)",
+   "smiles_input": "CC1=CC2C(=C)C3C(=O)NC(=C2CC3(C)N)C",
+   "parses": false,
+   "errors": [
+    "SMILES is syntactically invalid and cannot be parsed"
+   ],
+   "warnings": [],
+   "canonical_smiles": null,
+   "inchikey": null,
+   "formula": null,
+   "mol_weight": null,
+   "exact_mass": null,
+   "heavy_atoms": null,
+   "stereocenters_total": null,
+   "stereocenters_unspecified": null,
+   "implied_stereoisomers": null,
+   "clogp": null,
+   "tpsa": null,
+   "hbd": null,
+   "hba": null,
+   "rotatable_bonds": null,
+   "aromatic_rings": null,
+   "lipinski_violations": null,
+   "cns_mpo_flags": [],
+   "reference_check": {
+    "compared": false,
+    "reason": "did not parse"
+   }
+  },
+  {
+   "name": "Ginsenoside Rg1 (Panax ginseng)",
+   "smiles_input": "CC(=CCCC(C)(C1CCC2(C1C(CC3C2(CCC4C3(C(CC4O)O)C)C)OC5C(C(C(C(O5)CO)O)O)O)C)O)C6C(C(C(C(O6)CO)O)O)O",
+   "parses": true,
+   "errors": [],
+   "warnings": [
+    "21 of 21 stereocentres are unspecified, so this flat structure denotes up to 2,097,152 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ],
+   "canonical_smiles": "CC(=CCCC(C)(O)C1CCC2(C)C1C(OC1OC(CO)C(O)C(O)C1O)CC1C3(C)C(O)CC(O)C3CCC12C)C1OC(CO)C(O)C(O)C1O",
+   "inchikey": "DYTIXWQVBPQHKX-UHFFFAOYSA-N",
+   "formula": "C38H64O14",
+   "mol_weight": 744.916,
+   "exact_mass": 744.4296,
+   "heavy_atoms": 52,
+   "stereocenters_total": 21,
+   "stereocenters_unspecified": 21,
+   "implied_stereoisomers": 2097152,
+   "clogp": -0.908,
+   "tpsa": 250.22,
+   "hbd": 11,
+   "hba": 14,
+   "rotatable_bonds": 9,
+   "aromatic_rings": 0,
+   "lipinski_violations": 3,
+   "cns_mpo_flags": [
+    "MW 745 > 360 (CNS MPO desirable limit)",
+    "TPSA 250 > 90 A^2 (poor CNS permeability)",
+    "HBD 11 > 3 (CNS MPO desirable limit)"
+   ],
+   "reference_check": {
+    "compared": false,
+    "reason": "no reference structure on file"
+   }
+  },
+  {
+   "name": "Ginkgolide B (Ginkgo biloba)",
+   "smiles_input": "CC(C)(C)C1C2C3C4(C(C1O)C5(C2O4)C6C(C3=O)OC(=O)C6(C5O)O)O",
+   "parses": true,
+   "errors": [],
+   "warnings": [
+    "12 of 12 stereocentres are unspecified, so this flat structure denotes up to 4,096 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ],
+   "canonical_smiles": "CC(C)(C)C1C(O)C2C3(O)OC4C1C3C(=O)C1OC(=O)C3(O)C(O)C42C13",
+   "inchikey": "KRGCYOMVCDUGIP-UHFFFAOYSA-N",
+   "formula": "C18H22O8",
+   "mol_weight": 366.366,
+   "exact_mass": 366.1315,
+   "heavy_atoms": 26,
+   "stereocenters_total": 12,
+   "stereocenters_unspecified": 12,
+   "implied_stereoisomers": 4096,
+   "clogp": -1.811,
+   "tpsa": 133.52,
+   "hbd": 4,
+   "hba": 8,
+   "rotatable_bonds": 0,
+   "aromatic_rings": 0,
+   "lipinski_violations": 0,
+   "cns_mpo_flags": [
+    "MW 366 > 360 (CNS MPO desirable limit)",
+    "TPSA 134 > 90 A^2 (poor CNS permeability)",
+    "HBD 4 > 3 (CNS MPO desirable limit)"
+   ],
+   "reference_check": {
+    "compared": false,
+    "reason": "one side failed to parse",
+    "reference": "Ginkgolide B",
+    "pubchem_cid": 65243
+   }
+  },
+  {
+   "name": "Baicalein (Scutellaria baicalensis)",
+   "smiles_input": "C1=CC=C(C=C1)C2=CC(=O)C3=C(O2)C(=C(C(=C3)O)O)O",
+   "parses": true,
+   "errors": [],
+   "warnings": [],
+   "canonical_smiles": "O=c1cc(-c2ccccc2)oc2c(O)c(O)c(O)cc12",
+   "inchikey": "SXZJEWVPXPKGJG-UHFFFAOYSA-N",
+   "formula": "C15H10O5",
+   "mol_weight": 270.24,
+   "exact_mass": 270.0528,
+   "heavy_atoms": 20,
+   "stereocenters_total": 0,
+   "stereocenters_unspecified": 0,
+   "implied_stereoisomers": null,
+   "clogp": 2.577,
+   "tpsa": 90.9,
+   "hbd": 3,
+   "hba": 5,
+   "rotatable_bonds": 1,
+   "aromatic_rings": 3,
+   "lipinski_violations": 0,
+   "cns_mpo_flags": [
+    "TPSA 91 > 90 A^2 (poor CNS permeability)"
+   ],
+   "reference_check": {
+    "compared": true,
+    "reference": "Baicalein",
+    "pubchem_cid": 5281605,
+    "reference_formula": "C15H10O5",
+    "reference_inchikey": "FXNFHKRTJBSTCS-UHFFFAOYSA-N",
+    "stored_inchikey": "SXZJEWVPXPKGJG-UHFFFAOYSA-N",
+    "identical": false,
+    "same_constitution": false,
+    "stored_formula": "C15H10O5"
+   }
+  },
+  {
+   "name": "Curcumin (Curcuma longa)",
+   "smiles_input": "COC1=C(C=CC(=C1)C=CC(=O)CC(=O)C=CC2=CC(=C(C=C2)O)OCH3)O",
+   "parses": false,
+   "errors": [
+    "SMILES is syntactically invalid and cannot be parsed"
+   ],
+   "warnings": [],
+   "canonical_smiles": null,
+   "inchikey": null,
+   "formula": null,
+   "mol_weight": null,
+   "exact_mass": null,
+   "heavy_atoms": null,
+   "stereocenters_total": null,
+   "stereocenters_unspecified": null,
+   "implied_stereoisomers": null,
+   "clogp": null,
+   "tpsa": null,
+   "hbd": null,
+   "hba": null,
+   "rotatable_bonds": null,
+   "aromatic_rings": null,
+   "lipinski_violations": null,
+   "cns_mpo_flags": [],
+   "reference_check": {
+    "compared": false,
+    "reason": "did not parse"
+   }
+  },
+  {
+   "name": "Onjisaponin V / DISS (Polygala tenuifolia)",
+   "smiles_input": "C58H92O27 (Onjisaponin V Core Skeleton)",
+   "parses": false,
+   "errors": [
+    "field contains a molecular formula, not a SMILES string: 'C58H92O27 (Onjisaponin V Core Skeleton)'. No structure-based computation is possible on this record."
+   ],
+   "warnings": [],
+   "canonical_smiles": null,
+   "inchikey": null,
+   "formula": null,
+   "mol_weight": null,
+   "exact_mass": null,
+   "heavy_atoms": null,
+   "stereocenters_total": null,
+   "stereocenters_unspecified": null,
+   "implied_stereoisomers": null,
+   "clogp": null,
+   "tpsa": null,
+   "hbd": null,
+   "hba": null,
+   "rotatable_bonds": null,
+   "aromatic_rings": null,
+   "lipinski_violations": null,
+   "cns_mpo_flags": [],
+   "reference_check": {
+    "compared": false,
+    "reason": "did not parse"
+   }
+  },
+  {
+   "name": "Salvianolic Acid B (Salvia miltiorrhiza)",
+   "smiles_input": "C36H30O16 (Caffeic Acid Tetramer)",
+   "parses": false,
+   "errors": [
+    "field contains a molecular formula, not a SMILES string: 'C36H30O16 (Caffeic Acid Tetramer)'. No structure-based computation is possible on this record."
+   ],
+   "warnings": [],
+   "canonical_smiles": null,
+   "inchikey": null,
+   "formula": null,
+   "mol_weight": null,
+   "exact_mass": null,
+   "heavy_atoms": null,
+   "stereocenters_total": null,
+   "stereocenters_unspecified": null,
+   "implied_stereoisomers": null,
+   "clogp": null,
+   "tpsa": null,
+   "hbd": null,
+   "hba": null,
+   "rotatable_bonds": null,
+   "aromatic_rings": null,
+   "lipinski_violations": null,
+   "cns_mpo_flags": [],
+   "reference_check": {
+    "compared": false,
+    "reason": "did not parse"
+   }
+  },
+  {
+   "name": "Asiatic Acid (Centella asiatica)",
+   "smiles_input": "CC1CCC2(CCC3(C(=CCC4C3(CCC5C4(CC(C(C5(C)CO)O)O)C)C)C2C1C)C)C(=O)O",
+   "parses": true,
+   "errors": [],
+   "warnings": [
+    "12 of 12 stereocentres are unspecified, so this flat structure denotes up to 4,096 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ],
+   "canonical_smiles": "CC1CCC2(C(=O)O)CCC3(C)C(=CCC4C5(C)CC(O)C(O)C(C)(CO)C5CCC43C)C2C1C",
+   "inchikey": "JXSVIVRDWWRQRT-UHFFFAOYSA-N",
+   "formula": "C30H48O5",
+   "mol_weight": 488.709,
+   "exact_mass": 488.3502,
+   "heavy_atoms": 35,
+   "stereocenters_total": 12,
+   "stereocenters_unspecified": 12,
+   "implied_stereoisomers": 4096,
+   "clogp": 5.033,
+   "tpsa": 97.99,
+   "hbd": 4,
+   "hba": 4,
+   "rotatable_bonds": 2,
+   "aromatic_rings": 0,
+   "lipinski_violations": 1,
+   "cns_mpo_flags": [
+    "MW 489 > 360 (CNS MPO desirable limit)",
+    "TPSA 98 > 90 A^2 (poor CNS permeability)",
+    "HBD 4 > 3 (CNS MPO desirable limit)",
+    "cLogP 5.0 > 5"
+   ],
+   "reference_check": {
+    "compared": true,
+    "reference": "Asiatic acid",
+    "pubchem_cid": 119034,
+    "reference_formula": "C30H48O5",
+    "reference_inchikey": "JXSVIVRDWWRQRT-UHFFFAOYSA-N",
+    "stored_inchikey": "JXSVIVRDWWRQRT-UHFFFAOYSA-N",
+    "identical": true,
+    "same_constitution": true,
+    "stored_formula": "C30H48O5"
+   }
+  }
+ ],
+ "af3_candidates": [
+  {
+   "code": "CogDual-TrkB-PAS-10",
+   "target": "TrkB D5 + AChE PAS (Bispecific)",
+   "stated_plddt": 93.2,
+   "stated_dg": -17.9,
+   "stated_cei": 98.4,
+   "peptide": {
+    "name": "CogDual-TrkB-PAS-10",
+    "sequence": "MCVCDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCHGGGGSGGGGSGGGGSKWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+    "length": 100,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 11445.2,
+    "net_charge_ph74": 8.38,
+    "isoelectric_point": 9.2,
+    "gravy": -0.86,
+    "frac_cationic": 0.21,
+    "frac_aromatic": 0.14,
+    "n_cysteine": 9,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 11445 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "net charge +8.4 at pH 7.4: polycationic peptides bind glycosaminoglycans and serum proteins nonspecifically, are cleared rapidly, and do not cross an intact BBB by passive diffusion.",
+     "9 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "100 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "CogDual-TrkB-PAS-10",
+    "dg_stated": -17.9,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 7.571971163322804e-14,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CogBDNF-Mimic-04",
+   "target": "TrkB Dimerization Interface",
+   "stated_plddt": 94,
+   "stated_dg": -16.8,
+   "stated_cei": 95.2,
+   "peptide": {
+    "name": "CogBDNF-Mimic-04",
+    "sequence": "APMKEANIRGQGGLAYPGVRTCGPGGSGGSGGSGGSGGSGAPMKEANIRGQGGLAYPGVRTC",
+    "length": 62,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 5778.43,
+    "net_charge_ph74": 3.79,
+    "isoelectric_point": 9.96,
+    "gravy": -0.423,
+    "frac_cationic": 0.097,
+    "frac_aromatic": 0.032,
+    "n_cysteine": 2,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 5778 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "62 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "CogBDNF-Mimic-04",
+    "dg_stated": -16.8,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 4.847463487376589e-13,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CogNrf-KeapDis-03",
+   "target": "Keap1 Kelch Domain",
+   "stated_plddt": 96.1,
+   "stated_dg": -15.1,
+   "stated_cei": 92.1,
+   "peptide": {
+    "name": "CogNrf-KeapDis-03",
+    "sequence": "DEETGEFLFQLPQLDEETGEWRWYCPWC",
+    "length": 28,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3507.81,
+    "net_charge_ph74": -7.2,
+    "isoelectric_point": 3.44,
+    "gravy": -0.961,
+    "frac_cationic": 0.036,
+    "frac_aromatic": 0.214,
+    "n_cysteine": 2,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 3508 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism."
+    ]
+   },
+   "thermo": {
+    "label": "CogNrf-KeapDis-03",
+    "dg_stated": -15.1,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 8.543251541212881e-12,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CogTrk-DeNovo-01",
+   "target": "TrkB Ig-like D5 Domain",
+   "stated_plddt": 95.4,
+   "stated_dg": -14.2,
+   "stated_cei": 93.8,
+   "peptide": {
+    "name": "CogTrk-DeNovo-01",
+    "sequence": "MCVCDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+    "length": 49,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 5574.39,
+    "net_charge_ph74": -0.61,
+    "isoelectric_point": 6.95,
+    "gravy": -0.808,
+    "frac_cationic": 0.163,
+    "frac_aromatic": 0.061,
+    "n_cysteine": 9,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 5574 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "9 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "49 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "CogTrk-DeNovo-01",
+    "dg_stated": -14.2,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 3.90236395434361e-11,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CogAbeta-Clearer-08",
+   "target": "A\u03b242 Core + Trem2 Phagocytic Tag",
+   "stated_plddt": 92.1,
+   "stated_dg": -14.8,
+   "stated_cei": 90.5,
+   "peptide": {
+    "name": "CogAbeta-Clearer-08",
+    "sequence": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPWECDRRACPCYRGFWR",
+    "length": 50,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 5372.17,
+    "net_charge_ph74": 2.83,
+    "isoelectric_point": 8.95,
+    "gravy": -0.158,
+    "frac_cationic": 0.14,
+    "frac_aromatic": 0.12,
+    "n_cysteine": 3,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 5372 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "3 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "contains KLVFF, the Abeta(16-20) self-recognition motif and the core driver of amyloid fibrillization. Using it as a therapeutic warhead carries a seeding/aggregation risk that must be measured, not assumed absent.",
+     "50 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "CogAbeta-Clearer-08",
+    "dg_stated": -14.8,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.4175053919591578e-11,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CogWnt-Fzd-09",
+   "target": "Frizzled-8 CRD Domain",
+   "stated_plddt": 94.8,
+   "stated_dg": -13.5,
+   "stated_cei": 89,
+   "peptide": {
+    "name": "CogWnt-Fzd-09",
+    "sequence": "CKCHGMSGSCSTKTCWWGBLCPFRRACPDCHGMSGSCSTK",
+    "length": 40,
+    "valid": false,
+    "errors": [
+     "residue 'B' appears 1x: aspartate or asparagine (ambiguous). The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor."
+    ],
+    "warnings": [],
+    "invalid_residues": {
+     "B": 1
+    },
+    "mol_weight": null,
+    "net_charge_ph74": null,
+    "isoelectric_point": null,
+    "gravy": null,
+    "frac_cationic": null,
+    "frac_aromatic": null,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": []
+   },
+   "thermo": {
+    "label": "CogWnt-Fzd-09",
+    "dg_stated": -13.5,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.2718366391923994e-10,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CogAChE-PAS-02",
+   "target": "AChE PAS Gorge",
+   "stated_plddt": 92.8,
+   "stated_dg": -12.6,
+   "stated_cei": 87.6,
+   "peptide": {
+    "name": "CogAChE-PAS-02",
+    "sequence": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+    "length": 36,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4942.97,
+    "net_charge_ph74": 8.93,
+    "isoelectric_point": 10.95,
+    "gravy": -1.089,
+    "frac_cationic": 0.361,
+    "frac_aromatic": 0.306,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": [
+     "MW 4943 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "net charge +8.9 at pH 7.4: polycationic peptides bind glycosaminoglycans and serum proteins nonspecifically, are cleared rapidly, and do not cross an intact BBB by passive diffusion.",
+     "36% Lys/Arg with 31% aromatic residues is the canonical cationic amphipathic motif of antimicrobial and cell-penetrating peptides: expect membrane lysis, hemolysis and concentration-dependent cytotoxicity. These liabilities are distinct from, and generally precede, any hERG concern.",
+     "36 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "CogAChE-PAS-02",
+    "dg_stated": -12.6,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 5.809461927528945e-10,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CogGluN2B-Mod-07",
+   "target": "NMDA GluN2B NTD",
+   "stated_plddt": 93.6,
+   "stated_dg": -13,
+   "stated_cei": 85.4,
+   "peptide": {
+    "name": "CogGluN2B-Mod-07",
+    "sequence": "GCPWECDRRACPCYRGFWRERACPDCHSEAEFRLFRDVWANYCAC",
+    "length": 45,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 5436.15,
+    "net_charge_ph74": -0.54,
+    "isoelectric_point": 6.98,
+    "gravy": -0.644,
+    "frac_cationic": 0.156,
+    "frac_aromatic": 0.178,
+    "n_cysteine": 8,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 5436 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "8 cysteines admit 105 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined.",
+     "45 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "CogGluN2B-Mod-07",
+    "dg_stated": -13,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 2.9575621204055416e-10,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CogGSK-Ser9-05",
+   "target": "GSK-3\u03b2 ATP Pocket",
+   "stated_plddt": 91.9,
+   "stated_dg": -11.8,
+   "stated_cei": 83.9,
+   "peptide": {
+    "name": "CogGSK-Ser9-05",
+    "sequence": "GRPRTTSFAESCKPVQQPSAFGSMKVSRDKDG",
+    "length": 32,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3455.87,
+    "net_charge_ph74": 2.87,
+    "isoelectric_point": 10.49,
+    "gravy": -1.003,
+    "frac_cationic": 0.188,
+    "frac_aromatic": 0.062,
+    "n_cysteine": 1,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 3456 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "1 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "32 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "CogGSK-Ser9-05",
+    "dg_stated": -11.8,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 2.241506378799324e-09,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "code": "CognACh-Mod-06",
+   "target": "\u03b17 nAChR ECD",
+   "stated_plddt": 90.7,
+   "stated_dg": -12.1,
+   "stated_cei": 82.5,
+   "peptide": {
+    "name": "CognACh-Mod-06",
+    "sequence": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+    "length": 41,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4903.56,
+    "net_charge_ph74": -1.39,
+    "isoelectric_point": 5.68,
+    "gravy": -0.344,
+    "frac_cationic": 0.122,
+    "frac_aromatic": 0.195,
+    "n_cysteine": 6,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 4904 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "6 cysteines admit 15 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined.",
+     "41 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "CognACh-Mod-06",
+    "dg_stated": -12.1,
+    "kd_stated_molar": null,
+    "kd_stated_text": "",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.3509474414660748e-09,
+    "dg_implied_by_kd": null,
+    "discrepancy_kcal": null,
+    "discrepancy_orders": null,
+    "consistent": null,
+    "plausible": true,
+    "issues": [
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  }
+ ],
+ "drugs": [
+  {
+   "id": 1,
+   "code": "HippoTrk-Saponin-X1",
+   "region": "hippocampus",
+   "affinity_string": "\u0394G = -18.4 kcal/mol | Kd = 0.32 nM | AF3 pLDDT = 96.2 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM (0% Cardiotoxicity) | Seizure Index: 0.01 | Downregulation: < 3.5%",
+   "stated_plddt": 96.2,
+   "peptide": {
+    "name": "HippoTrk-Saponin-X1",
+    "sequence": "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+    "length": 47,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 5340.06,
+    "net_charge_ph74": -0.54,
+    "isoelectric_point": 6.98,
+    "gravy": -0.936,
+    "frac_cationic": 0.17,
+    "frac_aromatic": 0.064,
+    "n_cysteine": 8,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 5340 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "8 cysteines admit 105 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined.",
+     "47 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "HippoTrk-Saponin-X1",
+    "dg_stated": -18.4,
+    "kd_stated_molar": 3.2000000000000003e-10,
+    "kd_stated_text": "Kd = 0.32 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 3.256165031996587e-14,
+    "dg_implied_by_kd": -12.953320783626344,
+    "discrepancy_kcal": 5.446679216373655,
+    "discrepancy_orders": 3.992443570226471,
+    "consistent": false,
+    "plausible": false,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -18.4 kcal/mol implies Kd = 32.6 fM, but the record states Kd = 320 pM \u2014 a gap of 5.4 kcal/mol (4.0 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -18.4 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 2,
+   "code": "HippoAChE-AlkaPept-X2",
+   "region": "hippocampus",
+   "affinity_string": "\u0394G = -16.2 kcal/mol | Kd = 2.1 nM | AF3 pLDDT = 94.8 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.02 | Tolerance Rate: 0.0%",
+   "stated_plddt": 94.8,
+   "peptide": {
+    "name": "HippoAChE-AlkaPept-X2",
+    "sequence": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+    "length": 36,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4942.97,
+    "net_charge_ph74": 8.93,
+    "isoelectric_point": 10.95,
+    "gravy": -1.089,
+    "frac_cationic": 0.361,
+    "frac_aromatic": 0.306,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": [
+     "MW 4943 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "net charge +8.9 at pH 7.4: polycationic peptides bind glycosaminoglycans and serum proteins nonspecifically, are cleared rapidly, and do not cross an intact BBB by passive diffusion.",
+     "36% Lys/Arg with 31% aromatic residues is the canonical cationic amphipathic motif of antimicrobial and cell-penetrating peptides: expect membrane lysis, hemolysis and concentration-dependent cytotoxicity. These liabilities are distinct from, and generally precede, any hERG concern.",
+     "36 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "HippoAChE-AlkaPept-X2",
+    "dg_stated": -16.2,
+    "kd_stated_molar": 2.1e-09,
+    "kd_stated_text": "Kd = 2.1 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.3344969896015896e-12,
+    "dg_implied_by_kd": -11.83863640906513,
+    "discrepancy_kcal": 4.36136359093487,
+    "discrepancy_orders": 3.1969016963038306,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.2 kcal/mol implies Kd = 1.33 pM, but the record states Kd = 2.1 nM \u2014 a gap of 4.4 kcal/mol (3.2 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 3,
+   "code": "HippoNrf-KeapDecoy-X3",
+   "region": "hippocampus",
+   "affinity_string": "\u0394G = -15.8 kcal/mol | Kd = 3.5 nM | AF3 pLDDT = 97.0 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Immunogenicity: Very Low",
+   "stated_plddt": 97.0,
+   "peptide": {
+    "name": "HippoNrf-KeapDecoy-X3",
+    "sequence": "DEETGEFLFQLPQLDEETGEWRWYCPWC",
+    "length": 28,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3507.81,
+    "net_charge_ph74": -7.2,
+    "isoelectric_point": 3.44,
+    "gravy": -0.961,
+    "frac_cationic": 0.036,
+    "frac_aromatic": 0.214,
+    "n_cysteine": 2,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 3508 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism."
+    ]
+   },
+   "thermo": {
+    "label": "HippoNrf-KeapDecoy-X3",
+    "dg_stated": -15.8,
+    "kd_stated_molar": 3.5000000000000003e-09,
+    "kd_stated_text": "Kd = 3.5 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 2.6213175371712375e-12,
+    "dg_implied_by_kd": -11.535979915000931,
+    "discrepancy_kcal": 4.2640200849990695,
+    "discrepancy_orders": 3.125548411313523,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.8 kcal/mol implies Kd = 2.62 pM, but the record states Kd = 3.5 nM \u2014 a gap of 4.3 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 4,
+   "code": "HippoWnt-FzdAgonist-X4",
+   "region": "hippocampus",
+   "affinity_string": "\u0394G = -16.9 kcal/mol | Kd = 1.2 nM | AF3 pLDDT = 95.1 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.01 | Tumorigenicity: Negligible",
+   "stated_plddt": 95.1,
+   "peptide": {
+    "name": "HippoWnt-FzdAgonist-X4",
+    "sequence": "CKCHGMSGSCSTKTCWWGBLCPFRRACPDCH",
+    "length": 31,
+    "valid": false,
+    "errors": [
+     "residue 'B' appears 1x: aspartate or asparagine (ambiguous). The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor."
+    ],
+    "warnings": [],
+    "invalid_residues": {
+     "B": 1
+    },
+    "mol_weight": null,
+    "net_charge_ph74": null,
+    "isoelectric_point": null,
+    "gravy": null,
+    "frac_cationic": null,
+    "frac_aromatic": null,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": []
+   },
+   "thermo": {
+    "label": "HippoWnt-FzdAgonist-X4",
+    "dg_stated": -16.9,
+    "kd_stated_molar": 1.2e-09,
+    "kd_stated_text": "Kd = 1.2 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 4.0946240963054214e-13,
+    "dg_implied_by_kd": -12.170200341099003,
+    "discrepancy_kcal": 4.729799658900996,
+    "discrepancy_orders": 3.4669672081791982,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.9 kcal/mol implies Kd = 409 fM, but the record states Kd = 1.2 nM \u2014 a gap of 4.7 kcal/mol (3.5 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 5,
+   "code": "HippoDual-TrkB-AMPK-X5",
+   "region": "hippocampus",
+   "affinity_string": "\u0394G = -19.1 kcal/mol | Kd = 0.14 nM | AF3 pLDDT = 94.5 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.01 | Tolerance Downregulation: < 3.8%",
+   "stated_plddt": 94.5,
+   "peptide": {
+    "name": "HippoDual-TrkB-AMPK-X5",
+    "sequence": "MCVCDRENPGGGGSFLRRFWRRLKKYFEELWKK",
+    "length": 33,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4093.8,
+    "net_charge_ph74": 4.79,
+    "isoelectric_point": 10.47,
+    "gravy": -0.964,
+    "frac_cationic": 0.273,
+    "frac_aromatic": 0.182,
+    "n_cysteine": 2,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 4094 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "net charge +4.8 at pH 7.4: polycationic peptides bind glycosaminoglycans and serum proteins nonspecifically, are cleared rapidly, and do not cross an intact BBB by passive diffusion.",
+     "33 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "HippoDual-TrkB-AMPK-X5",
+    "dg_stated": -19.1,
+    "kd_stated_molar": 1.4000000000000003e-10,
+    "kd_stated_text": "Kd = 0.14 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 9.990859406539917e-15,
+    "dg_implied_by_kd": -13.443115396577516,
+    "discrepancy_kcal": 5.656884603422485,
+    "discrepancy_orders": 4.146525188146469,
+    "consistent": false,
+    "plausible": false,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -19.1 kcal/mol implies Kd = 9.99 fM, but the record states Kd = 140 pM \u2014 a gap of 5.7 kcal/mol (4.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -19.1 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 6,
+   "code": "PfcACh-PAM-P1",
+   "region": "pfc",
+   "affinity_string": "\u0394G = -16.5 kcal/mol | Kd = 1.8 nM | AF3 pLDDT = 93.2 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.02 | Receptor Desensitization: Low",
+   "stated_plddt": 93.2,
+   "peptide": {
+    "name": "PfcACh-PAM-P1",
+    "sequence": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+    "length": 41,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4903.56,
+    "net_charge_ph74": -1.39,
+    "isoelectric_point": 5.68,
+    "gravy": -0.344,
+    "frac_cationic": 0.122,
+    "frac_aromatic": 0.195,
+    "n_cysteine": 6,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 4904 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "6 cysteines admit 15 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined.",
+     "41 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "PfcACh-PAM-P1",
+    "dg_stated": -16.5,
+    "kd_stated_molar": 1.8000000000000002e-09,
+    "kd_stated_text": "Kd = 1.8 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 8.042963030567593e-13,
+    "dg_implied_by_kd": -11.929968366867433,
+    "discrepancy_kcal": 4.570031633132567,
+    "discrepancy_orders": 3.349856432628216,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.5 kcal/mol implies Kd = 804 fM, but the record states Kd = 1.8 nM \u2014 a gap of 4.6 kcal/mol (3.3 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 7,
+   "code": "PfcTrk-ErkEnhancer-P2",
+   "region": "pfc",
+   "affinity_string": "\u0394G = -17.2 kcal/mol | Kd = 0.85 nM | AF3 pLDDT = 95.8 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.01 | Off-target Binding: None",
+   "stated_plddt": 95.8,
+   "peptide": {
+    "name": "PfcTrk-ErkEnhancer-P2",
+    "sequence": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+    "length": 37,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4111.71,
+    "net_charge_ph74": 1.54,
+    "isoelectric_point": 8.04,
+    "gravy": -0.916,
+    "frac_cationic": 0.189,
+    "frac_aromatic": 0.054,
+    "n_cysteine": 7,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 4112 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "7 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "37 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "PfcTrk-ErkEnhancer-P2",
+    "dg_stated": -17.2,
+    "kd_stated_molar": 8.500000000000001e-10,
+    "kd_stated_text": "Kd = 0.85 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 2.467814501439061e-13,
+    "dg_implied_by_kd": -12.374513139315756,
+    "discrepancy_kcal": 4.825486860684244,
+    "discrepancy_orders": 3.5371064138008648,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -17.2 kcal/mol implies Kd = 247 fM, but the record states Kd = 850 pM \u2014 a gap of 4.8 kcal/mol (3.5 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 8,
+   "code": "PfcGluN2A-LTP-P3",
+   "region": "pfc",
+   "affinity_string": "\u0394G = -15.4 kcal/mol | Kd = 4.2 nM | AF3 pLDDT = 93.9 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.02 (Capped Emax 135%) | Excitotoxicity: Safe",
+   "stated_plddt": 93.9,
+   "peptide": {
+    "name": "PfcGluN2A-LTP-P3",
+    "sequence": "GCPWECDRRACPCYRGFWRERACPDCHSEAEFRLFRDVWANYCAC",
+    "length": 45,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 5436.15,
+    "net_charge_ph74": -0.54,
+    "isoelectric_point": 6.98,
+    "gravy": -0.644,
+    "frac_cationic": 0.156,
+    "frac_aromatic": 0.178,
+    "n_cysteine": 8,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 5436 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "8 cysteines admit 105 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined.",
+     "45 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "PfcGluN2A-LTP-P3",
+    "dg_stated": -15.4,
+    "kd_stated_molar": 4.2e-09,
+    "kd_stated_text": "Kd = 4.2 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 5.14898548608408e-12,
+    "dg_implied_by_kd": -11.427957136572607,
+    "discrepancy_kcal": 3.9720428634273937,
+    "discrepancy_orders": 2.911527622754484,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.4 kcal/mol implies Kd = 5.15 pM, but the record states Kd = 4.2 nM \u2014 a gap of 4.0 kcal/mol (2.9 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 9,
+   "code": "PfcGsk-WntLinker-P4",
+   "region": "pfc",
+   "affinity_string": "\u0394G = -16.0 kcal/mol | Kd = 2.4 nM | AF3 pLDDT = 92.5 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Tau Hyperphosphorylation: Suppressed",
+   "stated_plddt": 92.5,
+   "peptide": {
+    "name": "PfcGsk-WntLinker-P4",
+    "sequence": "GRPRTTSFAESCKPVQQPSAFGSMKVSRDKDG",
+    "length": 32,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3455.87,
+    "net_charge_ph74": 2.87,
+    "isoelectric_point": 10.49,
+    "gravy": -1.003,
+    "frac_cationic": 0.188,
+    "frac_aromatic": 0.062,
+    "n_cysteine": 1,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 3456 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "1 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "32 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "PfcGsk-WntLinker-P4",
+    "dg_stated": -16.0,
+    "kd_stated_molar": 2.4e-09,
+    "kd_stated_text": "Kd = 2.4 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.8703316182283977e-12,
+    "dg_implied_by_kd": -11.759521068606482,
+    "discrepancy_kcal": 4.240478931393518,
+    "discrepancy_orders": 3.1082926259781862,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.0 kcal/mol implies Kd = 1.87 pM, but the record states Kd = 2.4 nM \u2014 a gap of 4.2 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 10,
+   "code": "PfcDual-nACh-GluN2A-P5",
+   "region": "pfc",
+   "affinity_string": "\u0394G = -18.7 kcal/mol | Kd = 0.22 nM | AF3 pLDDT = 94.1 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.02 | Systemic Toxicity: Negligible",
+   "stated_plddt": 94.1,
+   "peptide": {
+    "name": "PfcDual-nACh-GluN2A-P5",
+    "sequence": "SEAEFRLFRDVWGGGGSGCPWECDRRACPCYRGFWR",
+    "length": 36,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4213.72,
+    "net_charge_ph74": 0.65,
+    "isoelectric_point": 7.91,
+    "gravy": -0.714,
+    "frac_cationic": 0.167,
+    "frac_aromatic": 0.194,
+    "n_cysteine": 4,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 4214 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "4 cysteines admit 3 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined.",
+     "36 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "PfcDual-nACh-GluN2A-P5",
+    "dg_stated": -18.7,
+    "kd_stated_molar": 2.2000000000000002e-10,
+    "kd_stated_text": "Kd = 0.22 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.9624783853273525e-14,
+    "dg_implied_by_kd": -13.17532101321684,
+    "discrepancy_kcal": 5.52467898678316,
+    "discrepancy_orders": 4.049617798683771,
+    "consistent": false,
+    "plausible": false,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -18.7 kcal/mol implies Kd = 19.6 fM, but the record states Kd = 220 pM \u2014 a gap of 5.5 kcal/mol (4.0 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -18.7 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 11,
+   "code": "BasalAChE-GorgeBlock-B1",
+   "region": "basal",
+   "affinity_string": "\u0394G = -17.5 kcal/mol | Kd = 0.65 nM | AF3 pLDDT = 94.3 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.01 | Peripheral Side Effects: None",
+   "stated_plddt": 94.3,
+   "peptide": {
+    "name": "BasalAChE-GorgeBlock-B1",
+    "sequence": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+    "length": 36,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4942.97,
+    "net_charge_ph74": 8.93,
+    "isoelectric_point": 10.95,
+    "gravy": -1.089,
+    "frac_cationic": 0.361,
+    "frac_aromatic": 0.306,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": [
+     "MW 4943 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "net charge +8.9 at pH 7.4: polycationic peptides bind glycosaminoglycans and serum proteins nonspecifically, are cleared rapidly, and do not cross an intact BBB by passive diffusion.",
+     "36% Lys/Arg with 31% aromatic residues is the canonical cationic amphipathic motif of antimicrobial and cell-penetrating peptides: expect membrane lysis, hemolysis and concentration-dependent cytotoxicity. These liabilities are distinct from, and generally precede, any hERG concern.",
+     "36 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "BasalAChE-GorgeBlock-B1",
+    "dg_stated": -17.5,
+    "kd_stated_molar": 6.5e-10,
+    "kd_stated_text": "Kd = 0.65 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.4873424935412271e-13,
+    "dg_implied_by_kd": -12.533455513952045,
+    "discrepancy_kcal": 4.966544486047955,
+    "discrepancy_orders": 3.6405023706844273,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -17.5 kcal/mol implies Kd = 149 fM, but the record states Kd = 650 pM \u2014 a gap of 5.0 kcal/mol (3.6 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 12,
+   "code": "BasalM1-PAM-B2",
+   "region": "basal",
+   "affinity_string": "\u0394G = -15.9 kcal/mol | Kd = 3.1 nM | AF3 pLDDT = 92.9 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.01 | Desensitization: Safe",
+   "stated_plddt": 92.9,
+   "peptide": {
+    "name": "BasalM1-PAM-B2",
+    "sequence": "CDERACPRCHGFWREVCSSEAEFRLFRDVWANYCAC",
+    "length": 36,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4316.87,
+    "net_charge_ph74": -1.39,
+    "isoelectric_point": 5.68,
+    "gravy": -0.392,
+    "frac_cationic": 0.139,
+    "frac_aromatic": 0.167,
+    "n_cysteine": 6,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 4317 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "6 cysteines admit 15 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined.",
+     "36 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "BasalM1-PAM-B2",
+    "dg_stated": -15.9,
+    "kd_stated_molar": 3.1000000000000005e-09,
+    "kd_stated_text": "Kd = 3.1 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 2.214211613913165e-12,
+    "dg_implied_by_kd": -11.607884396273322,
+    "discrepancy_kcal": 4.292115603726678,
+    "discrepancy_orders": 3.146142569449187,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.9 kcal/mol implies Kd = 2.21 pM, but the record states Kd = 3.1 nM \u2014 a gap of 4.3 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 13,
+   "code": "BasalNgf-TrkA-B3",
+   "region": "basal",
+   "affinity_string": "\u0394G = -16.8 kcal/mol | Kd = 1.4 nM | AF3 pLDDT = 96.0 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Immunogenicity: Low",
+   "stated_plddt": 96.0,
+   "peptide": {
+    "name": "BasalNgf-TrkA-B3",
+    "sequence": "EPKHVNCDRENPVEWVRACPTGKCEGLRGYTCRCE",
+    "length": 35,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4036.56,
+    "net_charge_ph74": -0.32,
+    "isoelectric_point": 7.08,
+    "gravy": -1.026,
+    "frac_cationic": 0.171,
+    "frac_aromatic": 0.057,
+    "n_cysteine": 5,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 4037 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "5 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "35 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "BasalNgf-TrkA-B3",
+    "dg_stated": -16.8,
+    "kd_stated_molar": 1.4e-09,
+    "kd_stated_text": "Kd = 1.4 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 4.847463487376589e-13,
+    "dg_implied_by_kd": -12.078868383296701,
+    "discrepancy_kcal": 4.7211316167033,
+    "discrepancy_orders": 3.4606134891581473,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.8 kcal/mol implies Kd = 485 fM, but the record states Kd = 1.4 nM \u2014 a gap of 4.7 kcal/mol (3.5 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 14,
+   "code": "BasalAChE-Abeta-B4",
+   "region": "basal",
+   "affinity_string": "\u0394G = -16.4 kcal/mol | Kd = 1.9 nM | AF3 pLDDT = 93.7 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.01 | Fibril Blockade: 100%",
+   "stated_plddt": 93.7,
+   "peptide": {
+    "name": "BasalAChE-Abeta-B4",
+    "sequence": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+    "length": 35,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3471.98,
+    "net_charge_ph74": 1.05,
+    "isoelectric_point": 9.54,
+    "gravy": 0.263,
+    "frac_cationic": 0.086,
+    "frac_aromatic": 0.086,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": [
+     "MW 3472 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "contains KLVFF, the Abeta(16-20) self-recognition motif and the core driver of amyloid fibrillization. Using it as a therapeutic warhead carries a seeding/aggregation risk that must be measured, not assumed absent.",
+     "35 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "BasalAChE-Abeta-B4",
+    "dg_stated": -16.4,
+    "kd_stated_molar": 1.9e-09,
+    "kd_stated_text": "Kd = 1.9 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 9.521745758340864e-13,
+    "dg_implied_by_kd": -11.897934351986159,
+    "discrepancy_kcal": 4.50206564801384,
+    "discrepancy_orders": 3.3000370198260716,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.4 kcal/mol implies Kd = 952 fM, but the record states Kd = 1.9 nM \u2014 a gap of 4.5 kcal/mol (3.3 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 15,
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "region": "basal",
+   "affinity_string": "\u0394G = -19.5 kcal/mol | Kd = 0.08 nM | AF3 pLDDT = 95.2 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.01 | Safety Plasticity Score: 99.5 / 100",
+   "stated_plddt": 95.2,
+   "peptide": {
+    "name": "BasalSuper-AChE-TrkA-B5",
+    "sequence": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+    "length": 39,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4273.85,
+    "net_charge_ph74": 2.69,
+    "isoelectric_point": 8.52,
+    "gravy": -0.805,
+    "frac_cationic": 0.179,
+    "frac_aromatic": 0.103,
+    "n_cysteine": 5,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 4274 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "5 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "39 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "BasalSuper-AChE-TrkA-B5",
+    "dg_stated": -19.5,
+    "kd_stated_molar": 8.000000000000001e-11,
+    "kd_stated_text": "Kd = 0.08 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 5.086286423715071e-15,
+    "dg_implied_by_kd": -13.77467932861139,
+    "discrepancy_kcal": 5.7253206713886104,
+    "discrepancy_orders": 4.196689174066837,
+    "consistent": false,
+    "plausible": false,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -19.5 kcal/mol implies Kd = 5.09 fM, but the record states Kd = 80 pM \u2014 a gap of 5.7 kcal/mol (4.2 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -19.5 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 16,
+   "code": "MicroTrem2-Agonist-M1",
+   "region": "microglia",
+   "affinity_string": "\u0394G = -17.8 kcal/mol | Kd = 0.52 nM | AF3 pLDDT = 94.7 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Cytokine Storm Risk: Negligible | Immunogenicity: Low",
+   "stated_plddt": 94.7,
+   "peptide": {
+    "name": "MicroTrem2-Agonist-M1",
+    "sequence": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+    "length": 31,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3733.26,
+    "net_charge_ph74": 1.8,
+    "isoelectric_point": 8.22,
+    "gravy": -0.955,
+    "frac_cationic": 0.194,
+    "frac_aromatic": 0.129,
+    "n_cysteine": 5,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 3733 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "5 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "31 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "MicroTrem2-Agonist-M1",
+    "dg_stated": -17.8,
+    "kd_stated_molar": 5.200000000000001e-10,
+    "kd_stated_text": "Kd = 0.52 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 8.964157118792543e-14,
+    "dg_implied_by_kd": -12.66566470975529,
+    "discrepancy_kcal": 5.13433529024471,
+    "discrepancy_orders": 3.7634938836313694,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -17.8 kcal/mol implies Kd = 89.6 fM, but the record states Kd = 520 pM \u2014 a gap of 5.1 kcal/mol (3.8 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 17,
+   "code": "MicroNrf2-AntiInflam-M2",
+   "region": "microglia",
+   "affinity_string": "\u0394G = -16.3 kcal/mol | Kd = 2.1 nM | AF3 pLDDT = 96.5 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Inflammatory Cytokine Suppression: 98%",
+   "stated_plddt": 96.5,
+   "peptide": {
+    "name": "MicroNrf2-AntiInflam-M2",
+    "sequence": "DEETGEWRWYCPWCKCHGMSGSCSTK",
+    "length": 26,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3067.41,
+    "net_charge_ph74": -1.24,
+    "isoelectric_point": 5.61,
+    "gravy": -1.085,
+    "frac_cationic": 0.115,
+    "frac_aromatic": 0.154,
+    "n_cysteine": 4,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 3067 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "4 cysteines admit 3 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined."
+    ]
+   },
+   "thermo": {
+    "label": "MicroNrf2-AntiInflam-M2",
+    "dg_stated": -16.3,
+    "kd_stated_molar": 2.1e-09,
+    "kd_stated_text": "Kd = 2.1 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.1272418130222769e-12,
+    "dg_implied_by_kd": -11.83863640906513,
+    "discrepancy_kcal": 4.461363590934871,
+    "discrepancy_orders": 3.2702022049554977,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.3 kcal/mol implies Kd = 1.13 pM, but the record states Kd = 2.1 nM \u2014 a gap of 4.5 kcal/mol (3.3 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 18,
+   "code": "MicroTlr4-Antagonist-M3",
+   "region": "microglia",
+   "affinity_string": "\u0394G = -15.7 kcal/mol | Kd = 3.8 nM | AF3 pLDDT = 92.8 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Cytokine Storm Risk: 0% | Sepsis Safety: High",
+   "stated_plddt": 92.8,
+   "peptide": {
+    "name": "MicroTlr4-Antagonist-M3",
+    "sequence": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+    "length": 41,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4903.56,
+    "net_charge_ph74": -1.39,
+    "isoelectric_point": 5.68,
+    "gravy": -0.344,
+    "frac_cationic": 0.122,
+    "frac_aromatic": 0.195,
+    "n_cysteine": 6,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 4904 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "6 cysteines admit 15 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined.",
+     "41 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "MicroTlr4-Antagonist-M3",
+    "dg_stated": -15.7,
+    "kd_stated_molar": 3.8e-09,
+    "kd_stated_text": "Kd = 3.8 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 3.103274134913356e-12,
+    "dg_implied_by_kd": -11.487255079493638,
+    "discrepancy_kcal": 4.212744920506362,
+    "discrepancy_orders": 3.0879634549283903,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.7 kcal/mol implies Kd = 3.1 pM, but the record states Kd = 3.8 nM \u2014 a gap of 4.2 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 19,
+   "code": "MicroAutophagy-Tag-M4",
+   "region": "microglia",
+   "affinity_string": "\u0394G = -16.6 kcal/mol | Kd = 1.7 nM | AF3 pLDDT = 93.4 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Lysosomal Clearance: +420%",
+   "stated_plddt": 93.4,
+   "peptide": {
+    "name": "MicroAutophagy-Tag-M4",
+    "sequence": "FLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+    "length": 32,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4314.19,
+    "net_charge_ph74": 6.93,
+    "isoelectric_point": 10.79,
+    "gravy": -0.925,
+    "frac_cationic": 0.344,
+    "frac_aromatic": 0.281,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": [
+     "MW 4314 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "net charge +6.9 at pH 7.4: polycationic peptides bind glycosaminoglycans and serum proteins nonspecifically, are cleared rapidly, and do not cross an intact BBB by passive diffusion.",
+     "34% Lys/Arg with 28% aromatic residues is the canonical cationic amphipathic motif of antimicrobial and cell-penetrating peptides: expect membrane lysis, hemolysis and concentration-dependent cytotoxicity. These liabilities are distinct from, and generally precede, any hERG concern.",
+     "32 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "MicroAutophagy-Tag-M4",
+    "dg_stated": -16.6,
+    "kd_stated_molar": 1.7000000000000001e-09,
+    "kd_stated_text": "Kd = 1.7 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 6.793843897208714e-13,
+    "dg_implied_by_kd": -11.963833866823235,
+    "discrepancy_kcal": 4.636166133176767,
+    "discrepancy_orders": 3.3983333575548507,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.6 kcal/mol implies Kd = 679 fM, but the record states Kd = 1.7 nM \u2014 a gap of 4.6 kcal/mol (3.4 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 20,
+   "code": "MicroDual-Trem2-Nrf2-M5",
+   "region": "microglia",
+   "affinity_string": "\u0394G = -18.9 kcal/mol | Kd = 0.18 nM | AF3 pLDDT = 95.6 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Cytokine Storm Risk: None | Safety Index: 99.1 / 100",
+   "stated_plddt": 95.6,
+   "peptide": {
+    "name": "MicroDual-Trem2-Nrf2-M5",
+    "sequence": "GRLVGHPWECDRGGGGSDEETGEWRWYCPWC",
+    "length": 31,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3581.88,
+    "net_charge_ph74": -3.17,
+    "isoelectric_point": 4.38,
+    "gravy": -1.116,
+    "frac_cationic": 0.097,
+    "frac_aromatic": 0.161,
+    "n_cysteine": 3,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 3582 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "3 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "31 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "MicroDual-Trem2-Nrf2-M5",
+    "dg_stated": -18.9,
+    "kd_stated_molar": 1.8e-10,
+    "kd_stated_text": "Kd = 0.18 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.4002444656623067e-14,
+    "dg_implied_by_kd": -13.294215380148247,
+    "discrepancy_kcal": 5.605784619851752,
+    "discrepancy_orders": 4.109068640268203,
+    "consistent": false,
+    "plausible": false,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -18.9 kcal/mol implies Kd = 14 fM, but the record states Kd = 180 pM \u2014 a gap of 5.6 kcal/mol (4.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -18.9 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 21,
+   "code": "AstroEos-NO-A1",
+   "region": "astrocyte",
+   "affinity_string": "\u0394G = -16.7 kcal/mol | Kd = 1.5 nM | AF3 pLDDT = 95.3 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Vasodilation Rate: Safe (+45%)",
+   "stated_plddt": 95.3,
+   "peptide": {
+    "name": "AstroEos-NO-A1",
+    "sequence": "ERACPDCHSEAEFRLFRDVWANYCACYPGWLGCD",
+    "length": 34,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 3984.44,
+    "net_charge_ph74": -3.32,
+    "isoelectric_point": 4.35,
+    "gravy": -0.391,
+    "frac_cationic": 0.088,
+    "frac_aromatic": 0.176,
+    "n_cysteine": 5,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 3984 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "5 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "34 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "AstroEos-NO-A1",
+    "dg_stated": -16.7,
+    "kd_stated_molar": 1.5000000000000002e-09,
+    "kd_stated_text": "Kd = 1.5 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 5.738720260707577e-13,
+    "dg_implied_by_kd": -12.037991145295758,
+    "discrepancy_kcal": 4.662008854704242,
+    "discrepancy_orders": 3.4172762038839237,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.7 kcal/mol implies Kd = 574 fM, but the record states Kd = 1.5 nM \u2014 a gap of 4.7 kcal/mol (3.4 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 22,
+   "code": "AstroEaat2-Up-A2",
+   "region": "astrocyte",
+   "affinity_string": "\u0394G = -15.8 kcal/mol | Kd = 3.6 nM | AF3 pLDDT = 94.1 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Glutamate Toxicity: Prevented",
+   "stated_plddt": 94.1,
+   "peptide": {
+    "name": "AstroEaat2-Up-A2",
+    "sequence": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+    "length": 37,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 4111.71,
+    "net_charge_ph74": 1.54,
+    "isoelectric_point": 8.04,
+    "gravy": -0.916,
+    "frac_cationic": 0.189,
+    "frac_aromatic": 0.054,
+    "n_cysteine": 7,
+    "cys_pairing": "ODD (unpairable)",
+    "liabilities": [
+     "MW 4112 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "7 cysteines is odd, so at least one thiol must remain free: expect disulfide scrambling, covalent dimerization and batch heterogeneity.",
+     "37 residues: unmodified linear peptides of this length are cleared by serum peptidases with plasma half-lives of minutes, and are large enough to raise anti-drug-antibody risk."
+    ]
+   },
+   "thermo": {
+    "label": "AstroEaat2-Up-A2",
+    "dg_stated": -15.8,
+    "kd_stated_molar": 3.6000000000000004e-09,
+    "kd_stated_text": "Kd = 3.6 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 2.6213175371712375e-12,
+    "dg_implied_by_kd": -11.51928909437491,
+    "discrepancy_kcal": 4.2807109056250905,
+    "discrepancy_orders": 3.1377828677305346,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.8 kcal/mol implies Kd = 2.62 pM, but the record states Kd = 3.6 nM \u2014 a gap of 4.3 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 23,
+   "code": "AstroZo1-Protect-A3",
+   "region": "astrocyte",
+   "affinity_string": "\u0394G = -16.1 kcal/mol | Kd = 2.8 nM | AF3 pLDDT = 93.8 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | BBB Disruption Risk: 0.0% | Edema Risk: Suppressed",
+   "stated_plddt": 93.8,
+   "peptide": {
+    "name": "AstroZo1-Protect-A3",
+    "sequence": "CKCHGMSGSCSTKTCWWGBLCPFRRACPDCH",
+    "length": 31,
+    "valid": false,
+    "errors": [
+     "residue 'B' appears 1x: aspartate or asparagine (ambiguous). The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor."
+    ],
+    "warnings": [],
+    "invalid_residues": {
+     "B": 1
+    },
+    "mol_weight": null,
+    "net_charge_ph74": null,
+    "isoelectric_point": null,
+    "gravy": null,
+    "frac_cationic": null,
+    "frac_aromatic": null,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": []
+   },
+   "thermo": {
+    "label": "AstroZo1-Protect-A3",
+    "dg_stated": -16.1,
+    "kd_stated_molar": 2.8e-09,
+    "kd_stated_text": "Kd = 2.8 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 1.5798581942954403e-12,
+    "dg_implied_by_kd": -11.668189110804176,
+    "discrepancy_kcal": 4.431810889195825,
+    "discrepancy_orders": 3.2485399242604664,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.1 kcal/mol implies Kd = 1.58 pM, but the record states Kd = 2.8 nM \u2014 a gap of 4.4 kcal/mol (3.2 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 24,
+   "code": "AstroPafr-Block-A4",
+   "region": "astrocyte",
+   "affinity_string": "\u0394G = -15.2 kcal/mol | Kd = 4.8 nM | AF3 pLDDT = 92.4 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Cerebral Edema: Prevented",
+   "stated_plddt": 92.4,
+   "peptide": {
+    "name": "AstroPafr-Block-A4",
+    "sequence": "HIS14-PHE174-LINKER-PEPTIDE-CONJUGATE",
+    "length": 37,
+    "valid": false,
+    "errors": [
+     "residue '1' appears 2x: not an amino acid letter. The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor.",
+     "residue '4' appears 2x: not an amino acid letter. The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor.",
+     "residue '-' appears 4x: not an amino acid letter. The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor.",
+     "residue '7' appears 1x: not an amino acid letter. The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor.",
+     "residue 'O' appears 1x: pyrrolysine (22nd aa; not present in humans). The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor.",
+     "residue 'J' appears 1x: leucine or isoleucine (ambiguous). The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor.",
+     "residue 'U' appears 1x: selenocysteine (21st aa; requires SECIS machinery). The sequence does not specify a synthesizable molecule and cannot be submitted to any structure predictor."
+    ],
+    "warnings": [],
+    "invalid_residues": {
+     "1": 2,
+     "4": 2,
+     "-": 4,
+     "7": 1,
+     "O": 1,
+     "J": 1,
+     "U": 1
+    },
+    "mol_weight": null,
+    "net_charge_ph74": null,
+    "isoelectric_point": null,
+    "gravy": null,
+    "frac_cationic": null,
+    "frac_aromatic": null,
+    "n_cysteine": 0,
+    "cys_pairing": "",
+    "liabilities": []
+   },
+   "thermo": {
+    "label": "AstroPafr-Block-A4",
+    "dg_stated": -15.2,
+    "kd_stated_molar": 4.8e-09,
+    "kd_stated_text": "Kd = 4.8 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 7.21643468022907e-12,
+    "dg_implied_by_kd": -11.348841796113957,
+    "discrepancy_kcal": 3.851158203886042,
+    "discrepancy_orders": 2.822918552428838,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.2 kcal/mol implies Kd = 7.22 pM, but the record states Kd = 4.8 nM \u2014 a gap of 3.9 kcal/mol (2.8 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  },
+  {
+   "id": 25,
+   "code": "AstroSuper-CBF-EAAT2-A5",
+   "region": "astrocyte",
+   "affinity_string": "\u0394G = -18.2 kcal/mol | Kd = 0.35 nM | AF3 pLDDT = 94.9 / 100",
+   "safety_string": "hERG IC50 > 50 \u03bcM | Seizure Index: 0.00 | Safety Index: 99.3 / 100",
+   "stated_plddt": 94.9,
+   "peptide": {
+    "name": "AstroSuper-CBF-EAAT2-A5",
+    "sequence": "ERACPDCHSEAEGGGGSVRACPTGKCEGL",
+    "length": 29,
+    "valid": true,
+    "errors": [],
+    "warnings": [],
+    "invalid_residues": {},
+    "mol_weight": 2877.15,
+    "net_charge_ph74": -2.24,
+    "isoelectric_point": 4.7,
+    "gravy": -0.624,
+    "frac_cationic": 0.103,
+    "frac_aromatic": 0.0,
+    "n_cysteine": 4,
+    "cys_pairing": "even (pairable)",
+    "liabilities": [
+     "MW 2877 Da far exceeds the ~400-500 Da soft ceiling for passive blood-brain-barrier diffusion; systemic dosing will not give CNS exposure without an active transport mechanism.",
+     "4 cysteines admit 3 distinct disulfide pairings; no connectivity is specified anywhere, so the folded product is undefined."
+    ]
+   },
+   "thermo": {
+    "label": "AstroSuper-CBF-EAAT2-A5",
+    "dg_stated": -18.2,
+    "kd_stated_molar": 3.5e-10,
+    "kd_stated_text": "Kd = 0.35 nM",
+    "temperature_k": 298.15,
+    "kd_implied_by_dg": 4.563598465164829e-14,
+    "dg_implied_by_kd": -12.900226928281747,
+    "discrepancy_kcal": 5.299773071718253,
+    "discrepancy_orders": 3.8847606189535098,
+    "consistent": false,
+    "plausible": true,
+    "issues": [
+     "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -18.2 kcal/mol implies Kd = 45.6 fM, but the record states Kd = 350 pM \u2014 a gap of 5.3 kcal/mol (3.9 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
+    ]
+   }
+  }
+ ],
+ "summary": {
+  "natural_products_total": 8,
+  "smiles_parse_failures": 4,
+  "smiles_wrong_compound": 1,
+  "smiles_stereo_undefined": 3,
+  "sequences_total": 35,
+  "sequences_invalid": 4,
+  "sequences_with_liabilities": 31,
+  "duplicate_sequences": {
+   "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG...": [
+    "HippoAChE-AlkaPept-X2",
+    "BasalAChE-GorgeBlock-B1"
+   ],
+   "CKCHGMSGSCSTKTCWWGBLCPFRRACPDCH...": [
+    "HippoWnt-FzdAgonist-X4",
+    "AstroZo1-Protect-A3"
+   ],
+   "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREV...": [
+    "PfcACh-PAM-P1",
+    "MicroTlr4-Antagonist-M3"
+   ],
+   "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH...": [
+    "PfcTrk-ErkEnhancer-P2",
+    "AstroEaat2-Up-A2"
+   ]
+  },
+  "thermo_pairs_checked": 25,
+  "thermo_inconsistent": 25,
+  "thermo_implausible": 5,
+  "max_discrepancy_kcal": 5.7253206713886104
+ }
+}

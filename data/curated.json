@@ -1,0 +1,867 @@
+{
+ "chemistry": {
+  "compounds": [
+   {
+    "name": "Huperzine A",
+    "pubchem_cid": 854026,
+    "isomeric_smiles": "C/C=C/1\\[C@@H]2CC3=C([C@]1(CC(=C2)C)N)C=CC(=O)N3",
+    "canonical_smiles": "CC=C1C2CC3=C(C1(CC(=C2)C)N)C=CC(=O)N3",
+    "inchikey": "ZRJBHWIHUMBLCN-YQEJDHNASA-N",
+    "molecular_formula": "C15H18N2O",
+    "molecular_weight": 242.32,
+    "rdkit_parses": true,
+    "rdkit_formula_matches": true,
+    "stereocenters_defined": 2,
+    "notes": "CAS 102518-79-6, (-)-huperzine A. Platform's claimed formula C15H18N2O is CORRECT, but the platform SMILES 'CC1=CC2C(=C)C3C(=O)NC(=C2CC3(C)N)C' FAILS to parse in RDKit (kekulization error) - one of the 4 broken entries. RDKit verification of the PubChem isomeric SMILES: formula C15H18N2O (matches), MolWt 242.32, regenerated InChIKey ZRJBHWIHUMBLCN-YQEJDHNASA-N identical to PubChem's. 2 atom stereocenters, both defined (1R,9R), plus 1 defined E double-bond (13E ethylidene) - all stereochemistry present."
+   },
+   {
+    "name": "Ginsenoside Rg1",
+    "pubchem_cid": 441923,
+    "isomeric_smiles": "CC(=CCC[C@@](C)([C@H]1CC[C@@]2([C@@H]1[C@@H](C[C@H]3[C@]2(C[C@@H]([C@@H]4[C@@]3(CC[C@@H](C4(C)C)O)C)O[C@H]5[C@@H]([C@H]([C@@H]([C@H](O5)CO)O)O)O)C)O)C)O[C@H]6[C@@H]([C@H]([C@@H]([C@H](O6)CO)O)O)O)C",
+    "canonical_smiles": "CC(=CCCC(C)(C1CCC2(C1C(CC3C2(CC(C4C3(CCC(C4(C)C)O)C)OC5C(C(C(C(O5)CO)O)O)O)C)O)C)OC6C(C(C(C(O6)CO)O)O)O)C",
+    "inchikey": "YURJSTAIMNSZAE-HHNZYBFYSA-N",
+    "molecular_formula": "C42H72O14",
+    "molecular_weight": 801.01,
+    "rdkit_parses": true,
+    "rdkit_formula_matches": true,
+    "stereocenters_defined": 21,
+    "notes": "CAS 22427-39-0 (Sanchinoside C1, Panaxoside Rg1). Platform's claimed formula C42H72O14 is CORRECT, but the platform SMILES ENCODES THE WRONG MOLECULE: it parses to C38H64O14 (MW ~745), i.e. it is missing C4H8 relative to the real protopanaxatriol diglucoside - one of the 2 wrong-structure entries. It is also completely flat (zero stereocenters), unusable for a compound with 21 stereocenters. RDKit verification of the PubChem isomeric SMILES: formula C42H72O14 (matches PubChem and the platform's claim), MolWt 801.01, regenerated InChIKey YURJSTAIMNSZAE-HHNZYBFYSA-N identical to PubChem's. 21 atom stereocenters, all defined, 0 undefined. C4(C)C gem-dimethyl carbon is not a stereocenter."
+   },
+   {
+    "name": "Ginkgolide B",
+    "pubchem_cid": 11973122,
+    "isomeric_smiles": "C[C@@H]1C(=O)O[C@@H]2[C@]1([C@@]34C(=O)O[C@H]5[C@]3([C@@H]2O)[C@@]6([C@@H](C5)C(C)(C)C)[C@H](C(=O)O[C@H]6O4)O)O",
+    "canonical_smiles": "CC1C(=O)OC2C1(C34C(=O)OC5C3(C2O)C6(C(C5)C(C)(C)C)C(C(=O)OC6O4)O)O",
+    "inchikey": "SQOJOAFXDQDRGF-ZMVGXLHTSA-N",
+    "molecular_formula": "C20H24O10",
+    "molecular_weight": 424.4,
+    "rdkit_parses": true,
+    "rdkit_formula_matches": true,
+    "stereocenters_defined": 11,
+    "notes": "CAS 15291-77-7 (BN 52021), CHEBI:5356. Platform's claimed formula C20H24O10 is CORRECT, but the platform SMILES ENCODES THE WRONG MOLECULE: it parses to C18H22O8, missing one lactone ring (C2O2) from the true tri-gamma-lactone cage - the second of the 2 wrong-structure entries, and it is stereochemically flat. RDKit verification of the PubChem isomeric SMILES: formula C20H24O10 (matches), MolWt 424.40, regenerated InChIKey SQOJOAFXDQDRGF-ZMVGXLHTSA-N identical to PubChem's. 11 atom stereocenters, all defined. IMPORTANT CID CHOICE: CID 65243 also has formula C20H24O10 and the same InChIKey skeleton (SQOJOAFXDQDRGF-UHFFFAOYSA-N) but is the stereochemistry-free record titled 'Npc169089'; CID 11973122 is the stereo-defined, CAS-linked Ginkgolide B record and is the one to use."
+   },
+   {
+    "name": "Baicalein",
+    "pubchem_cid": 5281605,
+    "isomeric_smiles": "C1=CC=C(C=C1)C2=CC(=O)C3=C(O2)C=C(C(=C3O)O)O",
+    "canonical_smiles": "C1=CC=C(C=C1)C2=CC(=O)C3=C(O2)C=C(C(=C3O)O)O",
+    "inchikey": "FXNFHKRTJBSTCS-UHFFFAOYSA-N",
+    "molecular_formula": "C15H10O5",
+    "molecular_weight": 270.24,
+    "rdkit_parses": true,
+    "rdkit_formula_matches": true,
+    "stereocenters_defined": 0,
+    "notes": "CAS 491-67-8, confirmed synonym '5,6,7-Trihydroxyflavone'. Claimed formula C15H10O5 is CORRECT. ADDITIONAL FINDING BEYOND THE BRIEF: the platform's stored Baicalein SMILES DOES parse and DOES give C15H10O5, but it is the WRONG REGIOISOMER - it canonicalizes to O=c1cc(-c2ccccc2)oc2c(O)c(O)c(O)cc12 (InChIKey SXZJEWVPXPKGJG-UHFFFAOYSA-N), which is 6,7,8-trihydroxyflavone, not the 5,6,7-trihydroxyflavone the platform labels it. A formula-only check would have passed it; the InChIKey catches it. So there are 3 wrong-molecule entries, not 2. RDKit verification of the PubChem SMILES: formula C15H10O5 (matches), MolWt 270.24, regenerated InChIKey FXNFHKRTJBSTCS-UHFFFAOYSA-N identical to PubChem's. Baicalein is achiral: 0 stereocenters, so isomeric and canonical SMILES are identical and no stereochemistry is lost."
+   },
+   {
+    "name": "Curcumin",
+    "pubchem_cid": 969516,
+    "isomeric_smiles": "COC1=C(C=CC(=C1)/C=C/C(=O)CC(=O)/C=C/C2=CC(=C(C=C2)O)OC)O",
+    "canonical_smiles": "COC1=C(C=CC(=C1)C=CC(=O)CC(=O)C=CC2=CC(=C(C=C2)O)OC)O",
+    "inchikey": "VFLDPWHFBUODDF-FCXRPNKRSA-N",
+    "molecular_formula": "C21H20O6",
+    "molecular_weight": 368.39,
+    "rdkit_parses": true,
+    "rdkit_formula_matches": true,
+    "stereocenters_defined": 0,
+    "notes": "CAS 458-37-7 (diferuloylmethane, Curcumin I). Platform's claimed formula C21H20O6 is CORRECT, but the platform SMILES FAILS to parse in RDKit - it contains the invalid token 'OCH3' written as an organic-subset atom sequence (O-C-H-3) instead of 'OC'; one of the 4 broken entries. RDKit verification of the PubChem isomeric SMILES: formula C21H20O6 (matches), MolWt 368.39, regenerated InChIKey VFLDPWHFBUODDF-FCXRPNKRSA-N identical to PubChem's. 0 atom stereocenters, but 2 DEFINED double-bond stereocenters (1E,6E) - this is the stereochemistry that matters here, and the canonical SMILES loses it. The PubChem record is the diketo (keto) tautomer, the conventional deposited form."
+   },
+   {
+    "name": "Onjisaponin V",
+    "pubchem_cid": 177827987,
+    "isomeric_smiles": "C[C@@H]1[C@@H]([C@@H]([C@H]([C@@H](O1)OC(=O)[C@@]23CC[C@@]4(C(=CC[C@H]5[C@]4(CC[C@@H]6[C@@]5(C[C@@H]([C@@H]([C@@]6(C)C(=O)O)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)O)C)C)[C@@H]2CC(CC3)(C)C)CO)O[C@H]8[C@@H]([C@@H]([C@H]([C@@H](O8)C)O[C@H]9[C@@H]([C@H]([C@@H](CO9)O[C@H]1[C@@H]([C@H]([C@H]([C@H](O1)CO)O)O)O)O)O)O[C@H]1[C@@H]([C@](CO1)(COC(=O)CC(C)(CC(=O)O)O)O)O)O)OC(=O)/C=C/C1=CC(=C(C(=C1)OC)OC)OC)O",
+    "canonical_smiles": "CC1C(C(C(C(O1)OC(=O)C23CCC(CC2C4=CCC5C(C4(CC3)CO)(CCC6C5(CC(C(C6(C)C(=O)O)OC7C(C(C(C(O7)CO)O)O)O)O)C)C)(C)C)OC8C(C(C(C(O8)C)OC9C(C(C(CO9)OC1C(C(C(C(O1)CO)O)O)O)O)O)OC1C(C(CO1)(COC(=O)CC(C)(CC(=O)O)O)O)O)O)OC(=O)C=CC1=CC(=C(C(=C1)OC)OC)OC)O",
+    "inchikey": "MYKOTWPDDUNUJG-VNBMPPIYSA-N",
+    "molecular_formula": "C82H122O41",
+    "molecular_weight": 1763.84,
+    "rdkit_parses": true,
+    "rdkit_formula_matches": true,
+    "stereocenters_defined": 37,
+    "notes": "PLATFORM'S CLAIMED FORMULA C58H92O27 IS WRONG. PubChem's only record for onjisaponin V (CID 177827987) is C82H122O41, MW 1763.8 - far larger. The platform's stored 'SMILES' field is not chemistry at all: the literal string 'C58H92O27 (Onjisaponin V Core Skeleton)', which of course FAILS to parse - one of the 4 broken entries. PROVENANCE CAVEAT, AS REQUESTED: PubChem has essentially no consensus structure for onjisaponin V. CID 177827987 is a bare single-depositor record - sole source 'Traditional Medicine Medicinal Chemistry DB', exactly one synonym ('onjisaponin V'), NO CAS number, NO literature reference, NO ChEBI/ChEMBL/DrugBank cross-links, and no Biologic Description or Literature sections in the PUG-View record. Onjisaponins are a family of closely related presenegenin oligoglycosides isolated as mixtures from Polygala tenuifolia, and their reported structures vary between papers; onjisaponin V was described among onjisaponins V-Z in the Polygala saponin literature but is not independently corroborated in PubChem. This CID should be flagged as low-confidence/tentative rather than treated as a settled structure. RDKit verification of the deposited isomeric SMILES: parses, formula C82H122O41 (matches PubChem), MolWt 1763.84, regenerated InChIKey MYKOTWPDDUNUJG-VNBMPPIYSA-N identical to PubChem's. 38 atom stereocenters total, 37 DEFINED and 1 UNDEFINED (the tertiary carbinol of the 3-hydroxy-3-methylglutaryl ester side chain), plus 1 defined E double bond (3,4,5-trimethoxycinnamoyl)."
+   },
+   {
+    "name": "Salvianolic Acid B",
+    "pubchem_cid": 6451084,
+    "isomeric_smiles": "C1=CC(=C(C=C1C[C@H](C(=O)O)OC(=O)/C=C/C2=C3[C@@H]([C@H](OC3=C(C=C2)O)C4=CC(=C(C=C4)O)O)C(=O)O[C@H](CC5=CC(=C(C=C5)O)O)C(=O)O)O)O",
+    "canonical_smiles": "C1=CC(=C(C=C1CC(C(=O)O)OC(=O)C=CC2=C3C(C(OC3=C(C=C2)O)C4=CC(=C(C=C4)O)O)C(=O)OC(CC5=CC(=C(C=C5)O)O)C(=O)O)O)O",
+    "inchikey": "SNKFFCBZYFGCQN-VWUOOIFGSA-N",
+    "molecular_formula": "C36H30O16",
+    "molecular_weight": 718.62,
+    "rdkit_parses": true,
+    "rdkit_formula_matches": true,
+    "stereocenters_defined": 4,
+    "notes": "CAS 121521-90-2 (lithospermic acid B, Dan Shen Suan B). Platform's claimed formula C36H30O16 is CORRECT, but the platform's stored 'SMILES' is again not chemistry - the literal string 'C36H30O16 (Caffeic Acid Tetramer)', which FAILS to parse; one of the 4 broken entries. RDKit verification of the PubChem isomeric SMILES: formula C36H30O16 (matches), MolWt 718.62, regenerated InChIKey SNKFFCBZYFGCQN-VWUOOIFGSA-N identical to PubChem's. 4 atom stereocenters, all defined (2R benzofuran-4-yl ester carbon, 2S/3S dihydrobenzofuran, 1R danshensu ester), plus 1 defined E double bond on the cinnamoyl linker. Note the descriptive label 'caffeic acid tetramer' is chemically apt (it is a tetrameric caffeic acid derivative) but is a description, not a structure."
+   },
+   {
+    "name": "Asiatic Acid",
+    "pubchem_cid": 119034,
+    "isomeric_smiles": "C[C@@H]1CC[C@@]2(CC[C@@]3(C(=CC[C@H]4[C@]3(CC[C@@H]5[C@@]4(C[C@H]([C@@H]([C@@]5(C)CO)O)O)C)C)[C@@H]2[C@H]1C)C)C(=O)O",
+    "canonical_smiles": "CC1CCC2(CCC3(C(=CCC4C3(CCC5C4(CC(C(C5(C)CO)O)O)C)C)C2C1C)C)C(=O)O",
+    "inchikey": "JXSVIVRDWWRQRT-UYDOISQJSA-N",
+    "molecular_formula": "C30H48O5",
+    "molecular_weight": 488.71,
+    "rdkit_parses": true,
+    "rdkit_formula_matches": true,
+    "stereocenters_defined": 12,
+    "notes": "CAS 464-92-6, UNII 9PA5A687X5. Platform's claimed formula C30H48O5 is CORRECT and, unlike the others, the platform's stored SMILES actually parses and gives the right formula C30H48O5 with the right connectivity. Its defect is different and milder: it is completely FLAT - zero stereochemistry on a pentacyclic ursane triterpene with 12 stereocenters, so it does not specify asiatic acid as opposed to any of its many stereoisomers. Replace it anyway, since the brief requires stereospecific structures. RDKit verification of the PubChem isomeric SMILES: formula C30H48O5 (matches), MolWt 488.71, regenerated InChIKey JXSVIVRDWWRQRT-UYDOISQJSA-N identical to PubChem's. 12 atom stereocenters, all defined, 0 undefined."
+   }
+  ]
+ },
+ "motifs": {
+  "motifs": [
+   {
+    "motif": "KLVFFAEDVGSNKGAIIGLM",
+    "appears_in": [
+     "CogAbeta-Clearer-08 (rank 5, AF3_CANDIDATES)",
+     "BasalAChE-Abeta-B4 (id 14, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": "P05067",
+    "protein_name": "Amyloid-beta precursor protein (APP), A4_HUMAN",
+    "residue_range": "687-706 (= Abeta(16-35) in Abeta numbering; Abeta1 = APP Asp672)",
+    "exact_match": true,
+    "biological_role": "This is the complete fibril-forming core of Abeta42, copied letter-for-letter. It contains (a) the central hydrophobic cluster KLVFF = Abeta16-20 = APP 687-691, the primary self-recognition element that nucleates cross-beta sheet formation; (b) the Abeta21-30 turn (APP 692-701) that sets the hairpin register; and (c) the second hydrophobic strand GAIIGLM = Abeta29-35 = APP 700-706, which forms the beta2 strand of the protofilament. Abeta(16-22) KLVFFAE (APP 687-693) is the canonical minimal self-assembling fragment used as a fibrillization positive control. Verified by exact substring match against the retrieved UniProt P05067 sequence and by exhaustive exact-match scan of all 575,503 SwissProt entries (hits only in APP orthologues: P05067, P08592 rat, P12023 mouse, P53601, P79307, O73683, P86906, Q28053 - all at the identical Abeta16-35 position).",
+    "directionality_note": "INVERTED - this is the flagship polarity failure. BasalAChE-Abeta-B4 is labelled 'AChE-Abeta Fibril Disruptor' with 'Fibril Blockade: 100%', and CogAbeta-Clearer-08 is labelled 'Abeta42 Core + Trem2 Phagocytic Tag'. Both carry the aggregation-NUCLEATING core as the payload, not an aggregation inhibitor. The nucleating range is APP 687-691 (KLVFF, Abeta16-20) for beta-sheet self-recognition, extended to APP 687-693 (KLVFFAE, Abeta16-22) for the minimal autonomously-fibrillizing unit, with APP 700-706 (GAIIGLM, Abeta29-35) supplying the second strand. Genuine KLVFF-derived inhibitors are only inhibitory when the beta-sheet propagation face is deliberately broken - by N-methylation of alternating backbone amides, D-amino-acid substitution, proline insertion, or a bulky C-terminal disruptor (e.g. the LPFFD class). This construct has none of those: it is unmodified all-L Abeta16-35. Appending a GGGSGGSG linker plus a soluble cysteine-rich tag does not abolish the cross-beta interface; a solubilizing tag on an amyloid core is the standard recipe for a seeding-competent fusion. Administered into brain, this molecule is expected to seed, not clear, Abeta. Secondary point: APP topological domain 18-701 is extracellular and the transmembrane helix begins at 702, so APP 702-706 (Abeta31-35) is drawn from inside the membrane-embedded segment - that stretch is hydrophobic bilayer-resident sequence, further raising the aggregation and membrane-perturbation liability of the free peptide.",
+    "verified": true
+   },
+   {
+    "motif": "GRPRTTSFAESCKPVQQPSAFGSMKVSRDKDG",
+    "appears_in": [
+     "CogGSK-Ser9-05 (rank 9, AF3_CANDIDATES)",
+     "PfcGsk-WntLinker-P4 (id 9, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": "P49841",
+    "protein_name": "Glycogen synthase kinase-3 beta (GSK3B), GSK3B_HUMAN",
+    "residue_range": "3-34",
+    "exact_match": true,
+    "biological_role": "GSK-3beta's own N-terminal autoinhibitory pseudosubstrate tail, copied verbatim for 32 residues. Ser9 - the inhibitory phosphosite (UniProt P49841 MOD_RES 9: 'Phosphoserine; by PKB/AKT1, RPS6KA3, SGK3 and NME7') - sits at position 7 of the peptide. Verified against retrieved P49841 and by exact scan of SwissProt (hits only P49841 human, P18266 rat, Q9WV60 mouse, Q5YJC2 - all at 3-34).",
+    "directionality_note": "CATEGORY ERROR plus likely INVERSION. Both entries declare the target as the 'GSK-3beta ATP Binding Pocket (Val135, Asp133, Lys85)'. I confirmed from the retrieved P49841 record that the ATP site is UniProt BINDING 62-70 and BINDING 85, inside the protein-kinase domain (56-340), and that Lys85, Asp133 and Val135 are the real residues at those positions. The peptide is residues 3-34 - entirely inside the annotated disordered region 1-53, with ZERO overlap with the ATP site and lying wholly outside the kinase domain. It is therefore structurally incapable of being an ATP-pocket ligand: it is the enzyme's own substrate-side regulatory tail. Mechanistically the tail works by pSer9 docking into the POSITIVELY CHARGED PRIMED-SUBSTRATE PHOSPHATE POCKET (Arg96, Arg180, Lys205 - all three residue identities confirmed in the retrieved P49841 sequence), the same pocket that normally receives the p+4 phosphoserine of a primed substrate. It competes with SUBSTRATE, never with nucleotide, so every docking score and Kd quoted against the ATP pocket is computed at the wrong site. Three further consequences: (1) the peptide as specified is UNPHOSPHORYLATED at Ser9, and the phosphate supplies essentially all of the autoinhibitory binding energy - so as written it has no meaningful affinity for anything on GSK-3beta; (2) an unphosphorylated peptide presenting Ser9 in its native kinase-proximal context is a candidate SUBSTRATE, i.e. GSK-3beta or upstream kinases may phosphorylate it rather than be inhibited by it; (3) the stated mechanism, 'Induces inhibitory Ser9 phosphorylation of GSK-3beta', is backwards - Ser9 phosphorylation is performed by AKT1/RPS6KA3/SGK3 on the kinase itself, and flooding the cytosol with a decoy copy of the AKT substrate motif would competitively soak up AKT activity, REDUCING Ser9 phosphorylation of endogenous GSK-3beta, de-repressing the kinase, and increasing tau hyperphosphorylation - the exact opposite of the claimed 'Tau Hyperphosphorylation: Suppressed'. Additionally GSK-3beta is annotated Cytoplasm/Nucleus (retrieved P49841), and this peptide carries no cell-penetrating element, so it cannot reach the target compartment regardless.",
+    "verified": true
+   },
+   {
+    "motif": "APMKEANIRGQGGLAYPGVRT",
+    "appears_in": [
+     "CogBDNF-Mimic-04 (rank 2, AF3_CANDIDATES) - present twice, as a head-to-tail tandem repeat joined by a GS linker"
+    ],
+    "uniprot_accession": "P23560",
+    "protein_name": "Brain-derived neurotrophic factor (BDNF), BDNF_HUMAN",
+    "residue_range": "19-39",
+    "exact_match": true,
+    "biological_role": "The extreme N-terminus of the BDNF PRODOMAIN. From the retrieved P23560 feature table: signal peptide ends at 18, PROPEP (prodomain) = 19-128, and the mature BDNF CHAIN = 129-247. Residues 19-39 therefore begin at the first residue after signal-peptide cleavage and sit entirely within the propeptide. Verified by exact SwissProt scan: only P23560 (human) and Q5IS78 (chimpanzee) BDNF, both at 19-39. Note the platform's copy is actually 'APMKEANIRGQGGLAYPGVRTC' - the terminal Cys is NOT native (P23560 residue 40 is His), so the 22-mer as deployed is an altered copy with a non-native cysteine appended at each of the two repeats.",
+    "directionality_note": "INVERTED. CogBDNF-Mimic-04 is declared a 'BDNF Mimic' targeting the 'TrkB Dimerization Interface', but the segment is prodomain, not mature domain. proBDNF/prodomain and mature BDNF are the textbook yin-yang pair: mature BDNF (P23560 129-247, a cystine-knot dimer) engages TrkB and drives survival, spine growth and LTP; the prodomain acting via p75NTR with sortilin as co-receptor drives growth-cone retraction, spine pruning, dendritic simplification and facilitation of hippocampal LTD - the opposite sign of the claimed effect. Every determinant that actually contacts TrkB lives in the mature chain (notably the N-terminal segment beginning at 129, HSDPARRGELSV, which is the principal TrkB-d5 specificity element, plus the beta-hairpin loops of the knot). Residues 19-39 contain none of them: I confirmed by Smith-Waterman that the construct has no alignment to NTRK2 (Q16620) above noise. So the molecule cannot agonise TrkB, and the domain it is drawn from is the one that signals with reversed polarity. Two aggravating details: it is built as a TANDEM DIMER, which is precisely the architecture that would cluster p75NTR/sortilin if the prodomain retains any receptor avidity - amplifying the wrong-sign signal; and the two appended non-native cysteines (replacing native His40) will form disulfides, cross-linking copies into higher-order species of undefined valency.",
+    "verified": true
+   },
+   {
+    "motif": "DEETGEFLFQLP",
+    "appears_in": [
+     "CogNrf-KeapDis-03 (rank 3, AF3_CANDIDATES)",
+     "HippoNrf-KeapDecoy-X3 (id 3, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": "Q16236",
+    "protein_name": "Nuclear factor erythroid 2-related factor 2 (NFE2L2/Nrf2), NF2L2_HUMAN",
+    "residue_range": "77-88 (the platform's copy is verbatim only over 77-84)",
+    "exact_match": false,
+    "biological_role": "The Neh2-domain high-affinity ETGE degron that docks into the Keap1 Kelch beta-propeller. The core tetrapeptide ETGE is Q16236 residues 79-82. Retrieved Q16236 reads ...FFAQLQL(75)DEETGEFLPIQPAQHIQ... so the authentic 12-mer at 77-88 is DEETGEFLPIQP.",
+    "directionality_note": "ALTERED COPY, but polarity is CORRECT; the failure is delivery and fidelity, not sign. Fidelity: only DEETGEFL (Q16236 77-84) is verbatim - exact SwissProt scan returns Q16236 human, O54968 rat, Q5NUA6 bovine, Q60795 mouse, all at 77-84, while the full 12-mer DEETGEFLFQLP returns ZERO hits in all 575,503 SwissProt entries. The platform has corrupted the three residues immediately C-terminal to the motif: native P85/I86/Q87 have become F/Q/L (P85F, I86Q, Q87L). Those flanking residues are not inert - they complete the beta-hairpin that presents ETGE to the Kelch domain, so the substitution degrades exactly the element that sets the picomolar affinity. Polarity: a free ETGE peptide competitively displaces Nrf2 from Keap1, blocking Cul3-mediated Nrf2 ubiquitination and thereby ACTIVATING the ARE/HO-1/NQO1 programme - which is the stated intent, so the sign is right. Topology, however, is wrong: KEAP1 (Q14145, retrieved) is annotated Cytoplasm and Nucleus, an intracellular substrate adaptor, and this peptide is a net -7 polyanion with no cell-penetrating element whatsoever (published DEETGE decoys are invariably fused to a CPP such as TAT precisely because the bare motif cannot cross a membrane). It cannot reach Keap1. The construct also appends WRWYCPWC, an 8-mer with no natural source (see separate entry). Note the second copy of the motif in the same peptide, QLDEETGE, IS verbatim Q16236 75-82.",
+    "verified": true
+   },
+   {
+    "motif": "QLDEETGE",
+    "appears_in": [
+     "CogNrf-KeapDis-03 (rank 3, AF3_CANDIDATES)",
+     "HippoNrf-KeapDecoy-X3 (id 3, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": "Q16236",
+    "protein_name": "Nuclear factor erythroid 2-related factor 2 (NFE2L2/Nrf2), NF2L2_HUMAN",
+    "residue_range": "75-82",
+    "exact_match": true,
+    "biological_role": "Second, tandem copy of the Nrf2 ETGE Keap1-binding degron within the same 28-mer, offset by two residues relative to the first copy. Verbatim against retrieved Q16236.",
+    "directionality_note": "Polarity correct (ETGE displaces Nrf2 from Keap1 = Nrf2 activation), but this copy is TRUNCATED at Glu82 and so loses Phe83/Leu84, which pack against the Kelch surface in the authentic complex - the minimal high-affinity element is normally described as the 9-mer LDEETGEFL (Q16236 76-84). Same fatal compartment problem as the first copy: Keap1 (Q14145) is cytosolic/nuclear and the peptide has no delivery vector.",
+    "verified": true
+   },
+   {
+    "motif": "DEETGE",
+    "appears_in": [
+     "MicroNrf2-AntiInflam-M2 (id 17, FULL_BRAIN_DRUGS_DATA)",
+     "MicroDual-Trem2-Nrf2-M5 (id 20, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": "Q16236",
+    "protein_name": "Nuclear factor erythroid 2-related factor 2 (NFE2L2/Nrf2), NF2L2_HUMAN",
+    "residue_range": "77-82",
+    "exact_match": true,
+    "biological_role": "Minimal ETGE-containing hexamer (ETGE core = 79-82). Verbatim against retrieved Q16236.",
+    "directionality_note": "Polarity correct but severely truncated - stripped of both the Leu76 N-flank and the Phe83/Leu84 C-flank that contribute most of the Keap1 Kelch interface, so this 6-mer is well below the size that supports meaningful Keap1 engagement. Compartment error again: Keap1 (Q14145) is annotated Cytoplasm/Nucleus (retrieved), and neither peptide carries a cell-penetrating element. MicroNrf2-AntiInflam-M2 compounds the problem by grafting the fragment onto CKCHGMSGSCSTK, a WNT-derived extracellular-secreted-protein fragment - fusing a cytosol-target motif to a secreted-protein motif is topologically incoherent in both directions.",
+    "verified": true
+   },
+   {
+    "motif": "CKCHGMSGSC",
+    "appears_in": [
+     "CogWnt-Fzd-09 (rank 6, AF3_CANDIDATES)",
+     "HippoWnt-FzdAgonist-X4 (id 4, FULL_BRAIN_DRUGS_DATA)",
+     "AstroZo1-Protect-A3 (id 23, FULL_BRAIN_DRUGS_DATA)",
+     "MicroNrf2-AntiInflam-M2 (id 17, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": "P04628",
+    "protein_name": "Proto-oncogene Wnt-1 (WNT1), WNT1_HUMAN",
+    "residue_range": "218-227",
+    "exact_match": true,
+    "biological_role": "A 10-residue verbatim slice of the conserved CKCHG(x)SGSC cysteine motif in the WNT C-terminal domain. Exact SwissProt scan returns exactly 10 hits, all WNT1 orthologues (P04628 human 218-227, P04426 mouse, P09615 Drosophila wingless, P10108, P21551, P24257, P28094, P34888) - WNT1 is the only human paralogue with Met at the sixth position. All other human WNTs carry Val/Leu/Ile/Thr there (WNT3A P56704 203 CKCHGLSGSC, WNT5A P41221 238 CKCHGVSGSC, WNT7A O00755 200 CKCHGVSGSC, etc.).",
+    "directionality_note": "WRONG SITE and, in one deployment, WRONG COMPARTMENT. (a) Wrong site for the FZD claim: HippoWnt-FzdAgonist-X4 and CogWnt-Fzd-09 declare the target as the Frizzled-8 CRD. WNT engages the FZD CRD through two sites, neither of which is this one - site 1 is the palmitoleoylated 'lipid thumb' (the serine acylated by PORCN, e.g. WNT3A Ser209), which inserts its lipid into the CRD groove and supplies the dominant binding energy, and site 2 is the 'index finger' tip. A synthetic peptide cannot be lipidated by PORCN, so the single most important FZD-binding determinant is unobtainable by construction. (b) A 10-mer excised from the WNT fold cannot fold: WNT proteins are built on ~22 conserved cysteines in a fixed disulfide network, and the four cysteines here would be left unpaired or would mispair. (c) WRONG COMPARTMENT: the identical 31-mer is redeployed unchanged as AstroZo1-Protect-A3 targeting 'BMEC Zonula Occludens-1 (ZO-1) & Occludin Complex'. ZO-1 (Q07157, retrieved) is a MAGUK scaffold annotated as a peripheral membrane protein on the CYTOPLASMIC face of the tight junction - it has no extracellular domain at all. Occludin (Q16625, retrieved) places its ZO-1-binding C-terminal coiled-coil in topological domain 266-522, annotated Cytoplasmic. A WNT-derived, disulfide-rich, secreted-protein fragment with no cell-penetrating capability cannot reach either. The claimed contact residues are also fabricated: I checked the retrieved Q16625 sequence and position 220 is Tyr (not the claimed Arg220) and position 310 is Ser (not the claimed Asp310); moreover 220 lies in extracellular loop 196-243 while 310 is cytoplasmic, so the two claimed contacts sit on OPPOSITE SIDES of the plasma membrane and cannot be bridged by one peptide. (d) The same sequence appearing verbatim under two unrelated targets with different quoted affinities (dG -16.9 vs -16.1 kcal/mol) is itself disqualifying.",
+    "verified": true
+   },
+   {
+    "motif": "CKCHGMSGSCSTKTCWWGBLCPFRRACPDCH",
+    "appears_in": [
+     "CogWnt-Fzd-09 (rank 6, AF3_CANDIDATES)",
+     "HippoWnt-FzdAgonist-X4 (id 4, FULL_BRAIN_DRUGS_DATA)",
+     "AstroZo1-Protect-A3 (id 23, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "A WNT-family CHIMERA, not a copy of any single protein. EBI BLASTP against uniprotkb_swissprot gives WNT3/WNT3A as best hits (P56703 WNT3_HUMAN and P56704 WNT3A_HUMAN, both E = 2e-06), but only the first 10 residues are verbatim from any real sequence (WNT1 P04628 218-227). The remainder is stitched from different paralogues and then corrupted: STKTC approximates WNT7A/7B TTKTC (O00755/P56706, pos 205-209) and WNT5A/5B SLKTC but matches neither; CWWG approximates WNT3A CWWS (P56704) / WNT3 CWWA (P56703) but matches neither; ACPDCH matches nothing. No exact SwissProt hit exists for CKCHGMSGSCSTK or CKCHGMSGSCSTKTC.",
+    "directionality_note": "Beyond the site and compartment errors noted for the WNT1 core, this segment contains a HARD CHEMICAL DEFECT: position 19 is the letter B. B is the IUPAC ambiguity code for Asx (Asp OR Asn) and is not an amino acid. This peptide cannot be synthesised or expressed as written, and no structure predictor can have produced a genuine pLDDT for it - the presence of an ambiguity character is direct evidence the sequence was assembled as text rather than designed. All three entries carrying it quote precise pLDDT values (94.8, 95.1, 93.8), which cannot be real.",
+    "verified": true
+   },
+   {
+    "motif": "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+    "appears_in": [
+     "CogTrk-DeNovo-01 (rank 4, AF3_CANDIDATES)",
+     "CogDual-TrkB-PAS-10 (rank 1, AF3_CANDIDATES)",
+     "HippoTrk-Saponin-X1 (id 1)",
+     "PfcTrk-ErkEnhancer-P2 (id 7)",
+     "AstroEaat2-Up-A2 (id 22)",
+     "BasalNgf-TrkA-B3 (id 13)",
+     "HippoDual-TrkB-AMPK-X5 (id 5, as MCVCDRENP)",
+     "BasalSuper-AChE-TrkA-B5 (id 15, as MCVCDRENP)",
+     "AstroSuper-CBF-EAAT2-A5 (id 25, as VRACPTGKCEGL)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "An EGF-LIKE DOMAIN PASTICHE with no natural source. Exact-match scan of all 575,503 SwissProt entries returns zero hits for the full 47-mer and for every sub-fragment tested (DRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDC, CPTGKCEGLRGYTCRCEPGWKGPDC, RCEPGWKGPDC, ERACPDCH). EBI BLASTP against full UniProtKB (SwissProt + TrEMBL) returns only generic EGF-repeat proteins at best E = 9e-05 (insect Draper, Phytophthora tenascin-like, Tenascin-C P24821 E = 3e-05, MEGF11 A6BM72 E = 3e-05, NOTCH3 Q61982, Teneurin-3 Q9P273) - i.e. it matches the EGF-like domain FAMILY SIGNATURE, not any protein. The reason is explicit: it carries the canonical EGF-like C-terminal consensus CxCxxG[FYW]xGxxC as CRCEPGWKGPDC at its positions 27-38, plus 8 cysteines in EGF-like spacing. It is sequence built to look like an EGF domain.",
+    "directionality_note": "WRONG FOLD, WRONG RECEPTOR FAMILY, and the peptide is orphaned from any biology. Six of the nine constructs declare TrkB or TrkA as the target ('TrkB Ig-like D5 Domain', 'TrkA Extracellular Ig-like Domain'). Two independent checks refute this. First, the retrieved NTRK2 record (Q16620) shows the extracellular region is built from LRRNT 32-61, LRRCT 148-196 and two IMMUNOGLOBULIN folds, Ig-like C2-type 1 at 197-282 and Ig-like C2-type 2 at 295-365 (the domain called D5). An Ig C2 fold carries a single intradomain disulfide and is topologically unrelated to an 8-cysteine EGF-like domain; NTRK1/NTRK2 contain no EGF-like domain at all. Second, direct Smith-Waterman of this 47-mer against full-length NTRK2 (Q16620) scores 35 and against NTRK1 (P04629) scores 36, versus a self-score of 297 - pure noise. So the molecule has no structural or sequence relationship to its stated receptor, and the real BDNF determinant for TrkB-d5 lives in the mature BDNF chain (P23560 129-247), which appears nowhere in this platform. Compounding errors: (i) the quoted contact residues are partly fabricated - against the retrieved Q16620 sequence, Asp298 and Tyr342 are correct but 'Glu319' is actually Tyr319, 'Val312' is Lys312, 'Thr315' is Leu315 and 'Leu333' is Lys333; (ii) COMPARTMENT ERROR in two deployments - AstroEaat2-Up-A2 aims the identical 37-mer at EAAT2 'Thr368, Lys490', but in the retrieved SLC1A2 record (P43004) position 368 is Leu and 490 is Ala, and residue 490 lies inside transmembrane helix 8 (472-493), i.e. buried in the lipid bilayer and inaccessible to any peptide, while AstroSuper-CBF-EAAT2-A5 pairs it with the nuclear receptor ER-beta; (iii) the same 37-mer VRACPTGKC...ACPDCH is deployed unchanged as both PfcTrk-ErkEnhancer-P2 (TrkB) and AstroEaat2-Up-A2 (EAAT2) with different quoted affinities; (iv) with 8 free cysteines and no folding context, the peptide would form a scrambled disulfide ensemble, not a defined structure.",
+    "verified": true
+   },
+   {
+    "motif": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+    "appears_in": [
+     "CogAChE-PAS-02 (rank 7, AF3_CANDIDATES)",
+     "CogDual-TrkB-PAS-10 (rank 1, AF3_CANDIDATES)",
+     "HippoAChE-AlkaPept-X2 (id 2)",
+     "BasalAChE-GorgeBlock-B1 (id 11)",
+     "MicroAutophagy-Tag-M4 (id 19, as FLRRFWRRLKKYFEELWKKLAEKYFELLKKYG)",
+     "HippoDual-TrkB-AMPK-X5 (id 5, as FLRRFWRRLKKYFEELWKK)",
+     "BasalSuper-AChE-TrkA-B5 (id 15, as KWWKFLRR)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "A DE NOVO CATIONIC AMPHIPATHIC (membranolytic-class) alpha-helix with no natural source anywhere. Exact scan of all 575,503 SwissProt entries returns zero hits for the 36-mer and for every sub-fragment (KWWKFLRRFWRR, FLRRFWRR, LKKYFEELWKKLAEKYFELLKKYG, LKKYFEELWKK, YFELLKKYG). EBI BLASTP against full UniProtKB (SwissProt + TrEMBL, ~250M sequences) returns nothing above E = 2.4 - i.e. no homologue exists. Web search likewise returns no published peptide with these sequences. Its physicochemistry is diagnostic: net charge +9, Eisenberg hydrophobic moment muH = 0.615 over the 36-mer and 0.989 over the KWWKFLRRFWRR N-half - substantially MORE amphipathic than melittin (muH 0.353) or magainin-2 (muH 0.455), the reference lytic and antimicrobial peptides. Tryptophan/arginine-rich N-terminus plus a Leu/Lys heptad C-terminus is the textbook signature of a membrane-permeabilising AMP, not of an enzyme-active-site ligand.",
+    "directionality_note": "NOT a polarity inversion for AChE, but a specificity and SAFETY inversion; and a clear COMPARTMENT ERROR in two of its deployments. (a) AChE deployments (CogAChE-PAS-02, HippoAChE-AlkaPept-X2, BasalAChE-GorgeBlock-B1, CogDual-TrkB-PAS-10): the compartment is at least right - AChE (P22303, retrieved) is annotated Synapse/Secreted/GPI-anchored, hence extracellular. And a PAS binder would in principle raise ACh, so the intended sign is consistent. The failure is that a +9 polycation binds the anionic, aromatic PAS rim (Trp286/Tyr72/Tyr341) by non-specific electrostatics - and by the same non-specific electrostatics it binds every polyanionic surface it meets: phospholipid headgroups, heparan sulfate, glycosaminoglycans, nucleic acids. There is no selectivity to speak of, so the quoted 'Off-target Binding: None', 'Peripheral Side Effects: None' and 'hERG IC50 > 50 uM' are not credible for a melittin-class amphipath, whose dominant pharmacology is membrane lysis and haemolysis, not enzyme inhibition. (b) COMPARTMENT ERROR - MicroAutophagy-Tag-M4 aims the 32-mer at 'Microglial Autophagosomal Membrane LC3-II (Phe52, Leu63)'. The residue numbers are genuine: I confirmed against the retrieved MAP1LC3B record (Q9GZQ8) that Phe52 and Leu63 are real and are bona fide HP2 residues of the LIR docking site. But Q9GZQ8 is annotated 'Cytoplasmic vesicle, autophagosome membrane; Lipid-anchor' - LC3-II faces the CYTOSOL. A cationic helix may cross membranes, but it does so by endocytosis and is overwhelmingly retained in endosomes/lysosomes, i.e. on the WRONG SIDE of the very membrane it must cross; and this peptide derives from no LIR-containing protein (any FEEL/WKKL resemblance to the [WFY]xx[LIV] LIR consensus is coincidental in a Leu/Lys/Trp-rich designed helix). (c) COMPARTMENT ERROR - HippoDual-TrkB-AMPK-X5 aims the 19-mer at the 'AMPK alpha-subunit kinase domain (Lys45, Arg67)'. AMPK alpha-1 (Q13131, retrieved) is annotated Cytoplasm/Nucleus, so again unreachable; Lys45 is a real residue but position 67 is Asp, not the claimed Arg67, and the annotated ATP site is 33-41 plus 56, not 45/67.",
+    "verified": true
+   },
+   {
+    "motif": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+    "appears_in": [
+     "CognACh-Mod-06 (rank 10, AF3_CANDIDATES)",
+     "PfcACh-PAM-P1 (id 6)",
+     "MicroTlr4-Antagonist-M3 (id 18)",
+     "CogGluN2B-Mod-07 (rank 8) and PfcGluN2A-LTP-P3 (id 8, as SEAEFRLFRDVWANYCAC)",
+     "BasalM1-PAM-B2 (id 12, as CDERACPRCHGFWREVCSSEAEFRLFRDVWANYCAC)",
+     "AstroEos-NO-A1 (id 21, as ERACPDCHSEAEFRLFRDVWANYCACYPGWLGCD)",
+     "PfcDual-nACh-GluN2A-P5 (id 10, as SEAEFRLFRDVW)",
+     "AstroSuper-CBF-EAAT2-A5 (id 25, as ERACPDCHSEAE)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "A second EGF-LIKE DOMAIN PASTICHE with no natural source. Exact scan of all 575,503 SwissProt entries returns zero hits for the 41-mer and for every sub-fragment (SEAEFRLFRDVWANYCAC, SEAEFRLFRDVW, ANYCACYPGWLGC, YPGWLGCDERACPRCHGFWREVC, CDERACPRCHGFWREVC). EBI BLASTP against full UniProtKB returns only MEGF11 orthologues and teneurins at best E = 0.34 (SwissProt-only best: MEG11_MOUSE Q80T91 E = 0.004, MEG11_HUMAN A6BM72 E = 0.008, TEN4_HUMAN Q6N022 E = 0.029) - generic EGF-repeat resemblance, no attributable source. Six cysteines in EGF-like spacing.",
+    "directionality_note": "UNFALSIFIABLE TARGETING plus one clear COMPARTMENT ERROR. The identical 41-mer is deployed unchanged against three unrelated receptors - alpha7 nAChR ECD (CognACh-Mod-06 and PfcACh-PAM-P1) and the TLR4/MD-2 complex (MicroTlr4-Antagonist-M3) - with three different quoted affinities (dG -12.1, -16.5, -15.7 kcal/mol) for the same molecule. A single sequence cannot have three different free energies against three different targets; at most one of these claims can be examined, and none has a structural basis since the peptide corresponds to no natural ligand of any of them. COMPARTMENT ERROR: AstroEos-NO-A1 aims a 34-residue slice at the 'Estrogen Receptor-beta (ER-beta) LBD (Glu305, Arg346)'. From the retrieved ESR2 record (Q92731), ER-beta is annotated Nucleus and its NR LBD spans 264-498 - an intracellular nuclear receptor. Glu305 and Arg346 are genuine residue identities, but the ligand pocket of an NR LBD is a small, fully enclosed hydrophobic cavity sized for a ~270 Da steroid; it physically cannot accommodate a 34-mer disulfide-rich peptide, and the peptide cannot reach the nucleus in any case. Similarly BasalM1-PAM-B2 targets M1 mAChR 'Tyr381, Trp164' - both identities are correct in the retrieved CHRM1 record (P11229), but Tyr381 sits in transmembrane helix 6 (367-390) and Trp164 in transmembrane helix 4 (143-164), i.e. buried inside the helical bundle and unreachable by a 36-mer peptide from the extracellular face.",
+    "verified": true
+   },
+   {
+    "motif": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+    "appears_in": [
+     "MicroTrem2-Agonist-M1 (id 16)",
+     "CogGluN2B-Mod-07 (rank 8) and PfcGluN2A-LTP-P3 (id 8, as GCPWECDRRACPCYRGFWRERACPDCH)",
+     "CogAbeta-Clearer-08 (rank 5, as GRLVGHPWECDRRACPCYRGFWR)",
+     "PfcDual-nACh-GluN2A-P5 (id 10, as GCPWECDRRACPCYRGFWR)",
+     "MicroDual-Trem2-Nrf2-M5 (id 20, as GRLVGHPWECDR)",
+     "BasalAChE-Abeta-B4 (id 14, as GRLVGHPW)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "A third cysteine-rich PASTICHE with no natural source. Exact scan of all 575,503 SwissProt entries returns zero hits for the 31-mer and every sub-fragment (GCPWECDRRACPCYRGFWRERACPDCH, CDRRACPCYRGFWR, GRLVGHPWECDRR, GRLVGHPW). EBI BLASTP against full UniProtKB returns nothing above E = 1.4 - no homologue exists anywhere. Web search for GRLVGHPW and ACPCYRGFWR returns no published peptide.",
+    "directionality_note": "No inversion to assess because there is no biology to invert - the segment is invented sequence. Target compartments happen to be correct where TREM2 is claimed (Q9NZC2, retrieved: extracellular topological domain 19-174), but 'Arg47, Asp87, Lys112' cannot be validated as a binding epitope for a peptide that corresponds to no TREM2 ligand. The serious issue is its role in CogAbeta-Clearer-08 and BasalAChE-Abeta-B4, where it is the solubilising 'Trem2 phagocytic tag' fused via a GS linker to verbatim Abeta16-35: a soluble tag appended to an amyloid nucleus does not neutralise the cross-beta interface, it produces a seeding-competent fusion. As with the other pastiches, the same sequence is reused verbatim across unrelated declared targets (TREM2 Ig domain in MicroTrem2-Agonist-M1; NMDAR GluN2B/GluN2A NTD in CogGluN2B-Mod-07 and PfcGluN2A-LTP-P3) with different quoted affinities.",
+    "verified": true
+   },
+   {
+    "motif": "WRWYCPWC",
+    "appears_in": [
+     "CogNrf-KeapDis-03 (rank 3, AF3_CANDIDATES)",
+     "HippoNrf-KeapDecoy-X3 (id 3)",
+     "MicroDual-Trem2-Nrf2-M5 (id 20)",
+     "MicroNrf2-AntiInflam-M2 (id 17, as WRWYCPW)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "An 8-mer with no natural source. Exact scan of all 575,503 SwissProt entries returns zero hits for WRWYCPWC and for DEETGEWRWYCPWC. EBI BLASTP returns only unrelated bacterial and fungal proteins at E >= 5.0. Superficially it resembles a thioredoxin-family CXXC redox motif (as CPWC) but matches no thioredoxin, glutaredoxin or PDI family member.",
+    "directionality_note": "Invented sequence appended to the genuine Nrf2 ETGE motif. Its two free cysteines are a liability rather than a feature: they will form disulfides with each other or intermolecularly, cross-linking the ETGE decoy into dimers and higher aggregates and disrupting the beta-hairpin presentation the ETGE motif needs. It contributes nothing toward solving the actual problem with these constructs, which is that Keap1 (Q14145) is cytosolic and the peptide has no cell-penetrating element.",
+    "verified": true
+   },
+   {
+    "motif": "GGGGSGGGGSGGGGS / GGGGS / GGGSGGSGGSGGSGGSG / GGGSGGSG",
+    "appears_in": [
+     "CogDual-TrkB-PAS-10 (GGGGSx3)",
+     "CogBDNF-Mimic-04 (GPGGSGGSGGSGGSGGSG)",
+     "CogAbeta-Clearer-08 (GGGSGGSG)",
+     "BasalAChE-Abeta-B4 (GGGSGGSG)",
+     "HippoDual-TrkB-AMPK-X5 (GGGGS)",
+     "BasalSuper-AChE-TrkA-B5 (GGGGS x2)",
+     "PfcDual-nACh-GluN2A-P5 (GGGGS)",
+     "MicroDual-Trem2-Nrf2-M5 (GGGGS)",
+     "AstroSuper-CBF-EAAT2-A5 (GGGGS)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "The standard (Gly4Ser)n flexible linker of recombinant protein engineering. Not a natural motif and not attributable to any protein; its presence is the structural signature of a concatenated construct rather than a de novo designed fold.",
+    "directionality_note": "Not a polarity question, but decisive evidence against the platform's central claim. Nine of the 35 sequences are explicitly joined by GS linkers, and the segments they join are, without exception, either verbatim natural motifs or EGF-like pastiche - not novel backbone. A GS-linked concatenation of pre-existing motifs is not 'de novo designed via AlphaFold3'; AlphaFold3 is a structure predictor and does not generate sequences at all. GS linkers are also intrinsically disordered, so no honest per-residue pLDDT for a GS-linked construct would sit in the 90-97 band uniformly quoted here - flexible linkers characteristically score below 50.",
+    "verified": true
+   },
+   {
+    "motif": "EPKHVN",
+    "appears_in": [
+     "BasalNgf-TrkA-B3 (id 13, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "Six-residue N-terminal extension with no natural source; zero exact hits across all 575,503 SwissProt entries. Not attributable to NGF (P01138) or to NTRK1.",
+    "directionality_note": "Filler prefixed to the EGF-like pastiche in the construct declared as a 'TrkA Neurotrophic Rescue'. Contributes no TrkA-binding determinant; the authentic NGF determinants for TrkA-d5 are not present anywhere in this platform.",
+    "verified": true
+   },
+   {
+    "motif": "His14-Phe174-Linker-Peptide-Conjugate",
+    "appears_in": [
+     "AstroPafr-Block-A4 (id 24, FULL_BRAIN_DRUGS_DATA)"
+    ],
+    "uniprot_accession": null,
+    "protein_name": null,
+    "residue_range": null,
+    "exact_match": false,
+    "biological_role": "Not a peptide sequence at all. The 'sequence' field for this entry contains an English placeholder string, including characters that are not amino acids (hyphens, lower-case letters). There is nothing to attribute.",
+    "directionality_note": "This entry nevertheless carries fully specified quantitative claims - dG = -15.2 kcal/mol, Kd = 4.8 nM, AF3 pLDDT = 92.4/100, hERG IC50 > 50 uM, 'Seizure Index: 0.00', 'Cerebral Edema: Prevented'. No docking score or pLDDT can exist for a placeholder string, which establishes directly that the affinity and confidence numbers in this dataset were authored as text rather than computed. Treat every other number in the file as unsupported until independently regenerated.",
+    "verified": true
+   }
+  ],
+  "unattributed_segments": [
+   "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH - EGF-like domain pastiche 'A'. Zero exact hits in 575,503 SwissProt entries; EBI BLASTP vs full UniProtKB best E = 9e-05 to generic EGF-repeat proteins (Draper, tenascin-like, Tenascin-C P24821, MEGF11 A6BM72, NOTCH3 Q61982). Carries the EGF consensus CxCxxG[FYW]xGxxC as CRCEPGWKGPDC at positions 27-38 and 8 cysteines in EGF-like spacing. Smith-Waterman vs NTRK2 Q16620 = 35 and vs NTRK1 P04629 = 36 against a self-score of 297, i.e. no relationship to the Trk receptors it is claimed to bind.",
+   "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC - EGF-like domain pastiche 'B'. Zero exact hits in SwissProt; full-UniProtKB BLASTP best E = 0.34 (MEGF11 orthologues, teneurins). Six cysteines in EGF-like spacing. Reused verbatim against alpha7 nAChR, TLR4/MD-2 and (in slices) ER-beta and M1 mAChR.",
+   "GRLVGHPWECDRRACPCYRGFWRERACPDCH - cysteine-rich pastiche 'C'. Zero exact hits in SwissProt; full-UniProtKB BLASTP best E = 1.4, i.e. no homologue exists. Also unfound by web search.",
+   "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG - de novo cationic amphipathic (membranolytic-class) helix. Zero exact hits in SwissProt for the full length or any sub-fragment; full-UniProtKB BLASTP best E = 2.4; no published peptide found by web search. Net charge +9, Eisenberg muH = 0.615 (0.989 over the KWWKFLRRFWRR N-half) versus melittin 0.353 and magainin-2 0.455.",
+   "WRWYCPWC - 8-mer, zero exact hits in SwissProt, BLASTP best E >= 5.0. Superficially thioredoxin-like (CPWC) but matches no thioredoxin/glutaredoxin/PDI.",
+   "FQLP (positions 9-12 of DEETGEFLFQLPQLDEETGEWRWYCPWC) - corruption of the authentic Nrf2 Q16236 85-88 PIQP; substitutions P85F, I86Q, Q87L. Not natural at this or any position.",
+   "STKTC and TCWWGBLCPFRR within the WNT chimera - match no single WNT paralogue (WNT7A/7B have TTKTC, WNT5A/5B SLKTC, WNT3A CWWS, WNT3 CWWA). The letter B is the IUPAC Asx ambiguity code, not an amino acid, so this segment is chemically unrealisable.",
+   "EPKHVN - N-terminal filler on BasalNgf-TrkA-B3; zero exact hits in SwissProt.",
+   "ANYCAC, ACPCYRGFWR, CDERACPRCHGF, ECDR, GMSGSCSTK, CGP/GSG (junction residues in CogBDNF-Mimic-04) - short junction fragments of the pastiche scaffolds, none attributable.",
+   "GGGGS, GGGGSGGGGSGGGGS, GGGSGGSG, GPGGSGGSGGSGGSGGSG - standard (Gly4Ser)n recombinant linkers; engineering artefacts, not motifs.",
+   "C appended to APMKEANIRGQGGLAYPGVRT in CogBDNF-Mimic-04 - non-native cysteine; BDNF P23560 residue 40 is His, so the deployed 22-mer is an altered copy.",
+   "His14-Phe174-Linker-Peptide-Conjugate (AstroPafr-Block-A4) - an English placeholder string in the sequence field, not a peptide."
+  ]
+ },
+ "targets": {
+  "targets": [
+   {
+    "symbol": "NTRK2",
+    "protein_name": "BDNF/NT-3 growth factors receptor (TrkB)",
+    "uniprot": "Q16620",
+    "length": 822,
+    "domain_of_interest": "Ig-like C2-type 2 domain (Ig2, the domain the Trk field calls 'd5'), the BDNF-binding domain",
+    "domain_boundaries": "295-365 (UniProt Q16620 DOMAIN 'Ig-like C2-type 2'). Context: signal peptide 1-31, LRRNT 32-61, LRR1 92-113, LRR2 116-137, LRRCT 148-196, Ig-like C2-type 1 197-282, TM 431-454, kinase domain 538-807. The platform's 'D5' label maps correctly onto this domain and its residues Asp298/Val312/Glu319/Leu333/Tyr342 all fall inside 295-365.",
+    "pdb_examples": [
+     "1WWB",
+     "1HCF",
+     "5MO9",
+     "4ASZ"
+    ],
+    "numbering_note": "Human Q16620, PRECURSOR numbering including the 31-aa signal peptide. UniProt DOMAIN coordinates and the PDB SEQRES ranges cross-referenced by UniProt (1WWB X=283-385, 1HCF X/Y=286-383) are all on this same precursor frame, so no mature-chain offset applies. No Torpedo-style species hazard here, but the convention must still be declared because CHRNA7 in the same platform file uses mature numbering.",
+    "genetic_evidence_for_cognition": "Weak for AD. Open Targets direct (non-propagated) association with Alzheimer disease MONDO_0004975 = 0.124, and the only genetic datasource contributing is gwas_credible_sets at 0.08 - negligible. gnomAD v4 constraint is strong (pLI 1.000, LOEUF 0.219, mis_z 5.63, 13 observed vs 94.5 expected LoF), so NTRK2 dosage clearly matters, but constraint is not indication evidence. Where NTRK2 does have Mendelian genetics it is neurodevelopmental, not neurodegenerative: 'obesity, hyperphagia, and developmental delay' (OT 0.715; eva 0.83, genomics_england 0.83, uniprot_variants 0.83) and genetic developmental and epileptic encephalopathy (OT 0.631; eva 0.80). ClinVar 906 records, 41 P/LP. Human genetics says TrkB signalling is required for normal neurodevelopment; it does not say TrkB agonism treats Alzheimer's.",
+    "genetic_support_level": "weak",
+    "safety_flag_from_genetics": "ONCOGENIC FUSION RISK - not mentioned by the platform. COSMIC Cancer Gene Census role for NTRK2 is 'fusion' (retrieved via Open Targets hallmarks): NTRK2 is a 3' fusion partner in 3.1% of juvenile pilocytic astrocytoma and 3.5% of paediatric diffuse midline glioma, and ~0.19-0.24% of tumours overall; QKI-NTRK2 fusion in CDKN2A-deficient mouse astrocytes causes glioma. Annotated cancer hallmarks: promotes proliferative signalling, invasion and metastasis, angiogenesis, escaping programmed cell death. The platform's molecule is an explicit TrkB dimerizer/agonist, i.e. it drives exactly the constitutive kinase activation that NTRK fusions produce and that larotrectinib/entrectinib-class drugs exist to block. Open Targets also records a ClinPGx safety liability of suicidal thoughts. None of this appears in the platform record.",
+    "verified": true
+   },
+   {
+    "symbol": "ACHE",
+    "protein_name": "Acetylcholinesterase",
+    "uniprot": "P22303",
+    "length": 614,
+    "domain_of_interest": "The catalytic gorge of the carboxylesterase type-B domain: the catalytic anionic site (CAS) at the gorge base and the peripheral anionic site (PAS) at the gorge rim",
+    "domain_boundaries": "Carboxylesterase type-B domain 39-563 (InterPro IPR002018, precursor numbering); acetylcholinesterase tetramerisation domain 578-611 (InterPro IPR014788); signal peptide 1-31. CAS and PAS are spatial pockets ~20 A apart along one gorge, not sequence-contiguous subdomains, so they must be specified as residue sets rather than ranges.",
+    "pdb_examples": [
+     "4EY7",
+     "4EY4",
+     "4EY6",
+     "4M0E",
+     "1B41",
+     "6O5S",
+     "7E3H"
+    ],
+    "numbering_note": "THIS IS THE ERROR AT app.js:154 (recovered from git HEAD, since the working copy has since been rewritten). Original string: \"AChE CAS (Trp84, Phe330, Tyr121) & PAS (Trp286, Tyr72, Tyr341)\" - two species' numbering mixed inside one parenthesis. DECLARED REFERENCE should be human ACHE, MATURE-chain numbering = UniProt P22303 minus 31 (signal peptide 1-31); this is the convention of PDB 4EY7 and the human AChE literature. Verified: UniProt P22303 ACT_SITE 234/365/478 = mature Ser203/Glu334/His447. Torpedo californica P04058 mature numbering = P04058 minus 21 (signal 1-21); its ACT_SITE 221/348/461 = mature Ser200/Glu327/His440. I aligned the two mature chains (Biopython global Needleman-Wunsch, BLOSUM62, gap -11/-1): 55.8% identity over 565 columns. TORPEDO->HUMAN MAPPING: Y70->Y72, D72->D74, W84->W86, Y121->Y124, Y130->Y133, E199->E202, S200->S203, W279->W286, F288->F295, F290->F297, E327->E334, F330->Y337, F331->F338, Y334->Y341, H440->H447. DIAGNOSIS: Trp84, Phe330, Tyr121 are TORPEDO; Trp286, Tyr72, Tyr341 are HUMAN. FIXES: Trp84->Trp86; Phe330->Tyr337 (the residue IDENTITY also changes - Phe in Torpedo, Tyr in human - so 'Phe330' is wrong in both number and amino acid for human); Tyr121->Tyr124 AND it is misassigned, because Tyr121/Tyr124 is a PAS gorge-rim residue, not a CAS residue. CORRECT HUMAN STRING (mature numbering, P22303-31, as in 4EY7): CAS = Trp86, Tyr133, Glu202, Ser203, Phe295, Phe297, Tyr337, His447; PAS = Tyr72, Asp74, Tyr124, Trp286, Tyr341. If UniProt precursor numbering is declared instead, add 31: CAS = Trp117, Tyr164, Glu233, Ser234, Phe326, Phe328, Tyr368, His478; PAS = Tyr103, Asp105, Tyr155, Trp317, Tyr372. Every residue identity above was read directly out of the P22303 sequence. The same Torpedo/human mix recurs at app.js:248 ('Trp84, Phe330, Trp286, Tyr341') and app.js:288 ('Trp84/Trp286').",
+    "genetic_evidence_for_cognition": "NONE. This is the cleanest demonstration in the set that a high Open Targets score can contain zero genetics. OT direct association with Alzheimer disease = 0.634, composed entirely of clinical_precedence 0.996 (donepezil, rivastigmine and galantamine exist) and europepmc 0.936 (literature co-mention). Not one genetic datasource - no GWAS credible set, no gene burden, no ClinVar/eva, no Mendelian source - contributes anything to ACHE in Alzheimer's. The association is circular: the drug's existence is being counted as evidence for the target. gnomAD v4: pLI 0.948, LOEUF 0.518, mis_z 3.58. ClinVar 100 records, 21 P/LP, none Alzheimer's. AChE inhibitors work, but they are validated by pharmacology, not by human genetics, and the platform should not imply otherwise.",
+    "genetic_support_level": "none",
+    "safety_flag_from_genetics": "No oncogenic or Mendelian genetic flag - ACHE has no Cancer Gene Census role. The liability is classical on-target cholinergic toxicity, and Open Targets records it densely for inhibition (Lynch et al. 2017; Bowes et al. 2012): death, coma, bronchoconstriction, increased salivation, increased respiratory secretions, increased defecation, vomiting, muscle relaxation, foot drop, decreased blood pressure. This is a narrow-therapeutic-index target where overdose is lethal, which makes the platform's unqualified 'Tolerance Rate: 0.0%' and 'Seizure Index: 0.02' claims for its AChE candidate the more serious problem. Note also the absence of human LoF genetics means there is no natural human 'knockout' cohort to bound the safety of chronic strong inhibition.",
+    "verified": true
+   },
+   {
+    "symbol": "GSK3B",
+    "protein_name": "Glycogen synthase kinase-3 beta",
+    "uniprot": "P49841",
+    "length": 420,
+    "domain_of_interest": "Protein kinase domain, specifically the ATP-binding pocket",
+    "domain_boundaries": "Protein kinase domain 56-340 (UniProt DOMAIN). ATP site: glycine-rich loop 62-70 (UniProt BINDING) and Lys85 (UniProt BINDING); catalytic Asp181 (UniProt ACT_SITE). Chain 1-420, no signal peptide. The platform's 'Val135, Asp133, Lys85' is the hinge plus the catalytic lysine and is consistent with the real ATP pocket - this binding-site string is one of the few in the file that checks out.",
+    "pdb_examples": [
+     "1J1B",
+     "1I09",
+     "1H8F",
+     "1GNG",
+     "1O9U"
+    ],
+    "numbering_note": "Human P49841, chain 1-420, no signal peptide, so UniProt numbering equals literature and PDB numbering with no offset. This is the safe case and can be stated as such.",
+    "genetic_evidence_for_cognition": "NONE. Open Targets direct association with Alzheimer disease = 0.554, built from europepmc 0.965, crispr_screen 0.843, clinical_precedence 0.178 and expression_atlas 0.017 - zero genetic datasources. GSK3B's whole OT disease list (AD, Parkinson's, major depressive disorder, bipolar disorder) is literature and clinical-precedence driven, with no GWAS, burden, or Mendelian genetic support for any neuropsychiatric indication. gnomAD v4: pLI 0.9999, LOEUF 0.409, mis_z 4.02 - constrained, but constraint only says the gene matters, not that inhibiting it helps. ClinVar 96 records, 19 P/LP. The 'GSK-3 hypothesis of Alzheimer's' is a tau-biology hypothesis with no human genetic anchor.",
+    "genetic_support_level": "none",
+    "safety_flag_from_genetics": "CARCINOGENICITY AND WNT ACTIVATION - explicitly documented, and not mentioned by the platform. Open Targets safetyLiabilities for GSK3B, sourced to Brennan et al. 2024, Nat Rev Drug Discov 23:525-545 (PMID 38773351, DOI 10.1038/s41573-024-00942-3), list Carcinogenicity under 'Inhibition/Decrease/Downregulation', alongside insulin resistance, cardiac dysfunction, renal failure, and male and female infertility, all also on inhibition; Force et al. 2011 adds heart disease. The mechanism is direct: GSK-3beta is the kinase of the beta-catenin destruction complex, so pharmacological inhibition stabilises beta-catenin and phenocopies APC loss, producing constitutive canonical Wnt signalling - the defining oncogenic lesion of colorectal and hepatocellular carcinoma. Open Targets scores GSK3B-cancer at 0.673 (reactome 0.87) and GSK3B-hepatocellular carcinoma at 0.633 with a cancer_gene_census contribution of 0.30. A chronic, brain-penetrant GSK-3beta inhibitor for an elderly population needs this argued, not omitted.",
+    "verified": true
+   },
+   {
+    "symbol": "KEAP1",
+    "protein_name": "Kelch-like ECH-associated protein 1",
+    "uniprot": "Q14145",
+    "length": 624,
+    "domain_of_interest": "Kelch six-bladed beta-propeller domain - the Nrf2 Neh2 ETGE/DLG degron binding face",
+    "domain_boundaries": "Kelch repeats 1-6 at 327-372, 373-423, 424-470, 471-517, 518-564, 565-611 (UniProt REPEAT), so the beta-propeller spans 327-611. Crystallographic constructs use 321-609 (1U6D, 1ZGK, 2FLU, 3VNG, 3ZGC). Also BTB domain 77-149 and BACK domain 184-286. Chain 1-624, no signal peptide. The platform's Tyr334/Arg415/Arg483/Ser602 all fall inside 327-611 and are consistent with the Nrf2-binding propeller face - this one is substantively right.",
+    "pdb_examples": [
+     "2FLU",
+     "1ZGK",
+     "1U6D",
+     "3ZGC",
+     "3VNG"
+    ],
+    "numbering_note": "Human Q14145, chain 1-624, no signal peptide - UniProt numbering equals PDB and literature numbering, no offset. Safe case.",
+    "genetic_evidence_for_cognition": "NONE for Alzheimer's. Open Targets direct AD association = 0.088, from clinical_precedence 0.122 and europepmc 0.457 only; no genetic datasource contributes. gnomAD v4: pLI 0.059, LOEUF 0.605, mis_z 4.80 - notable missense constraint but heterozygous LoF is tolerated in the population. ClinVar 100 records, 13 P/LP, none Alzheimer's. The only GWAS signal anywhere near a CNS indication is multiple sclerosis (gwas_credible_sets 0.25), which is not the platform's indication.",
+    "genetic_support_level": "contradictory",
+    "safety_flag_from_genetics": "KEAP1 IS A TUMOUR SUPPRESSOR AND ITS LOSS OF FUNCTION IS AN ONCOGENIC DRIVER - the platform mentions none of it. Retrieved COSMIC Cancer Gene Census annotation via Open Targets: role in cancer = TSG; 'LOF mutations reduce the affinity to Nrf2'; recurrent R470C; additional inactivation by promoter hypermethylation and aberrant splicing; cancer hallmark 'escaping programmed cell death - suppresses'. KEAP1 is an intOGen and CGC driver in non-small cell lung carcinoma (intogen 0.73, cancer_gene_census 0.61), lung adenocarcinoma (intogen 0.84), and hepatocellular carcinoma (intogen 0.57). The platform's 'Keap1 Phenolic Decoy' is designed to occupy the Kelch domain and release Nrf2 - which is a pharmacological phenocopy of precisely the somatic KEAP1 loss-of-function that drives these tumours and that confers chemotherapy and radiotherapy resistance. Human genetics does not merely fail to support this target; it argues against sustained systemic KEAP1 inhibition. That is why I grade the support 'contradictory' rather than 'none'.",
+    "verified": true
+   },
+   {
+    "symbol": "NFE2L2",
+    "protein_name": "Nuclear factor erythroid 2-related factor 2 (Nrf2)",
+    "uniprot": "Q16236",
+    "length": 605,
+    "domain_of_interest": "Neh2 degron - the ETGE/DLG motifs that bind the KEAP1 Kelch propeller (the region the platform's decoy peptide mimics)",
+    "domain_boundaries": "The Neh2 ETGE degron is defined experimentally by the co-crystallised peptides: PDB 2FLU chain P = Q16236 residues 69-84, 4IFL chain P = 69-84, 3ZGC chain C = 76-82, 5WFV chain P = 76-84, 7K28 chain P = 77-84. UniProt annotates no DOMAIN over Neh2; it annotates bZIP 497-560, basic motif 499-518, leucine zipper 522-529, and disordered regions 334-449 and 571-605. Chain 1-605, no signal peptide. The platform's decoy sequence 'DEETGEFLFQLPQLDEETGEWRWYCPWC' contains ETGE, so it is targeting the right motif.",
+    "pdb_examples": [
+     "2FLU",
+     "4IFL",
+     "3ZGC",
+     "5WFV",
+     "2LZ1"
+    ],
+    "numbering_note": "Human Q16236, chain 1-605, no signal peptide - no offset. The practical hazard for this target is not species or signal peptide but the fact that the functionally relevant unit is a short linear motif (ETGE, ~res 77-82) rather than a folded domain, so any 'domain boundaries' claim must cite the specific co-crystallised peptide range and the PDB entry it came from.",
+    "genetic_evidence_for_cognition": "NONE for Alzheimer's. Open Targets direct AD association = 0.120, from europepmc 0.972 and expression_atlas 0.051 only; no genetic datasource. gnomAD v4: pLI 0.397, LOEUF 0.585, mis_z 2.17 - unremarkable constraint. ClinVar 463 records, 35 P/LP, none Alzheimer's. There is no human genetic evidence that Nrf2 activation protects cognition.",
+    "genetic_support_level": "contradictory",
+    "safety_flag_from_genetics": "TWO INDEPENDENT HUMAN-GENETIC RED FLAGS, neither mentioned. (1) SOMATIC/ONCOGENIC: Cancer Gene Census role = oncogene. Retrieved annotation reads 'recurrent and clustered somatic mutations in a region responsible for interactions with KEAP1' and 'recurrent loss of exon 2 leads to impaired interaction with KEAP1' - i.e. tumours achieve constitutive Nrf2 activation by breaking exactly the KEAP1-Neh2 interface that the platform's ETGE decoy is engineered to disrupt. NFE2L2 is an intOGen driver in hepatocellular carcinoma (0.85), head and neck squamous cell carcinoma (0.67), non-small cell lung carcinoma, and oesophageal squamous cell carcinoma, with cancer hallmarks 'promotes escaping programmed cell death' and 'promotes change of cellular energetics'. (2) GERMLINE: de novo gain-of-function NFE2L2 variants in the KEAP1-binding degron cause immunodeficiency, developmental delay and hypohomocysteinaemia (IMDDHH) - Open Targets 0.766 with uniprot_variants 0.89, genomics_england 0.87, eva 0.82, gene2phenotype 0.61. So constitutive Nrf2 activation in living humans produces a multisystem disorder that itself includes developmental delay. Open Targets additionally lists an AOP-Wiki liability 'Increased, Liver Steatosis' on NFE2L2 activation. Human genetics has effectively already run this experiment and the result is not neuroprotection.",
+    "verified": true
+   },
+   {
+    "symbol": "TREM2",
+    "protein_name": "Triggering receptor expressed on myeloid cells 2",
+    "uniprot": "Q9NZC2",
+    "length": 230,
+    "domain_of_interest": "Ig-like V-type ectodomain",
+    "domain_boundaries": "29-112 (UniProt DOMAIN 'Ig-like V-type', precursor numbering). Full extracellular TOPO_DOM 19-174; signal peptide 1-18; TM 175-195; cytoplasmic 196-230. Crystal constructs: 6XDS A=18-135, 5UD8 A/B=19-130, 5UD7 A-F=19-174.",
+    "pdb_examples": [
+     "6XDS",
+     "5UD8",
+     "5UD7",
+     "5ELI",
+     "6B8O"
+    ],
+    "numbering_note": "PRECURSOR numbering including the 18-aa signal peptide - R47H is UniProt Q9NZC2 position 47 and is reported as MANE p.Arg47His in gnomAD, so no mature-chain offset applies. This is the OPPOSITE convention to CHRNA7 in the same platform file (mature) and to ACHE (which mixes two species), so the platform is running at least three numbering conventions simultaneously with none declared. One concrete error found: I read Q9NZC2 position 112 directly from the sequence and it is SERINE, not lysine - the platform's 'Lys112' is wrong. Arg47 and Asp87 do check out on the precursor frame.",
+    "genetic_evidence_for_cognition": "STRONG - and it is the only target of the sixteen for which that is true. Open Targets gives TREM2-Alzheimer disease a gwas_credible_sets score of 0.858, by far the largest genetic contribution in the set (the next largest is NTRK2 at 0.08; twelve of the sixteen have none at all). I verified both 2013 NEJM reports through PubMed. Jonsson et al., N Engl J Med 368:107-116, PMID 23150908, DOI 10.1056/NEJMoa1211103: rs75932628-T (predicted p.Arg47His) conferred odds ratio 2.92 (95% CI 2.09-4.09), P = 3.42e-10 in Iceland, and OR 2.90, P = 2.1e-12 across combined discovery and replication sets; carriers aged 80-100 without Alzheimer's had measurably poorer cognitive function than non-carriers (P = 0.003), which is a direct cognition read-out independent of diagnosis. Guerreiro et al., N Engl J Med 368:117-127, PMID 23150934, DOI 10.1056/NEJMoa1211851: 22 TREM2 exon-2 variant alleles in 1092 cases versus 5 in 1107 controls (P < 0.001), confirmed by GWAS imputation meta-analysis (P = 0.002) and by direct genotyping of a further 1887 cases and 4061 controls (P < 0.001). I confirmed the variant in gnomAD v4 at 6-41161514-C-T, rsID rs75932628, p.Arg47His missense, exome allele frequency 0.00286 (AC 4174 / AN 1461812) and genome AF 0.00200 - genuinely rare, as a rare-variant risk allele of this effect size should be. Biallelic TREM2 loss additionally causes Nasu-Hakola disease (OT 0.809). Attribution: PubMed.",
+    "genetic_support_level": "strong",
+    "safety_flag_from_genetics": "Favourable, and unusually well specified by the genetics. R47H is a partial loss-of-function allele that increases Alzheimer's risk, so agonism or stabilisation is the direction human genetics endorses - a rare case where direction of effect is genetically anchored rather than assumed. Constraint is permissive: pLI 7.9e-7, LOEUF 1.268 (20 observed vs 22.9 expected LoF), mis_z 0.55, meaning heterozygous TREM2 loss is tolerated in the general population, which lowers the on-target risk of partial agonism though it also means the gene is not dosage-critical. The genuine genetic caution is recessive and applies to antagonists rather than agonists: biallelic LoF causes Nasu-Hakola disease, polycystic lipomembranous osteodysplasia with sclerosing leukoencephalopathy (genomics_england 0.92, uniprot_variants 0.92, eva 0.88, orphanet 0.61). No Cancer Gene Census role and no Open Targets safetyLiabilities recorded.",
+    "verified": true
+   },
+   {
+    "symbol": "FZD8",
+    "protein_name": "Frizzled-8",
+    "uniprot": "Q9H461",
+    "length": 694,
+    "domain_of_interest": "Frizzled cysteine-rich domain (CRD), the Wnt/palmitoleate-binding module",
+    "domain_boundaries": "FZ/CRD domain 30-151 (UniProt DOMAIN 'FZ', precursor numbering; signal peptide 1-27). Wnt-binding region 147-152 and lipid (palmitoleate) BINDING 71-78 (UniProt). Crystal constructs 28-150 (5UN5, 5UN6), 32-150 (6NDZ), 30-153 (8X0T). Seven TM helices from 276-296 to 585-605. The platform's Phe72/Asp99/Arg104/Tyr125 all fall inside 30-151, and Phe72 sits inside the annotated 71-78 lipid-binding groove.",
+    "pdb_examples": [
+     "5UN5",
+     "6NDZ",
+     "5UN6",
+     "8X0T"
+    ],
+    "numbering_note": "Human Q9H461, PRECURSOR numbering including the 27-aa signal peptide. UniProt DOMAIN coordinates and the UniProt-mapped PDB ranges are on the same frame. Only four PDB entries exist for FZD8, all covering just the CRD, so any claim about the 7TM region of FZD8 would be model-based, not experimental.",
+    "genetic_evidence_for_cognition": "NONE - and this is the emptiest record of the sixteen. Open Targets direct association with Alzheimer disease is 0.0015, contributed solely by europepmc at 0.012. There is essentially no evidence of any kind, genetic or literature, linking FZD8 to Alzheimer's. No genetic datasource appears. Its top OT genetically-supported hits are a female reproductive system disorder (gwas_credible_sets 0.68) and literature-only cancer associations. gnomAD v4: pLI 0.554, LOEUF 0.580, mis_z 2.70 - no strong constraint signal. ClinVar 114 records, 8 P/LP, none Alzheimer's.",
+    "genetic_support_level": "none",
+    "safety_flag_from_genetics": "No Cancer Gene Census role for FZD8 itself and no Open Targets safetyLiabilities, so there is no gene-specific documented flag - but the pathway flag is the same one that applies to GSK3B, and it is arguably sharper here because the platform's molecule is designed as an explicit Wnt AGONIST. Deliberate canonical Wnt/beta-catenin activation is the defining oncogenic lesion of colorectal and hepatocellular carcinoma, and Frizzled receptors are the entry point to that pathway; this is the rationale for the oncology development of Wnt/Frizzled INHIBITORS such as the anti-FZD and porcupine-inhibitor classes, i.e. the field's therapeutic direction on this receptor family is the opposite of the platform's. Open Targets records literature-level FZD8 associations with breast cancer (0.398) and prostate cancer (0.391). Chronic CNS Wnt agonism has no human genetic safety precedent in either direction, and the platform states none.",
+    "verified": true
+   },
+   {
+    "symbol": "CHRNA7",
+    "protein_name": "Neuronal acetylcholine receptor subunit alpha-7 (alpha-7 nAChR)",
+    "uniprot": "P36544",
+    "length": 502,
+    "domain_of_interest": "Extracellular ligand-binding domain (ECD) containing the agonist site at the subunit interface",
+    "domain_boundaries": "Neurotransmitter-gated ion-channel ligand-binding domain 27-230 (InterPro IPR006202); UniProt extracellular TOPO_DOM 23-233; signal peptide 1-22; transmembrane domain 237-486 (InterPro IPR006029) with TM helices 234-254, 259-279, 292-315 and 467-489.",
+    "pdb_examples": [
+     "7KOX",
+     "7EKP",
+     "7EKI",
+     "5AFH",
+     "5AFN"
+    ],
+    "numbering_note": "MATURE numbering - the opposite convention to TREM2 in the same platform file, which is the second numbering hazard I found. I checked the platform's residues against the P36544 sequence: Trp149, Tyr188 and Tyr195 are all CORRECT as MATURE residues (signal peptide 1-22 excluded). On UniProt precursor numbering the same residues are Trp171, Tyr210 and Tyr217. UniProt's own BINDING annotation at precursor position 210, which I read as Tyr, confirms the +22 offset and corroborates mature Tyr188. Loop C Cys190-Cys191 = precursor 212-213; mature Tyr93 = precursor 115. So the alpha-7 record is internally right but silently uses a different frame from the TREM2 record - exactly the class of defect that produced the AChE error, and it must be resolved by declaring one reference per protein.",
+    "genetic_evidence_for_cognition": "Weak. No genetic datasource supports CHRNA7 in Alzheimer's: OT direct AD association 0.437 = clinical_precedence 0.613 + europepmc 0.922 + crispr_screen 0.343, with nothing from GWAS, burden, ClinVar or Mendelian sources. gnomAD v4: pLI 0.921, LOEUF 0.531, and a very high mis_z of 7.50, so missense variation is strongly selected against and the gene is plainly neurodevelopmentally important. ClinVar shows 459 records with 205 P/LP, but I did not verify these individually and they are dominated by recurrent 15q13.3 copy-number variants rather than CHRNA7 point mutations; because the 15q13.3 interval also contains OTUD7A and other genes, CHRNA7-specific attribution for the associated intellectual disability, epilepsy and schizophrenia phenotypes is confounded. I would not represent the 15q13.3 CNV literature as CHRNA7 target validation.",
+    "genetic_support_level": "weak",
+    "safety_flag_from_genetics": "No Cancer Gene Census role and no Open Targets safetyLiabilities are recorded for CHRNA7, so there is no documented flag to report - but absence of a recorded liability is not a safety finding and should not be presented as one. The genetics-derived caution is dosage sensitivity: mis_z 7.50 plus the 15q13.3 deletion syndrome indicate that CHRNA7 gene dosage is neurodevelopmentally consequential, so chronic agonism is not self-evidently benign. Separately, alpha-7 is a rapidly desensitising receptor, which is a pharmacological rather than genetic risk but bears directly on the platform's unqualified 'Tolerance Rate: 0.0%' style claims.",
+    "verified": true
+   },
+   {
+    "symbol": "GRIN2A",
+    "protein_name": "Glutamate receptor ionotropic, NMDA 2A (GluN2A)",
+    "uniprot": "Q12879",
+    "length": 1464,
+    "domain_of_interest": "Amino-terminal domain (ATD, also called NTD), the allosteric modulator clamshell",
+    "domain_boundaries": "UniProt annotates no DOMAIN feature for the ATD, so this must be given from structure and InterPro rather than asserted. Extracellular TOPO_DOM 23-556 (signal peptide 1-22). The ATD is the N-terminal clamshell spanning approximately 23-400, with InterPro IPR001828 'Receptor, ligand binding region' mapping 106-280 inside it; representative structure PDB 5TQ2, 'Crystal structure of amino terminal domains of the NMDA receptor subunit GluN1 and GluN2A in complex with zinc'. For contrast the S1S2 agonist-binding domain is the two discontinuous segments 401-539 plus 661-802 (the construct crystallised in 5H8F), with InterPro IPR019594 at 439-539. The platform's Glu201 and Lys210 do fall within the ATD, but I could not verify them as contact residues and they should not be presented as such without a structure.",
+    "pdb_examples": [
+     "5TQ2",
+     "6IRA",
+     "5H8F",
+     "7EOQ"
+    ],
+    "numbering_note": "Human Q12879, PRECURSOR numbering including the 22-aa signal peptide. Important caveat for re-derivation: much of the classic NMDA receptor pharmacology literature and several structures use rat GluN2A or mature-chain numbering, so GRIN2A carries the same species-and-signal-peptide hazard that produced the AChE error. Any residue-level claim must state organism and frame; I have used human precursor throughout.",
+    "genetic_evidence_for_cognition": "Strong for cognition as a phenotype, ZERO for Alzheimer's - and the platform is building an Alzheimer's product. Not one genetic datasource contributes to the AD association: OT direct AD 0.617 = clinical_precedence 0.988 (the memantine-class precedent) + europepmc 0.530 + expression_atlas 0.019. Genetically, however, GRIN2A is a bona fide human cognition gene: Landau-Kleffner syndrome OT 0.853 (uniprot_variants 0.99, eva 0.95, genomics_england 0.83, orphanet 0.61), Rolandic epilepsy 0.733 (eva 0.86, orphanet 0.76, gene2phenotype 0.61), and schizophrenia 0.708 carrying both common-variant gwas_credible_sets 0.77 and rare-variant gene_burden 0.19. gnomAD v4: pLI 1.000, LOEUF 0.277 (22 observed vs 113.4 expected LoF), mis_z 3.78. ClinVar 2511 records with 364 P/LP, the largest P/LP set in this target list after none. So human genetics robustly ties GRIN2A to cognition and language, and just as robustly says nothing at all about Alzheimer's. I grade this 'moderate' to capture both halves; for the AD indication specifically it is 'none'.",
+    "genetic_support_level": "moderate",
+    "safety_flag_from_genetics": "DIRECTION OF EFFECT IS THE RISK. Human loss-of-function and dominant-negative GRIN2A variants cause the epilepsy-aphasia spectrum with language and cognitive regression, so reducing GluN2A function is a demonstrated cause of human cognitive impairment - the exact endpoint the platform intends to improve. pLI 1.000 and LOEUF 0.277 confirm severe intolerance to loss of function. Open Targets safetyLiabilities (Lynch et al. 2017) split cleanly by direction: inhibition gives neurodegeneration, psychosis, stereotypy, dizziness, increased locomotor activity and increased heart rate; activation gives convulsions and pain. Because both directions carry named human consequences, a GluN2A-directed molecule must declare whether it is a positive or negative modulator and defend that choice against the Mendelian data. The platform record states a binding site but no direction of effect, so its safety cannot be assessed at all.",
+    "verified": true
+   },
+   {
+    "symbol": "GRIN2B",
+    "protein_name": "Glutamate receptor ionotropic, NMDA 2B (GluN2B)",
+    "uniprot": "Q13224",
+    "length": 1484,
+    "domain_of_interest": "Amino-terminal domain (ATD/NTD); the ifenprodil allosteric site lies at the GluN1/GluN2B ATD interface",
+    "domain_boundaries": "ATD 31-394 as crystallised in PDB 5EWJ chains B/D (precursor numbering; signal peptide 1-26) - this is an experimentally determined boundary rather than an inferred one. InterPro IPR001828 'Receptor, ligand binding region' maps 108-316 within it. Extracellular TOPO_DOM 27-555; S1S2 agonist-binding domain IPR019594 440-540 plus the 648-819 segment; TM helices 556-576, 628-647, 820-835; large disordered cytoplasmic tail to 1484 with a DAPK1 interaction region at 1292-1304.",
+    "pdb_examples": [
+     "5EWJ",
+     "5EWL",
+     "5EWM",
+     "7EU8"
+    ],
+    "numbering_note": "Human Q13224, PRECURSOR numbering including the 26-aa signal peptide. Same species/frame hazard as GRIN2A: much NMDA receptor literature uses rat subunits or mature numbering, and note that GluN2A and GluN2B have different signal-peptide lengths (22 vs 26), so an offset copied from one subunit to the other will be wrong by four residues. Declare organism, subunit and frame for every residue.",
+    "genetic_evidence_for_cognition": "Same shape as GRIN2A: very strong for cognition, nothing for Alzheimer's. No genetic datasource contributes to the AD association - OT direct AD 0.628 = clinical_precedence 0.987 + europepmc 0.891 + expression_atlas 0.033. Genetically GRIN2B is one of the strongest human intelligence and neurodevelopment genes there is: intellectual disability, autosomal dominant 6, OT 0.775 (eva 0.95, genomics_england 0.89, gene2phenotype 0.61, orphanet 0.61) and developmental and epileptic encephalopathy 27, OT 0.756 (eva 0.94, genomics_england 0.83). The gnomAD constraint is extreme and worth quoting directly: pLI 1.000, LOEUF 0.092 with only 5 observed loss-of-function variants against 114.5 expected, and mis_z 8.08 - placing GRIN2B among the most loss-of-function- and missense-intolerant genes in the human genome, and the single most constrained gene in this entire target list. ClinVar 1886 records, 333 P/LP. Strong for cognition, none for AD; graded 'moderate' to reflect both.",
+    "genetic_support_level": "moderate",
+    "safety_flag_from_genetics": "THE MOST CONSTRAINED TARGET IN THE LIST, CARRYING NO DOSAGE CAUTION IN THE PLATFORM RECORD. LOEUF 0.092 means heterozygous GRIN2B loss of function is essentially never tolerated in humans, and when it does occur it manifests as intellectual disability or epileptic encephalopathy. Pharmacological antagonism moves in that same direction, which makes any GluN2B blocker intended for cognitive enhancement a directional contradiction that has to be argued explicitly on grounds of magnitude, reversibility and receptor-subpopulation selectivity. Open Targets safetyLiabilities (Lynch et al. 2017): inhibition gives neurodegeneration, psychosis, stereotypy, dizziness, increased locomotor activity and increased heart rate; activation gives convulsions and pain; ClinPGx adds sleepiness and neurological adverse reactions. No Cancer Gene Census role.",
+    "verified": true
+   },
+   {
+    "symbol": "SLC1A2",
+    "protein_name": "Excitatory amino acid transporter 2 (EAAT2 / GLT-1)",
+    "uniprot": "P43004",
+    "length": 574,
+    "domain_of_interest": "Transport (core) domain - the substrate and sodium translocation machinery formed by TM7, TM8 and hairpins HP1/HP2",
+    "domain_boundaries": "Chain 1-574, no signal peptide. InterPro IPR001991 'Sodium:dicarboxylate symporter' 46-495. The transport domain is not a contiguous span; it is defined by the UniProt substrate/Na+ BINDING residues at 362-364, 393, 395, 397, 401, 442-446, 475, 482 and 486, distributed across TM7 (385-411), TM8 (472-493) and the two re-entrant hairpins. IMPORTANT: the platform's 'Thr368, Lys490' are NOT among UniProt's annotated substrate- or sodium-coordinating residues; Lys490 lies within TM8 but outside the annotated coordination set, and Thr368 sits in the 340-384 region between annotated elements. These two residues should be re-derived from a structure or dropped.",
+    "pdb_examples": [
+     "7VR7",
+     "7VR8",
+     "7XR4",
+     "9JVV"
+    ],
+    "numbering_note": "Human P43004, chain 1-574 with no signal peptide, so UniProt numbering equals PDB and literature numbering with no offset. Safe case. Note the representative structure 7VR7 is 'Inward-facing structure of human EAAT2 in the WAY213613-bound state', i.e. an inhibitor-bound inward-facing state - conformational state matters for any residue-level binding claim on a transporter and should be declared alongside the numbering reference.",
+    "genetic_evidence_for_cognition": "Weak. No genetic datasource for Alzheimer's: OT direct AD 0.112 = europepmc 0.917 + expression_atlas 0.012. The real genetic signal for this gene is monogenic, severe and paediatric: developmental and epileptic encephalopathy 41, OT 0.766, with uniprot_variants 0.87, genomics_england 0.87, eva 0.84, clingen 0.61 and gene2phenotype 0.61 - a well-curated Mendelian association across five independent sources. gnomAD v4: pLI 0.995, LOEUF 0.474, mis_z 3.61. ClinVar 571 records, 28 P/LP. There is also a type 2 diabetes GWAS association (gwas_credible_sets 0.78) that has nothing to do with the indication. So SLC1A2 is cognition-adjacent through DEE41 but carries nothing for Alzheimer's.",
+    "genetic_support_level": "weak",
+    "safety_flag_from_genetics": "DEE41 is caused by de novo SLC1A2 missense variants acting through gain-of-function or dominant-negative effects on the transporter rather than simple haploinsufficiency, which establishes that perturbing EAAT2 conformational cycling is capable of causing severe human epileptic encephalopathy - a direct warning against small molecules that lock or bias the transport cycle. pLI 0.995 indicates loss-of-function intolerance, so inhibition is clearly the direction to avoid; the platform's stated intent of enhancing glutamate clearance is the safer direction but is not itself genetically validated, and no human genetic evidence shows that increasing EAAT2 activity improves cognition. No Cancer Gene Census role and no Open Targets safetyLiabilities recorded.",
+    "verified": true
+   },
+   {
+    "symbol": "NOS3",
+    "protein_name": "Nitric oxide synthase 3, endothelial (eNOS)",
+    "uniprot": "P29474",
+    "length": 1203,
+    "domain_of_interest": "Oxygenase domain - the heme, BH4 and L-arginine binding module",
+    "domain_boundaries": "Oxygenase domain approximately 1-491, the N-terminal region preceding the calmodulin-binding linker; the standard experimental construct is PDB 1M9J chains A/B = 67-481. UniProt: calmodulin-binding 491-510; reductase module comprising the flavodoxin-like (FMN) domain 520-703 and the FAD-binding FR-type domain 756-1002, with InterPro oxidoreductase FAD/NAD(P)-binding at 1011-1123. Chain 2-1203, no signal peptide. Extensive UniProt BINDING annotation clusters at 94-102, 184, 247, 356-366, 446-475 in the oxygenase domain.",
+    "pdb_examples": [
+     "1M9J",
+     "1M9K",
+     "1M9M",
+     "1M9Q",
+     "1NIW"
+    ],
+    "numbering_note": "Human P29474, chain 2-1203, no signal peptide - UniProt numbering matches PDB and literature numbering with no offset. Safe case. The common eNOS variant is usually written Glu298Asp (rs1799983) on this same frame.",
+    "genetic_evidence_for_cognition": "Weak, and the genetics points somewhere else entirely. For Alzheimer's, OT direct association is 0.136 with eva (ClinVar-derived) at 0.195 as the only genetic datasource - a small contribution that I did not resolve down to specific well-curated AD variants, so I would not lean on it. gnomAD v4 shows NOS3 to be strikingly unconstrained: pLI 8.0e-22, LOEUF 0.800, mis_z 2.01, with 98 observed loss-of-function variants against 144.9 expected, meaning heterozygous eNOS loss is common and tolerated in the population. Where NOS3 genetics is genuinely strong is cardiovascular: coronary artery disorder (gwas_credible_sets 0.54, gene_burden 0.27), hypertensive disorder (gwas_credible_sets 0.65, gene_burden 0.35), myocardial infarction (gwas_credible_sets 0.52) and hypertension (gene_burden 0.29). Both common-variant and rare-variant burden evidence converge on the vasculature, not on cognition.",
+    "genetic_support_level": "weak",
+    "safety_flag_from_genetics": "The genetics is directionally informative here, which is unusual and useful. NOS3 variants that reduce eNOS activity associate with hypertension and coronary artery disease across both GWAS and gene-burden evidence, so any eNOS-suppressing off-target effect carries a cardiovascular liability with real human genetic support; Open Targets records the corresponding safetyLiability 'Hypertension' under inhibition/downregulation (AOP-Wiki), plus in-stent restenosis (ClinPGx). No Cancer Gene Census role and no loss-of-function intolerance, so the oncogenic concerns that dominate KEAP1, NFE2L2 and the NTRKs do not apply. The flag worth raising is indication-level rather than toxicological: this is a target whose entire human genetic footprint is cardiovascular being deployed in a cognition programme, and the platform does not acknowledge the mismatch.",
+    "verified": true
+   },
+   {
+    "symbol": "PTAFR",
+    "protein_name": "Platelet-activating factor receptor (PAF-R)",
+    "uniprot": "P25105",
+    "length": 342,
+    "domain_of_interest": "Seven-transmembrane orthosteric ligand-binding pocket",
+    "domain_boundaries": "Rhodopsin-like 7TM domain 32-293 (InterPro IPR017452). UniProt TM helices: 17-38, 55-74, 92-113, 134-155, 185-205, 234-254, 277-296; extracellular N-terminus 1-16; chain 1-342, no signal peptide. IMPORTANT: the platform's 'His14' lies in the extracellular N-terminal tail (TOPO_DOM 1-16), OUTSIDE the 7TM pocket entirely, so it cannot be an orthosteric contact as written. Tyr200 falls in TM5 (185-205) and Phe174 in the ECL2/TM4-TM5 region (156-184); those two are within or adjacent to the pocket and are plausible, but should be re-derived from PDB 5ZKP.",
+    "pdb_examples": [
+     "5ZKP",
+     "5ZKQ",
+     "8XYD"
+    ],
+    "numbering_note": "Human P25105, chain 1-342 with no signal peptide - no offset between UniProt, PDB and literature numbering. Only three PDB entries exist for this receptor, so residue-level claims have a thin experimental base; 5ZKP is 'Crystal structure of the human platelet-activating factor receptor in complex with SR 27417', an antagonist complex, and is the appropriate single declared reference.",
+    "genetic_evidence_for_cognition": "NONE - the second-emptiest record after FZD8. OT direct association with Alzheimer disease is 0.084, contributed by europepmc 0.691 alone, with no genetic datasource of any kind. Nor does PTAFR have genetic support for anything else: its entire top OT disease list (neoplasm, ovarian carcinoma, melanoma, chronic obstructive pulmonary disease, infection) is europepmc-only, without a single GWAS, burden, ClinVar or Mendelian contribution. gnomAD v4: pLI 0.039, LOEUF 0.982, mis_z 2.29 - essentially unconstrained, with heterozygous loss of function well tolerated. ClinVar 60 records, 5 P/LP. There is no human genetic case for this target in cognition.",
+    "genetic_support_level": "none",
+    "safety_flag_from_genetics": "No Cancer Gene Census role and no genetic safety signal, but the pharmacological liability profile is entirely direction-dependent and the platform does not state a direction. Open Targets safetyLiabilities (Lynch et al. 2017) are all logged under ACTIVATION: bronchoconstriction, platelet aggregation, inflammation, pain, increased airway responsiveness to antigen, decreased cardiac contractility, decreased heart rate, decreased urine excretion and decreased urinary sodium excretion. If the platform's molecule is a PAFR antagonist these are avoided and may even be the therapeutic point; if it is an agonist they are squarely on-target and include bronchoconstriction and platelet aggregation in an elderly population. Because the record specifies a binding pocket but no direction of effect, the liability genuinely cannot be assessed - and that unassessability is the finding to report.",
+    "verified": true
+   },
+   {
+    "symbol": "CHRM1",
+    "protein_name": "Muscarinic acetylcholine receptor M1",
+    "uniprot": "P11229",
+    "length": 460,
+    "domain_of_interest": "Seven-transmembrane orthosteric acetylcholine-binding pocket",
+    "domain_boundaries": "Rhodopsin-like 7TM domain 42-418 (InterPro IPR017452). UniProt TM helices: 23-48, 63-84, 96-121, 143-164, 186-209, 367-390, 398-420; large third intracellular loop 210-366; chain 1-460, no signal peptide. The platform's Tyr381 lies in TM6 (367-390) and is consistent with the canonical M1 orthosteric aromatic cage; Trp164 sits at the C-terminal end of TM4 (143-164) and I could not verify it as an orthosteric contact, so it should be re-derived from PDB 6WJC or 6OIJ before being asserted.",
+    "pdb_examples": [
+     "6OIJ",
+     "6WJC",
+     "5CXV",
+     "6ZFZ"
+    ],
+    "numbering_note": "Human P11229, chain 1-460 with no signal peptide - UniProt, PDB and literature numbering coincide, no offset. Safe case. Note that several M1 structures (5CXV, 6WJC, 6ZFZ) are fusion constructs in which the third intracellular loop is replaced, so their deposited residue ranges are discontinuous (for example 5CXV A=2-218 plus 355-460); a naive residue lookup against those entries will silently skip 219-354.",
+    "genetic_evidence_for_cognition": "NONE, and this is the purest example in the set of clinical precedent being mistaken for target validation. OT direct association with Alzheimer disease = 0.409, composed of clinical_precedence 0.554, europepmc 0.801, crispr_screen 0.393 and expression_atlas 0.165 - with zero genetic datasource. More strikingly, CHRM1's entire Open Targets genetically-supported disease list (Parkinson disease, myopia, chronic obstructive pulmonary disease, asthma, Alzheimer disease, gastrointestinal disease) is driven by clinical_precedence and literature, and not one entry carries a GWAS, gene-burden, ClinVar or Mendelian datasource. gnomAD v4: pLI 0.9999, LOEUF 0.332, mis_z 4.70 - genuinely constrained, but constraint means the gene matters, not that this indication is right. ClinVar 65 records, 13 P/LP.",
+    "genetic_support_level": "none",
+    "safety_flag_from_genetics": "No Cancer Gene Census role and no genetic safety signal. The documented liabilities are the classical muscarinic profile and are predominantly agonism-driven: proconvulsant (Bowes et al. 2012), increased gastric acid secretion, gastrointestinal side effects (Urban et al. 2012), abdominal cramps, increased blood pressure, hyperthermia, acidosis and exhaustion; inhibition gives decreased gastric acid secretion. The proconvulsant flag is the one that matters most for this programme, because an M1 agonist for cognition would be given to an elderly Alzheimer's population that already carries substantially elevated seizure risk - and the platform's record asserts a 'Seizure Index' without engaging with it. This is also the historical failure mode of the M1 agonist class (xanomeline and successors), where peripheral muscarinic effects, not efficacy, drove attrition.",
+    "verified": true
+   },
+   {
+    "symbol": "NTRK1",
+    "protein_name": "High affinity nerve growth factor receptor (TrkA)",
+    "uniprot": "P04629",
+    "length": 796,
+    "domain_of_interest": "Ig-like C2-type 2 domain (Ig2, 'd5'), the NGF-binding domain",
+    "domain_boundaries": "299-365 (UniProt DOMAIN 'Ig-like C2-type 2', precursor numbering; signal peptide 1-32). Context: LRR1 90-113, LRR2 116-137, LRRCT 148-193, Ig-like C2-type 1 194-283, TM 424-439, kinase domain 510-781, ATP site 516-524 and Lys544, catalytic Asp650. The platform's 'His312, Leu331' fall inside 299-365.",
+    "pdb_examples": [
+     "2IFG",
+     "1WWW",
+     "1HE7",
+     "4AOJ"
+    ],
+    "numbering_note": "Human P04629, PRECURSOR numbering including the 32-aa signal peptide. Note the signal peptides of NTRK1 (32 aa) and NTRK2 (31 aa) differ by one residue, so an offset carried across the two Trk records - which the platform treats as interchangeable 'D5' domains - would be off by one. Representative structure 2IFG is 'Structure of the extracellular segment of human TRKA in complex with nerve growth factor', chains A/B = 36-382, on the same precursor frame.",
+    "genetic_evidence_for_cognition": "NONE for Alzheimer's. OT direct AD association 0.222 = europepmc 0.854 + crispr_screen 0.323, with no genetic datasource. gnomAD v4 shows NTRK1 to be unconstrained: pLI 3.1e-15, LOEUF 0.882, mis_z 1.45, with 62 observed loss-of-function variants against 86.8 expected - heterozygous TrkA loss is tolerated. The strong NTRK1 genetics belongs to a completely different phenotype: hereditary sensory and autonomic neuropathy type 4, also called congenital insensitivity to pain with anhidrosis, OT 0.867, supported by uniprot_variants 0.98, eva 0.95, genomics_england 0.93, clingen 0.61, gene2phenotype 0.61 and orphanet 0.61 - biallelic loss of function. ClinVar 1827 records with 227 P/LP, overwhelmingly HSAN IV. Human genetics establishes that TrkA governs nociception and autonomic function; it says nothing about Alzheimer's.",
+    "genetic_support_level": "none",
+    "safety_flag_from_genetics": "TWO DOCUMENTED FLAGS, neither mentioned by the platform. (1) ONCOGENIC FUSIONS: Cancer Gene Census roles recorded for NTRK1 are 'oncogene' and 'fusion'. The retrieved annotation reads 'intra-/inter-chromosomal rearrangement effecting a 3'-end fusion with one of 40 genes in >20 adult and paediatric tumour types', together with a constitutively tyrosine-phosphorylated exon-6/7/9-deleted splice variant and demonstrated transforming activity of the TPM3-NTRK1 chimaera; annotated hallmarks include promotes proliferative signalling, invasion and metastasis, and angiogenesis. TRK-fusion cancer is an established, tissue-agnostic clinical entity with approved inhibitors, so an NTRK1 AGONIST drives precisely the signalling axis that an entire oncology drug class exists to shut down. (2) DIRECT SAFETY LIABILITIES from Brennan et al. 2024 (PMID 38773351, DOI 10.1038/s41573-024-00942-3), split by direction: activation gives seizures, grey matter heterotopia and anxiety; inhibition gives peripheral sensory neuropathy, cognitive disorder, dizziness and weight change. The human biallelic loss-of-function phenotype (CIPA) independently confirms that both directions of TrkA modulation have named consequences in people.",
+    "verified": true
+   },
+   {
+    "symbol": "TLR4",
+    "protein_name": "Toll-like receptor 4",
+    "uniprot": "O00206",
+    "length": 839,
+    "domain_of_interest": "Leucine-rich-repeat ectodomain and the MD-2 (LY96)/LPS interface",
+    "domain_boundaries": "Extracellular LRR ectodomain TOPO_DOM 24-631, built from 19 annotated LRR repeats running from 55-76 through 545-565 and capped by the LRRCT domain 579-629 (UniProt DOMAIN; InterPro IPR000483 579-628). Signal peptide 1-23; TM 632-652; cytoplasmic TIR domain 672-815. The TLR4/MD-2/LPS complex is PDB 3FXI, in which TLR4 chains A/B span 27-631. The platform's Arg264, Lys341 and Glu439 all lie within the LRR ectodomain and Arg264/Lys341 are consistent with reported LPS/MD-2 interface residues - this binding-site string is broadly defensible, unlike most in the file.",
+    "pdb_examples": [
+     "3FXI",
+     "2Z63",
+     "2Z62",
+     "2Z66",
+     "3UL7"
+    ],
+    "numbering_note": "Human O00206, PRECURSOR numbering including the 23-aa signal peptide. This is the correct frame for the well-known TLR4 coding polymorphisms Asp299Gly and Thr399Ile, which are conventionally written on the precursor sequence. Worth declaring explicitly because 3FXI is a ternary complex and residue lookups must specify the TLR4 chain rather than the MD-2 or LPS entities.",
+    "genetic_evidence_for_cognition": "NONE for Alzheimer's. OT direct AD association 0.115, from europepmc 0.948 alone, with no genetic datasource whatsoever. gnomAD v4 shows TLR4 to be one of the least constrained genes in the set: pLI 0.00038, LOEUF 0.931, mis_z 0.50, with 17 observed loss-of-function variants against 27.4 expected - human TLR4 loss of function is common and tolerated. Where TLR4 does carry GWAS support it is other indications entirely: major depressive disorder (gwas_credible_sets 0.79), type 2 diabetes (0.61), cervical carcinoma (0.46) and chronic obstructive pulmonary disease (0.44). ClinVar 175 records, 26 P/LP. The strongest neuropsychiatric genetic evidence TLR4 has is for depression, not Alzheimer's, and the platform does not distinguish the two.",
+    "genetic_support_level": "none",
+    "safety_flag_from_genetics": "No Cancer Gene Census role, and the only Open Targets safetyLiability is a generic ClinPGx 'adverse drug events' entry, so there is no oncogenic flag of the KEAP1/NFE2L2/NTRK kind. The relevant caution is immunological: TLR4 is the lipopolysaccharide receptor and its highest-scoring Open Targets association is sepsis (0.676), so sustained pharmacological blockade carries a plausible innate-immune and infection liability - though I want to be explicit that I found no human loss-of-function-to-infection genetic evidence quantifying it, and the permissive gnomAD constraint (LOEUF 0.931) actually argues that partial TLR4 loss is well tolerated. The honest summary is that TLR4 antagonism is not genetically contraindicated, but neither is it genetically supported for cognition.",
+    "verified": true
+   }
+  ]
+ },
+ "verification": [
+  {
+   "checked": 112,
+   "errors_found": [
+    {
+     "item": "Ginsenoside Rg1 (CID 441923) molecular_weight",
+     "claimed": "801.01",
+     "actual": "RDKit Descriptors.MolWt = 801.024 (rounds to 801.02); PubChem reports 801.0. The value 801.01 matches neither source.",
+     "severity": "minor"
+    },
+    {
+     "item": "Huperzine A note - stated cause of the platform SMILES parse failure",
+     "claimed": "the platform SMILES 'CC1=CC2C(=C)C3C(=O)NC(=C2CC3(C)N)C' FAILS to parse in RDKit (kekulization error)",
+     "actual": "It does fail to parse, but RDKit's error is 'SMILES Parse Error: unclosed ring for input' - ring-closure bond 1 is opened and never closed. Not a kekulization error. Conclusion correct, diagnosis wrong.",
+     "severity": "minor"
+    },
+    {
+     "item": "Ginkgolide B note - atom-count difference between platform SMILES and true structure",
+     "claimed": "missing one lactone ring (C2O2) from the true tri-gamma-lactone cage",
+     "actual": "Verified delta is C2H2O2, not C2O2: platform SMILES parses to C18H22O8 (MW 366.37) vs true C20H24O10 (MW 424.40). The hydrogens are omitted from the stated difference.",
+     "severity": "minor"
+    }
+   ],
+   "unverifiable": [
+    "Onjisaponin V literature claim that it 'was described among onjisaponins V-Z in the Polygala saponin literature' - I did not consult the primary Polygala tenuifolia saponin papers, so this specific bibliographic assertion is uncorroborated here. The PubChem-side provenance caveats around it (single depositor 'Traditional Medicine Medicinal Chemistry DB', SID 522861771, one synonym, no CAS, no cross-links, no Literature section) were all confirmed.",
+    "Salvianolic Acid B note's per-moiety mapping of the stereodescriptors ('2R benzofuran-4-yl ester carbon, 2S/3S dihydrobenzofuran, 1R danshensu ester'). RDKit confirms 4 atom stereocenters all defined and the descriptors 2R / 2S,3S / 1R do appear in PubChem's IUPAC name, but I did not independently verify which descriptor belongs to which named fragment.",
+    "Huperzine A note's locant choice '(1R,9R)' and '13E ethylidene'. Both numbering systems are present in PubChem synonyms ((1R,9R,13E)-... and (5R,9R,11E)-...), so the note is self-consistent with one of two valid conventions, but which locant set the platform should standardize on is a convention choice, not a verifiable fact."
+   ],
+   "verdict": "ACCEPT_WITH_CORRECTIONS"
+  },
+  {
+   "checked": 155,
+   "errors_found": [
+    {
+     "item": "Motif 1 (KLVFFAEDVGSNKGAIIGLM) \u2014 biological_role: SwissProt orthologue scan claimed 'hits only in APP orthologues: P05067, P08592 rat, P12023 mouse, P53601, P79307, O73683, P86906, Q28053 - all at the identical Abeta16-35 position'",
+     "claimed": "8 SwissProt hits, all at the identical Abeta16-35 position (i.e. 687-706)",
+     "actual": "15 hits, not 8, and three of the eight NAMED accessions do not carry the motif at 687: Q28053 (A4_BOVIN) is a 59-residue Abeta fragment entry with the motif at 22-41; O73683 (A4_DICFU, 780 aa) has it at 697-716; P86906 (A4_FELCA, 40 aa) has it at 16-35. Seven further hits went unlisted: Q28280 CANLF@22, Q60495 CAVPO@687, Q5IS80 PANTR@687, Q28748 RABIT@21, Q95241 SAISC@668, Q28757 SHEEP@21, Q29149 URSMA@21. The primary claim \u2014 P05067 687-706 = KLVFFAEDVGSNKGAIIGLM \u2014 is exact and verified, as are KLVFF 687-691, KLVFFAE 687-693, GAIIGLM 700-706, Abeta1=Asp672, and TOPO_DOM 18-701 / TRANSMEM 702-722. The directionality verdict is unaffected.",
+     "severity": "major"
+    },
+    {
+     "item": "Motif 7 / unattributed_segments \u2014 'STKTC approximates WNT7A/7B TTKTC (O00755/P56706, pos 205-209)'",
+     "claimed": "TTKTC occurs at residues 205-209 of WNT7A (O00755) and WNT7B (P56706)",
+     "actual": "TTKTC is at 210-214 in both O00755 and P56706. Positions 205-209 in both are VSGSC (the tail of CKCHGVSGSC at 200-209). Real accessions, wrong range, motif absent at the cited range. The substantive point stands \u2014 the platform's STKTC matches neither WNT7A/7B TTKTC nor WNT5A/5B SLKTC (P41221 248-252 SLKTC verified) \u2014 and WNT3A CWWS (P56704 217-220) and WNT3 CWWA (P56703 220-223) were both verified correct.",
+     "severity": "major"
+    },
+    {
+     "item": "Motif 10 (cationic amphipath) \u2014 'a +9 polycation binds the anionic, aromatic PAS rim (Trp286/Tyr72/Tyr341)', stated immediately after 'AChE (P22303, retrieved)'",
+     "claimed": "Trp286, Tyr72, Tyr341 read as P22303 positions",
+     "actual": "In P22303 UniProt numbering those positions are Val286, Pro72, Asp341. The residues are correct only in mature-chain numbering (SIGNAL 1-31, CHAIN 32-614), i.e. P22303 317=Trp, 103=Tyr, 372=Tyr \u2014 all three verified. The report reproduces the dataset's numbers without flagging the convention shift, while elsewhere holding the same dataset to strict UniProt numbering (Occludin Arg220, AMPK Arg67, EAAT2 Thr368). It also failed to note that the same dataset field mixes a second convention: 'AChE CAS (Trp84, Phe330, Tyr121)' is Torpedo numbering (human mature equivalents are Trp86/Phe338/Tyr124).",
+     "severity": "minor"
+    },
+    {
+     "item": "Motif 10 \u2014 subcellular annotation of acetylcholinesterase",
+     "claimed": "AChE (P22303, retrieved) is annotated Synapse/Secreted/GPI-anchored",
+     "actual": "Canonical P22303 SUBCELLULAR LOCATION reads Synapse; Secreted; Cell membrane, Peripheral membrane protein. GPI-anchor is isoform-specific \u2014 feature LIPID 'GPI-anchor amidated glycine' at P22303-2:588 (isoform H). The conclusion (extracellular, therefore the right compartment) is correct either way.",
+     "severity": "minor"
+    },
+    {
+     "item": "Motif 8 appears_in \u2014 the 31-mer CKCHGMSGSCSTKTCWWGBLCPFRRACPDCH attributed to CogWnt-Fzd-09",
+     "claimed": "CogWnt-Fzd-09 carries the same 31-mer as HippoWnt-FzdAgonist-X4 and AstroZo1-Protect-A3",
+     "actual": "CogWnt-Fzd-09's actual sequence in data/extracted_raw.json is the 40-mer CKCHGMSGSCSTKTCWWGBLCPFRRACPDCHGMSGSCSTK \u2014 the 31-mer is a prefix substring, followed by an unreported 9-residue tail GMSGSCSTK. HippoWnt-FzdAgonist-X4 and AstroZo1-Protect-A3 are genuinely byte-identical 31-mers, so the 'redeployed unchanged' claim and the -16.9 vs -16.1 kcal/mol comparison are both verified correct.",
+     "severity": "minor"
+    },
+    {
+     "item": "Coverage gap \u2014 quoted contact residues the report reproduced but did not check, several of which are fabricated",
+     "claimed": "Report validated contact residues for NTRK2, EAAT2, LC3B, AMPK, ESR2, CHRM1, OCLN, GSK3B and TREM2 (Arg47/Asp87 only), leaving others unexamined",
+     "actual": "All 26 residue identities the report did assert are correct (verified). But five further quoted triads contain fabrications the report passed over: TREM2 'Lys112' is Ser112 in Q9NZC2 (the report quoted the triad but declined to validate it); NTRK1 'His312, Leu331' (BasalNgf-TrkA-B3) are Ser312/Glu331 in P04629 and Gly344/Ala363 in mature numbering \u2014 wrong in both conventions; GluN2A 'Glu201, Lys210' are Gln201/Phe210 in Q12879 and His223/Ser232 mature \u2014 wrong in both; FZD8 'Arg104' is Leu104 in Q9H461 (Phe72, Tyr125, Asp99 all verified correct); PAFR 'His14, Tyr200' are Arg14/Leu200 in P25105, which has no signal peptide so no offset applies (Phe174 verified correct). Verified genuine and also unflagged: TLR4 Arg264/Lys341/Glu439 (O00206), KEAP1 Tyr334/Arg415/Arg483/Ser602 (Q14145), alpha7 nAChR Tyr188/Trp149/Tyr195 (P36544 mature numbering, +22 offset), Abeta Lys28/Asp23 (APP 699/694).",
+     "severity": "minor"
+    }
+   ],
+   "unverifiable": [
+    "EBI BLASTP E-values quoted throughout (2e-06 for the WNT chimera vs P56703/P56704; 9e-05, 3e-05 for pastiche A vs Tenascin-C P24821 / MEGF11 A6BM72 / NOTCH3 Q61982; 0.34, 0.004, 0.008, 0.029 for pastiche B vs MEG11_MOUSE Q80T91 / A6BM72 / TEN4_HUMAN Q6N022; 1.4 for pastiche C; 2.4 for the cationic helix; >=5.0 for WRWYCPWC). I did not re-run EBI BLASTP. The qualitative conclusions these support are independently corroborated: all 38 exact SwissProt substring scans reproduced exactly (every pastiche fragment returns 0 hits across all 575,503 entries, count confirmed), and the Smith-Waterman scores reproduced to the digit (pastiche A self=297, vs NTRK2 Q16620=35, vs NTRK1 P04629=36, BLOSUM62 -11/-1 local).",
+    "Web-search negatives ('no published peptide with these sequences' for the cationic helix, GRLVGHPW, ACPCYRGFWR). Absence-of-publication claims are not checkable by sequence retrieval.",
+    "The pharmacological directionality premises themselves, as distinct from the sequence and annotation facts underpinning them: that unmodified all-L KLVFF/Abeta16-35 nucleates rather than blocks fibrils; that the BDNF prodomain signals through p75NTR/sortilin with opposite sign to mature BDNF at TrkB; that a free ETGE peptide activates Nrf2 by displacing it from Keap1; that GSK-3beta's pSer9 tail docks the primed-substrate phosphate pocket (Arg96/Arg180/Lys205) rather than the ATP site; that PORCN palmitoleoylation supplies the dominant WNT-FZD CRD binding energy. These are literature propositions. I verified every structural premise they rest on \u2014 PROPEP 19-128 vs CHAIN 129-247, kinase domain 56-340 vs disordered 1-53, ATP BINDING 62-70/85, MOTIF 79-82 ETGE, TOPO_DOM/TRANSMEM boundaries, subcellular annotations \u2014 and all 16 directionality judgements follow soundly from them, but the phenotypic sign claims were not independently sourced.",
+    "The inference that the platform's pLDDT and dG values 'were authored as text rather than computed'. Strongly supported but not directly provable: I confirmed the AstroPafr-Block-A4 sequence field literally contains 'His14-Phe174-Linker-Peptide-Conjugate' alongside dG -15.2, Kd 4.8 nM and pLDDT 92.4, and that the letter B (IUPAC Asx) sits at position 19 of the WNT chimera carried by three entries quoting pLDDT 94.8 / 95.1 / 93.8. Both verified in data/extracted_raw.json.",
+    "No SMILES appear anywhere in the report under review, so the RDKit parse/formula check had nothing in scope to run against. The dataset's chemStruct fields carry prose plus bare molecular formulas (e.g. 'Asiatic Acid Ursane Pentacyclic Ring Core (C30H48O5)'), not structures."
+   ],
+   "verdict": "ACCEPT_WITH_CORRECTIONS"
+  },
+  {
+   "checked": 251,
+   "errors_found": [
+    {
+     "item": "GRIN2A pdb_examples / \"representative structure PDB 5TQ2\"",
+     "claimed": "5TQ2 is cited as the representative structure for the human GRIN2A amino-terminal domain, inside a numbering_note that warns 'much of the classic NMDA receptor pharmacology literature and several structures use rat GluN2A' and declares 'I have used human precursor throughout'.",
+     "actual": "5TQ2 contains NO human GRIN2A. RCSB polymer entities map to Q00959 (NMDE1_RAT, Rattus norvegicus GluN2A, chain B = 34-393) and A0A1L8F5J9 (NMDZ1_XENLA, Xenopus laevis GluN1, chain A). Its residue numbering is therefore not on the human Q12879 precursor frame the record declares. This is precisely the species-frame error class the review exists to catch, committed in the same field that warns against it. The other three GRIN2A entries are correct human Q12879 (6IRA, 7EOQ, and 5H8F whose A=401-539 + 661-802 matches the claimed S1S2 boundaries exactly).",
+     "severity": "major"
+    },
+    {
+     "item": "FZD8 safety_flag_from_genetics - cancer association scores",
+     "claimed": "'Open Targets records literature-level FZD8 associations with breast cancer (0.398) and prostate cancer (0.391).'",
+     "actual": "Neither value is reproducible. Open Targets direct (non-propagated) scores are breast cancer 0.087 and prostate cancer 0.078 - roughly 4.5x lower than claimed. Indirect/propagated scores are 0.864 and 0.805, so the quoted figures match neither setting. The europepmc components (0.64 for both) are correct. These inflated scores are the sole quantitative support offered for the FZD8 Wnt-oncogenicity flag.",
+     "severity": "major"
+    },
+    {
+     "item": "TLR4 safety_flag_from_genetics - sepsis association",
+     "claimed": "'its highest-scoring Open Targets association is sepsis (0.676)'",
+     "actual": "Wrong on both the value and the superlative. TLR4-Sepsis (HP_0100806) direct score is 0.401 (europepmc 0.958, clinical_precedence 0.611, expression_atlas 0.020). TLR4's actual highest-scoring Open Targets association is major depressive disorder at 0.503 (gwas_credible_sets 0.79) - which the reviewer separately quotes correctly elsewhere in the same record. The infection-liability argument rests on this claim.",
+     "severity": "major"
+    },
+    {
+     "item": "GSK3B safety_flag_from_genetics - hepatocellular carcinoma score",
+     "claimed": "'GSK3B-hepatocellular carcinoma at 0.633 with a cancer_gene_census contribution of 0.30'",
+     "actual": "Overall score is 0.214, not 0.633 - off by roughly 3x. The cancer_gene_census component IS correct at 0.304, and is a genuine finding (GSK3B has no CGC 'role in cancer' attribute yet still carries a cancer_gene_census evidence contribution here). Only the aggregate score is wrong.",
+     "severity": "major"
+    },
+    {
+     "item": "GRIN2A genetic_evidence_for_cognition - schizophrenia score; GSK3B cancer score",
+     "claimed": "'schizophrenia 0.708 carrying both common-variant gwas_credible_sets 0.77 and rare-variant gene_burden 0.19'; and 'Open Targets scores GSK3B-cancer at 0.673 (reactome 0.87)'",
+     "actual": "GRIN2A-schizophrenia direct score is 0.588, not 0.708 (indirect is 0.881; neither is 0.708). GSK3B-cancer direct score is 0.557, not 0.673 (indirect 0.905). In both cases every datasource component the reviewer quotes is exactly right (gwas_credible_sets 0.77, gene_burden 0.19, reactome 0.87) - only the aggregates are inflated, so the underlying arguments survive.",
+     "severity": "major"
+    },
+    {
+     "item": "ACHE numbering_note - completeness of the Torpedo/human contamination fix list",
+     "claimed": "'The same Torpedo/human mix recurs at app.js:248 and app.js:288.'",
+     "actual": "The enumeration is incomplete. Verified in git HEAD, the same defect also appears at app.js:12, app.js:15 and README.md:32. app.js:12 reads 'Trp84, Phe330 (CAS Salt Bridge); Tyr121, Gly117/118 (Hydrogen Bonds); Trp279 (PAS)' and introduces two further Torpedo-numbered identifiers the reviewer never mentions anywhere: Trp279 (human Trp286) and Gly117/118 (human Gly120/121, confirmed from my alignment). Anyone applying the reviewer's fix list would leave three locations and two residue identifiers uncorrected. The reviewer's claim that the working copy was rewritten is accurate (git diff HEAD: 650 insertions, 1033 deletions).",
+     "severity": "minor"
+    },
+    {
+     "item": "TLR4 domain_boundaries - LRR repeat count",
+     "claimed": "'built from 19 annotated LRR repeats running from 55-76 through 545-565'",
+     "actual": "UniProt O00206 annotates 18 REPEAT features, labelled LRR 1 through LRR 18. The quoted endpoints 55-76 (LRR 1) and 545-565 (LRR 18) are both exactly correct; only the count is off by one.",
+     "severity": "minor"
+    },
+    {
+     "item": "Cancer Gene Census roles - three incomplete or omitted annotations",
+     "claimed": "NTRK2: 'COSMIC Cancer Gene Census role for NTRK2 is fusion'. NTRK1: 'Cancer Gene Census roles recorded for NTRK1 are oncogene and fusion'. GRIN2A: no CGC status stated.",
+     "actual": "NTRK2 also carries 'oncogene'. NTRK1 also carries 'TSG'. GRIN2A carries CGC roles 'Oncogene' AND 'TSG', which the record omits entirely - notable because the reviewer explicitly reports 'No Cancer Gene Census role' for six other targets (ACHE, CHRNA7, GRIN2B, SLC1A2, NOS3, PTAFR, CHRM1, TLR4, TREM2, FZD8 - all of which I confirmed as genuinely absent), so silence on GRIN2A is a methodological inconsistency rather than a deliberate judgement.",
+     "severity": "minor"
+    },
+    {
+     "item": "PDB chain ranges - 1HCF and 6XDS",
+     "claimed": "'1HCF X/Y=286-383' (NTRK2); '6XDS A=18-135' (TREM2)",
+     "actual": "RCSB UniProt alignments give 1HCF chains X,Y = Q16620 284-383 (not 286) and 6XDS chain A = Q9NZC2 17-135 (not 18). All other quoted ranges I checked are exact, including 1WWB X=283-385, all five KEAP1 constructs at 321-609, all five NFE2L2 peptide ranges (2FLU P=69-84, 4IFL P=69-84, 3ZGC C=76-82, 5WFV P=76-84, 7K28 P=77-84), 5UD8 19-130, 5UD7 19-174, all four FZD8 ranges, 5EWJ B/D=31-394, 5H8F 401-539+661-802, 1M9J 67-481, 2IFG 36-382, 3FXI 27-631 and 5CXV 2-218+355-460.",
+     "severity": "minor"
+    },
+    {
+     "item": "Unflagged chimeric/mismatched structures in pdb_examples",
+     "claimed": "5AFH/5AFN listed as CHRNA7 structures; 2Z62/2Z63/2Z66/3UL7 listed as TLR4 structures; 2LZ1 listed under an NFE2L2 record whose domain_of_interest is the Neh2 degron; 1NIW listed under a NOS3 record whose domain_of_interest is the oxygenase domain.",
+     "actual": "5AFH/5AFN are alpha7/Lymnaea stagnalis AChBP chimeras (P36544 + P58154) with only fragmentary P36544 coverage, not human alpha7 structures. 2Z62/2Z63/2Z66/3UL7 are human TLR4 / hagfish (Eptatretus burgeri) VLRB hybrids (O00206 + Q4G1L2). 2LZ1 is the Q16236 bZIP DNA-binding domain (445-523), not Neh2. 1NIW is the eNOS calmodulin-binding peptide (P29474 492-511) bound to calmodulin, not the oxygenase domain. Given the record's own insistence on declaring organism and construct, these should have been flagged.",
+     "severity": "minor"
+    },
+    {
+     "item": "Systematic upward drift in Open Targets aggregate scores",
+     "claimed": "NTRK2 obesity/hyperphagia/DD 0.715; NTRK2 DEE 0.631; TREM2 Nasu-Hakola 0.809; GRIN2A Landau-Kleffner 0.853; GRIN2A Rolandic epilepsy 0.733; GRIN2B DEE27 0.756; NTRK1 HSAN4 0.867; SLC1A2 DEE41 0.766; NOS3 hypertension gene_burden 0.29.",
+     "actual": "Current values are 0.709, 0.606, 0.798, 0.840, 0.715, 0.742, 0.858, 0.763, and essential-hypertension gene_burden 0.27 respectively. Every deviation is in the same upward direction. Individually these are within plausible release drift and every constituent datasource score is exactly right (NFE2L2 IMDDHH 0.766 and GRIN2B ID 0.775 match to three decimals), but the uniform direction alongside the five larger errors above suggests the aggregates were not re-read at the same time as the components.",
+     "severity": "minor"
+    },
+    {
+     "item": "NFE2L2 domain_boundaries - understated UniProt annotation; FZD8 Wnt-binding regions",
+     "claimed": "NFE2L2: 'UniProt annotates no DOMAIN over Neh2' and boundaries 'must cite the specific co-crystallised peptide range'; the degron is given as 'ETGE, ~res 77-82'. FZD8: 'Wnt-binding region 147-152'.",
+     "actual": "True that there is no DOMAIN feature, but UniProt Q16236 does directly annotate MOTIF 'ETGE motif' at 79-82 and MOTIF 'DLG motif' at 29-31 - both of the motifs the record names - so the claim that structure is the only source understates what UniProt provides, and the ETGE span is 79-82 rather than ~77-82. FZD8 Q9H461 annotates two Wnt-binding regions, 95-100 and 147-152; only the second is cited.",
+     "severity": "minor"
+    }
+   ],
+   "unverifiable": [
+    "ClinVar Pathogenic/Likely-Pathogenic sub-counts for GRIN2A (claimed 364), CHRNA7 (claimed 205) and TREM2 - the E-utilities clinical-significance queries were rate-limited. All total record counts I did retrieve match exactly: GRIN2B 1886, GRIN2A 2511, ACHE 100, NTRK1 1827, CHRNA7 459, NFE2L2 463, and the P/LP counts that returned (GRIN2B 333, ACHE 21, NTRK1 227, NFE2L2 35) all match. ClinVar counts drift continuously and should be treated as timestamped.",
+    "Whether the specific platform binding-site residues are genuine contact residues, as opposed to merely falling inside the stated domain. I confirmed the arithmetic containment claims (NTRK2 Asp298/Val312/Glu319/Leu333/Tyr342 inside 295-365; KEAP1 Tyr334/Arg415/Arg483/Ser602 inside 327-611; FZD8 Phe72 inside the 71-78 lipid groove; GSK3B Val135/Asp133/Lys85 consistent with the ATP pocket; TLR4 Arg264/Lys341/Glu439 inside the LRR ectodomain) but did not re-derive contact status from coordinates. The reviewer's own hedging on GRIN2A Glu201/Lys210, PTAFR Tyr200/Phe174, CHRM1 Trp164 and SLC1A2 Thr368/Lys490 is appropriate; I confirmed independently that PTAFR His14 does lie in TOPO_DOM 1-16 outside the 7TM bundle, and that SLC1A2 Thr368 and Lys490 are indeed absent from UniProt's annotated substrate/Na+ coordination set (362-364, 393, 395, 397, 401, 442-446, 475, 482, 486, all confirmed).",
+    "The COSMIC Cancer Gene Census percentage figures quoted for NTRK2 (3.1% juvenile pilocytic astrocytoma, 3.5% paediatric diffuse midline glioma, 0.19% and 0.24% of tumours). I confirmed all four verbatim through Open Targets' mirrored CGC annotation, but could not check them against COSMIC directly, which requires authentication.",
+    "The mechanistic characterisation of DEE41 SLC1A2 variants as acting 'through gain-of-function or dominant-negative effects rather than simple haploinsufficiency'. The Open Targets association (0.763, five curated sources) is confirmed, but the variant-mechanism claim was not traced to primary literature.",
+    "Whether the platform's decoy peptide sequence DEETGEFLFQLPQLDEETGEWRWYCPWC is a genuine Nrf2-derived sequence. It does contain ETGE as stated, which is all the reviewer actually claims, but I did not align it against Q16236.",
+    "Assignment of Phe295/Phe297 to the CAS rather than the mid-gorge. The reviewer places them in the CAS; some primary literature describes Phe295/Phe297 as mid-gorge acyl-pocket residues. This is a convention difference rather than a resolvable error, and does not affect the numbering correction. By contrast the Tyr124 reassignment IS confirmed: the canonical literature PAS set is exactly Tyr72, Asp74, Tyr124, Trp286, Tyr341, located ~20 A from the catalytic centre, matching the reviewer's corrected string.",
+    "The grade label 'contradictory' used for KEAP1 and NFE2L2 is an editorial construct, not a term on any standard genetic-support scale. The underlying evidence is fully confirmed (KEAP1 CGC role TSG with the verbatim 'LOF mutations reduce the affinity to Nrf2' and recurrent R470C annotations, intOGen driver scores 0.84 lung adenocarcinoma / 0.73 NSCLC / 0.57 HCC; NFE2L2 CGC oncogene with both verbatim KEAP1-interface annotations, IMDDHH at 0.766 with uniprot_variants 0.89 / genomics_england 0.87 / eva 0.82 / gene2phenotype 0.61, and the AOP-Wiki 'Increased, Liver Steatosis' liability on activation), so the reasoning is sound; only the label is non-standard."
+   ],
+   "verdict": "ACCEPT_WITH_CORRECTIONS"
+  }
+ ]
+}

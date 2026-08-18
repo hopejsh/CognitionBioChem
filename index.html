@@ -1,415 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroCognition BioChem - Advanced AlphaFold3 & Natural Products Platform</title>
-    <meta name="description" content="State-of-the-art computational biology and neuro-pharmacology research platform for cognition-enhancing natural products and AlphaFold3 de novo engineered candidates.">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Three.js for 3D Molecular WebGL Rendering -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <!-- Chart.js for Benchmark Metrics & pLDDT Plots -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CognitionBioChem — Structural Pharmacology Workbench</title>
+<link rel="stylesheet" href="styles.css">
+<!-- Pinned versions. Unpinned CDN tags are a supply-chain and reproducibility hazard. -->
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/3dmol@2.4.2/build/3Dmol-min.js"></script>
+<script defer src="app.js"></script>
 </head>
 <body>
-    <!-- Top Navigation Header -->
-    <header class="app-header">
-        <div class="logo-container">
-            <div class="logo-icon">
-                <i class="fa-solid fa-dna glow-icon"></i>
-            </div>
-            <div class="logo-text">
-                <h1>Cognition <span>BioChem</span></h1>
-                <p class="subtitle">DeepMind Structural Pharmacology & AlphaFold3 De Novo Platform</p>
-            </div>
-        </div>
-        <nav class="nav-links">
-            <button class="nav-btn active" data-tab="overview"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
-            <button class="nav-btn" data-tab="natural-products"><i class="fa-solid fa-flask-vial"></i> Natural Pharmacophores</button>
-            <button class="nav-btn" data-tab="brain-regions"><i class="fa-solid fa-brain"></i> Brain Targets</button>
-            <button class="nav-btn" data-tab="signaling"><i class="fa-solid fa-diagram-project"></i> Signaling Cascades</button>
-            <button class="nav-btn highlight" data-tab="af3-candidates"><i class="fa-solid fa-cube"></i> AF3 TOP 10 Candidates</button>
-            <button class="nav-btn highlight-gold" data-tab="full-brain-pipeline"><i class="fa-solid fa-pills"></i> 25 De Novo Drug Center</button>
-        </nav>
-        <div class="header-actions">
-            <a href="https://alphafoldserver.com/" target="_blank" rel="noopener noreferrer" class="status-badge link-badge"><i class="fa-solid fa-server"></i> AlphaFold Server Live Connected</a>
-        </div>
-    </header>
 
-    <!-- Main Container -->
-    <main class="app-container">
-        <!-- Tab 1: Overview & Executive Dashboard -->
-        <section id="overview" class="tab-content active">
-            <div class="hero-banner">
-                <div class="hero-text">
-                    <span class="badge-tag"><i class="fa-solid fa-microscope"></i> Structural Biology & Computational Neuro-Medicine</span>
-                    <h2>Eastern Natural Product Pharmacology & <br>AlphaFold3 Sequence-Driven Drug Discovery Platform</h2>
-                    <p>Investigating the 3D binding structures and pharmacophoric moieties of cognition-enhancing natural products (Ginsenosides, Huperzine A, Ginkgolide B, Baicalein, Curcumin, Onjisaponin V, Salvianolic Acid B, Asiatic Acid). Modeling 25 De Novo therapeutics via <strong>AlphaFold3 sequence-driven 3D structural topology parsing and live AlphaFold Server integration</strong> across 5 targeted brain regions.</p>
-                </div>
-                <div class="hero-stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fa-solid fa-brain"></i></div>
-                        <div class="stat-value">5 Regions</div>
-                        <div class="stat-label">Targeted CNS Subfields</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fa-solid fa-capsules"></i></div>
-                        <div class="stat-value">25 Drugs</div>
-                        <div class="stat-label">De Novo Bio-Conjugates</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fa-solid fa-server"></i></div>
-                        <div class="stat-value">AF3 Engine</div>
-                        <div class="stat-label">Live AlphaFold Integration</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fa-solid fa-gauge-high"></i></div>
-                        <div class="stat-value">-19.5 kcal</div>
-                        <div class="stat-label">Peak Binding Energy ($\Delta G$)</div>
-                    </div>
-                </div>
-            </div>
+<header class="masthead">
+  <div class="brand">
+    <h1>CognitionBioChem</h1>
+    <p class="tagline">Structural pharmacology workbench — validation, provenance, and
+      real predictor-output analysis</p>
+  </div>
+  <div class="build-meta" id="build-meta"></div>
+</header>
 
-            <!-- Key Paradigm Summary Grid -->
-            <div class="section-title-box">
-                <h3><i class="fa-solid fa-layer-group"></i> Core Biomedical Research Domains</h3>
-                <p>Comprehensive integration of chemical structures, 3D receptor binding sites, cellular subfield mapping, and intracellular signaling pathways</p>
-            </div>
+<!-- The single most important element on the page. -->
+<div class="disclosure" role="note" aria-label="Status disclosure">
+  <div class="disclosure-head">
+    <span class="dot"></span>
+    <strong id="disclosure-headline">No structure prediction has been run in this
+      repository.</strong>
+  </div>
+  <p id="disclosure-detail"></p>
+  <p id="disclosure-sequences" class="disclosure-sub"></p>
+</div>
 
-            <div class="card-grid-3">
-                <div class="glass-card">
-                    <div class="card-header">
-                        <i class="fa-solid fa-flask-vial"></i>
-                        <h4>Natural Pharmacophores</h4>
-                    </div>
-                    <p>In-depth analysis of cation-π anchoring, hydrophobic cage insertion, and covalent alkylation mechanics across 8 traditional Eastern medicine compounds.</p>
-                    <button class="card-action-btn" onclick="switchTab('natural-products')">Explore Pharmacophores <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-                <div class="glass-card">
-                    <div class="card-header">
-                        <i class="fa-solid fa-brain"></i>
-                        <h4>Brain Subfield Mapping</h4>
-                    </div>
-                    <p>Cellular targeting across Hippocampus (CA1/CA3/DG), Prefrontal Cortex, Basal Forebrain, Microglia M2 polarization, and Astrocytes & BBB.</p>
-                    <button class="card-action-btn" onclick="switchTab('brain-regions')">Explore Brain Targets <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-                <div class="glass-card highlight-card">
-                    <div class="card-header">
-                        <i class="fa-solid fa-pills"></i>
-                        <h4>25 De Novo Drug Center</h4>
-                    </div>
-                    <p>Interactive 3-column drug hub featuring real FASTA sequence 3D WebGL structural viewers and direct AlphaFold Server launch integration.</p>
-                    <button class="card-action-btn" onclick="switchTab('full-brain-pipeline')">Open 25 Drug Center <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-        </section>
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-tab="overview" role="tab">Overview</button>
+  <button class="tab" data-tab="validation" role="tab">Validation report</button>
+  <button class="tab" data-tab="compounds" role="tab">Compounds</button>
+  <button class="tab" data-tab="candidates" role="tab">Candidate sequences</button>
+  <button class="tab" data-tab="structure" role="tab">Structure analysis</button>
+  <button class="tab" data-tab="provenance" role="tab">Provenance</button>
+</nav>
 
-        <!-- Tab 2: Natural Products Pharmacophore & Binding Structures -->
-        <section id="natural-products" class="tab-content">
-            <div class="section-title-box">
-                <h2><i class="fa-solid fa-flask-vial"></i> Cognition-Enhancing Natural Products Chemical Structures & Binding Moieties</h2>
-                <p>Detailed SMILES formulation, pharmacophoric moieties, receptor binding residue coordinates, and stereochemistry</p>
-            </div>
+<main>
 
-            <div class="split-view">
-                <div class="sidebar-selector">
-                    <div class="selector-item active" onclick="selectNaturalProduct(0)">
-                        <div class="item-title">Huperzine A</div>
-                        <div class="item-sub">Sesquiterpene Alkaloid | AChE & NMDA</div>
-                    </div>
-                    <div class="selector-item" onclick="selectNaturalProduct(1)">
-                        <div class="item-title">Ginsenoside Rg1</div>
-                        <div class="item-sub">Dammarane Triterpenoid | TrkB & GR</div>
-                    </div>
-                    <div class="selector-item" onclick="selectNaturalProduct(2)">
-                        <div class="item-title">Ginkgolide B</div>
-                        <div class="item-sub">Diterpene Tri-lactone | PAFR & GABA_A</div>
-                    </div>
-                    <div class="selector-item" onclick="selectNaturalProduct(3)">
-                        <div class="item-title">Baicalein</div>
-                        <div class="item-sub">Trihydroxyflavone | GSK-3β & LOX</div>
-                    </div>
-                    <div class="selector-item" onclick="selectNaturalProduct(4)">
-                        <div class="item-title">Curcumin</div>
-                        <div class="item-sub">Diarylheptanoid | Keap1 & Aβ Oligomers</div>
-                    </div>
-                    <div class="selector-item" onclick="selectNaturalProduct(5)">
-                        <div class="item-title">Onjisaponin V / DISS</div>
-                        <div class="item-sub">Triterpenoid Saponin | TrkB & Autophagy</div>
-                    </div>
-                    <div class="selector-item" onclick="selectNaturalProduct(6)">
-                        <div class="item-title">Salvianolic Acid B</div>
-                        <div class="item-sub">Polyphenolic Tetramer | AChE PAS & ER-β</div>
-                    </div>
-                    <div class="selector-item" onclick="selectNaturalProduct(7)">
-                        <div class="item-title">Asiatic Acid</div>
-                        <div class="item-sub">Ursane Triterpenoid | TrkB & Nrf2</div>
-                    </div>
-                </div>
+<!-- ───────────────────────────── OVERVIEW ───────────────────────────── -->
+<section class="panel active" id="tab-overview">
+  <div class="stat-grid" id="overview-stats"></div>
 
-                <div class="detail-panel glass-card">
-                    <div id="np-detail-content"></div>
-                </div>
-            </div>
-        </section>
+  <div class="card">
+    <h2>What this workbench does, and does not do</h2>
+    <div class="two-col">
+      <div>
+        <h3 class="ok">It does</h3>
+        <ul class="ticks">
+          <li>Validate every chemical structure with RDKit — parsing, molecular formula,
+            InChIKey, and stereochemistry completeness.</li>
+          <li>Compute real peptide properties from sequence: molecular weight, net charge
+            at pH&nbsp;7.4, isoelectric point, and Kyte–Doolittle hydropathy.</li>
+          <li>Check every stated ΔG/K<sub>d</sub> pair for thermodynamic consistency
+            against ΔG = RT·ln(K<sub>d</sub>).</li>
+          <li>Parse <em>genuine</em> predictor output — AlphaFold Server, AlphaFold DB,
+            Boltz, or Chai — and display the real per-residue pLDDT, the real PAE matrix,
+            and the real coordinates.</li>
+          <li>Flag designs whose target is in a compartment the molecule cannot reach.</li>
+          <li>Attach a provenance record to every value, so nothing can be displayed
+            without a stated origin.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="warn">It does not</h3>
+        <ul class="crosses">
+          <li>Run AlphaFold3, or any structure predictor. Prediction happens elsewhere;
+            this workbench analyses what you bring back.</li>
+          <li>Compute binding free energies or dissociation constants. No docking, MM-GBSA
+            or FEP calculation exists here — and structure predictors do not output
+            free energies in any case.</li>
+          <li>Perform ADMET or toxicity prediction.</li>
+          <li>Claim any affiliation with Google DeepMind or the AlphaFold team.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-        <!-- Tab 3: Brain Regions & Cell Types Mapping -->
-        <section id="brain-regions" class="tab-content">
-            <div class="section-title-box">
-                <h2><i class="fa-solid fa-brain"></i> Target Brain Regions & Cellular Subfields Mapping</h2>
-                <p>Mapping cognitive functions (memory consolidation, executive focus, adult neurogenesis) to specific CNS anatomical regions</p>
-            </div>
+  <div class="card">
+    <h2>How to get a real prediction</h2>
+    <ol class="steps">
+      <li>Pick a candidate under <strong>Candidate sequences</strong> and copy its FASTA.
+        Sequences that fail validation cannot be copied — they are not submittable.</li>
+      <li>Run it through a predictor you have the right to use. Note that the AlphaFold
+        Server terms prohibit automated use for predicting protein–ligand or
+        protein–peptide binding; for an automated pipeline use a permissively licensed
+        model such as Boltz-2, Chai-1, Protenix, or OpenFold3.</li>
+      <li>Bring the returned <code>.cif</code> and confidence JSON back to
+        <strong>Structure analysis</strong> and load them. Everything shown there is then
+        read from your files.</li>
+    </ol>
+    <p class="note">A single peptide chain predicted alone has no interface, so ipTM and
+      interface PAE are undefined for it. To evaluate a binder, predict the peptide
+      <em>together with</em> its receptor chain.</p>
+  </div>
+</section>
 
-            <div class="brain-map-container glass-card">
-                <div class="brain-regions-interactive">
-                    <div class="region-node active" data-region="hippocampus" onclick="selectBrainRegion('hippocampus')">
-                        <i class="fa-solid fa-synapse"></i>
-                        <span>Hippocampus (CA1/CA3/DG)</span>
-                    </div>
-                    <div class="region-node" data-region="pfc" onclick="selectBrainRegion('pfc')">
-                        <i class="fa-solid fa-lightbulb"></i>
-                        <span>Prefrontal Cortex (PFC)</span>
-                    </div>
-                    <div class="region-node" data-region="basal-forebrain" onclick="selectBrainRegion('basal-forebrain')">
-                        <i class="fa-solid fa-bolt-lightning"></i>
-                        <span>Basal Forebrain (NBM)</span>
-                    </div>
-                    <div class="region-node" data-region="microglia" onclick="selectBrainRegion('microglia')">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span>Microglia (M1/M2 State)</span>
-                    </div>
-                    <div class="region-node" data-region="astrocytes" onclick="selectBrainRegion('astrocytes')">
-                        <i class="fa-solid fa-star"></i>
-                        <span>Astrocytes & BBB Unit</span>
-                    </div>
-                </div>
+<!-- ──────────────────────────── VALIDATION ─────────────────────────── -->
+<section class="panel" id="tab-validation">
+  <div class="card">
+    <h2>Data-integrity gate</h2>
+    <p>Produced by <code>platform/validate.py</code>, which exits non-zero when any record
+      fails. Every count below is reproducible from a clean checkout.</p>
+    <div id="validation-summary" class="stat-grid compact"></div>
+  </div>
+  <div id="validation-detail"></div>
+</section>
 
-                <div id="brain-region-detail" class="region-detail-display"></div>
-            </div>
-        </section>
+<!-- ──────────────────────────── COMPOUNDS ──────────────────────────── -->
+<section class="panel" id="tab-compounds">
+  <div class="card">
+    <h2>Natural product structures</h2>
+    <p>Each structure is parsed with RDKit. A compound whose stored SMILES fails to parse,
+      or encodes a different molecule than its name, is shown as unverified rather than
+      rendered with computed properties.</p>
+  </div>
+  <div id="compound-list"></div>
+</section>
 
-        <!-- Tab 4: Intracellular Downstream Signaling Cascades -->
-        <section id="signaling" class="tab-content">
-            <div class="section-title-box">
-                <h2><i class="fa-solid fa-diagram-project"></i> Intracellular Downstream Signaling Pathways</h2>
-                <p>Post-binding kinase cascades, gene transcription induction, and synaptic plasticity mechanisms</p>
-            </div>
+<!-- ──────────────────────────── CANDIDATES ─────────────────────────── -->
+<section class="panel" id="tab-candidates">
+  <div class="card">
+    <h2>Candidate sequences</h2>
+    <p>These are hand-assembled concatenations of published natural motifs joined by
+      GGGGS linkers — a hypothesis catalogue, not de novo designs. Properties shown are
+      computed from the sequence. Affinity and confidence fields are empty because nothing
+      has computed them.</p>
+    <div class="filter-row" id="candidate-filters"></div>
+  </div>
+  <div id="candidate-list"></div>
+</section>
 
-            <div class="pathway-grid">
-                <div class="pathway-card glass-card">
-                    <div class="pathway-header">
-                        <span class="pathway-badge p1">Pathway 01</span>
-                        <h3>TrkB-PI3K-Akt-CREB Signaling (Synaptic Plasticity & LTP)</h3>
-                    </div>
-                    <div class="pathway-flow">
-                        <div class="flow-step">TrkB Receptor Activation (Tyr515/816 Autophosphorylation)</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">PI3K Activation → PIP3 Generation → Akt (Ser473) Phosphorylation</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">MEK1/2 → ERK1/2 Phosphorylation & MSK1/p90RSK Kinase Cascade</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step highlight-step">CREB (Ser133) Phosphorylation → BDNF & Synaptophysin / PSD-95 Gene Transcription</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-result">Outcome: Prolonged Hippocampal LTP Duration, Dendritic Spine Density Increase & Memory Formation</div>
-                    </div>
-                </div>
+<!-- ──────────────────────────── STRUCTURE ──────────────────────────── -->
+<section class="panel" id="tab-structure">
+  <div class="card">
+    <h2>Load real predictor output</h2>
+    <p>Drop a coordinate file and, optionally, its confidence JSON. Everything rendered
+      below is read from these files. Nothing is synthesized.</p>
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="file-input" multiple accept=".cif,.mmcif,.pdb,.json" hidden>
+      <p><strong>Drop files here</strong> or <button class="link-btn" id="browse-btn">browse</button></p>
+      <p class="hint">
+        AlphaFold Server: <code>*_model_*.cif</code> +
+        <code>*_full_data_*.json</code> + <code>*_summary_confidences_*.json</code><br>
+        AlphaFold DB: <code>AF-&lt;ACC&gt;-F1-model_v*.cif</code> +
+        <code>*predicted_aligned_error*.json</code>
+      </p>
+    </div>
+    <div class="demo-row">
+      <button class="btn" id="load-demo">Load a real AlphaFold DB entry (human TrkB, Q16620)</button>
+      <span class="hint">Fetches genuine output from EBI so you can see the difference.</span>
+    </div>
+    <div id="load-status"></div>
+  </div>
 
-                <div class="pathway-card glass-card">
-                    <div class="pathway-header">
-                        <span class="pathway-badge p2">Pathway 02</span>
-                        <h3>Nrf2/Keap1-ARE Pathway (Antioxidant Defense & Neuroprotection)</h3>
-                    </div>
-                    <div class="pathway-flow">
-                        <div class="flow-step">Keap1 Cys151 Alkylation / Decoy Binding Nrf2 Dissociation</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">Nrf2 Escape from Ubiquitin E3 Ligase Proteasomal Degradation Complex</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">Nrf2 Nuclear Translocation & Heterodimerization with Maf Proteins</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step highlight-step">Binding to ARE (Antioxidant Response Element) DNA Promoter Region</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-result">Outcome: Massive HO-1, NQO1, GSH Expression → ROS Scavenging & Prevention of Dendritic Atrophy</div>
-                    </div>
-                </div>
+  <div id="structure-results" class="hidden">
+    <div class="stat-grid compact" id="structure-stats"></div>
 
-                <div class="pathway-card glass-card">
-                    <div class="pathway-header">
-                        <span class="pathway-badge p3">Pathway 03</span>
-                        <h3>GSK-3β Inhibition & Wnt/β-Catenin Pathway (Tau & Aβ Suppression)</h3>
-                    </div>
-                    <div class="pathway-flow">
-                        <div class="flow-step">GSK-3β ATP Pocket Binding / Ser9 Inhibitory Phosphorylation Induction</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">Blockade of Tau Protein Hyperphosphorylation</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step">Cytoplasmic β-Catenin Stabilization & Nuclear Translocation</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-step highlight-step">TCF/LEF Transcription Factor Complex Activation → Cyclin D1 & Wnt Gene Expression</div>
-                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-                        <div class="flow-result">Outcome: Neurofibrillary Tangle (NFT) Suppression & Adult Neural Stem Cell Differentiation</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tab 5: AlphaFold3 De Novo Candidates Leaderboard & 3D Viewer -->
-        <section id="af3-candidates" class="tab-content">
-            <div class="section-title-box">
-                <h2><i class="fa-solid fa-cube"></i> AlphaFold3 De Novo Engineered Candidates TOP 10</h2>
-                <p>AI De Novo computational structure design leaderboard ranking and interactive 3D WebGL visualization</p>
-            </div>
-
-            <div class="af3-dashboard-grid">
-                <div class="viewer-card glass-card">
-                    <div class="viewer-header">
-                        <div class="viewer-title">
-                            <i class="fa-solid fa-cube glow-icon"></i>
-                            <h3 id="current-candidate-name">CogDual-TrkB-PAS-10 (Rank #1)</h3>
-                        </div>
-                        <div class="viewer-controls">
-                            <button id="reset-cam-btn" class="mini-btn"><i class="fa-solid fa-arrows-rotate"></i> Reset Camera</button>
-                            <span class="plddt-pill" id="current-plddt">pLDDT: 93.2 (AF3 Confidence: Very High)</span>
-                        </div>
-                    </div>
-                    
-                    <div id="webgl-3d-container" class="canvas-3d-wrapper">
-                        <div class="viewer-overlay-info">
-                            <span id="target-protein-tag"><i class="fa-solid fa-crosshairs"></i> Target: TrkB D5 + AChE PAS</span>
-                            <span id="energy-tag"><i class="fa-solid fa-bolt"></i> $\Delta G$: -17.9 kcal/mol</span>
-                        </div>
-                    </div>
-
-                    <div class="candidate-sequence-box">
-                        <div class="seq-label">FASTA Sequence (AlphaFold3 Design):</div>
-                        <div class="seq-content" id="current-fasta">MCVCDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCHGGGGSGGGGSGGGGSKWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG</div>
-                    </div>
-                </div>
-
-                <div class="leaderboard-card glass-card">
-                    <h3><i class="fa-solid fa-trophy"></i> AlphaFold3 Leaderboard Ranking</h3>
-                    <div class="table-wrapper">
-                        <table class="leaderboard-table">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Candidate Code</th>
-                                    <th>Target Receptor</th>
-                                    <th>AF3 pLDDT</th>
-                                    <th>$\Delta G$ (kcal/mol)</th>
-                                    <th>CEI Score</th>
-                                </tr>
-                            </thead>
-                            <tbody id="leaderboard-tbody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="chart-container-card glass-card">
-                <h3><i class="fa-solid fa-chart-bar"></i> TOP 10 Candidate Computational Benchmark (CEI vs Binding Affinity)</h3>
-                <div class="chart-wrapper">
-                    <canvas id="benchmark-chart"></canvas>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tab 6: 5-Brain-Region Targeted 25 De Novo Drug Therapeutics Pipeline -->
-        <section id="full-brain-pipeline" class="tab-content">
-            <div class="section-title-box">
-                <h2><i class="fa-solid fa-pills"></i> 25 De Novo Targeted Therapeutics Precision Center</h2>
-                <p>Complete chemical formulations, FASTA sequences, 3D binding site coordinates, target cellular subfields, and live AlphaFold Server integration</p>
-            </div>
-
-            <!-- Region Filter Bar -->
-            <div class="region-filter-bar">
-                <button class="filter-btn active" onclick="filterBrainPipeline('all')"><i class="fa-solid fa-border-all"></i> All 25 Therapeutics</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('hippocampus')"><i class="fa-solid fa-synapse"></i> 1. Hippocampus</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('pfc')"><i class="fa-solid fa-lightbulb"></i> 2. Prefrontal Cortex (PFC)</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('basal')"><i class="fa-solid fa-bolt-lightning"></i> 3. Basal Forebrain</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('microglia')"><i class="fa-solid fa-shield-halved"></i> 4. Microglia M2</button>
-                <button class="filter-btn" onclick="filterBrainPipeline('astrocyte')"><i class="fa-solid fa-star"></i> 5. Astrocytes & BBB</button>
-            </div>
-
-            <!-- Pipeline Cards Container -->
-            <div class="drug-cards-grid" id="full-brain-pipeline-cards">
-                <!-- Dynamically populated by JS -->
-            </div>
-        </section>
-    </main>
-
-    <!-- Interactive Drug Detail & AlphaFold3 Structural Graphs Modal -->
-    <div id="drug-modal" class="modal-backdrop">
-        <div class="modal-container glass-card">
-            <button class="modal-close-btn" onclick="closeDrugModal()"><i class="fa-solid fa-xmark"></i></button>
-            
-            <div id="modal-content"></div>
-
-            <!-- AlphaFold Server Integration Launcher Bar -->
-            <div class="af3-server-bar glass-card" style="margin-top: 1.5rem; background: rgba(0, 242, 254, 0.08); border-color: rgba(0, 242, 254, 0.3);">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                    <div>
-                        <h4 style="color: var(--accent-cyan); font-weight: 800; font-size: 1.1rem;"><i class="fa-solid fa-server"></i> AlphaFold Server Live 3D Pipeline</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Submit this candidate's FASTA sequence directly to AlphaFold Server for live 3D prediction and PDB/CIF download.</p>
-                    </div>
-                    <div style="display: flex; gap: 0.6rem;">
-                        <button class="card-action-btn" style="margin-top: 0; width: auto;" id="btn-copy-fasta" onclick="copyModalFasta()"><i class="fa-solid fa-copy"></i> Copy FASTA Sequence</button>
-                        <a href="https://alphafoldserver.com/" target="_blank" class="card-action-btn" style="margin-top: 0; width: auto; background: var(--grad-primary); color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Launch AlphaFold Server</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AlphaFold3 Structural Confidence & PAE Error Graphs Grid inside Modal -->
-            <div class="af3-graphs-container" style="margin-top: 1.5rem; border-top: 1px solid var(--border-glass); padding-top: 1.5rem;">
-                <h4 style="color: var(--accent-cyan); font-size: 1.2rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;">
-                    <i class="fa-solid fa-chart-line glow-icon"></i> AlphaFold3 Real Sequence-Driven 3D Model & PAE Heatmap Graphs
-                </h4>
-
-                <div class="af3-modal-grid">
-                    <!-- Graph 1: Real Sequence 3D Molecule WebGL Canvas -->
-                    <div class="graph-box">
-                        <div class="graph-title"><i class="fa-solid fa-cube"></i> Real Sequence 3D Structure (pLDDT Color Spectrum)</div>
-                        <div id="modal-3d-canvas-wrapper" class="modal-canvas-wrapper"></div>
-                    </div>
-
-                    <!-- Graph 2: Residue pLDDT Line Chart -->
-                    <div class="graph-box">
-                        <div class="graph-title"><i class="fa-solid fa-chart-line"></i> Residue-Level pLDDT Profile (0-100)</div>
-                        <div class="modal-chart-wrapper">
-                            <canvas id="modal-plddt-chart"></canvas>
-                        </div>
-                        <div class="plddt-legend-bar">
-                            <span class="lg-item lg-veryhigh">■ Very High (>90)</span>
-                            <span class="lg-item lg-high">■ High (70-90)</span>
-                            <span class="lg-item lg-low">■ Low (50-70)</span>
-                            <span class="lg-item lg-verylow">■ Very Low (<50)</span>
-                        </div>
-                    </div>
-
-                    <!-- Graph 3: 2D PAE (Predicted Aligned Error) Matrix Heatmap -->
-                    <div class="graph-box" style="grid-column: span 2;">
-                        <div class="graph-title"><i class="fa-solid fa-grid-2"></i> 2D PAE (Predicted Aligned Error) Domain Matrix (0 - 30 Å)</div>
-                        <div class="pae-heatmap-wrapper">
-                            <canvas id="modal-pae-heatmap" width="540" height="220"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="card">
+      <h3>Geometry check</h3>
+      <p class="note">Consecutive Cα atoms in a real polypeptide sit 3.80&nbsp;Å apart with
+        very little variance. This check is what distinguishes genuine coordinates from a
+        parametric curve.</p>
+      <div id="geometry-check"></div>
     </div>
 
-    <!-- Footer -->
-    <footer class="app-footer">
-        <p>© 2026 Seung H. Jung - CognitionBioChem Intelligence</p>
-        <p class="footer-sub">Generated with AlphaFold3 3D Structural Modeling & Structural Pharmacology Algorithms.</p>
-    </footer>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Structure <span class="badge computed">from your file</span></h3>
+        <div id="viewer-3d" class="viewer"></div>
+        <div class="legend" id="plddt-legend"></div>
+      </div>
+      <div class="card">
+        <h3>Per-residue pLDDT <span class="badge computed">from your file</span></h3>
+        <div class="chart-wrap"><canvas id="plddt-chart"></canvas></div>
+        <div id="plddt-stats" class="mini-stats"></div>
+      </div>
+    </div>
 
-    <script src="app.js"></script>
+    <div class="card">
+      <h3>Predicted aligned error <span class="badge computed">from your file</span></h3>
+      <div class="pae-row">
+        <canvas id="pae-canvas" width="520" height="520"></canvas>
+        <div class="colorbar">
+          <div class="colorbar-gradient"></div>
+          <div class="colorbar-labels"><span>0 Å</span><span id="pae-mid"></span><span id="pae-max-label"></span></div>
+          <p class="hint">Expected&nbsp;position&nbsp;error of residue <em>i</em> when the
+            structure is aligned on residue <em>j</em>. Low blocks off the diagonal mean
+            two regions are confidently placed relative to each other.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Low-confidence regions</h3>
+      <p class="note">Contiguous runs below pLDDT 70 — typically signal peptides, linkers
+        and disordered segments.</p>
+      <div id="low-conf"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────── PROVENANCE ─────────────────────────── -->
+<section class="panel" id="tab-provenance">
+  <div class="card">
+    <h2>Provenance model</h2>
+    <p>Every scientific value in this workbench carries a status. The UI cannot render a
+      number whose status is <code>placeholder</code> or <code>not_computed</code> — those
+      states produce a label, never a figure.</p>
+    <table class="prov-table">
+      <thead><tr><th>Status</th><th>Meaning</th><th>Required metadata</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge computed">computed</span></td>
+            <td>Calculated in this repository</td><td>method + software version</td></tr>
+        <tr><td><span class="badge predicted">predicted</span></td>
+            <td>Output of a model</td><td>model name + version</td></tr>
+        <tr><td><span class="badge database">database</span></td>
+            <td>Retrieved from a public database</td><td>accession</td></tr>
+        <tr><td><span class="badge literature">literature</span></td>
+            <td>Taken from a publication</td><td>DOI or PMID</td></tr>
+        <tr><td><span class="badge measured">measured</span></td>
+            <td>Wet-lab measurement</td><td>citation</td></tr>
+        <tr><td><span class="badge placeholder">placeholder</span></td>
+            <td>Illustrative only — never a result</td><td>a note saying so</td></tr>
+        <tr><td><span class="badge notcomputed">not computed</span></td>
+            <td>Honestly absent</td><td>why it is absent</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Retracted claims</h2>
+    <p>An earlier version of this project displayed affinity, confidence and safety values
+      as though they had been computed. No calculation produced them. They are preserved
+      here rather than deleted, so the record of what was asserted is not lost.</p>
+    <div id="retracted-list"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>CognitionBioChem — a structural pharmacology workbench.
+     Not affiliated with, endorsed by, or connected to Google DeepMind or the AlphaFold team.
+     AlphaFold is a trademark of Google DeepMind.</p>
+  <p class="hint">Data layer: <code>data/dataset.json</code> ·
+     Gate: <code>platform/validate.py</code> ·
+     Parser: <code>platform/cbc/predictor.py</code></p>
+</footer>
+
 </body>
 </html>

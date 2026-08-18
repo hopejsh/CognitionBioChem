@@ -3,3 +3,19 @@ node_modules/
 *.log
 .vscode/
 .idea/
+
+# Python
+.venv/
+# The 3.12 environment holds Boltz-2 and its downloaded weights (1.6 GB). Never committed.
+.venv312/
+__pycache__/
+*.py[cod]
+
+# CBC-Memory: the ledger under memory/ledger/ is the source of truth and IS tracked.
+# memory/index/ is a pure function of it and is rebuilt in milliseconds, so it is not.
+memory/index/
+memory/**/*.sqlite3
+memory/**/*.npz
+
+# Large raw workflow transcripts; the distilled findings in reviews/ are tracked.
+reviews/*_raw_full.json

@@ -1,0 +1,53 @@
+{
+ "hash": "cd955b3977b5056a7ee8e9b9754bea5e6cd2c896710f16c53ab6f25cb5fc5ca4",
+ "registered_utc": "2026-08-17T20:53:12+00:00",
+ "min_attainable_p": 0.0,
+ "content": {
+  "study_id": "ache-affinity-ranking-v1",
+  "question": "Does the Boltz-2 affinity head rank the potency of AChE inhibitors on this hardware in single-sequence mode, and does its per-compound error correlate with how heavily that compound has been assayed (a memorization signature)?",
+  "primary_metric": "spearman_rho_predicted_vs_measured_pIC50",
+  "primary_metric_justification": "Rank correlation, not absolute error, is the primary metric for three reasons. (1) The head was trained on POOLED Ki/Kd/IC50/EC50 labels, so its output has no single physical referent and its absolute scale is not interpretable, whereas its ordering can be. (2) The reference values are medians over ChEMBL records from different laboratories and assay conditions, carrying an inter-laboratory uncertainty that absolute error would attribute to the model. (3) The decision the platform would actually make with this model is a ranking decision \u2014 which compound to pursue \u2014 so ranking is the task-relevant quantity. Absolute error is retained as a SECONDARY metric because it is what the disputed Huperzine A observation measured, and dropping it would make this study unable to speak to the dispute it was designed to settle.",
+  "decision_threshold": "H1 confirmed if Spearman rho > 0.4 with Holm-adjusted p < 0.05; H2 confirmed if Spearman(|error|, n_chembl_records) < -0.3 with Holm-adjusted p < 0.05; H3 confirmed if the Huperzine A absolute error is within 2 SD of the mean absolute error across the set.",
+  "n_planned": 17,
+  "n_comparisons": 3,
+  "multiplicity_correction": "holm",
+  "alpha": 0.05,
+  "stopping_rule": "Fixed n: every compound in the pre-built set is predicted exactly once with seed=1. No interim analysis, no compound added or removed after predictions begin. A compound whose prediction fails technically is reported as a failure and excluded from the correlation with the exclusion stated, not silently dropped.",
+  "analysis_plan": "For each compound, predict the AChE(P22303 mature chain) + ligand complex with Boltz-2 2.2.1, msa=empty, accelerator=gpu(MPS), recycling_steps=3, diffusion_samples=1, seed=1. Read affinity_pred_value y and convert to a predicted pIC50 as 6 - y (y is log10 IC50 in uM). Measured pIC50 is -log10(median ChEMBL value in M). Compute Spearman rho (scipy.stats.spearmanr) for H1, Spearman of absolute error against the compound's ChEMBL record count for H2, and a z-score for Huperzine A for H3. Apply Holm across the three tests. Report rho with a bootstrap 95% CI (10000 resamples, seed 0).",
+  "hypotheses": [
+   {
+    "name": "H1_ranking_ability",
+    "statement": "The affinity head ranks AChE inhibitor potency better than chance in this configuration.",
+    "predicted_by": "position B (the head is usable; the single result was noise)",
+    "confirmed_if": "Spearman rho > 0.4 and Holm-adjusted p < 0.05",
+    "falsified_if": "Spearman rho <= 0.4, or the bootstrap 95% CI for rho includes 0"
+   },
+   {
+    "name": "H2_memorization_signature",
+    "statement": "Prediction error is smaller for compounds with more ChEMBL records, i.e. the head performs better on well-studied compounds, which is the signature of memorization rather than generalization.",
+    "predicted_by": "position A (heavily assayed pairs are likely memorized)",
+    "confirmed_if": "Spearman(|error|, n_chembl_records) < -0.3 with Holm-adjusted p < 0.05",
+    "falsified_if": "Spearman(|error|, n_chembl_records) >= -0.3, or its Holm-adjusted p >= 0.05"
+   },
+   {
+    "name": "H3_huperzine_representative",
+    "statement": "The disputed Huperzine A error is representative of the method's typical error rather than an outlier.",
+    "predicted_by": "position B (the single result was cherry-picked and atypical)",
+    "confirmed_if": "the Huperzine A absolute error lies within 2 SD of the mean absolute error across the set",
+    "falsified_if": "the Huperzine A absolute error lies more than 2 SD from the mean absolute error"
+   }
+  ],
+  "test_type": "parametric",
+  "n_permutations": 0,
+  "secondary_metrics": [
+   "mean_absolute_error_log10",
+   "rmse_log10",
+   "pearson_r_pIC50",
+   "kendall_tau",
+   "huperzine_absolute_error_log10",
+   "fraction_within_1_log"
+  ],
+  "exclusions": "Compounds without a measured IC50/Ki/Kd against CHEMBL220, without a parseable structure, or above the affinity head's documented 128-heavy-atom limit are excluded before registration, not after seeing predictions.",
+  "known_confounds": "1. Single-sequence mode (msa=empty) is documented by Boltz to degrade accuracy, so this measures a lower bound on the method's capability, not its ceiling. 2. ChEMBL record count is a proxy for how well studied a compound is, not for membership in the training set; Boltz-2 has not published an enumerable affinity training split, so H2 tests a signature of memorization rather than memorization itself. 3. Reference values are medians across heterogeneous assays and organisms. 4. The set is 17 compounds from one target, so nothing here generalizes to other targets."
+ }
+}

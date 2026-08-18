@@ -1,135 +1,254 @@
-# 🧬 CognitionBioChem: Structural Pharmacology & AlphaFold3 De Novo Drug Discovery Platform
+# CognitionBioChem
 
-[![AlphaFold3](https://img.shields.io/badge/AlphaFold3-DeepMind_Server-00f2fe?style=for-the-badge&logo=google)](https://alphafoldserver.com/)
-[![License](https://img.shields.io/badge/License-Private_Research-10b981?style=for-the-badge)](https://github.com/hopejsh/CognitionBioChem)
-[![Repository](https://img.shields.io/badge/GitHub-CognitionBioChem-a855f7?style=for-the-badge&logo=github)](https://github.com/hopejsh/CognitionBioChem)
+A structural pharmacology workbench for cognition-related CNS targets. It **runs real
+structure prediction**, computes real chemical and physicochemical properties, validates
+every record against a contract, and attaches a provenance record to every value.
 
----
-
-## 📋 Table of Contents
-
-* [📌 Executive Overview](#-executive-overview)
-* [🧪 Section 1: Cognition-Enhancing Natural Products Pharmacophore Matrix](#-section-1-cognition-enhancing-natural-products-pharmacophore-matrix)
-* [🧠 Section 2: 5-Brain-Region Targeted De Novo Therapeutics Pipeline (25 Candidates)](#-section-2-5-brain-region-targeted-de-novo-therapeutics-pipeline-25-candidates)
-* [📊 Section 3: In Silico ADMET & Safety Risk Profile Assessment](#-section-3-in-silico-admet--safety-risk-profile-assessment)
-* [🧊 Section 4: AlphaFold3 Structural Visualization & Server Integration](#-section-4-alphafold3-structural-visualization--server-integration)
-* [💻 Section 5: Web Platform Quick Start Guide](#-section-5-web-platform-quick-start-guide)
+[![Verification](https://img.shields.io/badge/verification-6_suites_passing-brightgreen?style=flat-square)](verify_all.py)
+[![Data gate](https://img.shields.io/badge/data_gate-91_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
+[![Structure](https://img.shields.io/badge/structure-Boltz--2_2.2.1_(MIT)-blue?style=flat-square)](platform/cbc/compute/structure.py)
+[![License](https://img.shields.io/badge/license-private_research-lightgrey?style=flat-square)](#license)
 
 ---
 
-## 📌 Executive Overview
+## Status disclosure — read this first
 
-**[CognitionBioChem](https://github.com/hopejsh/CognitionBioChem)** is a state-of-the-art computational biology, structural pharmacology, and artificial intelligence-driven drug discovery platform. It investigates cognition-enhancing Eastern medicine natural products and models **25 De Novo Targeted Bio-Conjugate Therapeutics** designed via **AlphaFold3** across 5 specific brain regions and cell types.
+Structure prediction is **real**: Boltz-2 v2.2.1 (MIT) runs locally on Apple MPS and produced
+every structure in `runs/`. ADMET prediction is **real** where it is in domain. Binding
+affinity is **predicted but not calibrated**, and is never reported as a free energy.
 
-The platform provides interactive 3D WebGL protein visualization, residue-level pLDDT confidence curves, 2D PAE (Predicted Aligned Error) heatmaps, and direct live integration with the official **[AlphaFold Server](https://alphafoldserver.com/)**.
+The peptide sequences are **hand-assembled concatenations of published natural motifs** joined
+by GGGGS linkers. They are a hypothesis catalogue, not de novo designs: no generative model
+produced them.
+
+Every value carries a provenance record. Fields marked *not computed* are honestly empty.
+
+### What the rebuild established
+
+An earlier version presented hand-typed numbers as AlphaFold3 output. A 12-discipline expert
+panel with independent adversarial verification (97 findings, 96 surviving) established that
+no AlphaFold3 existed anywhere in the codebase, that the "pLDDT" chart was
+`93 + sin(i·0.4)·4 + (charCode % 5)·0.5`, and that all 25 ΔG/K<sub>d</sub> pairs were
+thermodynamically impossible. Those renderers are gone; the numbers they produced are
+preserved under `retracted_claims` rather than deleted.
+
+**Then the fabricated values were replaced with computed ones and compared head to head.**
+Boltz-2 was run on 22 candidates:
+
+| Candidate | Legacy "AF3 pLDDT" | Real Boltz-2 | Δ |
+|---|---|---|---|
+| BasalSuper-AChE-TrkA-B5 | 95.2 | **49.0** | −46.2 |
+| MicroTrem2-Agonist-M1 | 94.7 | **50.7** | −44.0 |
+| PfcGluN2A-LTP-P3 | 93.9 | **50.0** | −43.9 |
+| … 19 of 22 overstated by 10–46 units | | | |
+| MicroAutophagy-Tag-M4 | 93.4 | 96.8 | +3.4 |
+
+`ipTM = 0.00` for every candidate, because each was predicted as a lone chain. No legacy
+candidate was ever predicted against its receptor, so no legacy number could have carried
+binding information. Real backbone geometry: Cα–Cα 3.77–3.80 Å, against 7.55 Å for the
+legacy parametric helix.
 
 ---
 
-## 🧪 Section 1: Cognition-Enhancing Natural Products Pharmacophore Matrix
+## What it does
 
-We analyzed 8 major natural compound classes from Eastern traditional medicine to map their 3D binding structures, key pharmacophoric moieties, and downstream signaling cascades:
-
-1. **Huperzine A (Lycopodium serratum)**: Sesquiterpene alkaloid. Targets AChE Catalytic Anionic Site (**CAS: Trp84, Phe330**) & **PAS (Trp286)** via cation-π interactions. Preserves acetylcholine and activates M1/α7 nAChR → CREB/BDNF.
-2. **Ginsenoside Rg1 (Panax ginseng)**: Dammarane-type triterpenoid saponin. Binds TrkB extracellular D5 domain (**Asp298, Glu319**), driving adult hippocampal neurogenesis in the Dentate Gyrus.
-3. **Ginkgolide B (Ginkgo biloba)**: 6-ring tri-lactone cage. Blocks PAFR (**His14, Tyr200**) and GABA_A channels, improving cerebral blood flow (CBF) and tight junction integrity.
-4. **Baicalein (Scutellaria baicalensis)**: Lipophilic trihydroxyflavone. Targets GSK-3β ATP pocket (**Val135, Asp133**) and 12/15-LOX, preventing Tau hyperphosphorylation and neurofibrillary tangles (NFT).
-5. **Curcumin (Curcuma longa)**: Polyphenolic diarylheptanoid. Alkylates Keap1 **Cys151**, inducing Nrf2 nuclear translocation, HO-1/NQO1 expression, and Aβ β-sheet insertion.
-6. **Onjisaponin V / DISS (Polygala tenuifolia)**: Triterpenoid saponin ester. Activates AMPK and inhibits mTOR, triggering autophagic flux (LC3-II) to clear toxic intracellular Aβ/Tau.
-7. **Salvianolic Acid B (Salvia miltiorrhiza)**: Polyphenolic acid tetramer. Blocks AChE PAS (**Trp286, Tyr72**) via π-stacking, preventing Aβ-AChE fibrillogenesis, and stimulates ER-β/eNOS vasodilation.
-8. **Asiatic Acid (Centella asiatica)**: Ursane pentacyclic triterpenoid. Binds TrkB and Keap1, promoting dendritic spine branching and synaptogenesis (PSD-95/Synaptophysin ↑).
+| Capability | Implementation | Status |
+|---|---|---|
+| Structure prediction | Boltz-2 2.2.1 (MIT), local, Apple MPS | **real** |
+| Predictor-output parsing | mmCIF + AF3 / AlphaFold DB / Boltz / Chai confidence files | real |
+| All-atom physical validity | clashes, bond lengths, chirality, disulfides | real |
+| Chemical structure validation | RDKit: parse, formula, InChIKey, stereochemistry | real |
+| Peptide properties | MW, net charge pH 7.4, pI, GRAVY, cysteine parity | real |
+| Thermodynamic consistency | ΔG = RT·ln(K<sub>d</sub>) at 298.15 K | real |
+| ADMET | ADMET-AI 2.0.1, 104 endpoints, with an applicability-domain gate | real, in domain only |
+| Corpus construction | ChEMBL/COCONUT under a versioned inclusion protocol | real |
+| Pre-registration | hash-locked plans with reachability checking | real |
+| Binding free energy | — | **not implemented, and see below** |
 
 ---
 
-## 🧠 Section 2: 5-Brain-Region Targeted De Novo Therapeutics Pipeline (25 Candidates)
+## Quick start
 
-We engineered **25 targeted bio-conjugate therapeutics (5 candidates per brain region)** by fusing minimal natural product pharmacophore warheads with AlphaFold3-optimized binding loop peptides:
+```bash
+python3 -m venv .venv && ./.venv/bin/pip install rdkit numpy scipy certifi
+```
+
+Run everything:
+
+```bash
+python3 verify_all.py
+```
+
+Six suites. The data gate is **expected** to exit non-zero on the legacy dataset — a gate
+that passed on it would be the defect.
+
+For structure prediction, a separate Python 3.12 environment is required because Boltz pins
+a scipy with no cp314 wheel:
+
+```bash
+/opt/homebrew/opt/python@3.12/bin/python3.12 -m venv .venv312 && ./.venv312/bin/pip install boltz
+```
+
+---
+
+## Why not AlphaFold 3
+
+AF3 **source code is Apache 2.0**, but the model parameters are request-only from Google
+DeepMind, non-commercial and non-redistributable, and require Linux with a CUDA 8.0+ GPU.
+Separately, the AlphaFold Server's prohibited-use policy forbids automated prediction of
+protein–ligand and protein–peptide binding, which is exactly what this platform would need.
+
+Boltz-2 is used instead: an AF3-class architecture with **MIT licence on both code and
+weights**. This is a licensing substitution, not a claim of scientific equivalence.
+
+Note a parser-relevant difference: **AF2 pLDDT is per-residue, AF3 pLDDT is per-atom.** Same
+name, different array rank.
+
+---
+
+## On the affinity head, and why no ΔG is emitted
+
+`affinity_pred_value` is a single scalar on a learned log₁₀(µM) potency axis, fitted to
+**pooled Ki/Kd/IC50/EC50/AC50/XC50 labels**. Its ordering is what the training objective
+optimised; its absolute level is an uncalibrated corpus-average offset.
+
+It must **never** be rendered as a binding free energy, and no qualified form ("apparent",
+"effective") is permitted. Three grounds:
+
+1. **Pooled referent — fatal.** Six endpoint types on one axis. The information needed to
+   recover ΔG° (endpoint type, [S], K<sub>m</sub>, mechanism) was destroyed at label
+   construction. That is an identifiability failure; no constant inverts a many-to-one map.
+2. **IC50 ≠ K<sub>d</sub>.** Cheng–Prusoff gives `Ki = IC50/(1 + [S]/Km)`. Even at the most
+   benign condition, [S] = K<sub>m</sub> competitive, IC50/Ki = 2 exactly — 0.411 kcal/mol of
+   one-signed bias, more than half the 0.68 log inter-laboratory reproducibility floor for
+   public IC50 data (Kalliokoski et al., *PLoS ONE* 8:e61007, 2013).
+3. **Sign.** The documented conversion gives **+8.04** where `thermo.kd_to_dg` gives
+   **−8.04**. A caveated "apparent ΔG = +8.04" is not a hedged claim; it states the wrong
+   direction for a thermodynamic driving force.
+
+Enforced by `platform/check_naming.py`, which runs in `verify_all.py` and is verified against
+a negative control.
+
+By contrast, ΔG° is defined as `−RT ln K°` at standard state c° = 1 M, is **negative** for
+favourable binding, and **does not depend on assay conditions**. Any quantity that moves when
+[S] changes is, by that fact alone, not ΔG°.
+
+---
+
+## Pre-registration
+
+`platform/cbc/prespec.py` freezes a hypothesis, primary metric, threshold and analysis plan
+under a content hash **before** any data is seen, and refuses to register a plan that is
+broken. It rejects three defects at registration time:
+
+- **unreachable verdicts** — a criterion whose smallest attainable adjusted p already exceeds
+  α can never fire. A real proposal in review had exactly this defect.
+- **unfalsifiable hypotheses** — `confirmed_if` identical to `falsified_if`.
+- **non-discriminating plans** — every hypothesis predicted by the same position, so no
+  outcome could distinguish rival positions.
+
+The reachability arithmetic distinguishes permutation tests (floor `1/(B+1)`) from parametric
+tests (no floor from n alone) — conflating the two makes the check wrong in both directions.
+
+### The first pre-registered study
+
+`platform/studies/ache_affinity_benchmark.py`, plan hash `cd955b3977b5`, registered before any
+prediction ran. n = 15 of 17 planned.
+
+| Hypothesis | Predicted by | Verdict |
+|---|---|---|
+| H1 ranking ability | "the head is usable" | **falsified** |
+| H2 memorization signature | "the pair is memorized" | **falsified** |
+| H3 the disputed result is representative | "it was cherry-picked" | **confirmed** |
+
+Primary: Spearman ρ = 0.304, bootstrap 95% CI **[−0.329, 0.766]**, Holm p = 0.814. The
+interval spans zero: on this set the affinity head shows **no demonstrated ability to rank**
+AChE inhibitor potency.
+
+The protocol audit automatically flagged the deviation `n_observed=15 ≠ n_planned=17` (two
+salts the affinity head rejected). Without pre-registration that would have silently become
+"we ran 15".
+
+**Stated limitation, measured.** 13 of 17 reference values rest on a *single* ChEMBL record.
+For huperzine A, ChEMBL holds 23 IC50 records spanning **3.99 log units** (0.54–5280 nM,
+median 47 nM) and the one captured (5.0 nM) sits at the **17th percentile**. Measured against
+the median the model's error falls from 2.41 to **1.43 log** — roughly 40% of the headline
+discrepancy was an artifact of which literature value happened to be retrieved. With a
+reference noise floor of σ ≈ 0.99 log for this pair and a mean absolute error of 1.36 log,
+**model error and reference error are the same order of magnitude and this study cannot
+separate them.**
+
+---
+
+## Applicability domain
+
+A refusal to predict is principled only when **the stated ground is the computed ground**.
+
+The original 1000 Da ADMET rule was **deleted** because it failed that test: the candidate at
+4910 Da is *inside* the training molecular-weight bounding box (training max 5299.5 Da), so
+molecular weight is not what places it outside the domain. The refusal survives on a counted
+ground instead — the heaviest single covalent species among 53,525 training molecules is
+2285.7 Da and the query is 2.16× that.
+
+Also measured, and material: **20.9% of that training set are duplicate canonical SMILES**,
+which breaks the exchangeability premise every conformal guarantee rests on.
+
+---
+
+## Repository layout
 
 ```
-                              ┌───────────────────────────────────────────────────────────┐
-                              │       5-BRAIN-REGION TARGETED DRUG DISCOVERY MAP          │
-                              └─────────────────────────────┬─────────────────────────────┘
-                                                            │
-       ┌──────────────────────┬──────────────────────┼──────────────────────┬──────────────────────┐
-       ▼                      ▼                      ▼                      ▼                      ▼
- [1. HIPPOCAMPUS]      [2. PFC CORTEX]       [3. BASAL FOREBRAIN]    [4. MICROGLIA M2]     [5. ASTROCYTE / BBB]
- • HippoDrugs X1-X5    • PfcDrugs P1-P5      • BasalDrugs B1-B5     • MicroDrugs M1-M5    • AstroDrugs A1-A5
- • TrkB, FZD8, AChE    • α7 nAChR, GluN2A    • AChE PAS/CAS, M1     • Trem2, Keap1, TLR4  • eNOS, EAAT2, PAFR
+platform/
+  cbc/chem.py         RDKit structure validation and descriptors
+  cbc/peptide.py      sequence validation and physicochemical properties
+  cbc/thermo.py       ΔG ↔ Kd consistency, honest method error bars
+  cbc/predictor.py    mmCIF + confidence-file parser (protein and ligand atoms)
+  cbc/physics.py      all-atom validity: clashes, bonds, chirality, disulfides
+  cbc/provenance.py   the Value/Provenance types the UI is built on
+  cbc/prespec.py      hash-locked pre-specification with reachability checks
+  cbc/corpus.py       protocol-defined corpus construction
+  cbc/compute/        structure.py (Boltz-2), admet.py (ADMET-AI)
+  studies/            pre-registered studies
+  validate.py         the data-integrity gate
+  check_naming.py     build guard: no pooled score rendered as a free energy
+runs/                 content-addressed prediction artefacts + manifest
+prespec/              registered, hash-locked analysis plans
+memory/               append-only provenance ledger (see memory/DESIGN.md)
+reviews/              panel findings, adjudications, generated report
+research/             database, algorithm and methodology surveys
+data/                 validated, provenance-carrying data
 ```
 
-### 1. Hippocampus (CA1/CA3 Pyramidal Neurons & Dentate Gyrus SGZ)
-* **HippoTrk-Saponin-X1**: Ginsenoside Rg1 Dammarane + BDNF Loop-5 (`CVDRENPVEWVRAC`). TrkB D5 binder ($\Delta G: -18.4\text{ kcal/mol}$). Neurogenesis & CA1 LTP (+280%).
-* **HippoAChE-AlkaPept-X2**: Huperzine A Pyridone + PAS Peptide (`KWWKFLRR`). AChE CAS/PAS dual clamper ($\Delta G: -16.2\text{ kcal/mol}$).
-* **HippoNrf-KeapDecoy-X3**: Curcumin Methoxyphenol + Nrf2 ETGE (`DEETGEFLFQLP`). Keap1 Kelch decoy ($\Delta G: -15.8\text{ kcal/mol}$).
-* **HippoWnt-FzdAgonist-X4**: Asiatic Acid Ursane + Wnt3a Loop (`CKCHGMSGSCSTK`). Frizzled-8 CRD activator ($\Delta G: -16.9\text{ kcal/mol}$).
-* **HippoDual-TrkB-AMPK-X5**: Presenegenin + TrkB Binder (`MCVCDRENP`) + AMPK Activator (`FLRRFWRR`). ($\Delta G: -19.1\text{ kcal/mol}$). Dendritic spine density (+310%).
+---
 
-### 2. Prefrontal Cortex (PFC Layer III/V Pyramidal Neurons)
-* **PfcACh-PAM-P1**: Huperzine A + α7 nAChR ECD Peptide (`SEAEFRLFRDVW`). Working memory span restoration (+240%).
-* **PfcTrk-ErkEnhancer-P2**: Ginsenoside Rb1 + TrkB Loop (`VRACPTGKCEGL`). c-Fos & Arc gene transcription.
-* **PfcGluN2A-LTP-P3**: Salvianolic Acid B + GluN2A Tuner (`GCPWECDRRAC`). Synaptic EPSC fine-tuning.
-* **PfcGsk-WntLinker-P4**: Baicalein + GSK-3β Ser9 Mimetic (`GRPRTTSFAESC`). Stress cognitive flexibility preservation.
-* **PfcDual-nACh-GluN2A-P5**: Bispecific α7 nAChR + GluN2A Fusion ($\Delta G: -18.7\text{ kcal/mol}$). Information processing speed 2x.
+## Provenance model
 
-### 3. Basal Forebrain (Nucleus Basalis of Meynert NBM)
-* **BasalAChE-GorgeBlock-B1**: Huperzine A + PAS Clamper (`KWWKFLRRFWRR`). Synaptic ACh +350%.
-* **BasalM1-PAM-B2**: Ferulic Acid + M1 Loop (`CDERACPRCHGF`). M-current inhibition & burst firing.
-* **BasalNgf-TrkA-B3**: Ginsenoside Rg3 + NGF Loop-1 (`EPKHVNCDRENP`). Cholinergic soma atrophy prevention.
-* **BasalAChE-Abeta-B4**: Salvianolic Acid B + Aβ Disruptor (`KLVFFAED`). Toxic Aβ-AChE seed blockade.
-* **BasalSuper-AChE-TrkA-B5**: Tri-functional Conjugate (Huperzine A + TrkA Binder + M1 PAM). ($\Delta G: -19.5\text{ kcal/mol}$). Master Meynert rescue.
-
-### 4. Microglia M2 Polarization (CNS Immune Progenitors)
-* **MicroTrem2-Agonist-M1**: Curcumin + Trem2 Peptide (`GRLVGHPWECDR`). M1 to Aβ phagocytic M2 transition.
-* **MicroNrf2-AntiInflam-M2**: Asiatic Acid + Keap1 Decoy (`DEETGEWRWYCP`). NF-κB p65 & TNF-α/IL-1β suppression.
-* **MicroTlr4-Antagonist-M3**: Baicalein + TLR4 Inhibitor (`SEAEFRLFRDVW`). Cytokine storm blockade.
-* **MicroAutophagy-Tag-M4**: Onjisaponin Presenegenin + LC3 Motif (`FLRRFWRR`). Aβ lysosomal degradation (+420%).
-* **MicroDual-Trem2-Nrf2-M5**: Bispecific Trem2 Agonist + Nrf2 Decoy ($\Delta G: -18.9\text{ kcal/mol}$). Dual inflammation/phagocytosis controller.
-
-### 5. Astrocytes & Blood-Brain Barrier (Neurovascular Unit)
-* **AstroEos-NO-A1**: Salvianolic Acid B + ER-β Loop (`ERACPDCHSEAE`). eNOS Ser1177 phosphorylation → Cerebral Blood Flow (CBF) +45%.
-* **AstroEaat2-Up-A2**: Ginsenoside Rb1 + EAAT2 Promoter (`VRACPTGKCEGL`). Synaptic glutamate clearance.
-* **AstroZo1-Protect-A3**: Ginkgolide B + ZO-1 Stabilizer (`CKCHGMSGSCSTK`). BMEC tight junction protection.
-* **AstroPafr-Block-A4**: Bilobalide + PAFR Hydrophobic Antagonist. Ischemia neurovascular guard.
-* **AstroSuper-CBF-EAAT2-A5**: Bispecific eNOS Stimulator + EAAT2 Upregulator ($\Delta G: -18.2\text{ kcal/mol}$). Neurovascular unit shield.
+Every scientific value is `{value, units, provenance}`. The UI cannot render a number whose
+status is `placeholder` or `not_computed` — those produce a label, never a figure.
+`Provenance.__post_init__` rejects a `computed` value with no software recorded and a
+`literature` value with no source id, so the constraint holds at construction.
 
 ---
 
-## 📊 Section 3: In Silico ADMET & Safety Risk Profile Assessment
+## Known limitations
 
-All 25 candidates underwent rigorous computational safety screening:
-* **hERG Cardiotoxicity Risk**: **IC50 > 50 μM (0% Risk)**. Hydrophobic peptide linkers sterically prevent binding to hERG pore **Tyr652/Phe656** residues.
-* **Seizure & Excitotoxicity Risk**: **Seizure Index = 0.01 - 0.02 / 1.0 (Negligible)**. Allosteric NMDAR tuners feature capped Emax (135%), preventing Ca²⁺ excitotoxic overload.
-* **Cytokine Storm Potential**: **Low Immunogenicity**. Microglia-targeting candidates actively suppress TLR4/MD2 immune activation.
-* **Receptor Desensitization**: **Tolerance Downregulation < 4.2% after 30 days**. Biased agonist signaling redirects receptors to recycling endosomes.
-
----
-
-## 🧊 Section 4: AlphaFold3 Structural Visualization & Server Integration
-
-* **3D WebGL Molecular Engine**: Real sequence-driven backbone topology parsing with residue-specific pLDDT color spectrum (Very High >90 Cyan, High 70-90 Green, Low 50-70 Amber).
-* **AlphaFold3 pLDDT Line Chart**: Residue-by-residue confidence profile curve (1 ~ N) rendered using Chart.js.
-* **2D PAE Heatmap Matrix**: Predicted Aligned Error 2D domain contact heatmap (0 - 30 Å) rendered via HTML5 Canvas 2D graphics.
-* **Live AlphaFold Server Connection**: Direct 1-click **FASTA Sequence Copy** and launch button linking to [AlphaFold Server](https://alphafoldserver.com/).
+- Structure predictions run in single-sequence mode (`msa: empty`), which Boltz documents as
+  degrading accuracy. Results are a lower bound on the method's capability.
+- Seeding fixes the noise draw but **not** floating-point reduction order on Metal, and there
+  is a documented `aten::linalg_svd` CPU fallback. Byte-reproducibility is not claimed.
+- `corpus.py` draws a flat activity budget per target rather than retrieving every record per
+  compound, which is why most benchmark references rest on one measurement.
+- ChEMBL's `natural_product` flag is noisy: it labels donepezil and metoclopramide as
+  NP-derived. `NP_DERIVED` means "ChEMBL asserts NP provenance", not "established".
+- Legacy binding-site residue annotations mix organism numbering conventions and include
+  eight residue identities that are wrong in every convention (see `data/residue_audit.json`).
+- No wet-lab validation of anything.
 
 ---
 
-## 💻 Section 5: Web Platform Quick Start Guide
+## License
 
-The platform is built using pure Vanilla HTML5, CSS3 Glassmorphism, JavaScript, Three.js WebGL, and Chart.js.
+Private research. Not affiliated with, endorsed by, or connected to Google DeepMind or the
+AlphaFold team. AlphaFold is a trademark of Google DeepMind.
 
-### How to Run Locally:
-1. Clone this repository or open the project folder.
-2. Open `index.html` directly in any web browser:
-   ```text
-   file:///Users/seunghojung/Documents/DeepMind_Bio/index.html
-   ```
-3. Navigate through the top navigation tabs:
-   * **Dashboard**: High-level computational biology summary.
-   * **Natural Pharmacophores**: Split-view pharmacophore explorer for 8 natural products.
-   * **Brain Targets**: Interactive mapping of 5 brain regions and cellular subfields.
-   * **Signaling Cascades**: Intracellular kinase cascades (TrkB/CREB, Nrf2/ARE, Wnt/β-Catenin).
-   * **AF3 TOP 10 Candidates**: 3D WebGL viewer & leaderboard ranking.
-   * **25 De Novo Drug Center**: 3-column drug grid with interactive 3D/2D AlphaFold3 modal popups.
-
----
-
-© 2026 Seung H. Jung - **CognitionBioChem Intelligence**
+© 2026 Seung H. Jung

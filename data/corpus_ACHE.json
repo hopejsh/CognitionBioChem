@@ -1,0 +1,803 @@
+{
+ "target_chembl_id": "CHEMBL220",
+ "target_name": "Acetylcholinesterase",
+ "organism": "Homo sapiens",
+ "protocol": {
+  "version": "np-cognition-v1",
+  "description": "Natural products with a measured potency value against a named human target implicated in cognition, from an assay ChEMBL scores as directly assigned to a single protein.",
+  "require_parseable_structure": true,
+  "require_defined_stereochemistry": false,
+  "min_assay_confidence": 8,
+  "allowed_activity_types": [
+   "IC50",
+   "EC50",
+   "Ki",
+   "Kd",
+   "AC50",
+   "XC50"
+  ],
+  "require_pure_compound": true,
+  "max_mol_weight": 2000.0,
+  "exclude_pains": false,
+  "admit_tiers": [
+   "NP_ISOLATED",
+   "NP_DERIVED"
+  ],
+  "prefer_cns_permeable": true
+ },
+ "protocol_summary": "np-cognition-v1: potency (IC50/EC50/Ki/Kd/AC50/XC50) on a named human target, assay confidence >= 8, pure compound, MW <= 2000 Da, parseable structure.",
+ "denominator": {
+  "activities_examined": 300,
+  "distinct_molecules_examined": 258,
+  "molecules_retrieved": 258,
+  "admitted": 18,
+  "rejected": {
+   "unparseable": 0,
+   "tier_excluded": 240,
+   "no_structure": 0,
+   "too_large": 0
+  },
+  "tiers_seen": {
+   "SYNTHETIC": 240,
+   "NP_DERIVED": 18
+  },
+  "tiers_admitted": [
+   "NP_ISOLATED",
+   "NP_DERIVED"
+  ]
+ },
+ "compounds": [
+  {
+   "inchikey": "LULNWZDBKTWDGK-UHFFFAOYSA-M",
+   "inchikey_skeleton": "LULNWZDBKTWDGK",
+   "canonical_smiles": "CN(C)C(=O)Oc1cccc([N+](C)(C)C)c1.[Br-]",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL54126",
+   "protocol_version": "np-cognition-v1",
+   "name": "NEOSTIGMINE BROMIDE",
+   "formula": "C12H19BrN2O2",
+   "mol_weight": 303.2,
+   "clogp": -1.052,
+   "tpsa": 29.54,
+   "hbd": 0,
+   "heavy_atoms": 17,
+   "stereocenters_total": 0,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL54126",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 22.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL636834",
+     "document": "CHEMBL1126972"
+    },
+    {
+     "chembl_id": "CHEMBL54126",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 2.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL645004",
+     "document": "CHEMBL1135872"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "TTWJBBZEZQICBI-UHFFFAOYSA-N",
+   "inchikey_skeleton": "TTWJBBZEZQICBI",
+   "canonical_smiles": "CCN(CC)CCNC(=O)c1cc(Cl)c(N)cc1OC",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL86",
+   "protocol_version": "np-cognition-v1",
+   "name": "METOCLOPRAMIDE",
+   "formula": "C14H22ClN3O2",
+   "mol_weight": 299.802,
+   "clogp": 2.002,
+   "tpsa": 67.59,
+   "hbd": 2,
+   "heavy_atoms": 20,
+   "stereocenters_total": 0,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL86",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 20000.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL636834",
+     "document": "CHEMBL1126972"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "JBKPUQTUERUYQE-UHFFFAOYSA-O",
+   "inchikey_skeleton": "JBKPUQTUERUYQE",
+   "canonical_smiles": "C[n+]1ccccc1C=NO",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL1420",
+   "protocol_version": "np-cognition-v1",
+   "name": "PRALIDOXIME",
+   "formula": "C7H9N2O+",
+   "mol_weight": 137.162,
+   "clogp": 0.319,
+   "tpsa": 36.47,
+   "hbd": 1,
+   "heavy_atoms": 10,
+   "stereocenters_total": 0,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL1420",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 340000.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644102",
+     "document": "CHEMBL1123431"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "PIJVFDBKTWXHHD-HIFRSBDPSA-N",
+   "inchikey_skeleton": "PIJVFDBKTWXHHD",
+   "canonical_smiles": "CNC(=O)Oc1ccc2c(c1)[C@]1(C)CCN(C)[C@@H]1N2C",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL94",
+   "protocol_version": "np-cognition-v1",
+   "name": "PHYSOSTIGMINE",
+   "formula": "C15H21N3O2",
+   "mol_weight": 275.352,
+   "clogp": 1.774,
+   "tpsa": 44.81,
+   "hbd": 1,
+   "heavy_atoms": 20,
+   "stereocenters_total": 2,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL94",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 30.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL645001",
+     "document": "CHEMBL1128816"
+    },
+    {
+     "chembl_id": "CHEMBL94",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 14.13,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL638603",
+     "document": "CHEMBL1131149"
+    },
+    {
+     "chembl_id": "CHEMBL94",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 27.9,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644099",
+     "document": "CHEMBL1131001"
+    },
+    {
+     "chembl_id": "CHEMBL94",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 61.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644838",
+     "document": "CHEMBL1126447"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "YLJREFDVOIBQDA-UHFFFAOYSA-N",
+   "inchikey_skeleton": "YLJREFDVOIBQDA",
+   "canonical_smiles": "Nc1c2c(nc3ccccc13)CCCC2",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL95",
+   "protocol_version": "np-cognition-v1",
+   "name": "TACRINE",
+   "formula": "C13H14N2",
+   "mol_weight": 198.269,
+   "clogp": 2.696,
+   "tpsa": 38.91,
+   "hbd": 1,
+   "heavy_atoms": 15,
+   "stereocenters_total": 0,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL95",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 218.78,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL638603",
+     "document": "CHEMBL1131149"
+    },
+    {
+     "chembl_id": "CHEMBL95",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 254.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644115",
+     "document": "CHEMBL1149992"
+    },
+    {
+     "chembl_id": "CHEMBL95",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 33.5,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644838",
+     "document": "CHEMBL1126447"
+    },
+    {
+     "chembl_id": "CHEMBL95",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 143.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644109",
+     "document": "CHEMBL1126001"
+    },
+    {
+     "chembl_id": "CHEMBL95",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 95.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644839",
+     "document": "CHEMBL1134774"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "CAEPIUXAUPYIIJ-UHFFFAOYSA-N",
+   "inchikey_skeleton": "CAEPIUXAUPYIIJ",
+   "canonical_smiles": "CC[N+](C)(C)c1cccc(O)c1.[Br-]",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL60745",
+   "protocol_version": "np-cognition-v1",
+   "name": "EDROPHONIUM BROMIDE",
+   "formula": "C10H16BrNO",
+   "mol_weight": 246.148,
+   "clogp": -1.017,
+   "tpsa": 20.23,
+   "hbd": 1,
+   "heavy_atoms": 13,
+   "stereocenters_total": 0,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL60745",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "Ki",
+     "value_nm": 1.63,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL641011",
+     "document": "CHEMBL1131149"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "QTPHSDHUHXUYFE-KIYNQFGBSA-N",
+   "inchikey_skeleton": "QTPHSDHUHXUYFE",
+   "canonical_smiles": "CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL208599",
+   "protocol_version": "np-cognition-v1",
+   "name": "HUPRINE X",
+   "formula": "C18H19ClN2",
+   "mol_weight": 298.817,
+   "clogp": 4.857,
+   "tpsa": 38.91,
+   "hbd": 1,
+   "heavy_atoms": 21,
+   "stereocenters_total": 2,
+   "stereocenters_undefined": 1,
+   "implied_stereoisomers": 2,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL208599",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "Ki",
+     "value_nm": 0.026,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL641012",
+     "document": "CHEMBL1145007"
+    }
+   ],
+   "quality_flags": [
+    "1 unspecified stereocentre(s): at most 2 stereoisomers, but this is an upper bound only. If the relative configuration is known and only the absolute configuration is open, the true count is 2. Resolve against the source record before treating this as ambiguity.",
+    "1 of 2 stereocentres are unspecified, so this flat structure denotes up to 2 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ]
+  },
+  {
+   "inchikey": "ZRJBHWIHUMBLCN-YQEJDHNASA-N",
+   "inchikey_skeleton": "ZRJBHWIHUMBLCN",
+   "canonical_smiles": "C/C=C1\\[C@H]2C=C(C)C[C@]1(N)c1ccc(=O)[nH]c1C2",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL395280",
+   "protocol_version": "np-cognition-v1",
+   "name": "HUPERZINE A",
+   "formula": "C15H18N2O",
+   "mol_weight": 242.322,
+   "clogp": 1.998,
+   "tpsa": 58.88,
+   "hbd": 2,
+   "heavy_atoms": 18,
+   "stereocenters_total": 2,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL395280",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 5.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL643374",
+     "document": "CHEMBL1129143"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "VMXUWOKSQNHOCA-UHFFFAOYSA-N",
+   "inchikey_skeleton": "VMXUWOKSQNHOCA",
+   "canonical_smiles": "CNC(=C[N+](=O)[O-])NCCSCc1ccc(CN(C)C)o1",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL1790041",
+   "protocol_version": "np-cognition-v1",
+   "name": "RANITIDINE",
+   "formula": "C13H22N4O3S",
+   "mol_weight": 314.411,
+   "clogp": 1.459,
+   "tpsa": 83.58,
+   "hbd": 2,
+   "heavy_atoms": 21,
+   "stereocenters_total": 0,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL1790041",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 650.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL636834",
+     "document": "CHEMBL1126972"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "ADEBPBSSDYVVLD-UHFFFAOYSA-N",
+   "inchikey_skeleton": "ADEBPBSSDYVVLD",
+   "canonical_smiles": "COc1cc2c(cc1OC)C(=O)C(CC1CCN(Cc3ccccc3)CC1)C2",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL502",
+   "protocol_version": "np-cognition-v1",
+   "name": "DONEPEZIL",
+   "formula": "C24H29NO3",
+   "mol_weight": 379.5,
+   "clogp": 4.361,
+   "tpsa": 38.77,
+   "hbd": 0,
+   "heavy_atoms": 28,
+   "stereocenters_total": 1,
+   "stereocenters_undefined": 1,
+   "implied_stereoisomers": 2,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [
+    "MW 380 > 360 (CNS MPO desirable limit)"
+   ],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL502",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 2.33,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644838",
+     "document": "CHEMBL1126447"
+    },
+    {
+     "chembl_id": "CHEMBL502",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 16.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644839",
+     "document": "CHEMBL1134774"
+    }
+   ],
+   "quality_flags": [
+    "1 unspecified stereocentre(s): at most 2 stereoisomers, but this is an upper bound only. If the relative configuration is known and only the absolute configuration is open, the true count is 2. Resolve against the source record before treating this as ambiguity.",
+    "1 of 1 stereocentres are unspecified, so this flat structure denotes up to 2 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ]
+  },
+  {
+   "inchikey": "HLVVITIHAZBPKB-UHFFFAOYSA-N",
+   "inchikey_skeleton": "HLVVITIHAZBPKB",
+   "canonical_smiles": "Nc1c2c(nc3ccccc13)CCCC2O",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL51934",
+   "protocol_version": "np-cognition-v1",
+   "name": "VELNACRINE",
+   "formula": "C13H14N2O",
+   "mol_weight": 214.268,
+   "clogp": 2.187,
+   "tpsa": 59.14,
+   "hbd": 2,
+   "heavy_atoms": 16,
+   "stereocenters_total": 1,
+   "stereocenters_undefined": 1,
+   "implied_stereoisomers": 2,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL51934",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 164.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644838",
+     "document": "CHEMBL1126447"
+    }
+   ],
+   "quality_flags": [
+    "1 unspecified stereocentre(s): at most 2 stereoisomers, but this is an upper bound only. If the relative configuration is known and only the absolute configuration is open, the true count is 2. Resolve against the source record before treating this as ambiguity.",
+    "1 of 1 stereocentres are unspecified, so this flat structure denotes up to 2 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ]
+  },
+  {
+   "inchikey": "PBHFNBQPZCRWQP-IJHRGXPZSA-N",
+   "inchikey_skeleton": "PBHFNBQPZCRWQP",
+   "canonical_smiles": "CN1CC[C@@]2(C)c3cc(OC(=O)Nc4ccccc4)ccc3N(C)C12",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL54727",
+   "protocol_version": "np-cognition-v1",
+   "name": "CHEMBL54727",
+   "formula": "C20H23N3O2",
+   "mol_weight": 337.423,
+   "clogp": 3.667,
+   "tpsa": 44.81,
+   "hbd": 1,
+   "heavy_atoms": 25,
+   "stereocenters_total": 2,
+   "stereocenters_undefined": 1,
+   "implied_stereoisomers": 2,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL54727",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 24.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644099",
+     "document": "CHEMBL1131001"
+    }
+   ],
+   "quality_flags": [
+    "1 unspecified stereocentre(s): at most 2 stereoisomers, but this is an upper bound only. If the relative configuration is known and only the absolute configuration is open, the true count is 2. Resolve against the source record before treating this as ambiguity.",
+    "1 of 2 stereocentres are unspecified, so this flat structure denotes up to 2 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ]
+  },
+  {
+   "inchikey": "HKGWQUVGHPDEBZ-OLZOCXBDSA-N",
+   "inchikey_skeleton": "HKGWQUVGHPDEBZ",
+   "canonical_smiles": "CN1CC[C@@]2(C)c3cc(O)ccc3N(C)[C@@H]12",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL310934",
+   "protocol_version": "np-cognition-v1",
+   "name": "CHEMBL310934",
+   "formula": "C13H18N2O",
+   "mol_weight": 218.3,
+   "clogp": 1.761,
+   "tpsa": 26.71,
+   "hbd": 1,
+   "heavy_atoms": 16,
+   "stereocenters_total": 2,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL310934",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": null,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644100",
+     "document": "CHEMBL1131001"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "PIJVFDBKTWXHHD-AWKYBWMHSA-N",
+   "inchikey_skeleton": "PIJVFDBKTWXHHD",
+   "canonical_smiles": "CNC(=O)Oc1ccc2c(c1)[C@@]1(C)CCN(C)C1N2C",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL76640",
+   "protocol_version": "np-cognition-v1",
+   "name": "(+)-PHYSOSTIGMINE",
+   "formula": "C15H21N3O2",
+   "mol_weight": 275.352,
+   "clogp": 1.774,
+   "tpsa": 44.81,
+   "hbd": 1,
+   "heavy_atoms": 20,
+   "stereocenters_total": 2,
+   "stereocenters_undefined": 1,
+   "implied_stereoisomers": 2,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL76640",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 9890.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644099",
+     "document": "CHEMBL1131001"
+    }
+   ],
+   "quality_flags": [
+    "1 unspecified stereocentre(s): at most 2 stereoisomers, but this is an upper bound only. If the relative configuration is known and only the absolute configuration is open, the true count is 2. Resolve against the source record before treating this as ambiguity.",
+    "1 of 2 stereocentres are unspecified, so this flat structure denotes up to 2 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ]
+  },
+  {
+   "inchikey": "PBHFNBQPZCRWQP-ROPPNANJSA-N",
+   "inchikey_skeleton": "PBHFNBQPZCRWQP",
+   "canonical_smiles": "CN1CC[C@]2(C)c3cc(OC(=O)Nc4ccccc4)ccc3N(C)C12",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL75919",
+   "protocol_version": "np-cognition-v1",
+   "name": "CHEMBL75919",
+   "formula": "C20H23N3O2",
+   "mol_weight": 337.423,
+   "clogp": 3.667,
+   "tpsa": 44.81,
+   "hbd": 1,
+   "heavy_atoms": 25,
+   "stereocenters_total": 2,
+   "stereocenters_undefined": 1,
+   "implied_stereoisomers": 2,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL75919",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 3500.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644099",
+     "document": "CHEMBL1131001"
+    }
+   ],
+   "quality_flags": [
+    "1 unspecified stereocentre(s): at most 2 stereoisomers, but this is an upper bound only. If the relative configuration is known and only the absolute configuration is open, the true count is 2. Resolve against the source record before treating this as ambiguity.",
+    "1 of 2 stereocentres are unspecified, so this flat structure denotes up to 2 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ]
+  },
+  {
+   "inchikey": "GPONHWSDHNCYFZ-PYMCNQPYSA-N",
+   "inchikey_skeleton": "GPONHWSDHNCYFZ",
+   "canonical_smiles": "CNC(=O)Oc1ccc2c(c1)[C@]1(C)CCN(C)C1N2",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL431784",
+   "protocol_version": "np-cognition-v1",
+   "name": "CHEMBL431784",
+   "formula": "C14H19N3O2",
+   "mol_weight": 261.325,
+   "clogp": 1.75,
+   "tpsa": 53.6,
+   "hbd": 2,
+   "heavy_atoms": 19,
+   "stereocenters_total": 2,
+   "stereocenters_undefined": 1,
+   "implied_stereoisomers": 2,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL431784",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 56.7,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644099",
+     "document": "CHEMBL1131001"
+    }
+   ],
+   "quality_flags": [
+    "1 unspecified stereocentre(s): at most 2 stereoisomers, but this is an upper bound only. If the relative configuration is known and only the absolute configuration is open, the true count is 2. Resolve against the source record before treating this as ambiguity.",
+    "1 of 2 stereocentres are unspecified, so this flat structure denotes up to 2 distinct stereoisomers. For a natural product whose activity is stereospecific, that makes the record biologically ambiguous."
+   ]
+  },
+  {
+   "inchikey": "BMRFESVZYWRROS-UHFFFAOYSA-N",
+   "inchikey_skeleton": "BMRFESVZYWRROS",
+   "canonical_smiles": "Nc1c2c(nc3c1CCCC3)CCCC2",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL263198",
+   "protocol_version": "np-cognition-v1",
+   "name": "OCTAAMINOACRIDINE",
+   "formula": "C13H18N2",
+   "mol_weight": 202.301,
+   "clogp": 2.421,
+   "tpsa": 38.91,
+   "hbd": 1,
+   "heavy_atoms": 15,
+   "stereocenters_total": 0,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL263198",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 360.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644109",
+     "document": "CHEMBL1126001"
+    }
+   ],
+   "quality_flags": []
+  },
+  {
+   "inchikey": "YLUSMKAJIQOXPV-UHFFFAOYSA-N",
+   "inchikey_skeleton": "YLUSMKAJIQOXPV",
+   "canonical_smiles": "Nc1c2c(nc3c1CCC3)CCCC2",
+   "source": "ChEMBL",
+   "source_id": "CHEMBL130880",
+   "protocol_version": "np-cognition-v1",
+   "name": "IPIDACRINE",
+   "formula": "C12H16N2",
+   "mol_weight": 188.274,
+   "clogp": 2.031,
+   "tpsa": 38.91,
+   "hbd": 1,
+   "heavy_atoms": 14,
+   "stereocenters_total": 0,
+   "stereocenters_undefined": 0,
+   "implied_stereoisomers": 1,
+   "natural_product_flag": true,
+   "np_tier": "NP_DERIVED",
+   "cns_mpo_flags": [],
+   "activities": [
+    {
+     "chembl_id": "CHEMBL130880",
+     "target_chembl_id": "CHEMBL220",
+     "target_name": "Acetylcholinesterase",
+     "organism": "Homo sapiens",
+     "activity_type": "IC50",
+     "value_nm": 658.0,
+     "assay_confidence": null,
+     "assay_chembl_id": "CHEMBL644109",
+     "document": "CHEMBL1126001"
+    }
+   ],
+   "quality_flags": []
+  }
+ ]
+}

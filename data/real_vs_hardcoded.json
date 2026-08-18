@@ -1,0 +1,1052 @@
+{
+ "summary": {
+  "n_predicted": 22,
+  "n_failed": 0,
+  "plddt_mean_abs_delta": 28.07,
+  "plddt_max_abs_delta": 46.19,
+  "all_iptm_zero": true,
+  "legacy_dg_values_reproduced": 0,
+  "interpretation": [
+   "ipTM is 0.0 for every candidate because each was predicted as a lone chain. ipTM measures confidence in an INTERFACE, so it is undefined without the receptor. Every legacy entry has the same problem: not one was ever predicted against its stated target, so no legacy number could have carried binding information even if a model had produced it.",
+   "Where a legacy pLDDT happens to sit close to the computed value, that is not vindication. These are short designed amphipathic sequences, and a confident helix prediction is the expected outcome for them \u2014 which is also the regime where structure predictors are most reliably confident and least informative about function. Agreement on the number does not make it the right quantity.",
+   "No legacy \u0394G or Kd value is reproduced, because no method in this repository computes a binding free energy, and structure predictors do not emit one. Those fields remain not-computed rather than being filled with a docking score relabelled as \u0394G.",
+   "The geometry audit is the check that cleanly separates real from synthetic: Boltz-2 coordinates give mean Ca-Ca near 3.79 A with very small variance, while the legacy parametric helix gave 7.55 A with 18 of 23 bonds out of range."
+  ]
+ },
+ "rows": [
+  {
+   "code": "HippoTrk-Saponin-X1",
+   "sequence": "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "length": 47,
+   "legacy": {
+    "plddt": 96.2,
+    "dg": -18.4,
+    "kd": 3.2000000000000003e-10
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.7562189102172852,
+    "ptm": 0.6600036025047302,
+    "iptm": 0.0,
+    "complex_plddt": 0.7802727222442627,
+    "plddt_mean": 78.03,
+    "plddt_min": 58.5,
+    "plddt_max": 90.43,
+    "plddt_sd": 9.23,
+    "frac_below_70": 0.1915,
+    "pae_min": 0.25,
+    "pae_max": 26.41,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 46,
+     "mean_ca_ca": 3.798,
+     "stdev_ca_ca": 0.017,
+     "min": 3.759,
+     "max": 3.837,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 5340.06,
+    "net_charge_ph74": -0.54,
+    "isoelectric_point": 6.98,
+    "gravy": -0.936
+   },
+   "plddt_delta": -18.17
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "sequence": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "length": 36,
+   "legacy": {
+    "plddt": 94.8,
+    "dg": -16.2,
+    "kd": 2.1e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.8798465728759766,
+    "ptm": 0.592334508895874,
+    "iptm": 0.0,
+    "complex_plddt": 0.9517245888710022,
+    "plddt_mean": 95.17,
+    "plddt_min": 83.49,
+    "plddt_max": 96.95,
+    "plddt_sd": 2.54,
+    "frac_below_70": 0.0,
+    "pae_min": 0.25,
+    "pae_max": 25.89,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 35,
+     "mean_ca_ca": 3.804,
+     "stdev_ca_ca": 0.006,
+     "min": 3.793,
+     "max": 3.813,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4942.97,
+    "net_charge_ph74": 8.93,
+    "isoelectric_point": 10.95,
+    "gravy": -1.089
+   },
+   "plddt_delta": 0.37
+  },
+  {
+   "code": "HippoNrf-KeapDecoy-X3",
+   "sequence": "DEETGEFLFQLPQLDEETGEWRWYCPWC",
+   "length": 28,
+   "legacy": {
+    "plddt": 97.0,
+    "dg": -15.8,
+    "kd": 3.5000000000000003e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.6789749264717102,
+    "ptm": 0.40743401646614075,
+    "iptm": 0.0,
+    "complex_plddt": 0.746860146522522,
+    "plddt_mean": 74.69,
+    "plddt_min": 59.27,
+    "plddt_max": 91.35,
+    "plddt_sd": 9.46,
+    "frac_below_70": 0.3929,
+    "pae_min": 0.25,
+    "pae_max": 24.64,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 27,
+     "mean_ca_ca": 3.804,
+     "stdev_ca_ca": 0.011,
+     "min": 3.784,
+     "max": 3.826,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 3507.81,
+    "net_charge_ph74": -7.2,
+    "isoelectric_point": 3.44,
+    "gravy": -0.961
+   },
+   "plddt_delta": -22.31
+  },
+  {
+   "code": "HippoDual-TrkB-AMPK-X5",
+   "sequence": "MCVCDRENPGGGGSFLRRFWRRLKKYFEELWKK",
+   "length": 33,
+   "legacy": {
+    "plddt": 94.5,
+    "dg": -19.1,
+    "kd": 1.4000000000000003e-10
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.6823187470436096,
+    "ptm": 0.5361657738685608,
+    "iptm": 0.0,
+    "complex_plddt": 0.7188569903373718,
+    "plddt_mean": 71.89,
+    "plddt_min": 56.34,
+    "plddt_max": 91.43,
+    "plddt_sd": 12.47,
+    "frac_below_70": 0.4545,
+    "pae_min": 0.25,
+    "pae_max": 25.43,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 32,
+     "mean_ca_ca": 3.791,
+     "stdev_ca_ca": 0.01,
+     "min": 3.772,
+     "max": 3.813,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4093.8,
+    "net_charge_ph74": 4.79,
+    "isoelectric_point": 10.47,
+    "gravy": -0.964
+   },
+   "plddt_delta": -22.61
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "sequence": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "length": 41,
+   "legacy": {
+    "plddt": 93.2,
+    "dg": -16.5,
+    "kd": 1.8000000000000002e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.5575264692306519,
+    "ptm": 0.3996220827102661,
+    "iptm": 0.0,
+    "complex_plddt": 0.5970026254653931,
+    "plddt_mean": 59.7,
+    "plddt_min": 50.23,
+    "plddt_max": 83.43,
+    "plddt_sd": 8.18,
+    "frac_below_70": 0.8537,
+    "pae_min": 0.25,
+    "pae_max": 20.5,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 40,
+     "mean_ca_ca": 3.801,
+     "stdev_ca_ca": 0.014,
+     "min": 3.76,
+     "max": 3.84,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4903.56,
+    "net_charge_ph74": -1.39,
+    "isoelectric_point": 5.68,
+    "gravy": -0.344
+   },
+   "plddt_delta": -33.5
+  },
+  {
+   "code": "PfcTrk-ErkEnhancer-P2",
+   "sequence": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "length": 37,
+   "legacy": {
+    "plddt": 95.8,
+    "dg": -17.2,
+    "kd": 8.500000000000001e-10
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.8073630332946777,
+    "ptm": 0.6373659372329712,
+    "iptm": 0.0,
+    "complex_plddt": 0.849862277507782,
+    "plddt_mean": 84.99,
+    "plddt_min": 58.14,
+    "plddt_max": 93.83,
+    "plddt_sd": 8.73,
+    "frac_below_70": 0.0541,
+    "pae_min": 0.25,
+    "pae_max": 25.8,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 36,
+     "mean_ca_ca": 3.786,
+     "stdev_ca_ca": 0.014,
+     "min": 3.756,
+     "max": 3.817,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4111.71,
+    "net_charge_ph74": 1.54,
+    "isoelectric_point": 8.04,
+    "gravy": -0.916
+   },
+   "plddt_delta": -10.81
+  },
+  {
+   "code": "PfcGluN2A-LTP-P3",
+   "sequence": "GCPWECDRRACPCYRGFWRERACPDCHSEAEFRLFRDVWANYCAC",
+   "length": 45,
+   "legacy": {
+    "plddt": 93.9,
+    "dg": -15.4,
+    "kd": 4.2e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.47533607482910156,
+    "ptm": 0.37657561898231506,
+    "iptm": 0.0,
+    "complex_plddt": 0.5000261664390564,
+    "plddt_mean": 50.0,
+    "plddt_min": 38.12,
+    "plddt_max": 63.12,
+    "plddt_sd": 5.41,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 19.77,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 44,
+     "mean_ca_ca": 3.785,
+     "stdev_ca_ca": 0.016,
+     "min": 3.751,
+     "max": 3.81,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 5436.15,
+    "net_charge_ph74": -0.54,
+    "isoelectric_point": 6.98,
+    "gravy": -0.644
+   },
+   "plddt_delta": -43.9
+  },
+  {
+   "code": "PfcGsk-WntLinker-P4",
+   "sequence": "GRPRTTSFAESCKPVQQPSAFGSMKVSRDKDG",
+   "length": 32,
+   "legacy": {
+    "plddt": 92.5,
+    "dg": -16.0,
+    "kd": 2.4e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.5177665948867798,
+    "ptm": 0.310016930103302,
+    "iptm": 0.0,
+    "complex_plddt": 0.5697040557861328,
+    "plddt_mean": 56.97,
+    "plddt_min": 47.15,
+    "plddt_max": 65.37,
+    "plddt_sd": 5.85,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 22.73,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 31,
+     "mean_ca_ca": 3.802,
+     "stdev_ca_ca": 0.011,
+     "min": 3.773,
+     "max": 3.818,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 3455.87,
+    "net_charge_ph74": 2.87,
+    "isoelectric_point": 10.49,
+    "gravy": -1.003
+   },
+   "plddt_delta": -35.53
+  },
+  {
+   "code": "PfcDual-nACh-GluN2A-P5",
+   "sequence": "SEAEFRLFRDVWGGGGSGCPWECDRRACPCYRGFWR",
+   "length": 36,
+   "legacy": {
+    "plddt": 94.1,
+    "dg": -18.7,
+    "kd": 2.2000000000000002e-10
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.48886483907699585,
+    "ptm": 0.3951128423213959,
+    "iptm": 0.0,
+    "complex_plddt": 0.5123028755187988,
+    "plddt_mean": 51.23,
+    "plddt_min": 35.44,
+    "plddt_max": 67.46,
+    "plddt_sd": 6.82,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 19.9,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 35,
+     "mean_ca_ca": 3.791,
+     "stdev_ca_ca": 0.01,
+     "min": 3.768,
+     "max": 3.807,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4213.72,
+    "net_charge_ph74": 0.65,
+    "isoelectric_point": 7.91,
+    "gravy": -0.714
+   },
+   "plddt_delta": -42.87
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "sequence": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "length": 36,
+   "legacy": {
+    "plddt": 94.3,
+    "dg": -17.5,
+    "kd": 6.5e-10
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.8835808634757996,
+    "ptm": 0.607580840587616,
+    "iptm": 0.0,
+    "complex_plddt": 0.9525808691978455,
+    "plddt_mean": 95.26,
+    "plddt_min": 84.94,
+    "plddt_max": 97.06,
+    "plddt_sd": 2.34,
+    "frac_below_70": 0.0,
+    "pae_min": 0.25,
+    "pae_max": 25.64,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 35,
+     "mean_ca_ca": 3.793,
+     "stdev_ca_ca": 0.007,
+     "min": 3.777,
+     "max": 3.807,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4942.97,
+    "net_charge_ph74": 8.93,
+    "isoelectric_point": 10.95,
+    "gravy": -1.089
+   },
+   "plddt_delta": 0.96
+  },
+  {
+   "code": "BasalM1-PAM-B2",
+   "sequence": "CDERACPRCHGFWREVCSSEAEFRLFRDVWANYCAC",
+   "length": 36,
+   "legacy": {
+    "plddt": 92.9,
+    "dg": -15.9,
+    "kd": 3.1000000000000005e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.5838813185691833,
+    "ptm": 0.44032710790634155,
+    "iptm": 0.0,
+    "complex_plddt": 0.6197698712348938,
+    "plddt_mean": 61.98,
+    "plddt_min": 48.27,
+    "plddt_max": 76.19,
+    "plddt_sd": 5.94,
+    "frac_below_70": 0.9444,
+    "pae_min": 0.25,
+    "pae_max": 16.83,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 35,
+     "mean_ca_ca": 3.795,
+     "stdev_ca_ca": 0.011,
+     "min": 3.769,
+     "max": 3.812,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4316.87,
+    "net_charge_ph74": -1.39,
+    "isoelectric_point": 5.68,
+    "gravy": -0.392
+   },
+   "plddt_delta": -30.92
+  },
+  {
+   "code": "BasalNgf-TrkA-B3",
+   "sequence": "EPKHVNCDRENPVEWVRACPTGKCEGLRGYTCRCE",
+   "length": 35,
+   "legacy": {
+    "plddt": 96.0,
+    "dg": -16.8,
+    "kd": 1.4e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.553045928478241,
+    "ptm": 0.39295756816864014,
+    "iptm": 0.0,
+    "complex_plddt": 0.5930680632591248,
+    "plddt_mean": 59.31,
+    "plddt_min": 45.48,
+    "plddt_max": 64.51,
+    "plddt_sd": 4.94,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 18.8,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 34,
+     "mean_ca_ca": 3.787,
+     "stdev_ca_ca": 0.015,
+     "min": 3.759,
+     "max": 3.822,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4036.56,
+    "net_charge_ph74": -0.32,
+    "isoelectric_point": 7.08,
+    "gravy": -1.026
+   },
+   "plddt_delta": -36.69
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "sequence": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "length": 35,
+   "legacy": {
+    "plddt": 93.7,
+    "dg": -16.4,
+    "kd": 1.9e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.4760231077671051,
+    "ptm": 0.3046328127384186,
+    "iptm": 0.0,
+    "complex_plddt": 0.5188706517219543,
+    "plddt_mean": 51.89,
+    "plddt_min": 39.36,
+    "plddt_max": 59.6,
+    "plddt_sd": 5.79,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 22.66,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 34,
+     "mean_ca_ca": 3.789,
+     "stdev_ca_ca": 0.014,
+     "min": 3.762,
+     "max": 3.837,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 3471.98,
+    "net_charge_ph74": 1.05,
+    "isoelectric_point": 9.54,
+    "gravy": 0.263
+   },
+   "plddt_delta": -41.81
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "sequence": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "length": 39,
+   "legacy": {
+    "plddt": 95.2,
+    "dg": -19.5,
+    "kd": 8.000000000000001e-11
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.446634441614151,
+    "ptm": 0.2728368639945984,
+    "iptm": 0.0,
+    "complex_plddt": 0.49008384346961975,
+    "plddt_mean": 49.01,
+    "plddt_min": 40.02,
+    "plddt_max": 54.53,
+    "plddt_sd": 3.31,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 21.55,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 38,
+     "mean_ca_ca": 3.785,
+     "stdev_ca_ca": 0.021,
+     "min": 3.738,
+     "max": 3.832,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4273.85,
+    "net_charge_ph74": 2.69,
+    "isoelectric_point": 8.52,
+    "gravy": -0.805
+   },
+   "plddt_delta": -46.19
+  },
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "sequence": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "length": 31,
+   "legacy": {
+    "plddt": 94.7,
+    "dg": -17.8,
+    "kd": 5.200000000000001e-10
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.47357407212257385,
+    "ptm": 0.34026581048965454,
+    "iptm": 0.0,
+    "complex_plddt": 0.5069011449813843,
+    "plddt_mean": 50.69,
+    "plddt_min": 42.32,
+    "plddt_max": 56.49,
+    "plddt_sd": 3.34,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 17.21,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 30,
+     "mean_ca_ca": 3.766,
+     "stdev_ca_ca": 0.154,
+     "min": 2.941,
+     "max": 3.821,
+     "outliers_beyond_0.5A": 1,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 3733.26,
+    "net_charge_ph74": 1.8,
+    "isoelectric_point": 8.22,
+    "gravy": -0.955
+   },
+   "plddt_delta": -44.01
+  },
+  {
+   "code": "MicroNrf2-AntiInflam-M2",
+   "sequence": "DEETGEWRWYCPWCKCHGMSGSCSTK",
+   "length": 26,
+   "legacy": {
+    "plddt": 96.5,
+    "dg": -16.3,
+    "kd": 2.1e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.5290078520774841,
+    "ptm": 0.3273109793663025,
+    "iptm": 0.0,
+    "complex_plddt": 0.5794320702552795,
+    "plddt_mean": 57.94,
+    "plddt_min": 43.64,
+    "plddt_max": 68.16,
+    "plddt_sd": 6.48,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 25.93,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 25,
+     "mean_ca_ca": 3.773,
+     "stdev_ca_ca": 0.01,
+     "min": 3.754,
+     "max": 3.806,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 3067.41,
+    "net_charge_ph74": -1.24,
+    "isoelectric_point": 5.61,
+    "gravy": -1.085
+   },
+   "plddt_delta": -38.56
+  },
+  {
+   "code": "MicroTlr4-Antagonist-M3",
+   "sequence": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "length": 41,
+   "legacy": {
+    "plddt": 92.8,
+    "dg": -15.7,
+    "kd": 3.8e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.5820545554161072,
+    "ptm": 0.4601591229438782,
+    "iptm": 0.0,
+    "complex_plddt": 0.6125284433364868,
+    "plddt_mean": 61.25,
+    "plddt_min": 49.96,
+    "plddt_max": 83.05,
+    "plddt_sd": 8.27,
+    "frac_below_70": 0.8293,
+    "pae_min": 0.25,
+    "pae_max": 18.52,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 40,
+     "mean_ca_ca": 3.787,
+     "stdev_ca_ca": 0.011,
+     "min": 3.761,
+     "max": 3.808,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4903.56,
+    "net_charge_ph74": -1.39,
+    "isoelectric_point": 5.68,
+    "gravy": -0.344
+   },
+   "plddt_delta": -31.55
+  },
+  {
+   "code": "MicroAutophagy-Tag-M4",
+   "sequence": "FLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "length": 32,
+   "legacy": {
+    "plddt": 93.4,
+    "dg": -16.6,
+    "kd": 1.7000000000000001e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.8996602892875671,
+    "ptm": 0.6252796649932861,
+    "iptm": 0.0,
+    "complex_plddt": 0.9682554006576538,
+    "plddt_mean": 96.83,
+    "plddt_min": 91.64,
+    "plddt_max": 97.94,
+    "plddt_sd": 1.27,
+    "frac_below_70": 0.0,
+    "pae_min": 0.25,
+    "pae_max": 23.89,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 31,
+     "mean_ca_ca": 3.795,
+     "stdev_ca_ca": 0.008,
+     "min": 3.782,
+     "max": 3.813,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4314.19,
+    "net_charge_ph74": 6.93,
+    "isoelectric_point": 10.79,
+    "gravy": -0.925
+   },
+   "plddt_delta": 3.43
+  },
+  {
+   "code": "MicroDual-Trem2-Nrf2-M5",
+   "sequence": "GRLVGHPWECDRGGGGSDEETGEWRWYCPWC",
+   "length": 31,
+   "legacy": {
+    "plddt": 95.6,
+    "dg": -18.9,
+    "kd": 1.8e-10
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.5621410608291626,
+    "ptm": 0.38363343477249146,
+    "iptm": 0.0,
+    "complex_plddt": 0.6067679524421692,
+    "plddt_mean": 60.68,
+    "plddt_min": 46.49,
+    "plddt_max": 70.14,
+    "plddt_sd": 6.04,
+    "frac_below_70": 0.9677,
+    "pae_min": 0.25,
+    "pae_max": 22.53,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 30,
+     "mean_ca_ca": 3.784,
+     "stdev_ca_ca": 0.022,
+     "min": 3.735,
+     "max": 3.827,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 3581.88,
+    "net_charge_ph74": -3.17,
+    "isoelectric_point": 4.38,
+    "gravy": -1.116
+   },
+   "plddt_delta": -34.92
+  },
+  {
+   "code": "AstroEos-NO-A1",
+   "sequence": "ERACPDCHSEAEFRLFRDVWANYCACYPGWLGCD",
+   "length": 34,
+   "legacy": {
+    "plddt": 95.3,
+    "dg": -16.7,
+    "kd": 1.5000000000000002e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.5683130025863647,
+    "ptm": 0.5192000865936279,
+    "iptm": 0.0,
+    "complex_plddt": 0.5805912613868713,
+    "plddt_mean": 58.06,
+    "plddt_min": 48.94,
+    "plddt_max": 69.73,
+    "plddt_sd": 5.24,
+    "frac_below_70": 1.0,
+    "pae_min": 0.25,
+    "pae_max": 15.69,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 33,
+     "mean_ca_ca": 3.803,
+     "stdev_ca_ca": 0.013,
+     "min": 3.772,
+     "max": 3.826,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 3984.44,
+    "net_charge_ph74": -3.32,
+    "isoelectric_point": 4.35,
+    "gravy": -0.391
+   },
+   "plddt_delta": -37.24
+  },
+  {
+   "code": "AstroEaat2-Up-A2",
+   "sequence": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "length": 37,
+   "legacy": {
+    "plddt": 94.1,
+    "dg": -15.8,
+    "kd": 3.6000000000000004e-09
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.7964146733283997,
+    "ptm": 0.6614174246788025,
+    "iptm": 0.0,
+    "complex_plddt": 0.8301639556884766,
+    "plddt_mean": 83.02,
+    "plddt_min": 56.59,
+    "plddt_max": 92.81,
+    "plddt_sd": 9.21,
+    "frac_below_70": 0.1081,
+    "pae_min": 0.25,
+    "pae_max": 26.11,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 36,
+     "mean_ca_ca": 3.794,
+     "stdev_ca_ca": 0.014,
+     "min": 3.754,
+     "max": 3.818,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 4111.71,
+    "net_charge_ph74": 1.54,
+    "isoelectric_point": 8.04,
+    "gravy": -0.916
+   },
+   "plddt_delta": -11.08
+  },
+  {
+   "code": "AstroSuper-CBF-EAAT2-A5",
+   "sequence": "ERACPDCHSEAEGGGGSVRACPTGKCEGL",
+   "length": 29,
+   "legacy": {
+    "plddt": 94.9,
+    "dg": -18.2,
+    "kd": 3.5e-10
+   },
+   "real": {
+    "ok": true,
+    "backend": "boltz-2",
+    "version": "2.2.1",
+    "licence": "MIT",
+    "citation": "Wohlwend et al., Boltz-1 (2024); Passaro et al., Boltz-2 (2025)",
+    "msa_mode": "empty",
+    "accelerator": "gpu",
+    "confidence_score": 0.5927637815475464,
+    "ptm": 0.37203821539878845,
+    "iptm": 0.0,
+    "complex_plddt": 0.6479451656341553,
+    "plddt_mean": 64.79,
+    "plddt_min": 53.56,
+    "plddt_max": 72.55,
+    "plddt_sd": 5.59,
+    "frac_below_70": 0.7586,
+    "pae_min": 0.25,
+    "pae_max": 19.84,
+    "geometry": {
+     "checked": true,
+     "n_bonds": 28,
+     "mean_ca_ca": 3.797,
+     "stdev_ca_ca": 0.014,
+     "min": 3.768,
+     "max": 3.826,
+     "outliers_beyond_0.5A": 0,
+     "plausible_protein": true
+    }
+   },
+   "computed_properties": {
+    "mol_weight_da": 2877.15,
+    "net_charge_ph74": -2.24,
+    "isoelectric_point": 4.7,
+    "gravy": -0.624
+   },
+   "plddt_delta": -30.11
+  }
+ ]
+}
