@@ -5,6 +5,7 @@ structure prediction**, computes real chemical and physicochemical properties, v
 every record against a contract, and attaches a provenance record to every value.
 
 [![Verification](https://img.shields.io/badge/verification-6_suites_passing-brightgreen?style=flat-square)](verify_all.py)
+[![Studies](https://img.shields.io/badge/pre--registered_studies-6-blueviolet?style=flat-square)](prespec/)
 [![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
 [![Data gate](https://img.shields.io/badge/data_gate-91_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
 [![Structure](https://img.shields.io/badge/structure-Boltz--2_2.2.1_(MIT)-blue?style=flat-square)](platform/cbc/compute/structure.py)
@@ -346,6 +347,98 @@ Both were caught before the results were trusted, and both are now regression-te
 2. **Multi-copy ligands counted as one molecule**, giving reference atom counts that were
    exact multiples of the prediction (56 vs 14, 60 vs 30, 74 vs 37). Fixed by grouping copies
    and taking the best match, the standard redocking convention.
+
+---
+
+## Slate #7 — peptide interface benchmark, and the gate for #9
+
+`platform/studies/peptide_interface.py`, plan `515be79a7d12`. 16 peptide–receptor X-ray
+complexes, Boltz-2 + DockQ (CAPRI standard). **All three hypotheses confirmed.**
+
+| Stratum | CAPRI acceptable | median DockQ |
+|---|---|---|
+| pre-cutoff (could be memorised) | **7/8 = 0.88** | 0.87 |
+| post-cutoff | **3/8 = 0.38** | 0.18 |
+
+A 0.50 drop in success rate and a **4.8× drop in median DockQ**. Unlike #6, this effect is
+large enough to see at n = 8 per stratum.
+
+**ipTM is well calibrated** for this task — Spearman ρ = **0.847**, p = 3×10⁻⁵. Against
+AlphaFold3's published bands: 9 confident-and-acceptable, 1 confident-but-wrong, 4
+failed-band-and-wrong, and **zero failed-band-but-acceptable**. So ipTM < 0.6 produced no
+false negatives. This is the project's first calibrated interpretation key for any confidence
+metric.
+
+**Gate for #9: OPEN.** The pipeline recovers 7 of 8 memorisable interfaces, so it has
+demonstrated sensitivity and a low score in #9 is evidence about the candidate, not the
+method.
+
+---
+
+## Slate #8 — corrected references refute my own hypothesis
+
+`platform/studies/affinity_corrected.py`, plan `0b098bfae805`. The **same** 14 predictions
+from the earlier affinity study, re-scored against references that are medians over *all*
+ChEMBL records instead of whichever single record a flat per-target budget captured. Only the
+reference variable changed.
+
+| Hypothesis | Verdict |
+|---|---|
+| H1 ranking works with good references | **falsified** (ρ = 0.191, CI spans zero) |
+| H2 the reference fix matters | **falsified** — ρ went *down* from 0.304 |
+| H3 the model is the larger error term | **confirmed** |
+
+I predicted reference quality was the binding limit. **It was not.** The earlier claim that
+~40% of the huperzine A discrepancy was a reference artifact holds for that compound
+(2.41 → 1.44 log) but does not generalise.
+
+The operative result is H3: model median error **1.047 log₁₀** against the references' own
+measured dispersion of **0.444 log₁₀** — the model is the larger error term by ~2.4×, so it
+is the term worth improving.
+
+Measured in passing, and striking on its own: **donepezil × AChE has 176 ChEMBL records
+spanning 5.00 log₁₀ units.** The published IC50 for a marketed drug against its primary target
+disagrees by five orders of magnitude. Tacrine 201 records / 2.57, physostigmine 55 / 4.76.
+
+---
+
+## Slate #9 — the candidate screen
+
+`platform/studies/candidate_screen.py`, plan `5a62fdf6d614`, audit **confirmatory**. Six
+candidates co-folded with their declared receptors, each against three composition-matched
+shuffles that preserve length, charge, pI and GRAVY exactly.
+
+**Not one candidate beat its own null.**
+
+| Candidate | Target | native ipTM | best decoy | band |
+|---|---|---|---|---|
+| PfcACh-PAM-P1 | CHRNA7 | 0.685 | **0.837** | grey |
+| MicroTrem2-Agonist-M1 | TREM2 | 0.410 | **0.581** | failed |
+| BasalAChE-Abeta-B4 | ACHE | 0.391 | **0.742** | failed |
+| HippoAChE-AlkaPept-X2 | ACHE | 0.340 | 0.348 | failed |
+| BasalAChE-GorgeBlock-B1 | ACHE | 0.340 | 0.348 | failed |
+| BasalSuper-AChE-TrkA-B5 | ACHE | 0.265 | **0.499** | failed |
+
+Mean native ipTM **0.405** against mean decoy **0.411** — the designed sequences score very
+slightly *worse* than random rearrangements of their own amino acids.
+
+**Why the null was necessary, demonstrated twice.** A shuffle of `PfcACh-PAM-P1` scored
+**0.837** — inside the confident band, above every native — and a shuffle of
+`BasalAChE-Abeta-B4` scored **0.742**. Reported without a null, either would have read as a
+hit. These are Arg/Trp-rich cationic amphipathic peptides, the class most prone to scoring on
+composition alone.
+
+**An unplanned consistency check passed.** `HippoAChE-AlkaPept-X2` and
+`BasalAChE-GorgeBlock-B1` returned byte-identical ipTM and identical decoy values, because
+they are one of the duplicate sequence pairs the data gate flagged. Identical inputs giving
+identical outputs confirms both that the pipeline is deterministic at fixed seed and that the
+duplicate finding was real — the platform listed them as two distinct therapeutics against
+different targets.
+
+**Scope, registered in advance.** Three decoys give a minimum empirical p of 0.25, so no
+individual candidate could reach significance; the design tests the set. A negative bounds
+what *this pipeline at this configuration* detects, not what the molecules do in a cell. Only
+6 of 25 candidates were screened — those whose receptor is in the registry and extracellular.
 
 ---
 
