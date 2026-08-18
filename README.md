@@ -5,7 +5,7 @@ structure prediction**, computes real chemical and physicochemical properties, v
 every record against a contract, and attaches a provenance record to every value.
 
 [![Verification](https://img.shields.io/badge/verification-6_suites_passing-brightgreen?style=flat-square)](verify_all.py)
-[![Studies](https://img.shields.io/badge/pre--registered_studies-6-blueviolet?style=flat-square)](prespec/)
+[![Studies](https://img.shields.io/badge/pre--registered_studies-7-blueviolet?style=flat-square)](prespec/)
 [![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
 [![Data gate](https://img.shields.io/badge/data_gate-91_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
 [![Structure](https://img.shields.io/badge/structure-Boltz--2_2.2.1_(MIT)-blue?style=flat-square)](platform/cbc/compute/structure.py)
@@ -439,6 +439,56 @@ different targets.
 individual candidate could reach significance; the design tests the set. A negative bounds
 what *this pipeline at this configuration* detects, not what the molecules do in a cell. Only
 6 of 25 candidates were screened — those whose receptor is in the registry and extracellular.
+
+---
+
+## Slate #10 — does the negative survive a full MSA?
+
+`platform/studies/msa_specificity.py`, plan `048c532eb430`. Study #9 re-run with
+`--use_msa_server`, same candidates, same RNG seed, **10 decoys each instead of 3**. The panel
+classified this `needs-gpu` at 100–250 GPU-hours; it ran here in ~5 hours on Apple MPS, which
+the 128 GB unified memory made possible by removing the VRAM ceiling.
+
+| Hypothesis | Verdict |
+|---|---|
+| H1 natives separate from decoys | **falsified** (Δ = 0.019, p = 0.77, dz = 0.13) |
+| H2 a candidate is confident *and* specific | **falsified** (0 candidates > 0.8) |
+| H3 the MSA raises natives | **confirmed** (+0.219) |
+
+**The result separates two things that looked identical.** The MSA genuinely raises ipTM —
++0.219 on average, up to **+0.42** on the AChE candidates — so #9's registered confound was
+*real* and running this study was necessary. But the rise applies to natives and decoys alike:
+mean native **0.624** against mean decoy **0.606**, a gap indistinguishable from zero. **The
+MSA raises the level without creating specificity**, exactly as the pre-registered confound
+predicted: it helps the receptor, which has thousands of homologues, not the peptide, which
+has none.
+
+| Candidate | #9 no-MSA | MSA native | Δ | decoy mean | **decoy max** | diff |
+|---|---|---|---|---|---|---|
+| BasalAChE-GorgeBlock-B1 | 0.340 | 0.759 | +0.42 | 0.594 | 0.757 | +0.165 |
+| HippoAChE-AlkaPept-X2 | 0.340 | 0.759 | +0.42 | 0.596 | 0.757 | +0.163 |
+| BasalSuper-AChE-TrkA-B5 | 0.265 | 0.584 | +0.32 | 0.532 | **0.826** | +0.052 |
+| BasalAChE-Abeta-B4 | 0.391 | 0.570 | +0.18 | 0.562 | 0.778 | +0.008 |
+| PfcACh-PAM-P1 | 0.685 | 0.526 | −0.16 | 0.580 | **0.856** | −0.054 |
+| MicroTrem2-Agonist-M1 | 0.410 | 0.549 | +0.14 | 0.772 | **0.934** | −0.223 |
+
+**Random sequences reach the confident band; no native does.** Four decoys scored 0.934,
+0.856, 0.826 and 0.778, while **not one designed sequence reached 0.8**. Reported without a
+null, any of those four would have read as a hit.
+
+**The pilot was misleading, and that is the lesson.** A single native–decoy pair measured
+before this study showed 0.759 against 0.299 — a +0.46 separation that looked decisive. With
+ten decoys the same candidate's decoy mean is 0.594 and the separation collapses to +0.165.
+The single decoy happened to be the weakest of ten. Raising decoys from 3 to 10 also flipped
+the running mean's sign twice mid-run.
+
+**Two stated limits.** The 2 of 6 candidates that beat all their decoys are
+`HippoAChE-AlkaPept-X2` and `BasalAChE-GorgeBlock-B1` — the duplicate sequence pair the data
+gate flagged. They are the same molecule, so the effective number of independent candidates
+beating their null is **one**, at empirical p = 0.091, which cannot reach 0.05 with ten
+decoys. One fold of 66 failed, so n = 65 and the audit flags the deviation.
+
+**The slate is complete.** All 11 consensus items have now been executed.
 
 ---
 
