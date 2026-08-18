@@ -1,0 +1,56 @@
+{
+ "hash": "515be79a7d12c8f1929323d3eb48781f859e01463ac3c25b9be45fbcb66d2227",
+ "registered_utc": "2026-08-18T05:04:46+00:00",
+ "min_attainable_p": 0.0,
+ "content": {
+  "study_id": "peptide-interface-v1",
+  "question": "On peptide-receptor complexes predicted with Boltz-2 on this hardware, what fraction of interfaces reach CAPRI acceptable quality, how well does ipTM predict that, and does the pipeline have enough sensitivity for a screen of unknown candidates to be interpretable?",
+  "primary_metric": "fraction_dockq_acceptable",
+  "primary_metric_justification": "The fraction of predictions reaching DockQ >= 0.23 is the CAPRI acceptable-quality rate, the field's standard success criterion for a docked complex, so it is directly comparable to published numbers and is the quantity that determines whether a screen has any sensitivity. It is preferred over mean DockQ because DockQ is a bounded composite of three terms and its mean is not interpretable as a physical quantity, and preferred over ipTM because ipTM is the model's self-assessment \u2014 using it to score itself would measure confidence rather than correctness. This study exists precisely to test whether that self-assessment is trustworthy, so it cannot also be the criterion.",
+  "decision_threshold": "H1 confirmed if the overall fraction_dockq_acceptable > 0.3; H2 confirmed if Spearman rho between ipTM and DockQ exceeds 0.6 with p < 0.05; H3 (THE GATE) confirmed if the pre-cutoff stratum \u2014 complexes whose answer the model could have memorised \u2014 reaches fraction_dockq_acceptable > 0.5.",
+  "n_planned": 16,
+  "n_comparisons": 3,
+  "multiplicity_correction": "holm",
+  "alpha": 0.05,
+  "stopping_rule": "Fixed: each curated complex is predicted exactly once at seed 1 in a fixed order, then scored with DockQ. No complex is added or removed after the first prediction. Technical failures are recorded with their reason and excluded.",
+  "analysis_plan": "Predict each complex with Boltz-2 2.2.1 from the two deposited construct sequences, msa=empty, gpu, seed 1, diffusion_samples 1. Score against the crystal with DockQ 2.1.3 using an explicit chain mapping from the predicted chains to the deposited receptor and peptide chains. Report fraction_dockq_acceptable overall and per stratum with Wilson 95% intervals, Spearman rho between ipTM and DockQ, and the confusion matrix of the AlphaFold3 ipTM bands (>0.8 confident, <0.6 failed) against CAPRI acceptable. Holm across the three hypotheses.",
+  "hypotheses": [
+   {
+    "name": "H1_overall_accuracy",
+    "statement": "The pipeline reaches CAPRI acceptable quality on a meaningful fraction of peptide-receptor complexes.",
+    "predicted_by": "the claim that a co-folding model can dock peptides",
+    "confirmed_if": "fraction_dockq_acceptable > 0.3",
+    "falsified_if": "fraction_dockq_acceptable <= 0.3"
+   },
+   {
+    "name": "H2_iptm_calibration",
+    "statement": "ipTM predicts whether the interface is right, so it can be used as a screening filter.",
+    "predicted_by": "the platform's implicit assumption whenever it reports ipTM as evidence about a binder",
+    "confirmed_if": "Spearman rho(ipTM, DockQ) > 0.6 with p < 0.05",
+    "falsified_if": "Spearman rho <= 0.6 or p >= 0.05"
+   },
+   {
+    "name": "H3_assay_power_GATE",
+    "statement": "The pipeline recovers the majority of interfaces it could have memorised. If it cannot do that, it cannot license a positive claim about an unknown candidate, and study #9 must not run as a positive screen.",
+    "predicted_by": "the premise of study #9, which assumes the screen can detect a true binder",
+    "confirmed_if": "pre-cutoff stratum fraction_dockq_acceptable > 0.5",
+    "falsified_if": "pre-cutoff stratum fraction_dockq_acceptable <= 0.5"
+   }
+  ],
+  "test_type": "parametric",
+  "n_permutations": 0,
+  "secondary_metrics": [
+   "median_dockq",
+   "mean_iptm",
+   "spearman_iptm_dockq",
+   "fraction_iptm_above_0.8",
+   "iptm_band_confusion",
+   "median_irmsd",
+   "median_fnat",
+   "per_entry",
+   "wall_clock_seconds_per_complex"
+  ],
+  "exclusions": "Complexes are two-protein-entity X-ray structures under 2.5 A where the shorter chain is 5-30 residues of standard amino acids and the receptor is 50-350 residues. One entry per receptor accession per stratum. Entries whose prediction or DockQ scoring fails technically are recorded and excluded.",
+  "known_confounds": "1. Predictions run in single-sequence mode, which Boltz documents as degrading accuracy, so all strata are depressed together; the DIFFERENCE between strata is more interpretable than the levels. 2. Deposition date bounds when coordinates could enter a training snapshot but does not prove they did; Boltz's split is not published. 3. Crystallised peptide complexes are biased toward peptides that bind well enough to crystallise, so the recovery rate here is an OPTIMISTIC bound on what a screen of arbitrary designed peptides would achieve. 4. n is small per stratum, so a Wilson interval on a proportion is wide."
+ }
+}

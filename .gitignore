@@ -19,3 +19,4 @@ memory/**/*.npz
 
 # Large raw workflow transcripts; the distilled findings in reviews/ are tracked.
 reviews/*_raw_full.json
+.venvdockq/

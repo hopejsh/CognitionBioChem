@@ -384,3 +384,88 @@ def _sequence_correspondence(ref_atoms, pred_atoms) -> dict:
             if rseq[ri] == pseq[pi]:
                 out[rkeys[ri]] = pkeys[pi]
     return out
+
+
+def search_peptide_complexes(date_from: str, date_to: str, *,
+                             pep_min: int = 5, pep_max: int = 30,
+                             prot_max: int = 350, max_resolution: float = 2.5,
+                             limit: int = 120) -> list[str]:
+    """Entries with exactly two protein entities, one of them a short peptide.
+
+    This is the modality the platform's own candidates are: a short chain docked against a
+    folded receptor. Benchmarking on globular protein-protein complexes instead would measure
+    a different and easier problem.
+    """
+    q = {
+        "query": {"type": "group", "logical_operator": "and", "nodes": [
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "rcsb_accession_info.deposit_date", "operator": "range",
+                "value": {"from": date_from, "to": date_to}}},
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "rcsb_entry_info.experimental_method",
+                "operator": "exact_match", "value": "X-ray"}},
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "rcsb_entry_info.resolution_combined",
+                "operator": "less", "value": max_resolution}},
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "rcsb_entry_info.polymer_entity_count_protein",
+                "operator": "equals", "value": 2}},
+            {"type": "terminal", "service": "text", "parameters": {
+                "attribute": "entity_poly.rcsb_sample_sequence_length",
+                "operator": "range", "value": {"from": pep_min, "to": pep_max}}},
+        ]},
+        "return_type": "entry",
+        "request_options": {"paginate": {"start": 0, "rows": limit},
+                            "results_content_type": ["experimental"]},
+    }
+    res = _post(RCSB_SEARCH, q)
+    return [r["identifier"] for r in res.get("result_set", [])]
+
+
+def describe_peptide_complex(pdb_id: str, *, pep_min: int = 5, pep_max: int = 30,
+                             prot_min: int = 50, prot_max: int = 350) -> dict | None:
+    """Resolve which entity is the peptide and which the receptor, with both sequences."""
+    try:
+        entry = _get(f"{RCSB_DATA}/entry/{pdb_id}")
+    except Exception:  # noqa: BLE001
+        return None
+    ids = entry.get("rcsb_entry_container_identifiers", {}).get("polymer_entity_ids", [])
+    if len(ids) != 2:
+        return None
+    ents = []
+    for eid in ids:
+        try:
+            pe = _get(f"{RCSB_DATA}/polymer_entity/{pdb_id}/{eid}")
+        except Exception:  # noqa: BLE001
+            return None
+        poly = pe.get("entity_poly", {})
+        if poly.get("rcsb_entity_polymer_type") != "Protein":
+            return None
+        seq = (poly.get("pdbx_seq_one_letter_code_can") or "").replace("\n", "")
+        cids = (pe.get("rcsb_polymer_entity_container_identifiers", {})
+                .get("auth_asym_ids") or [None])
+        ents.append({"entity_id": eid, "seq": seq, "length": len(seq),
+                     "chain": cids[0],
+                     "uniprot": (pe.get("rcsb_polymer_entity_container_identifiers", {})
+                                 .get("uniprot_ids") or [None])[0]})
+    ents.sort(key=lambda e: e["length"])
+    pep, rec = ents[0], ents[1]
+    if not (pep_min <= pep["length"] <= pep_max):
+        return None
+    if not (prot_min <= rec["length"] <= prot_max):
+        return None
+    if not pep["seq"] or not rec["seq"]:
+        return None
+    if set(pep["seq"]) - set("ACDEFGHIKLMNPQRSTVWY"):
+        return None
+    info = entry.get("rcsb_entry_info", {})
+    return {
+        "pdb_id": pdb_id,
+        "deposited": (entry.get("rcsb_accession_info", {}).get("deposit_date") or "")[:10],
+        "resolution": (info.get("resolution_combined") or [None])[0],
+        "peptide_seq": pep["seq"], "peptide_len": pep["length"],
+        "peptide_chain": pep["chain"],
+        "receptor_seq": rec["seq"], "receptor_len": rec["length"],
+        "receptor_chain": rec["chain"], "receptor_uniprot": rec["uniprot"],
+        "title": entry.get("struct", {}).get("title", "")[:110],
+    }
