@@ -233,6 +233,76 @@ natural ones.
 
 ---
 
+## Slate #4 — target construct and numbering registry
+
+`platform/cbc/registry.py` fetches all 16 targets from UniProt and **derives** the
+canonical↔mature offset from the CHAIN feature rather than assuming it. Every residue
+annotation is resolved under both conventions, and fails only when wrong under **both** —
+which is what separates a numbering problem from a wrong residue identity.
+
+The AChE string `CAS (Trp84, Phe330, Tyr121) & PAS (Trp286, Tyr72, Tyr341)` decomposes into
+three different situations, not one:
+
+| Residues | Resolves in |
+|---|---|
+| Trp84, Tyr121 | **neither** convention — Torpedo numbering |
+| Phe330 | canonical — **by coincidence** |
+| Trp286, Tyr72, Tyr341 | mature |
+
+The `Phe330` coincidence is the dangerous case: a naive check passes it. Resolving live
+rather than against a static list raised detection from 8 to **45** fabricated residues, and
+total gate violations from 91 to **124**. Independently confirmed against the earlier audit:
+8/8 fabricated and 17/17 correct calls reproduce.
+
+`PTAFR` deserves separate mention — P25105 has no signal peptide, so the two conventions
+coincide and `His14` cannot be excused as a convention artifact.
+
+---
+
+## Slate #11 — can PRODIGY fill the empty affinity field?
+
+`platform/studies/prodigy_falsification.py`, plan hash `b6b903d9ec37`. PRODIGY needs only a
+structure, and structures now exist, so it is the obvious candidate. Scored on 15 peptide–AChE
+complexes (3 candidates × 5 seeds).
+
+| Hypothesis | Verdict |
+|---|---|
+| H1 no better than reseeding | **confirmed** (ratio 1.36) |
+| H2 range collapses | **confirmed** (17.1% of fit range) |
+| H3 %NIS drives the variation | **falsified** |
+
+Between-candidate SD is **1.41 kcal/mol** against a within-candidate seed noise of **1.04** —
+PRODIGY does not distinguish different peptides better than rerunning one peptide with a
+different seed.
+
+**H3 refutes the mechanism I proposed, not the conclusion.** I predicted the %NIS terms would
+dominate, since they are computed over the whole complex and a 26–47mer barely perturbs a
+583-residue receptor's surface. %NIS is indeed nearly constant (41.2–43.2% apolar), but it
+accounts for only **10.6%** of the between-candidate variance. The variation comes from the
+interface contacts, which differ genuinely between candidates.
+
+So the operative conclusion is the confound stated in the registered plan **before** any
+structure was scored: PRODIGY responds to the interfaces, but those interfaces are
+seed-unstable — interface-PAE SD 3.14 Å, and contact counts swinging 13→52 across seeds for
+one candidate. **This study cannot separate "PRODIGY cannot discriminate here" from "these
+interfaces are not real."** PRODIGY is not wired in.
+
+### Why retrieval beats recall, demonstrated
+
+Two earlier memory-based retrievals of the PRODIGY regression produced **mutually
+sign-flipped** forms — and both were faithful to a real source. The published eLife Equation 2
+is the exact negation of the reference implementation, because the paper regresses against
+|ΔG| while the code returns signed ΔG. Two further published-source corruptions: eLife Table 3
+lists different weights in the 4th decimal, and the official method page misprints the
+%NIS_charged coefficient as 0.3810 instead of 0.13810. Three published sources disagree; only
+reading the installed code resolves it.
+
+Applicability, established by retrieval: **"peptid" occurs zero times in the eLife full text.**
+PRODIGY was fitted on 81 crystal structures of globular protein–protein complexes. Applying it
+to 26–47mers is an out-of-domain extrapolation with no published validation.
+
+---
+
 ## Applicability domain
 
 A refusal to predict is principled only when **the stated ground is the computed ground**.
@@ -298,7 +368,11 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 - ChEMBL's `natural_product` flag is noisy: it labels donepezil and metoclopramide as
   NP-derived. `NP_DERIVED` means "ChEMBL asserts NP provenance", not "established".
 - Legacy binding-site residue annotations mix organism numbering conventions and include
-  eight residue identities that are wrong in every convention (see `data/residue_audit.json`).
+  **45** residue identities that are wrong in every convention, resolved live against
+  `data/target_registry.json`.
+- PoseBusters' paper states it uses RDKit `GetBestRMS`; its code has never used that for the
+  pass/fail decision, and following the paper literally scores a pose translated 3 Å as
+  perfect. Only `CalcRMS` is correct for docking.
 - No wet-lab validation of anything.
 
 ---

@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0",
  "built": "2026-08-17",
- "git_sha": "b4f7bce",
+ "git_sha": "93d0c01",
  "disclosure": {
   "headline": "No structure prediction has been run in this repository.",
   "detail": "This platform can parse, validate and display genuine structure-predictor output, and it computes real physicochemical and chemical properties. It does not itself run AlphaFold3 or any other predictor, and it contains no binding-affinity calculation. Every field is labelled with its provenance; fields marked 'not computed' are honestly empty rather than filled with an estimate. Values asserted by an earlier version of this project that no calculation supports are preserved under 'retracted_claims' and are not displayed as results.",
