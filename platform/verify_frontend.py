@@ -123,8 +123,20 @@ def main() -> int:
     if README.exists():
         rd = README.read_text()
         check("README has no Google-logo badge", "logo=google" not in rd)
-        check("README discloses status",
-              "not" in rd.lower() and ("has not been" in rd or "No structure prediction" in rd))
+        # This check used to look for the literal phrase "No structure prediction has been
+        # run", which was the honest disclosure when none had been. Structure prediction is
+        # now real, so that phrase would be false and the README correctly dropped it.
+        # A check pinned to a phrase rather than to the property it stands for goes stale
+        # exactly when the project improves, so it now tests the property: the README must
+        # carry a status disclosure that separates what is computed from what is not.
+        check("README has a status disclosure section",
+              "## Status disclosure" in rd)
+        check("README states what is NOT implemented",
+              "not implemented" in rd.lower())
+        check("README discloses that sequences are not de novo designs",
+              "not de novo designs" in rd or "hypothesis catalogue" in rd)
+        check("README names the structure backend and its licence",
+              "Boltz-2" in rd and "MIT" in rd)
 
     print("\n[lifecycle] resources are released")
     check("a viewer disposal path exists", "function disposeViewer" in app)

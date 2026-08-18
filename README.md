@@ -5,6 +5,7 @@ structure prediction**, computes real chemical and physicochemical properties, v
 every record against a contract, and attaches a provenance record to every value.
 
 [![Verification](https://img.shields.io/badge/verification-6_suites_passing-brightgreen?style=flat-square)](verify_all.py)
+[![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
 [![Data gate](https://img.shields.io/badge/data_gate-91_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
 [![Structure](https://img.shields.io/badge/structure-Boltz--2_2.2.1_(MIT)-blue?style=flat-square)](platform/cbc/compute/structure.py)
 [![License](https://img.shields.io/badge/license-private_research-lightgrey?style=flat-square)](#license)
@@ -47,6 +48,12 @@ Boltz-2 was run on 22 candidates:
 candidate was ever predicted against its receptor, so no legacy number could have carried
 binding information. Real backbone geometry: Cα–Cα 3.77–3.80 Å, against 7.55 Å for the
 legacy parametric helix.
+
+**Those deltas are now qualified against a measured noise floor** (see the variance study
+below). Against an across-seed SD of 2.66 pLDDT units, 19 of the 22 deltas exceed 2 SD
+(4.1×–17.4×) and are resolvable, so the overstatement finding stands. The three that looked
+like agreement — +0.4, +1.0 and +3.4 — sit at 0.1, 0.4 and 1.3 SD and are **not
+distinguishable from sampler noise**. No claim of agreement is licensed for those three.
 
 ---
 
@@ -180,6 +187,52 @@ separate them.**
 
 ---
 
+## Inference variance — how large is a difference before it means anything?
+
+`platform/studies/inference_variance.py`, plan hash `69e64d5c2f02`, registered before any
+fold. **87 of 87 folds succeeded; the protocol audit returned CONFIRMATORY with no
+deviation.** A two-level decomposition, with every metric reported separately because pLDDT,
+pTM, ipTM and interface PAE have different distributions and an SD on one licenses no
+inference about another.
+
+| Hypothesis | Verdict |
+|---|---|
+| H1 across-seed SD of complex pLDDT < 2.0 units | **falsified** (2.66) |
+| H2 same seed is bit-reproducible | **confirmed** |
+| H3 MSA is immaterial for designed sequences | **confirmed** |
+
+**The measured noise floor: SD = 2.66 pLDDT units, so the 2-SD resolution limit is 5.32.**
+Any pLDDT difference smaller than that is not distinguishable from the sampler. Per-candidate
+SD ranged from 0.13 (MicroAutophagy-Tag-M4) to 3.46 (BasalAChE-Abeta-B4) — the noise is not
+uniform, and the least confident structures are the noisiest.
+
+Reported separately, as registered:
+
+| Metric | Across-seed SD |
+|---|---|
+| complex pLDDT | 2.66 units |
+| pTM | 0.026 |
+| **ipTM** | **0.095** |
+| minimum interface PAE | **3.14 Å** |
+
+The ipTM figure matters for binder work: an earlier pilot's three native replicates spanned
+0.212–0.473, which is about 2.7 SD — that spread was **sampler noise, not signal**. Any ipTM
+comparison below roughly 0.19 is unresolvable on this hardware.
+
+**Determinism.** All six candidates returned bit-identical `complex_plddt` across three
+same-seed replicates, spread exactly 0.0. The pre-registered caveat that Metal
+floating-point reduction order might break this did not materialise at single-chain scale; it
+remains untested for larger jobs.
+
+**MSA.** Enabling the ColabFold MSA server shifted mean pLDDT by 0.33 units, far under seed
+noise, paired t-test p = 0.978. **Four of six candidates were bit-identical with and without
+MSA** — the search returned nothing usable, exactly as expected for hand-assembled motif
+concatenations with no natural homologues. Single-sequence mode costs this candidate set
+essentially nothing, which is a property of *these* sequences and does not generalise to
+natural ones.
+
+---
+
 ## Applicability domain
 
 A refusal to predict is principled only when **the stated ground is the computed ground**.
@@ -232,10 +285,14 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 
 ## Known limitations
 
-- Structure predictions run in single-sequence mode (`msa: empty`), which Boltz documents as
-  degrading accuracy. Results are a lower bound on the method's capability.
-- Seeding fixes the noise draw but **not** floating-point reduction order on Metal, and there
-  is a documented `aten::linalg_svd` CPU fallback. Byte-reproducibility is not claimed.
+- Structure predictions run in single-sequence mode (`msa: empty`). Boltz documents this as
+  degrading accuracy in general, though it was measured to cost this candidate set nothing
+  (see the variance study). Results remain a lower bound for natural sequences.
+- Same-seed bit-reproducibility was **measured and confirmed** for single-chain folds on MPS.
+  It is not claimed for larger jobs: Metal's floating-point reduction order is not fixed by
+  the seed and there is a documented `aten::linalg_svd` CPU fallback.
+- The variance estimate rests on 5 seeds per candidate, so the SD itself carries roughly 30%
+  relative uncertainty.
 - `corpus.py` draws a flat activity budget per target rather than retrieving every record per
   compound, which is why most benchmark references rest on one measurement.
 - ChEMBL's `natural_product` flag is noisy: it labels donepezil and metoclopramide as

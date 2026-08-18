@@ -1,0 +1,146 @@
+{
+ "study_id": "inference-variance-v1",
+ "prespec_hash": "69e64d5c2f02843e3b8e7f081370b73df6328115d99b8efbae478e03056cbe18",
+ "n_observed": 87,
+ "primary_metric": "across_seed_sd_complex_plddt",
+ "metrics": {
+  "across_seed_sd_complex_plddt": 2.6615,
+  "across_seed_sd_ptm": 0.02618,
+  "across_seed_sd_iptm": 0.09543,
+  "across_seed_sd_interface_pae_min": 3.1429,
+  "same_seed_distinct_values": {
+   "BasalSuper-AChE-TrkA-B5": 1,
+   "BasalAChE-Abeta-B4": 1,
+   "BasalNgf-TrkA-B3": 1,
+   "AstroSuper-CBF-EAAT2-A5": 1,
+   "AstroEaat2-Up-A2": 1,
+   "MicroAutophagy-Tag-M4": 1
+  },
+  "msa_mean_shift": 0.3306,
+  "wall_clock_seconds_per_fold": 66.7,
+  "per_residue_plddt_sd": null
+ },
+ "per_candidate_sd_plddt": {
+  "BasalSuper-AChE-TrkA-B5": 3.404,
+  "BasalAChE-Abeta-B4": 3.46,
+  "BasalNgf-TrkA-B3": 2.187,
+  "AstroSuper-CBF-EAAT2-A5": 2.931,
+  "AstroEaat2-Up-A2": 2.357,
+  "MicroAutophagy-Tag-M4": 0.131
+ },
+ "per_candidate_sd_iptm": {
+  "BasalSuper-AChE-TrkA-B5": 0.0945,
+  "BasalNgf-TrkA-B3": 0.086,
+  "AstroEaat2-Up-A2": 0.1049
+ },
+ "per_candidate_sd_interface_pae": {
+  "BasalSuper-AChE-TrkA-B5": 3.33,
+  "BasalNgf-TrkA-B3": 2.597,
+  "AstroEaat2-Up-A2": 3.435
+ },
+ "determinism": {
+  "BasalSuper-AChE-TrkA-B5": {
+   "n_replicates": 3,
+   "distinct_values": 1,
+   "values": [
+    0.5351666212081909
+   ],
+   "spread": 0.0
+  },
+  "BasalAChE-Abeta-B4": {
+   "n_replicates": 3,
+   "distinct_values": 1,
+   "values": [
+    0.5520309805870056
+   ],
+   "spread": 0.0
+  },
+  "BasalNgf-TrkA-B3": {
+   "n_replicates": 3,
+   "distinct_values": 1,
+   "values": [
+    0.6099170446395874
+   ],
+   "spread": 0.0
+  },
+  "AstroSuper-CBF-EAAT2-A5": {
+   "n_replicates": 3,
+   "distinct_values": 1,
+   "values": [
+    0.6013258695602417
+   ],
+   "spread": 0.0
+  },
+  "AstroEaat2-Up-A2": {
+   "n_replicates": 3,
+   "distinct_values": 1,
+   "values": [
+    0.7951539754867554
+   ],
+   "spread": 0.0
+  },
+  "MicroAutophagy-Tag-M4": {
+   "n_replicates": 3,
+   "distinct_values": 1,
+   "values": [
+    0.9677156209945679
+   ],
+   "spread": 0.0
+  }
+ },
+ "msa_paired": [
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "without": 0.546156,
+   "with": 0.546156
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "without": 0.581086,
+   "with": 0.575871
+  },
+  {
+   "code": "BasalNgf-TrkA-B3",
+   "without": 0.613612,
+   "with": 0.613612
+  },
+  {
+   "code": "AstroSuper-CBF-EAAT2-A5",
+   "without": 0.605914,
+   "with": 0.605914
+  },
+  {
+   "code": "AstroEaat2-Up-A2",
+   "without": 0.822621,
+   "with": 0.847669
+  },
+  {
+   "code": "MicroAutophagy-Tag-M4",
+   "without": 0.968031,
+   "with": 0.968031
+  }
+ ],
+ "p_raw": {
+  "H1_seed_noise_small": 1.0,
+  "H2_same_seed_deterministic": 0.0,
+  "H3_msa_immaterial_for_designed_sequences": 0.48924736813491787
+ },
+ "p_holm": {
+  "H1_seed_noise_small": 1.0,
+  "H2_same_seed_deterministic": 0.0,
+  "H3_msa_immaterial_for_designed_sequences": 0.97849
+ },
+ "verdicts": {
+  "H1_seed_noise_small": "FALSIFIED",
+  "H2_same_seed_deterministic": "CONFIRMED",
+  "H3_msa_immaterial_for_designed_sequences": "CONFIRMED"
+ },
+ "prespec_audit": {
+  "study_id": "inference-variance-v1",
+  "prespec_hash": "69e64d5c2f02843e3b8e7f081370b73df6328115d99b8efbae478e03056cbe18",
+  "registered_utc": "2026-08-18T00:40:49+00:00",
+  "deviations": [],
+  "confirmatory": true,
+  "note": "All pre-specified analyses were carried out as planned."
+ }
+}

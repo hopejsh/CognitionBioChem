@@ -151,7 +151,10 @@ def _write_boltz_input(chains: Sequence[Chain], path: Path,
         if c.kind in ("protein", "dna", "rna"):
             lines += [f"  - {c.kind}:", f"      id: {c.chain_id}",
                       f"      sequence: {c.sequence}"]
-            if c.kind == "protein":
+            if c.kind == "protein" and c.msa is not None:
+                # Omit the key entirely when the MSA is to be generated: writing
+                # `msa: None` is a literal string Boltz silently ignores, and the run then
+                # exits 0 in ~3 s having produced nothing. Absent means "generate it".
                 lines.append(f"      msa: {c.msa}")
         elif c.kind == "smiles":
             lines += ["  - ligand:", f"      id: {c.chain_id}",
