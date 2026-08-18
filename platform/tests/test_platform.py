@@ -441,6 +441,45 @@ def test_registry_numbering():
           a.convert(286, "mature", "canonical") == 317)
 
 
+
+def test_posebench_sequence_alignment():
+    print("\n[posebench] residues are paired by sequence, never by residue number")
+    from cbc import posebench as pb, physics
+
+    # A crystal numbered from 33 and a model numbered from 1 describe the same protein.
+    # Pairing on residue number matches Pro33 to Asp33; only sequence alignment recovers
+    # the true correspondence. Measured on 4XH6, number-pairing agreed on residue TYPE for
+    # 4.2% of pairs and gave a pocket RMSD of 15.13 A where the truth is 0.56 A.
+    def atoms(seq, start, chain="A"):
+        out = []
+        for i, aa in enumerate(seq):
+            three = {v: k for k, v in
+                     {"ALA": "A", "ARG": "R", "ASN": "N", "ASP": "D", "CYS": "C",
+                      "GLN": "Q", "GLU": "E", "GLY": "G", "LEU": "L", "PRO": "P",
+                      "SER": "S", "TYR": "Y", "VAL": "V"}.items()}[aa]
+            out.append(physics.Atom(chain=chain, resi=start + i, resn=three, name="CA",
+                                    element="C", x=float(i), y=0.0, z=0.0))
+        return out
+
+    seq = "PLESQYQVASGLAPRPY"
+    ref = atoms(seq, 33)          # crystal author numbering
+    pred = atoms(seq, 1)          # model numbering
+    corr = pb._sequence_correspondence(ref, pred)
+    check("all residues paired", len(corr) == len(seq), f"{len(corr)}/{len(seq)}")
+    check("the numbering offset is recovered", corr.get(("A", 33)) == ("A", 1),
+          str(corr.get(("A", 33))))
+    check("pairing is order-preserving",
+          all(corr[("A", 33 + i)] == ("A", 1 + i) for i in range(len(seq))))
+
+    # A pair whose residue types differ must never be emitted.
+    mutated = atoms("PLESQYQVASGLAPRPY".replace("Y", "V"), 33)
+    corr2 = pb._sequence_correspondence(mutated, pred)
+    bad = [(r, p) for r, p in corr2.items()
+           if {a.resn for a in mutated if (a.chain, a.resi) == r} !=
+              {a.resn for a in pred if (a.chain, a.resi) == p}]
+    check("no pair with mismatched residue types is emitted", not bad, str(bad[:3]))
+
+
 def main() -> int:
     print("=" * 76)
     print("CognitionBioChem platform regression suite")

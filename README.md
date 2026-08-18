@@ -303,6 +303,52 @@ to 26–47mers is an out-of-domain extrapolation with no published validation.
 
 ---
 
+## Slate #6 — pose accuracy, stratified by what the model had seen
+
+`platform/studies/pose_accuracy.py`, plan hash `8457830a2c5e`. 16 protein–ligand X-ray
+complexes predicted with Boltz-2; 12 scorable.
+
+| Hypothesis | Verdict |
+|---|---|
+| H1 recall stratum > 50% within 2 Å | **falsified** (3/6 = 0.50) |
+| H2 interpolation premium ≥ 0.2 | **falsified** — but underpowered |
+| H3 PoseBusters validity > 0.8 | **not executed** (declared deviation) |
+
+**The decisive separation.** Median pocket backbone RMSD is **0.454 Å** — the model
+reproduces the binding-site fold essentially perfectly — yet it places the ligand wrongly in
+7 of 12 cases. `23SI` is the clearest: pocket backbone **0.22 Å**, ligand **8.49 Å** away.
+Folding ability and docking ability are distinguishable, and confidence in the first licenses
+nothing about the second.
+
+The RMSD distribution is sharply **bimodal**, exactly as the registered metric justification
+predicted: hits at 0.31–0.81 Å, misses at 3.3–17.4 Å, nothing between.
+
+**H2 is underpowered, not null.** Premium 0.167 (recall 0.50 vs congeneric 0.33), Fisher
+p = 1.0, Wilson intervals [0.19, 0.81] and [0.10, 0.70] almost entirely overlapping. At n = 6
+per stratum only a very large premium was detectable — stated as a known confound before any
+prediction ran.
+
+**The receptor-disjoint stratum does not exist**, and that is a finding about the PDB rather
+than a shortfall. 14 distinct receptors from post-cutoff protein–ligand depositions were
+checked and **every one already had pre-cutoff entries** — 13 to 1172 (lysozyme). So this
+measures the step from "this exact complex was seen" to "this pocket was seen with other
+ligands", the smaller of the two gaps. Nothing here bears on novel folds.
+
+### Two scoring bugs that produced confident nonsense
+
+Both were caught before the results were trusted, and both are now regression-tested.
+
+1. **Residues paired by number, not sequence.** A model is numbered 1..N; a crystal uses
+   author numbering with an offset and gaps. On `4XH6` only **4.2%** of number-matched pairs
+   were even the same amino acid, and the pocket RMSD read **15.13 Å** where the truth is
+   **0.56 Å**. Fixed by global sequence alignment, with a guard that refuses any pair whose
+   residue types differ.
+2. **Multi-copy ligands counted as one molecule**, giving reference atom counts that were
+   exact multiples of the prediction (56 vs 14, 60 vs 30, 74 vs 37). Fixed by grouping copies
+   and taking the best match, the standard redocking convention.
+
+---
+
 ## Applicability domain
 
 A refusal to predict is principled only when **the stated ground is the computed ground**.

@@ -1,0 +1,54 @@
+{
+ "hash": "8457830a2c5e5d1d0fcd60e26ca3c5ea671b09a21e21cc7cb3a560859196126f",
+ "registered_utc": "2026-08-18T04:16:59+00:00",
+ "min_attainable_p": 0.0,
+ "content": {
+  "study_id": "pose-accuracy-v1",
+  "question": "When Boltz-2 places a small molecule in a protein pocket on this hardware, how often is the pose within 2 A of the crystallographic pose, and does that accuracy differ between complexes that could have been in its training set and complexes deposited after its cutoff?",
+  "primary_metric": "fraction_rmsd_under_2A",
+  "primary_metric_justification": "The fraction of poses within 2 A symmetry-corrected RMSD is the field's conventional success criterion and the one PoseBusters thresholds on, so it is comparable to published numbers. It is preferred over mean RMSD because the RMSD distribution for docking is strongly bimodal \u2014 poses are broadly right or in the wrong subpocket entirely \u2014 and a mean over a bimodal distribution describes neither mode. RMSD is computed with CalcRMS, symmetry-corrected and IN PLACE after superposing on the binding-pocket backbone only; whole-chain superposition would charge a global chain shift to the pose, and GetBestRMS would re-superimpose the ligand and discard the placement error entirely.",
+  "decision_threshold": "H1 confirmed if the recall stratum achieves fraction_rmsd_under_2A > 0.5; H2 confirmed if the congeneric-extension stratum is at least 0.2 lower than the recall stratum; H3 confirmed if PoseBusters physical validity is achieved by more than 0.8 of poses in both strata.",
+  "n_planned": 16,
+  "n_comparisons": 3,
+  "multiplicity_correction": "holm",
+  "alpha": 0.05,
+  "stopping_rule": "Fixed: every curated entry is predicted exactly once at seed 1, in a fixed order. No entry is added or removed after the first prediction. An entry whose prediction or scoring fails technically is reported as a failure with its error and excluded with the exclusion stated.",
+  "analysis_plan": "For each entry, predict the complex with Boltz-2 2.2.1 from the deposited construct sequence plus the ligand SMILES, msa=empty, gpu, seed 1, diffusion_samples 1. Superpose the prediction onto the crystal structure using backbone atoms within 10 A of the crystal ligand, apply that transform to the predicted ligand, and compute symmetry-corrected RMSD in place with CalcRMS. Run PoseBusters in 'redock' mode for physical validity. Report fraction_rmsd_under_2A per stratum with a Wilson 95% interval, and compare strata by Fisher exact test. Holm across the three hypotheses.",
+  "hypotheses": [
+   {
+    "name": "H1_recall_accuracy",
+    "statement": "On complexes that could be in its training set, Boltz-2 places the ligand within 2 A more often than not.",
+    "predicted_by": "published docking benchmarks on pre-cutoff data",
+    "confirmed_if": "recall stratum fraction_rmsd_under_2A > 0.5",
+    "falsified_if": "recall stratum fraction_rmsd_under_2A <= 0.5"
+   },
+   {
+    "name": "H2_interpolation_premium",
+    "statement": "Accuracy drops on complexes deposited after the cutoff, i.e. some of the recall-stratum accuracy is memorisation rather than docking ability.",
+    "predicted_by": "the leakage argument: a complex in training can be recalled rather than predicted",
+    "confirmed_if": "congeneric stratum is at least 0.2 below the recall stratum in fraction_rmsd_under_2A",
+    "falsified_if": "congeneric stratum is less than 0.2 below the recall stratum, i.e. no meaningful premium"
+   },
+   {
+    "name": "H3_physical_validity",
+    "statement": "Whatever the placement accuracy, the poses are physically valid molecules \u2014 correct bond lengths, no internal clashes, not interpenetrating the protein.",
+    "predicted_by": "the claim that a co-folding model produces chemically sound output, which PoseBusters was written to test",
+    "confirmed_if": "PoseBusters validity rate > 0.8 in both strata",
+    "falsified_if": "PoseBusters validity rate <= 0.8 in either stratum"
+   }
+  ],
+  "test_type": "parametric",
+  "n_permutations": 0,
+  "secondary_metrics": [
+   "median_rmsd",
+   "mean_rmsd",
+   "pocket_backbone_rmsd",
+   "fraction_rmsd_under_5A",
+   "posebusters_pass_rate",
+   "per_entry_rmsd",
+   "wall_clock_seconds_per_complex"
+  ],
+  "exclusions": "Entries are single-protein-entity X-ray structures under 2.5 A with exactly one non-polymer entity that is not a crystallisation additive, a ligand of 12-50 heavy atoms, and a chain under 300 residues. One entry per UniProt accession, so no single well-studied target dominates. Entries whose ligand cannot be matched between prediction and crystal are excluded with the reason recorded.",
+  "known_confounds": "1. THE RECEPTOR-DISJOINT STRATUM DOES NOT EXIST IN THIS STUDY. Every post-cutoff receptor checked already had pre-cutoff PDB entries (13 to 1172). So H2 measures the step from 'this exact complex was seen' to 'this pocket was seen with other ligands', which is the SMALLER of the two gaps the field cares about. Nothing here bears on novel folds. 2. Predictions run in single-sequence mode, which Boltz documents as degrading accuracy, so all strata are depressed together and the DIFFERENCE between strata is the interpretable quantity, not the levels. 3. n is 8 per stratum, so a Wilson interval on a proportion is wide \u2014 roughly +/-0.3 near 0.5 \u2014 and only a large premium would be detectable. 4. Deposition date bounds when coordinates could enter a training snapshot but does not prove they did; Boltz's split is not published."
+ }
+}
