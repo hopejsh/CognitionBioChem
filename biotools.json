@@ -101,6 +101,12 @@
       "value": "doi:10.5281/zenodo.22032685",
       "type": "doi",
       "version": "1.0.0"
+    },
+    {
+      "value": "RRID:SCR_028851",
+      "type": "RRID",
+      "version": "SciCrunch registry"
     }
-  ]
+  ],
+  "_licensing_note": "This deposit is not single-licensed. The project's own code is Apache-2.0, but it redistributes third-party scientific data that keeps its own terms: UniProt and AlphaFold DB under CC BY 4.0, RCSB crystal depositions under CC0 1.0, Boltz-2 model outputs under MIT, and ChEMBL-derived files under CC BY-SA 3.0 -- share-alike, so that last one carries obligations onward. NOTICE at the repository root lists which files fall under which."
 }

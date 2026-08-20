@@ -62,7 +62,36 @@ first produces no DOI, and the fix is to make another one.
 `.zenodo.json` in the repository root is what Zenodo reads for title, authors, licence and
 keywords. It is already written, so the deposit needs no manual editing on the Zenodo side.
 
-## 2. SciCrunch — RRID
+## 2. SciCrunch — **done**
+
+**RRID:SCR_028851**, issued 2026-08-20. Cite it inline in a Methods section; the DOI goes in
+the reference list.
+
+The submit flow assigns the ID at the end of *Basic Information*. Step 2, *Additional
+Information*, is optional enrichment and most of its fields are for **data repositories** and
+for **RIN Community Authorities** — registries that issue their own identifiers. This is
+neither. What was filled in, and what was deliberately left blank:
+
+| Field | Value |
+|---|---|
+| Terms Of Use URLs | `https://github.com/hopejsh/CognitionBioChem/blob/main/NOTICE` |
+| Supercategory | `resource` |
+| License | Apache-2.0 for the code, plus the mixed-licence paragraph below |
+| Data Access Information URL | `https://doi.org/10.5281/zenodo.22032684` |
+| Located In | *blank* — software has no physical location |
+| Processing, Repository Guidelines (+URL), Data Submission URL, Data size limits, Data storage fee/costs | *blank* — for repositories that accept deposits; this accepts none |
+| RIN Description, RRID Identifier Pattern, ES Index | *blank* — for Community Authorities that mint their own RRIDs |
+| FAIRSharing URL | *blank* — not registered there |
+| Specification URL | *blank* — no PDF specification exists |
+| Resource Status | *blank* — the field is for a resource no longer in service |
+
+The rule is the same one applied to bio.tools' EDAM terms: **a blank field is better than a
+plausible wrong one**, because a curator and every downstream query treat what is there as
+true. Nothing was invented to make the entry look complete.
+
+### The original submission content
+
+
 
 Account creation and form submission are yours to do; the content is below, ready to paste.
 
@@ -102,7 +131,23 @@ Keywords:
   peptide design
 
 License:
-  Apache-2.0
+  Apache-2.0 (this project's own code)
+
+  NOTE — the resource is not single-licensed, and a submission that says only "Apache-2.0"
+  understates a reuser's obligations. The repository redistributes third-party scientific
+  data, each source keeping its own terms:
+
+    Apache-2.0    this project's code, and the vendored .agents/skills/ software
+    CC BY 4.0     UniProt records, AlphaFold DB models, .agents/skills/ documentation
+    CC BY-SA 3.0  ChEMBL-derived data files -- SHARE-ALIKE, and therefore the one that
+                  actually constrains reuse: it covers data/corpus_ACHE.json, three study
+                  artefacts, and the 17 runs/*/input.yaml whose job is a CHEMBL accession
+    CC0 1.0       RCSB PDB crystal depositions used as experimental ground truth
+    MIT           Boltz-2 model outputs (the predicted structures under runs/)
+
+  If the form takes only one value, enter Apache-2.0 and put the paragraph above in the
+  comments or description field. The full per-file breakdown is in NOTICE at the repository
+  root.
 
 Availability:
   Free, open source

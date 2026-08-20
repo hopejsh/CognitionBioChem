@@ -928,9 +928,10 @@ a reproducibility statement, for instance. The version DOI has to be written int
 `CITATION.cff` by hand after each release, because the webhook issues it only once the tag is
 already pushed.
 
-If your journal uses Research Resource Identifiers, the RRID belongs inline in the running
-text and the DOI in the reference list. The RRID is not yet issued; see
-`docs/REGISTRATION.md`.
+If your journal uses Research Resource Identifiers, cite **CognitionBioChem
+(RRID:SCR_028851)** inline in the running text; the DOI belongs in the reference list. The two
+are not alternatives — the RRID identifies the tool in a Methods section, the DOI identifies
+the archived release.
 
 `docs/REGISTRATION.md` records which registries this project belongs in and which it does not,
 with the metadata for each already written: `.zenodo.json`, `CITATION.cff`, `codemeta.json`

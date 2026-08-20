@@ -270,6 +270,22 @@ def main() -> int:
         notice = " ".join((REPO / "NOTICE").read_text().split())
         check("NOTICE does not claim AlphaFold is only mentioned negatively",
               "referred to only to describe what this project does NOT do" not in notice)
+        # The repository redistributes data under five licences and one of them, ChEMBL's
+        # CC BY-SA 3.0, is share-alike. A metadata file that names only Apache-2.0 tells a
+        # reuser they have fewer obligations than they do -- the same class of understatement
+        # as an overclaimed result, one field over.
+        import yaml as _yaml
+        cff = _yaml.safe_load((REPO / "CITATION.cff").read_text())
+        lic = cff["license"] if isinstance(cff["license"], list) else [cff["license"]]
+        check("CITATION.cff lists every licence the deposit carries",
+              {"Apache-2.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC0-1.0", "MIT"} <= set(lic),
+              f"lists {lic}")
+        for name in ("CITATION.cff", "codemeta.json", ".zenodo.json", "biotools.json",
+                     "docs/REGISTRATION.md"):
+            body = (REPO / name).read_text()
+            check(f"{name} discloses the share-alike obligation",
+                  "BY-SA" in body or "BY SA" in body)
+
         for token, what in (("AlphaFold DB IS used", "AlphaFold DB is used"),
                             ("AlphaFold 3 is NOT run", "AlphaFold 3 is not run"),
                             ("AlphaFold SERVER is NOT used", "AlphaFold Server is not used")):

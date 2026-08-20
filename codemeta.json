@@ -5,7 +5,13 @@
   "description": "A structural pharmacology workbench for cognition-related CNS targets. Boltz-2 v2.2.1 runs locally and produced every predicted structure; every displayed value carries a provenance record. Eight studies were pre-registered under content hashes before any data was seen. The headline result is negative: designed peptides did not separate from composition-matched shuffles of their own amino acids.",
   "version": "1.0.0",
   "dateModified": "2026-08-20",
-  "license": "https://spdx.org/licenses/Apache-2.0",
+  "license": [
+    "https://spdx.org/licenses/Apache-2.0",
+    "https://spdx.org/licenses/CC-BY-4.0",
+    "https://spdx.org/licenses/CC-BY-SA-3.0",
+    "https://spdx.org/licenses/CC0-1.0",
+    "https://spdx.org/licenses/MIT"
+  ],
   "programmingLanguage": [
     "Python",
     "JavaScript"
@@ -48,6 +54,10 @@
     "NumPy",
     "SciPy"
   ],
-  "identifier": "https://doi.org/10.5281/zenodo.22032684",
-  "releaseNotes": "https://github.com/hopejsh/CognitionBioChem/releases/tag/v1.0.0"
+  "identifier": [
+    "https://doi.org/10.5281/zenodo.22032684",
+    "https://scicrunch.org/resolver/SCR_028851"
+  ],
+  "releaseNotes": "https://github.com/hopejsh/CognitionBioChem/releases/tag/v1.0.0",
+  "copyrightNotice": "This deposit is not single-licensed. The project's own code is Apache-2.0, but it redistributes third-party scientific data that keeps its own terms: UniProt and AlphaFold DB under CC BY 4.0, RCSB crystal depositions under CC0 1.0, Boltz-2 model outputs under MIT, and ChEMBL-derived files under CC BY-SA 3.0 -- share-alike, so that last one carries obligations onward. NOTICE at the repository root lists which files fall under which."
 }
