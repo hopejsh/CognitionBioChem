@@ -1,4 +1,5 @@
 {
+  "owner": "seung",
   "name": "CognitionBioChem",
   "description": "A structural pharmacology workbench for cognition-related CNS targets, built so that a displayed number must trace to a computation. Runs Boltz-2 locally for structure prediction, validates chemistry with RDKit, enforces a provenance record on every value, and reports eight studies pre-registered under content hashes before any data was seen. Its headline result is negative: designed peptides did not separate from composition-matched shuffles of their own amino acids.",
   "homepage": "https://github.com/hopejsh/CognitionBioChem",

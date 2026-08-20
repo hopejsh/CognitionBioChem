@@ -204,8 +204,19 @@ pasted or imported.
    https://www.ebi.ac.uk/ols4/api/search?q=<term>&ontology=edam&exact=true
    ```
 
-   Keep the `"owner"` line the editor starts with, paste the rest of the object alongside it,
-   then press **Validate** before **Save**.
+   The editor starts with `{"owner": "seung"}`. `biotools.json` carries that field too, so
+   there is nothing to merge: click in the editor, select all, paste over it, then press
+   **Validate** before **Save**.
+
+   ```
+   pbcopy < biotools.json
+   ```
+
+   An earlier version of this file left `owner` out, on the grounds that a bio.tools account
+   name is not something the project asserts about itself. That was a distinction that cost
+   more than it bought — it made the repository's own file unusable as-is and pushed the
+   working copy into a scratch directory. `owner` is a biotoolsSchema field and is public the
+   moment the entry is registered.
 4. Curation is manual and takes days to weeks. The result is a stable entry at
    `https://bio.tools/cognitionbiochem`.
 5. Add that URL to `CITATION.cff` under `identifiers:` and to the README.
