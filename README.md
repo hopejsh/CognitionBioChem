@@ -943,6 +943,11 @@ cite the software, cite it for what it does — pre-registration, provenance enf
 custody of prediction artefacts — and not as evidence that any candidate here binds anything.
 `data/slate.json` carries every verdict, including the eleven falsifications.
 
+**Releasing.** `./release.sh 1.1.0` — it verifies the repository, the notes, the tree, the
+tag, `VERSION` and the full test suite before it publishes anything, and refuses a placeholder
+version. Do not hand-type the git and gh commands; `docs/REGISTRATION.md` records what happened
+the two times they were.
+
 **Development note.** This project was built with substantial AI assistance, and the internal
 review that found the fabricated values was a multi-agent LLM process, not human peer review.
 Both facts are recorded in the status disclosure above and in `NOTICE`.

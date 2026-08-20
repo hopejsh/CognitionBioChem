@@ -25,7 +25,11 @@ Concept DOI **10.5281/zenodo.22032684** · v1.0.0 DOI **10.5281/zenodo.22032685*
 > Recovery: delete the Zenodo record (owners can, within 30 days of publishing; the reason to
 > select is *Duplicate of another record*, **not** *Retraction/Withdrawal*, which is published
 > on the tombstone and reads as a scholarly retraction), then delete the GitHub release and
-> tag. Use `git -C <path>` rather than trusting the shell's working directory.
+> tag.
+>
+> The fix that followed was `release.sh`. Telling the reader to "use `git -C`" was not enough:
+> the very next attempt pasted the corrected commands with their placeholders intact and
+> created a tag named `vX.Y.Z`. The guard has to be in the tool, not in the instructions.
 
 The webhook only sees releases created *after* the repository is switched on. A release made
 first produces no DOI, and the fix is to make another one.
@@ -33,14 +37,23 @@ first produces no DOI, and the fix is to make another one.
 1. Sign in at <https://zenodo.org> **with GitHub**.
 2. Go to <https://zenodo.org/account/settings/github/>, find `hopejsh/CognitionBioChem`,
    toggle it **ON**. If it is not listed, use *Sync now*.
-3. Only then publish the release. Every command names its repository explicitly:
+3. Only then publish the release, with `./release.sh`:
    ```
-   R=/Users/seunghojung/Documents/DeepMind_Bio
-   git -C $R tag -a vX.Y.Z -m "CognitionBioChem vX.Y.Z"
-   git -C $R push origin vX.Y.Z
-   gh release create vX.Y.Z --repo hopejsh/CognitionBioChem \
-      --title "CognitionBioChem vX.Y.Z" --notes-file "$R/docs/RELEASE_NOTES_vX.Y.Z.md"
+   ./release.sh 1.1.0
    ```
+
+   **Do not hand-type the git and gh commands.** This section used to show them with `vX.Y.Z`
+   and `docs/...` as placeholders, and both times they were run they were run literally —
+   once from the wrong directory, which released a different repository and made Zenodo mint
+   a bogus DOI against a published project, and once verbatim, which created a tag actually
+   named `vX.Y.Z`. A command a reader is expected to edit before running is a command that
+   will eventually be run unedited.
+
+   `release.sh` takes the version as its only argument and derives everything else. Before it
+   touches anything it checks that `origin` really is `hopejsh/CognitionBioChem`, that the
+   release notes exist, that the working tree is clean, that the tag is new, that `VERSION`
+   agrees with the argument, and that `verify_all.py` passes — then asks for confirmation,
+   noting that a Zenodo DOI cannot be un-minted. It refuses a placeholder version outright.
 4. Zenodo mints two DOIs within a few minutes. Take **both** from the record page.
 5. Write them into `CITATION.cff` (`doi:` plus both `identifiers:` entries), `.zenodo.json`
    and the README badge. The **version** DOI must be redone by hand at every release; the
