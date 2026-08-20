@@ -47,5 +47,7 @@
     "Boltz-2 2.2.1",
     "NumPy",
     "SciPy"
-  ]
+  ],
+  "identifier": "https://doi.org/10.5281/zenodo.22032684",
+  "releaseNotes": "https://github.com/hopejsh/CognitionBioChem/releases/tag/v1.0.0"
 }

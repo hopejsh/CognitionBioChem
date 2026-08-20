@@ -9,6 +9,7 @@ every record against a contract, and attaches a provenance record to every value
 [![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
 [![Data gate](https://img.shields.io/badge/data_gate-114_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
 [![Structure](https://img.shields.io/badge/structure-Boltz--2_2.2.1_(MIT)-blue?style=flat-square)](platform/cbc/compute/structure.py)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22032684.svg)](https://doi.org/10.5281/zenodo.22032684)
 [![License](https://img.shields.io/badge/code-Apache--2.0-blue?style=flat-square)](LICENSE)
 [![Data](https://img.shields.io/badge/data-see_NOTICE-lightgrey?style=flat-square)](NOTICE)
 
@@ -904,19 +905,32 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 
 ## How to cite
 
-**Not yet citable.** The DOI is minted by Zenodo when the first GitHub Release is published,
-and that has not happened. `CITATION.cff` carries no `doi:` field until it does, so nothing
-here can be cited by accident in the meantime.
+> Jung, S. H. (2026). *CognitionBioChem: A structural pharmacology workbench that reports a
+> negative result* (Version 1.0.0) [Computer software]. Zenodo.
+> https://doi.org/10.5281/zenodo.22032684
 
-Once the release exists, Zenodo issues two DOIs and they are not interchangeable. The
-**concept DOI** always resolves to the newest release and is what a reader normally wants.
-The **version DOI** is frozen to one release and is what you cite when the exact bytes matter
-— a reproducibility statement, for instance. The version DOI has to be written into
+```bibtex
+@software{jung_cognitionbiochem_2026,
+  author    = {Jung, Seung Ho},
+  title     = {CognitionBioChem: A structural pharmacology workbench that reports a negative result},
+  year      = {2026},
+  version   = {1.0.0},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22032684},
+  url       = {https://doi.org/10.5281/zenodo.22032684}
+}
+```
+
+Zenodo issues two DOIs and they are not interchangeable. **`10.5281/zenodo.22032684`** is the *concept* DOI
+and always resolves to the newest release — cite this one normally. **`10.5281/zenodo.22032685`** is the
+*version* DOI, permanently fixed to v1.0.0, and is what you cite when the exact bytes matter —
+a reproducibility statement, for instance. The version DOI has to be written into
 `CITATION.cff` by hand after each release, because the webhook issues it only once the tag is
 already pushed.
 
 If your journal uses Research Resource Identifiers, the RRID belongs inline in the running
-text and the DOI in the reference list. The RRID is likewise not yet issued.
+text and the DOI in the reference list. The RRID is not yet issued; see
+`docs/REGISTRATION.md`.
 
 `docs/REGISTRATION.md` records which registries this project belongs in and which it does not,
 with the metadata for each already written: `.zenodo.json`, `CITATION.cff`, `codemeta.json`

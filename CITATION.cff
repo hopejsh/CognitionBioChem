@@ -29,11 +29,19 @@ date-released: "2026-08-20"
 license: Apache-2.0
 repository-code: "https://github.com/hopejsh/CognitionBioChem"
 url: "https://github.com/hopejsh/CognitionBioChem"
-# Zenodo issues two DOIs on the first release: a concept DOI that always resolves to the
-# newest version, and a version DOI frozen to one release. Both fields below are placeholders
-# until the first release is minted; nothing should cite this file while they say PENDING.
-# The version DOI must be updated by hand on every release, because it is issued by the
-# Zenodo webhook after the tag is pushed and no CI step can know it in advance.
+# Zenodo issues two DOIs. The concept DOI always resolves to the newest release and is what a
+# reader normally wants; the version DOI is frozen to one release and is what you cite when the
+# exact bytes matter -- a reproducibility statement, for instance.
+doi: 10.5281/zenodo.22032684
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22032684
+    description: Concept DOI -- always resolves to the latest release
+  # This one must be updated BY HAND at every release: the version DOI is issued by the Zenodo
+  # webhook only after the tag is already pushed, so no CI step can know it in advance.
+  - type: doi
+    value: 10.5281/zenodo.22032685
+    description: Version DOI -- permanently fixed to v1.0.0 (this release)
 keywords:
   - structural biology
   - protein structure prediction

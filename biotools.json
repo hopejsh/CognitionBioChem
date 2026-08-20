@@ -90,5 +90,17 @@
       "Structure similarity score",
       "Validation report"
     ]
-  }
+  },
+  "otherID": [
+    {
+      "value": "doi:10.5281/zenodo.22032684",
+      "type": "doi",
+      "version": "concept DOI, resolves to the latest release"
+    },
+    {
+      "value": "doi:10.5281/zenodo.22032685",
+      "type": "doi",
+      "version": "1.0.0"
+    }
+  ]
 }

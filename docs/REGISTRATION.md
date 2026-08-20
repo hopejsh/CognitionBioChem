@@ -13,7 +13,19 @@ recorded here so the question is not reopened later.
 
 ---
 
-## 1. Zenodo — the order matters
+## 1. Zenodo — **done**, and a warning about how it went wrong
+
+Concept DOI **10.5281/zenodo.22032684** · v1.0.0 DOI **10.5281/zenodo.22032685**, minted
+2026-08-20.
+
+> **The mistake that cost an hour.** The release command was first run from the wrong working
+> directory. It tagged and released `hopejsh/aaa-rns` instead, that repository also had the
+> Zenodo webhook enabled, and Zenodo immediately minted a bogus `v1.0.0` deposit whose concept
+> DOI then resolved to it instead of to AAA-RNS v2.1.0 — a DOI cited in that project's README.
+> Recovery: delete the Zenodo record (owners can, within 30 days of publishing; the reason to
+> select is *Duplicate of another record*, **not** *Retraction/Withdrawal*, which is published
+> on the tombstone and reads as a scholarly retraction), then delete the GitHub release and
+> tag. Use `git -C <path>` rather than trusting the shell's working directory.
 
 The webhook only sees releases created *after* the repository is switched on. A release made
 first produces no DOI, and the fix is to make another one.
@@ -21,11 +33,13 @@ first produces no DOI, and the fix is to make another one.
 1. Sign in at <https://zenodo.org> **with GitHub**.
 2. Go to <https://zenodo.org/account/settings/github/>, find `hopejsh/CognitionBioChem`,
    toggle it **ON**. If it is not listed, use *Sync now*.
-3. Only then publish the release:
+3. Only then publish the release. Every command names its repository explicitly:
    ```
-   git tag -a v1.0.0 -m "CognitionBioChem v1.0.0"
-   git push origin v1.0.0
-   gh release create v1.0.0 --title "CognitionBioChem v1.0.0" --notes-file docs/RELEASE_NOTES_v1.0.0.md
+   R=/Users/seunghojung/Documents/DeepMind_Bio
+   git -C $R tag -a vX.Y.Z -m "CognitionBioChem vX.Y.Z"
+   git -C $R push origin vX.Y.Z
+   gh release create vX.Y.Z --repo hopejsh/CognitionBioChem \
+      --title "CognitionBioChem vX.Y.Z" --notes-file "$R/docs/RELEASE_NOTES_vX.Y.Z.md"
    ```
 4. Zenodo mints two DOIs within a few minutes. Take **both** from the record page.
 5. Write them into `CITATION.cff` (`doi:` plus both `identifiers:` entries), `.zenodo.json`
@@ -89,11 +103,11 @@ Related identifiers:
 
 Run through this list each time an identifier arrives; nothing here is automatic.
 
-- [ ] `CITATION.cff` — `doi:`, both `identifiers:` DOI entries, and the RRID entry
+- [x] `CITATION.cff` — `doi:` and both `identifiers:` DOI entries (RRID still pending)
 - [ ] `.zenodo.json` — nothing to change; Zenodo owns the record after the first deposit
-- [ ] `README.md` — DOI badge, and replace the "Not yet citable" paragraph
-- [ ] `codemeta.json` — add `identifier` with the concept DOI
-- [ ] `biotools.json` — add the DOI under `otherID`, once bio.tools has an entry
+- [x] `README.md` — DOI badge and citation block
+- [x] `codemeta.json` — `identifier` set to the concept DOI
+- [x] `biotools.json` — both DOIs under `otherID`
 - [ ] `VERSION` — bump before the *next* release, not this one
 
 One caution that applies to both registries: this repository's finding is negative. The
