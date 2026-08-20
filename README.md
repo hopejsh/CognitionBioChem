@@ -902,6 +902,39 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 
 ---
 
+## How to cite
+
+**Not yet citable.** The DOI is minted by Zenodo when the first GitHub Release is published,
+and that has not happened. `CITATION.cff` carries no `doi:` field until it does, so nothing
+here can be cited by accident in the meantime.
+
+Once the release exists, Zenodo issues two DOIs and they are not interchangeable. The
+**concept DOI** always resolves to the newest release and is what a reader normally wants.
+The **version DOI** is frozen to one release and is what you cite when the exact bytes matter
+— a reproducibility statement, for instance. The version DOI has to be written into
+`CITATION.cff` by hand after each release, because the webhook issues it only once the tag is
+already pushed.
+
+If your journal uses Research Resource Identifiers, the RRID belongs inline in the running
+text and the DOI in the reference list. The RRID is likewise not yet issued.
+
+`docs/REGISTRATION.md` records which registries this project belongs in and which it does not,
+with the metadata for each already written: `.zenodo.json`, `CITATION.cff`, `codemeta.json`
+and `biotools.json` are all in the repository root. ELN Finder is deliberately excluded there
+— it registers electronic lab notebooks, and this is not one.
+
+**What to say about it.** This repository's headline finding is negative: the designed
+peptides did not separate from composition-matched shuffles of their own amino acids. If you
+cite the software, cite it for what it does — pre-registration, provenance enforcement and
+custody of prediction artefacts — and not as evidence that any candidate here binds anything.
+`data/slate.json` carries every verdict, including the eleven falsifications.
+
+**Development note.** This project was built with substantial AI assistance, and the internal
+review that found the fabricated values was a multi-agent LLM process, not human peer review.
+Both facts are recorded in the status disclosure above and in `NOTICE`.
+
+---
+
 ## License and attribution
 
 **Code: Apache-2.0** (see [LICENSE](LICENSE)). SPDX-License-Identifier: `Apache-2.0`.

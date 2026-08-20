@@ -1,0 +1,63 @@
+cff-version: 1.2.0
+message: If you use this software or its results, please cite it as below.
+title: "CognitionBioChem: A structural pharmacology workbench that reports a negative result"
+abstract: >-
+  A structural pharmacology workbench for cognition-related CNS targets, built around the
+  discipline that a displayed number must trace to a computation. Boltz-2 v2.2.1 runs locally
+  and produced every predicted structure; chemistry is validated with RDKit; every value
+  carries a provenance record, and fields that were never computed render as labels rather
+  than figures. Eight studies were pre-registered under content hashes before any data was
+  seen, and their artefacts, analysis plans and prediction runs are all under content-addressed
+  custody in the repository.
+
+  The headline result is negative and is the reason the project exists in this form. Across a
+  13-candidate screen and a 143-fold full-MSA rerun, designed peptides did not separate from
+  composition-matched shuffles of their own amino acids: mean native ipTM 0.629 against a mean
+  decoy of 0.628. That hypothesis has been falsified in all eleven retained versions of the two
+  screening studies, across candidate sets from six to thirteen designs. An earlier version of
+  this project displayed fabricated affinity, confidence and safety values as though they had
+  been computed; those claims are preserved under `retracted_claims` rather than deleted, and
+  the renderers that produced them are gone.
+type: software
+authors:
+  - given-names: Seung Ho
+    family-names: Jung
+    email: seung.jung@gmail.com
+    orcid: "https://orcid.org/0000-0001-7914-5306"
+version: 1.0.0
+date-released: "2026-08-20"
+license: Apache-2.0
+repository-code: "https://github.com/hopejsh/CognitionBioChem"
+url: "https://github.com/hopejsh/CognitionBioChem"
+# Zenodo issues two DOIs on the first release: a concept DOI that always resolves to the
+# newest version, and a version DOI frozen to one release. Both fields below are placeholders
+# until the first release is minted; nothing should cite this file while they say PENDING.
+# The version DOI must be updated by hand on every release, because it is issued by the
+# Zenodo webhook after the tag is pushed and no CI step can know it in advance.
+keywords:
+  - structural biology
+  - protein structure prediction
+  - computational chemistry
+  - drug discovery
+  - reproducible research
+  - research integrity
+  - pre-registration
+  - negative results
+  - provenance
+  - peptide design
+references:
+  - type: software
+    title: "Boltz-2"
+    notes: >-
+      Every predicted structure in this repository was produced by Boltz-2 v2.2.1, whose code
+      and weights are MIT-licensed.
+    authors:
+      - name: "Passaro, S. et al."
+  - type: database
+    title: "AlphaFold Protein Structure Database"
+    notes: >-
+      Sixteen deposited models are redistributed here under CC BY 4.0 and compared against
+      Boltz-2. AlphaFold Server was not used: its terms prohibit automated use for
+      protein-peptide binding prediction.
+    authors:
+      - name: "Varadi, M. et al."

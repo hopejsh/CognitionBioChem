@@ -1,0 +1,34 @@
+{
+  "title": "CognitionBioChem: A structural pharmacology workbench that reports a negative result",
+  "description": "<p>A structural pharmacology workbench for cognition-related CNS targets, built around the discipline that a displayed number must trace to a computation. Boltz-2 v2.2.1 runs locally and produced every predicted structure; chemistry is validated with RDKit; every value carries a provenance record, and fields that were never computed render as labels rather than figures. Eight studies were pre-registered under content hashes before any data was seen, and their artefacts, analysis plans and prediction runs are all under content-addressed custody in the repository.</p><p><strong>The headline result is negative</strong>, and is the reason the project exists in this form. Across a 13-candidate screen and a 143-fold full-MSA rerun, designed peptides did not separate from composition-matched shuffles of their own amino acids: mean native ipTM 0.629 against a mean decoy of 0.628. That hypothesis has been falsified in all eleven retained versions of the two screening studies, across candidate sets from six to thirteen designs.</p><p>An earlier version of this project displayed fabricated affinity, confidence and safety values as though they had been computed. Those claims are preserved under <code>retracted_claims</code> rather than deleted, and the renderers that produced them are gone. The repository ships 51 structures it computed or downloaded, 8 study artefacts, 26 registered analysis plans and 313 automated checks that are themselves verified to fail on the defects they name.</p><p><em>Development note:</em> this project was built with substantial AI assistance, and its internal review was a multi-agent LLM process rather than human peer review. Both facts are stated in the README and NOTICE.</p>",
+  "creators": [
+    {
+      "name": "Jung, Seung Ho",
+      "orcid": "0000-0001-7914-5306"
+    }
+  ],
+  "license": "Apache-2.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "keywords": [
+    "structural biology",
+    "protein structure prediction",
+    "computational chemistry",
+    "drug discovery",
+    "reproducible research",
+    "research integrity",
+    "pre-registration",
+    "negative results",
+    "provenance",
+    "peptide design"
+  ],
+  "version": "1.0.0",
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/hopejsh/CognitionBioChem",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "CognitionBioChem: A structural pharmacology workbench that reports a negative result",
+  "description": "A structural pharmacology workbench for cognition-related CNS targets. Boltz-2 v2.2.1 runs locally and produced every predicted structure; every displayed value carries a provenance record. Eight studies were pre-registered under content hashes before any data was seen. The headline result is negative: designed peptides did not separate from composition-matched shuffles of their own amino acids.",
+  "version": "1.0.0",
+  "dateModified": "2026-08-20",
+  "license": "https://spdx.org/licenses/Apache-2.0",
+  "programmingLanguage": [
+    "Python",
+    "JavaScript"
+  ],
+  "runtimePlatform": [
+    "Python 3.14",
+    "Python 3.12",
+    "Web browser"
+  ],
+  "operatingSystem": [
+    "macOS",
+    "Linux"
+  ],
+  "applicationCategory": "Computational Biology",
+  "developmentStatus": "active",
+  "codeRepository": "https://github.com/hopejsh/CognitionBioChem",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Seung Ho",
+      "familyName": "Jung",
+      "@id": "https://orcid.org/0000-0001-7914-5306"
+    }
+  ],
+  "keywords": [
+    "structural biology",
+    "protein structure prediction",
+    "computational chemistry",
+    "drug discovery",
+    "reproducible research",
+    "research integrity",
+    "pre-registration",
+    "negative results",
+    "provenance",
+    "peptide design"
+  ],
+  "softwareRequirements": [
+    "RDKit",
+    "Boltz-2 2.2.1",
+    "NumPy",
+    "SciPy"
+  ]
+}
