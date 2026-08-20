@@ -38,6 +38,34 @@ class Status(str, Enum):
 UNTRUSTWORTHY = {Status.PLACEHOLDER, Status.NOT_COMPUTED}
 
 
+#: Files the generators themselves write. Excluded when deciding whether the tree is dirty,
+#: because otherwise the stamp is self-invalidating: running a generator modifies its own
+#: output, which makes the tree dirty, which makes the stamp the generator just wrote wrong.
+#: The question the stamp is meant to answer is "were the INPUTS committed", and that is what
+#: it answers once its own products are taken out of the comparison.
+GENERATED_ARTEFACTS = (
+    "data/dataset.json", "data/dataset.js",
+    "data/slate.json", "data/slate.js",
+    "data/structures.json", "data/structures.js",
+    "data/validation_gate.json", "data/validation_gate.js",
+    "data/alphafold_db_comparison.json",
+    "data/pae/",
+)
+
+
+def _tree_is_dirty(root: Path) -> bool:
+    """Dirty ignoring the generators' own output. See GENERATED_ARTEFACTS."""
+    out = subprocess.run(["git", "status", "--porcelain"], cwd=root,
+                         capture_output=True, text=True, timeout=30).stdout
+    for line in out.splitlines():
+        path = line[3:].strip().strip('"')
+        if not path:
+            continue
+        if not any(path.startswith(g) for g in GENERATED_ARTEFACTS):
+            return True
+    return False
+
+
 def git_sha(repo: Path | None = None) -> str:
     """Short HEAD, suffixed `-dirty` when the working tree does not match it.
 
@@ -55,9 +83,7 @@ def git_sha(repo: Path | None = None) -> str:
         sha = out.stdout.strip()
         if not sha:
             return "unknown"
-        st = subprocess.run(["git", "status", "--porcelain"],
-                            cwd=root, capture_output=True, text=True, timeout=30)
-        return f"{sha}-dirty" if st.stdout.strip() else sha
+        return f"{sha}-dirty" if _tree_is_dirty(root) else sha
     except Exception:  # noqa: BLE001
         return "unknown"
 

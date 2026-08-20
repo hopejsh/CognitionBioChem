@@ -559,9 +559,12 @@ def main() -> int:
                and st["n_failures"] > st["n_failures_detail"]["distinct"]]
         check("no study double-counts a technical failure", not dbl, str(dbl))
         # A generated file stamped with a bare commit claims a clean-tree reproduction.
-        import subprocess as _sp
-        dirty = _sp.run(["git", "status", "--porcelain"], cwd=REPO,
-                        capture_output=True, text=True).stdout.strip()
+        # The same exclusion the generators use. Without it this check fails structurally the
+        # moment a generator runs: writing its own output dirties the tree and invalidates the
+        # stamp it just wrote. See cbc.provenance.GENERATED_ARTEFACTS.
+        sys.path.insert(0, str(REPO / "platform"))
+        from cbc.provenance import _tree_is_dirty
+        dirty = _tree_is_dirty(REPO)
         stamps = {n: json.loads((REPO / "data" / n).read_text()).get("git_sha")
                   for n in ("slate.json", "structures.json",
                             "alphafold_db_comparison.json", "dataset.json")
