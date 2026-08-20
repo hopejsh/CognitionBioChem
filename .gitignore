@@ -24,3 +24,20 @@ reviews/*_raw_full.json
 # Editor/agent scaffolding, not part of the project. .claude/launch.json only records how to
 # start `python3 -m http.server` for local preview, which the README states directly.
 .claude/
+
+# The built long-form documents are deliberately NOT tracked. They are personal reading
+# copies, and every one of them is a pure function of data/ plus docs/figures/ -- so the
+# generators and the figures are tracked and the outputs are not:
+#
+#   ./.venv/bin/python platform/build_figures.py \
+#     && ./.venv/bin/python platform/build_report.py \
+#     && ./.venv/bin/python platform/build_report_ko.py \
+#     && ./.venv/bin/python platform/build_deck.py \
+#     && ./.venv/bin/python platform/build_pptx.py
+#
+# They were tracked once, at 2e1831f; that commit is still in the history.
+docs/CognitionBioChem_Report.docx
+docs/CognitionBioChem_Report_KO.docx
+docs/CognitionBioChem_Deck.html
+docs/CognitionBioChem_Deck.pdf
+docs/CognitionBioChem_Deck.pptx

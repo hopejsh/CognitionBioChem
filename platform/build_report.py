@@ -28,6 +28,7 @@ from docx.shared import Inches, Pt, RGBColor
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "platform"))
 from cbc.provenance import git_sha  # noqa: E402
+from cbc.report_data import J, A, load  # noqa: E402
 
 FIG = REPO / "docs" / "figures"
 OUT = REPO / "docs" / "CognitionBioChem_Report.docx"
@@ -36,54 +37,7 @@ NAVY = RGBColor(0x1A, 0x3D, 0x6D)
 GREY = RGBColor(0x5A, 0x66, 0x78)
 
 
-PY = str(REPO / ".venv" / "bin" / "python")
-if not Path(PY).exists():
-    PY = sys.executable
-
-
-def suite_count(rel: str) -> int:
-    """Run a verification suite and return its passing-check count.
-
-    The count is taken from the suite's own output rather than typed here, and a suite with
-    any failing check raises instead of reporting a number -- a document that advertises
-    "N checks, each verified to fail on the defect it names" must not be publishable while
-    one of them is red.
-    """
-    r = subprocess.run([PY, rel], cwd=REPO, capture_output=True, text=True)
-    m = re.search(r"(\d+) passed, (\d+) failed", r.stdout)
-    if not m:
-        raise RuntimeError(f"{rel} printed no 'N passed, M failed' line -- cannot count it")
-    if int(m.group(2)):
-        raise RuntimeError(
-            f"{rel} reports {m.group(2)} failing check(s); refusing to build a report that "
-            f"claims every check passes")
-    return int(m.group(1))
-
-
-def J(p):
-    return json.loads((REPO / p).read_text())
-
-
-def A(p):
-    d = J(p)
-    return d.get("analysis") or d
-
-
-D = {
-    "msa": A("data/study_msa_specificity.json"),
-    "scr": A("data/study_candidate_screen.json"),
-    "iv": A("data/study_inference_variance_analysis.json"),
-    "pi": A("data/study_peptide_interface.json"),
-    "pa": A("data/study_pose_accuracy.json"),
-    "ache": A("data/study_ache_affinity.json"),
-    "ac": A("data/study_affinity_corrected.json"),
-    "pro": A("data/study_prodigy.json"),
-    "slate": J("data/slate.json"),
-    "struct": J("data/structures.json"),
-    "af": J("data/alphafold_db_comparison.json"),
-    "ds": J("data/dataset.json"),
-    "refs": J("docs/REFERENCES.json"),
-}
+D = load()
 REF = {r["key"]: r for r in D["refs"]["references"]}
 CITED: list[str] = []
 
@@ -176,32 +130,11 @@ def build() -> int:
         s.left_margin = s.right_margin = Inches(1.0)
         s.top_margin = s.bottom_margin = Inches(0.9)
 
-    cit = D["ds"]["citation"]
-    msa, scr, slate, struct, af = D["msa"], D["scr"], D["slate"], D["struct"], D["af"]
-    m, c = msa["metrics"], slate["counts"]
-    nul = m["beats_all_decoys_null"]
-    ver = slate["separation_across_versions"]
-    per = msa["per_candidate"]
-    n_decoys = max(p["n_decoys"] for p in per)
-    winners = sorted((p for p in per if p["beats_all_decoys"]),
-                     key=lambda p: -p["difference"])
-    # The screen's own lineage, oldest first, so the trajectory of the margin is read from
-    # the artefacts rather than transcribed. Both screening studies keep every superseded
-    # version; this walks the one whose construct set was corrected three times.
-    _SEP_KEYS = ("native_minus_decoy_mean", "paired_native_minus_decoy_mean")
-    def _sep(path):
-        mm = A(path)["metrics"]
-        return next(mm[k] for k in _SEP_KEYS if k in mm)
-    scr_line = sorted((v["artefact"] for v in ver["versions"]
-                       if "candidate_screen" in v["artefact"]),
-                      key=lambda a: (0, a) if "superseded" in a else (1, a))
-    scr_series = [_sep(a) for a in scr_line]
-    scr_decoys = len({r["kind"] for r in J("data/study_candidate_screen.json")["rows"]
-                      if r["kind"] != "native"})
-    win_margins = " and ".join(
-        format(w["native_iptm"] - w["decoy_max"], "+.3f") for w in winners)
-    n_checks = suite_count("platform/tests/test_platform.py") + \
-        suite_count("platform/verify_frontend.py")
+    cit, msa, scr = D["cit"], D["msa"], D["scr"]
+    slate, struct, af = D["slate"], D["struct"], D["af"]
+    m, c, nul, ver, per = D["m"], D["c"], D["nul"], D["ver"], D["per"]
+    n_decoys, winners, win_margins = D["n_decoys"], D["winners"], D["win_margins"]
+    scr_series, scr_decoys, n_checks = D["scr_series"], D["scr_decoys"], D["n_checks"]
 
     # ---------------------------------------------------------------- title page ---- #
     t = doc.add_paragraph(); t.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -258,11 +191,9 @@ def build() -> int:
     # ---------------------------------------------------------------- 1. WHY -------- #
     h(doc, "1  Why this project exists", 1)
     h(doc, "1.1  The failure it started from", 2)
-    retr = [x for x in D["ds"]["candidates"] if "retracted_claims" in x]
-    n_retr = len(retr)
-    _aud = [x["retracted_claims"]["thermodynamic_audit"] for x in retr]
-    med_disc = statistics.median(a["discrepancy"]["value"] for a in _aud)
-    med_ord = statistics.median(a["discrepancy_orders"]["value"] for a in _aud)
+    n_retr = len(D["retr"])
+    med_disc = statistics.median(a["discrepancy"]["value"] for a in D["aud"])
+    med_ord = statistics.median(a["discrepancy_orders"]["value"] for a in D["aud"])
     para(doc,
          f"An earlier version of this project presented numbers as though a structure "
          f"predictor had produced them. No calculation had. {n_retr} candidates carried "
@@ -426,7 +357,7 @@ def build() -> int:
            "time rather than written into the markup.")
 
     h(doc, "3.2  Pre-registration under a content hash", 2)
-    plans = len(list((REPO / "prespec").glob("*.json")))
+    plans = D["plans"]
     para(doc,
          f"Before a study runs, its question, primary metric, decision threshold, hypotheses "
          f"and analysis plan are frozen and hashed. The registry refuses a plan with "
@@ -442,14 +373,7 @@ def build() -> int:
          f"results confirmatory — it made the deviations visible.")
 
     h(doc, "3.3  Custody of the computation", 2)
-    runs = len(J("runs/manifest.json")["runs"])
-    # The custody test counts rows the study reports as having produced a result; a row
-    # whose fold failed carries ok=False and no run to resolve. Counting those too gave 331
-    # against the test's 328, which is the kind of near-miss that reads as a typo.
-    published_rows = sum(
-        sum(1 for r in J(f"data/study_{k}.json")["rows"] if r.get("ok") is not False)
-        for k in ("candidate_screen", "msa_specificity", "inference_variance",
-                  "pose_accuracy", "peptide_interface", "ache_affinity"))
+    runs, published_rows = D["runs"], D["published_rows"]
     para(doc,
          f"Every prediction run is content-addressed: the directory name is a hash over the "
          f"names and contents of its files, so the identifier changes if any output changes. "
@@ -492,10 +416,8 @@ def build() -> int:
          f"changed the answer's precision and none changed its direction.")
 
     h(doc, "4.2  A gate before the screen was allowed to count", 2)
-    gate_pl = [r["peptide_len"] for r in J("data/study_peptide_interface.json")["rows"]]
-    gate_rl = [r["receptor_len"] for r in J("data/study_peptide_interface.json")["rows"]]
-    cand_pl = [len(r["peptide_used"]) for r in J("data/study_msa_specificity.json")["rows"]]
-    cand_rl = [r["receptor_len"] for r in J("data/study_msa_specificity.json")["rows"]]
+    gate_pl, gate_rl = D["gate_pl"], D["gate_rl"]
+    cand_pl, cand_rl = D["cand_pl"], D["cand_rl"]
     pi_m = D["pi"]["metrics"]
     para(doc,
          f"Slate #7 was registered before the candidate screen was permitted to be believed. It "
@@ -657,7 +579,7 @@ def build() -> int:
     # ---------------------------------------------------------------- 6. LIMITS ----- #
     doc.add_page_break()
     h(doc, "6  What this work does not show", 1)
-    att = D["ds"]["disclosure"]["sequence_attribution_counts"]
+    att = D["att"]
     for txt in [
         "It does not show that these peptides cannot bind. It shows that this predictor, on "
         "this construct set, does not distinguish them from shuffles of their own residues. A "
@@ -701,7 +623,7 @@ f"The candidate sequences are hand-assembled concatenations of published motifs,
     table(doc, ["Identifier", "What it names"], rows)
     para(doc,
          f"Verification is automated and is itself checked: {n_checks} checks across the "
-         f"platform and front-end suites, run together with four more suites by verify_all.py, "
+         f"platform and front-end suites, run together with five more suites by verify_all.py, "
          f"and every guard added during this work was "
          f"verified to fail on the defect it names by injecting that defect and observing the "
          f"failure. Three generated indices are rebuilt and compared on every test run, so a "

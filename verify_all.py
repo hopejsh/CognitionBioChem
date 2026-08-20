@@ -49,6 +49,12 @@ SUITES = [
     ("Naming guard (pooled potency must not be rendered as free energy)",
      [PY, "platform/check_naming.py"], 0,
      "no code path converts affinity_pred_value into kcal/mol or names it an apparent dG"),
+    # Not in the platform suite: both report generators run that suite to take their check
+    # count from it, so a check there comparing the two finished editions is circular.
+    ("Report editions agree (English vs Korean)",
+     [PY, "platform/check_reports.py"], 0,
+     "the two editions describe the same work; no number stated in English is missing "
+     "from the Korean"),
 ]
 
 #: What each suite must PRINT for its exit code to be believed.
@@ -69,6 +75,8 @@ EVIDENCE = {
     "Dataset build + provenance audit": re.compile(r"PROVENANCE AUDIT:", re.M),
     "Naming guard (pooled potency must not be rendered as free energy)":
         re.compile(r"^PASS — no code path converts", re.M),
+    "Report editions agree (English vs Korean)":
+        re.compile(r"^\d+ passed, \d+ failed", re.M),
 }
 
 #: Patterns that recover a suite's own self-reported scale from its output.

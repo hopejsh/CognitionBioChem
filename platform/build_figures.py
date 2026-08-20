@@ -145,8 +145,14 @@ def fig2():
 def fig3():
     """One bar per retained version of the two screening studies; all falsified."""
     ver = J("data/slate.json")["separation_across_versions"]
-    vs = sorted(ver["versions"],
-                key=lambda v: ("msa" in v["artefact"], v["artefact"]))
+    # Chronological within each lineage: the superseded versions in order, then the current
+    # artefact last. Sorting on the path alone put the current one first, which reversed the
+    # trajectory the slide's own prose walks through.
+    def order(v):
+        a = v["artefact"]
+        return ("msa" in a, 1 if "superseded" not in a else 0, a)
+
+    vs = sorted(ver["versions"], key=order)
 
     def label(a):
         stem = Path(a).stem

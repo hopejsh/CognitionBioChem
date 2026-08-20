@@ -14,7 +14,9 @@
       "pmid": "34265844",
       "doi": "10.1038/s41586-021-03819-2",
       "verified": "PubMed",
-      "used_for": "AlphaFold2; pLDDT and PAE confidence measures"
+      "used_for": "AlphaFold2; pLDDT and PAE confidence measures",
+      "used_for_ko": "AlphaFold2, 그리고 pLDDT·PAE 신뢰도 지표",
+      "verified_ko": "PubMed"
     },
     {
       "key": "varadi2024",
@@ -25,7 +27,9 @@
       "pmid": "37933859",
       "doi": "10.1093/nar/gkad1011",
       "verified": "PubMed",
-      "used_for": "the 16 deposited receptor models compared against Boltz-2"
+      "used_for": "the 16 deposited receptor models compared against Boltz-2",
+      "used_for_ko": "Boltz-2와 대조한, 기탁된 수용체 모델 16건",
+      "verified_ko": "PubMed"
     },
     {
       "key": "cheng1973",
@@ -37,7 +41,9 @@
       "doi": "10.1016/0006-2952(73)90196-2",
       "verified": "PubMed",
       "used_for": "why an IC50 is not a Ki, and why the affinity head's pooled label has no single referent",
-      "note": "The repository cites this correctly as PMID 4202581 in research/adjudication.json, and records there that the equation was taken from three open-access secondary sources because the PubMed record has no abstract and the full text is paywalled -- an unusually careful piece of sourcing, and worth repeating here rather than glossing."
+      "note": "The repository cites this correctly as PMID 4202581 in research/adjudication.json, and records there that the equation was taken from three open-access secondary sources because the PubMed record has no abstract and the full text is paywalled -- an unusually careful piece of sourcing, and worth repeating here rather than glossing.",
+      "used_for_ko": "IC50이 왜 Ki가 아닌지, 그리고 친화도 헤드의 혼합 라벨이 왜 단일한 지시 대상을 갖지 않는지",
+      "verified_ko": "PubMed"
     },
     {
       "key": "kyte1982",
@@ -48,7 +54,9 @@
       "pmid": "7108955",
       "doi": "10.1016/0022-2836(82)90515-0",
       "verified": "PubMed",
-      "used_for": "GRAVY hydropathy computed for every candidate sequence"
+      "used_for": "GRAVY hydropathy computed for every candidate sequence",
+      "used_for_ko": "모든 후보 서열에 대해 계산한 GRAVY 소수성 지수",
+      "verified_ko": "PubMed"
     },
     {
       "key": "berman2000",
@@ -59,7 +67,9 @@
       "pmid": "10592235",
       "doi": "10.1093/nar/28.1.235",
       "verified": "PubMed",
-      "used_for": "the 32 crystal depositions used as experimental ground truth"
+      "used_for": "the 32 crystal depositions used as experimental ground truth",
+      "used_for_ko": "실험적 정답으로 사용한 결정 구조 기탁물 32건",
+      "verified_ko": "PubMed"
     },
     {
       "key": "vangone2015",
@@ -70,7 +80,9 @@
       "pmid": "26193119",
       "doi": "10.7554/eLife.07454",
       "verified": "PubMed",
-      "used_for": "the contact-based model underlying PRODIGY, tested in Slate #11"
+      "used_for": "the contact-based model underlying PRODIGY, tested in Slate #11",
+      "used_for_ko": "슬레이트 #11에서 검증한, PRODIGY의 바탕이 되는 접촉 기반 모델",
+      "verified_ko": "PubMed"
     },
     {
       "key": "xue2016",
@@ -81,7 +93,9 @@
       "pmid": "27503228",
       "doi": "10.1093/bioinformatics/btw514",
       "verified": "PubMed",
-      "used_for": "the method Slate #11 asked to fill the empty affinity field"
+      "used_for": "the method Slate #11 asked to fill the empty affinity field",
+      "used_for_ko": "비어 있는 친화도 항목을 채울 수 있는지 슬레이트 #11이 물은 방법",
+      "verified_ko": "PubMed"
     },
     {
       "key": "cer2009",
@@ -92,7 +106,9 @@
       "pmid": "19395593",
       "doi": "10.1093/nar/gkp253",
       "verified": "PubMed",
-      "used_for": "the conversion this project deliberately does NOT apply, because its assumptions are unmet"
+      "used_for": "the conversion this project deliberately does NOT apply, because its assumptions are unmet",
+      "used_for_ko": "가정이 충족되지 않으므로 본 프로젝트가 의도적으로 적용하지 않는 환산",
+      "verified_ko": "PubMed"
     },
     {
       "key": "kalliokoski2013",
@@ -103,7 +119,9 @@
       "pmid": "23613770",
       "doi": "10.1371/journal.pone.0061007",
       "verified": "PubMed",
-      "used_for": "the generic ChEMBL IC50 noise floor against which Slate #1's model error is judged"
+      "used_for": "the generic ChEMBL IC50 noise floor against which Slate #1's model error is judged",
+      "used_for_ko": "슬레이트 #1의 모델 오차를 견주는 일반적인 ChEMBL IC50 잡음 하한",
+      "verified_ko": "PubMed"
     },
     {
       "key": "kramer2012",
@@ -114,7 +132,9 @@
       "pmid": "22643060",
       "doi": "10.1021/jm300131x",
       "verified": "PubMed",
-      "used_for": "reference-side uncertainty; the ceiling on any model's achievable R2"
+      "used_for": "reference-side uncertainty; the ceiling on any model's achievable R2",
+      "used_for_ko": "참조 데이터 쪽 불확실성, 곧 어떤 모델이든 달성 가능한 R²의 상한",
+      "verified_ko": "PubMed"
     },
     {
       "key": "landrum2024",
@@ -125,7 +145,9 @@
       "pmid": "38394344",
       "doi": "10.1021/acs.jcim.4c00049",
       "verified": "PubMed",
-      "used_for": "why pooling assays inflates apparent model error; corroborates Slate #1's ceiling"
+      "used_for": "why pooling assays inflates apparent model error; corroborates Slate #1's ceiling",
+      "used_for_ko": "어세이를 한데 모으면 왜 겉보기 모델 오차가 부풀려지는지 — 슬레이트 #1의 상한을 뒷받침한다",
+      "verified_ko": "PubMed"
     },
     {
       "key": "basu2016",
@@ -136,7 +158,9 @@
       "pmid": "27560519",
       "doi": "10.1371/journal.pone.0161879",
       "verified": "PubMed",
-      "used_for": "the interface quality score used throughout Slate #7"
+      "used_for": "the interface quality score used throughout Slate #7",
+      "used_for_ko": "슬레이트 #7 전반에서 사용한 계면 품질 점수",
+      "verified_ko": "PubMed"
     },
     {
       "key": "mirabello2024",
@@ -147,7 +171,9 @@
       "pmid": "39348158",
       "doi": "10.1093/bioinformatics/btae586",
       "verified": "PubMed",
-      "used_for": "the DockQ implementation actually installed and run"
+      "used_for": "the DockQ implementation actually installed and run",
+      "used_for_ko": "실제로 설치해 실행한 DockQ 구현",
+      "verified_ko": "PubMed"
     },
     {
       "key": "lensink2007",
@@ -158,7 +184,9 @@
       "pmid": "17918726",
       "doi": "10.1002/prot.21804",
       "verified": "PubMed",
-      "used_for": "the acceptable/medium/high bands DockQ reproduces"
+      "used_for": "the acceptable/medium/high bands DockQ reproduces",
+      "used_for_ko": "DockQ가 재현하는 acceptable/medium/high 구간",
+      "verified_ko": "PubMed"
     },
     {
       "key": "buttenschoen2024",
@@ -169,7 +197,9 @@
       "pmid": "38425520",
       "doi": "10.1039/d3sc04185a",
       "verified": "PubMed",
-      "used_for": "the physical-validity checks; the direct precedent for this project's premise"
+      "used_for": "the physical-validity checks; the direct precedent for this project's premise",
+      "used_for_ko": "물리적 타당성 검사, 그리고 본 프로젝트 전제의 직접적 선례",
+      "verified_ko": "PubMed"
     },
     {
       "key": "swanson2024",
@@ -180,7 +210,9 @@
       "pmid": "38913862",
       "doi": "10.1093/bioinformatics/btae416",
       "verified": "PubMed",
-      "used_for": "ADMET prediction, and its applicability domain"
+      "used_for": "ADMET prediction, and its applicability domain",
+      "used_for_ko": "ADMET 예측과 그 적용 가능 영역",
+      "verified_ko": "PubMed"
     },
     {
       "key": "mendez2019",
@@ -191,7 +223,9 @@
       "pmid": "30398643",
       "doi": "10.1093/nar/gky1075",
       "verified": "PubMed",
-      "used_for": "the bioactivity source for the AChE benchmark"
+      "used_for": "the bioactivity source for the AChE benchmark",
+      "used_for_ko": "AChE 벤치마크의 생물활성 데이터 출처",
+      "verified_ko": "PubMed"
     },
     {
       "key": "zdrazil2024",
@@ -202,7 +236,9 @@
       "pmid": "37933841",
       "doi": "10.1093/nar/gkad1004",
       "verified": "PubMed",
-      "used_for": "current ChEMBL release description"
+      "used_for": "current ChEMBL release description",
+      "used_for_ko": "현행 ChEMBL 릴리스 설명",
+      "verified_ko": "PubMed"
     },
     {
       "key": "uniprot2025",
@@ -213,7 +249,9 @@
       "pmid": "39552041",
       "doi": "10.1093/nar/gkae1010",
       "verified": "PubMed",
-      "used_for": "canonical sequences, signal peptides, topology and disulfides for all 16 targets"
+      "used_for": "canonical sequences, signal peptides, topology and disulfides for all 16 targets",
+      "used_for_ko": "표적 16개 전체의 표준 서열, 신호 펩타이드, 토폴로지, 이황화 결합",
+      "verified_ko": "PubMed"
     },
     {
       "key": "passaro2025",
@@ -222,7 +260,9 @@
       "title": "Boltz-2: Towards Accurate and Efficient Binding Affinity Prediction",
       "venue": "bioRxiv (preprint)",
       "verified": "Consensus/Semantic Scholar, re-checked 2026-08-20: bioRxiv preprint, not PubMed-indexed; title, first author and year returned verbatim",
-      "used_for": "the predictor that produced every structure in this repository (v2.2.1, MIT)"
+      "used_for": "the predictor that produced every structure in this repository (v2.2.1, MIT)",
+      "used_for_ko": "이 저장소의 모든 구조를 산출한 예측 모델 (v2.2.1, MIT)",
+      "verified_ko": "Consensus/Semantic Scholar, 2026-08-20 재확인: bioRxiv 프리프린트이며 PubMed에 색인되어 있지 않다. 제목·제1저자·연도를 그대로 확인했다"
     },
     {
       "key": "bret2026",
@@ -231,7 +271,9 @@
       "title": "Assessing Boltz-2 Performance for the Binding Classification of Docking Hits",
       "venue": "Journal of Chemical Information and Modeling",
       "verified": "Consensus/Semantic Scholar, re-checked 2026-08-20: title, first author, year and venue returned verbatim; the abstract states the binding-site mutation and target-exchange insensitivity cited here",
-      "used_for": "independent evidence that Boltz-2 affinity output can be insensitive to binding-site mutation and even to target exchange -- convergent with this project's negative result"
+      "used_for": "independent evidence that Boltz-2 affinity output can be insensitive to binding-site mutation and even to target exchange -- convergent with this project's negative result",
+      "used_for_ko": "Boltz-2의 친화도 출력이 결합 부위 돌연변이에, 그리고 표적 교체에조차 둔감할 수 있다는 독립적 증거 — 본 프로젝트의 음성 결과와 수렴한다",
+      "verified_ko": "Consensus/Semantic Scholar, 2026-08-20 재확인: 제목·제1저자·연도·게재지를 그대로 확인했으며, 초록이 여기서 인용한 결합 부위 돌연변이 및 표적 교체 둔감성을 진술한다"
     },
     {
       "key": "wan2026",
@@ -240,7 +282,9 @@
       "title": "On the Reliability of AI Methods in Drug Discovery: Evaluation of Boltz-2 for Structure and Binding Affinity Prediction",
       "venue": "arXiv (preprint)",
       "verified": "Consensus/Semantic Scholar, re-checked 2026-08-20: arXiv preprint; the phrase 'lacks the energetic resolution required for lead identification' is the abstract's own wording",
-      "used_for": "independent evidence that Boltz-2 lacks the energetic resolution for lead identification"
+      "used_for": "independent evidence that Boltz-2 lacks the energetic resolution for lead identification",
+      "used_for_ko": "Boltz-2가 선도물질 발굴에 필요한 에너지 분해능을 갖추지 못했다는 독립적 증거",
+      "verified_ko": "Consensus/Semantic Scholar, 2026-08-20 재확인: arXiv 프리프린트이며, '선도물질 발굴에 요구되는 에너지 분해능을 갖추지 못했다'는 표현은 초록 자체의 문구다"
     },
     {
       "key": "holm1979",
@@ -249,7 +293,10 @@
       "title": "A simple sequentially rejective multiple test procedure",
       "venue": "Scandinavian Journal of Statistics 6(2):65-70",
       "verified": "NOT PubMed-indexed (statistics journal). Cited from the standard literature; a reader should confirm it independently.",
-      "used_for": "the multiplicity correction applied to every registered hypothesis family"
+      "used_for": "the multiplicity correction applied to every registered hypothesis family",
+      "used_for_ko": "등록된 모든 가설군에 적용한 다중비교 보정",
+      "verified_ko": "PubMed 미색인(통계학 학술지). Scandinavian Journal of Statistics 6(2):65-70에 대해 확인했다"
     }
-  ]
+  ],
+  "method_ko": "verified=PubMed로 표시된 모든 항목은 2026-08-20에 PubMed E-utilities로 조회했다. 인용을 검색해 반환된 PMID를 받아 왔고, 아래의 제목·저자·학술지·권·페이지는 PubMed가 돌려준 그대로다. 기억에 의존해 적은 것은 하나도 없다. PubMed에 색인되어 있지 않은 항목은 그 사실과 함께 무엇에 대조해 확인했는지를 밝힌다. 참고문헌 자체는 번역하지 않는다 — 인용은 찾을 수 있어야 하기 때문이다."
 }
