@@ -195,12 +195,17 @@ pasted or imported.
 
 1. <https://bio.tools> → sign in (ELIXIR AAI accepts ORCID and institutional logins).
 2. *Add tool* → the form mirrors `biotools.json` field for field.
-3. **The one part the file cannot fill in for you** is the EDAM ontology terms. bio.tools
-   requires an ontology URI for every topic and operation, and those URIs are deliberately
-   absent from `biotools.json`: a guessed ontology URI is worse than a blank one, because
-   curators and every downstream query trust it. The file lists the term *names* under
-   `_edam_terms_to_select_on_the_form`; type them into the form's autocomplete and it resolves
-   the URIs against the live ontology.
+3. The form has a **JSON tab** — paste `biotools.json` there rather than filling nine tabs
+   by hand. It arrives complete: every EDAM ontology URI in it was resolved against the live
+   ontology through EBI OLS rather than written from memory, because a wrong ontology URI is
+   worse than a missing one (curators and every downstream query treat it as true).
+
+   ```
+   https://www.ebi.ac.uk/ols4/api/search?q=<term>&ontology=edam&exact=true
+   ```
+
+   Keep the `"owner"` line the editor starts with, paste the rest of the object alongside it,
+   then press **Validate** before **Save**.
 4. Curation is manual and takes days to weeks. The result is a stable entry at
    `https://bio.tools/cognitionbiochem`.
 5. Add that URL to `CITATION.cff` under `identifiers:` and to the README.

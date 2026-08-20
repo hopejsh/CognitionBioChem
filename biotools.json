@@ -1,15 +1,14 @@
 {
   "name": "CognitionBioChem",
-  "biotoolsID": "cognitionbiochem",
   "description": "A structural pharmacology workbench for cognition-related CNS targets, built so that a displayed number must trace to a computation. Runs Boltz-2 locally for structure prediction, validates chemistry with RDKit, enforces a provenance record on every value, and reports eight studies pre-registered under content hashes before any data was seen. Its headline result is negative: designed peptides did not separate from composition-matched shuffles of their own amino acids.",
   "homepage": "https://github.com/hopejsh/CognitionBioChem",
+  "biotoolsID": "cognitionbiochem",
   "version": [
     "1.0.0"
   ],
   "toolType": [
     "Command-line tool",
-    "Web application",
-    "Workflow"
+    "Web application"
   ],
   "operatingSystem": [
     "Linux",
@@ -23,6 +22,125 @@
   "maturity": "Mature",
   "cost": "Free of charge",
   "accessibility": "Open access",
+  "topic": [
+    {
+      "uri": "http://edamontology.org/topic_0082",
+      "term": "Structure prediction"
+    },
+    {
+      "uri": "http://edamontology.org/topic_2814",
+      "term": "Protein structure analysis"
+    },
+    {
+      "uri": "http://edamontology.org/topic_2275",
+      "term": "Molecular modelling"
+    },
+    {
+      "uri": "http://edamontology.org/topic_3336",
+      "term": "Drug discovery"
+    }
+  ],
+  "function": [
+    {
+      "operation": [
+        {
+          "uri": "http://edamontology.org/operation_0474",
+          "term": "Protein structure prediction"
+        }
+      ],
+      "input": [
+        {
+          "data": {
+            "uri": "http://edamontology.org/data_2976",
+            "term": "Protein sequence"
+          },
+          "format": [
+            {
+              "uri": "http://edamontology.org/format_1929",
+              "term": "FASTA"
+            }
+          ]
+        }
+      ],
+      "output": [
+        {
+          "data": {
+            "uri": "http://edamontology.org/data_1460",
+            "term": "Protein structure"
+          },
+          "format": [
+            {
+              "uri": "http://edamontology.org/format_1477",
+              "term": "mmCIF"
+            }
+          ]
+        }
+      ],
+      "note": "Boltz-2 v2.2.1 runs locally; every predicted structure is retained under content-addressed custody with its confidence files."
+    },
+    {
+      "operation": [
+        {
+          "uri": "http://edamontology.org/operation_2428",
+          "term": "Validation"
+        }
+      ],
+      "input": [
+        {
+          "data": {
+            "uri": "http://edamontology.org/data_1460",
+            "term": "Protein structure"
+          },
+          "format": [
+            {
+              "uri": "http://edamontology.org/format_1477",
+              "term": "mmCIF"
+            }
+          ]
+        }
+      ],
+      "output": [
+        {
+          "data": {
+            "uri": "http://edamontology.org/data_1460",
+            "term": "Protein structure"
+          }
+        }
+      ],
+      "note": "Backbone geometry, per-residue pLDDT and interface PAE are read from the model's own file; a value that was never computed renders as a label."
+    },
+    {
+      "operation": [
+        {
+          "uri": "http://edamontology.org/operation_2480",
+          "term": "Structure analysis"
+        }
+      ],
+      "input": [
+        {
+          "data": {
+            "uri": "http://edamontology.org/data_2301",
+            "term": "SMILES string"
+          },
+          "format": [
+            {
+              "uri": "http://edamontology.org/format_1196",
+              "term": "SMILES"
+            }
+          ]
+        }
+      ],
+      "output": [
+        {
+          "data": {
+            "uri": "http://edamontology.org/data_1463",
+            "term": "Small molecule structure"
+          }
+        }
+      ],
+      "note": "RDKit validation: parsing, molecular formula, InChIKey and stereochemistry completeness. A SMILES that fails to parse is shown as unverified."
+    }
+  ],
   "documentation": [
     {
       "url": "https://github.com/hopejsh/CognitionBioChem#readme",
@@ -35,13 +153,20 @@
       "type": [
         "Citation instructions"
       ]
+    },
+    {
+      "url": "https://github.com/hopejsh/CognitionBioChem/blob/main/NOTICE",
+      "type": [
+        "Terms of use"
+      ],
+      "note": "The `license` field above is Apache-2.0, which covers this project's code, but the repository is not single-licensed. It redistributes third-party scientific data that keeps its own terms: CC BY 4.0 (UniProt, AlphaFold DB), CC BY-SA 3.0 (ChEMBL-derived files -- SHARE-ALIKE, so reuse carries an obligation onward), CC0 1.0 (RCSB depositions) and MIT (Boltz-2 model outputs). NOTICE lists which files fall under which."
     }
   ],
   "download": [
     {
-      "url": "https://github.com/hopejsh/CognitionBioChem/archive/refs/heads/main.zip",
+      "url": "https://github.com/hopejsh/CognitionBioChem/archive/refs/tags/v1.0.0.tar.gz",
       "type": "Source code",
-      "note": "Replace with the release tarball once tagged"
+      "version": "1.0.0"
     }
   ],
   "link": [
@@ -49,48 +174,15 @@
       "url": "https://github.com/hopejsh/CognitionBioChem",
       "type": [
         "Repository"
-      ],
-      "note": "Source, artefacts and prediction runs"
-    }
-  ],
-  "credit": [
+      ]
+    },
     {
-      "name": "Seung Ho Jung",
-      "orcidid": "https://orcid.org/0000-0001-7914-5306",
-      "email": "seung.jung@gmail.com",
-      "typeEntity": "Person",
-      "typeRole": [
-        "Developer",
-        "Maintainer"
+      "url": "https://github.com/hopejsh/CognitionBioChem/issues",
+      "type": [
+        "Issue tracker"
       ]
     }
   ],
-  "_edam_terms_to_select_on_the_form": {
-    "note": "bio.tools requires EDAM ontology URIs for topic and operation. They are not written here because guessing an ontology URI is worse than leaving it blank: a wrong one is trusted by curators and by every downstream query. Pick these term NAMES in the form's autocomplete, which resolves the URIs.",
-    "topic": [
-      "Structure prediction",
-      "Protein structure analysis",
-      "Molecular modelling",
-      "Drug discovery",
-      "Computational biology"
-    ],
-    "operation": [
-      "Protein structure prediction",
-      "Protein sequence analysis",
-      "Structure validation",
-      "Molecular docking"
-    ],
-    "input": [
-      "Protein sequence (FASTA)",
-      "Protein structure (mmCIF/PDB)",
-      "Small molecule (SMILES)"
-    ],
-    "output": [
-      "Protein structure (mmCIF)",
-      "Structure similarity score",
-      "Validation report"
-    ]
-  },
   "otherID": [
     {
       "value": "doi:10.5281/zenodo.22032684",
@@ -104,9 +196,19 @@
     },
     {
       "value": "RRID:SCR_028851",
-      "type": "RRID",
-      "version": "SciCrunch registry"
+      "type": "rrid"
     }
   ],
-  "_licensing_note": "This deposit is not single-licensed. The project's own code is Apache-2.0, but it redistributes third-party scientific data that keeps its own terms: UniProt and AlphaFold DB under CC BY 4.0, RCSB crystal depositions under CC0 1.0, Boltz-2 model outputs under MIT, and ChEMBL-derived files under CC BY-SA 3.0 -- share-alike, so that last one carries obligations onward. NOTICE at the repository root lists which files fall under which."
+  "credit": [
+    {
+      "name": "Seung Ho Jung",
+      "orcidid": "https://orcid.org/0000-0001-7914-5306",
+      "email": "seung.jung@gmail.com",
+      "typeEntity": "Person",
+      "typeRole": [
+        "Developer",
+        "Maintainer"
+      ]
+    }
+  ]
 }
