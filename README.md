@@ -929,7 +929,9 @@ a reproducibility statement, for instance. The version DOI has to be written int
 already pushed.
 
 If your journal uses Research Resource Identifiers, cite **CognitionBioChem
-(RRID:SCR_028851)** inline in the running text; the DOI belongs in the reference list. The two
+(RRID:SCR_028851)** inline in the running text; the DOI belongs in the reference list. The
+tool is also registered in ELIXIR's software registry as
+[biotools:cognitionbiochem](https://bio.tools/cognitionbiochem). The two
 are not alternatives — the RRID identifies the tool in a Methods section, the DOI identifies
 the archived release.
 

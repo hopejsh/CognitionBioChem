@@ -54,6 +54,9 @@ identifiers:
   - type: other
     value: "RRID:SCR_028851"
     description: Research Resource Identifier -- cite this inline in a Methods section
+  - type: other
+    value: "biotools:cognitionbiochem"
+    description: ELIXIR bio.tools registry entry -- https://bio.tools/cognitionbiochem
 keywords:
   - structural biology
   - protein structure prediction

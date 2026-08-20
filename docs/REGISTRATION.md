@@ -187,7 +187,13 @@ anything.
 
 ---
 
-## 4. bio.tools — the ELIXIR software registry
+## 4. bio.tools — **done**
+
+**biotools:cognitionbiochem** — <https://bio.tools/cognitionbiochem>, registered 2026-08-20.
+The stored record carries all four topics, three function graphs, both DOIs, the RRID, the
+ORCID and the licensing note; verified through `bio.tools/api/tool/cognitionbiochem/`.
+
+### How it was submitted
 
 In scope: bio.tools registers bioinformatics and computational-biology software, which is what
 this is. `biotools.json` in the repository root is written against biotoolsSchema and can be

@@ -211,5 +211,6 @@
         "Maintainer"
       ]
     }
-  ]
+  ],
+  "biotoolsCURIE": "biotools:cognitionbiochem"
 }
