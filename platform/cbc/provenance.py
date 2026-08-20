@@ -50,6 +50,14 @@ GENERATED_ARTEFACTS = (
     "data/validation_gate.json", "data/validation_gate.js",
     "data/alphafold_db_comparison.json",
     "data/pae/",
+    # The written account and the deck are generated too, and they carry this same stamp.
+    # Left out of this tuple, build_report.py dirtied the tree by writing its own .docx and
+    # then failed the stamp check it had just run -- the identical self-invalidation this
+    # tuple exists to stop, one directory over.
+    "docs/CognitionBioChem_Report.docx",
+    "docs/CognitionBioChem_Deck.html",
+    "docs/CognitionBioChem_Deck.pdf",
+    "docs/figures/fig",
 )
 
 
