@@ -1,0 +1,56 @@
+{
+ "hash": "4ffb4b7d27022051904155adc661ad29f1b574860a250e1f6e1e9bfc1dd43ab3",
+ "registered_utc": "2026-08-20T02:33:30+00:00",
+ "min_attainable_p": 0.0,
+ "content": {
+  "study_id": "prodigy-discrimination-v2",
+  "question": "Applied to peptide-receptor complexes predicted by Boltz-2, does PRODIGY's IC-NIS binding-affinity model produce values that discriminate between different peptide candidates, or does it collapse toward a near-constant set by the receptor's non-interacting surface?",
+  "primary_metric": "discrimination_ratio",
+  "primary_metric_justification": "The discrimination ratio is the between-candidate SD of predicted dG divided by the within-candidate across-seed SD, on the same structures. It is the right primary metric because the question is not whether PRODIGY is accurate \u2014 no measured affinity exists for these candidates, so accuracy is unmeasurable here \u2014 but whether its output carries candidate-specific information at all. A ratio near 1 means the spread between different molecules is no larger than the spread produced by rerunning the same molecule with a different random seed, which is the signature of a prediction determined by something other than the candidate. Using a signal-to-noise ratio rather than a raw SD also makes the verdict independent of the units and of PRODIGY's absolute calibration, both of which are out of domain here.",
+  "decision_threshold": "H1 confirmed if discrimination_ratio < 2.0; H2 confirmed if the between-candidate range of predicted dG is less than 20% of the 14.3 kcal/mol range the IC-NIS model was fitted on; H3 confirmed if the %NIS terms contribute more than 80% of the between-candidate variance in the fitted equation, decomposed term by term.",
+  "n_planned": 15,
+  "n_comparisons": 3,
+  "multiplicity_correction": "holm",
+  "alpha": 0.05,
+  "stopping_rule": "Fixed: every arm-D complex produced by the CURRENT variance study is scored, its membership read from data/study_inference_variance.json rather than from a work directory, scored exactly once. No new structure is predicted, no complex is added or removed after scoring begins. A structure PRODIGY cannot parse is reported as a failure with its error and excluded with the exclusion stated.",
+  "analysis_plan": "Score each arm-D complex (3 candidates x 5 seeds, AChE chain A + peptide chain B) with prodigy-prot at 25 C. Record predicted dG, the four IC counts and both %NIS values. Between-candidate SD is the SD of per-candidate mean dG; within-candidate SD is pooled as sqrt(mean of per-candidate variances across seeds); discrimination_ratio is their quotient. Decompose the between-candidate variance by term by recomputing the fitted equation with each term held at its grand mean in turn. Holm across the three hypotheses.",
+  "hypotheses": [
+   {
+    "name": "H1_no_discrimination",
+    "statement": "PRODIGY's predicted dG does not distinguish between different peptide candidates any better than reseeding one candidate.",
+    "predicted_by": "the mechanistic argument that %NIS is set by the receptor, not the peptide",
+    "confirmed_if": "discrimination_ratio < 2.0",
+    "falsified_if": "discrimination_ratio >= 2.0"
+   },
+   {
+    "name": "H2_range_collapse",
+    "statement": "The predicted values occupy a small fraction of the range the model was fitted on.",
+    "predicted_by": "the same mechanistic argument",
+    "confirmed_if": "between-candidate range < 20% of 14.3 kcal/mol, i.e. < 2.86 kcal/mol",
+    "falsified_if": "between-candidate range >= 2.86 kcal/mol"
+   },
+   {
+    "name": "H3_nis_dominates",
+    "statement": "If the values do vary, the variation is driven by the %NIS terms rather than by the interface-contact terms.",
+    "predicted_by": "PRODIGY being usable here would require the OPPOSITE: that interface contacts dominate",
+    "confirmed_if": "%NIS terms account for > 80% of between-candidate variance",
+    "falsified_if": "%NIS terms account for <= 80% of between-candidate variance"
+   }
+  ],
+  "test_type": "parametric",
+  "n_permutations": 0,
+  "secondary_metrics": [
+   "between_candidate_sd",
+   "within_candidate_sd",
+   "between_candidate_range",
+   "mean_predicted_dg",
+   "nis_variance_fraction",
+   "ic_counts_per_candidate",
+   "fraction_of_fit_range_occupied"
+  ],
+  "exclusions": "Only arm-D complexes from the current inference-variance artefact are scored, on the AChE ligand-accessible construct (543-residue catalytic core, canonical 32-574). Single-chain structures are excluded by construction: PRODIGY requires two chains, and a lone peptide has no interface.",
+  "known_confounds": "1. The structures are Boltz-2 predictions in single-sequence mode, not crystal structures, and PRODIGY was fitted on crystal structures. A poor interface prediction would also produce low discrimination, so a confirmed H1 does not by itself separate 'PRODIGY cannot discriminate' from 'these interfaces are not real'. Study #2 measures an across-seed SD of the interface PAE minimum of 4.62 A on exactly these complexes, which means the interfaces are NOT confidently placed \u2014 this is stated up front rather than discovered afterwards. 2. Only 3 candidates against 1 receptor, so nothing here generalises beyond AChE. 3. n=3 for the between-candidate SD is very small and the ratio is correspondingly imprecise.",
+  "supersedes": "prodigy-discrimination-v1",
+  "supersedes_reason": "v1's plan named study inference-variance-v1 as the arm-D source and characterised the complexes it would score against the 583-residue AChE mature chain. The variance study has since been superseded twice: arm D now follows its registered selection rule and folds the 543-residue catalytic core, so two of the three candidates and the entire receptor construct changed. The study was re-scored on that corrected arm D, and this plan states what it actually scores -- membership read from the variance artefact rather than from a work directory, which had come to hold both construct generations side by side. No hypothesis, threshold or metric changes."
+ }
+}

@@ -20,3 +20,7 @@ memory/**/*.npz
 # Large raw workflow transcripts; the distilled findings in reviews/ are tracked.
 reviews/*_raw_full.json
 .venvdockq/
+
+# Editor/agent scaffolding, not part of the project. .claude/launch.json only records how to
+# start `python3 -m http.server` for local preview, which the README states directly.
+.claude/

@@ -1,11 +1,19 @@
 {
  "schema_version": "1.0",
- "built": "2026-08-18",
- "git_sha": "a514a1a",
+ "built": "2026-08-20",
+ "git_sha": "2479695-dirty",
  "disclosure": {
-  "headline": "No structure prediction has been run in this repository.",
-  "detail": "This platform can parse, validate and display genuine structure-predictor output, and it computes real physicochemical and chemical properties. It does not itself run AlphaFold3 or any other predictor, and it contains no binding-affinity calculation. Every field is labelled with its provenance; fields marked 'not computed' are honestly empty rather than filled with an estimate. Values asserted by an earlier version of this project that no calculation supports are preserved under 'retracted_claims' and are not displayed as results.",
-  "sequences": "The peptide sequences are hand-assembled concatenations of published natural motifs joined by GGGGS linkers. They are a hypothesis catalogue, not de novo designs: no generative model produced them."
+  "headline": "Structure prediction is real; binding affinity is not calibrated and no free energy is emitted.",
+  "detail": "Boltz-2 v2.2.1 (MIT) runs locally and produced every PREDICTED structure under runs/ and in the pre-registered studies. runs/ also holds 32 RCSB crystal depositions, carrying a '-reference' kind in runs/manifest.json: those are experimental ground truth for studies #6 and #7 and were produced by no predictor. The platform also parses genuine output from AlphaFold DB and AlphaFold 3. ADMET is predicted by ADMET-AI where the molecule is inside its applicability domain, and refused with a stated reason where it is not. Binding affinity is PREDICTED but NOT CALIBRATED, and is never rendered as a free energy: the affinity head is fitted to pooled Ki/Kd/IC50/EC50 labels, so no thermodynamic quantity can be recovered from it. Every field is labelled with its provenance; fields marked 'not computed' are honestly empty. Values asserted by an earlier version that no calculation supports are preserved under 'retracted_claims' and are not displayed as results.",
+  "sequences": "The peptide sequences are hand-assembled concatenations of published natural motifs, pastiche scaffolds and one de novo amphipathic helix, joined by GGGGS linkers. No generative model produced them. Per-segment attribution is in data/dataset.json motif_provenance, and it is thinner than the word 'attribution' suggests: of 16 motif entries only 7 carry a UniProt accession. The other 9 describe themselves as chimeras, pastiches, a de novo helix, a linker, or in one case not a peptide sequence at all, and there are 12 further unattributed segments listed separately. Scanning for all 22 unattributed fragments, 31 of 35 candidates carry at least one.",
+  "sequence_attribution_counts": {
+   "attributed_motifs": 7,
+   "unattributed_motif_entries": 9,
+   "unattributed_segments": 12,
+   "distinct_unattributed_fragments": 22,
+   "candidates_carrying_one": 31,
+   "candidates_total": 35
+  }
  },
  "natural_products": [
   {
@@ -1169,17 +1177,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 78.03,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 58.5, max 90.43",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -1408,17 +1416,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 95.17,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 83.49, max 96.95",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -1644,17 +1652,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 74.69,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 59.27, max 91.35",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -1861,7 +1869,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -2089,17 +2097,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 71.89,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 56.34, max 91.43",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -2327,17 +2335,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 59.7,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 50.23, max 83.43",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -2565,17 +2573,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 84.99,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 58.14, max 93.83",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -2803,17 +2811,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 50.0,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 38.12, max 63.12",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -3041,17 +3049,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 56.97,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 47.15, max 65.37",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -3279,17 +3287,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 51.23,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 35.44, max 67.46",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -3518,17 +3526,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 95.26,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 84.94, max 97.06",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -3756,17 +3764,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 61.98,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 48.27, max 76.19",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -3994,17 +4002,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 59.31,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 45.48, max 64.51",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -4232,17 +4240,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 51.89,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 39.36, max 59.6",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -4470,17 +4478,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 49.01,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 40.02, max 54.53",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -4708,17 +4716,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 50.69,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 42.32, max 56.49",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -4945,17 +4953,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 57.94,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 43.64, max 68.16",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -5183,17 +5191,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 61.25,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 49.96, max 83.05",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -5422,17 +5430,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 96.83,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 91.64, max 97.94",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -5660,17 +5668,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 60.68,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 46.49, max 70.14",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -5898,17 +5906,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 58.06,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 48.94, max 69.73",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -6136,17 +6144,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 83.02,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 56.59, max 92.81",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -6353,7 +6361,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -6566,7 +6574,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -6793,17 +6801,17 @@
     }
    },
    "plddt": {
-    "value": null,
+    "value": 64.79,
     "units": "0-100",
-    "label": "pLDDT",
+    "label": "mean pLDDT",
     "provenance": {
-     "status": "not_computed",
-     "method": "",
-     "software": "",
-     "source_id": "",
-     "uncertainty": "",
+     "status": "predicted",
+     "method": "single-sequence mode (msa: empty), seed 1, MPS",
+     "software": "Boltz-2 2.2.1",
+     "source_id": "data/real_vs_hardcoded.json",
+     "uncertainty": "across-seed SD 2.66 units (study inference-variance-v1); min 53.56, max 72.55",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": ""
     }
    },
    "herg": {
@@ -7042,7 +7050,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -7194,7 +7202,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -7345,7 +7353,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -7498,7 +7506,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -7652,7 +7660,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -7774,7 +7782,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -7928,7 +7936,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -8081,7 +8089,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -8234,7 +8242,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {
@@ -8387,7 +8395,7 @@
      "source_id": "",
      "uncertainty": "",
      "applicability": "",
-     "note": "No structure prediction has been run for this sequence. Submit the FASTA to a predictor and load the returned mmCIF and confidence JSON to populate this field with real per-residue values."
+     "note": "No structure prediction has been run for THIS sequence. Sequences that fail validation are not submittable; valid ones can be folded and the result loaded back."
     }
    },
    "herg": {

@@ -18,6 +18,7 @@ them as results would repeat the original error. Both are avoided.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -30,12 +31,32 @@ REPO = Path(__file__).resolve().parents[1]
 RAW = REPO / "data" / "extracted_raw.json"
 CURATED = REPO / "data" / "curated.json"
 OUT = REPO / "data" / "dataset.json"
+#: The same payload as a plain script assignment. A <script src> is not subject to the
+#: cross-origin rule that blocks fetch() under the file: scheme, so this is what lets someone
+#: clone the repository, double-click index.html, and see the workbench rather than an error
+#: card. It is GENERATED FROM THE SAME OBJECT in the same pass -- never hand-maintained -- and
+#: platform/verify_frontend.py fails if the two ever disagree, because a duplicated data file
+#: that can drift is the defect this project keeps finding in other guises.
+OUT_JS = REPO / "data" / "dataset.js"
 
 RDKIT_VER = "RDKit 2026.03.5"
 STDLIB_VER = f"python {sys.version.split()[0]} stdlib"
 
 #: Fields in the original data that asserted a computation nobody performed.
 UNREPRODUCIBLE = ("affinity", "safety")
+
+
+def _real_folds() -> dict:
+    """Candidates for which a genuine Boltz-2 fold exists, keyed by code."""
+    p = REPO / "data" / "real_vs_hardcoded.json"
+    if not p.exists():
+        return {}
+    out = {}
+    for r in json.loads(p.read_text()).get("rows", []):
+        real = r.get("real") or {}
+        if real.get("ok") and real.get("plddt_mean") is not None:
+            out[r["code"]] = real
+    return out
 
 
 def curated() -> dict:
@@ -141,11 +162,24 @@ def build_candidate(name: str, seq: str, extra: dict, cur: dict) -> dict:
     rec["dissociation_constant"] = pv.not_computed(
         "M", label="Dissociation constant (Kd)",
         note="Not computed and not measured.").to_dict()
-    rec["plddt"] = pv.not_computed(
-        "0-100", label="pLDDT",
-        note="No structure prediction has been run for this sequence. Submit the FASTA to "
-             "a predictor and load the returned mmCIF and confidence JSON to populate "
-             "this field with real per-residue values.").to_dict()
+    fold = _real_folds().get(name)
+    if fold is not None:
+        # A real Boltz-2 fold exists for this candidate; report it as PREDICTED with the
+        # model that produced it. Saying "not computed" here while runs/ holds the artefact
+        # would be the same defect this project was rebuilt to remove, in the other
+        # direction.
+        rec["plddt"] = pv.predicted(
+            fold["plddt_mean"], "0-100", "Boltz-2 2.2.1", label="mean pLDDT",
+            method="single-sequence mode (msa: empty), seed 1, MPS",
+            uncertainty=f"across-seed SD 2.66 units (study inference-variance-v1); "
+                        f"min {fold['plddt_min']}, max {fold['plddt_max']}",
+            source_id="data/real_vs_hardcoded.json").to_dict()
+    else:
+        rec["plddt"] = pv.not_computed(
+            "0-100", label="pLDDT",
+            note="No structure prediction has been run for THIS sequence. Sequences that "
+                 "fail validation are not submittable; valid ones can be folded and the "
+                 "result loaded back.").to_dict()
     rec["herg"] = pv.not_computed(
         "uM", label="hERG IC50",
         note="Not computed. hERG models are also largely outside their applicability "
@@ -195,6 +229,42 @@ def build_candidate(name: str, seq: str, extra: dict, cur: dict) -> dict:
     return rec
 
 
+def attribution_summary(motifs_record: dict, candidates: list[dict]) -> dict:
+    """Count what is actually attributed, rather than restating a remembered number.
+
+    The disclosure used to say the record holds "16 attributed motifs and 12 unattributed
+    segments; 14 of 35 candidates carry at least one unattributed segment". Both halves were
+    hand-typed and both were wrong. Only 7 of the 16 entries under `motifs` carry a UniProt
+    accession; the other 9 describe themselves, in the record, as "a WNT-family CHIMERA, not
+    a copy of any single protein", "an EGF-LIKE DOMAIN PASTICHE with no natural source", a
+    de novo helix, a GGGGS linker, and one entry that is not a peptide sequence at all.
+    Calling those attributed is the exact overstatement this section exists to prevent, and
+    it sat in the first paragraph a reader is told to read first.
+
+    Counting the candidates by scanning for every unattributed fragment gives 31 of 35, not
+    14. The corrected sentence is assembled from these counts, so it cannot drift again.
+    """
+    motifs = motifs_record.get("motifs") or []
+    loose = motifs_record.get("unattributed_segments") or []
+    attributed = [m for m in motifs if m.get("uniprot_accession")]
+    pastiche = [m for m in motifs if not m.get("uniprot_accession")]
+
+    frags = {m["motif"] for m in pastiche
+             if isinstance(m.get("motif"), str) and m["motif"].isalpha()}
+    for entry in loose:
+        frags.update(re.findall(r"\b[ACDEFGHIKLMNPQRSTVWY]{5,}\b", str(entry)))
+    carriers = [c for c in candidates
+                if any(f in c.get("sequence", "") for f in frags)]
+    return {
+        "attributed_motifs": len(attributed),
+        "unattributed_motif_entries": len(pastiche),
+        "unattributed_segments": len(loose),
+        "distinct_unattributed_fragments": len(frags),
+        "candidates_carrying_one": len(carriers),
+        "candidates_total": len(candidates),
+    }
+
+
 def main() -> int:
     raw = json.loads(RAW.read_text())
     cur = curated()
@@ -204,20 +274,35 @@ def main() -> int:
         "built": date.today().isoformat(),
         "git_sha": pv.git_sha(),
         "disclosure": {
-            "headline": "No structure prediction has been run in this repository.",
+            "headline": ("Structure prediction is real; binding affinity is not calibrated and no "
+                         "free energy is emitted."),
             "detail": (
-                "This platform can parse, validate and display genuine structure-predictor "
-                "output, and it computes real physicochemical and chemical properties. It "
-                "does not itself run AlphaFold3 or any other predictor, and it contains no "
-                "binding-affinity calculation. Every field is labelled with its provenance; "
-                "fields marked 'not computed' are honestly empty rather than filled with an "
-                "estimate. Values asserted by an earlier version of this project that no "
-                "calculation supports are preserved under 'retracted_claims' and are not "
-                "displayed as results."),
+                "Boltz-2 v2.2.1 (MIT) runs locally and produced every PREDICTED structure "
+                "under runs/ and in the pre-registered studies. runs/ also holds 32 RCSB "
+                "crystal depositions, carrying a '-reference' kind in runs/manifest.json: "
+                "those are experimental ground truth for studies #6 and #7 and were "
+                "produced by no predictor. The platform also parses genuine output "
+                "from AlphaFold DB and AlphaFold 3. ADMET is predicted by ADMET-AI "
+                "where the molecule is inside its applicability domain, and refused with a "
+                "stated reason where it is not. Binding affinity is PREDICTED but NOT "
+                "CALIBRATED, and is never rendered as a free energy: the affinity head is "
+                "fitted to pooled Ki/Kd/IC50/EC50 labels, so no thermodynamic quantity can "
+                "be recovered from it. Every field is labelled with its provenance; fields "
+                "marked 'not computed' are honestly empty. Values asserted by an earlier "
+                "version that no calculation supports are preserved under "
+                "'retracted_claims' and are not displayed as results."),
             "sequences": (
+                # This sentence used to say "published natural motifs ... not de novo
+                # designs". The repository's own motif_provenance record contradicts both
+                # halves: 12 of the segments are unattributed, one of them labelled there
+                # as a "de novo cationic amphipathic helix" -- and that 36-mer is the
+                # sequence of the duplicate AChE pair that studies #9 and #10 screen.
                 "The peptide sequences are hand-assembled concatenations of published "
-                "natural motifs joined by GGGGS linkers. They are a hypothesis catalogue, "
-                "not de novo designs: no generative model produced them."),
+                "natural motifs, pastiche scaffolds and one de novo amphipathic helix, "
+                "joined by GGGGS linkers. No generative model produced them. Per-segment "
+                "attribution is in data/dataset.json motif_provenance, which records 16 "
+                "attributed motifs and 12 unattributed segments; 14 of 35 candidates "
+                "carry at least one unattributed segment."),
         },
         "natural_products": build_natural_products(raw["NATURAL_PRODUCTS_DATA"], cur),
         "brain_regions": raw["BRAIN_REGIONS_DATA"],
@@ -234,14 +319,46 @@ def main() -> int:
 
     if cur.get("motifs"):
         ds["motif_provenance"] = cur["motifs"]
+        # Written here, after the motif record and the candidate list both exist, so the
+        # sentence is a function of them rather than a memory of them.
+        a = attribution_summary(cur["motifs"], ds["candidates"])
+        ds["disclosure"]["sequences"] = (
+            "The peptide sequences are hand-assembled concatenations of published natural "
+            "motifs, pastiche scaffolds and one de novo amphipathic helix, joined by GGGGS "
+            "linkers. No generative model produced them. Per-segment attribution is in "
+            "data/dataset.json motif_provenance, and it is thinner than the word "
+            "'attribution' suggests: of "
+            f"{a['attributed_motifs'] + a['unattributed_motif_entries']} motif entries only "
+            f"{a['attributed_motifs']} carry a UniProt accession. The other "
+            f"{a['unattributed_motif_entries']} describe themselves as chimeras, pastiches, "
+            "a de novo helix, a linker, or in one case not a peptide sequence at all, and "
+            f"there are {a['unattributed_segments']} further unattributed segments listed "
+            f"separately. Scanning for all {a['distinct_unattributed_fragments']} "
+            f"unattributed fragments, {a['candidates_carrying_one']} of "
+            f"{a['candidates_total']} candidates carry at least one.")
+        ds["disclosure"]["sequence_attribution_counts"] = a
     if cur.get("targets"):
         ds["target_records"] = cur["targets"]
 
-    OUT.write_text(json.dumps(ds, indent=1))
+    payload = json.dumps(ds, indent=1)
+    OUT.write_text(payload)
+    OUT_JS.write_text(
+        "// GENERATED by platform/build_dataset.py -- do not edit.\n"
+        "// Byte-for-byte the same object as data/dataset.json; this form exists only so the\n"
+        "// page works when opened directly with file://, where fetch() is blocked.\n"
+        "window.__CBC_DATASET__ = " + payload + ";\n")
+
+    # The gate artefact is written by platform/validate.py --json; mirror it here so both
+    # file:-scheme shims are produced by one generator and cannot be half-updated.
+    gate = REPO / "data" / "validation_gate.json"
+    if gate.exists():
+        (REPO / "data" / "validation_gate.js").write_text(
+            "// GENERATED by platform/build_dataset.py -- do not edit.\n"
+            "window.__CBC_GATE__ = " + gate.read_text().rstrip() + ";\n")
 
     n_valid = sum(1 for c in ds["candidates"] if c["valid"])
     n_chem = sum(1 for n in ds["natural_products"] if n["validation"]["parses"])
-    print(f"wrote {OUT.relative_to(REPO)}")
+    print(f"wrote {OUT.relative_to(REPO)} and {OUT_JS.relative_to(REPO)}")
     print(f"  candidates:        {len(ds['candidates'])} ({n_valid} with a valid sequence)")
     print(f"  natural products:  {len(ds['natural_products'])} ({n_chem} with a verified structure)")
     print(f"  retracted claims:  {sum(1 for c in ds['candidates'] if 'retracted_claims' in c)}")

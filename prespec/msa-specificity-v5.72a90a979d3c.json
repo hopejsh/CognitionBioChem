@@ -1,0 +1,57 @@
+{
+ "hash": "72a90a979d3c1261fc3fc1f290d61e67b1139ee70aab13262d254dff55de7f13",
+ "registered_utc": "2026-08-19T19:14:08+00:00",
+ "min_attainable_p": 0.0,
+ "content": {
+  "study_id": "msa-specificity-v5",
+  "question": "With a full MSA rather than single-sequence mode, is each candidate's interface with its declared receptor distinguishable from the interfaces the same model assigns to sequences of identical amino-acid composition in random order?",
+  "primary_metric": "paired_native_minus_decoy_mean",
+  "primary_metric_justification": "The primary test is paired ACROSS candidates: each candidate contributes one native ipTM and the mean ipTM of its own decoys, and the resulting differences are tested against zero. This is chosen over a per-candidate permutation p because with N decoys the empirical p has a hard floor of 1/(N+1); at N=10 that floor is 0.091, so a per-candidate test could never reach alpha=0.05 and would be an unreachable verdict \u2014 exactly the defect this project's registration module rejects. Pairing also removes between-receptor variation, which is large here because the receptors range from 156 to 608 residues and ipTM depends on chain length. Per-candidate empirical p values are reported as descriptive.",
+  "decision_threshold": "H1 confirmed if the mean paired difference (native minus its own decoy mean) is positive with a paired t-test p < 0.05; H2 confirmed if at least one candidate both beats every one of its decoys and reaches ipTM > 0.8; H3 confirmed if the MSA arm raises mean native ipTM by more than 0.15 over the single-sequence values measured in study #9.",
+  "n_planned": 99,
+  "n_comparisons": 3,
+  "multiplicity_correction": "holm",
+  "alpha": 0.05,
+  "stopping_rule": "Fixed: each candidate is predicted once with its receptor and once with each of 10 composition-matched decoys, all with --use_msa_server at seed 1, in a fixed order. Nothing is added or removed after the first prediction. Technical failures are recorded with their reason and excluded; a candidate retaining fewer than 5 usable decoys is dropped from the paired test with that stated.",
+  "analysis_plan": "Reuse the exact candidate set and RNG seed of study #9 so the only changed variable is the MSA. Build 10 composition-matched shuffles per candidate with random.Random(1). Predict the receptor ligand-accessible construct (extracellular topological domain for a membrane receptor, mature chain for a soluble one) plus peptide with Boltz-2 2.2.1, --use_msa_server, gpu, seed 1, diffusion_samples 1, recycling_steps 3. For each candidate compute native ipTM minus the mean of its decoys; test the ten differences against zero with a paired t-test and report Cohen's dz. Compare native ipTM against study #9's single-sequence value for the same candidate. Holm across the three hypotheses.",
+  "hypotheses": [
+   {
+    "name": "H1_natives_separate_from_decoys",
+    "statement": "With a full MSA the designed sequences score higher than their own composition-matched shuffles.",
+    "predicted_by": "the pilot measurement, where MSA moved one native from 0.3402 to 0.7588 while moving its decoy from 0.3478 to 0.2986",
+    "confirmed_if": "mean paired difference > 0 with paired t-test p < 0.05",
+    "falsified_if": "mean paired difference <= 0 or p >= 0.05"
+   },
+   {
+    "name": "H2_a_candidate_is_confident_and_specific",
+    "statement": "At least one candidate is both better than its null and confident in absolute terms.",
+    "predicted_by": "the platform's original claim that these are targeted binders",
+    "confirmed_if": "some candidate beats all its decoys AND has native ipTM > 0.8",
+    "falsified_if": "no candidate satisfies both"
+   },
+   {
+    "name": "H3_msa_raises_natives",
+    "statement": "The MSA materially raises native ipTM relative to study #9's single-sequence run, i.e. #9's confound was real.",
+    "predicted_by": "the pilot, and the fact that these receptors have many homologues",
+    "confirmed_if": "mean native ipTM exceeds study #9's by more than 0.15",
+    "falsified_if": "the increase is 0.15 or less"
+   }
+  ],
+  "test_type": "parametric",
+  "n_permutations": 0,
+  "secondary_metrics": [
+   "mean_native_iptm",
+   "mean_decoy_iptm",
+   "cohens_dz",
+   "per_candidate_empirical_p",
+   "n_candidates_beating_all_decoys",
+   "delta_vs_study9",
+   "n_candidates_above_0.8",
+   "wall_clock_seconds_per_fold"
+  ],
+  "exclusions": "The same 9 candidates as study #9: those whose declared receptor is in the target registry and is extracellular. Reusing the set and the RNG seed is deliberate \u2014 with everything else held fixed, any difference is attributable to the MSA alone.",
+  "known_confounds": "4. STUDY #7'S BANDS ARE AN EXTRAPOLATION HERE, AND ARE LABELLED AS ONE. #7 calibrated ipTM against DockQ on 16 complexes whose peptides were 7-17 residues and whose receptors were 80-304. These candidates are 30-45 residues, longer than anything #7 measured, on receptors of 156-608. No candidate lies inside the calibrated peptide range, and only TREM2 (156 aa) and CHRNA7 (211 aa) lie inside the calibrated receptor range. The absolute thresholds in H1 and H3 are therefore extrapolated, and every verdict that rests on them is reported as extrapolated rather than calibrated. The primary metric does not depend on them: the native-versus-decoy contrast is a within-candidate comparison whose reference distribution is generated inside this study. 1. The ColabFold MSA server is a remote service whose returned alignment can change between calls, so this arm confounds MSA CONTENT with MSA PRESENCE; a rerun may not reproduce byte-identically even at fixed seed. 2. The MSA helps the RECEPTOR, which has thousands of homologues, far more than the peptide, which has none \u2014 so a rise in ipTM may reflect a better-folded receptor rather than a better interface. ipTM is interface-restricted, which mitigates but does not eliminate this. 3. n = 10 paired differences gives a paired t-test little power; only a large and consistent effect will register. 4. A positive result here bounds what this pipeline distinguishes, not what the molecules do in a cell.",
+  "supersedes": "msa-specificity-v4",
+  "supersedes_reason": "One (peptide, target) pair was screened under two codes: HippoAChE-AlkaPept-X2 and BasalAChE-GorgeBlock-B1 carry the identical 36-mer against the identical AChE construct, one of the duplicate pairs this project data gate flags. Screening both counted one molecule twice, and because every statistic here is a mean or a count over candidates, the duplicate voted twice in all of them. Measured on study #10 it moved the paired mean native-minus-decoy-mean difference from -0.0221 to -0.0412 and Cohen dz from -0.117 to -0.220, roughly doubling the reported effect size, and it overstated the paired t-test degrees of freedom by one; it is also the most extreme negative difference in the set, so it biased rather than merely diluted. The screen-level null was likewise computed over ten candidates when only nine are distinct. This plan de-duplicates on (peptide, target), keeps the first code, records the other as an alias, and reports n = 9 distinct designs. No fold is discarded: the duplicate cells remain under custody and are simply not counted twice. Earlier plans and results are retained."
+ }
+}

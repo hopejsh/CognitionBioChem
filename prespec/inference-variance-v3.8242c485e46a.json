@@ -1,0 +1,56 @@
+{
+ "hash": "8242c485e46a5e55d5857a89b671767c45be37385f5635114f40f33cc17da54d",
+ "registered_utc": "2026-08-19T22:59:10+00:00",
+ "min_attainable_p": 0.0,
+ "content": {
+  "study_id": "inference-variance-v3",
+  "question": "For each structural metric this platform reports, how large is a difference before it means anything? Specifically: what fraction of the observed variance in complex_plddt, pTM, ipTM and interface PAE is attributable to the sampler (seed) and to run-to-run nondeterminism, rather than to the molecule?",
+  "primary_metric": "across_seed_sd_complex_plddt",
+  "primary_metric_justification": "The across-seed standard deviation of complex_plddt is the quantity that sets the resolution of every pLDDT comparison the platform has already published. It is chosen as primary because the platform's headline claim \u2014 that legacy values overstated pLDDT by 10-46 units \u2014 is only interpretable relative to it. It is measured per candidate and then pooled, rather than pooled directly, because candidates differ in intrinsic predictability and pooling first would confound between-candidate signal with within-candidate noise. Metrics are reported SEPARATELY and never substituted for one another: pTM, ipTM and interface PAE have different supports and different distributions, and an SD measured on one licenses no inference about another.",
+  "decision_threshold": "H1 confirmed if the pooled across-seed SD of complex_plddt (0-100 scale) is below 2.0 units; H2 confirmed if same-seed repeats are bit-identical on complex_plddt for every candidate; H3 confirmed if enabling the MSA server changes mean complex_plddt by less than the across-seed SD measured in H1.",
+  "n_planned": 87,
+  "n_comparisons": 3,
+  "multiplicity_correction": "holm",
+  "alpha": 0.05,
+  "stopping_rule": "Fixed design: every (candidate, seed, arm) cell is run exactly once, in a fixed order, with no interim analysis. A cell that fails technically is reported as a failure with its error and excluded with the exclusion stated. No candidate is added or removed after the first fold begins.",
+  "analysis_plan": "Arm A (determinism): each of 6 candidates at seed=1, repeated 3 times, msa=empty. Report the exact set of distinct complex_plddt values per candidate. Arm B (sampler): each candidate at seeds 1-5, msa=empty, one run per seed; report per-candidate SD and the pooled SD as sqrt(mean of per-candidate variances). Arm C (MSA factor): the same 6 candidates at seeds 1-5 with --use_msa_server and the msa key omitted; compare arm means by paired t-test across candidates. Arm D (interface): 3 candidates co-folded with human AChE P22303 LIGAND-ACCESSIBLE CONSTRUCT (543-residue catalytic core, canonical 32-574, read from data/target_registry.json) at seeds 1-5, msa=empty; report ipTM and minimum interface PAE per seed with their SDs. Holm across the three hypotheses. All metrics reported separately; no metric is pooled across arms.",
+  "hypotheses": [
+   {
+    "name": "H1_seed_noise_small",
+    "statement": "Across-seed variation in complex_plddt is small enough that the platform's published 10-46 unit legacy deltas are resolvable.",
+    "predicted_by": "the platform's existing comparison, which assumes this",
+    "confirmed_if": "pooled across-seed SD of complex_plddt < 2.0 units",
+    "falsified_if": "pooled across-seed SD of complex_plddt >= 2.0 units"
+   },
+   {
+    "name": "H2_same_seed_deterministic",
+    "statement": "Fixing the seed makes a run bit-reproducible on this hardware.",
+    "predicted_by": "the seeding fix applied earlier in this project",
+    "confirmed_if": "every candidate yields exactly one distinct complex_plddt value across its 3 same-seed replicates",
+    "falsified_if": "any candidate yields more than one distinct complex_plddt value across its same-seed replicates"
+   },
+   {
+    "name": "H3_msa_immaterial_for_designed_sequences",
+    "statement": "For hand-assembled motif concatenations, which have no natural homologues, enabling an MSA search changes the prediction by less than seed noise.",
+    "predicted_by": "the observation that a designed amphipathic peptide moved 0.0005 in complex_plddt when the MSA server was enabled",
+    "confirmed_if": "|mean(with MSA) - mean(without MSA)| < the pooled across-seed SD from H1, and the paired t-test across candidates does not reject at Holm-adjusted 0.05",
+    "falsified_if": "the difference exceeds the across-seed SD, or the paired t-test rejects at Holm-adjusted 0.05"
+   }
+  ],
+  "test_type": "parametric",
+  "n_permutations": 0,
+  "secondary_metrics": [
+   "across_seed_sd_ptm",
+   "across_seed_sd_iptm",
+   "across_seed_sd_interface_pae_min",
+   "per_residue_plddt_sd",
+   "same_seed_distinct_values",
+   "msa_mean_shift",
+   "wall_clock_seconds_per_fold"
+  ],
+  "exclusions": "Sequences containing non-standard residues are excluded before registration. Arm D uses the 3 candidates with the highest, median and lowest mean pLDDT from the existing single-chain runs, fixed before any variance fold is executed.",
+  "known_confounds": "1. Seeding fixes the noise draw but not floating-point reduction order on Metal, and Boltz has a documented aten::linalg_svd CPU fallback, so H2 may fail for reasons that are hardware rather than software. 2. The MSA server is a remote service whose returned alignment may change between calls, so arm C confounds MSA content with MSA presence. 3. All candidates come from one design family, so the variance measured here may not transfer to natural sequences. 4. n=5 seeds gives a poorly determined SD; the estimate carries roughly 30% relative uncertainty and is reported with that caveat.",
+  "supersedes": "inference-variance-v2",
+  "supersedes_reason": "v2 was registered specifically to correct arm D's construct and its selection rule, and its own analysis_plan still specified the superseded 583-residue AChE mature chain -- byte-identical to v1's on that clause. A hash-locked plan that contradicts the reason it was registered cannot serve as the frozen reference results are compared against, and verify_result cannot see it because it compares metrics, hypotheses and multiplicity only. v3 states the executed construct. No arm, seed, metric or verdict changes; arms A, B and C are unaffected and, with content-addressed reuse now enabled for this study, are reused after each stored model is re-parsed and checked against the chains requested; arm D was already recomputed under v2."
+ }
+}

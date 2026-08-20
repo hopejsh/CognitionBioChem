@@ -1,0 +1,9 @@
+version: 1
+sequences:
+  - protein:
+      id: A
+      sequence: GAENESTPIQQLLEHFLRQLQRKDPHGFFAFPVTDAIAPGYSMIIKHPMDFGTMKDKIVANEYKSVTEFKADFKLMCDNAMTYNRPDTVYYKLAKKILHAGFKMMS
+      msa: empty
+  - ligand:
+      id: B
+      smiles: 'CN1C=C(c2c(cc(s2)C(=O)N3CCN(CC3)S(=O)(=O)C)C1=O)c4ccc(c(c4)OC)OC'

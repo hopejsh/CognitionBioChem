@@ -43,6 +43,43 @@
   ],
   "flag": "Precursor"
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "Q99NH8"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "11602640"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "25957402"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "27995897"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "29794134"
+      }
+     ],
+     "value": "Monomer (PubMed:27995897). After ectodomain shedding, the extracellular domain oligomerizes, which is enhanced and stabilized by binding of phosphatidylserine (PubMed:29794134). Interacts with TYROBP/DAP12 (PubMed:11602640, PubMed:25957402). Interaction with TYROBP is required for stabilization of the TREM2 C-terminal fragment (TREM2-CTF) which is produced by proteolytic processing (PubMed:25957402). Interacts with PLXNA1 (via TIG domains); the interaction mediates SEMA6D binding and signaling through TYROBP (By similarity)"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Signal",
@@ -79,6 +116,63 @@
    "featureId": "PRO_0000014987"
   },
   {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 19,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 174,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Extracellular",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
+   "type": "Transmembrane",
+   "location": {
+    "start": {
+     "value": 175,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 195,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Helical",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 196,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 230,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Cytoplasmic",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
    "type": "Domain",
    "location": {
     "start": {
@@ -91,6 +185,149 @@
     }
    },
    "description": "Ig-like V-type"
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 36,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 110,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "27995897"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "29794134"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5ELI"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5UD7"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5UD8"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "6B8O"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 51,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 60,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "27995897"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "29794134"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5ELI"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5UD8"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "6B8O"
+    }
+   ]
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 162,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 230,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 2",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "Reference",
+     "id": "Ref.2"
+    }
+   ],
+   "featureId": "VSP_010792",
+   "alternativeSequence": {
+    "originalSequence": "SLLEGEIPFPPTSILLLLACIFLIKILAASALWAAAWHGQKPGTHPPSELDCGHDPGYQLQTLPGLRDT",
+    "alternativeSequences": [
+     "AERHVKEDDGRKSPGEVPPGTSPACILATWPPGLLVLLWQETTLPEHCFSWTLEAGTG"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 162,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 230,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 3",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "15489334"
+    }
+   ],
+   "featureId": "VSP_010793",
+   "alternativeSequence": {
+    "originalSequence": "SLLEGEIPFPPTSILLLLACIFLIKILAASALWAAAWHGQKPGTHPPSELDCGHDPGYQLQTLPGLRDT",
+    "alternativeSequences": [
+     "PSQGSHLPSCLSKEPLGRRNPLPTHFHPSPPGLHLSHQDSSSQRPLGCSLAWTEARDTSTQ"
+    ]
+   }
   }
  ],
  "uniProtKBCrossReferences": [

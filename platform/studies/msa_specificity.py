@@ -36,12 +36,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from cbc import prespec as ps  # noqa: E402
+from cbc import inference as inf, prespec as ps  # noqa: E402
 from cbc.compute import structure as st  # noqa: E402
 from studies.candidate_screen import CANDIDATE_TARGETS, _candidates, _receptor_seq, _scrambles  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
-STUDY_ID = "msa-specificity-v1"
+STUDY_ID = "msa-specificity-v9"
 WORK = Path("/tmp/cbc_msa10")
 RESULT = REPO / "data" / "study_msa_specificity.json"
 
@@ -50,6 +50,17 @@ SEED = 1
 IPTM_CONFIDENT = 0.8
 IPTM_FAILED = 0.6
 
+
+
+def prespec_args() -> tuple:
+    """The arguments --register builds the plan with.
+
+    Named once so the registration path and the hash-stability test cannot disagree
+    about them: the test previously guessed, guessed wrong for the two-argument
+    studies, and reported drift that did not exist.
+    """
+    c = _candidates()
+    return (len(c) * (1 + N_DECOYS), len(c))
 
 def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
     return ps.Prespecification(
@@ -67,7 +78,7 @@ def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
             "floor is 0.091, so a per-candidate test could never reach alpha=0.05 and would "
             "be an unreachable verdict — exactly the defect this project's registration "
             "module rejects. Pairing also removes between-receptor variation, which is large "
-            "here because the receptors range from 212 to 583 residues and ipTM depends on "
+            "here because the receptors range from 156 to 608 residues and ipTM depends on "
             "chain length. Per-candidate empirical p values are reported as descriptive."),
         decision_threshold=(
             "H1 confirmed if the mean paired difference (native minus its own decoy mean) is "
@@ -89,10 +100,13 @@ def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
         analysis_plan=(
             "Reuse the exact candidate set and RNG seed of study #9 so the only changed "
             "variable is the MSA. Build 10 composition-matched shuffles per candidate with "
-            "random.Random(1). Predict receptor mature chain plus peptide with Boltz-2 "
+            "random.Random(1). Predict the receptor ligand-accessible construct (extracellular "
+            "topological domain for a membrane receptor, mature chain for a soluble one) "
+            "plus peptide with Boltz-2 "
             "2.2.1, --use_msa_server, gpu, seed 1, diffusion_samples 1, recycling_steps 3. "
             "For each candidate compute native ipTM minus the mean of its decoys; test the "
-            "six differences against zero with a paired t-test and report Cohen's dz. "
+            "the per-candidate differences against zero with a paired t-test and report "
+            "Cohen's dz. "
             "Compare native ipTM against study #9's single-sequence value for the same "
             "candidate. Holm across the three hypotheses."),
         hypotheses=(
@@ -129,14 +143,19 @@ def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
             "the target registry and is extracellular. Reusing the set and the RNG seed is "
             "deliberate — with everything else held fixed, any difference is attributable to "
             "the MSA alone."),
+        supersedes="msa-specificity-v8",
+        supersedes_reason=(
+            "Synchronised with candidate-screen-v8: coverage() no longer short-circuits on the hand-written map, the oligomeric flag no longer excludes, and the two GRIN2A candidates the criterion admits are screened, giving 13 distinct designs. The power caveat is now derived from n_cand rather than typed, because that string had gone stale three times. No hypothesis, threshold or decision rule changes."),
         known_confounds=(
+            "4. STUDY #7'S BANDS ARE AN EXTRAPOLATION HERE, AND ARE LABELLED AS ONE. #7 calibrated ipTM against DockQ on 16 complexes whose peptides were 7-17 residues and whose receptors were 80-304. These candidates are 31-47 residues, longer than anything #7 measured, on receptors of 156-608. No candidate lies inside the calibrated peptide range, and only TREM2 (156 aa) and CHRNA7 (211 aa) lie inside the calibrated receptor range. The absolute thresholds in H1 and H3 are therefore extrapolated, and every verdict that rests on them is reported as extrapolated rather than calibrated. The primary metric does not depend on them: the native-versus-decoy contrast is a within-candidate comparison whose reference distribution is generated inside this study. "
             "1. The ColabFold MSA server is a remote service whose returned alignment can "
             "change between calls, so this arm confounds MSA CONTENT with MSA PRESENCE; a "
             "rerun may not reproduce byte-identically even at fixed seed. 2. The MSA helps "
             "the RECEPTOR, which has thousands of homologues, far more than the peptide, "
             "which has none — so a rise in ipTM may reflect a better-folded receptor rather "
             "than a better interface. ipTM is interface-restricted, which mitigates but does "
-            "not eliminate this. 3. n = 6 paired differences gives a paired t-test little "
+            f"not eliminate this. 3. n = {n_cand} paired differences gives a paired t-test "
+            "little "
             "power; only a large and consistent effect will register. 4. A positive result "
             "here bounds what this pipeline distinguishes, not what the molecules do in a "
             "cell."),
@@ -145,7 +164,7 @@ def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
 
 def run() -> None:
     plan = ps.load(STUDY_ID)
-    cands = _candidates(limit=6)
+    cands = _candidates(limit=None)
     prior = {}
     p9 = REPO / "data" / "study_candidate_screen.json"
     if p9.exists():
@@ -171,16 +190,17 @@ def run() -> None:
                      st.Chain("B", pep, "protein", msa=None)],
                     WORK / f"{c['code']}_{kind}", accelerator="gpu", seed=SEED,
                     diffusion_samples=1, recycling_steps=3,
-                    use_msa_server=True, timeout=7200)
+                    use_msa_server=True, timeout=7200, reuse=True)
             except Exception as exc:  # noqa: BLE001
                 print(f"raised: {str(exc)[:40]}")
                 rows.append({**c, "kind": kind, "ok": False, "error": str(exc)[:200]})
                 continue
             dt = time.time() - t0
             conf = r.get("confidence") or {}
+            reused = bool(r.get("reused"))
             ok = r.get("returncode") == 0 and conf.get("iptm") is not None
             rec = {**c, "kind": kind, "peptide_used": pep, "ok": ok,
-                   "seconds": round(dt, 1), "iptm": conf.get("iptm"),
+                   "seconds": round(dt, 1), "reused": reused, "iptm": conf.get("iptm"),
                    "ptm": conf.get("ptm"), "complex_plddt": conf.get("complex_plddt"),
                    "iptm_study9": prior.get(c["code"]) if kind == "native" else None}
             if ok:
@@ -197,6 +217,25 @@ def run() -> None:
                  "n_observed": sum(1 for x in rows if x.get("ok")), "rows": rows}, indent=1))
     print(f"\nwrote {RESULT.relative_to(REPO)}")
 
+
+
+def _beats_all_null(observed: int, n_candidates: int, n_decoys: int) -> dict:
+    """How often would this many candidates beat all their own decoys by chance?"""
+    from math import comb
+    p0 = 1.0 / (n_decoys + 1)
+    tail = sum(comb(n_candidates, x) * p0 ** x * (1 - p0) ** (n_candidates - x)
+               for x in range(observed, n_candidates + 1))
+    return {
+        "per_candidate_null_probability": round(p0, 4),
+        "expected_under_null": round(n_candidates * p0, 3),
+        "observed": observed,
+        "p_at_least_observed": round(tail, 4),
+        "interpretation": (
+            f"with {n_decoys} decoys each, a candidate beats all of them with probability "
+            f"{p0:.4f} under the null, so {n_candidates * p0:.2f} of {n_candidates} are "
+            f"expected to do so by chance; observing {observed} has probability "
+            f"{tail:.3f}."),
+    }
 
 def analyse() -> int:
     from scipy import stats
@@ -246,18 +285,28 @@ def analyse() -> int:
     n_conf_spec = sum(1 for p in per
                       if p["beats_all_decoys"] and p["native_iptm"] > IPTM_CONFIDENT)
 
-    p1 = t_p if (diffs and statistics.fmean(diffs) > 0) else 1.0
-    p2 = 0.0 if n_conf_spec > 0 else 1.0
-    p3 = 0.0 if (d9 and statistics.fmean(d9) > 0.15) else 1.0
-    raw = [("H1_natives_separate_from_decoys", p1),
-           ("H2_a_candidate_is_confident_and_specific", p2),
-           ("H3_msa_raises_natives", p3)]
-    order = sorted(range(3), key=lambda i: raw[i][1])
-    adj = [0.0] * 3
-    rm = 0.0
-    for rank, i in enumerate(order):
-        rm = max(rm, (3 - rank) * raw[i][1])
-        adj[i] = min(1.0, rm)
+    # Only H1 is a test (paired t on the per-candidate native-minus-decoy-mean differences).
+    # H2 and H3 are threshold criteria. Encoding them as p = 0.0 put them at the head of the
+    # Holm step-down and stripped the multiplier off the one real test. See cbc/inference.py.
+    ruling = inf.decide(criteria={
+        "H2_a_candidate_is_confident_and_specific": inf.Criterion(
+            n_conf_spec > 0, n_conf_spec,
+            f"at least one candidate beats all decoys AND ipTM > {IPTM_CONFIDENT}"),
+        "H3_msa_raises_natives": inf.Criterion(
+            bool(d9) and statistics.fmean(d9) > 0.15,
+            round(statistics.fmean(d9), 4) if d9 else None,
+            "mean native ipTM gain over the single-sequence arm > 0.15"),
+    }, tests=({"H1_natives_separate_from_decoys": t_p}
+              if (t_p is not None and 0.0 < t_p <= 1.0) else {}))
+    # The test is two-sided, so a significant result in the WRONG direction must not confirm
+    # "natives separate from decoys". Direction is checked separately from significance, and
+    # both are reported. Gating the test's inclusion on direction, as an earlier version did,
+    # simply hid the p-value whenever the effect pointed the other way.
+    _mean_diff = statistics.fmean(diffs) if diffs else 0.0
+    if _mean_diff <= 0:
+        ruling["verdicts"]["H1_natives_separate_from_decoys"] = "FALSIFIED"
+    if "H1_natives_separate_from_decoys" not in ruling["verdicts"]:
+        ruling["verdicts"]["H1_natives_separate_from_decoys"] = "FALSIFIED"
 
     report = {
         "study_id": STUDY_ID, "prespec_hash": payload["prespec_hash"],
@@ -270,21 +319,21 @@ def analyse() -> int:
             "cohens_dz": round(dz, 4) if dz is not None else None,
             "per_candidate_empirical_p": {p["code"]: p["empirical_p"] for p in per},
             "n_candidates_beating_all_decoys": sum(1 for p in per if p["beats_all_decoys"]),
+            # A candidate beating all N of its own decoys has probability 1/(N+1) under the
+            # null, so with 10 candidates screened, some are EXPECTED to do it by chance.
+            # Reporting the count without this number invites reading a chance outcome as a
+            # hit -- which is the exact error the composition-matched null exists to prevent,
+            # reappearing one level up at the level of the screen rather than the candidate.
+            "beats_all_decoys_null": _beats_all_null(
+                sum(1 for p in per if p["beats_all_decoys"]), len(per), N_DECOYS),
             "delta_vs_study9": round(statistics.fmean(d9), 4) if d9 else None,
             "n_candidates_above_0.8": sum(1 for p in per
                                           if p["native_iptm"] > IPTM_CONFIDENT),
-            "wall_clock_seconds_per_fold": round(statistics.fmean(
-                [r["seconds"] for r in ok if r.get("seconds")]), 1) if ok else None,
+            "wall_clock_seconds_per_fold": inf.wall_clock(ok),
         },
         "paired_t_p": round(t_p, 5),
         "per_candidate": per,
-        "p_holm": {raw[i][0]: round(adj[i], 5) for i in range(3)},
-        "verdicts": {
-            "H1_natives_separate_from_decoys": "CONFIRMED" if adj[0] < 0.05 and diffs
-                                               and statistics.fmean(diffs) > 0 else "FALSIFIED",
-            "H2_a_candidate_is_confident_and_specific": "CONFIRMED" if p2 == 0 else "FALSIFIED",
-            "H3_msa_raises_natives": "CONFIRMED" if p3 == 0 else "FALSIFIED",
-        },
+        **ruling,
         "failures": [{"code": r["code"], "kind": r.get("kind"),
                       "error": str(r.get("error"))[:120]}
                      for r in payload["rows"] if not r.get("ok")],
@@ -312,10 +361,10 @@ def analyse() -> int:
     print(f"\nmean native ipTM {m['mean_native_iptm']} vs mean decoy {m['mean_decoy_iptm']}")
     print(f"mean rise over study #9's single-sequence run: {m['delta_vs_study9']}")
     print(f"candidates beating ALL their decoys: {m['n_candidates_beating_all_decoys']}/{len(per)}")
+    print("  " + m["beats_all_decoys_null"]["interpretation"])
     print(f"candidates in the confident band (>0.8): {m['n_candidates_above_0.8']}")
     print("\nPRE-SPECIFIED VERDICTS")
-    for h, v in report["verdicts"].items():
-        print(f"  {h:42s} {v:10s} Holm p = {report['p_holm'][h]}")
+    print(inf.format_verdicts(report))
     if report["failures"]:
         print(f"\nFAILURES: {len(report['failures'])}")
     a = report["prespec_audit"]
@@ -332,8 +381,8 @@ def main() -> int:
         ap.add_argument(f"--{f}", action="store_true")
     a = ap.parse_args()
     if a.register:
-        c = _candidates(limit=6)
-        spec = build_prespec(len(c) * (1 + N_DECOYS), len(c))
+        c = _candidates(limit=None)
+        spec = build_prespec(*prespec_args())
         problems = spec.check()
         if problems:
             print("NOT REGISTRABLE:")

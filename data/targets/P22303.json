@@ -53,6 +53,31 @@
   },
   "flag": "Precursor"
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000250"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "11053835"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15526038"
+      }
+     ],
+     "value": "Interacts with PRIMA1. The interaction with PRIMA1 is required to anchor it to the basal lamina of cells and organize into tetramers (By similarity). Isoform H generates GPI-anchored dimers; disulfide linked. Isoform T generates multiple structures, ranging from monomers and dimers to collagen-tailed and hydrophobic-tailed forms, in which catalytic tetramers are associated with anchoring proteins that attach them to the basal lamina or to cell membranes. In the collagen-tailed forms, isoform T subunits are associated with a specific collagen, COLQ, which triggers the formation of isoform T tetramers, from monomers and dimers. Isoform R may be monomeric"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Signal",
@@ -87,6 +112,169 @@
    },
    "description": "Acetylcholinesterase",
    "featureId": "PRO_0000008587"
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 100,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 127,
+     "modifier": "EXACT"
+    }
+   },
+   "description": ""
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 288,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 303,
+     "modifier": "EXACT"
+    }
+   },
+   "description": ""
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 440,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 560,
+     "modifier": "EXACT"
+    }
+   },
+   "description": ""
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 611,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 611,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Interchain"
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 357,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 444,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 4",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "Reference",
+     "id": "Ref.3"
+    }
+   ],
+   "featureId": "VSP_035568",
+   "alternativeSequence": {}
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 575,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 614,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform H",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "15489334"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "8299725"
+    }
+   ],
+   "featureId": "VSP_001457",
+   "alternativeSequence": {
+    "originalSequence": "DTLDEAERQWKAEFHRWSSYMVHWKNQFDHYSKQDRCSDL",
+    "alternativeSequences": [
+     "ASEAPSTCPGFTHGEAAPRPGLPLPLLLLHQLLLLFLSHLRRL"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 575,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 603,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform R",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "8299725"
+    }
+   ],
+   "featureId": "VSP_035569",
+   "alternativeSequence": {
+    "originalSequence": "DTLDEAERQWKAEFHRWSSYMVHWKNQFD",
+    "alternativeSequences": [
+     "GMQGPAGSAGRRGVGARQCNPSLLPLASE"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 604,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 614,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform R",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "8299725"
+    }
+   ],
+   "featureId": "VSP_035570",
+   "alternativeSequence": {}
   }
  ],
  "uniProtKBCrossReferences": [

@@ -101,6 +101,158 @@
    }
   ]
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "P18266"
+      },
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "Q9WV60"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "11004522"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "12054501"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "12554650"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15448698"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15647282"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15752768"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "16428445"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "16981698"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "17318175"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "18846110"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "19493954"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "19706605"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "19946213"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "20007971"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "20080667"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "24391509"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "25169422"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "25897075"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "25920809"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "27484798"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "28829046"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "28903391"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "31073040"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "34058472"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "9731200"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "9819408"
+      }
+     ],
+     "value": "Monomer. Interacts with ARRB2, DISC1 and ZBED3 (By similarity). Interacts with CABYR, MMP2, MUC1, NIN and PRUNE1. Interacts with AXIN1; the interaction mediates hyperphosphorylation of CTNNB1 leading to its ubiquitination and destruction. Interacts with and phosphorylates SNAI1. Interacts with DNM1L (via a C-terminal domain). Found in a complex composed of MACF1, APC, AXIN1, CTNNB1 and GSK3B (By similarity). Interacts with SGK3. Interacts with DAB2IP (via C2 domain); the interaction stimulates GSK3B kinase activation. Interacts (via C2 domain) with PPP2CA. Interacts with the CLOCK-BMAL1 heterodimer (PubMed:19946213). Interacts with the BMAL1 (PubMed:28903391). Interacts with CTNND2 (PubMed:19706605). Interacts with NCYM (PubMed:24391509). The complex composed, at least, of APC, CTNNB1 and GSK3B interacts with JPT1; the interaction requires the inactive form of GSK3B (phosphorylated at 'Ser-9') (PubMed:25169422). Forms a complex composed of PRKAR2A or PRKAR2B, GSK3B and GSKIP through GSKIP interaction; facilitates PKA-induced phosphorylation and regulates GSK3B activity (PubMed:20007971, PubMed:25920809, PubMed:27484798). Interacts with GSKIP (PubMed:16981698). Interacts with GID8 (PubMed:28829046). Interacts with PIWIL2 (By similarity). Interacts with LMBR1L (PubMed:31073040). Interacts with DDX3X (PubMed:18846110). Interacts with BIRC2 (PubMed:18846110). Interacts with TNFRSF10B; TNFRSF10B stimulation inhibits GSK3B kinase activity (PubMed:18846110). Interacts with RICTOR; the interaction results in phosphorylation of RICTOR at 'Thr-1695' by GSK3B which facilitates FBXW7-mediated ubiquitination and subsequent degradation of RICTOR (PubMed:25897075). Found in a complex with SLC39A6, SLC39A10 and with GSK3B that controls NCAM1 phosphorylation (By similarity). Interacts with PKP3 (via ARM repeats); the interaction may be involved in PKP3 protein degradation (PubMed:34058472)"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Chain",
@@ -137,6 +289,34 @@
      "id": "PRU00159"
     }
    ]
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 303,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 303,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 2",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "15489334"
+    }
+   ],
+   "featureId": "VSP_004790",
+   "alternativeSequence": {
+    "originalSequence": "K",
+    "alternativeSequences": [
+     "KDSSGTGHFTSGVR"
+    ]
+   }
   }
  ],
  "uniProtKBCrossReferences": [

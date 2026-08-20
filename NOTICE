@@ -1,0 +1,155 @@
+CognitionBioChem
+Copyright 2026 Seung H. Jung
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+================================================================================
+THIRD-PARTY MATERIAL REDISTRIBUTED IN THIS REPOSITORY
+================================================================================
+
+.agents/skills/  (229 files)
+    Derived from google-deepmind/science-skills.
+    Copyright 2026 Google LLC.
+    Software licensed under the Apache License, Version 2.0.
+    Documentation and other non-software materials licensed under CC BY 4.0.
+    Source: https://github.com/google-deepmind/science-skills
+    Unmodified except where noted in skills-lock.json.
+
+================================================================================
+THIRD-PARTY DATA REDISTRIBUTED IN THIS REPOSITORY
+================================================================================
+
+The data files below contain values retrieved from public scientific databases.
+They are redistributed for reproducibility of the pre-registered studies. Each
+source retains its own licence, which governs that data independently of the
+Apache-2.0 licence covering this project's code.
+
+ChEMBL  --  CC BY-SA 3.0
+    Files: data/corpus_ACHE.json, data/study_ache_affinity.json,
+           data/study_affinity_corrected.json, data/study_inputs/ache_bench.json,
+           runs/*/input.yaml for the 17 runs whose manifest `job` is a CHEMBL accession
+           (kind "ache-affinity") -- these carry the ligand SMILES the benchmark folded
+    (This list is enumerated by filename and is verified against the repository by
+     platform/tests/test_platform.py: any tracked file containing ChEMBL identifiers
+     must appear here, because a file omitted from the carve-out would otherwise be
+     offered downstream under Apache-2.0 -- a sublicensing grant this project does
+     not hold and which CC BY-SA 3.0 share-alike does not permit.)
+    Content: ChEMBL identifiers, canonical SMILES, and measured bioactivity values.
+    (The 16 pose-accuracy input.yaml files also carry a ligand SMILES, but those come
+     from RCSB PDB depositions, which are CC0; see the RCSB entry below.)
+    Attribution: ChEMBL database, EMBL-EBI. https://www.ebi.ac.uk/chembl/
+    Cite: Zdrazil B, et al. The ChEMBL Database in 2023. Nucleic Acids Res.
+    NOTE ON SHARE-ALIKE: CC BY-SA 3.0 requires that adaptations of the ChEMBL
+    data be distributed under compatible terms. The files listed above are
+    therefore made available under CC BY-SA 3.0, NOT under Apache-2.0. The code
+    that produced them remains Apache-2.0.
+
+UniProt  --  CC BY 4.0
+    Files: data/target_registry.json, data/targets/*.json, and every runs/*/input.yaml
+           whose folded chain is a substring of a canonical sequence recorded in the
+           registry. The criterion is stated rather than a count, because a count goes
+           stale every time a fold is added; the test suite checks the criterion selects a
+           non-empty set and that no file it selects is left unnamed.
+    Content: canonical protein sequences and feature annotations.
+    Attribution: UniProt Consortium. https://www.uniprot.org/
+    Cite: UniProt Consortium. UniProt: the Universal Protein Knowledgebase.
+          Nucleic Acids Res.
+
+RCSB Protein Data Bank  --  CC0 1.0 (public domain dedication)
+    Files: data/peptide_benchmark_set.json (deposited construct sequences),
+           and PDB entry identifiers throughout data/ and reviews/.
+    Attribution: RCSB PDB. https://www.rcsb.org/
+    Cite: Berman HM, et al. The Protein Data Bank. Nucleic Acids Res 28:235 (2000).
+
+PubChem  --  public domain (US Government work)
+    Files: data/curated.json, data/dataset.json (isomeric SMILES, InChIKeys, CIDs).
+    Attribution: PubChem, NCBI/NLM. https://pubchem.ncbi.nlm.nih.gov/
+
+AlphaFold Protein Structure Database  --  CC BY 4.0
+    Files: data/alphafold_db/*/AF-*.cif and data/alphafold_db/*/AF-*-predicted_aligned_error.json
+    Content: predicted coordinates with per-residue pLDDT in the B-factor column, and the
+             predicted aligned error matrix, for the 16 UniProt accessions in the target
+             registry. Downloaded from https://alphafold.ebi.ac.uk/, not computed here.
+    Cite: Jumper J, et al. Highly accurate protein structure prediction with AlphaFold.
+          Nature 596:583-589 (2021); Varadi M, et al. AlphaFold Protein Structure Database
+          in 2024. Nucleic Acids Res 52:D368-D375 (2024).
+    NOTE: AlphaFold SERVER was not used. Its terms prohibit automated use for predicting
+    protein-ligand or protein-peptide binding, which is what studies #9 and #10 do. The
+    Database is a separate, openly licensed resource of published monomer predictions.
+
+Boltz-2 model outputs  --  MIT
+    Files: the PREDICTED artefacts under runs/ -- *_model_*.cif, confidence_*.json,
+           pae_*.npz, plddt_*.npz, affinity_*.json -- and data/pae/*.json, which are
+           those same pae_*.npz arrays re-encoded as JSON so a browser can read them.
+           A change of container is not a change of provenance.
+    Generated locally with Boltz-2 v2.2.1, whose code AND weights are MIT.
+    Cite: Passaro S, et al. Boltz-2: Towards Accurate and Efficient Binding
+          Affinity Prediction (2025); Wohlwend J, et al. Boltz-1 (2024).
+
+    NOT covered by this entry, though they live in the same tree:
+
+      Every runs/*/input.yaml is an INPUT, not a model output. Those whose folded chain is a
+      substring of a canonical sequence recorded in data/target_registry.json carry
+      UniProt content under CC BY 4.0 (see the
+      UniProt entry above), and 17 carry a ChEMBL ligand SMILES under CC BY-SA 3.0 (see
+      the ChEMBL entry above). An MIT grant attached to Boltz-2's outputs cannot cover a
+      sequence copied into a Boltz input file.
+
+      The two run directories whose manifest `kind` ends in "-reference" hold 32 RCSB PDB
+      depositions used as experimental ground truth by studies #6 and #7. No predictor
+      produced them; they are CC0 (see the RCSB entry above). The earlier wording, which
+      placed all of runs/** under this MIT entry, made an affirmative false statement of
+      provenance about those 32 files.
+
+Derived indices  --  no new third-party content, but the upstream terms flow through
+    Files: data/slate.json, data/structures.json, data/alphafold_db_comparison.json
+           (and their .js twins, which are the same objects in a form a browser can load
+           from a file: URL).
+    These are generated by platform/build_slate.py, platform/build_structures.py and
+    platform/studies/alphafold_db_compare.py. They contain no content that is not already
+    covered above, but they carry values DERIVED from material that is:
+
+      * AlphaFold DB (CC BY 4.0) -- per-residue pLDDT means and Pearson correlations computed
+        from the deposited models, in data/alphafold_db_comparison.json and in the
+        receptor_afdb entries of data/structures.json. Attribution for those follows the
+        AlphaFold Protein Structure Database entry above.
+      * Boltz-2 outputs (MIT) -- confidences, per-chain pLDDT means and interface PAE
+        summaries, copied or computed from the retained runs.
+      * UniProt (CC BY 4.0) -- construct spans and accessions, via data/target_registry.json.
+
+    A reader redistributing these files inherits those terms; the indices themselves add
+    nothing that is separately licensable.
+
+================================================================================
+TOOLS USED (not redistributed here)
+================================================================================
+
+RDKit (BSD-3-Clause) · SciPy, NumPy (BSD-3-Clause) · PoseBusters (BSD-3-Clause)
+PRODIGY / prodigy-prot (Apache-2.0) · DockQ (MIT) · ADMET-AI (MIT)
+Chart.js (MIT) · 3Dmol.js (BSD-3-Clause)
+
+================================================================================
+TRADEMARKS
+================================================================================
+
+AlphaFold is a trademark of Google DeepMind. This project is NOT affiliated with,
+endorsed by, or connected to Google DeepMind or the AlphaFold team.
+
+The word "only" used to appear in this paragraph -- AlphaFold was said to be referred to
+"only to describe what this project does NOT do". That stopped being true when the project
+began using AlphaFold DB, and the sentence was left standing. To be exact about the three
+different things the name covers here:
+
+  * AlphaFold 3 is NOT run and NOT implemented. Its weights are request-only,
+    non-commercial and Linux/CUDA-bound; Boltz-2 is used instead, and the AlphaFold 3
+    reference exists to document that constraint. No AF3 code path exists in this
+    repository.
+  * AlphaFold DB IS used, substantially: 16 deposited models are downloaded under CC BY 4.0
+    (see the entry above), read by the parser, shown in the structure gallery, and compared
+    against Boltz-2 in data/alphafold_db_comparison.json. That is a positive use of
+    AlphaFold content, not a description of something the project avoids.
+  * AlphaFold SERVER is NOT used and could not be: its terms prohibit automated use for
+    protein-ligand and protein-peptide binding prediction, which is what studies #9 and #10
+    do. Nothing here is submitted to it.
+
+None of this implies endorsement by, or any relationship with, Google DeepMind.

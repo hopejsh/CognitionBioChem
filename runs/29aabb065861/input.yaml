@@ -1,0 +1,9 @@
+version: 1
+sequences:
+  - protein:
+      id: A
+      sequence: FQMNPPPPETSNPNKPKRQTNQLQYLLRVVLKTLWKHQFAWPFQQPVDAVKLNLPDYYKIIKTPMDMGTIKKRLENNYYWNAQECIQDFNTMFTNCYIYNKPGDDIVLMAEALEKLFLQKINALPTEE
+      msa: empty
+  - ligand:
+      id: B
+      smiles: 'CS(=O)(=O)Nc1ccc(cc1Oc2ccccc2)[N+](=O)[O-]'

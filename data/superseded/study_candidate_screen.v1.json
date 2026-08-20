@@ -1,0 +1,454 @@
+{
+ "study_id": "candidate-screen-v1",
+ "prespec_hash": "5a62fdf6d614b6303d47887ae388ed3792e89464b8c5e68fa8d771558450148e",
+ "n_observed": 24,
+ "rows": [
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "peptide": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "target": "TREM2",
+   "receptor_len": 212,
+   "kind": "native",
+   "peptide_used": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "ok": true,
+   "seconds": 39.7,
+   "iptm": 0.4098467528820038,
+   "ptm": 0.5976774096488953,
+   "complex_plddt": 0.6603733897209167
+  },
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "peptide": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "target": "TREM2",
+   "receptor_len": 212,
+   "kind": "decoy0",
+   "peptide_used": "DYRDCRHHWCCGCAWGFEPRRCPVELRAPRG",
+   "ok": true,
+   "seconds": 40.4,
+   "iptm": 0.258828729391098,
+   "ptm": 0.5883534550666809,
+   "complex_plddt": 0.6733444333076477
+  },
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "peptide": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "target": "TREM2",
+   "receptor_len": 212,
+   "kind": "decoy1",
+   "peptide_used": "AERCLHPRERGDRDVRGPCWCCAPWRCYFHG",
+   "ok": true,
+   "seconds": 40.3,
+   "iptm": 0.5807921886444092,
+   "ptm": 0.6515511870384216,
+   "complex_plddt": 0.6902170777320862
+  },
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "peptide": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "target": "TREM2",
+   "receptor_len": 212,
+   "kind": "decoy2",
+   "peptide_used": "RFWDGCGEHLCCYRVGRRAPRHCPWPACRED",
+   "ok": true,
+   "seconds": 40.5,
+   "iptm": 0.3412662744522095,
+   "ptm": 0.5114251375198364,
+   "complex_plddt": 0.6789690852165222
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "CHRNA7",
+   "receptor_len": 480,
+   "kind": "native",
+   "peptide_used": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "ok": true,
+   "seconds": 119.6,
+   "iptm": 0.6846827268600464,
+   "ptm": 0.5663700699806213,
+   "complex_plddt": 0.6589668393135071
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "CHRNA7",
+   "receptor_len": 480,
+   "kind": "decoy0",
+   "peptide_used": "CAWEERRDCLDGRWCGVHYVCYLGPFAESCENCPARFAFWR",
+   "ok": true,
+   "seconds": 124.5,
+   "iptm": 0.8364800810813904,
+   "ptm": 0.6158003211021423,
+   "complex_plddt": 0.6780740022659302
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "CHRNA7",
+   "receptor_len": 480,
+   "kind": "decoy1",
+   "peptide_used": "CFWAHPWADFSPGRCCCCRWNAEVAEDRGGRLEEYCRVLYF",
+   "ok": true,
+   "seconds": 123.7,
+   "iptm": 0.3124190866947174,
+   "ptm": 0.5343075394630432,
+   "complex_plddt": 0.662993848323822
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "CHRNA7",
+   "receptor_len": 480,
+   "kind": "decoy2",
+   "peptide_used": "YWACNWECFPFVRRECRSFAWCGAGYPLDECERGDHVLCAR",
+   "ok": true,
+   "seconds": 124.1,
+   "iptm": 0.4095610976219177,
+   "ptm": 0.551808774471283,
+   "complex_plddt": 0.662402868270874
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "native",
+   "peptide_used": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "ok": true,
+   "seconds": 178.2,
+   "iptm": 0.34018075466156006,
+   "ptm": 0.9019374847412109,
+   "complex_plddt": 0.9231272339820862
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy0",
+   "peptide_used": "YKWLLYLEKRRELWWKGEKKKKFKRELWYKALRFFF",
+   "ok": true,
+   "seconds": 179.6,
+   "iptm": 0.3477766215801239,
+   "ptm": 0.9030258059501648,
+   "complex_plddt": 0.9184437990188599
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy1",
+   "peptide_used": "WLYEGYWFFLRFKLERLKLKWEKKWKAEKRRYLFKK",
+   "ok": true,
+   "seconds": 181.1,
+   "iptm": 0.32021352648735046,
+   "ptm": 0.9079479575157166,
+   "complex_plddt": 0.8895465731620789
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy2",
+   "peptide_used": "EKLRFWWYRFEKKYRKLWLKFKWGLKAKFELRKEYL",
+   "ok": true,
+   "seconds": 182.3,
+   "iptm": 0.15289601683616638,
+   "ptm": 0.9058622717857361,
+   "complex_plddt": 0.9070160388946533
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "native",
+   "peptide_used": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "ok": true,
+   "seconds": 185.1,
+   "iptm": 0.34018075466156006,
+   "ptm": 0.9019374847412109,
+   "complex_plddt": 0.9231272339820862
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy0",
+   "peptide_used": "YKWLLYLEKRRELWWKGEKKKKFKRELWYKALRFFF",
+   "ok": true,
+   "seconds": 185.5,
+   "iptm": 0.3477766215801239,
+   "ptm": 0.9030258059501648,
+   "complex_plddt": 0.9184437990188599
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy1",
+   "peptide_used": "WLYEGYWFFLRFKLERLKLKWEKKWKAEKRRYLFKK",
+   "ok": true,
+   "seconds": 186.0,
+   "iptm": 0.32021352648735046,
+   "ptm": 0.9079479575157166,
+   "complex_plddt": 0.8895465731620789
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy2",
+   "peptide_used": "EKLRFWWYRFEKKYRKLWLKFKWGLKAKFELRKEYL",
+   "ok": true,
+   "seconds": 186.7,
+   "iptm": 0.15289601683616638,
+   "ptm": 0.9058622717857361,
+   "complex_plddt": 0.9070160388946533
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "peptide": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "native",
+   "peptide_used": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "ok": true,
+   "seconds": 185.1,
+   "iptm": 0.3906100392341614,
+   "ptm": 0.9127358198165894,
+   "complex_plddt": 0.9011994004249573
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "peptide": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy0",
+   "peptide_used": "PGVLMSSGHSNLALGGWRGGGKGFEKGVAGIDIFV",
+   "ok": true,
+   "seconds": 185.4,
+   "iptm": 0.3656891882419586,
+   "ptm": 0.9062145352363586,
+   "complex_plddt": 0.8891029953956604
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "peptide": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy1",
+   "peptide_used": "SLGGFIVISEVKSMHLGAFVGKGWGGGLNDGGRAP",
+   "ok": true,
+   "seconds": 185.7,
+   "iptm": 0.741795003414154,
+   "ptm": 0.9467099905014038,
+   "complex_plddt": 0.8930168151855469
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "peptide": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy2",
+   "peptide_used": "LSGVSLGEFHPKGDSKMRFIAWGLGGGNAGGGIVV",
+   "ok": true,
+   "seconds": 188.4,
+   "iptm": 0.5832412838935852,
+   "ptm": 0.9310505390167236,
+   "complex_plddt": 0.8913360834121704
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "peptide": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "native",
+   "peptide_used": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "ok": true,
+   "seconds": 192.3,
+   "iptm": 0.26456907391548157,
+   "ptm": 0.8987448215484619,
+   "complex_plddt": 0.8837260603904724
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "peptide": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy0",
+   "peptide_used": "GWGWGLDCCGRCGPPGSRFCGEMEKVKRGSNRDARCFHG",
+   "ok": true,
+   "seconds": 192.5,
+   "iptm": 0.4352700412273407,
+   "ptm": 0.9260408878326416,
+   "complex_plddt": 0.8863610029220581
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "peptide": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy1",
+   "peptide_used": "GGWRPGASKCDGRVFHRERCGPGGCLKNDSMWREFGGCC",
+   "ok": true,
+   "seconds": 193.0,
+   "iptm": 0.39590686559677124,
+   "ptm": 0.9141338467597961,
+   "complex_plddt": 0.8783172965049744
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "peptide": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "kind": "decoy2",
+   "peptide_used": "DPGGRWFPCACMGKGRGRNREGWEKHVGSSCGRCDLFCG",
+   "ok": true,
+   "seconds": 193.2,
+   "iptm": 0.4994364380836487,
+   "ptm": 0.9291819334030151,
+   "complex_plddt": 0.8753183484077454
+  }
+ ],
+ "analysis": {
+  "study_id": "candidate-screen-v1",
+  "prespec_hash": "5a62fdf6d614b6303d47887ae388ed3792e89464b8c5e68fa8d771558450148e",
+  "n_observed": 24,
+  "primary_metric": "fraction_candidates_beating_null",
+  "metrics": {
+   "fraction_candidates_beating_null": 0.0,
+   "mean_native_iptm": 0.405,
+   "mean_decoy_iptm": 0.4113,
+   "native_minus_decoy_mean": -0.0062,
+   "n_candidates_above_0.8": 0,
+   "n_candidates_below_0.6": 5,
+   "per_candidate_empirical_p": {
+    "PfcACh-PAM-P1": 0.5,
+    "MicroTrem2-Agonist-M1": 0.5,
+    "BasalAChE-Abeta-B4": 0.75,
+    "HippoAChE-AlkaPept-X2": 0.5,
+    "BasalAChE-GorgeBlock-B1": 0.5,
+    "BasalSuper-AChE-TrkA-B5": 1.0
+   },
+   "wall_clock_seconds_per_fold": 151.4
+  },
+  "per_candidate": [
+   {
+    "code": "PfcACh-PAM-P1",
+    "target": "CHRNA7",
+    "native_iptm": 0.6847,
+    "decoy_iptm": [
+     0.8365,
+     0.3124,
+     0.4096
+    ],
+    "decoy_mean": 0.5195,
+    "decoy_max": 0.8365,
+    "beats_all_decoys": false,
+    "empirical_p": 0.5,
+    "band": "grey"
+   },
+   {
+    "code": "MicroTrem2-Agonist-M1",
+    "target": "TREM2",
+    "native_iptm": 0.4098,
+    "decoy_iptm": [
+     0.2588,
+     0.5808,
+     0.3413
+    ],
+    "decoy_mean": 0.3936,
+    "decoy_max": 0.5808,
+    "beats_all_decoys": false,
+    "empirical_p": 0.5,
+    "band": "failed"
+   },
+   {
+    "code": "BasalAChE-Abeta-B4",
+    "target": "ACHE",
+    "native_iptm": 0.3906,
+    "decoy_iptm": [
+     0.3657,
+     0.7418,
+     0.5832
+    ],
+    "decoy_mean": 0.5636,
+    "decoy_max": 0.7418,
+    "beats_all_decoys": false,
+    "empirical_p": 0.75,
+    "band": "failed"
+   },
+   {
+    "code": "HippoAChE-AlkaPept-X2",
+    "target": "ACHE",
+    "native_iptm": 0.3402,
+    "decoy_iptm": [
+     0.3478,
+     0.3202,
+     0.1529
+    ],
+    "decoy_mean": 0.2736,
+    "decoy_max": 0.3478,
+    "beats_all_decoys": false,
+    "empirical_p": 0.5,
+    "band": "failed"
+   },
+   {
+    "code": "BasalAChE-GorgeBlock-B1",
+    "target": "ACHE",
+    "native_iptm": 0.3402,
+    "decoy_iptm": [
+     0.3478,
+     0.3202,
+     0.1529
+    ],
+    "decoy_mean": 0.2736,
+    "decoy_max": 0.3478,
+    "beats_all_decoys": false,
+    "empirical_p": 0.5,
+    "band": "failed"
+   },
+   {
+    "code": "BasalSuper-AChE-TrkA-B5",
+    "target": "ACHE",
+    "native_iptm": 0.2646,
+    "decoy_iptm": [
+     0.4353,
+     0.3959,
+     0.4994
+    ],
+    "decoy_mean": 0.4435,
+    "decoy_max": 0.4994,
+    "beats_all_decoys": false,
+    "empirical_p": 1.0,
+    "band": "failed"
+   }
+  ],
+  "p_holm": {
+   "H1_any_candidate_binds": 1.0,
+   "H2_natives_beat_decoys_on_average": 1.0,
+   "H3_candidates_in_failed_band": 0.0
+  },
+  "verdicts": {
+   "H1_any_candidate_binds": "FALSIFIED",
+   "H2_natives_beat_decoys_on_average": "FALSIFIED",
+   "H3_candidates_in_failed_band": "CONFIRMED"
+  },
+  "interpretation_key": "Study #7 measured, on 16 peptide-receptor complexes with known answers: ipTM > 0.8 was correct in 9 of 10 cases; ipTM < 0.6 was correct in 0 of 4, with no false negatives. The gate for this study was OPEN because #7 recovered 7 of 8 memorisable interfaces, so the pipeline has demonstrated sensitivity and a low score here is evidence about the candidate rather than about the method.",
+  "failures": [],
+  "prespec_audit": {
+   "study_id": "candidate-screen-v1",
+   "prespec_hash": "5a62fdf6d614b6303d47887ae388ed3792e89464b8c5e68fa8d771558450148e",
+   "registered_utc": "2026-08-18T05:30:51+00:00",
+   "deviations": [],
+   "confirmatory": true,
+   "note": "All pre-specified analyses were carried out as planned."
+  }
+ }
+}

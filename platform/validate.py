@@ -124,7 +124,12 @@ class Gate:
         """An extracellular peptide aimed at a cytoplasmic target cannot work."""
         for name, seq, target in records:
             t = target.lower()
-            cyto = [k for k in CYTOPLASMIC_TARGETS if k in t]
+            # CYTOPLASMIC_TARGETS is a set, so iterating it yields matches in hash order and
+            # Python randomises string hashing per process. Reporting cyto[0] therefore made
+            # this record read 'keap1' in one run and 'nrf2' in the next, and the artefact
+            # served to the Validation tab changed between runs while its counts stayed put.
+            # Sort, and name every cytoplasmic target the record mentions rather than one.
+            cyto = sorted(k for k in CYTOPLASMIC_TARGETS if k in t)
             if not cyto:
                 continue
             rep = peptide.analyze(name, seq)
@@ -133,7 +138,8 @@ class Gate:
             penetrating = rep.valid and rep.frac_cationic >= 0.30
             if not penetrating:
                 self.fail("compartment_mismatch", name,
-                          f"targets {cyto[0]!r}, which is cytoplasmic, with a peptide "
+                          f"targets {', '.join(repr(c) for c in cyto)}, which "
+                          f"{'is' if len(cyto) == 1 else 'are'} cytoplasmic, with a peptide "
                           f"carrying no cell-penetrating motif (net charge "
                           f"{rep.net_charge_ph74:+.1f}, {rep.frac_cationic:.0%} K/R). "
                           "An extracellular peptide cannot reach a cytosolic protein.")
@@ -166,7 +172,10 @@ class Gate:
                 signal_peptide=tuple(t["signal_peptide"]) if t["signal_peptide"] else None,
                 chain=tuple(t["chain"]) if t["chain"] else None)
 
-        # Which target a binding-site string refers to, by the aliases that appear in it.
+        # Which target a binding-site string refers to. Aliases are matched with word
+        # boundaries: a bare substring test let the CHRM1 alias "M1" match "TM1", i.e. the
+        # transmembrane-helix label in "PAFR His14 (TM1), Tyr200 (TM5)", and attributed
+        # PAFR's residues to the muscarinic receptor.
         ALIASES = {
             "ACHE": ("AChE", "acetylcholinesterase"), "NTRK2": ("TrkB",),
             "NTRK1": ("TrkA",), "KEAP1": ("Keap1",), "TREM2": ("Trem2", "TREM2"),
@@ -176,17 +185,66 @@ class Gate:
             "GSK3B": ("GSK-3", "GSK3"), "SLC1A2": ("EAAT2",), "NOS3": ("eNOS",),
             "NFE2L2": ("Nrf2",),
         }
+        #: Proteins these strings name that are NOT in the registry. A residue belonging to
+        #: one of them cannot be resolved here, and must be reported as unresolvable rather
+        #: than silently re-checked against whichever registry target shares the string.
+        OUT_OF_REGISTRY = ("BACE1", "GABA_A", "GABA-A", "AMPK", "Aβ", "Abeta", "LC3",
+                           "ZO-1", "occludin", "ER-β", "mTOR", "PSD-95", "APP")
         token = re.compile(r"\b([A-Z][a-z]{2})(\d+)\b")
 
+        def _alias_in(text: str, alias: str) -> bool:
+            return re.search(rf"(?<![A-Za-z0-9]){re.escape(alias)}(?![A-Za-z0-9])",
+                             text, re.I) is not None
+
         for name, sites in records:
-            for sym, aliases in ALIASES.items():
-                if sym not in reg["targets"]:
+            # A binding-site string routinely names SEVERAL proteins, e.g.
+            #   "AMPK α-subunit kinase domain (Lys45, Arg67); TrkB Ig-like D5 (Asp298)"
+            # Checking every token against every matched target made residues that are
+            # correct for one protein fail against another and be reported as fabricated.
+            # Tokens are therefore scoped to the clause that names their own target.
+            segments = [seg for seg in re.split(r"[;&]", sites) if seg.strip()]
+            conventions_used: set[str] = set()
+            # '&' joins two DIFFERENT proteins in some records ("Trem2 Ig domain & Keap1
+            # Kelch domain") and two sub-sites of ONE protein in others ("AChE CAS (Trp84,
+            # Phe330, Tyr121) & PAS (Trp286, Tyr72, Tyr341)"). Splitting on it unconditionally
+            # strips the protein name off the second kind, so those residues matched no target
+            # and were skipped with no record at all -- an unlogged under-count of the gate's
+            # own headline numbers. A clause that names no target now INHERITS the last target
+            # named in the same record, and if there is none it is reported as unresolvable
+            # rather than dropped.
+            carried: str | None = None
+            for seg in segments:
+                matched = [sym for sym, al in ALIASES.items()
+                           if sym in reg["targets"] and any(_alias_in(seg, a) for a in al)]
+                if len(matched) > 1:
+                    self.fail("unresolvable_residue_attribution", name,
+                              f"clause {seg.strip()[:70]!r} names more than one registry "
+                              f"target {matched}; its residues cannot be attributed to "
+                              f"one protein and were not checked")
+                    carried = None
                     continue
-                if not any(a.lower() in sites.lower() for a in aliases):
+                if not matched:
+                    if not token.search(seg):
+                        continue                       # no residues in it; nothing to lose
+                    if carried and not any(_alias_in(seg, o) for o in OUT_OF_REGISTRY):
+                        matched = [carried]            # sub-site of the protein just named
+                    else:
+                        self.fail("unresolvable_residue_attribution", name,
+                                  f"clause {seg.strip()[:70]!r} carries residue tokens but "
+                                  "names no target this registry can resolve; it was not "
+                                  "checked, and that omission is now on the record")
+                        carried = None
+                        continue
+                sym = matched[0]
+                carried = sym
+                if any(_alias_in(seg, o) for o in OUT_OF_REGISTRY):
+                    self.fail("unresolvable_residue_attribution", name,
+                              f"clause {seg.strip()[:70]!r} names both {sym} and a protein "
+                              f"outside the registry; residues cannot be attributed and "
+                              f"were not checked")
                     continue
                 rec = record_for(sym)
-                conventions_used: set[str] = set()
-                for m in token.finditer(sites):
+                for m in token.finditer(seg):
                     ann = m.group(0)
                     res = rec.check_annotation(ann)
                     if not res.get("parsed"):
@@ -194,20 +252,20 @@ class Gate:
                     if not res["valid"]:
                         self.fail(
                             "fabricated_residue", name,
-                            f"asserts {ann} for {sym} ({rec.uniprot}), but position "
-                            f"{res['position']} is {res['canonical']} in canonical "
-                            f"numbering and {res['mature']} in mature numbering. Wrong "
-                            f"under every convention, so this is a residue-identity error, "
-                            f"not a numbering-convention one.")
+                            f"asserts {ann} for {sym} ({rec.uniprot}) in clause "
+                            f"{seg.strip()[:50]!r}, but position {res['position']} is "
+                            f"{res['canonical']} in canonical numbering and {res['mature']} "
+                            f"in mature numbering. Wrong under every convention, so this is "
+                            f"a residue-identity error, not a numbering-convention one.")
                     elif len(res["resolves_in"]) == 1:
                         conventions_used.add(res["resolves_in"][0])
-                if len(conventions_used) > 1:
-                    self.fail(
-                        "mixed_numbering_convention", name,
-                        f"a single {sym} binding-site string uses more than one numbering "
-                        f"convention ({sorted(conventions_used)}). Every residue position "
-                        f"must be accompanied by its (accession, convention) pair; "
-                        f"see data/target_registry.json.")
+            if len(conventions_used) > 1:
+                self.fail(
+                    "mixed_numbering_convention", name,
+                    f"one binding-site string uses more than one numbering convention "
+                    f"({sorted(conventions_used)}). Every residue position must be "
+                    f"accompanied by its (accession, convention) pair; see "
+                    f"data/target_registry.json.")
 
     def check_placeholder_text(self, records: list[tuple[str, str]]) -> None:
         for name, seq in records:

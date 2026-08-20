@@ -5,18 +5,23 @@
    ========================================================================== */
 
 :root {
-  --bg: #080b14;
-  --bg-2: #0e1322;
-  --panel: rgba(20, 27, 45, 0.72);
-  --border: rgba(255, 255, 255, 0.09);
-  --text: #e6ecf7;
-  --muted: #8b9ab5;
-  --dim: #64748b;
-  --accent: #4aa8ff;
-  --ok: #22c55e;
-  --warn: #f59e0b;
-  --bad: #ef4444;
-  --placeholder: #a855f7;
+  --bg: #ffffff;
+  --bg-2: #f5f6f8;
+  --panel: #ffffff;
+  --border: rgba(15, 23, 42, 0.13);
+  --text: #16202e;
+  --muted: #46536b;
+  /* Raised from #5a6678 (3.76:1 against the card ground) to clear WCAG AA at 4.5:1.
+     --dim carries every caveat the page renders: the reading note that says a confirmed
+     criterion is not a test, the decoy-exclusion explanation, the interface-PAE disclaimer,
+     and every stat sub-label. At 3.76:1 and 12.5px beside a 27px 14:1 numeral, the visual
+     hierarchy was telling the reader which half to read, and it was the wrong half. */
+  --dim: #5a6678;
+  --accent: #1a5fb4;
+  --ok: #15803d;
+  --warn: #a45c00;
+  --bad: #b3261e;
+  --placeholder: #6b21a8;
   --radius: 12px;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -25,10 +30,10 @@
 
 body {
   margin: 0;
-  background:
-    radial-gradient(1100px 600px at 12% -8%, rgba(74, 168, 255, 0.10), transparent 60%),
-    radial-gradient(900px 500px at 88% 0%, rgba(168, 85, 247, 0.08), transparent 55%),
-    var(--bg);
+  /* Plain white. The two radial washes here were a blue and a violet tint over a near-black
+     ground; the page is a light theme now and the tints are gone rather than lightened,
+     because a faint blue cast is exactly what was objected to. */
+  background: var(--bg);
   color: var(--text);
   font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   min-height: 100vh;
@@ -42,7 +47,7 @@ body {
 }
 .brand h1 {
   margin: 0; font-size: 30px; font-weight: 650; letter-spacing: -0.02em;
-  background: linear-gradient(92deg, #6cc4ff, #a855f7);
+  background: linear-gradient(92deg, #14508f, var(--placeholder));
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .tagline { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
@@ -52,19 +57,19 @@ body {
 
 .disclosure {
   margin: 0 40px 24px; padding: 16px 20px;
-  background: linear-gradient(90deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.04));
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.16), rgba(245, 158, 11, 0.05));
+  border: 1px solid rgba(180, 120, 10, 0.40);
   border-left: 4px solid var(--warn);
   border-radius: var(--radius);
 }
 .disclosure-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.disclosure-head strong { font-size: 15.5px; color: #ffd79a; }
+.disclosure-head strong { font-size: 15.5px; color: #7a4e00; }
 .disclosure .dot {
   width: 9px; height: 9px; border-radius: 50%; background: var(--warn);
   box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18); flex: none;
 }
-.disclosure p { margin: 6px 0 0; color: #d8c9ae; font-size: 13.5px; }
-.disclosure-sub { color: #b9ab93 !important; }
+.disclosure p { margin: 6px 0 0; color: #4d4433; font-size: 13.5px; }
+.disclosure-sub { color: #5f5340 !important; }
 
 /* -------------------------------------------------------------------- tabs */
 
@@ -88,9 +93,12 @@ main { padding: 0 40px 72px; max-width: 1400px; }
 /* ------------------------------------------------------------------- cards */
 
 .card {
+  /* On the dark theme a card was a translucent panel that separated itself by being lighter
+     than the ground. A white card on a white page has no such edge, so the hairline and a
+     soft shadow carry the separation instead; the blur did nothing but cost paint time. */
   background: var(--panel); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 22px 24px; margin-bottom: 18px;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 1px 12px rgba(15, 23, 42, .04);
 }
 .card.error { border-color: rgba(239, 68, 68, 0.5); background: rgba(239, 68, 68, 0.08); }
 .card h2 { margin: 0 0 10px; font-size: 18px; font-weight: 600; }
@@ -127,7 +135,7 @@ h3.warn { color: var(--warn); }
   background: var(--panel); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px 18px;
 }
-.stat-value { font-size: 27px; font-weight: 650; letter-spacing: -0.02em; color: #dbe7ff; }
+.stat-value { font-size: 27px; font-weight: 650; letter-spacing: -0.02em; color: var(--text); }
 .stat-label { color: var(--muted); font-size: 12.5px; margin-top: 3px; }
 .stat-sub { color: var(--dim); font-size: 11.5px; margin-top: 5px; }
 
@@ -138,13 +146,13 @@ h3.warn { color: var(--warn); }
   font-size: 10px; font-weight: 650; letter-spacing: .04em; text-transform: uppercase;
   vertical-align: middle;
 }
-.badge.computed   { background: rgba(34, 197, 94, .16);  color: #6ee7a0; }
-.badge.predicted  { background: rgba(74, 168, 255, .16); color: #7cc4ff; }
-.badge.database   { background: rgba(56, 189, 248, .16); color: #67d8f5; }
-.badge.literature { background: rgba(168, 85, 247, .16); color: #c99cf7; }
-.badge.measured   { background: rgba(250, 204, 21, .16); color: #f2d574; }
+.badge.computed   { background: rgba(34, 197, 94, .16);  color: #15803d; }
+.badge.predicted  { background: rgba(74, 168, 255, .16); color: #14508f; }
+.badge.database   { background: rgba(56, 189, 248, .16); color: #0d5c72; }
+.badge.literature { background: rgba(168, 85, 247, .16); color: #6b21a8; }
+.badge.measured   { background: rgba(250, 204, 21, .16); color: #8a6100; }
 .badge.placeholder, .badge.notcomputed {
-  background: rgba(148, 163, 184, .16); color: #a8b6cc;
+  background: rgba(148, 163, 184, .16); color: #48566e;
 }
 
 .val { font-variant-numeric: tabular-nums; }
@@ -166,8 +174,8 @@ h3.warn { color: var(--warn); }
 .pill {
   padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
 }
-.pill-ok  { background: rgba(34, 197, 94, .15); color: #6ee7a0; }
-.pill-bad { background: rgba(239, 68, 68, .15); color: #fca5a5; }
+.pill-ok  { background: rgba(34, 197, 94, .15); color: #15803d; }
+.pill-bad { background: rgba(239, 68, 68, .15); color: #b3261e; }
 .card.unverified, .card.invalid { border-color: rgba(239, 68, 68, .28); }
 
 .prop-grid {
@@ -176,7 +184,7 @@ h3.warn { color: var(--warn); }
 }
 .prop-grid > div {
   display: flex; justify-content: space-between; gap: 12px;
-  padding: 7px 0; border-bottom: 1px solid rgba(255, 255, 255, .05); font-size: 13.5px;
+  padding: 7px 0; border-bottom: 1px solid rgba(15, 23, 42, .07); font-size: 13.5px;
 }
 .prop-grid > div.wide { grid-column: 1 / -1; }
 .prop-grid span:first-child { color: var(--muted); }
@@ -184,16 +192,16 @@ h3.warn { color: var(--warn); }
 .notice {
   background: rgba(239, 68, 68, .07); border: 1px solid rgba(239, 68, 68, .2);
   border-radius: 8px; padding: 12px 14px; margin: 10px 0; font-size: 13px;
-  color: #e7c3c3;
+  color: #8f2c2c;
 }
 .notice ul { margin: 6px 0 0; padding-left: 18px; }
 .flags { margin-top: 10px; font-size: 13px; color: var(--warn); }
-.flags ul { margin: 6px 0 0; padding-left: 18px; color: #d8b98a; }
+.flags ul { margin: 6px 0 0; padding-left: 18px; color: #7a5a1e; }
 .warn-inline { color: var(--warn); font-size: 12.5px; }
 
 .seq {
-  background: rgba(0, 0, 0, .3); border: 1px solid var(--border); border-radius: 8px;
-  padding: 10px 12px; font-size: 12px; word-break: break-all; color: #9fd4ff;
+  background: rgba(15, 23, 42, .10); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; font-size: 12px; word-break: break-all; color: #14508f;
   margin-bottom: 12px;
 }
 .mono { font-family: var(--mono); }
@@ -206,38 +214,38 @@ summary {
 summary:hover { color: var(--text); }
 details ul { color: var(--muted); font-size: 13px; padding-left: 18px; }
 details li { margin-bottom: 7px; }
-.retracted summary { color: #c99cf7; }
+.retracted summary { color: #6b21a8; }
 .retracted s { color: var(--dim); }
 .audit { color: var(--warn); font-size: 12.5px; }
 .liabilities summary { color: var(--warn); }
 
 .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 .chip {
-  background: rgba(255, 255, 255, .05); border: 1px solid var(--border);
+  background: rgba(15, 23, 42, .07); border: 1px solid var(--border);
   color: var(--muted); border-radius: 999px; padding: 5px 14px; font-size: 12.5px;
   cursor: pointer;
 }
-.chip.active { background: rgba(74, 168, 255, .18); color: #9fd4ff; border-color: rgba(74, 168, 255, .4); }
+.chip.active { background: rgba(74, 168, 255, .18); color: #14508f; border-color: rgba(74, 168, 255, .4); }
 
 /* ------------------------------------------------------------- violations */
 
 .count-pill {
-  background: rgba(239, 68, 68, .18); color: #fca5a5; border-radius: 999px;
+  background: rgba(239, 68, 68, .18); color: #b3261e; border-radius: 999px;
   padding: 1px 9px; font-size: 11.5px; margin-left: 8px; font-weight: 600;
 }
 .violations { list-style: none; padding: 0; margin: 0; }
 .violations li {
   display: grid; grid-template-columns: 240px 1fr; gap: 16px;
-  padding: 9px 0; border-bottom: 1px solid rgba(255, 255, 255, .05); font-size: 13px;
+  padding: 9px 0; border-bottom: 1px solid rgba(15, 23, 42, .07); font-size: 13px;
 }
-.violations code { color: #9fd4ff; font-size: 12.5px; }
+.violations code { color: #14508f; font-size: 12.5px; }
 .violations span { color: var(--muted); }
 @media (max-width: 860px) { .violations li { grid-template-columns: 1fr; gap: 4px; } }
 
 /* ------------------------------------------------------------ structure UI */
 
 .dropzone {
-  border: 2px dashed rgba(255, 255, 255, .16); border-radius: var(--radius);
+  border: 2px dashed rgba(15, 23, 42, .22); border-radius: var(--radius);
   padding: 30px; text-align: center; transition: border-color .15s, background .15s;
 }
 .dropzone.over { border-color: var(--accent); background: rgba(74, 168, 255, .07); }
@@ -248,7 +256,7 @@ details li { margin-bottom: 7px; }
 }
 .btn {
   background: rgba(74, 168, 255, .14); border: 1px solid rgba(74, 168, 255, .35);
-  color: #9fd4ff; border-radius: 8px; padding: 8px 16px; font-size: 13px;
+  color: #14508f; border-radius: 8px; padding: 8px 16px; font-size: 13px;
   cursor: pointer; transition: background .15s;
 }
 .btn:hover { background: rgba(74, 168, 255, .24); }
@@ -257,17 +265,23 @@ details li { margin-bottom: 7px; }
 
 .status {
   margin-top: 14px; padding: 11px 14px; border-radius: 8px; font-size: 13px;
-  background: rgba(255, 255, 255, .04); border: 1px solid var(--border); color: var(--muted);
+  background: rgba(15, 23, 42, .04); border: 1px solid var(--border); color: var(--muted);
 }
-.status.ok    { border-color: rgba(34, 197, 94, .35);  color: #a7e8c1; }
-.status.error { border-color: rgba(239, 68, 68, .4);   color: #fca5a5; }
-.status.warn  { border-color: rgba(245, 158, 11, .35); color: #f0cd93; }
+.status.ok    { border-color: rgba(34, 197, 94, .35);  color: #15803d; }
+.status.error { border-color: rgba(239, 68, 68, .4);   color: #b3261e; }
+.status.warn  { border-color: rgba(245, 158, 11, .35); color: #8a5a00; }
 .status ul { margin: 0; padding-left: 18px; }
 
 .hidden { display: none; }
 .viewer {
   position: relative; width: 100%; height: 380px; border-radius: 8px;
-  overflow: hidden; background: #0b1020; border: 1px solid var(--border);
+  overflow: hidden;
+  /* Not pure white, deliberately. The four pLDDT band colours are AlphaFold's published
+     ones and two of them -- "Low" #FFDB13 and "Confident" #65CBF3 -- are light enough to
+     wash out against #fff. A faint neutral keeps the published ramp readable while still
+     reading as a white page; changing the band colours themselves would be worse, because
+     they are a standard a reader arrives already knowing. */
+  background: #f2f4f7; border: 1px solid var(--border);
 }
 .chart-wrap { height: 380px; }
 .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-size: 11.5px; color: var(--muted); }
@@ -281,7 +295,10 @@ details li { margin-bottom: 7px; }
 .colorbar { flex: 1; min-width: 200px; }
 .colorbar-gradient {
   height: 14px; border-radius: 4px;
-  background: linear-gradient(90deg, rgb(12, 28, 64), rgb(245, 238, 239));
+  /* The high-error end used to run to near-white, which vanished into a dark page's card
+     and now would vanish into the page itself. It stops at a visible neutral instead. */
+  background: linear-gradient(90deg, rgb(16, 46, 110), rgb(226, 229, 235));
+  border: 1px solid var(--border);
 }
 .colorbar-labels {
   display: flex; justify-content: space-between; font-size: 11.5px;
@@ -300,7 +317,7 @@ details li { margin-bottom: 7px; }
   border-bottom: 1px solid var(--border);
 }
 .prov-table td {
-  padding: 9px 12px; border-bottom: 1px solid rgba(255, 255, 255, .05);
+  padding: 9px 12px; border-bottom: 1px solid rgba(15, 23, 42, .07);
   color: var(--muted); vertical-align: top;
 }
 .prov-table td.gap { color: var(--warn); font-variant-numeric: tabular-nums; }
@@ -312,5 +329,105 @@ footer {
 footer p { margin: 0 0 6px; }
 code {
   font-family: var(--mono); font-size: 12px;
-  background: rgba(255, 255, 255, .06); padding: 1px 5px; border-radius: 4px;
+  background: rgba(15, 23, 42, .06); padding: 1px 5px; border-radius: 4px;
 }
+
+/* ---------------------------------------------------- slate and gallery */
+
+/* The verdict pills carry the result of a study, so they must read as a state and not as
+   decoration. `undecided` deliberately gets no colour: a hypothesis that was not tested is
+   neither a pass nor a failure and should not borrow the visual weight of either. */
+.pill[title] { cursor: help; }
+.prov-table strong.bad { color: var(--bad); }
+.prov-table td .btn { white-space: nowrap; }
+
+/* A gallery row is a table row, but each cell holds two lines; without this the chain
+   column collapses the hint onto the name and the numbers stop lining up. */
+#gallery-list .prov-table td,
+#slate-table .prov-table td { vertical-align: top; }
+#slate-table .pill { display: inline-block; margin: 1px 0; }
+
+#af-arms h3 { margin-top: 22px; }
+#af-arms h3:first-child { margin-top: 0; }
+
+
+/* ------------------------------------------------- verdict and pill affordances */
+
+/* NOT_TESTED had no rule, so it fell through to the muted cell colour by accident. It is
+   neither a pass nor a failure and must not borrow either colour, but that should be a
+   decision in the stylesheet rather than a gap in it. */
+.verdict.warn { color: var(--warn); }
+
+/* The "at a glance" table was 13 green pills against 10 red with no marker for how a
+   verdict was reached, so a colour scan read as a scoreboard. The kind tag rides inside the
+   pill so the two cannot be separated. */
+/* The separator lives in the markup, not here: generated content is absent from
+   textContent and is not reliably announced, and the pill's accessible text ran together as
+   "falsifieddecided by a test". */
+.pill .kind {
+  display: inline-block; margin-left: 4px; padding: 0 5px;
+  font-size: 10px; font-style: normal; letter-spacing: .04em; text-transform: uppercase;
+  border-radius: 4px; background: rgba(15, 23, 42, .09); color: var(--text); opacity: .8;
+}
+
+/* A text alternative for the PAE canvas: available to a screen reader, out of the visual
+   flow. Not display:none, which would remove it from the accessibility tree as well. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+
+/* ------------------------------------------------- narrow viewports */
+
+/* At 375px the slate, gallery and AlphaFold tables were 260px wider than the viewport, so
+   the whole PAGE scrolled sideways and the disclosure, the headline finding and the tab bar
+   all slid out of view with it. A wide table has to scroll inside its own box; the document
+   never does. `display: block` is what turns the table itself into that scroll container. */
+.prov-table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Plan hashes, run paths and accession codes are long unbreakable tokens. Left alone they
+   push the document wider than the viewport even when the table around them scrolls. */
+code, .mono { overflow-wrap: anywhere; word-break: break-word; }
+
+/* A block-level table can still report a scrollWidth wider than its card unless the card is
+   itself told it may shrink. Without this the document kept ~15px of horizontal scroll even
+   though nothing was actually clipped. */
+.card, .panel, main { min-width: 0; max-width: 100%; }
+
+@media (max-width: 640px) {
+  /* The two-column explainer and the stat grid both assume room they do not have here. */
+  .two-col { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .pae-row { flex-direction: column; }
+  #pae-canvas { max-width: 100%; height: auto; }
+  .viewer { height: 320px; }
+  .masthead { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .tabs { overflow-x: auto; }
+}
+
+
+/* -------------------------------------------- verdict colour, deliberately not valence */
+
+/* CONFIRMED was green and FALSIFIED red, applied to every hypothesis alike. That encodes
+   "a pre-registered rule fired", but a reader scanning colour reads "good news" — and
+   several confirmations here are unwelcome ("candidates fall in the failed band", "the
+   model is the term worth improving"), while the project's single most important result,
+   H1 falsified, was the red one. The colour was telling the reader the opposite of the
+   finding.
+
+   These two hues carry no good/bad reading. They separate met from not-met, which is all
+   the verdict actually says, and the pill's own text plus the legend beside the table
+   supply the meaning. `.pill-ok` / `.pill-bad` keep their green and red where valence IS
+   the point — a sequence that fails validation really is bad news. */
+.pill-met   { background: rgba(74, 168, 255, .16); color: #14508f;
+              border-color: rgba(74, 168, 255, .38); }
+.pill-unmet { background: rgba(168, 85, 247, .16); color: #6b21a8;
+              border-color: rgba(168, 85, 247, .38); }
+.verdict.met   { color: #14508f; }
+.verdict.unmet { color: #6b21a8; }

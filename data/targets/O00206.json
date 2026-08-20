@@ -43,6 +43,153 @@
   ],
   "flag": "Precursor"
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "Q9QUK6"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "11274165"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "14519765"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15356101"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15852007"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "17098818"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "17803912"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "19252480"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "20037584"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "20865800"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "21393102"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "21602844"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "25736436"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "27022195"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "30573680"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "36232715"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "36945827"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "38378891"
+      }
+     ],
+     "value": "Belongs to the lipopolysaccharide (LPS) receptor, a multi-protein complex containing at least CD14, LY96 and TLR4 (PubMed:11274165). Binding to bacterial LPS leads to homodimerization. Interacts with LY96 via the extracellular domain (PubMed:17803912, PubMed:19252480). Interacts with MYD88 (PubMed:36232715). Interacts (via TIR domains) with TIRAP (By similarity). Interacts with TICAM2 (PubMed:14519765, PubMed:25736436). Interacts with NOX4 (PubMed:15356101). Interacts with CNPY3 (By similarity). Interacts with HSP90B1. The interaction with both CNPY3 and HSP90B1 is required for proper folding in the endoplasmic reticulum. Interacts with MAP3K21; this interaction leads to negative regulation of TLR4 signaling (PubMed:21602844). Interacts with CD36, following CD36 stimulation by oxLDL or amyloid-beta 42, and forms a heterodimer with TLR6 (PubMed:20037584). The trimeric complex is internalized and triggers inflammatory response. LYN kinase activity facilitates TLR4-TLR6 heterodimerization and signal initiation. Interacts with TICAM1 in response to LPS in a WDFY1-dependent manner (PubMed:25736436, PubMed:36232715). Interacts with WDFY1 in response to LPS (By similarity). Interacts with SMPDL3B (By similarity). Interacts with CEACAM1; upon lipopolysaccharide stimulation, forms a complex including TLR4 and the phosphorylated form of SYK and CEACAM1, which in turn, recruits PTPN6 that dephosphorylates SYK, reducing the production of reactive oxygen species (ROS) and lysosome disruption, which in turn, reduces the activity of the inflammasome (By similarity). Interacts with RFTN1; the interaction occurs in response to lipopolysaccharide stimulation (PubMed:27022195). Interacts with SCIMP; the interaction occurs in response to lipopolysaccharide stimulation and is enhanced by phosphorylation of SCIMP by LYN (By similarity). This interaction facilitates the phosphorylation of TLR4 by LYN which elicits a selective cytokine response in macrophages (By similarity). Interacts with TRAF3IP3 (PubMed:30573680). Interacts with TREM1; this interaction enhances TLR4-mediated inflammatory response (PubMed:17098818, PubMed:21393102). Interacts with ZG16B/PAUF (PubMed:36232715). Interacts with CD82; this interaction inhibits TLR4-mediated signaling pathway (PubMed:36945827). Interacts with neutrophil recruitment protein from Aedes aegypti saliva; the interaction probably promotes activation of canonical NF-kappa-B signaling in skin-resident macrophages and subsequent expression of neutrophil chemoattractants (PubMed:38378891). Interacts with CD180; this interaction inhibits TLR4-mediated signaling pathway upon ligand binding (PubMed:15852007)"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  },
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "23569230"
+      }
+     ],
+     "value": "(Microbial infection) In case of infection, interacts with uropathogenic E.coli protein TcpC"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  },
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "24265315"
+      }
+     ],
+     "value": "(Microbial infection) In case of infection, interacts with B.melitensis protein TcpB; TcpB abolishes the TLR4-TIRAP interaction in vitro"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  },
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "19846529"
+      }
+     ],
+     "value": "(Microbial infection) Interacts with ebolavirus protein GP; this interaction leads to the production of proinflammatory cytokines and suppressor of cytokine signaling 1/SOCS1"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Signal",
@@ -81,6 +228,63 @@
    "featureId": "PRO_0000034722"
   },
   {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 24,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 631,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Extracellular",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
+   "type": "Transmembrane",
+   "location": {
+    "start": {
+     "value": 632,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 652,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Helical",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 653,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 839,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Cytoplasmic",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
    "type": "Domain",
    "location": {
     "start": {
@@ -114,6 +318,167 @@
      "id": "PRU00204"
     }
    ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 29,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 40,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "17803912"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "19252480"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 281,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 306,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "19252480"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 390,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 391,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "19252480"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 583,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 609,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "19252480"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 585,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 627,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "19252480"
+    }
+   ]
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 200,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 3",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "14702039"
+    }
+   ],
+   "featureId": "VSP_035793",
+   "alternativeSequence": {}
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 40,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 2",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "14702039"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "9435236"
+    }
+   ],
+   "featureId": "VSP_035794",
+   "alternativeSequence": {}
   }
  ],
  "uniProtKBCrossReferences": [

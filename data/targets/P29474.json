@@ -109,6 +109,38 @@
    }
   ]
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "P70313"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "11149895"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "12446846"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "23585225"
+      }
+     ],
+     "value": "Homodimer. Interacts with NOSIP and NOSTRIN (PubMed:11149895, PubMed:12446846). Interacts with HSP90AB1 (By similarity) (PubMed:11149895, PubMed:12446846, PubMed:23585225). Forms a complex with ASL, ASS1 and SLC7A1; the complex regulates cell-autonomous L-arginine synthesis and citrulline recycling while channeling extracellular L-arginine to nitric oxide synthesis pathway (By similarity)"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Chain",
@@ -166,6 +198,108 @@
      "id": "PRU00716"
     }
    ]
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 584,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 625,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform eNOS13C",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "17264164"
+    }
+   ],
+   "featureId": "VSP_042625",
+   "alternativeSequence": {
+    "originalSequence": "ESFAAALMEMSGPYNSSPRPEQHKSYKIRFNSISCSDPLVSS",
+    "alternativeSequences": [
+     "EGLTLWPRLECSSTITAHCSLNLLDSSNPPTSTSQVVGTTGACHDA"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 585,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 614,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform eNOS13B",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "17264164"
+    }
+   ],
+   "featureId": "VSP_045495",
+   "alternativeSequence": {
+    "originalSequence": "SFAAALMEMSGPYNSSPRPEQHKSYKIRFN",
+    "alternativeSequences": [
+     "RWGFAMLPRLVSNSWVQAIHLPRPPKVLRL"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 615,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 1203,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform eNOS13B",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "17264164"
+    }
+   ],
+   "featureId": "VSP_045496",
+   "alternativeSequence": {}
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 626,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 1203,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform eNOS13C",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "17264164"
+    }
+   ],
+   "featureId": "VSP_042626",
+   "alternativeSequence": {}
   }
  ],
  "uniProtKBCrossReferences": [

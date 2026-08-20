@@ -9,12 +9,12 @@ output a binding free energy, on three grounds:
      [S], Km, mechanism — was destroyed when the labels were pooled. That is an
      identifiability failure, and no multiplicative constant inverts a many-to-one map.
   2. IC50 is not Kd. At the most benign condition, [S] = Km for a competitive inhibitor,
-     Cheng-Prusoff gives IC50/Ki = 2 exactly, i.e. 0.411 kcal/mol of one-signed bias — more
-     than half the 0.68 log10 (0.93 kcal/mol) inter-laboratory reproducibility floor for
+     Cheng-Prusoff gives IC50/Ki = 2 exactly, i.e. 0.411 kcal/mol of one-signed bias — 
+     44% of the 0.68 log10 (0.93 kcal/mol) inter-laboratory reproducibility floor for
      public IC50 data (Kalliokoski et al., PLoS ONE 8:e61007, 2013).
-  3. Sign. The documented conversion (6 - y) * 1.364 yields +8.0406 for this project's
+  3. Sign. The documented conversion (6 - y) * 1.364 yields +8.0372 for this project's
      huperzine A run, while thermo.kd_to_dg on the same back-transformed potency yields
-     -8.0420. Equal magnitude, opposite sign. A caveated "apparent dG = +8.04" is not a
+     -8.0387. Equal magnitude, opposite sign. A caveated "apparent dG = +8.04" is not a
      hedged claim; it states the wrong direction for a thermodynamic driving force.
 
 No qualified form is permitted -- not "apparent", not "effective". The defect is identity,

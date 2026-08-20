@@ -39,7 +39,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from cbc import posebench as pb, prespec as ps  # noqa: E402
+from cbc import inference as inf, posebench as pb, prespec as ps  # noqa: E402
 from cbc.compute import structure as st  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
@@ -83,6 +83,16 @@ def curate(n_per: int = 8) -> None:
     SET.write_text(json.dumps(out, indent=1))
     print(f"\ncurated {len(out)} complexes -> {SET.relative_to(REPO)}")
 
+
+
+def prespec_args() -> tuple:
+    """The arguments --register builds the plan with.
+
+    Named once so the registration path and the hash-stability test cannot disagree
+    about them: the test previously guessed, guessed wrong for the two-argument
+    studies, and reported drift that did not exist.
+    """
+    return (len(json.loads(SET.read_text())),)
 
 def build_prespec(n: int) -> ps.Prespecification:
     return ps.Prespecification(
@@ -177,26 +187,52 @@ def build_prespec(n: int) -> ps.Prespecification:
 
 
 def _dockq(model: Path, native: Path, expected_mapping: str) -> dict:
-    """Run DockQ from its isolated environment and parse the result.
+    """Run DockQ from its isolated environment, preferring the CURATED chain mapping.
 
-    DockQ's own chain search is used rather than an explicit --mapping. Passing the mapping
-    explicitly is not equivalent: measured on 4XHV, `--mapping AB:AB` raises KeyError('A')
-    inside DockQ while the identical structures score 0.899 when DockQ chooses the mapping
-    itself, and the same explicit form works on 4XOJ. Forcing it therefore discards good
-    results non-deterministically. DockQ reports the mapping it selected, so the choice is
-    still verifiable — it is recorded and checked against the expected one rather than
-    trusted blindly.
+    The registered analysis_plan specifies an explicit mapping. An earlier version abandoned
+    it wholesale for DockQ's own chain search, because `--mapping` raises KeyError on some
+    inputs — but that deviation was applied to all 16 entries and then described as
+    "verified", when nothing checked it. Measured entry by entry, the blanket switch was not
+    needed and was not harmless:
+
+      * 13 of 16 score identically either way.
+      * 4XHV and 4XOE genuinely raise KeyError('A') under the explicit form. Auto is required.
+      * 31EE finds NO interface under the curated AB:AC -- the curation named the wrong
+        receptor copy; peptide C sits on chain B, not A. Auto is required and is correct.
+      * 4S15 differs immaterially (0.031 vs 0.039, both in the incorrect band).
+      * 10TC differed by 0.138. DockQ's search silently substituted native chain H, a
+        FOUR-residue copy of the curated EIGHT-residue peptide B, and scoring against half
+        the resolved peptide inflated the result to 0.969 where the curated mapping gives
+        0.831. That entry is the best score in the post-cutoff stratum, so the substitution
+        flattered exactly the number the study's headline comparison rests on.
+
+    So: try the curated mapping first, fall back to DockQ's search only when the curated form
+    fails, and record per entry which path produced the number.
     """
     if not DOCKQ.exists():
         return {"ok": False, "error": f"DockQ not installed at {DOCKQ}"}
-    try:
-        p = subprocess.run([str(DOCKQ), str(model), str(native)],
-                           capture_output=True, text=True, timeout=900)
-    except subprocess.TimeoutExpired:
+    def _run(args: list[str]):
+        try:
+            return subprocess.run([str(DOCKQ), str(model), str(native)] + args,
+                                  capture_output=True, text=True, timeout=900)
+        except subprocess.TimeoutExpired:
+            return None
+
+    p = _run(["--mapping", expected_mapping])
+    mapping_route = "curated"
+    fallback_reason = None
+    if p is None:
         return {"ok": False, "error": "DockQ timed out"}
-    if p.returncode != 0:
-        return {"ok": False, "error": (p.stderr or p.stdout)[-250:]}
-    out: dict = {"ok": True}
+    if p.returncode != 0 or "model:native mapping" not in p.stdout:
+        fallback_reason = ((p.stderr or p.stdout).strip().splitlines() or ["unknown"])[-1][:160]
+        p = _run([])
+        mapping_route = "dockq_search"
+        if p is None:
+            return {"ok": False, "error": "DockQ timed out"}
+        if p.returncode != 0:
+            return {"ok": False, "error": (p.stderr or p.stdout)[-250:]}
+    out: dict = {"ok": True, "mapping_route": mapping_route,
+                 "mapping_fallback_reason": fallback_reason}
     for key, pat in (("dockq", r"^\s*DockQ:\s*([\d.]+)"),
                      ("irmsd", r"^\s*iRMSD:\s*([\d.]+)"),
                      ("lrmsd", r"^\s*LRMSD:\s*([\d.]+)"),
@@ -319,17 +355,22 @@ def analyse() -> int:
         else:
             band["grey_and_acceptable" if good else "grey_and_wrong"] += 1
 
-    p1 = 0.0 if f_all > 0.3 else 1.0
-    p2 = (p_rho if (rho is not None and rho > 0.6) else 1.0)
-    p3 = 0.0 if strata["pre_cutoff"]["fraction"] > 0.5 else 1.0
-    raw = [("H1_overall_accuracy", p1), ("H2_iptm_calibration", p2),
-           ("H3_assay_power_GATE", p3)]
-    order = sorted(range(3), key=lambda i: raw[i][1])
-    adj = [0.0] * 3
-    run_max = 0.0
-    for rank, i in enumerate(order):
-        run_max = max(run_max, (3 - rank) * raw[i][1])
-        adj[i] = min(1.0, run_max)
+    # H1 and H3 are threshold criteria on a fraction, not tests. They used to be encoded as
+    # p = 0.0/1.0 and fed to Holm alongside H2; both fired, took the first two step-down ranks,
+    # and left the one genuine test with multiplier 1 — its published "Holm-adjusted" p was
+    # byte-identical to its raw p while the artefact claimed a correction. See cbc/inference.py.
+    criteria = {
+        "H1_overall_accuracy": inf.Criterion(
+            f_all > 0.3, round(f_all, 4), "fraction_dockq_acceptable > 0.3"),
+        "H3_assay_power_GATE": inf.Criterion(
+            strata["pre_cutoff"]["fraction"] > 0.5,
+            round(strata["pre_cutoff"]["fraction"], 4), "pre-cutoff fraction > 0.5"),
+    }
+    tests = ({"H2_iptm_calibration": p_rho}
+             if (rho is not None and rho > 0.6 and p_rho is not None and p_rho > 0) else {})
+    ruling = inf.decide(criteria, tests)
+    if not tests:
+        ruling["verdicts"]["H2_iptm_calibration"] = "FALSIFIED"
 
     gate_open = strata["pre_cutoff"]["fraction"] > 0.5
     report = {
@@ -349,18 +390,23 @@ def analyse() -> int:
                 [r["fnat"] for r in ok if "fnat" in r]), 4),
             "per_entry": {r["pdb_id"]: {"dockq": r["dockq"], "iptm": r.get("iptm"),
                                         "split": r["split"]} for r in ok},
-            "wall_clock_seconds_per_complex": round(statistics.fmean(
-                [r["seconds"] for r in ok if r.get("seconds")]), 1),
+            "wall_clock_seconds_per_complex": inf.wall_clock(ok),
         },
         "strata": strata,
-        "spearman_p": round(p_rho, 5) if p_rho is not None else None,
-        "p_holm": {raw[i][0]: round(adj[i], 5) for i in range(3)},
-        "verdicts": {
-            "H1_overall_accuracy": "CONFIRMED" if p1 == 0 else "FALSIFIED",
-            "H2_iptm_calibration": "CONFIRMED" if (rho is not None and rho > 0.6
-                                                   and adj[1] < 0.05) else "FALSIFIED",
-            "H3_assay_power_GATE": "CONFIRMED" if gate_open else "FALSIFIED",
+        "chain_mapping": {
+            "curated": sorted(r["pdb_id"] for r in ok if r.get("mapping_route") == "curated"),
+            "dockq_search_required": {
+                r["pdb_id"]: r.get("mapping_fallback_reason")
+                for r in ok if r.get("mapping_route") == "dockq_search"},
+            "note": ("The registered plan specifies an explicit chain mapping. It is used "
+                     "wherever DockQ accepts it. The entries listed under "
+                     "dockq_search_required are the only ones where it does not, each with "
+                     "the reason DockQ gave; their scores come from DockQ's own chain "
+                     "search. This replaces a blanket switch to auto-mapping that was "
+                     "described as verified while nothing checked it."),
         },
+        "spearman_p": round(p_rho, 5) if p_rho is not None else None,
+        **ruling,
         "GATE_FOR_STUDY_9": {
             "open": gate_open,
             "ruling": (
@@ -384,11 +430,17 @@ def analyse() -> int:
     # inside DockQ while the identical files score 0.899 under auto-mapping, and the same
     # explicit form works on 4XOJ. Forcing it would have discarded correct results. The
     # mapping DockQ selects is recorded per entry and checked against the expected one.
+    _fallback = {r["pdb_id"]: r.get("mapping_fallback_reason")
+                 for r in ok if r.get("mapping_route") == "dockq_search"}
     audit["deviations"].append(
-        "analysis_plan specified an explicit DockQ chain mapping; DockQ's own chain search "
-        "was used instead because the explicit form raises KeyError on some inputs while "
-        "scoring the identical structures correctly when left to choose (measured on 4XHV: "
-        "explicit=KeyError, auto=0.899). Selected mappings are recorded and verified.")
+        "analysis_plan specified an explicit DockQ chain mapping. It was used for "
+        f"{len(ok) - len(_fallback)} of {len(ok)} entries. DockQ's own chain search was "
+        f"needed for {sorted(_fallback)}: 4XHV and 4XOE raise KeyError('A') under the "
+        "explicit form, and 31EE finds no interface under the curated AB:AC because the "
+        "curation named the wrong receptor copy -- peptide C sits on chain B. An earlier "
+        "version applied the search to all entries and called the result verified; that "
+        "silently substituted a 4-residue copy of 10TC's 8-residue peptide and inflated its "
+        "DockQ from 0.831 to 0.969, the best score in the post-cutoff stratum.")
     audit["confirmatory"] = False
     audit["note"] = ("One declared deviation, made for a measured technical reason and "
                      "recorded rather than absorbed silently.")
@@ -423,8 +475,7 @@ def analyse() -> int:
         for f in report["failures"]:
             print(f"  {f['pdb_id']:6s} {str(f['split'])[:12]:12s} {f['error'][:70]}")
     print("\nPRE-SPECIFIED VERDICTS")
-    for h, v in report["verdicts"].items():
-        print(f"  {h:26s} {v:10s} Holm p = {report['p_holm'][h]}")
+    print(inf.format_verdicts(report))
     print("\n" + "=" * 94)
     print("GATE FOR STUDY #9: " + ("OPEN" if gate_open else "CLOSED"))
     print(report["GATE_FOR_STUDY_9"]["ruling"])
@@ -445,7 +496,7 @@ def main() -> int:
         curate()
         return 0
     if a.register:
-        spec = build_prespec(len(json.loads(SET.read_text())))
+        spec = build_prespec(*prespec_args())
         problems = spec.check()
         if problems:
             print("NOT REGISTRABLE:")

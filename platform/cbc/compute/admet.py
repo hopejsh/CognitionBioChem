@@ -54,7 +54,17 @@ _ADMET_MODEL = None
 
 #: ADMET-AI's training sets are TDC drug-like small molecules. These bounds describe that
 #: space; outside them the model is extrapolating and its output is not reportable.
-AD_MAX_MW = 1000.0
+#:
+#: MOLECULAR WEIGHT IS NOT A HARD BOUND HERE, and the reason is measured. The TDC training
+#: molecules reach 5299.5 Da, so a 1000 Da cutoff is neither the training envelope nor the
+#: real disqualifier -- it would also refuse training molecules the model was fitted on.
+#: What actually places this project's candidates outside the domain is the peptide backbone
+#: and the heavy-atom count: the heaviest single covalent species among 53,525 training
+#: molecules is 2285.7 Da, and the heaviest candidate here is 5436.2 Da, 2.4x that.
+#: So MW is reported as an advisory distance from the training centre, not as a refusal
+#: ground, and the refusal rests on grounds that were counted rather than assumed.
+AD_ADVISORY_MW = 1000.0
+AD_TRAINING_MAX_SINGLE_SPECIES_DA = 2285.7
 AD_MAX_HEAVY_ATOMS = 70
 AD_MAX_ABS_CHARGE = 4
 
@@ -63,9 +73,14 @@ AD_MAX_ABS_CHARGE = 4
 class DomainVerdict:
     in_domain: bool
     reasons: list[str] = field(default_factory=list)
+    #: Distances from the training centre that are worth stating but do not by themselves
+    #: justify refusing to predict. Keeping these separate is what stops a refusal from
+    #: resting on a ground the project has retracted.
+    advisories: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
-        return {"in_domain": self.in_domain, "reasons": self.reasons}
+        return {"in_domain": self.in_domain, "reasons": self.reasons,
+                "advisories": self.advisories}
 
 
 def check_applicability(smiles: str) -> DomainVerdict:
@@ -77,14 +92,21 @@ def check_applicability(smiles: str) -> DomainVerdict:
         return DomainVerdict(False, ["structure does not parse"])
 
     reasons: list[str] = []
+    advisories: list[str] = []
     mw = Descriptors.MolWt(mol)
     heavy = mol.GetNumHeavyAtoms()
     charge = Chem.GetFormalCharge(mol)
 
-    if mw > AD_MAX_MW:
+    if mw > AD_TRAINING_MAX_SINGLE_SPECIES_DA:
         reasons.append(
-            f"molecular weight {mw:.0f} Da exceeds {AD_MAX_MW:.0f} Da. TDC ADMET training "
-            "sets are drug-like small molecules; nothing of this size is represented.")
+            f"molecular weight {mw:.0f} Da exceeds the heaviest single covalent species in "
+            f"the training data ({AD_TRAINING_MAX_SINGLE_SPECIES_DA:.1f} Da, counted over "
+            f"53,525 molecules) by {mw / AD_TRAINING_MAX_SINGLE_SPECIES_DA:.1f}x.")
+    elif mw > AD_ADVISORY_MW:
+        advisories.append(
+            f"molecular weight {mw:.0f} Da is above {AD_ADVISORY_MW:.0f} Da, far from the "
+            f"training centre but still inside the training envelope (which reaches "
+            f"5299.5 Da). This is advisory, not a refusal ground.")
     if heavy > AD_MAX_HEAVY_ATOMS:
         reasons.append(f"{heavy} heavy atoms exceeds {AD_MAX_HEAVY_ATOMS}")
     if abs(charge) > AD_MAX_ABS_CHARGE:
@@ -106,7 +128,7 @@ def check_applicability(smiles: str) -> DomainVerdict:
             "sets contain essentially no peptides. The governing liabilities here are "
             "proteolytic stability, immunogenicity, renal clearance and, for polycationic "
             "amphipaths, membrane lysis; none of those is predicted by these models.")
-    return DomainVerdict(not reasons, reasons)
+    return DomainVerdict(not reasons, reasons, advisories)
 
 
 # --------------------------------------------------------------------------- #

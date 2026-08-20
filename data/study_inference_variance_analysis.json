@@ -1,13 +1,13 @@
 {
- "study_id": "inference-variance-v1",
- "prespec_hash": "69e64d5c2f02843e3b8e7f081370b73df6328115d99b8efbae478e03056cbe18",
+ "study_id": "inference-variance-v3",
+ "prespec_hash": "8242c485e46a5e55d5857a89b671767c45be37385f5635114f40f33cc17da54d",
  "n_observed": 87,
  "primary_metric": "across_seed_sd_complex_plddt",
  "metrics": {
   "across_seed_sd_complex_plddt": 2.6615,
   "across_seed_sd_ptm": 0.02618,
-  "across_seed_sd_iptm": 0.09543,
-  "across_seed_sd_interface_pae_min": 3.1429,
+  "across_seed_sd_iptm": 0.14943,
+  "across_seed_sd_interface_pae_min": 4.6157,
   "same_seed_distinct_values": {
    "BasalSuper-AChE-TrkA-B5": 1,
    "BasalAChE-Abeta-B4": 1,
@@ -17,7 +17,12 @@
    "MicroAutophagy-Tag-M4": 1
   },
   "msa_mean_shift": 0.3306,
-  "wall_clock_seconds_per_fold": 66.7,
+  "wall_clock_seconds_per_fold": {
+   "mean_seconds_per_computed_fold": null,
+   "n_computed": 0,
+   "n_reused": 87,
+   "note": "no cell was recomputed in this run; every fold was served from a content-verified cache"
+  },
   "per_residue_plddt_sd": null
  },
  "per_candidate_sd_plddt": {
@@ -29,14 +34,14 @@
   "MicroAutophagy-Tag-M4": 0.131
  },
  "per_candidate_sd_iptm": {
-  "BasalSuper-AChE-TrkA-B5": 0.0945,
-  "BasalNgf-TrkA-B3": 0.086,
-  "AstroEaat2-Up-A2": 0.1049
+  "BasalSuper-AChE-TrkA-B5": 0.2344,
+  "AstroSuper-CBF-EAAT2-A5": 0.0854,
+  "MicroAutophagy-Tag-M4": 0.0689
  },
  "per_candidate_sd_interface_pae": {
-  "BasalSuper-AChE-TrkA-B5": 3.33,
-  "BasalNgf-TrkA-B3": 2.597,
-  "AstroEaat2-Up-A2": 3.435
+  "BasalSuper-AChE-TrkA-B5": 7.437,
+  "AstroSuper-CBF-EAAT2-A5": 2.02,
+  "MicroAutophagy-Tag-M4": 2.126
  },
  "determinism": {
   "BasalSuper-AChE-TrkA-B5": {
@@ -120,15 +125,36 @@
    "with": 0.968031
   }
  ],
- "p_raw": {
-  "H1_seed_noise_small": 1.0,
-  "H2_same_seed_deterministic": 0.0,
-  "H3_msa_immaterial_for_designed_sequences": 0.48924736813491787
+ "criteria": {
+  "H1_seed_noise_small": {
+   "met": false,
+   "observed": 2.6615,
+   "threshold": "pooled across-seed SD of complex_plddt < 2.0 units"
+  },
+  "H2_same_seed_deterministic": {
+   "met": true,
+   "observed": true,
+   "threshold": "every candidate yields exactly one distinct complex_plddt across replicates"
+  },
+  "H3_msa_immaterial_for_designed_sequences": {
+   "met": true,
+   "observed": {
+    "msa_shift": 0.3306,
+    "equivalence_margin_sd_plddt": 2.6615,
+    "paired_t_p_raw": 0.48925
+   },
+   "threshold": "|MSA shift| below the across-seed SD AND the paired t-test does not reject at raw alpha 0.05 (raw, never multiplicity-adjusted: adjustment would make this non-rejection criterion easier to satisfy, not harder)",
+   "note": "confirmed by not detecting an effect; this is not evidence of equivalence unless the interval excludes a material difference"
+  }
  },
- "p_holm": {
-  "H1_seed_noise_small": 1.0,
-  "H2_same_seed_deterministic": 0.0,
-  "H3_msa_immaterial_for_designed_sequences": 0.97849
+ "multiplicity": {
+  "family_size": 0,
+  "correction": "none (no hypothesis in this study is decided by a test statistic)",
+  "excluded_from_correction": [
+   "H1_seed_noise_small",
+   "H2_same_seed_deterministic",
+   "H3_msa_immaterial_for_designed_sequences"
+  ]
  },
  "verdicts": {
   "H1_seed_noise_small": "FALSIFIED",
@@ -136,11 +162,14 @@
   "H3_msa_immaterial_for_designed_sequences": "CONFIRMED"
  },
  "prespec_audit": {
-  "study_id": "inference-variance-v1",
-  "prespec_hash": "69e64d5c2f02843e3b8e7f081370b73df6328115d99b8efbae478e03056cbe18",
-  "registered_utc": "2026-08-18T00:40:49+00:00",
-  "deviations": [],
-  "confirmatory": true,
-  "note": "All pre-specified analyses were carried out as planned."
+  "study_id": "inference-variance-v3",
+  "prespec_hash": "8242c485e46a5e55d5857a89b671767c45be37385f5635114f40f33cc17da54d",
+  "registered_utc": "2026-08-19T22:59:10+00:00",
+  "deviations": [
+   "pre-specified metrics absent or null in the result: ['per_residue_plddt_sd']. Dropping a registered analysis after seeing the data is selective reporting; if a metric could not be computed, the reason belongs in the record.",
+   "registered n_comparisons=3 under 'holm', but the executed family holds 0: ['H1_seed_noise_small', 'H2_same_seed_deterministic', 'H3_msa_immaterial_for_designed_sequences'] were re-classified as threshold criteria rather than tests after registration. The re-classification is defensible \u2014 a 0/1 indicator is not a p-value and corrupts the correction \u2014 but it is a change to the inferential procedure made after seeing the data, and it belongs on the record rather than in the code alone."
+  ],
+  "confirmatory": false,
+  "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."
  }
 }

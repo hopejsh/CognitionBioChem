@@ -1,0 +1,172 @@
+[
+ {
+  "name": "HUPRINE X",
+  "chembl": "CHEMBL208599",
+  "smiles": "CCC1=CC2Cc3nc4cc(Cl)ccc4c(N)c3[C@@H](C1)C2",
+  "nm": 0.026,
+  "n_records": 1,
+  "mw": 298.817,
+  "heavy": 21,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "EDROPHONIUM BROMIDE",
+  "chembl": "CHEMBL60745",
+  "smiles": "CC[N+](C)(C)c1cccc(O)c1.[Br-]",
+  "nm": 1.63,
+  "n_records": 1,
+  "mw": 246.148,
+  "heavy": 13,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "HUPERZINE A",
+  "chembl": "CHEMBL395280",
+  "smiles": "C/C=C1\\[C@H]2C=C(C)C[C@]1(N)c1ccc(=O)[nH]c1C2",
+  "nm": 5.0,
+  "n_records": 1,
+  "mw": 242.322,
+  "heavy": 18,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "DONEPEZIL",
+  "chembl": "CHEMBL502",
+  "smiles": "COc1cc2c(cc1OC)C(=O)C(CC1CCN(Cc3ccccc3)CC1)C2",
+  "nm": 9.165,
+  "n_records": 2,
+  "mw": 379.5,
+  "heavy": 28,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "NEOSTIGMINE BROMIDE",
+  "chembl": "CHEMBL54126",
+  "smiles": "CN(C)C(=O)Oc1cccc([N+](C)(C)C)c1.[Br-]",
+  "nm": 12.0,
+  "n_records": 2,
+  "mw": 303.2,
+  "heavy": 17,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "CHEMBL54727",
+  "chembl": "CHEMBL54727",
+  "smiles": "CN1CC[C@@]2(C)c3cc(OC(=O)Nc4ccccc4)ccc3N(C)C12",
+  "nm": 24.0,
+  "n_records": 1,
+  "mw": 337.423,
+  "heavy": 25,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "PHYSOSTIGMINE",
+  "chembl": "CHEMBL94",
+  "smiles": "CNC(=O)Oc1ccc2c(c1)[C@]1(C)CCN(C)[C@@H]1N2C",
+  "nm": 28.95,
+  "n_records": 4,
+  "mw": 275.352,
+  "heavy": 20,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "CHEMBL431784",
+  "chembl": "CHEMBL431784",
+  "smiles": "CNC(=O)Oc1ccc2c(c1)[C@]1(C)CCN(C)C1N2",
+  "nm": 56.7,
+  "n_records": 1,
+  "mw": 261.325,
+  "heavy": 19,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "TACRINE",
+  "chembl": "CHEMBL95",
+  "smiles": "Nc1c2c(nc3ccccc13)CCCC2",
+  "nm": 143.0,
+  "n_records": 5,
+  "mw": 198.269,
+  "heavy": 15,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "VELNACRINE",
+  "chembl": "CHEMBL51934",
+  "smiles": "Nc1c2c(nc3ccccc13)CCCC2O",
+  "nm": 164.0,
+  "n_records": 1,
+  "mw": 214.268,
+  "heavy": 16,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "OCTAAMINOACRIDINE",
+  "chembl": "CHEMBL263198",
+  "smiles": "Nc1c2c(nc3c1CCCC3)CCCC2",
+  "nm": 360.0,
+  "n_records": 1,
+  "mw": 202.301,
+  "heavy": 15,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "RANITIDINE",
+  "chembl": "CHEMBL1790041",
+  "smiles": "CNC(=C[N+](=O)[O-])NCCSCc1ccc(CN(C)C)o1",
+  "nm": 650.0,
+  "n_records": 1,
+  "mw": 314.411,
+  "heavy": 21,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "IPIDACRINE",
+  "chembl": "CHEMBL130880",
+  "smiles": "Nc1c2c(nc3c1CCC3)CCCC2",
+  "nm": 658.0,
+  "n_records": 1,
+  "mw": 188.274,
+  "heavy": 14,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "CHEMBL75919",
+  "chembl": "CHEMBL75919",
+  "smiles": "CN1CC[C@]2(C)c3cc(OC(=O)Nc4ccccc4)ccc3N(C)C12",
+  "nm": 3500.0,
+  "n_records": 1,
+  "mw": 337.423,
+  "heavy": 25,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "(+)-PHYSOSTIGMINE",
+  "chembl": "CHEMBL76640",
+  "smiles": "CNC(=O)Oc1ccc2c(c1)[C@@]1(C)CCN(C)C1N2C",
+  "nm": 9890.0,
+  "n_records": 1,
+  "mw": 275.352,
+  "heavy": 20,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "METOCLOPRAMIDE",
+  "chembl": "CHEMBL86",
+  "smiles": "CCN(CC)CCNC(=O)c1cc(Cl)c(N)cc1OC",
+  "nm": 20000.0,
+  "n_records": 1,
+  "mw": 299.802,
+  "heavy": 20,
+  "tier": "NP_DERIVED"
+ },
+ {
+  "name": "PRALIDOXIME",
+  "chembl": "CHEMBL1420",
+  "smiles": "C[n+]1ccccc1C=NO",
+  "nm": 340000.0,
+  "n_records": 1,
+  "mw": 137.162,
+  "heavy": 10,
+  "tier": "NP_DERIVED"
+ }
+]

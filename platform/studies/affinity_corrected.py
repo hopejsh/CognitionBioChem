@@ -33,7 +33,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from cbc import corpus, prespec as ps  # noqa: E402
+from cbc import corpus, inference as inf, prespec as ps  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
 STUDY_ID = "affinity-corrected-v1"
@@ -41,6 +41,16 @@ V1 = REPO / "data" / "study_ache_affinity.json"
 RESULT = REPO / "data" / "study_affinity_corrected.json"
 TARGET = "CHEMBL220"      # human acetylcholinesterase
 
+
+
+def prespec_args() -> tuple:
+    """The arguments --register builds the plan with.
+
+    Named once so the registration path and the hash-stability test cannot disagree.
+    Without it the test skipped this study, and the skip was reported with a
+    hard-coded True — a check that could not fail, covering 3 of 8 studies.
+    """
+    return (len([r for r in json.loads(V1.read_text())["rows"] if r.get("ok")]),)
 
 def build_prespec(n: int) -> ps.Prespecification:
     return ps.Prespecification(
@@ -197,17 +207,20 @@ def analyse() -> int:
     med_err = float(np.median(err))
     med_disp = float(statistics.median(disp)) if disp else None
 
-    p1 = 0.0 if (rho > 0.5 and ci[0] > 0) else 1.0
-    p2 = 0.0 if delta > 0.15 else 1.0
-    p3 = 0.0 if (med_disp is not None and med_err > med_disp) else 1.0
-    raw = [("H1_ranking_with_good_references", p1), ("H2_reference_fix_matters", p2),
-           ("H3_model_dominates_error", p3)]
-    order = sorted(range(3), key=lambda i: raw[i][1])
-    adj = [0.0] * 3
-    run_max = 0.0
-    for rank, i in enumerate(order):
-        run_max = max(run_max, (3 - rank) * raw[i][1])
-        adj[i] = min(1.0, run_max)
+    # H1 is decided by a bootstrap interval, H2 and H3 by threshold comparisons. None is a
+    # test statistic, so this study emits no p-values. See cbc/inference.py.
+    ruling = inf.decide(criteria={
+        "H1_ranking_with_good_references": inf.Criterion(
+            rho > 0.5 and ci[0] > 0, [round(rho, 4), [round(ci[0], 4), round(ci[1], 4)]],
+            "Spearman rho > 0.5 with a bootstrap 95% CI excluding 0"),
+        "H2_reference_fix_matters": inf.Criterion(
+            delta > 0.15, round(delta, 4),
+            "correcting the references moves rho by more than 0.15"),
+        "H3_model_dominates_error": inf.Criterion(
+            med_disp is not None and med_err > med_disp,
+            [round(med_err, 4), round(med_disp, 4) if med_disp is not None else None],
+            "median model error exceeds median inter-laboratory dispersion"),
+    }, tests={})
 
     singles = sum(1 for r in ok if r["reference"]["n"] == 1)
     report = {
@@ -228,8 +241,7 @@ def analyse() -> int:
         },
         "spearman_ci95": [round(c, 4) for c in ci],
         "spearman_p": round(p_rho, 5),
-        "p_holm": {raw[i][0]: round(adj[i], 5) for i in range(3)},
-        "verdicts": {k: ("CONFIRMED" if v == 0 else "FALSIFIED") for k, v in raw},
+        **ruling,
         "per_compound": [
             {"name": r["name"], "records": r["reference"]["n"],
              "v1_nm": r["nm"], "corrected_nm": r["reference"]["median_nm"],
@@ -256,7 +268,7 @@ def analyse() -> int:
     print(f"\nERROR DECOMPOSITION")
     print(f"  model median |error|        {m['median_absolute_error_log10']} log10")
     print(f"  reference median dispersion {m['median_reference_log10_sd']} log10")
-    print(f"  -> {'model' if p3 == 0 else 'reference'} is the larger error term")
+    print(f"  -> {'model' if ruling['criteria']['H3_model_dominates_error']['met'] else 'reference'} is the larger error term")
     print("\nPER COMPOUND (largest corrected error first)")
     print(f"  {'compound':30s} {'recs':>4s} {'v1 nM':>10s} {'corr nM':>10s} "
           f"{'err v1':>7s} {'err corr':>9s}")
@@ -264,8 +276,7 @@ def analyse() -> int:
         print(f"  {r['name'][:29]:30s} {r['records']:4d} {r['v1_nm']:>10.4g} "
               f"{r['corrected_nm']:>10.4g} {r['error_v1']:>+7.2f} {r['error_corrected']:>+9.2f}")
     print("\nPRE-SPECIFIED VERDICTS")
-    for h, v in report["verdicts"].items():
-        print(f"  {h:34s} {v:10s} Holm p = {report['p_holm'][h]}")
+    print(inf.format_verdicts(report))
     a = report["prespec_audit"]
     print(f"\nprespec audit: {'CONFIRMATORY' if a['confirmatory'] else 'DEVIATIONS'}")
     for d in a["deviations"]:
@@ -280,8 +291,7 @@ def main() -> int:
         ap.add_argument(f"--{f}", action="store_true")
     a = ap.parse_args()
     if a.register:
-        n = len([r for r in json.loads(V1.read_text())["rows"] if r.get("ok")])
-        spec = build_prespec(n)
+        spec = build_prespec(*prespec_args())
         problems = spec.check()
         if problems:
             print("NOT REGISTRABLE:")

@@ -1,0 +1,56 @@
+{
+ "hash": "55c3c3c667c0024992e2e30fb6c33ccfcda869632c407d7225b9aa6008441a3e",
+ "registered_utc": "2026-08-19T19:13:51+00:00",
+ "min_attainable_p": 0.0,
+ "content": {
+  "study_id": "candidate-screen-v4",
+  "question": "For each platform candidate predicted together with its declared receptor, is the interface distinguishable from what the same model at the same settings assigns to a sequence of identical amino-acid composition in random order?",
+  "primary_metric": "fraction_candidates_beating_null",
+  "primary_metric_justification": "The fraction of candidates whose native ipTM exceeds every one of its own composition-matched decoys is the right primary metric because it is the only quantity here with a reference distribution. A raw ipTM has none, and these candidates are Arg/Trp-rich cationic amphipathic peptides \u2014 the class most prone to scoring well against anything \u2014 so an absolute threshold would measure composition rather than design. Using a per-candidate null also makes the verdict robust to the receptor: each candidate is compared only against sequences of its own composition against its own target. A pilot found a random shuffle scoring ipTM 0.735, above every native replicate, which in isolation would have read as a hit.",
+  "decision_threshold": "H1 confirmed if any candidate's native ipTM exceeds all of its decoys AND reaches the confident band ipTM > 0.8; H2 confirmed if the mean native ipTM exceeds the mean decoy ipTM by more than 0.1; H3 confirmed if at least half the candidates fall below ipTM 0.6, the band in which study #7 found 0 of 4 interfaces correct.",
+  "n_planned": 36,
+  "n_comparisons": 3,
+  "multiplicity_correction": "holm",
+  "alpha": 0.05,
+  "stopping_rule": "Fixed: each candidate is predicted once with its receptor and once with each of 3 composition-matched decoys, all at seed 1, in a fixed order. No candidate, decoy or receptor is added or removed after the first prediction. Technical failures are recorded and excluded with the reason stated.",
+  "analysis_plan": "For each candidate, build 3 composition-matched shuffles with a fixed RNG seed. Predict the receptor LIGAND-ACCESSIBLE CONSTRUCT plus each peptide with Boltz-2 2.2.1 \u2014 the extracellular topological domain for a membrane receptor, the mature chain for a soluble one, in both cases with obligate-assembly segments excluded (an isoform-variable terminal span carrying an interchain disulfide), refusing targets whose ligand site lies inside the membrane bundle \u2014 msa=empty, gpu, seed 1, diffusion_samples 1, recycling_steps 3. Record ipTM, pTM and complex_plddt. For each candidate report whether the native ipTM exceeds all its decoys, the native-minus-decoy-mean difference, and the empirical p = (1 + #{decoy >= native}) / (N + 1). Interpret levels against study #7's calibration bands. Holm across the three hypotheses.",
+  "hypotheses": [
+   {
+    "name": "H1_any_candidate_binds",
+    "statement": "At least one candidate produces an interface both better than its composition-matched null and confident in absolute terms.",
+    "predicted_by": "the platform's original claim that these are targeted binders",
+    "confirmed_if": "some candidate has native ipTM above all its decoys AND native ipTM > 0.8",
+    "falsified_if": "no candidate satisfies both conditions"
+   },
+   {
+    "name": "H2_natives_beat_decoys_on_average",
+    "statement": "Even without any individual candidate succeeding, the designed sequences score better on average than their shuffles, which would indicate the design contains some real information.",
+    "predicted_by": "a weaker version of the platform's claim",
+    "confirmed_if": "mean native ipTM exceeds mean decoy ipTM by more than 0.1",
+    "falsified_if": "the difference is 0.1 or less"
+   },
+   {
+    "name": "H3_candidates_in_failed_band",
+    "statement": "Most candidates fall in the ipTM band where study #7 measured no correct interfaces, so the screen returns a negative.",
+    "predicted_by": "the pilot, where the flagship AChE candidate scored ipTM 0.21-0.47 across replicates",
+    "confirmed_if": "at least half the candidates have native ipTM < 0.6",
+    "falsified_if": "fewer than half fall below 0.6"
+   }
+  ],
+  "test_type": "parametric",
+  "n_permutations": 0,
+  "secondary_metrics": [
+   "mean_native_iptm",
+   "mean_decoy_iptm",
+   "per_candidate_empirical_p",
+   "n_candidates_above_0.8",
+   "n_candidates_below_0.6",
+   "native_minus_decoy_mean",
+   "wall_clock_seconds_per_fold"
+  ],
+  "exclusions": "All 9 candidates whose declared receptor is in the target registry and admits a soluble-phase construct are screened; v1 screened only the 6 with the shortest constructs, and that truncation is removed here. Candidates naming an intracellular target (Keap1, GSK-3, Nrf2, AMPK) are excluded because a peptide with no cell-penetrating mechanism cannot reach one, and the platform's own data gate already flags them. Sequences containing non-standard residues are excluded.",
+  "known_confounds": "1. Single-sequence mode depresses all arms equally; the native-versus-decoy CONTRAST is the interpretable quantity, not the absolute level. 2. Three decoys give a minimum empirical p of 0.25, so no individual candidate can reach significance \u2014 the design tests the SET, and per-candidate p values are descriptive only. This is stated in advance rather than discovered afterwards. 4. STUDY #7'S BANDS ARE AN EXTRAPOLATION HERE, AND ARE LABELLED AS ONE. #7 calibrated ipTM against DockQ on 16 complexes whose peptides were 7-17 residues and whose receptors were 80-304. These candidates are 30-45 residues, longer than anything #7 measured, on receptors of 156-608. No candidate lies inside the calibrated peptide range, and only TREM2 (156 aa) and CHRNA7 (211 aa) lie inside the calibrated receptor range. The absolute thresholds in H1 and H3 are therefore extrapolated, and every verdict that rests on them is reported as extrapolated rather than calibrated. The primary metric does not depend on them: the native-versus-decoy contrast is a within-candidate comparison whose reference distribution is generated inside this study. 3. Composition-matched shuffling preserves charge and hydrophobicity but not secondary-structure propensity, so a helical native competes against shuffles that may not be helical; this makes the test conservative in the native's favour. 4. A negative result bounds what THIS pipeline detects at THIS configuration, not what the molecules do in a cell.",
+  "supersedes": "candidate-screen-v3",
+  "supersedes_reason": "One (peptide, target) pair was screened under two codes: HippoAChE-AlkaPept-X2 and BasalAChE-GorgeBlock-B1 carry the identical 36-mer against the identical AChE construct, one of the duplicate pairs this project data gate flags. Screening both counted one molecule twice, and because every statistic here is a mean or a count over candidates, the duplicate voted twice in all of them. Measured on study #10 it moved the paired mean native-minus-decoy-mean difference from -0.0221 to -0.0412 and Cohen dz from -0.117 to -0.220, roughly doubling the reported effect size, and it overstated the paired t-test degrees of freedom by one; it is also the most extreme negative difference in the set, so it biased rather than merely diluted. The screen-level null was likewise computed over ten candidates when only nine are distinct. This plan de-duplicates on (peptide, target), keeps the first code, records the other as an alias, and reports n = 9 distinct designs. No fold is discarded: the duplicate cells remain under custody and are simply not counted twice. Earlier plans and results are retained."
+ }
+}

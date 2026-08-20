@@ -12,8 +12,9 @@
   "affinity_implausible": 5,
   "duplicate_sequence": 7,
   "compartment_mismatch": 5,
-  "mixed_numbering_convention": 3,
-  "fabricated_residue": 11
+  "fabricated_residue": 23,
+  "mixed_numbering_convention": 2,
+  "unresolvable_residue_attribution": 12
  },
  "failures": [
   {
@@ -394,7 +395,7 @@
   {
    "category": "compartment_mismatch",
    "record": "MicroNrf2-AntiInflam-M2",
-   "detail": "targets 'keap1', which is cytoplasmic, with a peptide carrying no cell-penetrating motif (net charge -1.2, 12% K/R). An extracellular peptide cannot reach a cytosolic protein."
+   "detail": "targets 'keap1', 'nrf2', which are cytoplasmic, with a peptide carrying no cell-penetrating motif (net charge -1.2, 12% K/R). An extracellular peptide cannot reach a cytosolic protein."
   },
   {
    "category": "compartment_mismatch",
@@ -402,74 +403,189 @@
    "detail": "targets 'keap1', which is cytoplasmic, with a peptide carrying no cell-penetrating motif (net charge -3.2, 10% K/R). An extracellular peptide cannot reach a cytosolic protein."
   },
   {
+   "category": "fabricated_residue",
+   "record": "HippoTrk-Saponin-X1",
+   "detail": "asserts Glu319 for NTRK2 (Q16620) in clause 'TrkB Ig-like D5 Domain (Asp298, Glu319, Tyr342, Va', but position 319 is Tyr in canonical numbering and Asn in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "HippoTrk-Saponin-X1",
+   "detail": "asserts Val312 for NTRK2 (Q16620) in clause 'TrkB Ig-like D5 Domain (Asp298, Glu319, Tyr342, Va', but position 312 is Lys in canonical numbering and His in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "HippoTrk-Saponin-X1",
+   "detail": "asserts Leu333 for NTRK2 (Q16620) in clause 'TrkB Ig-like D5 Domain (Asp298, Glu319, Tyr342, Va', but position 333 is Lys in canonical numbering and Lys in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "HippoAChE-AlkaPept-X2",
+   "detail": "asserts Trp84 for ACHE (P22303) in clause 'AChE CAS (Trp84, Phe330, Tyr121)', but position 84 is Lys in canonical numbering and Glu in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "HippoAChE-AlkaPept-X2",
+   "detail": "asserts Tyr121 for ACHE (P22303) in clause 'AChE CAS (Trp84, Phe330, Tyr121)', but position 121 is Arg in canonical numbering and Gly in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
    "category": "mixed_numbering_convention",
    "record": "HippoAChE-AlkaPept-X2",
-   "detail": "two organisms' numbering conventions inside a single parenthesis. Trp84/Phe330/Tyr121 are Torpedo californica numbering; the human equivalents are Trp86/Phe338/Tyr124 in mature-chain numbering. Trp286/Tyr72/Tyr341 are human MATURE-chain numbering; in canonical P2230"
+   "detail": "one binding-site string uses more than one numbering convention (['canonical', 'mature']). Every residue position must be accompanied by its (accession, convention) pair; see data/target_registry.json."
   },
   {
    "category": "fabricated_residue",
    "record": "HippoWnt-FzdAgonist-X4",
-   "detail": "asserts Arg104 for FZD8, but Q9H461 position 104 is Leu104. Phe72, Tyr125 and Asp99 in the same record are correct"
+   "detail": "asserts Arg104 for FZD8 (Q9H461) in clause 'Frizzled-8 (FZD8) CRD Domain (Phe72, Tyr125, Asp99', but position 104 is Leu in canonical numbering and Asp in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "HippoDual-TrkB-AMPK-X5",
+   "detail": "asserts Glu319 for NTRK2 (Q16620) in clause 'TrkB D5 (Asp298, Glu319)', but position 319 is Tyr in canonical numbering and Asn in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "HippoDual-TrkB-AMPK-X5",
+   "detail": "clause 'AMPK \u03b1-subunit kinase domain (Lys45, Arg67)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "PfcTrk-ErkEnhancer-P2",
+   "detail": "asserts Thr315 for NTRK2 (Q16620) in clause 'TrkB Ig-like D5 Domain (Asp298, Thr315, Glu319)', but position 315 is Leu in canonical numbering and Leu in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "PfcTrk-ErkEnhancer-P2",
+   "detail": "asserts Glu319 for NTRK2 (Q16620) in clause 'TrkB Ig-like D5 Domain (Asp298, Thr315, Glu319)', but position 319 is Tyr in canonical numbering and Asn in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
    "category": "fabricated_residue",
    "record": "PfcGluN2A-LTP-P3",
-   "detail": "asserts Glu201 for GRIN2A, but Q12879 position 201 is Gln201. mature numbering gives His223 \u2014 wrong in both conventions"
+   "detail": "asserts Glu201 for GRIN2A (Q12879) in clause 'NMDAR GluN2A N-Terminal Domain (NTD) (Glu201, Lys2', but position 201 is Gln in canonical numbering and His in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
    "category": "fabricated_residue",
    "record": "PfcGluN2A-LTP-P3",
-   "detail": "asserts Lys210 for GRIN2A, but Q12879 position 210 is Phe210. mature numbering gives Ser232 \u2014 wrong in both conventions"
+   "detail": "asserts Lys210 for GRIN2A (Q12879) in clause 'NMDAR GluN2A N-Terminal Domain (NTD) (Glu201, Lys2', but position 210 is Phe in canonical numbering and Ser in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
    "category": "fabricated_residue",
    "record": "PfcDual-nACh-GluN2A-P5",
-   "detail": "asserts Glu201 for GRIN2A, but Q12879 position 201 is Gln201. mature numbering gives His223 \u2014 wrong in both conventions"
+   "detail": "asserts Glu201 for GRIN2A (Q12879) in clause 'NMDAR GluN2A NTD (Glu201)', but position 201 is Gln in canonical numbering and His in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "BasalAChE-GorgeBlock-B1",
+   "detail": "asserts Trp84 for ACHE (P22303) in clause 'AChE Catalytic Gorge (Trp84, Phe330, Trp286, Tyr34', but position 84 is Lys in canonical numbering and Glu in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
    "category": "mixed_numbering_convention",
    "record": "BasalAChE-GorgeBlock-B1",
-   "detail": "two organisms' numbering conventions inside a single parenthesis. Trp84/Phe330/Tyr121 are Torpedo californica numbering; the human equivalents are Trp86/Phe338/Tyr124 in mature-chain numbering. Trp286/Tyr72/Tyr341 are human MATURE-chain numbering; in canonical P2230"
+   "detail": "one binding-site string uses more than one numbering convention (['canonical', 'mature']). Every residue position must be accompanied by its (accession, convention) pair; see data/target_registry.json."
   },
   {
    "category": "fabricated_residue",
    "record": "BasalNgf-TrkA-B3",
-   "detail": "asserts His312 for NTRK1, but P04629 position 312 is Ser312. mature numbering gives Gly344 \u2014 wrong in both conventions"
+   "detail": "asserts His312 for NTRK1 (P04629) in clause 'TrkA Extracellular Ig-like Domain (His312, Leu331)', but position 312 is Ser in canonical numbering and Gly in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
    "category": "fabricated_residue",
    "record": "BasalNgf-TrkA-B3",
-   "detail": "asserts Leu331 for NTRK1, but P04629 position 331 is Glu331. mature numbering gives Ala363 \u2014 wrong in both conventions"
+   "detail": "asserts Leu331 for NTRK1 (P04629) in clause 'TrkA Extracellular Ig-like Domain (His312, Leu331)', but position 331 is Glu in canonical numbering and Ala in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
-   "category": "mixed_numbering_convention",
+   "category": "unresolvable_residue_attribution",
+   "record": "BasalAChE-Abeta-B4",
+   "detail": "clause 'A\u03b2 Oligomer Core (Lys28, Asp23)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "unresolvable_residue_attribution",
    "record": "BasalSuper-AChE-TrkA-B5",
-   "detail": "two organisms' numbering conventions inside a single parenthesis. Trp84/Phe330/Tyr121 are Torpedo californica numbering; the human equivalents are Trp86/Phe338/Tyr124 in mature-chain numbering. Trp286/Tyr72/Tyr341 are human MATURE-chain numbering; in canonical P2230"
+   "detail": "clause 'AChE CAS/PAS (Trp84/Trp286), TrkA Ig domain, M1 mAChR' names more than one registry target ['ACHE', 'NTRK1', 'CHRM1']; its residues cannot be attributed to one protein and were not checked"
   },
   {
    "category": "fabricated_residue",
    "record": "MicroTrem2-Agonist-M1",
-   "detail": "asserts Lys112 for TREM2, but Q9NZC2 position 112 is Ser112. wrong in canonical numbering; no convention makes it a lysine"
+   "detail": "asserts Lys112 for TREM2 (Q9NZC2) in clause 'Trem2 Extracellular Ig-like Domain (Arg47, Asp87, ', but position 112 is Ser in canonical numbering and Ala in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "MicroAutophagy-Tag-M4",
+   "detail": "clause 'Microglial Autophagosomal Membrane LC3-II (Phe52, Leu63)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "AstroEos-NO-A1",
+   "detail": "clause 'Estrogen Receptor-\u03b2 (ER-\u03b2) LBD (Glu305, Arg346)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "AstroEaat2-Up-A2",
+   "detail": "asserts Thr368 for SLC1A2 (P43004) in clause 'Astrocytic Glutamate Transporter EAAT2 / GLT-1 (Th', but position 368 is Leu in canonical numbering and Leu in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "AstroEaat2-Up-A2",
+   "detail": "asserts Lys490 for SLC1A2 (P43004) in clause 'Astrocytic Glutamate Transporter EAAT2 / GLT-1 (Th', but position 490 is Ala in canonical numbering and Ala in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "AstroZo1-Protect-A3",
+   "detail": "clause 'Occludin Complex (Arg220, Asp310)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
   },
   {
    "category": "fabricated_residue",
    "record": "AstroPafr-Block-A4",
-   "detail": "asserts His14 for PTAFR, but P25105 position 14 is Arg14. P25105 has no signal peptide, so no numbering offset can explain this"
+   "detail": "asserts His14 for PTAFR (P25105) in clause 'PAFR Ligand Binding Pocket (His14, Tyr200, Phe174)', but position 14 is Arg in canonical numbering and Arg in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
    "category": "fabricated_residue",
    "record": "AstroPafr-Block-A4",
-   "detail": "asserts Tyr200 for PTAFR, but P25105 position 200 is Leu200. Phe174 in the same record is correct"
+   "detail": "asserts Tyr200 for PTAFR (P25105) in clause 'PAFR Ligand Binding Pocket (His14, Tyr200, Phe174)', but position 200 is Leu in canonical numbering and Leu in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "Huperzine A (Lycopodium serratum)",
+   "detail": "clause 'Trp84, Phe330 (CAS Salt Bridge)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "Huperzine A (Lycopodium serratum)",
+   "detail": "clause 'Tyr121, Gly117/118 (Hydrogen Bonds)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "Huperzine A (Lycopodium serratum)",
+   "detail": "clause 'Trp279 (PAS)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "fabricated_residue",
+   "record": "Ginsenoside Rg1 (Panax ginseng)",
+   "detail": "asserts Glu319 for NTRK2 (Q16620) in clause 'TrkB Asp298, Glu319 (Extracellular Domain)', but position 319 is Tyr in canonical numbering and Asn in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
    "category": "fabricated_residue",
    "record": "Ginkgolide B (Ginkgo biloba)",
-   "detail": "asserts His14 for PTAFR, but P25105 position 14 is Arg14. P25105 has no signal peptide, so no numbering offset can explain this"
+   "detail": "asserts His14 for PTAFR (P25105) in clause 'PAFR His14 (TM1), Tyr200 (TM5), Phe174 (TM3)', but position 14 is Arg in canonical numbering and Arg in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
   },
   {
    "category": "fabricated_residue",
    "record": "Ginkgolide B (Ginkgo biloba)",
-   "detail": "asserts Tyr200 for PTAFR, but P25105 position 200 is Leu200. Phe174 in the same record is correct"
+   "detail": "asserts Tyr200 for PTAFR (P25105) in clause 'PAFR His14 (TM1), Tyr200 (TM5), Phe174 (TM3)', but position 200 is Leu in canonical numbering and Leu in mature numbering. Wrong under every convention, so this is a residue-identity error, not a numbering-convention one."
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "Ginkgolide B (Ginkgo biloba)",
+   "detail": "clause 'GABA_A Thr261 (TM2)' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "Curcumin (Curcuma longa)",
+   "detail": "clause 'A\u03b2 Lys28, Asp23' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
+  },
+  {
+   "category": "unresolvable_residue_attribution",
+   "record": "Curcumin (Curcuma longa)",
+   "detail": "clause 'BACE1 Asp32, Asp228' carries residue tokens but names no target this registry can resolve; it was not checked, and that omission is now on the record"
   }
  ]
 }

@@ -4,7 +4,7 @@
 This is the study the whole platform was built to make possible, and it could not be run
 honestly until study #7 measured whether the pipeline has any sensitivity. That gate is now
 OPEN: #7 recovered 7 of 8 memorisable peptide interfaces (DockQ >= 0.23) and established that
-ipTM tracks interface correctness at Spearman rho = 0.847, with ZERO false negatives below
+ipTM tracks interface correctness at Spearman rho = 0.800, with ZERO false negatives below
 ipTM 0.6. So a low score here is evidence about the candidate rather than about the method.
 
 The design point is that a raw ipTM has no reference distribution. These candidates are
@@ -35,11 +35,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from cbc import prespec as ps  # noqa: E402
+from cbc import inference as inf, prespec as ps  # noqa: E402
 from cbc.compute import structure as st  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
-STUDY_ID = "candidate-screen-v1"
+STUDY_ID = "candidate-screen-v8"
 REGISTRY = REPO / "data" / "target_registry.json"
 RAW = REPO / "data" / "extracted_raw.json"
 WORK = Path("/tmp/cbc_screen")
@@ -67,20 +67,130 @@ CANDIDATE_TARGETS = {
     "MicroTrem2-Agonist-M1": "TREM2",
     "MicroTlr4-Antagonist-M3": "TLR4",
     "PfcACh-PAM-P1": "CHRNA7",
+    # Added after coverage() showed the stated criterion admits them while the
+    # hand-written map did not. MicroDual-Trem2-Nrf2-M5 also names Keap1, which is
+    # cytoplasmic and unreachable; it is screened against the reachable half.
+    "HippoDual-TrkB-AMPK-X5": "NTRK2",
+    "MicroDual-Trem2-Nrf2-M5": "TREM2",
+    # Added after the short-circuit was removed and the criterion applied uniformly.
+    # A candidate naming several admissible targets is screened against the
+    # alphabetically first, deterministically, and coverage() records the others as
+    # declared-but-untested rather than letting the choice go unstated.
+    "PfcGluN2A-LTP-P3": "GRIN2A",
+    "PfcDual-nACh-GluN2A-P5": "CHRNA7",
 }
 
 
+#: Aliases the raw catalogue uses for each registry target, for deriving coverage.
+_TARGET_ALIASES = {
+    "ACHE": ("AChE", "acetylcholinesterase"), "NTRK1": ("TrkA",), "NTRK2": ("TrkB",),
+    "TREM2": ("Trem2", "TREM2"), "TLR4": ("TLR4",), "CHRNA7": ("nAChR", "α7", "alpha-7"),
+    "GRIN2A": ("GluN2A",), "GRIN2B": ("GluN2B",), "FZD8": ("Frizzled", "FZD8", "Fzd"),
+    "KEAP1": ("Keap1",), "NFE2L2": ("Nrf2",), "GSK3B": ("GSK-3", "GSK3"),
+    "SLC1A2": ("EAAT2",), "NOS3": ("eNOS",), "PTAFR": ("PAFR",), "CHRM1": ("M1",),
+}
+
+
+def coverage() -> dict:
+    """Which valid-sequence candidates the stated criterion admits, and why the rest are out.
+
+    CANDIDATE_TARGETS is hand-written, so a headline like "nine out of nine" was certified by
+    the map rather than by the criterion it claims to apply, and could not be false by
+    construction. This re-derives the population from the catalogue and the registry, so the
+    exclusions are visible and each carries its reason.
+    """
+    reg = json.loads(REGISTRY.read_text())["targets"]
+    raw = json.loads(RAW.read_text())
+    screened, excluded = [], []
+    for d in raw["FULL_BRAIN_DRUGS_DATA"]:
+        code, seq = d["code"], d.get("sequence", "")
+        if not re.fullmatch(r"[ACDEFGHIKLMNPQRSTVWY]{5,}", seq):
+            continue
+        # NO SHORT-CIRCUIT ON THE MAP. An earlier version admitted anything already in
+        # CANDIDATE_TARGETS without testing it, so the criterion only ever governed
+        # exclusions and the inclusion half stayed hand-listed -- which is the defect this
+        # function was written to remove, surviving in the half that matters.
+        blob = " ".join(str(d.get(k, "")) for k in ("targets", "bindingSites", "mechanism"))
+        named = sorted({sym for sym, al in _TARGET_ALIASES.items()
+                        if any(a.lower() in blob.lower() for a in al)})
+        if not named:
+            excluded.append({"code": code, "reason": "names no target in the registry"})
+            continue
+        reasons, admissible = [], []
+        for sym in named:
+            t = reg.get(sym, {})
+            if t.get("construct_basis") is None:
+                reasons.append(f"{sym}: ligand site is inside the membrane bundle; no "
+                               "soluble-phase construct exists")
+            elif sym in _INTRACELLULAR:
+                reasons.append(f"{sym}: cytoplasmic; a peptide with no penetrating mechanism "
+                               "cannot reach it")
+            else:
+                admissible.append(sym)
+                reasons.append(f"{sym}: admissible ({t['construct_basis']}, "
+                               f"{t['ligand_accessible_span'][1] - t['ligand_accessible_span'][0] + 1} aa)")
+        rec = {"code": code, "named": named, "reasons": reasons,
+               "admissible_targets": admissible,
+               "mapped_to": CANDIDATE_TARGETS.get(code),
+               "declared_but_untested": [a for a in admissible
+                                         if a != CANDIDATE_TARGETS.get(code)]}
+        if admissible and code in CANDIDATE_TARGETS:
+            screened.append(code)
+        else:
+            excluded.append(rec)
+
+    unscreened = [e for e in excluded if e.get("admissible_targets")]
+    return {"screened": sorted(screened), "excluded": excluded,
+            "admissible_but_unscreened": [e["code"] for e in unscreened],
+            "n_admissible_but_unscreened": len(unscreened),
+            "note": ("Oligomeric state is RECORDED in the registry and disclosed in the README, "
+                     "but is not used to exclude: a keyword scan over a SUBUNIT comment cannot "
+                     "establish whether a given binding site lies at a subunit interface, and "
+                     "using it that way excluded CHRNA7 and TLR4 -- both primarily homomers -- "
+                     "while the map screened them anyway. Exclusion rests only on grounds the "
+                     "code can establish: no soluble-phase construct, or a cytoplasmic "
+                     "compartment.")}
+
+
+#: Registry targets that live in the cytosol or nucleus.
+_INTRACELLULAR = {"KEAP1", "NFE2L2", "GSK3B", "NOS3"}
+
+
 def _receptor_seq(symbol: str) -> str | None:
+    """The receptor surface a soluble peptide can physically reach, or None to refuse.
+
+    This used to return the mature chain, which was wrong for every membrane receptor in the
+    registry. The mature chain of a single-pass receptor also contains its transmembrane
+    helix and cytoplasmic tail — for TREM2 that is 56 of 212 residues (26%), for CHRNA7 269
+    of 480 (56%). Folded in isolation those segments are solvent-exposed hydrophobic surface,
+    which is exactly what a structure predictor will dock a hydrophobic peptide onto; in the
+    cell they are inside the bilayer or on the far side of it, so the contact cannot form.
+    The construct therefore scored an interface that does not exist, and it did so in the
+    direction that inflates the score for the least specific candidates.
+
+    The span comes from the UniProt Topological-domain and Transmembrane features, recorded
+    per target in the registry. A target whose ligand site lies inside the membrane bundle
+    (GPCR, transporter) returns None: no soluble-phase construct of it is valid, and refusing
+    is the correct answer rather than folding a loop.
+    """
     reg = json.loads(REGISTRY.read_text())
     t = reg["targets"].get(symbol)
-    if not t:
+    if not t or t.get("construct_basis") is None:
         return None
-    seq, chain = t["sequence"], t.get("chain")
-    # Use the mature chain: the signal peptide is cleaved and is not part of the receptor.
-    return seq[chain[0] - 1:chain[1]] if chain else seq
+    span = t["ligand_accessible_span"]
+    return t["sequence"][span[0] - 1:span[1]]
 
 
-def _candidates(limit: int) -> list[dict]:
+def _construct_note(symbol: str) -> dict:
+    """Provenance for the construct, so a reader can see which residues were folded."""
+    t = json.loads(REGISTRY.read_text())["targets"][symbol]
+    span = t["ligand_accessible_span"]
+    return {"uniprot": t["uniprot"], "basis": t["construct_basis"],
+            "canonical_span": span, "length": span[1] - span[0] + 1,
+            "convention": "canonical (counts from the initiator methionine)"}
+
+
+def _candidates(limit: int | None = None) -> list[dict]:
     raw = json.loads(RAW.read_text())
     out = []
     for d in raw["FULL_BRAIN_DRUGS_DATA"]:
@@ -94,9 +204,32 @@ def _candidates(limit: int) -> list[dict]:
         if not rseq:
             continue
         out.append({"code": code, "peptide": seq, "target": sym,
-                    "receptor_len": len(rseq)})
+                    "receptor_len": len(rseq), "construct": _construct_note(sym)})
     out.sort(key=lambda c: c["receptor_len"])   # cheapest first
-    return out[:limit]
+
+    # One (peptide, target) pair appears under two codes: HippoAChE-AlkaPept-X2 and
+    # BasalAChE-GorgeBlock-B1 carry the identical 36-mer against the identical AChE construct,
+    # which is one of the duplicate pairs the data gate flags. Screening both counts one
+    # molecule twice, and because every downstream statistic is an average or a count over
+    # candidates, the duplicate votes twice in all of them: in study #10 it moved the paired
+    # mean difference from -0.0221 to -0.0412 and Cohen's dz from -0.117 to -0.220, roughly
+    # doubling the reported effect, while overstating the t-test's df by one. It is also the
+    # most extreme negative difference in the set, so it does not merely add noise.
+    #
+    # De-duplicating on (peptide, target) keeps the first code and records the alias, so the
+    # design is still visible in the output but is counted once.
+    deduped: list[dict] = []
+    by_key: dict[tuple[str, str], dict] = {}
+    for c in out:
+        key = (c["peptide"], c["target"])
+        first = by_key.get(key)
+        if first is None:
+            by_key[key] = c
+            deduped.append(c)
+        else:
+            first.setdefault("identical_to", []).append(c["code"])
+    out = deduped
+    return out if limit is None else out[:limit]
 
 
 def _scrambles(seq: str, n: int, seed: int) -> list[str]:
@@ -113,6 +246,17 @@ def _scrambles(seq: str, n: int, seed: int) -> list[str]:
         out.append(s)
     return out
 
+
+
+def prespec_args() -> tuple:
+    """The arguments --register builds the plan with.
+
+    Named once so the registration path and the hash-stability test cannot disagree
+    about them: the test previously guessed, guessed wrong for the two-argument
+    studies, and reported drift that did not exist.
+    """
+    c = _candidates()
+    return (len(c) * (1 + N_DECOYS), len(c))
 
 def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
     return ps.Prespecification(
@@ -151,7 +295,12 @@ def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
             "failures are recorded and excluded with the reason stated."),
         analysis_plan=(
             "For each candidate, build 3 composition-matched shuffles with a fixed RNG seed. "
-            "Predict the receptor mature chain plus each peptide with Boltz-2 2.2.1, "
+            "Predict the receptor LIGAND-ACCESSIBLE CONSTRUCT plus each peptide with Boltz-2 "
+            "2.2.1 — the extracellular topological domain for a membrane receptor, the "
+            "mature chain for a soluble one, in both cases with obligate-assembly "
+            "segments excluded (an isoform-variable terminal span carrying an "
+            "interchain disulfide), refusing targets whose ligand site lies inside "
+            "the membrane bundle — "
             "msa=empty, gpu, seed 1, diffusion_samples 1, recycling_steps 3. Record ipTM, "
             "pTM and complex_plddt. For each candidate report whether the native ipTM "
             "exceeds all its decoys, the native-minus-decoy-mean difference, and the "
@@ -189,17 +338,28 @@ def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
             "wall_clock_seconds_per_fold",
         ),
         exclusions=(
-            f"Only the {n_cand} candidates whose declared receptor is in the target registry "
-            "AND is extracellular are screened. Candidates naming an intracellular target "
-            "(Keap1, GSK-3, Nrf2, AMPK) are excluded because a peptide with no "
-            "cell-penetrating mechanism cannot reach one, and the platform's own data gate "
-            "already flags them. Sequences containing non-standard residues are excluded."),
+            f"All {n_cand} candidates admitted by coverage(), which resolves every "
+            "valid-sequence candidate in the catalogue against the target registry and "
+            "records the ground for each inclusion and exclusion in the artefact. A "
+            "candidate is excluded when EVERY target it declares is unreachable: either the "
+            "registry admits no soluble-phase construct for it (a GPCR or transporter, whose "
+            "ligand site lies inside the membrane bundle) or the target is cytoplasmic and a "
+            "peptide with no cell-penetrating mechanism cannot reach it. A candidate naming "
+            "BOTH a reachable and an unreachable target is screened against the reachable "
+            "one, with the others recorded as declared-but-untested -- not excluded. "
+            "Oligomeric state is recorded but does not exclude: a keyword scan over a UniProt "
+            "SUBUNIT comment cannot establish whether a binding site lies at a subunit "
+            "interface. Sequences containing non-standard residues are excluded."),
+        supersedes="candidate-screen-v7",
+        supersedes_reason=(
+            "v7 registered an exclusions clause that did not describe what the code does. It read as if a candidate naming several targets were excluded, whereas coverage() screens such a candidate against its reachable target and records the unreachable ones as declared-but-untested; it also still implied the oligomeric flag was an exclusion ground after that had been withdrawn. The text was corrected AFTER v7 had already been executed, which would have meant editing a hash-locked plan in place -- the registry rejected it by refusing to resolve a study with two plans, which is the guard working. v8 carries the corrected wording. No candidate, arm, threshold or decision rule changes; the 52 folds are reused after each stored model is re-parsed and checked against the chains its own input requested."),
         known_confounds=(
             "1. Single-sequence mode depresses all arms equally; the native-versus-decoy "
             "CONTRAST is the interpretable quantity, not the absolute level. 2. Three decoys "
             "give a minimum empirical p of 0.25, so no individual candidate can reach "
             "significance — the design tests the SET, and per-candidate p values are "
             "descriptive only. This is stated in advance rather than discovered afterwards. "
+            "4. STUDY #7'S BANDS ARE AN EXTRAPOLATION HERE, AND ARE LABELLED AS ONE. #7 calibrated ipTM against DockQ on 16 complexes whose peptides were 7-17 residues and whose receptors were 80-304. These candidates are 31-47 residues, longer than anything #7 measured, on receptors of 156-608. No candidate lies inside the calibrated peptide range, and only TREM2 (156 aa) and CHRNA7 (211 aa) lie inside the calibrated receptor range. The absolute thresholds in H1 and H3 are therefore extrapolated, and every verdict that rests on them is reported as extrapolated rather than calibrated. The primary metric does not depend on them: the native-versus-decoy contrast is a within-candidate comparison whose reference distribution is generated inside this study. "
             "3. Composition-matched shuffling preserves charge and hydrophobicity but not "
             "secondary-structure propensity, so a helical native competes against shuffles "
             "that may not be helical; this makes the test conservative in the native's "
@@ -210,7 +370,7 @@ def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
 
 def run() -> None:
     plan = ps.load(STUDY_ID)
-    cands = _candidates(limit=6)
+    cands = _candidates(limit=None)
     rows: list[dict] = []
     total = len(cands) * (1 + N_DECOYS)
     i = 0
@@ -228,7 +388,7 @@ def run() -> None:
                     [st.Chain("A", rseq, "protein", msa="empty"),
                      st.Chain("B", pep, "protein", msa="empty")],
                     WORK / f"{c['code']}_{kind}", accelerator="gpu", seed=SEED,
-                    diffusion_samples=1, recycling_steps=3, timeout=5400)
+                    diffusion_samples=1, recycling_steps=3, timeout=5400, reuse=True)
             except Exception as exc:  # noqa: BLE001
                 print(f"raised: {str(exc)[:50]}")
                 rows.append({**c, "kind": kind, "peptide_used": pep, "ok": False,
@@ -236,9 +396,10 @@ def run() -> None:
                 continue
             dt = time.time() - t0
             conf = r.get("confidence") or {}
+            reused = bool(r.get("reused"))
             ok = r.get("returncode") == 0 and conf.get("iptm") is not None
             rec = {**c, "kind": kind, "peptide_used": pep, "ok": ok,
-                   "seconds": round(dt, 1), "iptm": conf.get("iptm"),
+                   "seconds": round(dt, 1), "reused": reused, "iptm": conf.get("iptm"),
                    "ptm": conf.get("ptm"), "complex_plddt": conf.get("complex_plddt")}
             if ok:
                 print(f"{dt:6.1f}s  ipTM={rec['iptm']:.4f}  plddt={rec['complex_plddt']:.3f}")
@@ -288,17 +449,21 @@ def analyse() -> int:
     diff = (statistics.fmean(natives) - statistics.fmean(decoys)) if per else 0.0
     n_below = sum(1 for p in per if p["native_iptm"] < IPTM_FAILED_BAND)
 
-    p1 = 0.0 if n_beat_and_confident > 0 else 1.0
-    p2 = 0.0 if diff > 0.1 else 1.0
-    p3 = 0.0 if (per and n_below >= len(per) / 2) else 1.0
-    raw = [("H1_any_candidate_binds", p1), ("H2_natives_beat_decoys_on_average", p2),
-           ("H3_candidates_in_failed_band", p3)]
-    order = sorted(range(3), key=lambda i: raw[i][1])
-    adj = [0.0] * 3
-    rm = 0.0
-    for rank, i in enumerate(order):
-        rm = max(rm, (3 - rank) * raw[i][1])
-        adj[i] = min(1.0, rm)
+    # All three registered hypotheses are threshold criteria on descriptive statistics; none
+    # produces a test statistic. They were previously encoded as p = 0.0/1.0 and published
+    # under the key `p_holm`, which asserted an inference that was never computed. This study
+    # therefore emits no p-values at all — which is the honest description of its design, and
+    # is stated rather than hidden. See cbc/inference.py.
+    ruling = inf.decide(criteria={
+        "H1_any_candidate_binds": inf.Criterion(
+            n_beat_and_confident > 0, n_beat_and_confident,
+            f"at least one candidate beats all decoys AND ipTM > {IPTM_CONFIDENT}"),
+        "H2_natives_beat_decoys_on_average": inf.Criterion(
+            diff > 0.1, round(diff, 4), "mean native minus mean decoy > 0.1"),
+        "H3_candidates_in_failed_band": inf.Criterion(
+            bool(per) and n_below >= len(per) / 2, n_below,
+            f"at least half of {len(per)} candidates below ipTM {IPTM_FAILED_BAND}"),
+    }, tests={})
 
     report = {
         "study_id": STUDY_ID, "prespec_hash": payload["prespec_hash"],
@@ -312,12 +477,14 @@ def analyse() -> int:
             "n_candidates_above_0.8": sum(1 for p in per if p["native_iptm"] > IPTM_CONFIDENT),
             "n_candidates_below_0.6": n_below,
             "per_candidate_empirical_p": {p["code"]: p["empirical_p"] for p in per},
-            "wall_clock_seconds_per_fold": round(statistics.fmean(
-                [r["seconds"] for r in ok if r.get("seconds")]), 1) if ok else None,
+            "wall_clock_seconds_per_fold": inf.wall_clock(ok),
         },
         "per_candidate": per,
-        "p_holm": {raw[i][0]: round(adj[i], 5) for i in range(3)},
-        "verdicts": {k: ("CONFIRMED" if v == 0 else "FALSIFIED") for k, v in raw},
+        # The README says coverage() "records why each candidate is in or out". It did
+        # not: nothing wrote it anywhere, so the claim pointed at a function a reader
+        # would have to run themselves. It is part of the artefact now.
+        "coverage": coverage(),
+        **ruling,
         "interpretation_key": (
             "Study #7 measured, on 16 peptide-receptor complexes with known answers: ipTM > "
             "0.8 was correct in 9 of 10 cases; ipTM < 0.6 was correct in 0 of 4, with no "
@@ -349,8 +516,7 @@ def analyse() -> int:
     print(f"\ncandidates in the confident band (>0.8): {m['n_candidates_above_0.8']}")
     print(f"candidates in the failed band (<0.6):    {m['n_candidates_below_0.6']}")
     print("\nPRE-SPECIFIED VERDICTS")
-    for h, v in report["verdicts"].items():
-        print(f"  {h:36s} {v:10s} Holm p = {report['p_holm'][h]}")
+    print(inf.format_verdicts(report))
     if report["failures"]:
         print(f"\nFAILURES: {len(report['failures'])}")
         for f in report["failures"][:5]:
@@ -369,8 +535,8 @@ def main() -> int:
         ap.add_argument(f"--{f}", action="store_true")
     a = ap.parse_args()
     if a.register:
-        c = _candidates(limit=6)
-        spec = build_prespec(len(c) * (1 + N_DECOYS), len(c))
+        c = _candidates(limit=None)
+        spec = build_prespec(*prespec_args())
         problems = spec.check()
         if problems:
             print("NOT REGISTRABLE:")

@@ -69,6 +69,13 @@ class Atom:
     y: float
     z: float
     b: float | None = None
+    #: Alternate-conformation label. Deposited structures model a flexible side chain twice
+    #: at partial occupancy; both copies carry the same (chain, resi, name). Read as two
+    #: distinct atoms they sit ~0.5 A apart and every check that counts atoms or measures
+    #: distances sees a molecule that does not exist: duplicated residues, false clashes,
+    #: and an atom count that will never match a prediction's.
+    altloc: str = "."
+    occupancy: float = 1.0
 
     def dist(self, o: "Atom") -> float:
         return math.dist((self.x, self.y, self.z), (o.x, o.y, o.z))
@@ -165,10 +172,42 @@ def _parse_pdb(text: str) -> list[Atom]:
                 resn=line[17:20].strip(), name=line[12:16].strip(),
                 element=(line[76:78].strip() or line[12:16].strip()[:1]).upper(),
                 x=float(line[30:38]), y=float(line[38:46]), z=float(line[46:54]),
-                b=float(line[60:66]) if line[60:66].strip() else None))
+                b=float(line[60:66]) if line[60:66].strip() else None,
+                altloc=line[16].strip() or ".",
+                occupancy=float(line[54:60]) if line[54:60].strip() else 1.0))
         except (ValueError, IndexError):
             continue
-    return out
+    return _resolve_altlocs(out)
+
+
+def _resolve_altlocs(atoms: list[Atom]) -> list[Atom]:
+    """Collapse alternate conformations to one copy per (chain, resi, atom name).
+
+    Alternate locations are the SAME atom modelled twice, not two atoms. Keeping both makes a
+    residue appear duplicated, puts two nuclei 0.5 A apart where the clash test expects none,
+    and gives an atom count no prediction can match. Measured here: it silently reduced the
+    congeneric-extension stratum of the pose study from 7 scorable entries to 6, and the lost
+    entry was reported as a technical failure rather than as a parser limitation.
+
+    The highest-occupancy copy is kept, ties broken by the label so the choice is
+    deterministic. Atoms with no altloc ('.', '?', '') are untouched.
+    """
+    best: dict[tuple[str, int, str], Atom] = {}
+    order: list[tuple[str, int, str]] = []
+    for a in atoms:
+        if a.altloc in (".", "?", ""):
+            key = (a.chain, a.resi, a.name, id(a))       # never collapse a plain atom
+            best[key] = a
+            order.append(key)
+            continue
+        key = (a.chain, a.resi, a.name)
+        prev = best.get(key)
+        if prev is None:
+            best[key] = a
+            order.append(key)
+        elif (a.occupancy, a.altloc) > (prev.occupancy, prev.altloc):
+            best[key] = a
+    return [best[k] for k in order]
 
 
 def _parse_cif(text: str) -> list[Atom]:
@@ -208,10 +247,12 @@ def _parse_cif(text: str) -> list[Atom]:
                 element=col(f, "type_symbol").upper(),
                 x=float(col(f, "Cartn_x")), y=float(col(f, "Cartn_y")),
                 z=float(col(f, "Cartn_z")),
-                b=float(col(f, "B_iso_or_equiv", default="nan"))))
+                b=float(col(f, "B_iso_or_equiv", default="nan")),
+                altloc=col(f, "label_alt_id", default="."),
+                occupancy=float(col(f, "occupancy", default="1.0"))))
         except (ValueError, IndexError):
             continue
-    return out
+    return _resolve_altlocs(out)
 
 
 # --------------------------------------------------------------------------- #

@@ -1,0 +1,9 @@
+version: 1
+sequences:
+  - protein:
+      id: A
+      sequence: SGGELAAIIAKIKETGAKILELFTRALDTLVDGDEAEFRKILEELTKLVKEHFALVSEAIAAGAPVTPGYFRGVELVALFEAFVKAYEDGDEGAFLRLGAQLAVLALAGGLPREVARRFLEWALERLRRLGDEEGAAEVQRYLDTL
+      msa: empty
+  - ligand:
+      id: B
+      smiles: 'CC(C)(C)c1cc2c(c(c1)C(C)(C)C)O[Co]34[N+](=C2)CC[N+]3=Cc5cc(cc(c5O4)C(C)(C)C)C(C)(C)C'

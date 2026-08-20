@@ -70,6 +70,48 @@
   ],
   "flag": "Precursor"
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "P04629"
+      },
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "P15209"
+      },
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "Q63604"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "10092678"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "11738045"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "35840571"
+      }
+     ],
+     "value": "Exists in a dynamic equilibrium between monomeric (low affinity) and dimeric (high affinity) structures. Interacts (phosphorylated upon activation by BDNF) with SHC1; mediates SHC1 phosphorylation and activation. Interacts (phosphorylated upon activation by BDNF) with PLCG1 and/or PLCG2; mediates PLCG1 phosphorylation and activation. Interacts with SH2B1 and SH2B2. Interacts with NGFR; may regulate the ligand specificity of the receptor (By similarity). Interacts with SORCS2; this interaction is important for normal targeting to post-synaptic densities in response to high-frequency stimulation (By similarity). Interacts (phosphorylated upon ligand-binding) with SH2D1A; regulates NTRK2. Interacts with SQSTM1 and KIDINS220 (By similarity). Interacts (phosphorylated upon ligand-binding) with FRS2; activates the MAPK signaling pathway (PubMed:10092678). Interacts with APPL1 (By similarity). Interacts with MAPK8IP3/JIP3 and KLC1; interaction with KLC1 is mediated by MAPK8IP3/JIP3 (By similarity). Interacts with SORL1; this interaction facilitates NTRK2 trafficking between synaptic plasma membranes, postsynaptic densities and cell soma, hence positively regulates BDNF signaling (By similarity). Interacts with SLITRK2 (PubMed:35840571)"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Signal",
@@ -99,6 +141,63 @@
    },
    "description": "BDNF/NT-3 growth factors receptor",
    "featureId": "PRO_0000016727"
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 32,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 430,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Extracellular",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
+   "type": "Transmembrane",
+   "location": {
+    "start": {
+     "value": 431,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 454,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Helical",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 455,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 822,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Cytoplasmic",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255"
+    }
+   ]
   },
   {
    "type": "Domain",
@@ -176,6 +275,441 @@
      "id": "PRU00159"
     }
    ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 32,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 38,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255",
+     "source": "PROSITE-ProRule",
+     "id": "PRU00114"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "7574684"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 36,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 45,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255",
+     "source": "PROSITE-ProRule",
+     "id": "PRU00114"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "7574684"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 152,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 176,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255",
+     "source": "PROSITE-ProRule",
+     "id": "PRU00114"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "7574684"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 154,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 194,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255",
+     "source": "PROSITE-ProRule",
+     "id": "PRU00114"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "7574684"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 218,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 266,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255",
+     "source": "PROSITE-ProRule",
+     "id": "PRU00114"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "7574684"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 302,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 345,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000255",
+     "source": "PROSITE-ProRule",
+     "id": "PRU00114"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "10388563"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "11738045"
+    },
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "7574684"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "1HCF"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "1WWB"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5MO9"
+    }
+   ]
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 156,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform TrkB-N-T1",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "14702039"
+    }
+   ],
+   "featureId": "VSP_042177",
+   "alternativeSequence": {}
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 465,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 465,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 4 and isoform 5",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "11798182"
+    }
+   ],
+   "featureId": "VSP_041942",
+   "alternativeSequence": {
+    "originalSequence": "K",
+    "alternativeSequences": [
+     "KDFSWFGFGKVKSRQGV"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 467,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 477,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform TrkB-T1 and isoform TrkB-N-T1",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "11798182"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "14702039"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "15489334"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "7823156"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "7936202"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "Reference",
+     "id": "Ref.5"
+    }
+   ],
+   "featureId": "VSP_002901",
+   "alternativeSequence": {
+    "originalSequence": "PASVISNDDDS",
+    "alternativeSequences": [
+     "FVLFHKIPLDG"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 478,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 822,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform TrkB-T1 and isoform TrkB-N-T1",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "11798182"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "14702039"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "15489334"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "7823156"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "7936202"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "Reference",
+     "id": "Ref.5"
+    }
+   ],
+   "featureId": "VSP_002902",
+   "alternativeSequence": {}
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 529,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 537,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform TrkB-T-Shc and isoform 5",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "11798182"
+    }
+   ],
+   "featureId": "VSP_002903",
+   "alternativeSequence": {
+    "originalSequence": "FVQHIKRHN",
+    "alternativeSequences": [
+     "WPRGSPKTA"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 538,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 822,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform TrkB-T-Shc and isoform 5",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "11798182"
+    }
+   ],
+   "featureId": "VSP_002904",
+   "alternativeSequence": {}
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 710,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 735,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform TrkB-T-TK",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "Reference",
+     "id": "Ref.7"
+    }
+   ],
+   "featureId": "VSP_042178",
+   "alternativeSequence": {
+    "originalSequence": "GGHTMLPIRWMPPESIMYRKFTTESD",
+    "alternativeSequences": [
+     "SSCADQRPQGPLSLRDPCCICLLRLS"
+    ]
+   }
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 736,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 822,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform TrkB-T-TK",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "Reference",
+     "id": "Ref.7"
+    }
+   ],
+   "featureId": "VSP_042179",
+   "alternativeSequence": {}
   }
  ],
  "uniProtKBCrossReferences": [

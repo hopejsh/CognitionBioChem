@@ -21,7 +21,7 @@ import statistics
 from pathlib import Path
 from typing import Any
 
-from . import prespec as ps
+from . import inference as inf, prespec as ps
 
 RMSD_SUCCESS = 2.0
 
@@ -186,19 +186,21 @@ def main(path: Path, study_id: str) -> int:
     k1, n1, f1, ci1 = frac(rec)
     k2, n2, f2, ci2 = frac(con)
 
-    p1 = 0.0 if f1 > 0.5 else 1.0
-    p2 = 0.0 if (f1 - f2) >= 0.2 else 1.0
-    p_fisher = _fisher(k1, n1 - k1, k2, n2 - k2) if (n1 and n2) else 1.0
-    p3 = 1.0     # physical validity is reported, not tested, when PoseBusters is unavailable
+    p_fisher = _fisher(k1, n1 - k1, k2, n2 - k2) if (n1 and n2) else None
 
-    raw = [("H1_recall_accuracy", p1), ("H2_interpolation_premium", p2),
-           ("H3_physical_validity", p3)]
-    order = sorted(range(3), key=lambda i: raw[i][1])
-    adj = [0.0] * 3
-    run = 0.0
-    for rank, i in enumerate(order):
-        run = max(run, (3 - rank) * raw[i][1])
-        adj[i] = min(1.0, run)
+    # H1 and H2 are threshold criteria on fractions; H3 is not evaluated at all when
+    # PoseBusters is unavailable. The Fisher test comparing the two strata IS a real test, and
+    # it was previously computed and reported beside a `p_holm` block built from 0/1 sentinels
+    # that did not include it. It is now the family, and the family has one member.
+    ruling = inf.decide(criteria={
+        "H1_recall_accuracy": inf.Criterion(
+            f1 > 0.5, round(f1, 4), "recall-stratum accuracy > 0.5"),
+        "H2_interpolation_premium": inf.Criterion(
+            (f1 - f2) >= 0.2, round(f1 - f2, 4),
+            "recall minus congeneric-extension accuracy >= 0.2"),
+    }, tests=({"H2_interpolation_premium_fisher": p_fisher}
+              if (p_fisher is not None and 0.0 < p_fisher <= 1.0) else {}))
+    ruling["verdicts"]["H3_physical_validity"] = "NOT_TESTED"
 
     all_rmsd = [s["rmsd"] for s in usable]
     report = {
@@ -216,8 +218,7 @@ def main(path: Path, study_id: str) -> int:
                  if s.get("pocket_backbone_rmsd") is not None]), 3) if usable else None,
             "posebusters_pass_rate": None,
             "per_entry_rmsd": {s["pdb_id"]: s["rmsd"] for s in usable},
-            "wall_clock_seconds_per_complex": round(statistics.fmean(
-                [s["seconds"] for s in usable if s.get("seconds")]), 1) if usable else None,
+            "wall_clock_seconds_per_complex": inf.wall_clock(usable),
         },
         "strata": {
             "recall": {"k": k1, "n": n1, "fraction": round(f1, 4),
@@ -230,13 +231,9 @@ def main(path: Path, study_id: str) -> int:
                                           "(13 to 1172)."},
         },
         "interpolation_premium": round(f1 - f2, 4),
-        "fisher_p_recall_vs_congeneric": round(p_fisher, 5),
-        "p_holm": {raw[i][0]: round(adj[i], 5) for i in range(3)},
-        "verdicts": {
-            "H1_recall_accuracy": "CONFIRMED" if p1 == 0 else "FALSIFIED",
-            "H2_interpolation_premium": "CONFIRMED" if p2 == 0 else "FALSIFIED",
-            "H3_physical_validity": "NOT_TESTED",
-        },
+        "fisher_p_recall_vs_congeneric": (round(p_fisher, 5)
+                                          if p_fisher is not None else None),
+        **ruling,
         "failures": [{k: r.get(k) for k in ("pdb_id", "stratum", "error")}
                      for r in rows if not r.get("ok")]
                     + [{"pdb_id": s["pdb_id"], "stratum": s["stratum"],
@@ -271,8 +268,7 @@ def main(path: Path, study_id: str) -> int:
             print(f"  {f['pdb_id']:6s} {str(f.get('stratum'))[:20]:22s} "
                   f"{str(f.get('error'))[:70]}")
     print("\nPRE-SPECIFIED VERDICTS")
-    for h, v in report["verdicts"].items():
-        print(f"  {h:28s} {v:12s} Holm p = {report['p_holm'][h]}")
+    print(inf.format_verdicts(report))
     a = report["prespec_audit"]
     print(f"\nprespec audit: {'CONFIRMATORY' if a['confirmatory'] else 'DEVIATIONS'}")
     for d in a["deviations"]:

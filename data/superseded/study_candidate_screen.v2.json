@@ -1,0 +1,1166 @@
+{
+ "study_id": "candidate-screen-v2",
+ "prespec_hash": "1609f77d8511089dcbadd141cf04d880fa3affab9df9622868e754582a429a08",
+ "n_observed": 40,
+ "rows": [
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "peptide": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "target": "TREM2",
+   "receptor_len": 156,
+   "construct": {
+    "uniprot": "Q9NZC2",
+    "basis": "ectodomain",
+    "canonical_span": [
+     19,
+     174
+    ],
+    "length": 156,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "ok": true,
+   "seconds": 33.5,
+   "reused": false,
+   "iptm": 0.5256379842758179,
+   "ptm": 0.6979796886444092,
+   "complex_plddt": 0.7096455097198486
+  },
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "peptide": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "target": "TREM2",
+   "receptor_len": 156,
+   "construct": {
+    "uniprot": "Q9NZC2",
+    "basis": "ectodomain",
+    "canonical_span": [
+     19,
+     174
+    ],
+    "length": 156,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "DYRDCRHHWCCGCAWGFEPRRCPVELRAPRG",
+   "ok": true,
+   "seconds": 33.6,
+   "reused": false,
+   "iptm": 0.5673374533653259,
+   "ptm": 0.7141984105110168,
+   "complex_plddt": 0.7301565408706665
+  },
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "peptide": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "target": "TREM2",
+   "receptor_len": 156,
+   "construct": {
+    "uniprot": "Q9NZC2",
+    "basis": "ectodomain",
+    "canonical_span": [
+     19,
+     174
+    ],
+    "length": 156,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "AERCLHPRERGDRDVRGPCWCCAPWRCYFHG",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.5578002333641052,
+   "ptm": 0.7031128406524658,
+   "complex_plddt": 0.7077910304069519
+  },
+  {
+   "code": "MicroTrem2-Agonist-M1",
+   "peptide": "GRLVGHPWECDRRACPCYRGFWRERACPDCH",
+   "target": "TREM2",
+   "receptor_len": 156,
+   "construct": {
+    "uniprot": "Q9NZC2",
+    "basis": "ectodomain",
+    "canonical_span": [
+     19,
+     174
+    ],
+    "length": 156,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "RFWDGCGEHLCCYRVGRRAPRHCPWPACRED",
+   "ok": true,
+   "seconds": 33.6,
+   "reused": false,
+   "iptm": 0.28888368606567383,
+   "ptm": 0.681260347366333,
+   "complex_plddt": 0.6972054839134216
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "CHRNA7",
+   "receptor_len": 211,
+   "construct": {
+    "uniprot": "P36544",
+    "basis": "ectodomain",
+    "canonical_span": [
+     23,
+     233
+    ],
+    "length": 211,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "ok": true,
+   "seconds": 41.3,
+   "reused": false,
+   "iptm": 0.4030306935310364,
+   "ptm": 0.8503047227859497,
+   "complex_plddt": 0.7956792712211609
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "CHRNA7",
+   "receptor_len": 211,
+   "construct": {
+    "uniprot": "P36544",
+    "basis": "ectodomain",
+    "canonical_span": [
+     23,
+     233
+    ],
+    "length": 211,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "CAWEERRDCLDGRWCGVHYVCYLGPFAESCENCPARFAFWR",
+   "ok": true,
+   "seconds": 41.1,
+   "reused": false,
+   "iptm": 0.6304829120635986,
+   "ptm": 0.8832541108131409,
+   "complex_plddt": 0.8438941836357117
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "CHRNA7",
+   "receptor_len": 211,
+   "construct": {
+    "uniprot": "P36544",
+    "basis": "ectodomain",
+    "canonical_span": [
+     23,
+     233
+    ],
+    "length": 211,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "CFWAHPWADFSPGRCCCCRWNAEVAEDRGGRLEEYCRVLYF",
+   "ok": true,
+   "seconds": 44.2,
+   "reused": false,
+   "iptm": 0.8301225304603577,
+   "ptm": 0.9107615947723389,
+   "complex_plddt": 0.8210864067077637
+  },
+  {
+   "code": "PfcACh-PAM-P1",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "CHRNA7",
+   "receptor_len": 211,
+   "construct": {
+    "uniprot": "P36544",
+    "basis": "ectodomain",
+    "canonical_span": [
+     23,
+     233
+    ],
+    "length": 211,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "YWACNWECFPFVRRECRSFAWCGAGYPLDECERGDHVLCAR",
+   "ok": true,
+   "seconds": 43.9,
+   "reused": false,
+   "iptm": 0.5781481266021729,
+   "ptm": 0.8616346120834351,
+   "complex_plddt": 0.8037940263748169
+  },
+  {
+   "code": "BasalNgf-TrkA-B3",
+   "peptide": "EPKHVNCDRENPVEWVRACPTGKCEGLRGYTCRCE",
+   "target": "NTRK1",
+   "receptor_len": 391,
+   "construct": {
+    "uniprot": "P04629",
+    "basis": "ectodomain",
+    "canonical_span": [
+     33,
+     423
+    ],
+    "length": 391,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "EPKHVNCDRENPVEWVRACPTGKCEGLRGYTCRCE",
+   "ok": true,
+   "seconds": 86.1,
+   "reused": false,
+   "iptm": 0.8166112303733826,
+   "ptm": 0.6478016376495361,
+   "complex_plddt": 0.8408244848251343
+  },
+  {
+   "code": "BasalNgf-TrkA-B3",
+   "peptide": "EPKHVNCDRENPVEWVRACPTGKCEGLRGYTCRCE",
+   "target": "NTRK1",
+   "receptor_len": 391,
+   "construct": {
+    "uniprot": "P04629",
+    "basis": "ectodomain",
+    "canonical_span": [
+     33,
+     423
+    ],
+    "length": 391,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "CKKYPLCARNPCNPECEGGEGERHCVTTWEVDRVR",
+   "ok": true,
+   "seconds": 86.2,
+   "reused": false,
+   "iptm": 0.8721557855606079,
+   "ptm": 0.6947112679481506,
+   "complex_plddt": 0.8649794459342957
+  },
+  {
+   "code": "BasalNgf-TrkA-B3",
+   "peptide": "EPKHVNCDRENPVEWVRACPTGKCEGLRGYTCRCE",
+   "target": "NTRK1",
+   "receptor_len": 391,
+   "construct": {
+    "uniprot": "P04629",
+    "basis": "ectodomain",
+    "canonical_span": [
+     33,
+     423
+    ],
+    "length": 391,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "LPTGVRKVNCRVCPRCKNHTEEEEERGYPDACGWC",
+   "ok": true,
+   "seconds": 85.1,
+   "reused": false,
+   "iptm": 0.28884783387184143,
+   "ptm": 0.5953465700149536,
+   "complex_plddt": 0.8409132957458496
+  },
+  {
+   "code": "BasalNgf-TrkA-B3",
+   "peptide": "EPKHVNCDRENPVEWVRACPTGKCEGLRGYTCRCE",
+   "target": "NTRK1",
+   "receptor_len": 391,
+   "construct": {
+    "uniprot": "P04629",
+    "basis": "ectodomain",
+    "canonical_span": [
+     33,
+     423
+    ],
+    "length": 391,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "CCERNPTCVRCECDLVPGHRWERYEKAPNGEGVTK",
+   "ok": true,
+   "seconds": 84.7,
+   "reused": false,
+   "iptm": 0.46483466029167175,
+   "ptm": 0.6155776381492615,
+   "complex_plddt": 0.8316881060600281
+  },
+  {
+   "code": "HippoTrk-Saponin-X1",
+   "peptide": "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "target": "NTRK2",
+   "receptor_len": 399,
+   "construct": {
+    "uniprot": "Q16620",
+    "basis": "ectodomain",
+    "canonical_span": [
+     32,
+     430
+    ],
+    "length": 399,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "ok": true,
+   "seconds": 91.0,
+   "reused": false,
+   "iptm": 0.1212688684463501,
+   "ptm": 0.4515959322452545,
+   "complex_plddt": 0.6943553686141968
+  },
+  {
+   "code": "HippoTrk-Saponin-X1",
+   "peptide": "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "target": "NTRK2",
+   "receptor_len": 399,
+   "construct": {
+    "uniprot": "Q16620",
+    "basis": "ectodomain",
+    "canonical_span": [
+     32,
+     430
+    ],
+    "length": 399,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "EPDCNGDEWCWRKRTCAEKGLPVRCCTGHPRCRRVAPCYPCGVGEDE",
+   "ok": true,
+   "seconds": 91.3,
+   "reused": false,
+   "iptm": 0.20852383971214294,
+   "ptm": 0.4874894917011261,
+   "complex_plddt": 0.6801756620407104
+  },
+  {
+   "code": "HippoTrk-Saponin-X1",
+   "peptide": "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "target": "NTRK2",
+   "receptor_len": 399,
+   "construct": {
+    "uniprot": "Q16620",
+    "basis": "ectodomain",
+    "canonical_span": [
+     32,
+     430
+    ],
+    "length": 399,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "EPRWRCTYGPREHEVPDKKCNCCGETVCGGDGDEACRWLVCRRPAPC",
+   "ok": true,
+   "seconds": 90.9,
+   "reused": false,
+   "iptm": 0.20701687037944794,
+   "ptm": 0.5187754034996033,
+   "complex_plddt": 0.6774616241455078
+  },
+  {
+   "code": "HippoTrk-Saponin-X1",
+   "peptide": "CVDRENPVEWVRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "target": "NTRK2",
+   "receptor_len": 399,
+   "construct": {
+    "uniprot": "Q16620",
+    "basis": "ectodomain",
+    "canonical_span": [
+     32,
+     430
+    ],
+    "length": 399,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "DPGCKCDDNVCCREWRTVCPRYEGRRHGEGLKEERPTCPGACPWCVA",
+   "ok": true,
+   "seconds": 90.6,
+   "reused": false,
+   "iptm": 0.18105463683605194,
+   "ptm": 0.5069724321365356,
+   "complex_plddt": 0.6881537437438965
+  },
+  {
+   "code": "PfcTrk-ErkEnhancer-P2",
+   "peptide": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "target": "NTRK2",
+   "receptor_len": 399,
+   "construct": {
+    "uniprot": "Q16620",
+    "basis": "ectodomain",
+    "canonical_span": [
+     32,
+     430
+    ],
+    "length": 399,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "ok": true,
+   "seconds": 87.0,
+   "reused": false,
+   "iptm": 0.44233715534210205,
+   "ptm": 0.5754690170288086,
+   "complex_plddt": 0.7026206254959106
+  },
+  {
+   "code": "PfcTrk-ErkEnhancer-P2",
+   "peptide": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "target": "NTRK2",
+   "receptor_len": 399,
+   "construct": {
+    "uniprot": "Q16620",
+    "basis": "ectodomain",
+    "canonical_span": [
+     32,
+     430
+    ],
+    "length": 399,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "DCAEGRGDGRLWETCCPHYKEGCVRCGPRPTRAKCPC",
+   "ok": true,
+   "seconds": 86.9,
+   "reused": false,
+   "iptm": 0.24802613258361816,
+   "ptm": 0.5048951506614685,
+   "complex_plddt": 0.6734474897384644
+  },
+  {
+   "code": "PfcTrk-ErkEnhancer-P2",
+   "peptide": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "target": "NTRK2",
+   "receptor_len": 399,
+   "construct": {
+    "uniprot": "Q16620",
+    "basis": "ectodomain",
+    "canonical_span": [
+     32,
+     430
+    ],
+    "length": 399,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "RCAPEPRLCTCKGEPGDCGKHRTCPRGVECGCDWYAR",
+   "ok": true,
+   "seconds": 86.2,
+   "reused": false,
+   "iptm": 0.486064612865448,
+   "ptm": 0.5416187047958374,
+   "complex_plddt": 0.6971262693405151
+  },
+  {
+   "code": "PfcTrk-ErkEnhancer-P2",
+   "peptide": "VRACPTGKCEGLRGYTCRCEPGWKGPDCRERACPDCH",
+   "target": "NTRK2",
+   "receptor_len": 399,
+   "construct": {
+    "uniprot": "Q16620",
+    "basis": "ectodomain",
+    "canonical_span": [
+     32,
+     430
+    ],
+    "length": 399,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "REPGKAPAPGYGWCCCECCERRVDTLRDCPGGRTHCK",
+   "ok": true,
+   "seconds": 86.3,
+   "reused": false,
+   "iptm": 0.23339079320430756,
+   "ptm": 0.5034038424491882,
+   "complex_plddt": 0.6783977746963501
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.34018075466156006,
+   "ptm": 0.9019374847412109,
+   "complex_plddt": 0.9231272339820862
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "YKWLLYLEKRRELWWKGEKKKKFKRELWYKALRFFF",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.3477766215801239,
+   "ptm": 0.9030258059501648,
+   "complex_plddt": 0.9184437990188599
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "WLYEGYWFFLRFKLERLKLKWEKKWKAEKRRYLFKK",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.32021352648735046,
+   "ptm": 0.9079479575157166,
+   "complex_plddt": 0.8895465731620789
+  },
+  {
+   "code": "HippoAChE-AlkaPept-X2",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "EKLRFWWYRFEKKYRKLWLKFKWGLKAKFELRKEYL",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.15289601683616638,
+   "ptm": 0.9058622717857361,
+   "complex_plddt": 0.9070160388946533
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.34018075466156006,
+   "ptm": 0.9019374847412109,
+   "complex_plddt": 0.9231272339820862
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "YKWLLYLEKRRELWWKGEKKKKFKRELWYKALRFFF",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.3477766215801239,
+   "ptm": 0.9030258059501648,
+   "complex_plddt": 0.9184437990188599
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "WLYEGYWFFLRFKLERLKLKWEKKWKAEKRRYLFKK",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.32021352648735046,
+   "ptm": 0.9079479575157166,
+   "complex_plddt": 0.8895465731620789
+  },
+  {
+   "code": "BasalAChE-GorgeBlock-B1",
+   "peptide": "KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "EKLRFWWYRFEKKYRKLWLKFKWGLKAKFELRKEYL",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.15289601683616638,
+   "ptm": 0.9058622717857361,
+   "complex_plddt": 0.9070160388946533
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "peptide": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.3906100392341614,
+   "ptm": 0.9127358198165894,
+   "complex_plddt": 0.9011994004249573
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "peptide": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "PGVLMSSGHSNLALGGWRGGGKGFEKGVAGIDIFV",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.3656891882419586,
+   "ptm": 0.9062145352363586,
+   "complex_plddt": 0.8891029953956604
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "peptide": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "SLGGFIVISEVKSMHLGAFVGKGWGGGLNDGGRAP",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.741795003414154,
+   "ptm": 0.9467099905014038,
+   "complex_plddt": 0.8930168151855469
+  },
+  {
+   "code": "BasalAChE-Abeta-B4",
+   "peptide": "KLVFFAEDVGSNKGAIIGLMGGGSGGSGRLVGHPW",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "LSGVSLGEFHPKGDSKMRFIAWGLGGGNAGGGIVV",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.5832412838935852,
+   "ptm": 0.9310505390167236,
+   "complex_plddt": 0.8913360834121704
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "peptide": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.26456907391548157,
+   "ptm": 0.8987448215484619,
+   "complex_plddt": 0.8837260603904724
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "peptide": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "GWGWGLDCCGRCGPPGSRFCGEMEKVKRGSNRDARCFHG",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.4352700412273407,
+   "ptm": 0.9260408878326416,
+   "complex_plddt": 0.8863610029220581
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "peptide": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "GGWRPGASKCDGRVFHRERCGPGGCLKNDSMWREFGGCC",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.39590686559677124,
+   "ptm": 0.9141338467597961,
+   "complex_plddt": 0.8783172965049744
+  },
+  {
+   "code": "BasalSuper-AChE-TrkA-B5",
+   "peptide": "KWWKFLRRGGGGSMCVCDRENPGGGGSCDERACPRCHGF",
+   "target": "ACHE",
+   "receptor_len": 583,
+   "construct": {
+    "uniprot": "P22303",
+    "basis": "mature_chain",
+    "canonical_span": [
+     32,
+     614
+    ],
+    "length": 583,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "DPGGRWFPCACMGKGRGRNREGWEKHVGSSCGRCDLFCG",
+   "ok": true,
+   "seconds": 0.0,
+   "reused": true,
+   "iptm": 0.4994364380836487,
+   "ptm": 0.9291819334030151,
+   "complex_plddt": 0.8753183484077454
+  },
+  {
+   "code": "MicroTlr4-Antagonist-M3",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "TLR4",
+   "receptor_len": 608,
+   "construct": {
+    "uniprot": "O00206",
+    "basis": "ectodomain",
+    "canonical_span": [
+     24,
+     631
+    ],
+    "length": 608,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "native",
+   "peptide_used": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "ok": true,
+   "seconds": 189.2,
+   "reused": false,
+   "iptm": 0.7104300856590271,
+   "ptm": 0.8397324681282043,
+   "complex_plddt": 0.8766451478004456
+  },
+  {
+   "code": "MicroTlr4-Antagonist-M3",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "TLR4",
+   "receptor_len": 608,
+   "construct": {
+    "uniprot": "O00206",
+    "basis": "ectodomain",
+    "canonical_span": [
+     24,
+     631
+    ],
+    "length": 608,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy0",
+   "peptide_used": "CAWEERRDCLDGRWCGVHYVCYLGPFAESCENCPARFAFWR",
+   "ok": true,
+   "seconds": 187.7,
+   "reused": false,
+   "iptm": 0.7583222985267639,
+   "ptm": 0.8367645144462585,
+   "complex_plddt": 0.8762795925140381
+  },
+  {
+   "code": "MicroTlr4-Antagonist-M3",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "TLR4",
+   "receptor_len": 608,
+   "construct": {
+    "uniprot": "O00206",
+    "basis": "ectodomain",
+    "canonical_span": [
+     24,
+     631
+    ],
+    "length": 608,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy1",
+   "peptide_used": "CFWAHPWADFSPGRCCCCRWNAEVAEDRGGRLEEYCRVLYF",
+   "ok": true,
+   "seconds": 185.1,
+   "reused": false,
+   "iptm": 0.8228447437286377,
+   "ptm": 0.8717966675758362,
+   "complex_plddt": 0.8835201859474182
+  },
+  {
+   "code": "MicroTlr4-Antagonist-M3",
+   "peptide": "SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC",
+   "target": "TLR4",
+   "receptor_len": 608,
+   "construct": {
+    "uniprot": "O00206",
+    "basis": "ectodomain",
+    "canonical_span": [
+     24,
+     631
+    ],
+    "length": 608,
+    "convention": "canonical (counts from the initiator methionine)"
+   },
+   "kind": "decoy2",
+   "peptide_used": "YWACNWECFPFVRRECRSFAWCGAGYPLDECERGDHVLCAR",
+   "ok": true,
+   "seconds": 184.2,
+   "reused": false,
+   "iptm": 0.6209444999694824,
+   "ptm": 0.8276419043540955,
+   "complex_plddt": 0.8818929195404053
+  }
+ ],
+ "analysis": {
+  "study_id": "candidate-screen-v2",
+  "prespec_hash": "1609f77d8511089dcbadd141cf04d880fa3affab9df9622868e754582a429a08",
+  "n_observed": 40,
+  "primary_metric": "fraction_candidates_beating_null",
+  "metrics": {
+   "fraction_candidates_beating_null": 0.0,
+   "mean_native_iptm": 0.4355,
+   "mean_decoy_iptm": 0.4503,
+   "native_minus_decoy_mean": -0.0148,
+   "n_candidates_above_0.8": 1,
+   "n_candidates_below_0.6": 8,
+   "per_candidate_empirical_p": {
+    "BasalNgf-TrkA-B3": 0.5,
+    "MicroTlr4-Antagonist-M3": 0.75,
+    "MicroTrem2-Agonist-M1": 0.75,
+    "PfcTrk-ErkEnhancer-P2": 0.5,
+    "PfcACh-PAM-P1": 1.0,
+    "BasalAChE-Abeta-B4": 0.75,
+    "HippoAChE-AlkaPept-X2": 0.5,
+    "BasalAChE-GorgeBlock-B1": 0.5,
+    "BasalSuper-AChE-TrkA-B5": 1.0,
+    "HippoTrk-Saponin-X1": 1.0
+   },
+   "wall_clock_seconds_per_fold": 90.0
+  },
+  "per_candidate": [
+   {
+    "code": "BasalNgf-TrkA-B3",
+    "target": "NTRK1",
+    "native_iptm": 0.8166,
+    "decoy_iptm": [
+     0.8722,
+     0.2888,
+     0.4648
+    ],
+    "decoy_mean": 0.5419,
+    "decoy_max": 0.8722,
+    "beats_all_decoys": false,
+    "empirical_p": 0.5,
+    "band": "confident"
+   },
+   {
+    "code": "MicroTlr4-Antagonist-M3",
+    "target": "TLR4",
+    "native_iptm": 0.7104,
+    "decoy_iptm": [
+     0.7583,
+     0.8228,
+     0.6209
+    ],
+    "decoy_mean": 0.734,
+    "decoy_max": 0.8228,
+    "beats_all_decoys": false,
+    "empirical_p": 0.75,
+    "band": "grey"
+   },
+   {
+    "code": "MicroTrem2-Agonist-M1",
+    "target": "TREM2",
+    "native_iptm": 0.5256,
+    "decoy_iptm": [
+     0.5673,
+     0.5578,
+     0.2889
+    ],
+    "decoy_mean": 0.4713,
+    "decoy_max": 0.5673,
+    "beats_all_decoys": false,
+    "empirical_p": 0.75,
+    "band": "failed"
+   },
+   {
+    "code": "PfcTrk-ErkEnhancer-P2",
+    "target": "NTRK2",
+    "native_iptm": 0.4423,
+    "decoy_iptm": [
+     0.248,
+     0.4861,
+     0.2334
+    ],
+    "decoy_mean": 0.3225,
+    "decoy_max": 0.4861,
+    "beats_all_decoys": false,
+    "empirical_p": 0.5,
+    "band": "failed"
+   },
+   {
+    "code": "PfcACh-PAM-P1",
+    "target": "CHRNA7",
+    "native_iptm": 0.403,
+    "decoy_iptm": [
+     0.6305,
+     0.8301,
+     0.5781
+    ],
+    "decoy_mean": 0.6796,
+    "decoy_max": 0.8301,
+    "beats_all_decoys": false,
+    "empirical_p": 1.0,
+    "band": "failed"
+   },
+   {
+    "code": "BasalAChE-Abeta-B4",
+    "target": "ACHE",
+    "native_iptm": 0.3906,
+    "decoy_iptm": [
+     0.3657,
+     0.7418,
+     0.5832
+    ],
+    "decoy_mean": 0.5636,
+    "decoy_max": 0.7418,
+    "beats_all_decoys": false,
+    "empirical_p": 0.75,
+    "band": "failed"
+   },
+   {
+    "code": "HippoAChE-AlkaPept-X2",
+    "target": "ACHE",
+    "native_iptm": 0.3402,
+    "decoy_iptm": [
+     0.3478,
+     0.3202,
+     0.1529
+    ],
+    "decoy_mean": 0.2736,
+    "decoy_max": 0.3478,
+    "beats_all_decoys": false,
+    "empirical_p": 0.5,
+    "band": "failed"
+   },
+   {
+    "code": "BasalAChE-GorgeBlock-B1",
+    "target": "ACHE",
+    "native_iptm": 0.3402,
+    "decoy_iptm": [
+     0.3478,
+     0.3202,
+     0.1529
+    ],
+    "decoy_mean": 0.2736,
+    "decoy_max": 0.3478,
+    "beats_all_decoys": false,
+    "empirical_p": 0.5,
+    "band": "failed"
+   },
+   {
+    "code": "BasalSuper-AChE-TrkA-B5",
+    "target": "ACHE",
+    "native_iptm": 0.2646,
+    "decoy_iptm": [
+     0.4353,
+     0.3959,
+     0.4994
+    ],
+    "decoy_mean": 0.4435,
+    "decoy_max": 0.4994,
+    "beats_all_decoys": false,
+    "empirical_p": 1.0,
+    "band": "failed"
+   },
+   {
+    "code": "HippoTrk-Saponin-X1",
+    "target": "NTRK2",
+    "native_iptm": 0.1213,
+    "decoy_iptm": [
+     0.2085,
+     0.207,
+     0.1811
+    ],
+    "decoy_mean": 0.1989,
+    "decoy_max": 0.2085,
+    "beats_all_decoys": false,
+    "empirical_p": 1.0,
+    "band": "failed"
+   }
+  ],
+  "p_holm": {
+   "H1_any_candidate_binds": 1.0,
+   "H2_natives_beat_decoys_on_average": 1.0,
+   "H3_candidates_in_failed_band": 0.0
+  },
+  "verdicts": {
+   "H1_any_candidate_binds": "FALSIFIED",
+   "H2_natives_beat_decoys_on_average": "FALSIFIED",
+   "H3_candidates_in_failed_band": "CONFIRMED"
+  },
+  "interpretation_key": "Study #7 measured, on 16 peptide-receptor complexes with known answers: ipTM > 0.8 was correct in 9 of 10 cases; ipTM < 0.6 was correct in 0 of 4, with no false negatives. The gate for this study was OPEN because #7 recovered 7 of 8 memorisable interfaces, so the pipeline has demonstrated sensitivity and a low score here is evidence about the candidate rather than about the method.",
+  "failures": [],
+  "prespec_audit": {
+   "study_id": "candidate-screen-v2",
+   "prespec_hash": "1609f77d8511089dcbadd141cf04d880fa3affab9df9622868e754582a429a08",
+   "registered_utc": "2026-08-18T22:25:20+00:00",
+   "deviations": [],
+   "confirmatory": true,
+   "note": "All pre-specified analyses were carried out as planned."
+  }
+ }
+}

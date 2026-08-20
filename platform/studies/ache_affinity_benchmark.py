@@ -23,18 +23,28 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from cbc import prespec as ps  # noqa: E402
+from cbc import inference as inf, prespec as ps  # noqa: E402
 from cbc.compute import structure as st  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
 STUDY_ID = "ache-affinity-ranking-v1"
-BENCH = Path("/tmp/ache_bench.json")
+BENCH = REPO / "data" / "study_inputs" / "ache_bench.json"
 WORK = Path("/tmp/ache_affinity")
 RESULT = REPO / "data" / "study_ache_affinity.json"
 
 #: Human AChE, UniProt P22303, mature chain (SIGNAL 1-31, CHAIN 32-614).
-ACHE_MATURE = Path("/tmp/ache_mature.txt")
+ACHE_MATURE = REPO / "data" / "study_inputs" / "ache_mature.txt"
 
+
+
+def prespec_args() -> tuple:
+    """The arguments --register builds the plan with.
+
+    Named once so the registration path and the hash-stability test cannot disagree
+    about them: the test previously guessed, guessed wrong for the two-argument
+    studies, and reported drift that did not exist.
+    """
+    return (len(json.loads(BENCH.read_text())),)
 
 def build_prespec(n: int) -> ps.Prespecification:
     return ps.Prespecification(
@@ -204,15 +214,16 @@ def analyse() -> int:
     z = ((hup_err - err.mean()) / err.std(ddof=1)) if hup_err is not None else None
     p3 = 2 * (1 - stats.norm.cdf(abs(z))) if z is not None else 1.0
 
-    # Holm across the three pre-specified tests.
-    raw = [("H1_ranking_ability", p1), ("H2_memorization_signature", p2),
-           ("H3_huperzine_representative", p3)]
-    order = sorted(range(3), key=lambda i: raw[i][1])
-    adj = [0.0] * 3
-    running = 0.0
-    for rank, i in enumerate(order):
-        running = max(running, (3 - rank) * raw[i][1])
-        adj[i] = min(1.0, running)
+    # All three ARE genuine tests here (two Spearman p-values and a two-sided z), so this is
+    # the one study whose Holm family was legitimate. It goes through the shared path anyway,
+    # which validates that every member really is a p-value rather than a 0/1 sentinel.
+    tests = {}
+    for name, pv in (("H1_ranking_ability", p1), ("H2_memorization_signature", p2),
+                     ("H3_huperzine_representative", p3)):
+        tests[name] = float(min(max(float(pv), 1e-300), 1.0))
+    ruling = inf.decide(criteria={}, tests=tests)
+    adj = [ruling["p_holm"][n] for n in
+           ("H1_ranking_ability", "H2_memorization_signature", "H3_huperzine_representative")]
 
     rng = np.random.default_rng(0)
     boot = [stats.spearmanr(pred[s], meas[s]).statistic
@@ -225,6 +236,11 @@ def analyse() -> int:
                               else "FALSIFIED",
         "H2_memorization_signature": "CONFIRMED" if (rho2 < -0.3 and adj[1] < 0.05)
                                      else "FALSIFIED",
+        # Decided by the effect size, not by the test: H3 asks whether Huperzine A is
+        # REPRESENTATIVE, which is confirmed by the absence of a deviation. Its p is reported
+        # for completeness but must not gate the verdict, because failing to reject is not
+        # evidence of equivalence and the adjusted p only ever moves in the permissive
+        # direction. See cbc/inference.py.
         "H3_huperzine_representative": "CONFIRMED" if (z is not None and abs(z) <= 2)
                                        else "FALSIFIED",
     }
@@ -245,8 +261,7 @@ def analyse() -> int:
         "spearman_ci95": [round(c, 4) for c in ci],
         "memorization_rho": round(float(rho2), 4),
         "huperzine_z": round(float(z), 3) if z is not None else None,
-        "p_raw": {k: round(float(v), 5) for k, v in raw},
-        "p_holm": {raw[i][0]: round(adj[i], 5) for i in range(3)},
+        **{k: v for k, v in ruling.items() if k != "verdicts"},
         "verdicts": verdicts,
     }
     audit = ps.verify_result(STUDY_ID, report)
@@ -285,7 +300,7 @@ def main() -> int:
 
     if a.register:
         rows = json.loads(BENCH.read_text())
-        spec = build_prespec(len(rows))
+        spec = build_prespec(*prespec_args())
         problems = spec.check()
         if problems:
             print("NOT REGISTRABLE:")

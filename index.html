@@ -8,6 +8,13 @@
 <!-- Pinned versions. Unpinned CDN tags are a supply-chain and reproducibility hazard. -->
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/3dmol@2.4.2/build/3Dmol-min.js"></script>
+<!-- Loaded before app.js so the page also works when opened with file://, where
+     fetch() is refused as cross-origin. Both are generated from the same object as
+     their .json twin by platform/build_dataset.py; app.js prefers the fetched JSON. -->
+<script defer src="data/dataset.js"></script>
+<script defer src="data/validation_gate.js"></script>
+<script defer src="data/slate.js"></script>
+<script defer src="data/structures.js"></script>
 <script defer src="app.js"></script>
 </head>
 <body>
@@ -25,26 +32,69 @@
 <div class="disclosure" role="note" aria-label="Status disclosure">
   <div class="disclosure-head">
     <span class="dot"></span>
-    <strong id="disclosure-headline">No structure prediction has been run in this
-      repository.</strong>
+    <strong id="disclosure-headline">Structure prediction is real; binding affinity is not
+      calibrated and no free energy is emitted.</strong>
   </div>
   <p id="disclosure-detail"></p>
   <p id="disclosure-sequences" class="disclosure-sub"></p>
 </div>
 
+<noscript>
+  <div class="card error">
+    <h2>This page needs JavaScript, and what you can see without it is the flattering half</h2>
+    <p>Every number in this workbench — the pre-registered studies and their verdicts, the
+      structure gallery, the AlphaFold comparison, the validation violations and the retracted
+      claims — is read from JSON at load time. With scripts blocked the headings survive and
+      the values do not, so the page reduces to a capability description with the findings
+      stripped out of it, which is exactly the wrong half to leave standing.</p>
+    <p><strong>The headline result is negative.</strong> In studies&nbsp;#9 and&nbsp;#10 the
+      designed peptides did not separate from composition-matched shuffles of their own amino
+      acids. Read <code>README.md</code>, or enable JavaScript.</p>
+  </div>
+</noscript>
+
 <nav class="tabs" role="tablist">
-  <button class="tab active" data-tab="overview" role="tab">Overview</button>
-  <button class="tab" data-tab="validation" role="tab">Validation report</button>
-  <button class="tab" data-tab="compounds" role="tab">Compounds</button>
-  <button class="tab" data-tab="candidates" role="tab">Candidate sequences</button>
-  <button class="tab" data-tab="structure" role="tab">Structure analysis</button>
-  <button class="tab" data-tab="provenance" role="tab">Provenance</button>
+  <button class="tab active" data-tab="overview" role="tab" id="tab-btn-overview"
+          aria-controls="tab-overview" aria-selected="true"
+          tabindex="0">Overview</button>
+  <button class="tab" data-tab="studies" role="tab" id="tab-btn-studies"
+          aria-controls="tab-studies" aria-selected="false"
+          tabindex="-1">Pre-registered studies</button>
+  <button class="tab" data-tab="alphafold" role="tab" id="tab-btn-alphafold"
+          aria-controls="tab-alphafold" aria-selected="false"
+          tabindex="-1">AlphaFold vs Boltz-2</button>
+  <button class="tab" data-tab="structure" role="tab" id="tab-btn-structure"
+          aria-controls="tab-structure" aria-selected="false"
+          tabindex="-1">Structures</button>
+  <button class="tab" data-tab="candidates" role="tab" id="tab-btn-candidates"
+          aria-controls="tab-candidates" aria-selected="false"
+          tabindex="-1">Candidate sequences</button>
+  <button class="tab" data-tab="compounds" role="tab" id="tab-btn-compounds"
+          aria-controls="tab-compounds" aria-selected="false"
+          tabindex="-1">Compounds</button>
+  <button class="tab" data-tab="validation" role="tab" id="tab-btn-validation"
+          aria-controls="tab-validation" aria-selected="false"
+          tabindex="-1">Validation report</button>
+  <button class="tab" data-tab="provenance" role="tab" id="tab-btn-provenance"
+          aria-controls="tab-provenance" aria-selected="false"
+          tabindex="-1">Provenance</button>
 </nav>
 
 <main>
 
 <!-- ───────────────────────────── OVERVIEW ───────────────────────────── -->
-<section class="panel active" id="tab-overview">
+<section class="panel active" id="tab-overview" role="tabpanel"
+         aria-labelledby="tab-btn-overview" tabindex="0">
+
+  <!-- The result, before the capabilities. A reader who opens this page, reads the Overview
+       and leaves used to be told the tooling was real and nothing about what it found. -->
+  <div class="card">
+    <h2>The result this workbench was built to report is negative</h2>
+    <p id="headline-finding"></p>
+    <div class="stat-grid compact" id="headline-stats"></div>
+    <p class="note" id="headline-note"></p>
+  </div>
+
   <div class="stat-grid" id="overview-stats"></div>
 
   <div class="card">
@@ -60,7 +110,7 @@
           <li>Check every stated ΔG/K<sub>d</sub> pair for thermodynamic consistency
             against ΔG = RT·ln(K<sub>d</sub>).</li>
           <li>Parse <em>genuine</em> predictor output — AlphaFold Server, AlphaFold DB,
-            Boltz, or Chai — and display the real per-residue pLDDT, the real PAE matrix,
+            or Boltz — and display the real per-residue pLDDT, the real PAE matrix,
             and the real coordinates.</li>
           <li>Flag designs whose target is in a compartment the molecule cannot reach.</li>
           <li>Attach a provenance record to every value, so nothing can be displayed
@@ -70,12 +120,18 @@
       <div>
         <h3 class="warn">It does not</h3>
         <ul class="crosses">
-          <li>Run AlphaFold3, or any structure predictor. Prediction happens elsewhere;
-            this workbench analyses what you bring back.</li>
-          <li>Compute binding free energies or dissociation constants. No docking, MM-GBSA
-            or FEP calculation exists here — and structure predictors do not output
-            free energies in any case.</li>
-          <li>Perform ADMET or toxicity prediction.</li>
+          <li>Run AlphaFold3. Its weights are request-only, non-commercial, and
+            Linux/CUDA-bound; Boltz-2 v2.2.1 (MIT code <em>and</em> weights) runs locally
+            instead and produced every <em>predicted</em> structure under <code>runs/</code>.
+            <code>runs/</code> also holds 32 RCSB crystal depositions — experimental ground
+            truth for studies #6 and #7, produced by no predictor.</li>
+          <li id="does-not-affinity"><em>Display</em> a binding free energy or dissociation
+            constant as a result. No docking, MM-GBSA or FEP calculation exists here, and
+            structure predictors do not output free energies in any case. Boltz-2's affinity
+            head emits pooled potency on a log scale, which is never converted to kcal/mol.
+            <span id="prodigy-caveat"></span></li>
+          <li>Predict ADMET for a molecule outside ADMET-AI's applicability domain. Those
+            are refused with a stated reason rather than given a number.</li>
           <li>Claim any affiliation with Google DeepMind or the AlphaFold team.</li>
         </ul>
       </div>
@@ -90,9 +146,10 @@
       <li>Run it through a predictor you have the right to use. Note that the AlphaFold
         Server terms prohibit automated use for predicting protein–ligand or
         protein–peptide binding; for an automated pipeline use a permissively licensed
-        model such as Boltz-2, Chai-1, Protenix, or OpenFold3.</li>
+        model such as Boltz-2, Chai-1, Protenix, or OpenFold3 — noting that only Boltz and
+            AlphaFold confidence files are parsed here; other formats load as structure only.</li>
       <li>Bring the returned <code>.cif</code> and confidence JSON back to
-        <strong>Structure analysis</strong> and load them. Everything shown there is then
+        <strong>Structures</strong> and load them. Everything shown there is then
         read from your files.</li>
     </ol>
     <p class="note">A single peptide chain predicted alone has no interface, so ipTM and
@@ -101,8 +158,73 @@
   </div>
 </section>
 
+<!-- ───────────────────────────── STUDIES ───────────────────────────── -->
+<section class="panel" id="tab-studies" role="tabpanel"
+         aria-labelledby="tab-btn-studies" tabindex="0">
+  <div class="card">
+    <h2>The pre-registered slate</h2>
+    <p>Each study froze a question, a primary metric, a decision threshold and an analysis
+      plan under a content hash <strong>before</strong> any data was seen. What follows is
+      assembled by <code>platform/build_slate.py</code> from those plans and from the study
+      artefacts — no verdict, threshold or p-value on this page is typed by hand.</p>
+    <div class="stat-grid compact" id="slate-stats"></div>
+    <p class="note" id="slate-reading-note"></p>
+    <div class="notice" id="slate-confirmatory"></div>
+  </div>
+
+  <div class="card">
+    <h2>Verdicts at a glance</h2>
+    <p class="note">A confirmed <em>criterion</em> is not a test result. Most hypotheses here
+      are pre-specified threshold comparisons on a descriptive statistic; they carry no
+      p-value because none was computed, and the tally is not a score.</p>
+    <div class="legend" id="slate-legend"></div>
+    <div id="slate-table"></div>
+    <p class="note" id="slate-numbering-note"></p>
+  </div>
+
+  <div id="slate-detail"></div>
+</section>
+
+<!-- ──────────────────────────── ALPHAFOLD ──────────────────────────── -->
+<section class="panel" id="tab-alphafold" role="tabpanel"
+         aria-labelledby="tab-btn-alphafold" tabindex="0">
+  <div class="card">
+    <h2>AlphaFold DB against Boltz-2</h2>
+    <p id="af-question"></p>
+    <div class="notice" id="af-status"></div>
+    <div class="stat-grid compact" id="af-stats"></div>
+  </div>
+
+  <div class="card">
+    <h2>Why AlphaFold DB and not AlphaFold Server</h2>
+    <p id="af-source-note"></p>
+    <p class="note">Source: <a id="af-source-link" href="https://alphafold.ebi.ac.uk/"
+      target="_blank" rel="noopener">AlphaFold Protein Structure Database</a> —
+      <span id="af-licence"></span>. <span id="af-cite"></span></p>
+  </div>
+
+  <div class="card">
+    <h2>Per-residue confidence agreement</h2>
+    <p class="note">Pearson correlation between AlphaFold DB's per-residue pLDDT and
+      Boltz-2's, over the same canonical span of the same receptor construct. Two arms:
+      one against study&nbsp;#9's single-sequence folds, one against study&nbsp;#10's
+      full-MSA folds. The second holds the MSA constant, so it is the arm to read.</p>
+    <div id="af-arms"></div>
+    <h3>Does the MSA change the agreement?</h3>
+    <div id="af-agreement"></div>
+  </div>
+
+  <div class="card">
+    <h2>What this supports, and what it cannot</h2>
+    <p id="af-supports"></p>
+    <ul class="crosses" id="af-confounds"></ul>
+    <p class="note" id="af-coverage"></p>
+  </div>
+</section>
+
 <!-- ──────────────────────────── VALIDATION ─────────────────────────── -->
-<section class="panel" id="tab-validation">
+<section class="panel" id="tab-validation" role="tabpanel"
+         aria-labelledby="tab-btn-validation" tabindex="0">
   <div class="card">
     <h2>Data-integrity gate</h2>
     <p>Produced by <code>platform/validate.py</code>, which exits non-zero when any record
@@ -113,7 +235,8 @@
 </section>
 
 <!-- ──────────────────────────── COMPOUNDS ──────────────────────────── -->
-<section class="panel" id="tab-compounds">
+<section class="panel" id="tab-compounds" role="tabpanel"
+         aria-labelledby="tab-btn-compounds" tabindex="0">
   <div class="card">
     <h2>Natural product structures</h2>
     <p>Each structure is parsed with RDKit. A compound whose stored SMILES fails to parse,
@@ -124,22 +247,37 @@
 </section>
 
 <!-- ──────────────────────────── CANDIDATES ─────────────────────────── -->
-<section class="panel" id="tab-candidates">
+<section class="panel" id="tab-candidates" role="tabpanel"
+         aria-labelledby="tab-btn-candidates" tabindex="0">
   <div class="card">
     <h2>Candidate sequences</h2>
-    <p>These are hand-assembled concatenations of published natural motifs joined by
-      GGGGS linkers — a hypothesis catalogue, not de novo designs. Properties shown are
-      computed from the sequence. Affinity and confidence fields are empty because nothing
-      has computed them.</p>
+    <p>These are hand-assembled concatenations of published natural motifs, pastiche
+      scaffolds and one de novo amphipathic helix, joined by GGGGS linkers. Per-segment
+      attribution is in <code>motif_provenance</code>. Properties shown are computed from
+      the sequence.</p>
+    <p class="note" id="candidate-attribution"></p>
     <div class="filter-row" id="candidate-filters"></div>
   </div>
   <div id="candidate-list"></div>
 </section>
 
 <!-- ──────────────────────────── STRUCTURE ──────────────────────────── -->
-<section class="panel" id="tab-structure">
+<section class="panel" id="tab-structure" role="tabpanel"
+         aria-labelledby="tab-btn-structure" tabindex="0">
   <div class="card">
-    <h2>Load real predictor output</h2>
+    <h2>Structures computed in this repository</h2>
+    <p>Every entry below is a real model held under <code>runs/</code> or
+      <code>data/alphafold_db/</code>. Selecting one loads its actual coordinate file — the
+      pLDDT curve, the PAE matrix and the Cα geometry check are all read from that file, the
+      same way a file you drop in yourself would be.</p>
+    <div class="stat-grid compact" id="gallery-stats"></div>
+    <div class="filter-row" id="gallery-filters"></div>
+    <div id="gallery-list"></div>
+    <p class="note" id="gallery-note"></p>
+  </div>
+
+  <div class="card">
+    <h2>Or load your own predictor output</h2>
     <p>Drop a coordinate file and, optionally, its confidence JSON. Everything rendered
       below is read from these files. Nothing is synthesized.</p>
     <div class="dropzone" id="dropzone">
@@ -149,18 +287,22 @@
         AlphaFold Server: <code>*_model_*.cif</code> +
         <code>*_full_data_*.json</code> + <code>*_summary_confidences_*.json</code><br>
         AlphaFold DB: <code>AF-&lt;ACC&gt;-F1-model_v*.cif</code> +
-        <code>*predicted_aligned_error*.json</code>
+        <code>*predicted_aligned_error*.json</code><br>
+        Boltz: <code>*_model_*.cif</code> + <code>confidence_*.json</code>
+        (<code>pae_*.npz</code> is not readable in a browser — the PAE panel stays empty)
       </p>
     </div>
     <div class="demo-row">
-      <button class="btn" id="load-demo">Load a real AlphaFold DB entry (human TrkB, Q16620)</button>
-      <span class="hint">Fetches genuine output from EBI so you can see the difference.</span>
+      <button class="btn" id="load-demo">Fetch a fresh AlphaFold DB entry from EBI (TrkB, Q16620)</button>
+      <span class="hint">Goes to the network. The same entry is already in the gallery
+        above, served from this repository; this button exists to show the two agree.</span>
     </div>
     <div id="load-status"></div>
   </div>
 
   <div id="structure-results" class="hidden">
     <div class="stat-grid compact" id="structure-stats"></div>
+    <div id="structure-provenance"></div>
 
     <div class="card">
       <h3>Geometry check</h3>
@@ -172,21 +314,26 @@
 
     <div class="grid-2">
       <div class="card">
-        <h3>Structure <span class="badge computed">from your file</span></h3>
+        <h3>Structure <span class="badge computed" id="src-badge-a">from the loaded file</span></h3>
         <div id="viewer-3d" class="viewer"></div>
         <div class="legend" id="plddt-legend"></div>
       </div>
       <div class="card">
-        <h3>Per-residue pLDDT <span class="badge computed">from your file</span></h3>
-        <div class="chart-wrap"><canvas id="plddt-chart"></canvas></div>
+        <h3>Per-residue pLDDT <span class="badge computed" id="src-badge-b">from the loaded file</span></h3>
+        <div class="chart-wrap"><canvas id="plddt-chart" role="img"
+        aria-label="Per-residue pLDDT along the chain. The same values are summarised as
+        minimum, median, maximum and percent below 70 in the line beneath."></canvas></div>
         <div id="plddt-stats" class="mini-stats"></div>
       </div>
     </div>
 
     <div class="card">
-      <h3>Predicted aligned error <span class="badge computed">from your file</span></h3>
+      <h3>Predicted aligned error <span class="badge computed" id="src-badge-c">from the loaded file</span></h3>
       <div class="pae-row">
-        <canvas id="pae-canvas" width="520" height="520"></canvas>
+        <canvas id="pae-canvas" width="520" height="520" role="img"
+          aria-label="Predicted aligned error matrix"
+          aria-describedby="pae-alt"></canvas>
+        <p id="pae-alt" class="sr-only"></p>
         <div class="colorbar">
           <div class="colorbar-gradient"></div>
           <div class="colorbar-labels"><span>0 Å</span><span id="pae-mid"></span><span id="pae-max-label"></span></div>
@@ -207,7 +354,8 @@
 </section>
 
 <!-- ──────────────────────────── PROVENANCE ─────────────────────────── -->
-<section class="panel" id="tab-provenance">
+<section class="panel" id="tab-provenance" role="tabpanel"
+         aria-labelledby="tab-btn-provenance" tabindex="0">
   <div class="card">
     <h2>Provenance model</h2>
     <p>Every scientific value in this workbench carries a status. The UI cannot render a
@@ -250,6 +398,8 @@
      Not affiliated with, endorsed by, or connected to Google DeepMind or the AlphaFold team.
      AlphaFold is a trademark of Google DeepMind.</p>
   <p class="hint">Data layer: <code>data/dataset.json</code> ·
+     Slate: <code>data/slate.json</code> ·
+     Structures: <code>data/structures.json</code> ·
      Gate: <code>platform/validate.py</code> ·
      Parser: <code>platform/cbc/predictor.py</code></p>
 </footer>

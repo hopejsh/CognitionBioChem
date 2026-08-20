@@ -1,0 +1,664 @@
+{
+  "artefact": "alphafold_db_vs_boltz2",
+  "status": "EXPLORATORY -- not a pre-registered study, and labelled so deliberately. It has no hypothesis, no verdict and no place in the numbered slate.",
+  "generator": "platform/studies/alphafold_db_compare.py",
+  "git_sha": "2479695-dirty",
+  "question": "Do two independent predictors agree about WHERE each receptor construct is confidently folded?",
+  "method": "For every registry target with a Boltz-2 receptor fold, take AlphaFold DB's per-residue pLDDT over the construct's canonical span and correlate it against Boltz-2's chain-A per-residue pLDDT, residue by residue. Both vectors are read from the mmCIF B-factor column by the same parser the workbench uses on user-supplied predictor output. Both vectors are checked to lie on 0-100 before any mean is taken, and a row is refused rather than rescaled if either does not; no file in this repository triggers that, because every model under custody already writes 0-100.",
+  "confounds": [
+    "AlphaFold DB is a MONOMER prediction. Boltz-2 folded the receptor inside a two-chain complex with a peptide. Both arms carry this confound, so no offset in mean pLDDT is evidence that either model is more accurate.",
+    "Arm A additionally confounds the MSA: AlphaFold DB used a full MSA and study #9 used none. Arm B holds the MSA constant and is the arm to read.",
+    "pLDDT is a self-reported confidence, not accuracy. Agreement between two models about where they are confident is not agreement about where they are right.",
+    "The correlation is computed over residues within one protein, which are not independent: confidence runs in contiguous stretches, so the effective sample size is far below n_residues_compared and no p-value is reported for r. Each row carries effective_n_after_autocorrelation for this reason -- on TREM2 the 156 residues are worth a single-figure number of independent observations, which makes the largest r in the set the least supported number in it."
+  ],
+  "what_this_does_support": "The two models agree about which residues of each receptor are well determined, and that agreement is not an artefact of their two confidence distributions happening to have similar shape: mis-registering one profile against the other destroys it in every target-arm (see shift_null per row, and read its note for what that null does not rule out). The models have different weights, a different architecture and a different inference path -- but NOT independent training data: both are trained predominantly on the PDB, and both confidence heads are trained to predict lDDT, so some of this agreement is shared supervision rather than independent corroboration. It is a check that the receptor folds are not arbitrary. It is not a check on the peptide, on the interface, or on any claim in the slate -- whose answer remains negative.",
+  "source": {
+    "name": "AlphaFold Protein Structure Database",
+    "url": "https://alphafold.ebi.ac.uk/",
+    "licence": "CC BY 4.0",
+    "cite": "Jumper J et al. Nature 596:583-589 (2021); Varadi M et al. Nucleic Acids Res 52:D368-D375 (2024)",
+    "note": "Downloaded, not computed here. AlphaFold Server was NOT used: its terms prohibit automated use for protein-ligand and protein-peptide binding prediction, which is what studies #9 and #10 do."
+  },
+  "coverage": {
+    "registry_targets": 16,
+    "downloaded": 16,
+    "targets": [
+      "ACHE",
+      "CHRM1",
+      "CHRNA7",
+      "FZD8",
+      "GRIN2A",
+      "GRIN2B",
+      "GSK3B",
+      "KEAP1",
+      "NFE2L2",
+      "NOS3",
+      "NTRK1",
+      "NTRK2",
+      "PTAFR",
+      "SLC1A2",
+      "TLR4",
+      "TREM2"
+    ],
+    "compared_in_at_least_one_arm": [
+      "ACHE",
+      "CHRNA7",
+      "GRIN2A",
+      "NTRK1",
+      "NTRK2",
+      "TLR4",
+      "TREM2"
+    ],
+    "note": "Every registry accession is downloaded. A target is compared only where a Boltz-2 receptor fold exists; the rest are listed per arm under not_compared with a reason."
+  },
+  "arms": {
+    "boltz_single_sequence": {
+      "note": "study #9 -- receptor folded inside a two-chain complex with msa=empty",
+      "study": "data/study_candidate_screen.json",
+      "plan": "4486520b88637eb3edff3757622170719ab5cee25e689c711bee26d5b212a9d0",
+      "n_compared": 7,
+      "pearson_r_min": 0.4874,
+      "pearson_r_median": 0.7154,
+      "pearson_r_max": 0.9331,
+      "mean_offset_afdb_minus_boltz": 5.32,
+      "rows": [
+        {
+          "target": "ACHE",
+          "uniprot": "P22303",
+          "n_residues_compared": 543,
+          "construct_span_canonical": [
+            32,
+            574
+          ],
+          "construct_basis": "mature_chain_trimmed",
+          "effective_n_after_autocorrelation": 124,
+          "afdb_mean_plddt": 97.49,
+          "boltz_mean_plddt": 96.76,
+          "pearson_r": 0.8531,
+          "shift_null": {
+            "n_shifts": 523,
+            "fraction_of_shifts_reaching_observed_r": "<0.0019",
+            "null_abs_r_p95": 0.1422,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "HippoAChE-AlkaPept-X2_native",
+          "boltz_run": "runs/bff806565a98",
+          "boltz_run_selected_by": "chain A holds 543 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [
+            {
+              "boltz_job": "BasalAChE-Abeta-B4_native",
+              "boltz_run": "runs/49cb8d922302",
+              "pearson_r": 0.8376,
+              "boltz_mean_plddt": 96.26
+            },
+            {
+              "boltz_job": "BasalSuper-AChE-TrkA-B5_native",
+              "boltz_run": "runs/e61b4bdd4f9b",
+              "pearson_r": 0.801,
+              "boltz_mean_plddt": 96.71
+            }
+          ],
+          "afdb_files": [
+            "AF-P22303-predicted_aligned_error.json",
+            "AF-P22303.cif"
+          ]
+        },
+        {
+          "target": "CHRNA7",
+          "uniprot": "P36544",
+          "n_residues_compared": 211,
+          "construct_span_canonical": [
+            23,
+            233
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 36,
+          "afdb_mean_plddt": 91.95,
+          "boltz_mean_plddt": 86.54,
+          "pearson_r": 0.5974,
+          "shift_null": {
+            "n_shifts": 191,
+            "fraction_of_shifts_reaching_observed_r": "<0.0052",
+            "null_abs_r_p95": 0.2163,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "PfcACh-PAM-P1_native",
+          "boltz_run": "runs/9ecde4722962",
+          "boltz_run_selected_by": "chain A holds 211 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [
+            {
+              "boltz_job": "PfcDual-nACh-GluN2A-P5_native",
+              "boltz_run": "runs/cb90c1f33760",
+              "pearson_r": 0.6137,
+              "boltz_mean_plddt": 87.89
+            }
+          ],
+          "afdb_files": [
+            "AF-P36544-predicted_aligned_error.json",
+            "AF-P36544.cif"
+          ]
+        },
+        {
+          "target": "GRIN2A",
+          "uniprot": "Q12879",
+          "n_residues_compared": 534,
+          "construct_span_canonical": [
+            23,
+            556
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 32,
+          "afdb_mean_plddt": 83.24,
+          "boltz_mean_plddt": 69.59,
+          "pearson_r": 0.4874,
+          "shift_null": {
+            "n_shifts": 514,
+            "fraction_of_shifts_reaching_observed_r": "<0.0019",
+            "null_abs_r_p95": 0.2387,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "PfcGluN2A-LTP-P3_native",
+          "boltz_run": "runs/c550c7ccd98b",
+          "boltz_run_selected_by": "chain A holds 534 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [],
+          "afdb_files": [
+            "AF-Q12879-predicted_aligned_error.json",
+            "AF-Q12879.cif"
+          ]
+        },
+        {
+          "target": "NTRK1",
+          "uniprot": "P04629",
+          "n_residues_compared": 391,
+          "construct_span_canonical": [
+            33,
+            423
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 22,
+          "afdb_mean_plddt": 81.49,
+          "boltz_mean_plddt": 86.29,
+          "pearson_r": 0.8672,
+          "shift_null": {
+            "n_shifts": 371,
+            "fraction_of_shifts_reaching_observed_r": "<0.0027",
+            "null_abs_r_p95": 0.3707,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "BasalNgf-TrkA-B3_native",
+          "boltz_run": "runs/fd62fc1b02b9",
+          "boltz_run_selected_by": "chain A holds 391 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [],
+          "afdb_files": [
+            "AF-P04629-predicted_aligned_error.json",
+            "AF-P04629.cif"
+          ]
+        },
+        {
+          "target": "NTRK2",
+          "uniprot": "Q16620",
+          "n_residues_compared": 399,
+          "construct_span_canonical": [
+            32,
+            430
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 12,
+          "afdb_mean_plddt": 82.13,
+          "boltz_mean_plddt": 70.55,
+          "pearson_r": 0.7154,
+          "shift_null": {
+            "n_shifts": 379,
+            "fraction_of_shifts_reaching_observed_r": "<0.0026",
+            "null_abs_r_p95": 0.4135,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "HippoTrk-Saponin-X1_native",
+          "boltz_run": "runs/b221e98669cf",
+          "boltz_run_selected_by": "chain A holds 399 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [
+            {
+              "boltz_job": "HippoDual-TrkB-AMPK-X5_native",
+              "boltz_run": "runs/66cf0609c522",
+              "pearson_r": 0.7005,
+              "boltz_mean_plddt": 73.37
+            },
+            {
+              "boltz_job": "PfcTrk-ErkEnhancer-P2_native",
+              "boltz_run": "runs/bdc36d8bce44",
+              "pearson_r": 0.7584,
+              "boltz_mean_plddt": 71.0
+            }
+          ],
+          "afdb_files": [
+            "AF-Q16620-predicted_aligned_error.json",
+            "AF-Q16620.cif"
+          ]
+        },
+        {
+          "target": "TLR4",
+          "uniprot": "O00206",
+          "n_residues_compared": 608,
+          "construct_span_canonical": [
+            24,
+            631
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 83,
+          "afdb_mean_plddt": 94.76,
+          "boltz_mean_plddt": 90.62,
+          "pearson_r": 0.523,
+          "shift_null": {
+            "n_shifts": 588,
+            "fraction_of_shifts_reaching_observed_r": "<0.0017",
+            "null_abs_r_p95": 0.2305,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "MicroTlr4-Antagonist-M3_native",
+          "boltz_run": "runs/7bf57e784fa1",
+          "boltz_run_selected_by": "chain A holds 608 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [],
+          "afdb_files": [
+            "AF-O00206-predicted_aligned_error.json",
+            "AF-O00206.cif"
+          ]
+        },
+        {
+          "target": "TREM2",
+          "uniprot": "Q9NZC2",
+          "n_residues_compared": 156,
+          "construct_span_canonical": [
+            19,
+            174
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 5,
+          "afdb_mean_plddt": 82.89,
+          "boltz_mean_plddt": 76.37,
+          "pearson_r": 0.9331,
+          "shift_null": {
+            "n_shifts": 136,
+            "fraction_of_shifts_reaching_observed_r": "<0.0074",
+            "null_abs_r_p95": 0.5429,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "MicroTrem2-Agonist-M1_native",
+          "boltz_run": "runs/5d4e1b5bca2a",
+          "boltz_run_selected_by": "chain A holds 156 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [
+            {
+              "boltz_job": "MicroDual-Trem2-Nrf2-M5_native",
+              "boltz_run": "runs/d6021c4aefe8",
+              "pearson_r": 0.9137,
+              "boltz_mean_plddt": 74.75
+            }
+          ],
+          "afdb_files": [
+            "AF-Q9NZC2-predicted_aligned_error.json",
+            "AF-Q9NZC2.cif"
+          ]
+        }
+      ],
+      "not_compared": [
+        {
+          "target": "CHRM1",
+          "uniprot": "P11229",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "FZD8",
+          "uniprot": "Q9H461",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "GRIN2B",
+          "uniprot": "Q13224",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "GSK3B",
+          "uniprot": "P49841",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "KEAP1",
+          "uniprot": "Q14145",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "NFE2L2",
+          "uniprot": "Q16236",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "NOS3",
+          "uniprot": "P29474",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "PTAFR",
+          "uniprot": "P25105",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "SLC1A2",
+          "uniprot": "P43004",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        }
+      ]
+    },
+    "boltz_full_msa": {
+      "note": "study #10 -- same complex, --use_msa_server, so the MSA confound is removed",
+      "study": "data/study_msa_specificity.json",
+      "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+      "n_compared": 7,
+      "pearson_r_min": 0.6742,
+      "pearson_r_median": 0.8637,
+      "pearson_r_max": 0.9562,
+      "mean_offset_afdb_minus_boltz": 2.35,
+      "rows": [
+        {
+          "target": "ACHE",
+          "uniprot": "P22303",
+          "n_residues_compared": 543,
+          "construct_span_canonical": [
+            32,
+            574
+          ],
+          "construct_basis": "mature_chain_trimmed",
+          "effective_n_after_autocorrelation": 113,
+          "afdb_mean_plddt": 97.49,
+          "boltz_mean_plddt": 95.21,
+          "pearson_r": 0.8637,
+          "shift_null": {
+            "n_shifts": 523,
+            "fraction_of_shifts_reaching_observed_r": "<0.0019",
+            "null_abs_r_p95": 0.1388,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "HippoAChE-AlkaPept-X2_native",
+          "boltz_run": "runs/7890d28fd6af",
+          "boltz_run_selected_by": "chain A holds 543 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [
+            {
+              "boltz_job": "BasalAChE-Abeta-B4_native",
+              "boltz_run": "runs/f38427dffaf1",
+              "pearson_r": 0.871,
+              "boltz_mean_plddt": 94.89
+            },
+            {
+              "boltz_job": "BasalSuper-AChE-TrkA-B5_native",
+              "boltz_run": "runs/55caff666f59",
+              "pearson_r": 0.8787,
+              "boltz_mean_plddt": 95.72
+            }
+          ],
+          "afdb_files": [
+            "AF-P22303-predicted_aligned_error.json",
+            "AF-P22303.cif"
+          ]
+        },
+        {
+          "target": "CHRNA7",
+          "uniprot": "P36544",
+          "n_residues_compared": 211,
+          "construct_span_canonical": [
+            23,
+            233
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 37,
+          "afdb_mean_plddt": 91.95,
+          "boltz_mean_plddt": 90.19,
+          "pearson_r": 0.6742,
+          "shift_null": {
+            "n_shifts": 191,
+            "fraction_of_shifts_reaching_observed_r": "<0.0052",
+            "null_abs_r_p95": 0.236,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "PfcACh-PAM-P1_native",
+          "boltz_run": "runs/acdbd25f2042",
+          "boltz_run_selected_by": "chain A holds 211 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [
+            {
+              "boltz_job": "PfcDual-nACh-GluN2A-P5_native",
+              "boltz_run": "runs/f633621bd199",
+              "pearson_r": 0.6443,
+              "boltz_mean_plddt": 92.08
+            }
+          ],
+          "afdb_files": [
+            "AF-P36544-predicted_aligned_error.json",
+            "AF-P36544.cif"
+          ]
+        },
+        {
+          "target": "GRIN2A",
+          "uniprot": "Q12879",
+          "n_residues_compared": 534,
+          "construct_span_canonical": [
+            23,
+            556
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 34,
+          "afdb_mean_plddt": 83.24,
+          "boltz_mean_plddt": 77.12,
+          "pearson_r": 0.7083,
+          "shift_null": {
+            "n_shifts": 514,
+            "fraction_of_shifts_reaching_observed_r": "<0.0019",
+            "null_abs_r_p95": 0.1703,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "PfcGluN2A-LTP-P3_native",
+          "boltz_run": "runs/5c241afccfbd",
+          "boltz_run_selected_by": "chain A holds 534 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [],
+          "afdb_files": [
+            "AF-Q12879-predicted_aligned_error.json",
+            "AF-Q12879.cif"
+          ]
+        },
+        {
+          "target": "NTRK1",
+          "uniprot": "P04629",
+          "n_residues_compared": 391,
+          "construct_span_canonical": [
+            33,
+            423
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 19,
+          "afdb_mean_plddt": 81.49,
+          "boltz_mean_plddt": 85.69,
+          "pearson_r": 0.883,
+          "shift_null": {
+            "n_shifts": 371,
+            "fraction_of_shifts_reaching_observed_r": "<0.0027",
+            "null_abs_r_p95": 0.407,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "BasalNgf-TrkA-B3_native",
+          "boltz_run": "runs/5e8b4243d621",
+          "boltz_run_selected_by": "chain A holds 391 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [],
+          "afdb_files": [
+            "AF-P04629-predicted_aligned_error.json",
+            "AF-P04629.cif"
+          ]
+        },
+        {
+          "target": "NTRK2",
+          "uniprot": "Q16620",
+          "n_residues_compared": 399,
+          "construct_span_canonical": [
+            32,
+            430
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 14,
+          "afdb_mean_plddt": 82.13,
+          "boltz_mean_plddt": 82.04,
+          "pearson_r": 0.9562,
+          "shift_null": {
+            "n_shifts": 379,
+            "fraction_of_shifts_reaching_observed_r": "<0.0026",
+            "null_abs_r_p95": 0.4222,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "HippoTrk-Saponin-X1_native",
+          "boltz_run": "runs/5664cb1bcb37",
+          "boltz_run_selected_by": "chain A holds 399 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [
+            {
+              "boltz_job": "HippoDual-TrkB-AMPK-X5_native",
+              "boltz_run": "runs/c0ad56175c49",
+              "pearson_r": 0.9378,
+              "boltz_mean_plddt": 84.49
+            },
+            {
+              "boltz_job": "PfcTrk-ErkEnhancer-P2_native",
+              "boltz_run": "runs/15680acdee0b",
+              "pearson_r": 0.9638,
+              "boltz_mean_plddt": 82.32
+            }
+          ],
+          "afdb_files": [
+            "AF-Q16620-predicted_aligned_error.json",
+            "AF-Q16620.cif"
+          ]
+        },
+        {
+          "target": "TLR4",
+          "uniprot": "O00206",
+          "n_residues_compared": 608,
+          "construct_span_canonical": [
+            24,
+            631
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 86,
+          "afdb_mean_plddt": 94.76,
+          "boltz_mean_plddt": 91.49,
+          "pearson_r": 0.7748,
+          "shift_null": {
+            "n_shifts": 588,
+            "fraction_of_shifts_reaching_observed_r": "<0.0017",
+            "null_abs_r_p95": 0.2411,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "MicroTlr4-Antagonist-M3_native",
+          "boltz_run": "runs/f2dfc4a88129",
+          "boltz_run_selected_by": "chain A holds 608 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [],
+          "afdb_files": [
+            "AF-O00206-predicted_aligned_error.json",
+            "AF-O00206.cif"
+          ]
+        },
+        {
+          "target": "TREM2",
+          "uniprot": "Q9NZC2",
+          "n_residues_compared": 156,
+          "construct_span_canonical": [
+            19,
+            174
+          ],
+          "construct_basis": "ectodomain",
+          "effective_n_after_autocorrelation": 5,
+          "afdb_mean_plddt": 82.89,
+          "boltz_mean_plddt": 75.73,
+          "pearson_r": 0.9128,
+          "shift_null": {
+            "n_shifts": 136,
+            "fraction_of_shifts_reaching_observed_r": "<0.0074",
+            "null_abs_r_p95": 0.6083,
+            "note": "circular shift of the Boltz profile against the AlphaFold one. It preserves both profiles and destroys only the residue correspondence, so it rules out r being an artefact of the two marginal distributions. It does NOT separate residue-specific agreement from the generic fact that both models are unconfident at termini. The shifts overlap heavily, so this fraction is not a p-value and a zero count is reported as an upper bound rather than as 0."
+          },
+          "boltz_job": "MicroTrem2-Agonist-M1_native",
+          "boltz_run": "runs/e5f376ddb4cb",
+          "boltz_run_selected_by": "chain A holds 156 residues, matching the construct span. Among retained runs that match, the one whose content-hash directory name sorts last is taken, which is deterministic across clones",
+          "other_native_folds_of_this_receptor": [
+            {
+              "boltz_job": "MicroDual-Trem2-Nrf2-M5_native",
+              "boltz_run": "runs/cba1f414ef32",
+              "pearson_r": 0.9169,
+              "boltz_mean_plddt": 79.53
+            }
+          ],
+          "afdb_files": [
+            "AF-Q9NZC2-predicted_aligned_error.json",
+            "AF-Q9NZC2.cif"
+          ]
+        }
+      ],
+      "not_compared": [
+        {
+          "target": "CHRM1",
+          "uniprot": "P11229",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "FZD8",
+          "uniprot": "Q9H461",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "GRIN2B",
+          "uniprot": "Q13224",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "GSK3B",
+          "uniprot": "P49841",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "KEAP1",
+          "uniprot": "Q14145",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "NFE2L2",
+          "uniprot": "Q16236",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "NOS3",
+          "uniprot": "P29474",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "PTAFR",
+          "uniprot": "P25105",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        },
+        {
+          "target": "SLC1A2",
+          "uniprot": "P43004",
+          "reason": "no Boltz-2 receptor fold in this study; the target carries no designed candidate"
+        }
+      ]
+    }
+  },
+  "arm_agreement": {
+    "n_targets_in_both": 7,
+    "median_shift_in_r_when_boltz_gets_an_msa": 0.0768,
+    "mean_shift_in_r_when_boltz_gets_an_msa": 0.1138,
+    "n_positive_shifts": 6,
+    "sign_test_two_sided_p": 0.125,
+    "per_target_shift": {
+      "ACHE": 0.0106,
+      "CHRNA7": 0.0768,
+      "GRIN2A": 0.2209,
+      "NTRK1": 0.0158,
+      "NTRK2": 0.2408,
+      "TLR4": 0.2518,
+      "TREM2": -0.0203
+    },
+    "depends_on_which_native_fold_was_taken": "Each target contributes the FIRST native row in the study JSON, and six of the thirteen native folds are alternates listed per row under other_native_folds_of_this_receptor. The summary above is not robust to that pick: TREM2's chosen shift is negative while its alternate is positive, so taking the other fold would make all seven shifts positive and move the sign test from p = 0.125 to p = 0.0156. Read the direction, not the test.",
+    "reading": "Giving Boltz-2 an MSA moved its confidence profile closer to AlphaFold's, substantially so on nearly half the set: six of seven shifts are positive and three exceed +0.22. The distribution is bimodal -- four targets near zero, three near +0.24 -- so the mean and the median differ by half and the median alone hides the effect, which is why both are reported. On seven targets, six positives is a two-sided sign test p = 0.125: a direction worth reporting, not a result worth asserting. (This field previously said a shift near zero showed the MSA changed nothing. That was written before the numbers came back and should not have survived them.)"
+  }
+}

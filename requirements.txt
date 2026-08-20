@@ -1,0 +1,12 @@
+# Main analysis environment (.venv), Python 3.14.
+# Structure prediction runs in a separate 3.12 environment; see requirements-boltz.txt.
+# DockQ runs in a third environment because it pins numpy<2; see requirements-dockq.txt.
+rdkit==2026.3.5
+numpy>=2.3.3
+scipy>=1.18
+pandas>=3.0
+certifi
+biopython>=1.85
+posebusters==0.6.5
+prodigy-prot==2.4.0
+admet-ai==2.0.1

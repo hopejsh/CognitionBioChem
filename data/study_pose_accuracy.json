@@ -19,8 +19,8 @@
    "prior_entries": null,
    "ok": true,
    "seconds": 51.3,
-   "pred_cif": "/tmp/cbc_pose/3X31/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/3X31.cif",
+   "pred_cif": "runs/7ba790e3bf99/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/3X31.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 320,
@@ -359,8 +359,8 @@
    "prior_entries": null,
    "ok": true,
    "seconds": 28.8,
-   "pred_cif": "/tmp/cbc_pose/4S0Q/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/4S0Q.cif",
+   "pred_cif": "runs/246312f4425b/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/4S0Q.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 64,
@@ -465,8 +465,8 @@
    "prior_entries": null,
    "ok": true,
    "seconds": 29.0,
-   "pred_cif": "/tmp/cbc_pose/4UIT/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/4UIT.cif",
+   "pred_cif": "runs/a2d1f3c7aa48/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/4UIT.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 156,
@@ -827,8 +827,8 @@
    "prior_entries": null,
    "ok": true,
    "seconds": 50.5,
-   "pred_cif": "/tmp/cbc_pose/4XH6/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/4XH6.cif",
+   "pred_cif": "runs/0d962241de44/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/4XH6.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 200,
@@ -1079,8 +1079,8 @@
    "prior_entries": null,
    "ok": true,
    "seconds": 40.7,
-   "pred_cif": "/tmp/cbc_pose/4XIP/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/4XIP.cif",
+   "pred_cif": "runs/9a24e4c1091b/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/4XIP.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 260,
@@ -1331,8 +1331,8 @@
    "prior_entries": null,
    "ok": true,
    "seconds": 36.9,
-   "pred_cif": "/tmp/cbc_pose/4XJ2/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/4XJ2.cif",
+   "pred_cif": "runs/0b2b50a166c0/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/4XJ2.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 176,
@@ -1673,8 +1673,8 @@
    "prior_entries": null,
    "ok": true,
    "seconds": 28.7,
-   "pred_cif": "/tmp/cbc_pose/4XJJ/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/4XJJ.cif",
+   "pred_cif": "runs/584314dccf24/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/4XJJ.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 112,
@@ -1865,8 +1865,8 @@
    "prior_entries": 159,
    "ok": true,
    "seconds": 52.7,
-   "pred_cif": "/tmp/cbc_pose/10HY/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/10HY.cif",
+   "pred_cif": "runs/79ba5ee297f7/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/10HY.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 176,
@@ -2157,8 +2157,8 @@
    "prior_entries": null,
    "ok": true,
    "seconds": 33.3,
-   "pred_cif": "/tmp/cbc_pose/12XX/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/12XX.cif",
+   "pred_cif": "runs/26314a7f0ffc/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/12XX.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 296,
@@ -3203,8 +3203,8 @@
    "prior_entries": 13,
    "ok": true,
    "seconds": 51.5,
-   "pred_cif": "/tmp/cbc_pose/13LV/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/13LV.cif",
+   "pred_cif": "runs/9ccfd79ac475/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/13LV.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 188,
@@ -3549,8 +3549,8 @@
    "prior_entries": 1172,
    "ok": true,
    "seconds": 29.6,
-   "pred_cif": "/tmp/cbc_pose/23SI/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/23SI.cif",
+   "pred_cif": "runs/06b00f8722ab/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/23SI.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 236,
@@ -3930,8 +3930,8 @@
    "prior_entries": 158,
    "ok": true,
    "seconds": 29.0,
-   "pred_cif": "/tmp/cbc_pose/24KK/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/24KK.cif",
+   "pred_cif": "runs/81ffaeda90c2/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/24KK.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 116,
@@ -4231,8 +4231,8 @@
    "prior_entries": 549,
    "ok": true,
    "seconds": 30.0,
-   "pred_cif": "/tmp/cbc_pose/24KM/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/24KM.cif",
+   "pred_cif": "runs/29aabb065861/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/24KM.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 152,
@@ -4473,8 +4473,8 @@
    "prior_entries": 41,
    "ok": true,
    "seconds": 30.0,
-   "pred_cif": "/tmp/cbc_pose/24OS/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/24OS.cif",
+   "pred_cif": "runs/167081445de8/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/24OS.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 164,
@@ -5174,8 +5174,8 @@
    "prior_entries": 31,
    "ok": true,
    "seconds": 49.0,
-   "pred_cif": "/tmp/cbc_pose/25VX/boltz_results_input/predictions/input/input_model_0.cif",
-   "ref_cif": "/tmp/cbc_pose_refs/25VX.cif",
+   "pred_cif": "runs/50d3f6799043/boltz_results_input_predictions_input_input_model_0.cif",
+   "ref_cif": "runs/f46c153fca93/25VX.cif",
    "alignment": {
     "ok": true,
     "pocket_atoms": 224,
@@ -5633,14 +5633,14 @@
  "analysis": {
   "study_id": "pose-accuracy-v1",
   "prespec_hash": "8457830a2c5e5d1d0fcd60e26ca3c5ea671b09a21e21cc7cb3a560859196126f",
-  "n_observed": 12,
+  "n_observed": 13,
   "primary_metric": "fraction_rmsd_under_2A",
   "metrics": {
-   "fraction_rmsd_under_2A": 0.4167,
-   "median_rmsd": 3.943,
-   "mean_rmsd": 4.917,
-   "fraction_rmsd_under_5A": 0.5833,
-   "pocket_backbone_rmsd": 0.454,
+   "fraction_rmsd_under_2A": 0.3846,
+   "median_rmsd": 4.57,
+   "mean_rmsd": 5.008,
+   "fraction_rmsd_under_5A": 0.5385,
+   "pocket_backbone_rmsd": 0.348,
    "posebusters_pass_rate": null,
    "per_entry_rmsd": {
     "3X31": 0.708,
@@ -5652,11 +5652,17 @@
     "10HY": 0.313,
     "13LV": 17.436,
     "23SI": 8.493,
+    "24KK": 6.091,
     "24KM": 4.57,
     "24OS": 0.582,
     "25VX": 8.099
    },
-   "wall_clock_seconds_per_complex": 40.0
+   "wall_clock_seconds_per_complex": {
+    "mean_seconds_per_computed_fold": 39.1,
+    "n_computed": 13,
+    "n_reused": 0,
+    "note": ""
+   }
   },
   "strata": {
    "recall": {
@@ -5670,11 +5676,11 @@
    },
    "congeneric_extension": {
     "k": 2,
-    "n": 6,
-    "fraction": 0.3333,
+    "n": 7,
+    "fraction": 0.2857,
     "wilson95": [
-     0.0968,
-     0.7
+     0.0822,
+     0.6411
     ]
    },
    "receptor_disjoint": {
@@ -5683,17 +5689,39 @@
     "note": "NOT CONSTRUCTIBLE \u2014 every post-cutoff receptor checked already had pre-cutoff PDB entries (13 to 1172)."
    }
   },
-  "interpolation_premium": 0.1667,
-  "fisher_p_recall_vs_congeneric": 1.0,
-  "p_holm": {
-   "H1_recall_accuracy": 1.0,
-   "H2_interpolation_premium": 1.0,
-   "H3_physical_validity": 1.0
-  },
+  "interpolation_premium": 0.2143,
+  "fisher_p_recall_vs_congeneric": 0.59207,
   "verdicts": {
    "H1_recall_accuracy": "FALSIFIED",
-   "H2_interpolation_premium": "FALSIFIED",
+   "H2_interpolation_premium": "CONFIRMED",
+   "H2_interpolation_premium_fisher": "FALSIFIED",
    "H3_physical_validity": "NOT_TESTED"
+  },
+  "criteria": {
+   "H1_recall_accuracy": {
+    "met": false,
+    "observed": 0.5,
+    "threshold": "recall-stratum accuracy > 0.5"
+   },
+   "H2_interpolation_premium": {
+    "met": true,
+    "observed": 0.2143,
+    "threshold": "recall minus congeneric-extension accuracy >= 0.2"
+   }
+  },
+  "multiplicity": {
+   "family_size": 1,
+   "correction": "holm",
+   "excluded_from_correction": [
+    "H1_recall_accuracy",
+    "H2_interpolation_premium"
+   ]
+  },
+  "p_raw": {
+   "H2_interpolation_premium_fisher": 0.592074592074592
+  },
+  "p_holm": {
+   "H2_interpolation_premium_fisher": 0.592074592074592
   },
   "failures": [
    {
@@ -5710,11 +5738,6 @@
     "pdb_id": "12XX",
     "stratum": "unknown",
     "error": "no scorable copy pair (pred copies [37], ref copies [37, 37], template CC(C)(C)c1cc2c(c(c1)C(C)(C)C)O[Co]34[N+])"
-   },
-   {
-    "pdb_id": "24KK",
-    "stratum": "congeneric_extension",
-    "error": "no scorable copy pair (pred copies [18], ref copies [36], template Cc1cccc(c1C)Nc2ccccc2C(=O)O)"
    }
   ],
   "prespec_audit": {
@@ -5722,7 +5745,10 @@
    "prespec_hash": "8457830a2c5e5d1d0fcd60e26ca3c5ea671b09a21e21cc7cb3a560859196126f",
    "registered_utc": "2026-08-18T04:16:59+00:00",
    "deviations": [
-    "n_observed=12 differs from n_planned=16"
+    "n_observed=13 differs from n_planned=16",
+    "pre-specified metrics absent or null in the result: ['posebusters_pass_rate']. Dropping a registered analysis after seeing the data is selective reporting; if a metric could not be computed, the reason belongs in the record.",
+    "registered n_comparisons=3 under 'holm', but the executed family holds 1: ['H1_recall_accuracy', 'H2_interpolation_premium'] were re-classified as threshold criteria rather than tests after registration. The re-classification is defensible \u2014 a 0/1 indicator is not a p-value and corrupts the correction \u2014 but it is a change to the inferential procedure made after seeing the data, and it belongs on the record rather than in the code alone.",
+    "registered hypotheses without a CONFIRMED/FALSIFIED verdict: ['H3_physical_validity'] (reported as ['NOT_TESTED']). A hypothesis that was registered and then not decided is a deviation, whatever the reason."
    ],
    "confirmatory": false,
    "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."

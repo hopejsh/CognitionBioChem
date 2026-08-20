@@ -17,8 +17,12 @@ AlphaFold Protein Structure Database
 Boltz-1 / Boltz-2
     confidence_<name>_model_<n>.json     confidence_score, ptm, iptm, complex_plddt
     plddt_<name>_model_<n>.npz / pae_<name>_model_<n>.npz
-Chai-1
-    scores.model_idx_<n>.npz             aggregate_score, ptm, iptm, per_chain_pae, plddt
+Chai-1 -- NOT IMPLEMENTED.
+    Chai writes scores.model_idx_<n>.npz. No reader for it exists here, and none is written
+    speculatively: without a real Chai output to test against, a parser would be code whose
+    correctness nobody has checked, which is the thing this repository exists to refuse.
+    A Chai directory dropped into the loader is handled by the generic mmCIF path, so the
+    structure is read and the confidence arrays are not.
 
 Nothing here requires a GPU, model weights, or a licence: it reads output somebody else
 produced. That is deliberate -- it decouples "can display real results" from "can generate
@@ -435,17 +439,47 @@ def _sanity(pred: Prediction) -> None:
         #
         # So the check now runs only within a chain, where the original reasoning holds, and
         # reports inter-chain asymmetry separately as information rather than as a warning.
+        # The asymmetry test was BACKWARDS, and running the parser against genuine output is
+        # what revealed it. PAE is a DIRECTED quantity -- expected positional error in residue
+        # j when the prediction is aligned on residue i -- so it is not symmetric by
+        # construction. Measured on AlphaFold DB's own TREM2 matrix (Q9NZC2): max asymmetry
+        # 21.0 A, mean 3.22 A, 42.5% of pairs differing by more than 2 A. The old rule warned
+        # above 12 A, so it flagged real AlphaFold output as probably fabricated.
+        #
+        # Worse, it passed the thing it was written to catch. The original app rendered
+        # `Math.abs(i - j) * 0.4`, which is PERFECTLY symmetric: max asymmetry 0.0 A. So the
+        # check rejected genuine data and admitted the fabrication.
+        #
+        # The discriminating signals are the opposite ones: a real matrix is asymmetric and is
+        # not a closed-form function of |i - j|.
         chain_of = [r.chain for r in pred.residues]
-        lim = min(n, 60, len(chain_of))
+        lim = min(n, 120, len(chain_of))
         intra = [abs(pred.pae[i][j] - pred.pae[j][i])
                  for i in range(lim) for j in range(lim)
-                 if chain_of[i] == chain_of[j]]
-        asym = max(intra, default=0.0)
-        if asym > 12.0:
+                 if chain_of[i] == chain_of[j] and i != j]
+        if intra:
+            mean_asym = sum(intra) / len(intra)
+            if mean_asym < 0.05:
+                pred.warnings.append(
+                    f"PAE is essentially symmetric within a chain (mean |PAE_ij - PAE_ji| = "
+                    f"{mean_asym:.3f} A). PAE is a directed quantity and real matrices are "
+                    "visibly asymmetric; a symmetric one is characteristic of a matrix "
+                    "generated from a formula rather than by a predictor.")
+
+        # A fabricated ramp is an exact function of residue separation. Fit the best
+        # separation-only model and see how little is left over.
+        seps: dict[int, list[float]] = {}
+        for i in range(lim):
+            for j in range(lim):
+                if chain_of[i] == chain_of[j]:
+                    seps.setdefault(abs(i - j), []).append(pred.pae[i][j])
+        resid = [abs(v - sum(vals) / len(vals))
+                 for vals in seps.values() for v in vals]
+        if resid and sum(resid) / len(resid) < 0.02:
             pred.warnings.append(
-                f"PAE is strongly asymmetric WITHIN a chain (max |PAE_ij - PAE_ji| = "
-                f"{asym:.1f} A). Within a single chain real PAE is only mildly asymmetric, "
-                "so this suggests the matrix was not produced by a predictor.")
+                "PAE is an exact function of residue separation |i - j|, which is what a "
+                "generated ramp looks like; a predictor's matrix carries structure that "
+                "separation alone does not explain.")
     geo = pred.geometry_check()
     if geo.get("checked") and not geo["plausible_protein"]:
         pred.warnings.append(
@@ -460,11 +494,25 @@ def fetch_alphafold_db(accession: str, out_dir: str | Path) -> Path:
     Requires network but no GPU, no weights and no licence key, which makes it the
     cheapest way to prove the parser works against genuine output.
     """
+    import ssl
     import urllib.request
+
+    # A bare urlopen() fails with CERTIFICATE_VERIFY_FAILED on a Python that has no system
+    # trust store wired in, which is why the end-to-end test has been printing
+    # "SKIP real AlphaFold data not downloaded" rather than exercising the parser: the
+    # download never worked here, so the AlphaFold-parsing capability the README advertises
+    # had never once been run against genuine AlphaFold output. cbc/registry.py already
+    # solved this with certifi; use the same context.
+    try:
+        import certifi
+        ctx = ssl.create_default_context(cafile=certifi.where())
+    except ImportError:                                     # pragma: no cover
+        ctx = ssl.create_default_context()
+
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     api = f"https://alphafold.ebi.ac.uk/api/prediction/{accession}"
-    with urllib.request.urlopen(api, timeout=60) as fh:
+    with urllib.request.urlopen(api, timeout=60, context=ctx) as fh:
         meta = json.loads(fh.read())
     if not meta:
         raise PredictorError(f"no AlphaFold DB entry for {accession}")
@@ -476,6 +524,6 @@ def fetch_alphafold_db(accession: str, out_dir: str | Path) -> Path:
         dest = out / f"AF-{accession}{suffix}"
         if suffix == "_pae.json":
             dest = out / f"AF-{accession}-predicted_aligned_error.json"
-        with urllib.request.urlopen(url, timeout=120) as fh:
+        with urllib.request.urlopen(url, timeout=120, context=ctx) as fh:
             dest.write_bytes(fh.read())
     return out

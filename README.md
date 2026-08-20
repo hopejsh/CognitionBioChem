@@ -5,34 +5,52 @@ structure prediction**, computes real chemical and physicochemical properties, v
 every record against a contract, and attaches a provenance record to every value.
 
 [![Verification](https://img.shields.io/badge/verification-6_suites_passing-brightgreen?style=flat-square)](verify_all.py)
-[![Studies](https://img.shields.io/badge/pre--registered_studies-7-blueviolet?style=flat-square)](prespec/)
+[![Studies](https://img.shields.io/badge/pre--registered_studies-8-blueviolet?style=flat-square)](prespec/)
 [![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
-[![Data gate](https://img.shields.io/badge/data_gate-91_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
+[![Data gate](https://img.shields.io/badge/data_gate-114_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
 [![Structure](https://img.shields.io/badge/structure-Boltz--2_2.2.1_(MIT)-blue?style=flat-square)](platform/cbc/compute/structure.py)
-[![License](https://img.shields.io/badge/license-private_research-lightgrey?style=flat-square)](#license)
+[![License](https://img.shields.io/badge/code-Apache--2.0-blue?style=flat-square)](LICENSE)
+[![Data](https://img.shields.io/badge/data-see_NOTICE-lightgrey?style=flat-square)](NOTICE)
 
 ---
 
 ## Status disclosure — read this first
 
 Structure prediction is **real**: Boltz-2 v2.2.1 (MIT) runs locally on Apple MPS and produced
-every structure in `runs/`. ADMET prediction is **real** where it is in domain. Binding
+every **predicted** structure in `runs/`; `runs/` also holds 32 RCSB crystal depositions
+used as experimental ground truth by studies #6 and #7, which no predictor made. ADMET prediction is **real** where it is in domain. Binding
 affinity is **predicted but not calibrated**, and is never reported as a free energy.
 
-The peptide sequences are **hand-assembled concatenations of published natural motifs** joined
-by GGGGS linkers. They are a hypothesis catalogue, not de novo designs: no generative model
-produced them.
+The peptide sequences are **hand-assembled concatenations of published natural motifs,
+pastiche scaffolds and one de novo amphipathic helix**, joined by GGGGS linkers. No generative
+model produced them. Per-segment attribution lives in `data/dataset.json` → `motif_provenance`,
+and it is thinner than the word *attribution* suggests: of 16 motif entries only **7 carry a
+UniProt accession**. The other 9 describe themselves in that record as chimeras, pastiches, a de
+novo helix, a linker, and in one case not a peptide sequence at all, and 12 further unattributed
+segments are listed separately. Scanning for all 22 unattributed fragments, **31 of 35**
+candidates carry at least one. An earlier version of this paragraph counted every motif entry as
+attributed and reported the carrier count as fourteen; both were hand-typed, both were wrong in
+the flattering direction, and the sentence is now generated from the record by
+`platform/build_dataset.py`.
+Among them is `KWWKFLRRFWRRLKKYFEELWKKLAEKYFELLKKYG`, which
+that record calls a *de novo cationic amphipathic (membranolytic-class) helix* with zero exact
+hits in SwissProt — and which is the sequence of the duplicate AChE pair screened in #9 and #10.
+An earlier version of this paragraph said "published natural motifs … not de novo designs",
+which the repository's own provenance record contradicted on both counts.
 
 Every value carries a provenance record. Fields marked *not computed* are honestly empty.
 
 ### What the rebuild established
 
-An earlier version presented hand-typed numbers as AlphaFold3 output. A 12-discipline expert
-panel with independent adversarial verification (97 findings, 96 surviving) established that
-no AlphaFold3 existed anywhere in the codebase, that the "pLDDT" chart was
-`93 + sin(i·0.4)·4 + (charCode % 5)·0.5`, and that all 25 ΔG/K<sub>d</sub> pairs were
-thermodynamically impossible. Those renderers are gone; the numbers they produced are
-preserved under `retracted_claims` rather than deleted.
+An earlier version presented hand-typed numbers as AlphaFold3 output. A **multi-agent LLM
+review** — 12 role-played domain reviewers, 12 independent adversarial verifiers, a chair and 2
+completeness critics, all language models and **not human peer review** (see
+`reviews/REVIEW_REPORT.md`, and `reviews/panel_raw.json`, where every reviewer is a
+`reviewer_persona` string) — produced 97 findings of which 96 survived verification. It
+established that no AlphaFold3 existed anywhere in the codebase, that the "pLDDT" chart was `93
++ sin(i·0.4)·4 + (charCode % 5)·0.5`, and that all 25 ΔG/K<sub>d</sub> pairs were
+thermodynamically impossible. Those renderers are gone; the numbers they produced are preserved
+under `retracted_claims` rather than deleted.
 
 **Then the fabricated values were replaced with computed ones and compared head to head.**
 Boltz-2 was run on 22 candidates:
@@ -63,7 +81,9 @@ distinguishable from sampler noise**. No claim of agreement is licensed for thos
 | Capability | Implementation | Status |
 |---|---|---|
 | Structure prediction | Boltz-2 2.2.1 (MIT), local, Apple MPS | **real** |
-| Predictor-output parsing | mmCIF + AF3 / AlphaFold DB / Boltz / Chai confidence files | real |
+| Predictor-output parsing | mmCIF + AF3 / AlphaFold DB / Boltz confidence files | real (no Chai reader; see `platform/cbc/predictor.py`) |
+| Structure gallery | 13 candidate–receptor complexes, 22 peptide folds, 16 AlphaFold DB receptors | real — every entry opens a file under `runs/` or `data/alphafold_db/`, with its own pLDDT, PAE and interface PAE |
+| Study reporting | 8 pre-registered studies, 25 hypotheses of which 24 are decided | real — verdicts copied from artefacts, never recomputed for display |
 | All-atom physical validity | clashes, bond lengths, chirality, disulfides | real |
 | Chemical structure validation | RDKit: parse, formula, InChIKey, stereochemistry | real |
 | Peptide properties | MW, net charge pH 7.4, pI, GRAVY, cysteine parity | real |
@@ -77,14 +97,33 @@ distinguishable from sampler noise**. No claim of agreement is licensed for thos
 
 ## Quick start
 
+**Prerequisites:** Python 3.14 (and 3.12 for the structure environment), plus **Node** — one
+front-end check shells out to `node --check` to parse `app.js`. Without Node that single check
+is skipped with a stated reason rather than failing the suite.
+
+Three environments, because their pins genuinely conflict — DockQ hard-pins `numpy<2` while
+the analysis stack needs `numpy>=2`, and Boltz pins a SciPy with no cp314 wheel. Installing
+them together silently downgrades numpy and leaves SciPy outside its supported range.
+
 ```bash
-python3 -m venv .venv && ./.venv/bin/pip install rdkit numpy scipy certifi
+python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt
+```
+
+The analysis environment above runs the test suites, the data gate, ADMET and the dataset
+build. Structure prediction needs the second; only study #7 needs the third.
+
+```bash
+/opt/homebrew/opt/python@3.12/bin/python3.12 -m venv .venv312 && ./.venv312/bin/pip install -r requirements-boltz.txt
+```
+
+```bash
+python3 -m venv .venvdockq && ./.venvdockq/bin/pip install -r requirements-dockq.txt
 ```
 
 Run everything:
 
 ```bash
-python3 verify_all.py
+./.venv/bin/python verify_all.py
 ```
 
 Six suites. The data gate is **expected** to exit non-zero on the legacy dataset — a gate
@@ -128,7 +167,7 @@ It must **never** be rendered as a binding free energy, and no qualified form ("
    construction. That is an identifiability failure; no constant inverts a many-to-one map.
 2. **IC50 ≠ K<sub>d</sub>.** Cheng–Prusoff gives `Ki = IC50/(1 + [S]/Km)`. Even at the most
    benign condition, [S] = K<sub>m</sub> competitive, IC50/Ki = 2 exactly — 0.411 kcal/mol of
-   one-signed bias, more than half the 0.68 log inter-laboratory reproducibility floor for
+   one-signed bias — 44% of the 0.68 log10 (0.93 kcal/mol) inter-laboratory reproducibility floor for
    public IC50 data (Kalliokoski et al., *PLoS ONE* 8:e61007, 2013).
 3. **Sign.** The documented conversion gives **+8.04** where `thermo.kd_to_dg` gives
    **−8.04**. A caveated "apparent ΔG = +8.04" is not a hedged claim; it states the wrong
@@ -158,7 +197,16 @@ broken. It rejects three defects at registration time:
 The reachability arithmetic distinguishes permutation tests (floor `1/(B+1)`) from parametric
 tests (no floor from n alone) — conflating the two makes the check wrong in both directions.
 
-### The first pre-registered study
+**On the numbering.** The slate runs #1, #2, #4, #6–#11. Two of those are not experiments:
+**#4** is the target-construct registry, which has no hypothesis and no plan hash, and this
+section (#1) sits inside the pre-registration chapter because it is what the mechanism was
+built for. **#3 and #5 do not exist** — they were allocated to studies that were never
+registered and never run, and the numbers were not reused so that every citation in this
+document keeps pointing at the same thing. Nothing has been withdrawn: `prespec/` holds 26
+registered plans across 8 study families, `data/` holds an artefact for all 8, and
+`data/slate.json` is built by joining those two against this file.
+
+### Slate #1 — the first pre-registered study
 
 `platform/studies/ache_affinity_benchmark.py`, plan hash `cd955b3977b5`, registered before any
 prediction ran. n = 15 of 17 planned.
@@ -178,9 +226,9 @@ salts the affinity head rejected). Without pre-registration that would have sile
 "we ran 15".
 
 **Stated limitation, measured.** 13 of 17 reference values rest on a *single* ChEMBL record.
-For huperzine A, ChEMBL holds 23 IC50 records spanning **3.99 log units** (0.54–5280 nM,
-median 47 nM) and the one captured (5.0 nM) sits at the **17th percentile**. Measured against
-the median the model's error falls from 2.41 to **1.43 log** — roughly 40% of the headline
+For huperzine A, ChEMBL holds **23 IC50 records carrying a pChEMBL value** for this pair, drawn from 23 distinct documents (32 activity records in total across all endpoint types; `research/memorization.json` also reports a direct SD of 0.93–0.96 log over a broader 25-value pChEMBL selection, which is a different set and a different statistic). Those 23 span **3.99 log units** (0.54–5280 nM,
+median 47 nM) and the one captured (5.0 nM) is the **3rd most potent** of the 25 pChEMBL values `research/memorization.json` records. Measured against
+the median the model's error falls from 2.41 to **1.44 log** — roughly 40% of the headline
 discrepancy was an artifact of which literature value happened to be retrieved. With a
 reference noise floor of σ ≈ 0.99 log for this pair and a mean absolute error of 1.36 log,
 **model error and reference error are the same order of magnitude and this study cannot
@@ -188,13 +236,24 @@ separate them.**
 
 ---
 
-## Inference variance — how large is a difference before it means anything?
+## Slate #2 — inference variance: how large is a difference before it means anything?
 
-`platform/studies/inference_variance.py`, plan hash `69e64d5c2f02`, registered before any
-fold. **87 of 87 folds succeeded; the protocol audit returned CONFIRMATORY with no
-deviation.** A two-level decomposition, with every metric reported separately because pLDDT,
-pTM, ipTM and interface PAE have different distributions and an SD on one licenses no
-inference about another.
+`platform/studies/inference_variance.py`, plan `8242c485e46a` (v3; supersedes v2 and v1, all retained), registered before any fold. **87 of 87 folds succeeded. The protocol audit reports two deviations, both machine-detected.**
+
+1. The registered secondary metric `per_residue_plddt_sd` is absent from the result. It was
+   dropped silently; no reason was recorded at the time and one cannot be reconstructed now.
+2. The Holm family registered three comparisons and the executed family holds zero, because
+   round-2 re-classified all three hypotheses as threshold criteria rather than tests. That is
+   the right call — a 0/1 indicator is not a p-value — but it changed the inferential procedure
+   after the data were seen, so it is on the record rather than in the code alone.
+
+Both are found by `verify_result` without being told. A third deviation, arm-D membership, was
+found by hand in audit round 3 and has since been **fixed rather than declared**: see the floors
+above.
+
+A two-level decomposition, with every metric reported separately because pLDDT, pTM, ipTM and
+interface PAE have different distributions and an SD on one licenses no inference about
+another.
 
 | Hypothesis | Verdict |
 |---|---|
@@ -213,24 +272,56 @@ Reported separately, as registered:
 |---|---|
 | complex pLDDT | 2.66 units |
 | pTM | 0.026 |
-| **ipTM** | **0.095** |
-| minimum interface PAE | **3.14 Å** |
+| **ipTM** | **0.149** |
+| minimum interface PAE | **4.62 Å** |
 
 The ipTM figure matters for binder work: an earlier pilot's three native replicates spanned
-0.212–0.473, which is about 2.7 SD — that spread was **sampler noise, not signal**. Any ipTM
-comparison below roughly 0.19 is unresolvable on this hardware.
+0.212–0.473, which is about 1.7 SD — that spread was **sampler noise, not signal**. Any ipTM
+comparison below roughly **0.30** is unresolvable on this hardware.
+
+**Correcting arm D widened these floors by half, and that strengthens every negative in the
+project.** v1's arm D deviated from its own registered selection rule — the plan says the three
+candidates with the highest, median and lowest mean pLDDT, and the code took a fixed stride,
+which at six candidates selects ranks 0, 2 and 4 and never the highest. The most reproducible
+candidate was therefore missing from the arm whose job is to measure reproducibility. v1 also
+folded the 583-residue AChE mature chain, which the construct audit later showed is not a valid
+lone-chain construct. v2 fixes both: ipTM SD went **0.095 → 0.149** (+57%) and interface-PAE SD
+**3.14 → 4.62 Å** (+47%).
+
+Read against the corrected floor, the two "successes" in study #10 disappear into noise.
+`BasalNgf-TrkA-B3` beats its best decoy by **+0.068** and `BasalAChE-Abeta-B4` by **+0.014**,
+against a one-SD sampler spread of 0.149. Neither margin is a measurement. Study #9's mean
+native-minus-decoy of +0.0012 is likewise well inside it — which is consistent with its verdict,
+since that study concluded no separation exists.
+
+**One limit remains on transferring that floor.** It is measured on **three** candidates at
+five seeds — the registered design — so it is an estimate with wide uncertainty rather than a
+constant. The two limits stated here previously, that arm D deviated from its selection rule and
+that it used the superseded AChE mature chain, no longer apply: v2 fixed both, and the floors
+above are measured on the same 543-residue construct studies #9 and #10 fold.
 
 **Determinism.** All six candidates returned bit-identical `complex_plddt` across three
 same-seed replicates, spread exactly 0.0. The pre-registered caveat that Metal
 floating-point reduction order might break this did not materialise at single-chain scale; it
 remains untested for larger jobs.
 
-**MSA.** Enabling the ColabFold MSA server shifted mean pLDDT by 0.33 units, far under seed
-noise, paired t-test p = 0.978. **Four of six candidates were bit-identical with and without
-MSA** — the search returned nothing usable, exactly as expected for hand-assembled motif
-concatenations with no natural homologues. Single-sequence mode costs this candidate set
-essentially nothing, which is a property of *these* sequences and does not generalise to
-natural ones.
+**MSA.** Enabling the ColabFold MSA server shifted mean **single-chain pLDDT** by 0.33 units,
+far under seed noise, paired t-test p = 0.489 on the raw p (see the note on why this one is
+not multiplicity-adjusted). **Four of six candidates were bit-identical with and without MSA** —
+the search returned nothing usable, exactly as expected for hand-assembled motif concatenations
+with no natural homologues.
+
+**That finding is about lone peptides, and it does not transfer to complexes.** An MSA cannot
+help a sequence with no homologues, but in a peptide–receptor complex it helps the *receptor*,
+which has thousands. Study #10 measured exactly that: switching the same pipeline to
+`--use_msa_server` raised mean complex ipTM by **+0.167**, up to **+0.59** on one candidate.
+That mean rise is **1.12×** the 0.149 ipTM noise floor measured in this study's own arm D —
+marginally resolvable, not comfortably so, and the per-candidate +0.59 clearly is. An earlier
+version of this paragraph quoted +0.151 from a nine-candidate run and concluded the rise was
+*not* resolvable; the base moved and the conclusion inverted with it. So single-sequence mode is
+close to free for the isolated designed peptides and is *not* free for the complexes that
+studies #6, #7 and #9 scored in that mode. What #10 also showed is that the rise lifts natives
+and decoys alike, so it changes the level without changing the ranking.
 
 ---
 
@@ -251,9 +342,20 @@ three different situations, not one:
 | Trp286, Tyr72, Tyr341 | mature |
 
 The `Phe330` coincidence is the dangerous case: a naive check passes it. Resolving live
-rather than against a static list raised detection from 8 to **45** fabricated residues, and
-total gate violations from 91 to **124**. Independently confirmed against the earlier audit:
-8/8 fabricated and 17/17 correct calls reproduce.
+rather than against a static list raised detection from 8 to **23** fabricated residues.
+Independently confirmed against the earlier audit: 8/8 fabricated and 17/17 correct calls
+reproduce.
+
+A second correction raised the total to **114**. Binding-site strings use `&` to join two
+different proteins in some records (`Trem2 Ig domain & Keap1 Kelch domain`) and two sub-sites
+of one protein in others (`AChE CAS (Trp84, Phe330, Tyr121) & PAS (Trp286, Tyr72, Tyr341)`).
+Splitting on it unconditionally stripped the protein name off the second kind, so those
+residues matched no target and were skipped **with nothing written down** — the gate was
+under-counting itself and reporting the shortfall as a pass. A clause naming no target now
+inherits the last target named in the same record, and where there is none it is reported as
+`unresolvable_residue_attribution` instead of dropped: 12 clauses, up from 1. The
+inherited residues themselves all resolved correctly, so the fabricated count is unchanged
+at 23; what changed is that the gate no longer hides what it could not check.
 
 `PTAFR` deserves separate mention — P25105 has no signal peptide, so the two conventions
 coincide and `His14` cannot be excused as a convention artifact.
@@ -262,76 +364,109 @@ coincide and `His14` cannot be excused as a convention artifact.
 
 ## Slate #11 — can PRODIGY fill the empty affinity field?
 
-`platform/studies/prodigy_falsification.py`, plan hash `b6b903d9ec37`. PRODIGY needs only a
-structure, and structures now exist, so it is the obvious candidate. Scored on 15 peptide–AChE
-complexes (3 candidates × 5 seeds).
+`platform/studies/prodigy_falsification.py`, plan `4ffb4b7d2702` (v2; supersedes v1,
+both retained). PRODIGY needs only a
+structure, and structures now exist, so it is the obvious candidate to fill the ΔG field this
+platform leaves empty. Scored on the variance study's arm-D complexes — 3 candidates × 5 seeds =
+15 attempts, of which **14 produced a value**. `BasalSuper-AChE-TrkA-B5` at seed 4
+returned *No contacts found for selection*: PRODIGY found no interface contacts to score, which is
+itself a datum about how unstable these interfaces are across seeds. The registered stopping rule
+requires that failure be reported rather than dropped, and n = 14 is what every figure
+below rests on.
 
 | Hypothesis | Verdict |
 |---|---|
-| H1 no better than reseeding | **confirmed** (ratio 1.36) |
-| H2 range collapses | **confirmed** (17.1% of fit range) |
-| H3 %NIS drives the variation | **falsified** |
+| H1 no better than reseeding | **confirmed** (ratio 1.40) |
+| H2 range collapses | **confirmed** (2.61 kcal/mol = 18.2% of the fit range) |
+| H3 %NIS drives the variation | **falsified** (-0.4% of the variance) |
 
-Between-candidate SD is **1.41 kcal/mol** against a within-candidate seed noise of **1.04** —
-PRODIGY does not distinguish different peptides better than rerunning one peptide with a
-different seed.
+Between-candidate SD is **1.34 kcal/mol** against a within-candidate seed noise of
+**0.96** — a ratio of **1.40**, below the pre-registered falsification
+threshold of 2.0. That is the claim the design tested, and it is the only claim the data support.
+
+This section previously said PRODIGY "does not distinguish different peptides better than
+rerunning one peptide with a different seed". The same 14 numbers refute that: a one-way ANOVA on
+candidate identity gives **F(2,11) = 9.39, p = 0.0042**, so candidate identity
+*is* detectable. The point estimate says so too — 1.40 is greater than 1, not equal to it.
+What is true is that the effect is **small** and the study is small: the ratio's bootstrap 95% CI is
+**[0.96, 3.84]** (10 000 resamples, seed 0 — both now computed by the study and written to its
+artefact, so a reader can regenerate them), which contains the 2.0 threshold, so this design cannot
+separate "small" from "large enough to matter". Asserting a null that the data reject is the mirror
+image of the overclaiming this repository was rebuilt to remove.
+
+| Candidate | n | mean ΔG (kcal/mol) | seed SD |
+|---|---|---|---|
+| AstroSuper-CBF-EAAT2-A5 | 5 | -7.95 | 1.44 |
+| BasalSuper-AChE-TrkA-B5 | 4 | -6.14 | 0.74 |
+| MicroAutophagy-Tag-M4 | 5 | -5.35 | 0.36 |
 
 **H3 refutes the mechanism I proposed, not the conclusion.** I predicted the %NIS terms would
-dominate, since they are computed over the whole complex and a 26–47mer barely perturbs a
-583-residue receptor's surface. %NIS is indeed nearly constant (41.2–43.2% apolar), but it
-accounts for only **10.6%** of the between-candidate variance. The variation comes from the
-interface contacts, which differ genuinely between candidates.
+dominate, since they are computed over the whole complex and a 29–39mer barely perturbs a
+543-residue receptor's surface. %NIS is indeed nearly constant (43.67–45.82% apolar), and it does
+not drive the spread — the variation comes from the interface contacts, which differ genuinely
+between candidates.
 
-So the operative conclusion is the confound stated in the registered plan **before** any
-structure was scored: PRODIGY responds to the interfaces, but those interfaces are
-seed-unstable — interface-PAE SD 3.14 Å, and contact counts swinging 13→52 across seeds for
-one candidate. **This study cannot separate "PRODIGY cannot discriminate here" from "these
-interfaces are not real."** PRODIGY is not wired in.
+The *number* attached to that statement was wrong twice, and each correction sharpened the
+refutation. The code first summed per-term **standard deviations** and published the ratio under a
+key named `nis_variance_fraction`; summing SDs is not a variance decomposition and it assumes away
+the covariance between terms. The registered leave-one-term-at-its-grand-mean decomposition is now
+what runs. Then the study was found to be scoring the **superseded** arm D — a different candidate
+set on the 583-residue AChE mature chain — and was re-scored on the corrected 543-residue construct.
+Freezing the two %NIS terms does not remove variance; it **increases** it, giving a share of
+**-0.4%**. The %NIS terms are anti-correlated with the interface-contact terms and *damp*
+the spread rather than driving it. A negative share is well defined once covariance is kept.
 
-### Why retrieval beats recall, demonstrated
-
-Two earlier memory-based retrievals of the PRODIGY regression produced **mutually
-sign-flipped** forms — and both were faithful to a real source. The published eLife Equation 2
-is the exact negation of the reference implementation, because the paper regresses against
-|ΔG| while the code returns signed ΔG. Two further published-source corruptions: eLife Table 3
-lists different weights in the 4th decimal, and the official method page misprints the
-%NIS_charged coefficient as 0.3810 instead of 0.13810. Three published sources disagree; only
-reading the installed code resolves it.
-
-Applicability, established by retrieval: **"peptid" occurs zero times in the eLife full text.**
-PRODIGY was fitted on 81 crystal structures of globular protein–protein complexes. Applying it
-to 26–47mers is an out-of-domain extrapolation with no published validation.
+So the operative conclusion is the confound stated in the registered plan **before** any structure
+was scored: PRODIGY responds to the interfaces, but those interfaces are seed-unstable —
+interface-PAE SD 4.62 Å on these same arm-D folds, and contact counts swinging
+33→60 across seeds for `AstroSuper-CBF-EAAT2-A5`, with one seed yielding no scorable interface at all.
+**This study cannot separate "PRODIGY cannot discriminate here" from "these interfaces are not
+real."** PRODIGY is not wired in.
 
 ---
 
 ## Slate #6 — pose accuracy, stratified by what the model had seen
 
 `platform/studies/pose_accuracy.py`, plan hash `8457830a2c5e`. 16 protein–ligand X-ray
-complexes predicted with Boltz-2; 12 scorable.
+complexes predicted with Boltz-2; **13 scorable**.
 
 | Hypothesis | Verdict |
 |---|---|
 | H1 recall stratum > 50% within 2 Å | **falsified** (3/6 = 0.50) |
-| H2 interpolation premium ≥ 0.2 | **falsified** — but underpowered |
-| H3 PoseBusters validity > 0.8 | **not executed** (declared deviation) |
+| H2 interpolation premium ≥ 0.2 | **criterion met** (0.214) — but the test on the same data does not support it (`H2_interpolation_premium_fisher`, **falsified**, Fisher p = 0.59). The analysis emitted that second verdict under a name the registered plan does not contain, so it is reported as unregistered wherever it appears. |
+| H3 PoseBusters validity > 0.8 | **not executed** — now a machine-recorded deviation, not just prose |
 
-**The decisive separation.** Median pocket backbone RMSD is **0.454 Å** — the model
+**A parser bug had been suppressing a benchmark entry, and fixing it flipped a verdict.** The
+mmCIF/PDB reader ignored the alternate-location field, so a side chain deposited in two
+conformations was read as two atoms 0.5 Å apart. That made `24KK`'s atom counts irreconcilable
+and it was reported as a technical failure. Alternate locations are the same atom modelled
+twice; the parser now keeps the highest-occupancy copy. `24KK` scores 6.09 Å (a miss), the
+congeneric stratum goes from 6 entries to 7, and H2's threshold criterion moves from 0.167 to
+**0.214** — over the pre-registered 0.2 line.
+
+That is not a positive result, and the report no longer lets it read as one. The Fisher exact
+test on the very same 2×2 gives **p = 0.59**: the criterion is met and the test is not
+significant, which is what "underpowered" looks like when both are shown instead of one. Both
+now appear side by side, because the criterion and the test were previously collapsed into a
+single fabricated p-value.
+
+**The decisive separation.** Median pocket backbone RMSD is **0.348 Å** — the model
 reproduces the binding-site fold essentially perfectly — yet it places the ligand wrongly in
-7 of 12 cases. `23SI` is the clearest: pocket backbone **0.22 Å**, ligand **8.49 Å** away.
+8 of 13 cases. `23SI` is the clearest: pocket backbone **0.22 Å**, ligand **8.49 Å** away.
 Folding ability and docking ability are distinguishable, and confidence in the first licenses
 nothing about the second.
 
 The RMSD distribution is sharply **bimodal**, exactly as the registered metric justification
 predicted: hits at 0.31–0.81 Å, misses at 3.3–17.4 Å, nothing between.
 
-**H2 is underpowered, not null.** Premium 0.167 (recall 0.50 vs congeneric 0.33), Fisher
-p = 1.0, Wilson intervals [0.19, 0.81] and [0.10, 0.70] almost entirely overlapping. At n = 6
-per stratum only a very large premium was detectable — stated as a known confound before any
-prediction ran.
+**H2 is underpowered, not null.** Premium 0.214 (recall 3/6 = 0.50 vs congeneric 2/7 = 0.286),
+Fisher p = 0.59, Wilson intervals [0.19, 0.81] and [0.08, 0.64] overlapping across almost their
+whole range. At 6 and 7 per stratum only a very large premium was detectable — stated as a
+known confound before any prediction ran, and the reason the criterion crossing 0.2 is reported
+as a criterion rather than as evidence.
 
 **The receptor-disjoint stratum does not exist**, and that is a finding about the PDB rather
-than a shortfall. 14 distinct receptors from post-cutoff protein–ligand depositions were
-checked and **every one already had pre-cutoff entries** — 13 to 1172 (lysozyme). So this
+than a shortfall. Every post-cutoff receptor checked already had pre-cutoff entries — 13 to 1172 (lysozyme). So this
 measures the step from "this exact complex was seen" to "this pocket was seen with other
 ligands", the smaller of the two gaps. Nothing here bears on novel folds.
 
@@ -360,18 +495,68 @@ complexes, Boltz-2 + DockQ (CAPRI standard). **All three hypotheses confirmed.**
 | pre-cutoff (could be memorised) | **7/8 = 0.88** | 0.87 |
 | post-cutoff | **3/8 = 0.38** | 0.18 |
 
+**A chain-mapping shortcut had inflated the best post-cutoff score.** The registered plan
+specifies an explicit chain mapping; an earlier version abandoned it for DockQ's own chain
+search on all 16 entries and described the result as *verified*, when nothing checked it.
+Measured entry by entry, the blanket switch was neither necessary nor harmless. 13 of 16 score
+identically either way. Only three genuinely need the search: `4XHV` and `4XOE` raise
+`KeyError('A')` under the explicit form, and `31EE` finds **no interface** under the curated
+`AB:AC` — the curation had named the wrong receptor copy, and peptide C sits on chain B. The
+harm was in `10TC`, where DockQ silently substituted native chain H, a **4-residue copy of the
+curated 8-residue peptide**; scoring against half the resolved peptide gave DockQ 0.969 where
+the curated mapping gives **0.831**. That was the highest score in the post-cutoff stratum.
+The curated mapping is now used wherever DockQ accepts it, the three exceptions are recorded
+with the reason DockQ gave, and ρ moved from 0.847 to 0.800 as a result. The stratum
+fractions did not change.
+
 A 0.50 drop in success rate and a **4.8× drop in median DockQ**. Unlike #6, this effect is
 large enough to see at n = 8 per stratum.
 
-**ipTM is well calibrated** for this task — Spearman ρ = **0.847**, p = 3×10⁻⁵. Against
-AlphaFold3's published bands: 9 confident-and-acceptable, 1 confident-but-wrong, 4
-failed-band-and-wrong, and **zero failed-band-but-acceptable**. So ipTM < 0.6 produced no
-false negatives. This is the project's first calibrated interpretation key for any confidence
-metric.
+**The strata are separated by eleven years, not by the seven months the cutoff requires.** The
+registered cutoff is 2023-06-01, but every pre-cutoff entry was deposited in a **five-week
+window in January–February 2015**, and the post-cutoff entries run December 2025 – June 2026.
+Median gap: **11 years**. So the comparison carries a decade of change in target class,
+construct design, crystallisation practice and peptide chemistry alongside the variable it
+means to isolate. The registered `known_confounds` list four confounds and this is not among
+them; it is stated here because it was found by audit, not because it was anticipated.
 
-**Gate for #9: OPEN.** The pipeline recovers 7 of 8 memorisable interfaces, so it has
-demonstrated sensitivity and a low score in #9 is evidence about the candidate, not the
-method.
+What can be checked, has been. The strata are well matched on every structural property
+recorded: peptide length (medians 11.0 vs 11.5, Mann-Whitney p = 0.60), receptor length (251
+vs 247, p = 0.96) and resolution (1.80 vs 1.84 Å, p = 0.72). None of those predicts DockQ
+(|ρ| ≤ 0.41, all p > 0.11). So the measurable covariates do not explain the drop. That
+narrows the confound without removing it — era effects this benchmark does not measure remain
+unaddressed, and resolving them needs a pre-cutoff set drawn from the months immediately
+before the cutoff, which is a new study with its own registration rather than a correction to
+this one.
+
+**ipTM ranks interface quality well** — Spearman ρ = **0.800**, p = 2×10⁻⁴. The registered
+criterion is a rank correlation, and the section used to report it under the word
+*calibrated*. Those are different properties. Spearman is invariant under any strictly
+monotone transform, so replacing ipTM by ipTM² leaves ρ and p untouched while moving three
+of the ten entries out of the >0.8 band (4Y29, 4Y32, 23AG) — the statistic cannot see the rescaling that the band
+thresholds depend on. It measures discrimination, not calibration, and is now named that way.
+
+The absolute bands are a separate, much smaller piece of evidence: 9 confident-and-acceptable,
+1 confident-but-wrong, 4 failed-band-and-wrong, **zero failed-band-but-acceptable**, plus 1
+grey-and-acceptable and 1 grey-and-wrong. So ipTM < 0.6 produced no false negatives here — on
+**4 observations**. That is an interpretation key with an honest denominator, not a calibrated
+scale.
+
+**Gate for #9: OPEN, WITH A LIMIT I ORIGINALLY OMITTED.** The pipeline recovers 7 of 8
+memorisable interfaces, so it has demonstrated sensitivity, and a low score in #9 is evidence
+about the candidate rather than about the method. That much stands. What the original wording
+of this section did not say is the range over which it was demonstrated. The 16 complexes here
+have peptides of **7–17 residues** and receptors of **80–304**. The candidates screened in #9
+are **31–47 residues** — longer than anything measured here — on receptors of 156–608. No #9
+candidate lies inside the calibrated peptide range, and only TREM2 (156 aa) and CHRNA7 (211 aa)
+lie inside the calibrated receptor range.
+
+So the sensitivity argument transfers, but the **numeric bands do not**. Every use of the 0.6
+and 0.8 thresholds in #9 and #10 is an extrapolation and is now labelled as one, in the
+registered protocol as well as here. #9's primary metric was never one of them: the
+native-versus-composition-matched-decoy contrast generates its own reference distribution
+inside the study and needs no external calibration. That is why the headline negative survives
+the correction while the band language does not.
 
 ---
 
@@ -404,91 +589,221 @@ disagrees by five orders of magnitude. Tacrine 201 records / 2.57, physostigmine
 
 ## Slate #9 — the candidate screen
 
-`platform/studies/candidate_screen.py`, plan `5a62fdf6d614`, audit **confirmatory**. Six
-candidates co-folded with their declared receptors, each against three composition-matched
+`platform/studies/candidate_screen.py`, plan `4486520b8863` (v8; supersedes v7 and every
+earlier version, all retained), audit **one declared deviation** (below). Every candidate the
+screening criterion admits, co-folded with its receptor and with three composition-matched
 shuffles that preserve length, charge, pI and GRAVY exactly.
 
-**Not one candidate beat its own null.**
+**Not one candidate beat its own null. 13 out of 13.**
 
-| Candidate | Target | native ipTM | best decoy | band |
-|---|---|---|---|---|
-| PfcACh-PAM-P1 | CHRNA7 | 0.685 | **0.837** | grey |
-| MicroTrem2-Agonist-M1 | TREM2 | 0.410 | **0.581** | failed |
-| BasalAChE-Abeta-B4 | ACHE | 0.391 | **0.742** | failed |
-| HippoAChE-AlkaPept-X2 | ACHE | 0.340 | 0.348 | failed |
-| BasalAChE-GorgeBlock-B1 | ACHE | 0.340 | 0.348 | failed |
-| BasalSuper-AChE-TrkA-B5 | ACHE | 0.265 | **0.499** | failed |
+| Candidate | Target | construct | native ipTM | best decoy | band |
+|---|---|---|---|---|---|
+| BasalNgf-TrkA-B3 | NTRK1 | 391 aa ectodomain | 0.817 | **0.872** | confident |
+| PfcDual-nACh-GluN2A-P5 | CHRNA7 | 211 aa ectodomain | 0.757 | **0.894** | grey |
+| MicroTlr4-Antagonist-M3 | TLR4 | 608 aa ectodomain | 0.710 | **0.823** | grey |
+| MicroDual-Trem2-Nrf2-M5 | TREM2 | 156 aa ectodomain | 0.637 | **0.779** | grey |
+| MicroTrem2-Agonist-M1 | TREM2 | 156 aa ectodomain | 0.526 | **0.567** | failed |
+| PfcTrk-ErkEnhancer-P2 | NTRK2 | 399 aa ectodomain | 0.442 | **0.486** | failed |
+| HippoDual-TrkB-AMPK-X5 | NTRK2 | 399 aa ectodomain | 0.440 | **0.482** | failed |
+| PfcACh-PAM-P1 | CHRNA7 | 211 aa ectodomain | 0.403 | **0.830** | failed |
+| BasalSuper-AChE-TrkA-B5 | ACHE | 543 aa catalytic core | 0.351 | **0.493** | failed |
+| PfcGluN2A-LTP-P3 | GRIN2A | 534 aa ectodomain | 0.328 | **0.389** | failed |
+| HippoAChE-AlkaPept-X2 | ACHE | 543 aa catalytic core | 0.248 | **0.382** | failed |
+| BasalAChE-Abeta-B4 | ACHE | 543 aa catalytic core | 0.221 | **0.622** | failed |
+| HippoTrk-Saponin-X1 | NTRK2 | 399 aa ectodomain | 0.121 | **0.208** | failed |
 
-Mean native ipTM **0.405** against mean decoy **0.411** — the designed sequences score very
-slightly *worse* than random rearrangements of their own amino acids.
+Mean native ipTM **0.462** against mean decoy **0.460** — a difference of
+**+0.0012**, indistinguishable from zero and far inside the 0.149 ipTM sampler noise
+measured in study #2. All three hypotheses are decided by pre-specified thresholds, not by tests,
+so this study reports **no p-values at all**, and the protocol audit records that as a deviation:
+the plan registered `n_comparisons: 3` under Holm and the executed family holds **0**.
+Re-classifying a 0/1 indicator out of a Holm family is defensible — it is not a p-value and it
+corrupts the correction — but it is a change to the inferential procedure made after the data
+were seen, so it belongs on the record rather than in the code alone.
 
-**Why the null was necessary, demonstrated twice.** A shuffle of `PfcACh-PAM-P1` scored
-**0.837** — inside the confident band, above every native — and a shuffle of
-`BasalAChE-Abeta-B4` scored **0.742**. Reported without a null, either would have read as a
-hit. These are Arg/Trp-rich cationic amphipathic peptides, the class most prone to scoring on
-composition alone.
+**The population is derived, not hand-listed, and the derivation is in the artefact.**
+`coverage()` resolves every valid-sequence candidate in the catalogue against the registry and
+writes the ground for each inclusion and exclusion into `analysis.coverage`. A candidate is
+excluded only when **every** target it declares is unreachable — the registry admits no
+soluble-phase construct (a GPCR or transporter, whose ligand site is inside the membrane bundle)
+or the target is cytoplasmic. A candidate naming both a reachable and an unreachable target is
+screened against the reachable one, with the rest recorded as declared-but-untested.
 
-**An unplanned consistency check passed.** `HippoAChE-AlkaPept-X2` and
-`BasalAChE-GorgeBlock-B1` returned byte-identical ipTM and identical decoy values, because
-they are one of the duplicate sequence pairs the data gate flagged. Identical inputs giving
-identical outputs confirms both that the pipeline is deterministic at fixed seed and that the
-duplicate finding was real — the platform listed them as two distinct therapeutics against
-different targets.
+Getting there took two corrections. The first version of `coverage()` short-circuited on the
+hand-written map, so the criterion governed exclusions only while the inclusion half stayed
+hand-listed — the defect it was written to remove, surviving in the half that mattered. Applying
+the rule uniformly then exposed the rule itself: it excluded CHRNA7 and TLR4 as heteromers when
+both are primarily homomers. Narrowed to hetero-only evidence it caught nothing not already
+excluded as cytoplasmic, which settles the question — **a keyword scan over a UniProt SUBUNIT
+comment cannot establish whether a binding site lies at a subunit interface.** Oligomeric state
+is recorded and disclosed but no longer excludes. Two candidates declaring a GluN2A target then became visible and are screened here — one against
+GRIN2A and one against CHRNA7, which is the receptor its own construct record names — and both
+lose to their own decoys. 8 candidates remain excluded, each with its
+ground in the artefact, and **0** admissible candidates are left unscreened.
 
-**Scope, registered in advance.** Three decoys give a minimum empirical p of 0.25, so no
-individual candidate could reach significance; the design tests the set. A negative bounds
-what *this pipeline at this configuration* detects, not what the molecules do in a cell. Only
-6 of 25 candidates were screened — those whose receptor is in the registry and extracellular.
+**Why an absolute threshold would have produced a hit.** `BasalNgf-TrkA-B3` reaches ipTM
+**0.817**, inside the band study #7 associated with correct interfaces. Its own scrambled sequence
+reaches **0.872**. A screen reading absolute confidence would have reported it as the programme's
+lead. `PfcACh-PAM-P1` is the same story at 0.403 native against **0.830** scrambled, and
+`PfcDual-nACh-GluN2A-P5` at 0.757 against **0.894**. These are Arg/Trp-rich cationic amphipathic
+peptides, the class most prone to scoring on composition alone, which is exactly why the null is
+composition-matched rather than random.
+
+**The duplicate is now counted once, and it had been inflating the effect size.**
+`HippoAChE-AlkaPept-X2` and `BasalAChE-GorgeBlock-B1` carry the identical 36-mer against the
+identical AChE construct — one of the duplicate pairs the data gate flags — and both were being
+screened. Identical inputs gave byte-identical outputs, which is a real consistency check passed:
+it confirms the pipeline is deterministic at fixed seed and that the duplicate finding was
+genuine, since the platform listed them as two distinct therapeutics against different targets.
+
+But counting one molecule twice is not harmless. Every statistic here is a mean or a count over
+candidates, so the duplicate voted twice in all of them, and it is the most extreme negative
+difference in the set. In study #10 it moved the paired mean difference from −0.022 to −0.041
+and Cohen's *dz* from −0.117 to −0.220 — roughly doubling the reported effect — and overstated
+the t-test's degrees of freedom by one. v4 de-duplicated on (peptide, target), keeping the first
+code and recording the other as an alias; that run reported nine distinct designs, and the current
+v8 reports **13**. No fold is discarded;
+the duplicate's cells remain under custody and are simply not counted twice.
 
 ---
 
 ## Slate #10 — does the negative survive a full MSA?
 
-`platform/studies/msa_specificity.py`, plan `048c532eb430`. Study #9 re-run with
-`--use_msa_server`, same candidates, same RNG seed, **10 decoys each instead of 3**. The panel
-classified this `needs-gpu` at 100–250 GPU-hours; it ran here in ~5 hours on Apple MPS, which
-the 128 GB unified memory made possible by removing the VRAM ceiling.
+`platform/studies/msa_specificity.py`, plan `8511b6cc30ea` (v9; supersedes v8 and every
+earlier version, all retained). Study #9 re-run with `--use_msa_server`, the same corrected
+constructs, the same RNG seed, **10 decoys each instead of 3**, and all 13 distinct candidates.
+143 folds, zero failures. Every stored model was re-parsed and checked against the chains its
+own input requested.
 
 | Hypothesis | Verdict |
 |---|---|
-| H1 natives separate from decoys | **falsified** (Δ = 0.019, p = 0.77, dz = 0.13) |
-| H2 a candidate is confident *and* specific | **falsified** (0 candidates > 0.8) |
-| H3 the MSA raises natives | **confirmed** (+0.219) |
+| H1 natives separate from decoys | **falsified** (paired mean Δ = +0.0009, t-test p = 0.98, dz = +0.01) |
+| H2 a candidate is confident *and* specific | **criterion met** (2 candidates) — and see the null below |
+| H3 the MSA raises natives by > 0.15 | **criterion met** (+0.167) |
 
-**The result separates two things that looked identical.** The MSA genuinely raises ipTM —
-+0.219 on average, up to **+0.42** on the AChE candidates — so #9's registered confound was
-*real* and running this study was necessary. But the rise applies to natives and decoys alike:
-mean native **0.624** against mean decoy **0.606**, a gap indistinguishable from zero. **The
-MSA raises the level without creating specificity**, exactly as the pre-registered confound
-predicted: it helps the receptor, which has thousands of homologues, not the peptide, which
-has none.
+| Candidate | Target | #9 no-MSA | MSA native | Δ | decoy mean | **decoy max** | beats all |
+|---|---|---|---|---|---|---|---|
+| MicroDual-Trem2-Nrf2-M5 | TREM2 | 0.637 | 0.902 | +0.266 | 0.926 | **0.972** | no |
+| HippoDual-TrkB-AMPK-X5 | NTRK2 | 0.440 | 0.831 | +0.392 | 0.778 | **0.875** | no |
+| BasalNgf-TrkA-B3 | NTRK1 | 0.817 | 0.818 | +0.001 | 0.495 | 0.750 | **YES** |
+| BasalAChE-Abeta-B4 | ACHE | 0.221 | 0.810 | +0.590 | 0.661 | 0.797 | **YES** |
+| PfcDual-nACh-GluN2A-P5 | CHRNA7 | 0.757 | 0.746 | -0.011 | 0.594 | **0.866** | no |
+| MicroTlr4-Antagonist-M3 | TLR4 | 0.710 | 0.722 | +0.012 | 0.853 | **0.934** | no |
+| MicroTrem2-Agonist-M1 | TREM2 | 0.526 | 0.693 | +0.167 | 0.848 | **0.963** | no |
+| HippoTrk-Saponin-X1 | NTRK2 | 0.121 | 0.541 | +0.420 | 0.421 | **0.566** | no |
+| PfcTrk-ErkEnhancer-P2 | NTRK2 | 0.442 | 0.540 | +0.098 | 0.574 | **0.804** | no |
+| PfcGluN2A-LTP-P3 | GRIN2A | 0.328 | 0.495 | +0.168 | 0.468 | **0.770** | no |
+| BasalSuper-AChE-TrkA-B5 | ACHE | 0.351 | 0.489 | +0.139 | 0.505 | **0.696** | no |
+| PfcACh-PAM-P1 | CHRNA7 | 0.403 | 0.357 | -0.046 | 0.598 | **0.760** | no |
+| HippoAChE-AlkaPept-X2 | ACHE | 0.248 | 0.227 | -0.021 | 0.440 | **0.791** | no |
 
-| Candidate | #9 no-MSA | MSA native | Δ | decoy mean | **decoy max** | diff |
-|---|---|---|---|---|---|---|
-| BasalAChE-GorgeBlock-B1 | 0.340 | 0.759 | +0.42 | 0.594 | 0.757 | +0.165 |
-| HippoAChE-AlkaPept-X2 | 0.340 | 0.759 | +0.42 | 0.596 | 0.757 | +0.163 |
-| BasalSuper-AChE-TrkA-B5 | 0.265 | 0.584 | +0.32 | 0.532 | **0.826** | +0.052 |
-| BasalAChE-Abeta-B4 | 0.391 | 0.570 | +0.18 | 0.562 | 0.778 | +0.008 |
-| PfcACh-PAM-P1 | 0.685 | 0.526 | −0.16 | 0.580 | **0.856** | −0.054 |
-| MicroTrem2-Agonist-M1 | 0.410 | 0.549 | +0.14 | 0.772 | **0.934** | −0.223 |
+**The paired comparison is now as close to exactly zero as this design can resolve.** Mean native
+0.629 against mean decoy 0.628 — a paired difference of **+0.0009**
+(p = 0.98, dz = +0.01). With thirteen candidates, ten composition-matched decoys each and a
+full MSA, the designed sequences and rearrangements of their own amino acids are
+indistinguishable.
 
-**Random sequences reach the confident band; no native does.** Four decoys scored 0.934,
-0.856, 0.826 and 0.778, while **not one designed sequence reached 0.8**. Reported without a
-null, any of those four would have read as a hit.
+**Two candidates beat all ten of their own decoys. That is what chance looks like at this scale.**
+A candidate beats all 10 of its decoys with probability 1/11 = 0.091 under the null, so across
+13 candidates **1.18 are expected to do it by chance**, and P(X ≥ 2) = **0.334**. Two is the
+expected outcome. The composition-matched null protects a *candidate* from being read as a hit;
+it does nothing for a *screen* read the same way, and this is the same error one level up. The
+screen-level null is computed in the artefact and flagged by the audit as exploratory, because it
+was added after seeing the data.
 
-**The pilot was misleading, and that is the lesson.** A single native–decoy pair measured
-before this study showed 0.759 against 0.299 — a +0.46 separation that looked decisive. With
-ten decoys the same candidate's decoy mean is 0.594 and the separation collapses to +0.165.
-The single decoy happened to be the weakest of ten. Raising decoys from 3 to 10 also flipped
-the running mean's sign twice mid-run.
+**The MSA raises the level without changing the ranking**, as #9's registered confound predicted —
+it helps the receptor, which has thousands of homologues, not the peptide, which has none. The
+mean rise is **+0.167**, which is 1.12× the 0.149 ipTM sampler-noise floor from study #2, so the
+average rise is real but only marginally resolvable. It lifts decoys too: 11 of 13 candidates have
+a decoy above their native, 6 decoys clear 0.8, and `MicroTrem2-Agonist-M1`'s best scramble reaches
+**0.963** against a native of 0.693. Reported without a null, that scramble would have been the
+programme's lead compound.
 
-**Two stated limits.** The 2 of 6 candidates that beat all their decoys are
-`HippoAChE-AlkaPept-X2` and `BasalAChE-GorgeBlock-B1` — the duplicate sequence pair the data
-gate flagged. They are the same molecule, so the effective number of independent candidates
-beating their null is **one**, at empirical p = 0.091, which cannot reach 0.05 with ten
-decoys. One fold of 66 failed, so n = 65 and the audit flags the deviation.
+**H3 has been decided five different ways by margins smaller than the study's own resolution.**
+Its registered threshold is a rise of 0.15: v1 measured +0.219, v4 +0.134 with a duplicated
+candidate still counted, v7 +0.151 on nine candidates, v8 +0.183, and v9 measures +0.167 on thirteen candidates. A
+criterion that changes sign when one duplicated row is removed is measuring where the threshold
+was drawn, not the MSA. The honest statement is that the MSA raises complex ipTM by roughly
+0.13–0.18 on this set.
 
-**The slate is complete.** All 11 consensus items have now been executed.
+**What survived every correction, and what did not.** Across three construct corrections, a
+de-duplication and two coverage expansions, **H1 was falsified every time** — the designed
+sequences never separated from their own composition-matched nulls. What did NOT hold steady is
+the size of the gap: across the screen's six retained versions it ran −0.006, −0.015, −0.045,
+−0.041, −0.012, +0.001, growing several-fold before coming back through zero, and it has never
+left the sampler-noise floor. The verdict is what survived every correction, not the margin. H2's criterion is met, but the screen-level null says two is chance. H3
+reversed twice. One verdict is robust and two are artefacts of where thresholds were placed,
+which is the more useful thing to know about this study than any individual number in it.
+
+---
+
+## What the page shows, and why the decoys are not in the picker
+
+`platform/build_structures.py` indexes every structure the workbench can open:
+**13 candidate–receptor complexes** from study #10, **22 peptide-only folds**, and the
+**16 deposited AlphaFold DB receptors**. Each opens its real coordinate file and is drawn
+from that file's own B-factor column and PAE array — including the interface PAE across the
+two chains, which study #7 measured tracks DockQ, so a reader can see whether the peptide is
+*placed* against the receptor rather than only how the complex scored.
+
+**The decoys are deliberately absent from the picker.** Each complex has ten
+composition-matched scrambles under custody, and several score above their own native —
+`MicroTrem2-Agonist-M1`'s best scramble reaches 0.963 against a native of 0.693. They are
+reported in Slate #9 and #10 because they are the finding. They are kept out of a structure
+*picker* because letting a reader browse for the best-looking fold is precisely the error the
+composition-matched null exists to prevent. Every native is therefore shown with its decoy
+mean and decoy maximum beside it, and a native its own scrambles beat says so on the card.
+
+A single-chain fold has no interface, so no ipTM is shown for one. Boltz emits `iptm: 0.0`
+there; published beside a peptide that zero reads as the worst possible binding result rather
+than as an absence, so the index drops every interface term for monomers and records why.
+
+---
+
+## An independent predictor, and what it can and cannot settle
+
+`platform/studies/alphafold_db_compare.py`, artefact `data/alphafold_db_comparison.json`.
+**Exploratory, deliberately.** No hypothesis was registered for it, it has no verdict, and it
+is not in the numbered slate.
+
+Every receptor fold in studies #9 and #10 comes from one predictor, so nothing in the slate
+distinguishes an ordinary Boltz-2 fold from an arbitrary one. AlphaFold DB is an independent
+model with different weights, different training data and a different inference path, and its
+deposited per-residue confidence over the same span is a cheap external check. All
+16 registry accessions were downloaded (CC BY 4.0);
+7 have a Boltz-2 receptor fold and are compared, and the other
+9 are listed in the artefact with the reason, so "7 of
+16" can never be read as "16".
+
+**AlphaFold Server was not used and could not be.** Its terms prohibit automated use for
+protein–ligand and protein–peptide binding prediction, which is exactly what studies #9 and
+#10 do. AlphaFold DB is a separately licensed corpus of deposited monomer predictions and
+carries no such restriction. Nothing here is submitted to any server.
+
+| Target | Residues | AlphaFold DB pLDDT | Boltz-2 pLDDT (MSA) | r with MSA | r without |
+|---|---|---|---|---|---|
+| ACHE | 543 | 97.5 | 95.2 | +0.864 | +0.853 |
+| CHRNA7 | 211 | 92.0 | 90.2 | +0.674 | +0.597 |
+| GRIN2A | 534 | 83.2 | 77.1 | +0.708 | +0.487 |
+| NTRK1 | 391 | 81.5 | 85.7 | +0.883 | +0.867 |
+| NTRK2 | 399 | 82.1 | 82.0 | +0.956 | +0.715 |
+| TLR4 | 608 | 94.8 | 91.5 | +0.775 | +0.523 |
+| TREM2 | 156 | 82.9 | 75.7 | +0.913 | +0.933 |
+
+**Giving Boltz-2 an MSA moves it toward AlphaFold on both axes.** Median r rises from
++0.715 to +0.864 and the mean pLDDT gap closes from
+5.32 to 2.35 points. That
+is the point of running two arms: arm A confounds predictor, MSA and monomer-versus-complex
+context all at once, and arm B removes the middle one. The median shift is
++0.0768 over
+7 targets.
+
+**What this does not support, stated plainly.** pLDDT is a self-report, not accuracy — two
+models agreeing about where they are confident is not agreement about where they are right,
+and the residual offset is not evidence that either is better. Both arms still confound
+monomer against complex. The correlation runs over residues within one protein, which are not
+independent, so no p-value is attached to any r here. And none of it speaks to the peptide,
+the interface, or the answer to #9 and #10 — which remains negative.
 
 ---
 
@@ -497,7 +812,7 @@ decoys. One fold of 66 failed, so n = 65 and the audit flags the deviation.
 A refusal to predict is principled only when **the stated ground is the computed ground**.
 
 The original 1000 Da ADMET rule was **deleted** because it failed that test: the candidate at
-4910 Da is *inside* the training molecular-weight bounding box (training max 5299.5 Da), so
+4943 Da is *inside* the training molecular-weight bounding box (training max 5299.5 Da), so
 molecular weight is not what places it outside the domain. The refusal survives on a counted
 ground instead — the heaviest single covalent species among 53,525 training molecules is
 2285.7 Da and the query is 2.16× that.
@@ -520,8 +835,13 @@ platform/
   cbc/prespec.py      hash-locked pre-specification with reachability checks
   cbc/corpus.py       protocol-defined corpus construction
   cbc/compute/        structure.py (Boltz-2), admet.py (ADMET-AI)
-  studies/            pre-registered studies
+  cbc/inference.py    a criterion is not a test: Holm over real p-values only
+  studies/            pre-registered studies, plus the exploratory AlphaFold DB comparison
+  build_dataset.py    the provenance-carrying data layer the page reads
+  build_slate.py      the studies index, joined from plans + artefacts + README
+  build_structures.py the structure index the 3D viewer picks from
   validate.py         the data-integrity gate
+  verify_frontend.py  DOM, data and rendering-rule contract for the page
   check_naming.py     build guard: no pooled score rendered as a free energy
 runs/                 content-addressed prediction artefacts + manifest
 prespec/              registered, hash-locked analysis plans
@@ -529,6 +849,18 @@ memory/               append-only provenance ledger (see memory/DESIGN.md)
 reviews/              panel findings, adjudications, generated report
 research/             database, algorithm and methodology surveys
 data/                 validated, provenance-carrying data
+data/alphafold_db/    deposited AlphaFold models, downloaded under CC BY 4.0
+data/structures.json  51 structures the viewer can open, all under custody
+data/slate.json       the pre-registered studies, assembled from plans and artefacts
+index.html, app.js    the workbench page
+```
+
+The page is a static site with no build step. Serve it over HTTP — under `file://` the
+browser refuses every `fetch()` as cross-origin, and while the data layer has a `<script>`
+shim for that case, the structure viewer genuinely cannot read a coordinate file that way:
+
+```
+python3 -m http.server
 ```
 
 ---
@@ -544,9 +876,13 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 
 ## Known limitations
 
-- Structure predictions run in single-sequence mode (`msa: empty`). Boltz documents this as
-  degrading accuracy in general, though it was measured to cost this candidate set nothing
-  (see the variance study). Results remain a lower bound for natural sequences.
+- Studies #6, #7 and #9 run in single-sequence mode (`msa: empty`); study #10 runs with
+  `--use_msa_server`. The variance study measured the MSA to cost the *isolated designed
+  peptides* essentially nothing, which is expected for sequences with no homologues — but that
+  does not transfer to complexes, where the MSA helps the receptor. Study #10 measured a
+  **+0.167** mean rise in complex ipTM, which is 1.12× the 0.149 noise floor —
+  above it, though not by much. Single-sequence results
+  are therefore a lower bound, and the earlier wording here overstated how little was lost.
 - Same-seed bit-reproducibility was **measured and confirmed** for single-chain folds on MPS.
   It is not claimed for larger jobs: Metal's floating-point reduction order is not fixed by
   the seed and there is a documented `aten::linalg_svd` CPU fallback.
@@ -557,7 +893,7 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 - ChEMBL's `natural_product` flag is noisy: it labels donepezil and metoclopramide as
   NP-derived. `NP_DERIVED` means "ChEMBL asserts NP provenance", not "established".
 - Legacy binding-site residue annotations mix organism numbering conventions and include
-  **45** residue identities that are wrong in every convention, resolved live against
+  **23** residue identities that are wrong in every convention, resolved live against
   `data/target_registry.json`.
 - PoseBusters' paper states it uses RDKit `GetBestRMS`; its code has never used that for the
   pass/fail decision, and following the paper literally scores a pose translated 3 Å as
@@ -566,9 +902,26 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 
 ---
 
-## License
+## License and attribution
 
-Private research. Not affiliated with, endorsed by, or connected to Google DeepMind or the
-AlphaFold team. AlphaFold is a trademark of Google DeepMind.
+**Code: Apache-2.0** (see [LICENSE](LICENSE)). SPDX-License-Identifier: `Apache-2.0`.
+
+**Redistributed data keeps its own licence** — see [NOTICE](NOTICE) for the full list. In
+short:
+
+| Source | Licence | What is here |
+|---|---|---|
+| ChEMBL | **CC BY-SA 3.0** | measured activities in `data/corpus_ACHE.json` and the affinity studies |
+| UniProt | CC BY 4.0 | sequences in `data/target_registry.json` |
+| RCSB PDB | CC0 1.0 | construct sequences, entry identifiers |
+| PubChem | public domain | curated structures, InChIKeys, CIDs |
+| Boltz-2 outputs | MIT | predicted coordinates in `runs/` |
+| `.agents/skills/` (229 files) | Apache-2.0 / CC BY 4.0 | vendored from google-deepmind/science-skills, © Google LLC |
+
+ChEMBL's share-alike term propagates: the ChEMBL-derived data files listed in `NOTICE` are distributed
+under **CC BY-SA 3.0**, not Apache-2.0. The code that produced them stays Apache-2.0.
+
+Not affiliated with, endorsed by, or connected to Google DeepMind or the AlphaFold team.
+AlphaFold is a trademark of Google DeepMind.
 
 © 2026 Seung H. Jung

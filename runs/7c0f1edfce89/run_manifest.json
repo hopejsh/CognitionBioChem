@@ -1,0 +1,20 @@
+{
+ "input_yaml_sha256": "32c6dfbaf62e78014b997fcff6e446e4cdbf71e801d2413b2403943d0c874191",
+ "argv": [
+  "predict",
+  "--out_dir",
+  "--accelerator",
+  "gpu",
+  "--recycling_steps",
+  "3",
+  "--diffusion_samples",
+  "1",
+  "--output_format",
+  "mmcif",
+  "--override",
+  "--seed",
+  "1",
+  "--use_msa_server"
+ ],
+ "boltz_version": "2.2.1"
+}

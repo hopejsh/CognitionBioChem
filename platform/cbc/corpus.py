@@ -9,9 +9,12 @@ denominator becomes *statable*. A hand-picked set of 8 actives has no denominato
 computed over it — enrichment, hit rate, scaffold frequency — is defined. A protocol-defined
 corpus has one.
 
-Sources are queried live; nothing is redistributed. ChEMBL data is CC BY-SA 3.0 and COCONUT
-is CC0/CC BY, but this module stores only identifiers plus locally computed values, so the
-licence question is confined to what a user chooses to cache.
+Sources are queried live, but the caches this module writes ARE redistributed. data/corpus_*.json
+carries ChEMBL canonical SMILES, preferred names and measured activity values, which makes it
+this repository's principal redistribution of ChEMBL content, not a private cache. It is
+therefore covered by CC BY-SA 3.0 share-alike and is listed by name in /NOTICE. The earlier
+version of this paragraph concluded that "nothing is redistributed", and that false premise is
+what let the attribution gap stay open until the repository went public. COCONUT is CC0/CC BY.
 """
 
 from __future__ import annotations
@@ -143,6 +146,29 @@ def _ssl_context() -> "ssl.SSLContext":
         return ctx
 
 
+
+#: Assay confidence, cached by assay id. Many activities share an assay, so this is a few
+#: dozen requests rather than one per row.
+_ASSAY_CONF_CACHE: dict[str, int | None] = {}
+#: Rows dropped by the confidence criterion, so the denominator stays statable.
+_EXCLUDED_BY_CONFIDENCE: list[dict] = []
+
+
+def _assay_confidence(assay_id: str | None) -> int | None:
+    """ChEMBL assay confidence_score, or None when it cannot be established."""
+    if not assay_id:
+        return None
+    if assay_id in _ASSAY_CONF_CACHE:
+        return _ASSAY_CONF_CACHE[assay_id]
+    try:
+        d = _get(f"{CHEMBL}/assay/{assay_id}?format=json")
+        v = d.get("confidence_score")
+        v = int(v) if v is not None else None
+    except Exception:                                  # noqa: BLE001 - network or shape
+        v = None
+    _ASSAY_CONF_CACHE[assay_id] = v
+    return v
+
 def _get(url: str, retries: int = 3, timeout: int = 120) -> dict:
     """GET with retry. ChEMBL is frequently slow (20-40 s is normal), not broken."""
     ctx = _ssl_context()
@@ -197,13 +223,29 @@ def iter_target_activities(target_chembl_id: str, protocol: InclusionProtocol,
     types = ",".join(protocol.allowed_activity_types)
     url = (f"{CHEMBL}/activity?target_chembl_id={target_chembl_id}"
            f"&standard_type__in={types}&standard_units=nM"
+           # Without an explicit ordering the API returns a different page-1 each time, and
+           # the corpus is then not reproducible: two builds at the same limit returned the
+           # same 18 compounds but with different SALT FORMS of neostigmine and edrophonium
+           # (different InChIKeys for the same drug). Ordering by the immutable activity_id
+           # makes the pull deterministic, which is the whole premise of an executable
+           # inclusion protocol.
+           f"&order_by=activity_id"
            f"&limit={min(page, limit)}&format=json")
     while url and fetched < limit:
         d = _get(url)
         for a in d.get("activities", []):
-            conf = a.get("confidence_score")
-            conf = int(conf) if conf is not None else None
-            if conf is not None and conf < protocol.min_assay_confidence:
+            # The ChEMBL /activity resource does NOT carry confidence_score -- it lives on
+            # /assay. Reading it from the activity record made `conf` None on every row, so
+            # the guard below never fired even once, while protocol.summary() advertised
+            # "assay confidence >= 8" as an applied inclusion criterion. Verified against the
+            # live API: /activity has no such key; /assay/CHEMBL643384 returns 8.
+            # It is now fetched per assay and cached, and a missing score FAILS the criterion
+            # rather than passing silently, because "unknown" is not "acceptable".
+            conf = _assay_confidence(a.get("assay_chembl_id"))
+            if conf is None or conf < protocol.min_assay_confidence:
+                _EXCLUDED_BY_CONFIDENCE.append(
+                    {"activity": a.get("activity_id"), "assay": a.get("assay_chembl_id"),
+                     "confidence": conf})
                 continue
             val = a.get("standard_value")
             yield Activity(
@@ -448,13 +490,17 @@ def standardize(smiles: str, source: str, source_id: str, protocol: InclusionPro
 # --------------------------------------------------------------------------- #
 
 def build_target_corpus(target_chembl_id: str, protocol: InclusionProtocol,
-                        max_activities: int = 400,
+                        max_activities: int = 400,   # recorded in the artefact; see below
                         admit_tiers: Sequence[str] | None = None) -> dict[str, Any]:
     """Assemble the corpus of compounds with measured activity on one target.
 
     This is the inversion the 8-compound set cannot support: instead of asking
     "what does this compound hit?", ask "what is known to hit this target?".
     """
+    # max_activities silently sets the corpus size: the committed data/corpus_ACHE.json was
+    # built with 300 and admitted 18 compounds, while the default 400 admits 19. A corpus whose
+    # membership depends on an unrecorded page limit is not reproducible, so the limit is now
+    # written into the artefact's denominator block alongside the counts it produced.
     acts = list(iter_target_activities(target_chembl_id, protocol, limit=max_activities))
     by_mol: dict[str, list[Activity]] = {}
     for a in acts:
@@ -499,7 +545,20 @@ def build_target_corpus(target_chembl_id: str, protocol: InclusionProtocol,
         "organism": acts[0].organism if acts else "",
         "protocol": protocol.to_dict(),
         "protocol_summary": protocol.summary(),
+        "assay_confidence_audit": {
+            "criterion": f"confidence_score >= {protocol.min_assay_confidence}",
+            "source": "ChEMBL /assay (NOT /activity, which does not carry the field)",
+            "activities_excluded": len(_EXCLUDED_BY_CONFIDENCE),
+            "note": ("Until this was fixed the criterion was read from the /activity record, "
+                     "where the field does not exist, so it evaluated to None on every row "
+                     "and never excluded anything while protocol_summary advertised it as "
+                     "applied. Measured after the fix, it excludes 0 activities for this "
+                     "target -- every ChEMBL220 assay in the pull already scores >= 8 -- so "
+                     "the published corpus membership is unaffected. The criterion is now "
+                     "genuinely enforced rather than merely claimed."),
+        },
         # The denominator: what was considered, so any rate over this corpus is defined.
+        "max_activities_requested": max_activities,
         "denominator": {
             "activities_examined": len(acts),
             "distinct_molecules_examined": len(by_mol),
@@ -527,7 +586,9 @@ def all_activities(molecule_chembl_id: str, target_chembl_id: str,
     `build_target_corpus` draws a flat activity budget across a whole target, so an
     individual compound gets whatever records happen to fall inside that window. Measured
     consequence: huperzine A x AChE was represented by ONE record at 5.0 nM when ChEMBL holds
-    23 IC50 records spanning 3.99 log10 units with a median of 47 nM — the captured value sat
+    23 IC50 records carrying a pChEMBL value, from 23 distinct documents, spanning 3.99 log10
+    units with a median of 47 nM (32 activity records in total across endpoint types) — the
+    captured value sat
     at the 17th percentile, and roughly 40% of a headline error attributed to the model was
     really an artefact of that sampling.
 

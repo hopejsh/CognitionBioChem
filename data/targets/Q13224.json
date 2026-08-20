@@ -95,6 +95,73 @@
   ],
   "flag": "Precursor"
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "Q00960"
+      },
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "Q01097"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "10748157"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "26875626"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "26912815"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "26919761"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "27458189"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "28126851"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "28130356"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "34321660"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "8768735"
+      }
+     ],
+     "value": "Heterotetramer (PubMed:34321660). Forms heterotetrameric channels composed of two GluN1/zeta subunits (GRIN1), and two identical GluN2/epsilon subunits (GRIN2A, GRIN2B, GRIN2C or GRIN2D) or GluN3 subunits (GRIN3A or GRIN3B) (in vitro) (PubMed:26875626, PubMed:26912815, PubMed:26919761, PubMed:28126851, PubMed:34321660, PubMed:8768735). Can also form heterotetrameric channels that contain at least two GluN1 subunits and at least two different GluN2 subunits (or a combination of one GluN2 and one GluN3 subunits) (in vitro) (By similarity). In vivo, the subunit composition may depend on the expression levels of the different subunits (Probable). Found in a complex with GRIN1 and GRIN3B. Found in a complex with GRIN1, GRIN3A and PPP2CB. Interacts with PDZ domains of PATJ, DLG3 and DLG4. Interacts with HIP1 and NETO1 (By similarity). Interacts with MAGI3 (PubMed:10748157). Interacts with DAPK1 (By similarity). Found in a complex with GRIN1 and PRR7 (PubMed:27458189). Interacts with PRR7 (PubMed:27458189). Interacts with CAMK2A (PubMed:28130356). Interacts with ARC; preventing ARC oligomerization (By similarity). Interacts with TMEM25 (By similarity). Interacts (via the extreme C-terminus) with FRMPD2 (via the second PDZ domain); the interaction is direct and is likely to promote NMDAR-mediated neural signal transmission (By similarity). Interacts with FAM81A; the interaction facilitates condensate formation via liquid-liquid phase separation (By similarity)"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Signal",
@@ -129,6 +196,328 @@
    },
    "description": "Glutamate receptor ionotropic, NMDA 2B",
    "featureId": "PRO_0000011577"
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 27,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 555,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Extracellular",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Transmembrane",
+   "location": {
+    "start": {
+     "value": 556,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 576,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Helical",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 577,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 601,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Cytoplasmic",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Intramembrane",
+   "location": {
+    "start": {
+     "value": 602,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 613,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Discontinuously helical",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 614,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 627,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Cytoplasmic",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Transmembrane",
+   "location": {
+    "start": {
+     "value": 628,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 647,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Helical",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 648,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 819,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Extracellular",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Transmembrane",
+   "location": {
+    "start": {
+     "value": 820,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 835,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Helical",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Topological domain",
+   "location": {
+    "start": {
+     "value": 836,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 1484,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "Cytoplasmic",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 86,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 321,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "26912815"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5EWJ"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5EWL"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "5EWM"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 429,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 456,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
+  },
+  {
+   "type": "Disulfide bond",
+   "location": {
+    "start": {
+     "value": 436,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 457,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000269",
+     "source": "PubMed",
+     "id": "34321660"
+    },
+    {
+     "evidenceCode": "ECO:0007744",
+     "source": "PDB",
+     "id": "7EU8"
+    }
+   ]
   }
  ],
  "uniProtKBCrossReferences": [

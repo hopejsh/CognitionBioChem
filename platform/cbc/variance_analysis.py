@@ -20,7 +20,7 @@ import statistics
 from pathlib import Path
 from typing import Any
 
-from . import prespec as ps
+from . import inference as inf, prespec as ps
 
 #: Boltz reports confidence on 0-1; pLDDT is conventionally 0-100.
 PLDDT_SCALE = 100.0
@@ -119,29 +119,36 @@ def analyse(path: Path, study_id: str) -> dict[str, Any]:
     sd_iptm, sds_iptm = pooled_sd(iptm)
     sd_ipae, sds_ipae = pooled_sd(ipae)
 
-    # ---- Holm across the three pre-specified hypotheses ------------------- #
-    # H1 and H2 are threshold comparisons, not tests; they carry p = 0 or 1 by construction
-    # so that Holm is well defined and the reported adjustment stays honest about that.
-    p1 = 0.0 if (sd_plddt is not None and sd_plddt < 2.0) else 1.0
-    p2 = 0.0 if all_deterministic else 1.0
-    p3 = msa_p if msa_p is not None else 1.0
-    raw = [("H1_seed_noise_small", p1), ("H2_same_seed_deterministic", p2),
-           ("H3_msa_immaterial_for_designed_sequences", p3)]
-    order = sorted(range(3), key=lambda i: raw[i][1])
-    adj = [0.0] * 3
-    running = 0.0
-    for rank, i in enumerate(order):
-        running = max(running, (3 - rank) * raw[i][1])
-        adj[i] = min(1.0, running)
-
+    # ---- criteria and tests, kept apart ------------------------------------ #
+    # H1 and H2 are threshold comparisons. H3 is the subtle one: it is confirmed by FAILING
+    # to reject, so any multiplicity correction makes it EASIER to confirm, because adjustment
+    # only ever raises p. The previous version Holm-adjusted it (raw 0.4892 -> 0.9785) and
+    # tested `adjusted >= 0.05`, which meant a genuine MSA effect at raw p = 0.03 would have
+    # been reported as "the MSA is immaterial" at adjusted 0.06. It is now decided on the RAW
+    # p together with the pre-registered equivalence margin (the pooled across-seed SD), and
+    # marked as confirmed-by-absence so a reader can see what kind of claim it is.
     h3_ok = (msa_shift is not None and sd_plddt is not None
-             and abs(msa_shift) < sd_plddt and adj[2] >= 0.05)
+             and abs(msa_shift) < sd_plddt and msa_p is not None and msa_p >= 0.05)
+    ruling = inf.decide(criteria={
+        "H1_seed_noise_small": inf.Criterion(
+            sd_plddt is not None and sd_plddt < 2.0,
+            round(sd_plddt, 4) if sd_plddt is not None else None,
+            "pooled across-seed SD of complex_plddt < 2.0 units"),
+        "H2_same_seed_deterministic": inf.Criterion(
+            all_deterministic, all_deterministic,
+            "every candidate yields exactly one distinct complex_plddt across replicates"),
+        "H3_msa_immaterial_for_designed_sequences": inf.Criterion(
+            h3_ok,
+            {"msa_shift": round(msa_shift, 4) if msa_shift is not None else None,
+             "equivalence_margin_sd_plddt": round(sd_plddt, 4) if sd_plddt is not None else None,
+             "paired_t_p_raw": round(msa_p, 5) if msa_p is not None else None},
+            "|MSA shift| below the across-seed SD AND the paired t-test does not reject "
+            "at raw alpha 0.05 (raw, never multiplicity-adjusted: adjustment would make "
+            "this non-rejection criterion easier to satisfy, not harder)",
+            confirmed_by_absence=True),
+    }, tests={})
 
-    verdicts = {
-        "H1_seed_noise_small": "CONFIRMED" if p1 == 0.0 else "FALSIFIED",
-        "H2_same_seed_deterministic": "CONFIRMED" if all_deterministic else "FALSIFIED",
-        "H3_msa_immaterial_for_designed_sequences": "CONFIRMED" if h3_ok else "FALSIFIED",
-    }
+    verdicts = ruling["verdicts"]
 
     times = [r["seconds"] for r in rows if r.get("returncode") == 0]
     report = {
@@ -157,7 +164,7 @@ def analyse(path: Path, study_id: str) -> dict[str, Any]:
             "same_seed_distinct_values": {c: d["distinct_values"]
                                           for c, d in determinism.items()},
             "msa_mean_shift": round(msa_shift, 4) if msa_shift is not None else None,
-            "wall_clock_seconds_per_fold": round(statistics.fmean(times), 1) if times else None,
+            "wall_clock_seconds_per_fold": inf.wall_clock(rows),
             "per_residue_plddt_sd": None,
         },
         "per_candidate_sd_plddt": {c: round(v * PLDDT_SCALE, 3)
@@ -167,8 +174,7 @@ def analyse(path: Path, study_id: str) -> dict[str, Any]:
         "determinism": determinism,
         "msa_paired": [{"code": c, "without": round(o, 6), "with": round(w, 6)}
                        for c, o, w in paired],
-        "p_raw": {k: v for k, v in raw},
-        "p_holm": {raw[i][0]: round(adj[i], 5) for i in range(3)},
+        **{k: v for k, v in ruling.items() if k != "verdicts"},
         "verdicts": verdicts,
     }
     report["prespec_audit"] = ps.verify_result(study_id, report)
@@ -208,8 +214,7 @@ def main(path: Path, study_id: str) -> int:
                   f"with {p['with']:.6f}  Δ {(p['with']-p['without'])*100:+.3f}")
 
     print("\nPRE-SPECIFIED VERDICTS")
-    for h, v in rep["verdicts"].items():
-        print(f"  {h:42s} {v:10s} Holm p = {rep['p_holm'][h]}")
+    print(inf.format_verdicts(rep))
 
     a = rep["prespec_audit"]
     print(f"\nprespec audit: {'CONFIRMATORY' if a['confirmatory'] else 'DEVIATIONS'}")

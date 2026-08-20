@@ -1,0 +1,2289 @@
+{
+  "schema_version": "1.0",
+  "built": "2026-08-20",
+  "git_sha": "2479695-dirty",
+  "note": "Every entry points at a file under custody in this repository. Confidences are copied verbatim from each run's own confidence JSON, and every value in `screen` is copied from study #10's artefact. FOUR things are derived here and are the only ones: `interface_pae` (mean and minimum PAE across the two chains, from the retained array), `chains[].mean_plddt` (a mean over the B-factor column), `screen.decoy_mean_beats_native` (a comparison of two copied values, which the study did not make) and the `coverage` counts. An earlier version of this sentence said exactly one quantity was derived, which was wrong by three.",
+  "groups": {
+    "peptide_monomer": 22,
+    "complex": 13,
+    "receptor_afdb": 16
+  },
+  "coverage": {
+    "candidates_in_dataset": 35,
+    "candidates_with_a_peptide_fold": 22,
+    "candidates_with_a_complex": 13,
+    "candidates_screened_in_study_10": 13,
+    "note": "Not every catalogued candidate has a fold, and the reasons do not cover all of them. Of the 13 catalogued candidates with no fold at all: 4 fail sequence validation and were never submitted to a predictor; 5 carry a sequence that is byte-identical to one that WAS folded, so the computation exists under another code; and 4 are valid, carry a sequence nothing else shares, and were simply never folded -- CogAbeta-Clearer-08, CogBDNF-Mimic-04, CogDual-TrkB-PAS-10, CogTrk-DeNovo-01. That last group is an omission, not a policy, and is stated rather than absorbed into the first two.",
+    "complex_group_is_study_10": "The 13 complexes are not a selection from the 22 peptides -- they ARE study #10's native rows, so the decomposition is: of 35 catalogued candidates, 21 were never nominated for a receptor complex at all (they appear in no target map, so no complex was ever attempted for them), 1 was dropped by the screen's de-duplication on (peptide, target) because an earlier code carries the identical pair (BasalAChE-GorgeBlock-B1), and the rest were folded. The earlier wording said five codes were de-duplication casualties; one is, and the other four share a peptide with a folded complex against a DIFFERENT target, which is a different situation and was being counted as the same one."
+  },
+  "not_indexed": {
+    "decoys": "Each complex has 10 composition-matched scrambles under custody. They are excluded from this picker on purpose: several score above their own native, and letting a reader browse for the best-looking fold is the error the null exists to prevent."
+  },
+  "entries": [
+    {
+      "id": "pep-AstroEaat2-Up-A2",
+      "group": "peptide_monomer",
+      "code": "AstroEaat2-Up-A2",
+      "target": null,
+      "label": "AstroEaat2-Up-A2 \u2014 peptide alone",
+      "cif": "runs/059bfa1b518d/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-AstroEaat2-Up-A2.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 37,
+          "mean_plddt": 83.02,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.6614,
+        "complex_plddt": 0.8302,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/059bfa1b518d",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-AstroEos-NO-A1",
+      "group": "peptide_monomer",
+      "code": "AstroEos-NO-A1",
+      "target": null,
+      "label": "AstroEos-NO-A1 \u2014 peptide alone",
+      "cif": "runs/e95987135181/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-AstroEos-NO-A1.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 34,
+          "mean_plddt": 58.06,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.5192,
+        "complex_plddt": 0.5806,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/e95987135181",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-AstroSuper-CBF-EAAT2-A5",
+      "group": "peptide_monomer",
+      "code": "AstroSuper-CBF-EAAT2-A5",
+      "target": null,
+      "label": "AstroSuper-CBF-EAAT2-A5 \u2014 peptide alone",
+      "cif": "runs/bea511f8526a/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-AstroSuper-CBF-EAAT2-A5.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 29,
+          "mean_plddt": 64.79,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.372,
+        "complex_plddt": 0.6479,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/bea511f8526a",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-BasalAChE-Abeta-B4",
+      "group": "peptide_monomer",
+      "code": "BasalAChE-Abeta-B4",
+      "target": null,
+      "label": "BasalAChE-Abeta-B4 \u2014 peptide alone",
+      "cif": "runs/e400fbd6a659/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-BasalAChE-Abeta-B4.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 35,
+          "mean_plddt": 51.89,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.3046,
+        "complex_plddt": 0.5189,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/e400fbd6a659",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-BasalAChE-GorgeBlock-B1",
+      "group": "peptide_monomer",
+      "code": "BasalAChE-GorgeBlock-B1",
+      "target": null,
+      "label": "BasalAChE-GorgeBlock-B1 \u2014 peptide alone",
+      "cif": "runs/83e9571da3d8/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-BasalAChE-GorgeBlock-B1.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 36,
+          "mean_plddt": 95.26,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.6076,
+        "complex_plddt": 0.9526,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/83e9571da3d8",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-BasalM1-PAM-B2",
+      "group": "peptide_monomer",
+      "code": "BasalM1-PAM-B2",
+      "target": null,
+      "label": "BasalM1-PAM-B2 \u2014 peptide alone",
+      "cif": "runs/613b5e8b4baa/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-BasalM1-PAM-B2.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 36,
+          "mean_plddt": 61.98,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.4403,
+        "complex_plddt": 0.6198,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/613b5e8b4baa",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-BasalNgf-TrkA-B3",
+      "group": "peptide_monomer",
+      "code": "BasalNgf-TrkA-B3",
+      "target": null,
+      "label": "BasalNgf-TrkA-B3 \u2014 peptide alone",
+      "cif": "runs/9826a63db397/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-BasalNgf-TrkA-B3.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 35,
+          "mean_plddt": 59.31,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.393,
+        "complex_plddt": 0.5931,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/9826a63db397",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-BasalSuper-AChE-TrkA-B5",
+      "group": "peptide_monomer",
+      "code": "BasalSuper-AChE-TrkA-B5",
+      "target": null,
+      "label": "BasalSuper-AChE-TrkA-B5 \u2014 peptide alone",
+      "cif": "runs/e1365f0adba7/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-BasalSuper-AChE-TrkA-B5.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 39,
+          "mean_plddt": 49.01,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.2728,
+        "complex_plddt": 0.4901,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/e1365f0adba7",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-HippoAChE-AlkaPept-X2",
+      "group": "peptide_monomer",
+      "code": "HippoAChE-AlkaPept-X2",
+      "target": null,
+      "label": "HippoAChE-AlkaPept-X2 \u2014 peptide alone",
+      "cif": "runs/42018f62411b/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-HippoAChE-AlkaPept-X2.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 36,
+          "mean_plddt": 95.17,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.5923,
+        "complex_plddt": 0.9517,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/42018f62411b",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-HippoDual-TrkB-AMPK-X5",
+      "group": "peptide_monomer",
+      "code": "HippoDual-TrkB-AMPK-X5",
+      "target": null,
+      "label": "HippoDual-TrkB-AMPK-X5 \u2014 peptide alone",
+      "cif": "runs/6ecbd400a3e3/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-HippoDual-TrkB-AMPK-X5.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 33,
+          "mean_plddt": 71.89,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.5362,
+        "complex_plddt": 0.7189,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/6ecbd400a3e3",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-HippoNrf-KeapDecoy-X3",
+      "group": "peptide_monomer",
+      "code": "HippoNrf-KeapDecoy-X3",
+      "target": null,
+      "label": "HippoNrf-KeapDecoy-X3 \u2014 peptide alone",
+      "cif": "runs/ffc70dfc8b6c/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-HippoNrf-KeapDecoy-X3.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 28,
+          "mean_plddt": 74.69,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.4074,
+        "complex_plddt": 0.7469,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/ffc70dfc8b6c",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-HippoTrk-Saponin-X1",
+      "group": "peptide_monomer",
+      "code": "HippoTrk-Saponin-X1",
+      "target": null,
+      "label": "HippoTrk-Saponin-X1 \u2014 peptide alone",
+      "cif": "runs/27d89a94eb2e/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-HippoTrk-Saponin-X1.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 47,
+          "mean_plddt": 78.03,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.66,
+        "complex_plddt": 0.7803,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/27d89a94eb2e",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-MicroAutophagy-Tag-M4",
+      "group": "peptide_monomer",
+      "code": "MicroAutophagy-Tag-M4",
+      "target": null,
+      "label": "MicroAutophagy-Tag-M4 \u2014 peptide alone",
+      "cif": "runs/b24d7e15a3a8/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-MicroAutophagy-Tag-M4.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 32,
+          "mean_plddt": 96.83,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.6253,
+        "complex_plddt": 0.9683,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/b24d7e15a3a8",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-MicroDual-Trem2-Nrf2-M5",
+      "group": "peptide_monomer",
+      "code": "MicroDual-Trem2-Nrf2-M5",
+      "target": null,
+      "label": "MicroDual-Trem2-Nrf2-M5 \u2014 peptide alone",
+      "cif": "runs/340940d085ed/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-MicroDual-Trem2-Nrf2-M5.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 31,
+          "mean_plddt": 60.68,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.3836,
+        "complex_plddt": 0.6068,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/340940d085ed",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-MicroNrf2-AntiInflam-M2",
+      "group": "peptide_monomer",
+      "code": "MicroNrf2-AntiInflam-M2",
+      "target": null,
+      "label": "MicroNrf2-AntiInflam-M2 \u2014 peptide alone",
+      "cif": "runs/f657fee4bffc/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-MicroNrf2-AntiInflam-M2.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 26,
+          "mean_plddt": 57.94,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.3273,
+        "complex_plddt": 0.5794,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/f657fee4bffc",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-MicroTlr4-Antagonist-M3",
+      "group": "peptide_monomer",
+      "code": "MicroTlr4-Antagonist-M3",
+      "target": null,
+      "label": "MicroTlr4-Antagonist-M3 \u2014 peptide alone",
+      "cif": "runs/c3a2b69ceb00/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-MicroTlr4-Antagonist-M3.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 41,
+          "mean_plddt": 61.25,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.4602,
+        "complex_plddt": 0.6125,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/c3a2b69ceb00",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-MicroTrem2-Agonist-M1",
+      "group": "peptide_monomer",
+      "code": "MicroTrem2-Agonist-M1",
+      "target": null,
+      "label": "MicroTrem2-Agonist-M1 \u2014 peptide alone",
+      "cif": "runs/9080b5d571f0/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-MicroTrem2-Agonist-M1.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 31,
+          "mean_plddt": 50.69,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.3403,
+        "complex_plddt": 0.5069,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/9080b5d571f0",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-PfcACh-PAM-P1",
+      "group": "peptide_monomer",
+      "code": "PfcACh-PAM-P1",
+      "target": null,
+      "label": "PfcACh-PAM-P1 \u2014 peptide alone",
+      "cif": "runs/a3e6d44ba7fb/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-PfcACh-PAM-P1.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 41,
+          "mean_plddt": 59.7,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.3996,
+        "complex_plddt": 0.597,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/a3e6d44ba7fb",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-PfcDual-nACh-GluN2A-P5",
+      "group": "peptide_monomer",
+      "code": "PfcDual-nACh-GluN2A-P5",
+      "target": null,
+      "label": "PfcDual-nACh-GluN2A-P5 \u2014 peptide alone",
+      "cif": "runs/c877a76ddd8c/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-PfcDual-nACh-GluN2A-P5.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 36,
+          "mean_plddt": 51.23,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.3951,
+        "complex_plddt": 0.5123,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/c877a76ddd8c",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-PfcGluN2A-LTP-P3",
+      "group": "peptide_monomer",
+      "code": "PfcGluN2A-LTP-P3",
+      "target": null,
+      "label": "PfcGluN2A-LTP-P3 \u2014 peptide alone",
+      "cif": "runs/658f0a3ea7c7/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-PfcGluN2A-LTP-P3.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 45,
+          "mean_plddt": 50.0,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.3766,
+        "complex_plddt": 0.5,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/658f0a3ea7c7",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-PfcGsk-WntLinker-P4",
+      "group": "peptide_monomer",
+      "code": "PfcGsk-WntLinker-P4",
+      "target": null,
+      "label": "PfcGsk-WntLinker-P4 \u2014 peptide alone",
+      "cif": "runs/ac3c3ea0307a/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-PfcGsk-WntLinker-P4.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 32,
+          "mean_plddt": 56.97,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.31,
+        "complex_plddt": 0.5697,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/ac3c3ea0307a",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "pep-PfcTrk-ErkEnhancer-P2",
+      "group": "peptide_monomer",
+      "code": "PfcTrk-ErkEnhancer-P2",
+      "target": null,
+      "label": "PfcTrk-ErkEnhancer-P2 \u2014 peptide alone",
+      "cif": "runs/f688baf563b4/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/pep-PfcTrk-ErkEnhancer-P2.json",
+      "chains": [
+        {
+          "id": "A",
+          "length": 37,
+          "mean_plddt": 84.99,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.6374,
+        "complex_plddt": 0.8499,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model has one chain, so it has no interface, and the predictor emitted iptm, ligand_iptm, protein_iptm = 0.0 \u2014 an absence rather than a score; complex_iplddt is emitted byte-identical to complex_plddt for a single-chain model, so it carries no information of its own. They are not published here."
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "empty (single sequence)",
+        "run": "runs/f688baf563b4",
+        "kind": "candidate-fold",
+        "note": "monomer fold; no receptor is present, so there is no ipTM and nothing here speaks to binding"
+      }
+    },
+    {
+      "id": "cpx-BasalAChE-Abeta-B4",
+      "group": "complex",
+      "code": "BasalAChE-Abeta-B4",
+      "target": "ACHE",
+      "label": "BasalAChE-Abeta-B4 + ACHE",
+      "cif": "runs/f38427dffaf1/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-BasalAChE-Abeta-B4.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 11.28,
+        "min_pae": 3.36,
+        "n_pairs": 38010,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 543,
+          "mean_plddt": 94.89,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "ACHE receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 35,
+          "mean_plddt": 53.48,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.9643,
+        "iptm": 0.8105,
+        "protein_iptm": 0.8105,
+        "complex_plddt": 0.9238,
+        "complex_iplddt": 0.8474,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "P22303",
+        "basis": "mature_chain_trimmed",
+        "canonical_span": [
+          32,
+          574
+        ],
+        "length": 543,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.8105,
+        "decoy_mean": 0.6612,
+        "decoy_max": 0.7969,
+        "n_decoys": 10,
+        "beats_all_decoys": true,
+        "band": "confident",
+        "empirical_p": 0.0909,
+        "iptm_without_msa": 0.2209,
+        "delta_vs_single_sequence": 0.5896,
+        "decoy_mean_beats_native": false
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/f38427dffaf1",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-BasalNgf-TrkA-B3",
+      "group": "complex",
+      "code": "BasalNgf-TrkA-B3",
+      "target": "NTRK1",
+      "label": "BasalNgf-TrkA-B3 + NTRK1",
+      "cif": "runs/5e8b4243d621/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-BasalNgf-TrkA-B3.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 12.55,
+        "min_pae": 3.48,
+        "n_pairs": 27370,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 391,
+          "mean_plddt": 85.69,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "NTRK1 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 35,
+          "mean_plddt": 58.52,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.7597,
+        "iptm": 0.818,
+        "protein_iptm": 0.818,
+        "complex_plddt": 0.8346,
+        "complex_iplddt": 0.7772,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "P04629",
+        "basis": "ectodomain",
+        "canonical_span": [
+          33,
+          423
+        ],
+        "length": 391,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.818,
+        "decoy_mean": 0.4952,
+        "decoy_max": 0.7498,
+        "n_decoys": 10,
+        "beats_all_decoys": true,
+        "band": "confident",
+        "empirical_p": 0.0909,
+        "iptm_without_msa": 0.8166,
+        "delta_vs_single_sequence": 0.0014,
+        "decoy_mean_beats_native": false
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/5e8b4243d621",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-BasalSuper-AChE-TrkA-B5",
+      "group": "complex",
+      "code": "BasalSuper-AChE-TrkA-B5",
+      "target": "ACHE",
+      "label": "BasalSuper-AChE-TrkA-B5 + ACHE",
+      "cif": "runs/55caff666f59/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-BasalSuper-AChE-TrkA-B5.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 19.74,
+        "min_pae": 13.28,
+        "n_pairs": 42354,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 543,
+          "mean_plddt": 95.72,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "ACHE receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 39,
+          "mean_plddt": 47.6,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.9421,
+        "iptm": 0.4895,
+        "protein_iptm": 0.4895,
+        "complex_plddt": 0.925,
+        "complex_iplddt": 0.8451,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "P22303",
+        "basis": "mature_chain_trimmed",
+        "canonical_span": [
+          32,
+          574
+        ],
+        "length": 543,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.4895,
+        "decoy_mean": 0.5053,
+        "decoy_max": 0.6963,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "failed",
+        "empirical_p": 0.5455,
+        "iptm_without_msa": 0.3506,
+        "delta_vs_single_sequence": 0.1389,
+        "decoy_mean_beats_native": true
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/55caff666f59",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-HippoAChE-AlkaPept-X2",
+      "group": "complex",
+      "code": "HippoAChE-AlkaPept-X2",
+      "target": "ACHE",
+      "label": "HippoAChE-AlkaPept-X2 + ACHE",
+      "cif": "runs/676ad29d6294/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-HippoAChE-AlkaPept-X2.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 25.28,
+        "min_pae": 18.5,
+        "n_pairs": 39096,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 543,
+          "mean_plddt": 95.21,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "ACHE receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 36,
+          "mean_plddt": 70.02,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.9278,
+        "iptm": 0.2265,
+        "protein_iptm": 0.2265,
+        "complex_plddt": 0.9364,
+        "complex_iplddt": 0.9011,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "P22303",
+        "basis": "mature_chain_trimmed",
+        "canonical_span": [
+          32,
+          574
+        ],
+        "length": 543,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.2265,
+        "decoy_mean": 0.4401,
+        "decoy_max": 0.7911,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "failed",
+        "empirical_p": 1.0,
+        "iptm_without_msa": 0.2478,
+        "delta_vs_single_sequence": -0.0213,
+        "decoy_mean_beats_native": true
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/676ad29d6294",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-HippoDual-TrkB-AMPK-X5",
+      "group": "complex",
+      "code": "HippoDual-TrkB-AMPK-X5",
+      "target": "NTRK2",
+      "label": "HippoDual-TrkB-AMPK-X5 + NTRK2",
+      "cif": "runs/4713dbe62370/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-HippoDual-TrkB-AMPK-X5.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 12.92,
+        "min_pae": 3.19,
+        "n_pairs": 26334,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 399,
+          "mean_plddt": 84.49,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "NTRK2 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 33,
+          "mean_plddt": 60.14,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.764,
+        "iptm": 0.8314,
+        "protein_iptm": 0.8314,
+        "complex_plddt": 0.8263,
+        "complex_iplddt": 0.7669,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "Q16620",
+        "basis": "ectodomain",
+        "canonical_span": [
+          32,
+          430
+        ],
+        "length": 399,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.8314,
+        "decoy_mean": 0.7776,
+        "decoy_max": 0.8754,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "confident",
+        "empirical_p": 0.5455,
+        "iptm_without_msa": 0.4399,
+        "delta_vs_single_sequence": 0.3916,
+        "decoy_mean_beats_native": false
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/4713dbe62370",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-HippoTrk-Saponin-X1",
+      "group": "complex",
+      "code": "HippoTrk-Saponin-X1",
+      "target": "NTRK2",
+      "label": "HippoTrk-Saponin-X1 + NTRK2",
+      "cif": "runs/5664cb1bcb37/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-HippoTrk-Saponin-X1.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 21.26,
+        "min_pae": 9.08,
+        "n_pairs": 37506,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 399,
+          "mean_plddt": 82.04,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "NTRK2 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 47,
+          "mean_plddt": 58.17,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.6941,
+        "iptm": 0.5408,
+        "protein_iptm": 0.5408,
+        "complex_plddt": 0.7953,
+        "complex_iplddt": 0.6665,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "Q16620",
+        "basis": "ectodomain",
+        "canonical_span": [
+          32,
+          430
+        ],
+        "length": 399,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.5408,
+        "decoy_mean": 0.4211,
+        "decoy_max": 0.566,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "failed",
+        "empirical_p": 0.2727,
+        "iptm_without_msa": 0.1213,
+        "delta_vs_single_sequence": 0.4196,
+        "decoy_mean_beats_native": false
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/5664cb1bcb37",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-MicroDual-Trem2-Nrf2-M5",
+      "group": "complex",
+      "code": "MicroDual-Trem2-Nrf2-M5",
+      "target": "TREM2",
+      "label": "MicroDual-Trem2-Nrf2-M5 + TREM2",
+      "cif": "runs/884340a1ff8e/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-MicroDual-Trem2-Nrf2-M5.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 5.02,
+        "min_pae": 1.03,
+        "n_pairs": 9672,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 156,
+          "mean_plddt": 79.53,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "TREM2 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 31,
+          "mean_plddt": 54.76,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.9471,
+        "iptm": 0.9025,
+        "protein_iptm": 0.9025,
+        "complex_plddt": 0.7543,
+        "complex_iplddt": 0.7236,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "Q9NZC2",
+        "basis": "ectodomain",
+        "canonical_span": [
+          19,
+          174
+        ],
+        "length": 156,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.9025,
+        "decoy_mean": 0.9258,
+        "decoy_max": 0.9724,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "confident",
+        "empirical_p": 0.8182,
+        "iptm_without_msa": 0.6369,
+        "delta_vs_single_sequence": 0.2655,
+        "decoy_mean_beats_native": true
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/884340a1ff8e",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-MicroTlr4-Antagonist-M3",
+      "group": "complex",
+      "code": "MicroTlr4-Antagonist-M3",
+      "target": "TLR4",
+      "label": "MicroTlr4-Antagonist-M3 + TLR4",
+      "cif": "runs/f2dfc4a88129/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-MicroTlr4-Antagonist-M3.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 13.78,
+        "min_pae": 5.91,
+        "n_pairs": 49856,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 608,
+          "mean_plddt": 91.49,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "TLR4 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 41,
+          "mean_plddt": 50.08,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.8587,
+        "iptm": 0.7223,
+        "protein_iptm": 0.7223,
+        "complex_plddt": 0.8887,
+        "complex_iplddt": 0.8462,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "O00206",
+        "basis": "ectodomain",
+        "canonical_span": [
+          24,
+          631
+        ],
+        "length": 608,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.7223,
+        "decoy_mean": 0.8528,
+        "decoy_max": 0.9341,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "grey",
+        "empirical_p": 1.0,
+        "iptm_without_msa": 0.7104,
+        "delta_vs_single_sequence": 0.0119,
+        "decoy_mean_beats_native": true
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/f2dfc4a88129",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-MicroTrem2-Agonist-M1",
+      "group": "complex",
+      "code": "MicroTrem2-Agonist-M1",
+      "target": "TREM2",
+      "label": "MicroTrem2-Agonist-M1 + TREM2",
+      "cif": "runs/e5f376ddb4cb/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-MicroTrem2-Agonist-M1.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 9.89,
+        "min_pae": 4.39,
+        "n_pairs": 9672,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 156,
+          "mean_plddt": 75.73,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "TREM2 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 31,
+          "mean_plddt": 41.0,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.9114,
+        "iptm": 0.6929,
+        "protein_iptm": 0.6929,
+        "complex_plddt": 0.6997,
+        "complex_iplddt": 0.5906,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "Q9NZC2",
+        "basis": "ectodomain",
+        "canonical_span": [
+          19,
+          174
+        ],
+        "length": 156,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.6929,
+        "decoy_mean": 0.8483,
+        "decoy_max": 0.9625,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "grey",
+        "empirical_p": 0.9091,
+        "iptm_without_msa": 0.5256,
+        "delta_vs_single_sequence": 0.1673,
+        "decoy_mean_beats_native": true
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/e5f376ddb4cb",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-PfcACh-PAM-P1",
+      "group": "complex",
+      "code": "PfcACh-PAM-P1",
+      "target": "CHRNA7",
+      "label": "PfcACh-PAM-P1 + CHRNA7",
+      "cif": "runs/acdbd25f2042/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-PfcACh-PAM-P1.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 18.1,
+        "min_pae": 11.92,
+        "n_pairs": 17302,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 211,
+          "mean_plddt": 90.19,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "CHRNA7 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 41,
+          "mean_plddt": 54.13,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.8528,
+        "iptm": 0.3567,
+        "protein_iptm": 0.3567,
+        "complex_plddt": 0.8432,
+        "complex_iplddt": 0.7344,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "P36544",
+        "basis": "ectodomain",
+        "canonical_span": [
+          23,
+          233
+        ],
+        "length": 211,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.3567,
+        "decoy_mean": 0.5978,
+        "decoy_max": 0.7603,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "failed",
+        "empirical_p": 0.9091,
+        "iptm_without_msa": 0.403,
+        "delta_vs_single_sequence": -0.0463,
+        "decoy_mean_beats_native": true
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/acdbd25f2042",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-PfcDual-nACh-GluN2A-P5",
+      "group": "complex",
+      "code": "PfcDual-nACh-GluN2A-P5",
+      "target": "CHRNA7",
+      "label": "PfcDual-nACh-GluN2A-P5 + CHRNA7",
+      "cif": "runs/3ce9e5b566dc/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-PfcDual-nACh-GluN2A-P5.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 9.48,
+        "min_pae": 2.93,
+        "n_pairs": 15192,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 211,
+          "mean_plddt": 92.08,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "CHRNA7 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 36,
+          "mean_plddt": 50.51,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.9209,
+        "iptm": 0.7461,
+        "protein_iptm": 0.7461,
+        "complex_plddt": 0.8603,
+        "complex_iplddt": 0.7716,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "P36544",
+        "basis": "ectodomain",
+        "canonical_span": [
+          23,
+          233
+        ],
+        "length": 211,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.7461,
+        "decoy_mean": 0.5935,
+        "decoy_max": 0.8658,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "grey",
+        "empirical_p": 0.2727,
+        "iptm_without_msa": 0.7568,
+        "delta_vs_single_sequence": -0.0107,
+        "decoy_mean_beats_native": false
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/3ce9e5b566dc",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-PfcGluN2A-LTP-P3",
+      "group": "complex",
+      "code": "PfcGluN2A-LTP-P3",
+      "target": "GRIN2A",
+      "label": "PfcGluN2A-LTP-P3 + GRIN2A",
+      "cif": "runs/3da1c5524f24/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-PfcGluN2A-LTP-P3.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 19.06,
+        "min_pae": 12.0,
+        "n_pairs": 48060,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 534,
+          "mean_plddt": 77.12,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "GRIN2A receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 45,
+          "mean_plddt": 45.26,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.7894,
+        "iptm": 0.4953,
+        "protein_iptm": 0.4953,
+        "complex_plddt": 0.7465,
+        "complex_iplddt": 0.6805,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "Q12879",
+        "basis": "ectodomain",
+        "canonical_span": [
+          23,
+          556
+        ],
+        "length": 534,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.4953,
+        "decoy_mean": 0.468,
+        "decoy_max": 0.7704,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "failed",
+        "empirical_p": 0.5455,
+        "iptm_without_msa": 0.3275,
+        "delta_vs_single_sequence": 0.1678,
+        "decoy_mean_beats_native": false
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/3da1c5524f24",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "cpx-PfcTrk-ErkEnhancer-P2",
+      "group": "complex",
+      "code": "PfcTrk-ErkEnhancer-P2",
+      "target": "NTRK2",
+      "label": "PfcTrk-ErkEnhancer-P2 + NTRK2",
+      "cif": "runs/100a28d80233/boltz_results_input_predictions_input_input_model_0.cif",
+      "pae": "data/pae/cpx-PfcTrk-ErkEnhancer-P2.json",
+      "interface_pae": {
+        "chain_pair": "A-B",
+        "mean_pae": 21.5,
+        "min_pae": 9.19,
+        "n_pairs": 29526,
+        "note": "descriptive, computed here from the retained array; not a pre-registered quantity and not part of any verdict"
+      },
+      "chains": [
+        {
+          "id": "A",
+          "length": 399,
+          "mean_plddt": 82.32,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "NTRK2 receptor construct"
+        },
+        {
+          "id": "B",
+          "length": 37,
+          "mean_plddt": 57.13,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "designed peptide"
+        }
+      ],
+      "metrics": {
+        "ptm": 0.6793,
+        "iptm": 0.5405,
+        "protein_iptm": 0.5405,
+        "complex_plddt": 0.8018,
+        "complex_iplddt": 0.6698,
+        "scale": "0-1, as the predictor's confidence JSON writes them. Per-chain mean_plddt elsewhere in this entry is 0-100, parsed from the model's B-factor column; the two are the same quantity on different scales.",
+        "terms_undefined": "this model contains no ligand, and the predictor emitted ligand_iptm = 0.0 \u2014 an absence rather than a score. They are not published here."
+      },
+      "construct": {
+        "uniprot": "Q16620",
+        "basis": "ectodomain",
+        "canonical_span": [
+          32,
+          430
+        ],
+        "length": 399,
+        "convention": "canonical (counts from the initiator methionine)"
+      },
+      "screen": {
+        "native_iptm": 0.5405,
+        "decoy_mean": 0.5744,
+        "decoy_max": 0.8037,
+        "n_decoys": 10,
+        "beats_all_decoys": false,
+        "band": "failed",
+        "empirical_p": 0.5455,
+        "iptm_without_msa": 0.4423,
+        "delta_vs_single_sequence": 0.0981,
+        "decoy_mean_beats_native": true
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "Boltz-2 v2.2.1",
+        "msa": "full (--use_msa_server)",
+        "run": "runs/100a28d80233",
+        "kind": "msa-specificity",
+        "study": "data/study_msa_specificity.json",
+        "plan": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
+        "note": "the fold study #10 scored. Its ten composition-matched decoys are retained but deliberately not in this picker"
+      }
+    },
+    {
+      "id": "afdb-ACHE",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "ACHE",
+      "label": "ACHE \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/ACHE/AF-P22303.cif",
+      "pae": "data/alphafold_db/ACHE/AF-P22303-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 614,
+          "mean_plddt": 92.94,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "ACHE full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "P22303",
+      "comparison": {
+        "pearson_r": 0.8637,
+        "n_residues_compared": 543,
+        "afdb_mean_plddt": 97.49,
+        "boltz_mean_plddt": 95.21
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/P22303",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-CHRM1",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "CHRM1",
+      "label": "CHRM1 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/CHRM1/AF-P11229.cif",
+      "pae": "data/alphafold_db/CHRM1/AF-P11229-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 460,
+          "mean_plddt": 74.67,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "CHRM1 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "P11229",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/P11229",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-CHRNA7",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "CHRNA7",
+      "label": "CHRNA7 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/CHRNA7/AF-P36544.cif",
+      "pae": "data/alphafold_db/CHRNA7/AF-P36544-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 502,
+          "mean_plddt": 78.33,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "CHRNA7 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "P36544",
+      "comparison": {
+        "pearson_r": 0.6742,
+        "n_residues_compared": 211,
+        "afdb_mean_plddt": 91.95,
+        "boltz_mean_plddt": 90.19
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/P36544",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-FZD8",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "FZD8",
+      "label": "FZD8 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/FZD8/AF-Q9H461.cif",
+      "pae": "data/alphafold_db/FZD8/AF-Q9H461-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 694,
+          "mean_plddt": 74.5,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "FZD8 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "Q9H461",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/Q9H461",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-GRIN2A",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "GRIN2A",
+      "label": "GRIN2A \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/GRIN2A/AF-Q12879.cif",
+      "pae": "data/alphafold_db/GRIN2A/AF-Q12879-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 1464,
+          "mean_plddt": 60.85,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "GRIN2A full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "Q12879",
+      "comparison": {
+        "pearson_r": 0.7083,
+        "n_residues_compared": 534,
+        "afdb_mean_plddt": 83.24,
+        "boltz_mean_plddt": 77.12
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/Q12879",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-GRIN2B",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "GRIN2B",
+      "label": "GRIN2B \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/GRIN2B/AF-Q13224.cif",
+      "pae": "data/alphafold_db/GRIN2B/AF-Q13224-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 1484,
+          "mean_plddt": 60.7,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "GRIN2B full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "Q13224",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/Q13224",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-GSK3B",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "GSK3B",
+      "label": "GSK3B \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/GSK3B/AF-P49841.cif",
+      "pae": "data/alphafold_db/GSK3B/AF-P49841-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 420,
+          "mean_plddt": 88.23,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "GSK3B full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "P49841",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/P49841",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-KEAP1",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "KEAP1",
+      "label": "KEAP1 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/KEAP1/AF-Q14145.cif",
+      "pae": "data/alphafold_db/KEAP1/AF-Q14145-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 624,
+          "mean_plddt": 90.06,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "KEAP1 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "Q14145",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/Q14145",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-NFE2L2",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "NFE2L2",
+      "label": "NFE2L2 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/NFE2L2/AF-Q16236.cif",
+      "pae": "data/alphafold_db/NFE2L2/AF-Q16236-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 605,
+          "mean_plddt": 60.54,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "NFE2L2 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "Q16236",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/Q16236",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-NOS3",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "NOS3",
+      "label": "NOS3 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/NOS3/AF-P29474.cif",
+      "pae": "data/alphafold_db/NOS3/AF-P29474-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 1203,
+          "mean_plddt": 82.53,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "NOS3 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "P29474",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/P29474",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-NTRK1",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "NTRK1",
+      "label": "NTRK1 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/NTRK1/AF-P04629.cif",
+      "pae": "data/alphafold_db/NTRK1/AF-P04629-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 796,
+          "mean_plddt": 78.23,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "NTRK1 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "P04629",
+      "comparison": {
+        "pearson_r": 0.883,
+        "n_residues_compared": 391,
+        "afdb_mean_plddt": 81.49,
+        "boltz_mean_plddt": 85.69
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/P04629",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-NTRK2",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "NTRK2",
+      "label": "NTRK2 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/NTRK2/AF-Q16620.cif",
+      "pae": "data/alphafold_db/NTRK2/AF-Q16620-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 822,
+          "mean_plddt": 76.97,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "NTRK2 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "Q16620",
+      "comparison": {
+        "pearson_r": 0.9562,
+        "n_residues_compared": 399,
+        "afdb_mean_plddt": 82.13,
+        "boltz_mean_plddt": 82.04
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/Q16620",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-PTAFR",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "PTAFR",
+      "label": "PTAFR \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/PTAFR/AF-P25105.cif",
+      "pae": "data/alphafold_db/PTAFR/AF-P25105-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 342,
+          "mean_plddt": 86.5,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "PTAFR full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "P25105",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/P25105",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-SLC1A2",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "SLC1A2",
+      "label": "SLC1A2 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/SLC1A2/AF-P43004.cif",
+      "pae": "data/alphafold_db/SLC1A2/AF-P43004-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 574,
+          "mean_plddt": 77.76,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "SLC1A2 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "P43004",
+      "comparison": null,
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/P43004",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-TLR4",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "TLR4",
+      "label": "TLR4 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/TLR4/AF-O00206.cif",
+      "pae": "data/alphafold_db/TLR4/AF-O00206-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 839,
+          "mean_plddt": 89.2,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "TLR4 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "O00206",
+      "comparison": {
+        "pearson_r": 0.7748,
+        "n_residues_compared": 608,
+        "afdb_mean_plddt": 94.76,
+        "boltz_mean_plddt": 91.49
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/O00206",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    },
+    {
+      "id": "afdb-TREM2",
+      "group": "receptor_afdb",
+      "code": null,
+      "target": "TREM2",
+      "label": "TREM2 \u2014 AlphaFold DB",
+      "cif": "data/alphafold_db/TREM2/AF-Q9NZC2.cif",
+      "pae": "data/alphafold_db/TREM2/AF-Q9NZC2-predicted_aligned_error.json",
+      "pae_format": "alphafold_db",
+      "chains": [
+        {
+          "id": "A",
+          "length": 230,
+          "mean_plddt": 76.77,
+          "mean_plddt_scale": "0-100 (parsed from the mmCIF B-factor column)",
+          "role": "TREM2 full canonical sequence"
+        }
+      ],
+      "metrics": {},
+      "uniprot": "Q9NZC2",
+      "comparison": {
+        "pearson_r": 0.9128,
+        "n_residues_compared": 156,
+        "afdb_mean_plddt": 82.89,
+        "boltz_mean_plddt": 75.73
+      },
+      "in_dataset": true,
+      "provenance": {
+        "predictor": "AlphaFold (deposited model)",
+        "msa": "full (as deposited)",
+        "source": "AlphaFold Protein Structure Database",
+        "url": "https://alphafold.ebi.ac.uk/entry/Q9NZC2",
+        "licence": "CC BY 4.0",
+        "note": "downloaded, not computed here. AlphaFold Server was not used: its terms prohibit automated use for protein-peptide binding prediction"
+      }
+    }
+  ],
+  "by_candidate": {
+    "AstroEaat2-Up-A2": [
+      "pep-AstroEaat2-Up-A2"
+    ],
+    "AstroEos-NO-A1": [
+      "pep-AstroEos-NO-A1"
+    ],
+    "AstroSuper-CBF-EAAT2-A5": [
+      "pep-AstroSuper-CBF-EAAT2-A5"
+    ],
+    "BasalAChE-Abeta-B4": [
+      "pep-BasalAChE-Abeta-B4",
+      "cpx-BasalAChE-Abeta-B4"
+    ],
+    "BasalAChE-GorgeBlock-B1": [
+      "pep-BasalAChE-GorgeBlock-B1"
+    ],
+    "BasalM1-PAM-B2": [
+      "pep-BasalM1-PAM-B2"
+    ],
+    "BasalNgf-TrkA-B3": [
+      "pep-BasalNgf-TrkA-B3",
+      "cpx-BasalNgf-TrkA-B3"
+    ],
+    "BasalSuper-AChE-TrkA-B5": [
+      "pep-BasalSuper-AChE-TrkA-B5",
+      "cpx-BasalSuper-AChE-TrkA-B5"
+    ],
+    "HippoAChE-AlkaPept-X2": [
+      "pep-HippoAChE-AlkaPept-X2",
+      "cpx-HippoAChE-AlkaPept-X2"
+    ],
+    "HippoDual-TrkB-AMPK-X5": [
+      "pep-HippoDual-TrkB-AMPK-X5",
+      "cpx-HippoDual-TrkB-AMPK-X5"
+    ],
+    "HippoNrf-KeapDecoy-X3": [
+      "pep-HippoNrf-KeapDecoy-X3"
+    ],
+    "HippoTrk-Saponin-X1": [
+      "pep-HippoTrk-Saponin-X1",
+      "cpx-HippoTrk-Saponin-X1"
+    ],
+    "MicroAutophagy-Tag-M4": [
+      "pep-MicroAutophagy-Tag-M4"
+    ],
+    "MicroDual-Trem2-Nrf2-M5": [
+      "pep-MicroDual-Trem2-Nrf2-M5",
+      "cpx-MicroDual-Trem2-Nrf2-M5"
+    ],
+    "MicroNrf2-AntiInflam-M2": [
+      "pep-MicroNrf2-AntiInflam-M2"
+    ],
+    "MicroTlr4-Antagonist-M3": [
+      "pep-MicroTlr4-Antagonist-M3",
+      "cpx-MicroTlr4-Antagonist-M3"
+    ],
+    "MicroTrem2-Agonist-M1": [
+      "pep-MicroTrem2-Agonist-M1",
+      "cpx-MicroTrem2-Agonist-M1"
+    ],
+    "PfcACh-PAM-P1": [
+      "pep-PfcACh-PAM-P1",
+      "cpx-PfcACh-PAM-P1"
+    ],
+    "PfcDual-nACh-GluN2A-P5": [
+      "pep-PfcDual-nACh-GluN2A-P5",
+      "cpx-PfcDual-nACh-GluN2A-P5"
+    ],
+    "PfcGluN2A-LTP-P3": [
+      "pep-PfcGluN2A-LTP-P3",
+      "cpx-PfcGluN2A-LTP-P3"
+    ],
+    "PfcGsk-WntLinker-P4": [
+      "pep-PfcGsk-WntLinker-P4"
+    ],
+    "PfcTrk-ErkEnhancer-P2": [
+      "pep-PfcTrk-ErkEnhancer-P2",
+      "cpx-PfcTrk-ErkEnhancer-P2"
+    ]
+  }
+}

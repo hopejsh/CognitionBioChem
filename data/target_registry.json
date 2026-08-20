@@ -49,6 +49,115 @@
      "description": "Protein kinase"
     }
    ],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 32,
+     "end": 430,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 431,
+     "end": 454,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 455,
+     "end": 822,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 32,
+     "end": 38,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 36,
+     "end": 45,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 152,
+     "end": 176,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 154,
+     "end": 194,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 218,
+     "end": 266,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 302,
+     "end": 345,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 1,
+     "end": 156,
+     "description": "in isoform TrkB-N-T1"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 465,
+     "end": 465,
+     "description": "in isoform 4 and isoform 5"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 467,
+     "end": 477,
+     "description": "in isoform TrkB-T1 and isoform TrkB-N-T1"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 478,
+     "end": 822,
+     "description": "in isoform TrkB-T1 and isoform TrkB-N-T1"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 529,
+     "end": 537,
+     "description": "in isoform TrkB-T-Shc and isoform 5"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 538,
+     "end": 822,
+     "description": "in isoform TrkB-T-Shc and isoform 5"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 710,
+     "end": 735,
+     "description": "in isoform TrkB-T-TK"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 736,
+     "end": 822,
+     "description": "in isoform TrkB-T-TK"
+    }
+   ],
+   "subunit": "Exists in a dynamic equilibrium between monomeric (low affinity) and dimeric (high affinity) structures. Interacts (phosphorylated upon activation by BDNF) with SHC1; mediates SHC1 phosphorylation and activation. Interacts (phosphorylated upon activation by BDNF) with PLCG1 and/or PLCG2; mediates PLCG1 phosphorylation and activation. Interacts with SH2B1 and SH2B2. Interacts with NGFR; may regulate the ligand specificity of the receptor (By similarity). Interacts with SORCS2; this interaction is important for normal targeting to post-synaptic densities in response to high-frequency stimulation (By similarity). Interacts (phosphorylated upon ligand-binding) with SH2D1A; regulates NTRK2. Interacts with SQSTM1 and KIDINS220 (By similarity). Interacts (phosphorylated upon ligand-binding) with FRS2; activates the MAPK signaling pathway (PubMed:10092678). Interacts with APPL1 (By similarity). Interacts with MAPK8IP3/JIP3 and KLC1; interaction with KLC1 is mediated by MAPK8IP3/JIP3 (By similarity). Interacts with SORL1; this interaction facilitates NTRK2 trafficking between synaptic plasma membranes, postsynaptic densities and cell soma, hence positively regulates BDNF signaling (By similarity). Interacts with SLITRK2 (PubMed:35840571)",
    "pdb_entries": [
     "1HCF",
     "1WWB",
@@ -62,6 +171,19 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/Q16620",
    "mature_offset": 31,
+   "construct_exclusions": [],
+   "oligomeric": "homomer",
+   "oligomeric_evidence": {
+    "homo": [
+     "dimer"
+    ],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    32,
+    430
+   ],
+   "construct_basis": "ectodomain",
    "sequence_length_checked": true
   },
   "ACHE": {
@@ -80,6 +202,60 @@
     614
    ],
    "domains": [],
+   "topology": [],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 100,
+     "end": 127,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 288,
+     "end": 303,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 440,
+     "end": 560,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 611,
+     "end": 611,
+     "description": "Interchain"
+    }
+   ],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 357,
+     "end": 444,
+     "description": "in isoform 4"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 575,
+     "end": 614,
+     "description": "in isoform H"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 575,
+     "end": 603,
+     "description": "in isoform R"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 604,
+     "end": 614,
+     "description": "in isoform R"
+    }
+   ],
+   "subunit": "Interacts with PRIMA1. The interaction with PRIMA1 is required to anchor it to the basal lamina of cells and organize into tetramers (By similarity). Isoform H generates GPI-anchored dimers; disulfide linked. Isoform T generates multiple structures, ranging from monomers and dimers to collagen-tailed and hydrophobic-tailed forms, in which catalytic tetramers are associated with anchoring proteins that attach them to the basal lamina or to cell membranes. In the collagen-tailed forms, isoform T subunits are associated with a specific collagen, COLQ, which triggers the formation of isoform T tetramers, from monomers and dimers. Isoform R may be monomeric",
    "pdb_entries": [
     "1B41",
     "1F8U",
@@ -96,6 +272,37 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/P22303",
    "mature_offset": 31,
+   "construct_exclusions": [
+    {
+     "span": [
+      575,
+      614
+     ],
+     "kind": "obligate_assembly_segment",
+     "reason": "isoform-variable (in isoform H) and carries the interchain disulfide at 611; its partner chain is not present in a monomer construct"
+    },
+    {
+     "span": [
+      604,
+      614
+     ],
+     "kind": "obligate_assembly_segment",
+     "reason": "isoform-variable (in isoform R) and carries the interchain disulfide at 611; its partner chain is not present in a monomer construct"
+    }
+   ],
+   "oligomeric": "homomer",
+   "oligomeric_evidence": {
+    "homo": [
+     "dimer",
+     "tetramer"
+    ],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    32,
+    574
+   ],
+   "construct_basis": "mature_chain_trimmed",
    "sequence_length_checked": true
   },
   "GSK3B": {
@@ -118,6 +325,17 @@
      "description": "Protein kinase"
     }
    ],
+   "topology": [],
+   "disulfides": [],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 303,
+     "end": 303,
+     "description": "in isoform 2"
+    }
+   ],
+   "subunit": "Monomer. Interacts with ARRB2, DISC1 and ZBED3 (By similarity). Interacts with CABYR, MMP2, MUC1, NIN and PRUNE1. Interacts with AXIN1; the interaction mediates hyperphosphorylation of CTNNB1 leading to its ubiquitination and destruction. Interacts with and phosphorylates SNAI1. Interacts with DNM1L (via a C-terminal domain). Found in a complex composed of MACF1, APC, AXIN1, CTNNB1 and GSK3B (By similarity). Interacts with SGK3. Interacts with DAB2IP (via C2 domain); the interaction stimulates GSK3B kinase activation. Interacts (via C2 domain) with PPP2CA. Interacts with the CLOCK-BMAL1 heterodimer (PubMed:19946213). Interacts with the BMAL1 (PubMed:28903391). Interacts with CTNND2 (PubMed:19706605). Interacts with NCYM (PubMed:24391509). The complex composed, at least, of APC, CTNNB1 and GSK3B interacts with JPT1; the interaction requires the inactive form of GSK3B (phosphorylated at 'Ser-9') (PubMed:25169422). Forms a complex composed of PRKAR2A or PRKAR2B, GSK3B and GSKIP through GSKIP interaction; facilitates PKA-induced phosphorylation and regulates GSK3B activity (PubMed:20007971, PubMed:25920809, PubMed:27484798). Interacts with GSKIP (PubMed:16981698). Interacts with GID8 (PubMed:28829046). Interacts with PIWIL2 (By similarity). Interacts with LMBR1L (PubMed:31073040). Interacts with DDX3X (PubMed:18846110). Interacts with BIRC2 (PubMed:18846110). Interacts with TNFRSF10B; TNFRSF10B stimulation inhibits GSK3B kinase activity (PubMed:18846110). Interacts with RICTOR; the interaction results in phosphorylation of RICTOR at 'Thr-1695' by GSK3B which facilitates FBXW7-mediated ubiquitination and subsequent degradation of RICTOR (PubMed:25897075). Found in a complex with SLC39A6, SLC39A10 and with GSK3B that controls NCAM1 phosphorylation (By similarity). Interacts with PKP3 (via ARM repeats); the interaction may be involved in PKP3 protein degradation (PubMed:34058472)",
    "pdb_entries": [
     "1GNG",
     "1H8F",
@@ -134,6 +352,17 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/P49841",
    "mature_offset": 0,
+   "construct_exclusions": [],
+   "oligomeric": "monomer-or-unstated",
+   "oligomeric_evidence": {
+    "homo": [],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    1,
+    420
+   ],
+   "construct_basis": "mature_chain",
    "sequence_length_checked": true
   },
   "KEAP1": {
@@ -162,6 +391,10 @@
      "description": "BACK"
     }
    ],
+   "topology": [],
+   "disulfides": [],
+   "isoform_variable": [],
+   "subunit": "Component of the BCR(KEAP1) E3 ubiquitin ligase complex, at least composed of 2 molecules of CUL3, 2 molecules of KEAP1, and RBX1 (PubMed:15572695, PubMed:15601839, PubMed:15983046, PubMed:17127771, PubMed:18251510, PubMed:24896564). Interacts with NFE2L2/NRF2; the interaction is direct (PubMed:15379550, PubMed:15601839, PubMed:16006525, PubMed:16888629, PubMed:18387606). Forms a ternary complex with NFE2L2/NRF2 and PGAM5 (PubMed:17046835). Interacts with (phosphorylated) SQSTM1/p62; the interaction is direct and inactivates the BCR(KEAP1) complex by sequestering it in inclusion bodies, promoting its degradation (PubMed:20452972, PubMed:20495340). Interacts with NFE2L1 (PubMed:16687406). Interacts with BPTF and PTMA (PubMed:15657435). Interacts with MAP1LC3B (PubMed:24089205). Interacts indirectly with ENC1 (PubMed:19424503). Interacts with SESN1 and SESN2 (PubMed:23274085). Interacts with HSP90AA1 and HSP90AB1 (PubMed:26517842). Interacts with PGCKA1; this interaction prevents the ubiquitination of KEAP1 by TRIM25, thus protecting KEAP1 from degradation (PubMed:36882524) (Microbial infection) Interacts with ebolavirus protein VP24; this interaction activates transcription factor NFE2L2/NRF2 by blocking its interaction with KEAP1",
    "pdb_entries": [
     "1U6D",
     "1ZGK",
@@ -178,6 +411,17 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/Q14145",
    "mature_offset": 0,
+   "construct_exclusions": [],
+   "oligomeric": "monomer-or-unstated",
+   "oligomeric_evidence": {
+    "homo": [],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    1,
+    624
+   ],
+   "construct_basis": "mature_chain",
    "sequence_length_checked": true
   },
   "NFE2L2": {
@@ -200,6 +444,23 @@
      "description": "bZIP"
     }
    ],
+   "topology": [],
+   "disulfides": [],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 1,
+     "end": 16,
+     "description": "in isoform 2 and isoform 3"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 135,
+     "end": 141,
+     "description": "in isoform 3"
+    }
+   ],
+   "subunit": "Heterodimer; heterodimerizes with small Maf proteins (By similarity). Interacts (via the bZIP domain) with MAFG and MAFK; required for binding to antioxidant response elements (AREs) on DNA (By similarity). Interacts with KEAP1; the interaction is direct and promotes ubiquitination by the BCR(KEAP1) E3 ubiquitin ligase complex (PubMed:15601839, PubMed:16888629). Forms a ternary complex with PGAM5 and KEAP1 (PubMed:18387606). Interacts with EEF1D at heat shock promoter elements (HSE) (PubMed:21597468). Interacts via its leucine-zipper domain with the coiled-coil domain of PMF1 (PubMed:11256947). Interacts with CHD6; involved in activation of the transcription (By similarity). Interacts with ESRRB; represses NFE2L2 transcriptional activity (By similarity). Interacts with MOTS-c, a peptide produced by the mitochondrially encoded 12S rRNA MT-RNR1; the interaction occurs in the nucleus following metabolic stress (PubMed:29983246) (Microbial infection) Interacts with herpes virus 8 protein LANA1",
    "pdb_entries": [
     "2FLU",
     "2LZ1",
@@ -216,6 +477,19 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/Q16236",
    "mature_offset": 0,
+   "construct_exclusions": [],
+   "oligomeric": "heteromer",
+   "oligomeric_evidence": {
+    "homo": [],
+    "hetero": [
+     "heterodimer"
+    ]
+   },
+   "ligand_accessible_span": [
+    1,
+    605
+   ],
+   "construct_basis": "mature_chain",
    "sequence_length_checked": true
   },
   "TREM2": {
@@ -241,6 +515,55 @@
      "description": "Ig-like V-type"
     }
    ],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 19,
+     "end": 174,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 175,
+     "end": 195,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 196,
+     "end": 230,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 36,
+     "end": 110,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 51,
+     "end": 60,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 162,
+     "end": 230,
+     "description": "in isoform 2"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 162,
+     "end": 230,
+     "description": "in isoform 3"
+    }
+   ],
+   "subunit": "Monomer (PubMed:27995897). After ectodomain shedding, the extracellular domain oligomerizes, which is enhanced and stabilized by binding of phosphatidylserine (PubMed:29794134). Interacts with TYROBP/DAP12 (PubMed:11602640, PubMed:25957402). Interaction with TYROBP is required for stabilization of the TREM2 C-terminal fragment (TREM2-CTF) which is produced by proteolytic processing (PubMed:25957402). Interacts with PLXNA1 (via TIG domains); the interaction mediates SEMA6D binding and signaling through TYROBP (By similarity)",
    "pdb_entries": [
     "5ELI",
     "5UD7",
@@ -257,6 +580,19 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/Q9NZC2",
    "mature_offset": 18,
+   "construct_exclusions": [],
+   "oligomeric": "homomer",
+   "oligomeric_evidence": {
+    "homo": [
+     "oligomeriz"
+    ],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    19,
+    174
+   ],
+   "construct_basis": "ectodomain",
    "sequence_length_checked": true
   },
   "FZD8": {
@@ -282,6 +618,132 @@
      "description": "FZ"
     }
    ],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 28,
+     "end": 275,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 276,
+     "end": 296,
+     "description": "Helical; Name=1"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 297,
+     "end": 312,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 313,
+     "end": 333,
+     "description": "Helical; Name=2"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 334,
+     "end": 396,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 397,
+     "end": 417,
+     "description": "Helical; Name=3"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 418,
+     "end": 439,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 440,
+     "end": 460,
+     "description": "Helical; Name=4"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 461,
+     "end": 483,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 484,
+     "end": 504,
+     "description": "Helical; Name=5"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 505,
+     "end": 532,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 533,
+     "end": 553,
+     "description": "Helical; Name=6"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 554,
+     "end": 584,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 585,
+     "end": 605,
+     "description": "Helical; Name=7"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 606,
+     "end": 694,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 35,
+     "end": 96,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 43,
+     "end": 89,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 80,
+     "end": 118,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 107,
+     "end": 148,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 111,
+     "end": 135,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [],
+   "subunit": "Component of a Wnt-signaling complex that contains a WNT protein, a FZD protein and LRP5 or LRP6. Interacts directly with LRP5 or LRP6; the interaction is promoted by Wnt-binding and signaling and inhibited by DKK1. Interacts with GPOC, RSPO1 and RSPO3 (By similarity). Interacts with glypican GPC3 (PubMed:24496449)",
    "pdb_entries": [
     "5UN5",
     "5UN6",
@@ -290,6 +752,17 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/Q9H461",
    "mature_offset": 27,
+   "construct_exclusions": [],
+   "oligomeric": "monomer-or-unstated",
+   "oligomeric_evidence": {
+    "homo": [],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    28,
+    275
+   ],
+   "construct_basis": "ectodomain",
    "sequence_length_checked": true
   },
   "CHRNA7": {
@@ -308,6 +781,79 @@
     502
    ],
    "domains": [],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 23,
+     "end": 233,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 234,
+     "end": 254,
+     "description": "Helical"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 259,
+     "end": 279,
+     "description": "Helical"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 292,
+     "end": 315,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 316,
+     "end": 466,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 467,
+     "end": 489,
+     "description": "Helical"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 150,
+     "end": 164,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 212,
+     "end": 213,
+     "description": "Associated with receptor activation"
+    }
+   ],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 18,
+     "end": 18,
+     "description": "in isoform 2"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 81,
+     "end": 102,
+     "description": "in isoform 3"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 103,
+     "end": 502,
+     "description": "in isoform 3"
+    }
+   ],
+   "subunit": "Homopentamer (PubMed:33735609, PubMed:38382524). Can also form heteropentamers with CHRNB2, mainly found in basal forebrain cholinergic neurons (PubMed:33239400, PubMed:38161283). Interacts with RIC3; which is required for proper folding and assembly (PubMed:15504725, PubMed:16120769). Interacts with LYPD6 (PubMed:27344019). Interacts with CANX (PubMed:32783947)",
    "pdb_entries": [
     "2MAW",
     "5AFH",
@@ -324,6 +870,21 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/P36544",
    "mature_offset": 22,
+   "construct_exclusions": [],
+   "oligomeric": "both",
+   "oligomeric_evidence": {
+    "homo": [
+     "homopentamer"
+    ],
+    "hetero": [
+     "heteropentamer"
+    ]
+   },
+   "ligand_accessible_span": [
+    23,
+    233
+   ],
+   "construct_basis": "ectodomain",
    "sequence_length_checked": true
   },
   "GRIN2A": {
@@ -342,6 +903,97 @@
     1464
    ],
    "domains": [],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 23,
+     "end": 556,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 557,
+     "end": 576,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 577,
+     "end": 600,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "intramembrane",
+     "start": 601,
+     "end": 615,
+     "description": "Discontinuously helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 616,
+     "end": 625,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 626,
+     "end": 646,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 647,
+     "end": 814,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 815,
+     "end": 835,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 836,
+     "end": 1464,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 87,
+     "end": 320,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 429,
+     "end": 455,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 436,
+     "end": 456,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 745,
+     "end": 800,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 1259,
+     "end": 1464,
+     "description": "in isoform 2"
+    }
+   ],
+   "subunit": "Heterotetramer (PubMed:34186027). Forms heterotetrameric channels composed of two GluN1/zeta subunits (GRIN1), and two identical GluN2/epsilon subunits (GRIN2A, GRIN2B, GRIN2C or GRIN2D) or GluN3 subunits (GRIN3A or GRIN3B) (in vitro) (PubMed:26875626, PubMed:26919761, PubMed:28105280, PubMed:34186027, PubMed:8768735). Can also form heterotetrameric channels that contain at least two GluN1 subunits and at least two different GluN2 subunits (or a combination of one GluN2 and one GluN3 subunits) (in vitro). In vivo, the subunit composition may depend on the expression levels of the different subunits. Found in a complex with GRIN1, GRIN3A and PPP2CB (By similarity). Found in a complex with GRIN1 and GRIN3B (By similarity). Interacts with AIP1 (By similarity). Interacts with HIP1 and NETO1. Interacts with SNX27 (via PDZ domain); the interaction is required for recycling to the plasma membrane when endocytosed and prevent degradation in lysosomes (By similarity). Interacts with PDZ domains of PATJ and DLG4. Interacts with LRFN2 (By similarity). Interacts with RPH3A and DLG4; this ternary complex regulates NMDA receptor composition at postsynaptic membranes (By similarity). Interacts with SORCS2 (By similarity). Interacts with ARC; preventing ARC oligomerization (By similarity). Interacts (via the extreme C-terminus) with FRMPD2 (the second PDZ domain); the interaction is direct and is likely to promote NMDAR-mediated neural signal transmission (By similarity). GRIN2A binds FRMPD2 with lower affinity than GRIN2B (By similarity)",
    "pdb_entries": [
     "3NFL",
     "5H8F",
@@ -358,6 +1010,19 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/Q12879",
    "mature_offset": 22,
+   "construct_exclusions": [],
+   "oligomeric": "heteromer",
+   "oligomeric_evidence": {
+    "homo": [],
+    "hetero": [
+     "heterotetramer"
+    ]
+   },
+   "ligand_accessible_span": [
+    23,
+    556
+   ],
+   "construct_basis": "ectodomain",
    "sequence_length_checked": true
   },
   "GRIN2B": {
@@ -376,6 +1041,84 @@
     1484
    ],
    "domains": [],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 27,
+     "end": 555,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 556,
+     "end": 576,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 577,
+     "end": 601,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "intramembrane",
+     "start": 602,
+     "end": 613,
+     "description": "Discontinuously helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 614,
+     "end": 627,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 628,
+     "end": 647,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 648,
+     "end": 819,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 820,
+     "end": 835,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 836,
+     "end": 1484,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 86,
+     "end": 321,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 429,
+     "end": 456,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 436,
+     "end": 457,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [],
+   "subunit": "Heterotetramer (PubMed:34321660). Forms heterotetrameric channels composed of two GluN1/zeta subunits (GRIN1), and two identical GluN2/epsilon subunits (GRIN2A, GRIN2B, GRIN2C or GRIN2D) or GluN3 subunits (GRIN3A or GRIN3B) (in vitro) (PubMed:26875626, PubMed:26912815, PubMed:26919761, PubMed:28126851, PubMed:34321660, PubMed:8768735). Can also form heterotetrameric channels that contain at least two GluN1 subunits and at least two different GluN2 subunits (or a combination of one GluN2 and one GluN3 subunits) (in vitro) (By similarity). In vivo, the subunit composition may depend on the expression levels of the different subunits (Probable). Found in a complex with GRIN1 and GRIN3B. Found in a complex with GRIN1, GRIN3A and PPP2CB. Interacts with PDZ domains of PATJ, DLG3 and DLG4. Interacts with HIP1 and NETO1 (By similarity). Interacts with MAGI3 (PubMed:10748157). Interacts with DAPK1 (By similarity). Found in a complex with GRIN1 and PRR7 (PubMed:27458189). Interacts with PRR7 (PubMed:27458189). Interacts with CAMK2A (PubMed:28130356). Interacts with ARC; preventing ARC oligomerization (By similarity). Interacts with TMEM25 (By similarity). Interacts (via the extreme C-terminus) with FRMPD2 (via the second PDZ domain); the interaction is direct and is likely to promote NMDAR-mediated neural signal transmission (By similarity). Interacts with FAM81A; the interaction facilitates condensate formation via liquid-liquid phase separation (By similarity)",
    "pdb_entries": [
     "5EWJ",
     "5EWL",
@@ -392,6 +1135,19 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/Q13224",
    "mature_offset": 26,
+   "construct_exclusions": [],
+   "oligomeric": "heteromer",
+   "oligomeric_evidence": {
+    "homo": [],
+    "hetero": [
+     "heterotetramer"
+    ]
+   },
+   "ligand_accessible_span": [
+    27,
+    555
+   ],
+   "construct_basis": "ectodomain",
    "sequence_length_checked": true
   },
   "SLC1A2": {
@@ -407,6 +1163,150 @@
     574
    ],
    "domains": [],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 1,
+     "end": 44,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 45,
+     "end": 64,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 65,
+     "end": 87,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 88,
+     "end": 108,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 109,
+     "end": 120,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 121,
+     "end": 142,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 143,
+     "end": 235,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 236,
+     "end": 259,
+     "description": "Helical; Name=4"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 260,
+     "end": 268,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 269,
+     "end": 296,
+     "description": "Helical; Name=5"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 297,
+     "end": 317,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 318,
+     "end": 339,
+     "description": "Helical; Name=6"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 340,
+     "end": 344,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "intramembrane",
+     "start": 345,
+     "end": 375,
+     "description": "Discontinuously helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 376,
+     "end": 384,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 385,
+     "end": 411,
+     "description": "Helical; Name=7"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 412,
+     "end": 424,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "intramembrane",
+     "start": 425,
+     "end": 458,
+     "description": "Discontinuously helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 459,
+     "end": 471,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 472,
+     "end": 493,
+     "description": "Helical; Name=8"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 494,
+     "end": 574,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 1,
+     "end": 9,
+     "description": "in isoform 2"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 553,
+     "end": 574,
+     "description": "in isoform 3"
+    }
+   ],
+   "subunit": "Homotrimer (PubMed:15265858, PubMed:15483603, PubMed:26483543). Isoform 3 can oligomerize with isoform 1 (PubMed:20688910). Interacts with AJUBA (By similarity)",
    "pdb_entries": [
     "7VR7",
     "7VR8",
@@ -418,6 +1318,20 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/P43004",
    "mature_offset": 0,
+   "construct_exclusions": [],
+   "oligomeric": "homomer",
+   "oligomeric_evidence": {
+    "homo": [
+     "homotrimer",
+     "oligomeriz"
+    ],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    143,
+    235
+   ],
+   "construct_basis": null,
    "sequence_length_checked": true
   },
   "NOS3": {
@@ -446,6 +1360,35 @@
      "description": "FAD-binding FR-type"
     }
    ],
+   "topology": [],
+   "disulfides": [],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 584,
+     "end": 625,
+     "description": "in isoform eNOS13C"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 585,
+     "end": 614,
+     "description": "in isoform eNOS13B"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 615,
+     "end": 1203,
+     "description": "in isoform eNOS13B"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 626,
+     "end": 1203,
+     "description": "in isoform eNOS13C"
+    }
+   ],
+   "subunit": "Homodimer. Interacts with NOSIP and NOSTRIN (PubMed:11149895, PubMed:12446846). Interacts with HSP90AB1 (By similarity) (PubMed:11149895, PubMed:12446846, PubMed:23585225). Forms a complex with ASL, ASS1 and SLC7A1; the complex regulates cell-autonomous L-arginine synthesis and citrulline recycling while channeling extracellular L-arginine to nitric oxide synthesis pathway (By similarity)",
    "pdb_entries": [
     "1M9J",
     "1M9K",
@@ -462,6 +1405,19 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/P29474",
    "mature_offset": 1,
+   "construct_exclusions": [],
+   "oligomeric": "homomer",
+   "oligomeric_evidence": {
+    "homo": [
+     "homodimer"
+    ],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    2,
+    1203
+   ],
+   "construct_basis": "mature_chain",
    "sequence_length_checked": true
   },
   "PTAFR": {
@@ -477,6 +1433,108 @@
     342
    ],
    "domains": [],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 1,
+     "end": 16,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 17,
+     "end": 38,
+     "description": "Helical; Name=1"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 39,
+     "end": 54,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 55,
+     "end": 74,
+     "description": "Helical; Name=2"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 75,
+     "end": 91,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 92,
+     "end": 113,
+     "description": "Helical; Name=3"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 114,
+     "end": 133,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 134,
+     "end": 155,
+     "description": "Helical; Name=4"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 156,
+     "end": 184,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 185,
+     "end": 205,
+     "description": "Helical; Name=5"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 206,
+     "end": 233,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 234,
+     "end": 254,
+     "description": "Helical; Name=6"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 255,
+     "end": 276,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 277,
+     "end": 296,
+     "description": "Helical; Name=7"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 297,
+     "end": 342,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 90,
+     "end": 173,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [],
+   "subunit": "Interacts with ARRB1",
    "pdb_entries": [
     "5ZKP",
     "5ZKQ",
@@ -484,6 +1542,17 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/P25105",
    "mature_offset": 0,
+   "construct_exclusions": [],
+   "oligomeric": "monomer-or-unstated",
+   "oligomeric_evidence": {
+    "homo": [],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    156,
+    184
+   ],
+   "construct_basis": null,
    "sequence_length_checked": true
   },
   "CHRM1": {
@@ -499,6 +1568,115 @@
     460
    ],
    "domains": [],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 1,
+     "end": 22,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 23,
+     "end": 48,
+     "description": "Helical; Name=1"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 49,
+     "end": 62,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 63,
+     "end": 84,
+     "description": "Helical; Name=2"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 85,
+     "end": 95,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 96,
+     "end": 121,
+     "description": "Helical; Name=3"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 122,
+     "end": 142,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 143,
+     "end": 164,
+     "description": "Helical; Name=4"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 165,
+     "end": 185,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 186,
+     "end": 209,
+     "description": "Helical; Name=5"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 210,
+     "end": 366,
+     "description": "Cytoplasmic"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 367,
+     "end": 390,
+     "description": "Helical; Name=6"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 391,
+     "end": 397,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 398,
+     "end": 420,
+     "description": "Helical; Name=7"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 421,
+     "end": 460,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 98,
+     "end": 178,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 455,
+     "end": 460,
+     "description": "in isoform 2"
+    }
+   ],
+   "subunit": "Interacts with GPRASP2 (PubMed:15086532). Interacts with TMEM147 (PubMed:21056967)",
    "pdb_entries": [
     "5CXV",
     "6OIJ",
@@ -510,6 +1688,17 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/P11229",
    "mature_offset": 0,
+   "construct_exclusions": [],
+   "oligomeric": "monomer-or-unstated",
+   "oligomeric_evidence": {
+    "homo": [],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    1,
+    22
+   ],
+   "construct_basis": null,
    "sequence_length_checked": true
   },
   "NTRK1": {
@@ -553,6 +1742,79 @@
      "description": "Protein kinase"
     }
    ],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 33,
+     "end": 423,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 424,
+     "end": 439,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 440,
+     "end": 796,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 36,
+     "end": 41,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 40,
+     "end": 50,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 154,
+     "end": 191,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 215,
+     "end": 265,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 300,
+     "end": 345,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 1,
+     "end": 71,
+     "description": "in isoform 3"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 192,
+     "end": 284,
+     "description": "in isoform TrkA-III"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 393,
+     "end": 398,
+     "description": "in isoform TrkA-I, isoform 3 and isoform TrkA-III"
+    }
+   ],
+   "subunit": "Exists in a dynamic equilibrium between monomeric (low affinity) and dimeric (high affinity) structures. Homodimerization is induced by binding of a NGF dimer (PubMed:10490030, PubMed:1281417, PubMed:17196528). Interacts with SQSTM1; bridges NTRK1 to NGFR (PubMed:11244088). Forms a ternary complex with NGFR and KIDINS220; this complex is affected by the expression levels of KIDINS220 and an increase in KIDINS220 expression leads to a decreased association of NGFR and NTRK1 (By similarity). Interacts with SH2D1A; regulates NTRK1 (By similarity). Interacts (phosphorylated upon activation by NGF) with SHC1; mediates SHC1 phosphorylation and activation (PubMed:15488758, PubMed:8155326). Interacts (phosphorylated upon activation by NGF) with PLCG1; mediates PLCG1 phosphorylation and activation (PubMed:15488758, PubMed:7510697). Interacts (phosphorylated) with SH2B1 and SH2B2 (By similarity). Interacts with GRB2 (PubMed:15488758). Interacts with PIK3R1 (PubMed:15488758). Interacts with FRS2 (PubMed:15488758). Interacts with SORT1; may regulate NTRK1 anterograde axonal transport (PubMed:21102451). Interacts with RAB7A (By similarity). Found in a complex, at least composed of KIDINS220, MAGI2, NTRK1 and RAPGEF2; the complex is mainly formed at late endosomes in a nerve growth factor (NGF)-dependent manner (By similarity). Interacts with RAPGEF2; the interaction is strengthened after NGF stimulation (By similarity). Interacts with PTPRS (By similarity). Interacts with USP36; USP36 does not deubiquitinate NTRK1 (PubMed:27445338). Interacts with GGA3 (PubMed:26446845). Interacts with TSPAN1; this interaction promotes NTRK1 stability (By similarity)",
    "pdb_entries": [
     "1HE7",
     "1SHC",
@@ -569,6 +1831,20 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/P04629",
    "mature_offset": 32,
+   "construct_exclusions": [],
+   "oligomeric": "homomer",
+   "oligomeric_evidence": {
+    "homo": [
+     "dimer",
+     "homodimer"
+    ],
+    "hetero": []
+   },
+   "ligand_accessible_span": [
+    33,
+    423
+   ],
+   "construct_basis": "ectodomain",
    "sequence_length_checked": true
   },
   "TLR4": {
@@ -600,6 +1876,73 @@
      "description": "TIR"
     }
    ],
+   "topology": [
+    {
+     "kind": "topological_domain",
+     "start": 24,
+     "end": 631,
+     "description": "Extracellular"
+    },
+    {
+     "kind": "transmembrane",
+     "start": 632,
+     "end": 652,
+     "description": "Helical"
+    },
+    {
+     "kind": "topological_domain",
+     "start": 653,
+     "end": 839,
+     "description": "Cytoplasmic"
+    }
+   ],
+   "disulfides": [
+    {
+     "kind": "disulfide",
+     "start": 29,
+     "end": 40,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 281,
+     "end": 306,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 390,
+     "end": 391,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 583,
+     "end": 609,
+     "description": ""
+    },
+    {
+     "kind": "disulfide",
+     "start": 585,
+     "end": 627,
+     "description": ""
+    }
+   ],
+   "isoform_variable": [
+    {
+     "kind": "alternative_sequence",
+     "start": 1,
+     "end": 200,
+     "description": "in isoform 3"
+    },
+    {
+     "kind": "alternative_sequence",
+     "start": 1,
+     "end": 40,
+     "description": "in isoform 2"
+    }
+   ],
+   "subunit": "Belongs to the lipopolysaccharide (LPS) receptor, a multi-protein complex containing at least CD14, LY96 and TLR4 (PubMed:11274165). Binding to bacterial LPS leads to homodimerization. Interacts with LY96 via the extracellular domain (PubMed:17803912, PubMed:19252480). Interacts with MYD88 (PubMed:36232715). Interacts (via TIR domains) with TIRAP (By similarity). Interacts with TICAM2 (PubMed:14519765, PubMed:25736436). Interacts with NOX4 (PubMed:15356101). Interacts with CNPY3 (By similarity). Interacts with HSP90B1. The interaction with both CNPY3 and HSP90B1 is required for proper folding in the endoplasmic reticulum. Interacts with MAP3K21; this interaction leads to negative regulation of TLR4 signaling (PubMed:21602844). Interacts with CD36, following CD36 stimulation by oxLDL or amyloid-beta 42, and forms a heterodimer with TLR6 (PubMed:20037584). The trimeric complex is internalized and triggers inflammatory response. LYN kinase activity facilitates TLR4-TLR6 heterodimerization and signal initiation. Interacts with TICAM1 in response to LPS in a WDFY1-dependent manner (PubMed:25736436, PubMed:36232715). Interacts with WDFY1 in response to LPS (By similarity). Interacts with SMPDL3B (By similarity). Interacts with CEACAM1; upon lipopolysaccharide stimulation, forms a complex including TLR4 and the phosphorylated form of SYK and CEACAM1, which in turn, recruits PTPN6 that dephosphorylates SYK, reducing the production of reactive oxygen species (ROS) and lysosome disruption, which in turn, reduces the activity of the inflammasome (By similarity). Interacts with RFTN1; the interaction occurs in response to lipopolysaccharide stimulation (PubMed:27022195). Interacts with SCIMP; the interaction occurs in response to lipopolysaccharide stimulation and is enhanced by phosphorylation of SCIMP by LYN (By similarity). This interaction facilitates the phosphorylation of TLR4 by LYN which elicits a selective cytokine response in macrophages (By similarity). Interacts with TRAF3IP3 (PubMed:30573680). Interacts with TREM1; this interaction enhances TLR4-mediated inflammatory response (PubMed:17098818, PubMed:21393102). Interacts with ZG16B/PAUF (PubMed:36232715). Interacts with CD82; this interaction inhibits TLR4-mediated signaling pathway (PubMed:36945827). Interacts with neutrophil recruitment protein from Aedes aegypti saliva; the interaction probably promotes activation of canonical NF-kappa-B signaling in skin-resident macrophages and subsequent expression of neutrophil chemoattractants (PubMed:38378891). Interacts with CD180; this interaction inhibits TLR4-mediated signaling pathway upon ligand binding (PubMed:15852007) (Microbial infection) In case of infection, interacts with uropathogenic E.coli protein TcpC (Microbial infection) In case of infection, interacts with B.melitensis protein TcpB; TcpB abolishes the TLR4-TIRAP interaction in vitro (Microbial infection) Interacts with ebolavirus protein GP; this interaction leads to the production of proinflammatory cytokines and suppressor of cytokine signaling 1/SOCS1",
    "pdb_entries": [
     "2Z62",
     "2Z63",
@@ -616,6 +1959,22 @@
    ],
    "fetched_from": "https://rest.uniprot.org/uniprotkb/O00206",
    "mature_offset": 23,
+   "construct_exclusions": [],
+   "oligomeric": "both",
+   "oligomeric_evidence": {
+    "homo": [
+     "homodimer",
+     "trimer"
+    ],
+    "hetero": [
+     "heterodimer"
+    ]
+   },
+   "ligand_accessible_span": [
+    24,
+    631
+   ],
+   "construct_basis": "ectodomain",
    "sequence_length_checked": true
   }
  },

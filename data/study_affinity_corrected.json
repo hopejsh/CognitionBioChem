@@ -535,15 +535,45 @@
    0.7303
   ],
   "spearman_p": 0.51258,
-  "p_holm": {
-   "H1_ranking_with_good_references": 1.0,
-   "H2_reference_fix_matters": 1.0,
-   "H3_model_dominates_error": 0.0
-  },
   "verdicts": {
    "H1_ranking_with_good_references": "FALSIFIED",
    "H2_reference_fix_matters": "FALSIFIED",
    "H3_model_dominates_error": "CONFIRMED"
+  },
+  "criteria": {
+   "H1_ranking_with_good_references": {
+    "met": false,
+    "observed": [
+     0.1912,
+     [
+      -0.4622,
+      0.7303
+     ]
+    ],
+    "threshold": "Spearman rho > 0.5 with a bootstrap 95% CI excluding 0"
+   },
+   "H2_reference_fix_matters": {
+    "met": false,
+    "observed": -0.1128,
+    "threshold": "correcting the references moves rho by more than 0.15"
+   },
+   "H3_model_dominates_error": {
+    "met": true,
+    "observed": [
+     1.0471,
+     0.4445
+    ],
+    "threshold": "median model error exceeds median inter-laboratory dispersion"
+   }
+  },
+  "multiplicity": {
+   "family_size": 0,
+   "correction": "none (no hypothesis in this study is decided by a test statistic)",
+   "excluded_from_correction": [
+    "H1_ranking_with_good_references",
+    "H2_reference_fix_matters",
+    "H3_model_dominates_error"
+   ]
   },
   "per_compound": [
    {
@@ -692,7 +722,8 @@
    "prespec_hash": "0b098bfae8051a42403665c72635c3e0e77a45a9473a207ac6ff16f9af4b343d",
    "registered_utc": "2026-08-18T05:28:14+00:00",
    "deviations": [
-    "n_observed=14 differs from n_planned=15"
+    "n_observed=14 differs from n_planned=15",
+    "registered n_comparisons=3 under 'holm', but the executed family holds 0: ['H1_ranking_with_good_references', 'H2_reference_fix_matters', 'H3_model_dominates_error'] were re-classified as threshold criteria rather than tests after registration. The re-classification is defensible \u2014 a 0/1 indicator is not a p-value and corrupts the correction \u2014 but it is a change to the inferential procedure made after seeing the data, and it belongs on the record rather than in the code alone."
    ],
    "confirmatory": false,
    "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."

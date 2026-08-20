@@ -26,6 +26,13 @@
   "prefer_cns_permeable": true
  },
  "protocol_summary": "np-cognition-v1: potency (IC50/EC50/Ki/Kd/AC50/XC50) on a named human target, assay confidence >= 8, pure compound, MW <= 2000 Da, parseable structure.",
+ "assay_confidence_audit": {
+  "criterion": "confidence_score >= 8",
+  "source": "ChEMBL /assay (NOT /activity, which does not carry the field)",
+  "activities_excluded": 0,
+  "note": "Until this was fixed the criterion was read from the /activity record, where the field does not exist, so it evaluated to None on every row and never excluded anything while protocol_summary advertised it as applied. Measured after the fix, it excludes 0 activities for this target -- every ChEMBL220 assay in the pull already scores >= 8 -- so the published corpus membership is unaffected. The criterion is now genuinely enforced rather than merely claimed."
+ },
+ "max_activities_requested": 300,
  "denominator": {
   "activities_examined": 300,
   "distinct_molecules_examined": 258,
@@ -48,19 +55,19 @@
  },
  "compounds": [
   {
-   "inchikey": "LULNWZDBKTWDGK-UHFFFAOYSA-M",
-   "inchikey_skeleton": "LULNWZDBKTWDGK",
-   "canonical_smiles": "CN(C)C(=O)Oc1cccc([N+](C)(C)C)c1.[Br-]",
+   "inchikey": "ALWKGYPQUAPLQC-UHFFFAOYSA-N",
+   "inchikey_skeleton": "ALWKGYPQUAPLQC",
+   "canonical_smiles": "CN(C)C(=O)Oc1cccc([N+](C)(C)C)c1",
    "source": "ChEMBL",
    "source_id": "CHEMBL54126",
    "protocol_version": "np-cognition-v1",
    "name": "NEOSTIGMINE BROMIDE",
-   "formula": "C12H19BrN2O2",
-   "mol_weight": 303.2,
-   "clogp": -1.052,
+   "formula": "C12H19N2O2+",
+   "mol_weight": 223.296,
+   "clogp": 1.944,
    "tpsa": 29.54,
    "hbd": 0,
-   "heavy_atoms": 17,
+   "heavy_atoms": 16,
    "stereocenters_total": 0,
    "stereocenters_undefined": 0,
    "implied_stereoisomers": 1,
@@ -75,7 +82,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 22.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL636834",
      "document": "CHEMBL1126972"
     },
@@ -86,12 +93,14 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 2.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL645004",
      "document": "CHEMBL1135872"
     }
    ],
-   "quality_flags": []
+   "quality_flags": [
+    "desalted: removed ['[Br-]'] and kept the largest organic fragment. The source record was 'CN(C)C(=O)Oc1cccc([N+](C)(C)C)c1.[Br-]'."
+   ]
   },
   {
    "inchikey": "TTWJBBZEZQICBI-UHFFFAOYSA-N",
@@ -121,7 +130,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 20000.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL636834",
      "document": "CHEMBL1126972"
     }
@@ -156,7 +165,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 340000.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644102",
      "document": "CHEMBL1123431"
     }
@@ -191,7 +200,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 30.0,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL645001",
      "document": "CHEMBL1128816"
     },
@@ -202,7 +211,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 14.13,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL638603",
      "document": "CHEMBL1131149"
     },
@@ -213,7 +222,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 27.9,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644099",
      "document": "CHEMBL1131001"
     },
@@ -224,7 +233,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 61.0,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL644838",
      "document": "CHEMBL1126447"
     }
@@ -259,7 +268,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 218.78,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL638603",
      "document": "CHEMBL1131149"
     },
@@ -270,7 +279,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 254.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644115",
      "document": "CHEMBL1149992"
     },
@@ -281,7 +290,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 33.5,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL644838",
      "document": "CHEMBL1126447"
     },
@@ -292,7 +301,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 143.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644109",
      "document": "CHEMBL1126001"
     },
@@ -303,7 +312,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 95.0,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL644839",
      "document": "CHEMBL1134774"
     }
@@ -311,19 +320,19 @@
    "quality_flags": []
   },
   {
-   "inchikey": "CAEPIUXAUPYIIJ-UHFFFAOYSA-N",
-   "inchikey_skeleton": "CAEPIUXAUPYIIJ",
-   "canonical_smiles": "CC[N+](C)(C)c1cccc(O)c1.[Br-]",
+   "inchikey": "VWLHWLSRQJQWRG-UHFFFAOYSA-O",
+   "inchikey_skeleton": "VWLHWLSRQJQWRG",
+   "canonical_smiles": "CC[N+](C)(C)c1cccc(O)c1",
    "source": "ChEMBL",
    "source_id": "CHEMBL60745",
    "protocol_version": "np-cognition-v1",
    "name": "EDROPHONIUM BROMIDE",
-   "formula": "C10H16BrNO",
-   "mol_weight": 246.148,
-   "clogp": -1.017,
+   "formula": "C10H16NO+",
+   "mol_weight": 166.244,
+   "clogp": 1.979,
    "tpsa": 20.23,
    "hbd": 1,
-   "heavy_atoms": 13,
+   "heavy_atoms": 12,
    "stereocenters_total": 0,
    "stereocenters_undefined": 0,
    "implied_stereoisomers": 1,
@@ -338,12 +347,14 @@
      "organism": "Homo sapiens",
      "activity_type": "Ki",
      "value_nm": 1.63,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL641011",
      "document": "CHEMBL1131149"
     }
    ],
-   "quality_flags": []
+   "quality_flags": [
+    "desalted: removed ['[Br-]'] and kept the largest organic fragment. The source record was 'CC[N+](C)(C)c1cccc(O)c1.[Br-]'."
+   ]
   },
   {
    "inchikey": "QTPHSDHUHXUYFE-KIYNQFGBSA-N",
@@ -373,7 +384,7 @@
      "organism": "Homo sapiens",
      "activity_type": "Ki",
      "value_nm": 0.026,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL641012",
      "document": "CHEMBL1145007"
     }
@@ -411,7 +422,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 5.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL643374",
      "document": "CHEMBL1129143"
     }
@@ -446,7 +457,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 650.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL636834",
      "document": "CHEMBL1126972"
     }
@@ -483,7 +494,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 2.33,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL644838",
      "document": "CHEMBL1126447"
     },
@@ -494,7 +505,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 16.0,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL644839",
      "document": "CHEMBL1134774"
     }
@@ -532,7 +543,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 164.0,
-     "assay_confidence": null,
+     "assay_confidence": 9,
      "assay_chembl_id": "CHEMBL644838",
      "document": "CHEMBL1126447"
     }
@@ -570,7 +581,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 24.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644099",
      "document": "CHEMBL1131001"
     }
@@ -608,7 +619,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": null,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644100",
      "document": "CHEMBL1131001"
     }
@@ -643,7 +654,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 9890.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644099",
      "document": "CHEMBL1131001"
     }
@@ -681,7 +692,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 3500.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644099",
      "document": "CHEMBL1131001"
     }
@@ -719,7 +730,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 56.7,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644099",
      "document": "CHEMBL1131001"
     }
@@ -757,7 +768,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 360.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644109",
      "document": "CHEMBL1126001"
     }
@@ -792,7 +803,7 @@
      "organism": "Homo sapiens",
      "activity_type": "IC50",
      "value_nm": 658.0,
-     "assay_confidence": null,
+     "assay_confidence": 8,
      "assay_chembl_id": "CHEMBL644109",
      "document": "CHEMBL1126001"
     }

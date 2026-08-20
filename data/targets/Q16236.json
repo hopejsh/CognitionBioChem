@@ -88,6 +88,73 @@
    }
   ]
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "O54968"
+      },
+      {
+       "evidenceCode": "ECO:0000250",
+       "source": "UniProtKB",
+       "id": "Q60795"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "11256947"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15601839"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "16888629"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "18387606"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "21597468"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "29983246"
+      }
+     ],
+     "value": "Heterodimer; heterodimerizes with small Maf proteins (By similarity). Interacts (via the bZIP domain) with MAFG and MAFK; required for binding to antioxidant response elements (AREs) on DNA (By similarity). Interacts with KEAP1; the interaction is direct and promotes ubiquitination by the BCR(KEAP1) E3 ubiquitin ligase complex (PubMed:15601839, PubMed:16888629). Forms a ternary complex with PGAM5 and KEAP1 (PubMed:18387606). Interacts with EEF1D at heat shock promoter elements (HSE) (PubMed:21597468). Interacts via its leucine-zipper domain with the coiled-coil domain of PMF1 (PubMed:11256947). Interacts with CHD6; involved in activation of the transcription (By similarity). Interacts with ESRRB; represses NFE2L2 transcriptional activity (By similarity). Interacts with MOTS-c, a peptide produced by the mitochondrially encoded 12S rRNA MT-RNR1; the interaction occurs in the nucleus following metabolic stress (PubMed:29983246)"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  },
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "25995248"
+      }
+     ],
+     "value": "(Microbial infection) Interacts with herpes virus 8 protein LANA1"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Chain",
@@ -124,6 +191,57 @@
      "id": "PRU00978"
     }
    ]
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 1,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 16,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 2 and isoform 3",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "14702039"
+    },
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "Reference",
+     "id": "Ref.2"
+    }
+   ],
+   "featureId": "VSP_025045",
+   "alternativeSequence": {}
+  },
+  {
+   "type": "Alternative sequence",
+   "location": {
+    "start": {
+     "value": 135,
+     "modifier": "EXACT"
+    },
+    "end": {
+     "value": 141,
+     "modifier": "EXACT"
+    }
+   },
+   "description": "in isoform 3",
+   "evidences": [
+    {
+     "evidenceCode": "ECO:0000303",
+     "source": "PubMed",
+     "id": "14702039"
+    }
+   ],
+   "featureId": "VSP_046168",
+   "alternativeSequence": {}
   }
  ],
  "uniProtKBCrossReferences": [

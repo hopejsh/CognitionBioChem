@@ -39,11 +39,25 @@ UNTRUSTWORTHY = {Status.PLACEHOLDER, Status.NOT_COMPUTED}
 
 
 def git_sha(repo: Path | None = None) -> str:
+    """Short HEAD, suffixed `-dirty` when the working tree does not match it.
+
+    A derived file stamped with a bare commit asserts that a checkout of that commit
+    reproduces it. At 2479695 the pose-accuracy artefact records H2 as FALSIFIED and the file
+    built from the working tree says CONFIRMED, so the bare stamp sent an auditor to a commit
+    that contradicts the file for the most contested study in the slate. Four generators
+    stamped independently and only one was corrected; the implementation lives here now so
+    they cannot diverge again.
+    """
+    root = repo or Path(__file__).resolve().parents[2]
     try:
         out = subprocess.run(["git", "rev-parse", "--short", "HEAD"],
-                             cwd=repo or Path(__file__).resolve().parents[2],
-                             capture_output=True, text=True, timeout=10)
-        return out.stdout.strip() or "unknown"
+                             cwd=root, capture_output=True, text=True, timeout=10)
+        sha = out.stdout.strip()
+        if not sha:
+            return "unknown"
+        st = subprocess.run(["git", "status", "--porcelain"],
+                            cwd=root, capture_output=True, text=True, timeout=30)
+        return f"{sha}-dirty" if st.stdout.strip() else sha
     except Exception:  # noqa: BLE001
         return "unknown"
 

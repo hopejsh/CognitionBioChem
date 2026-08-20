@@ -12,7 +12,8 @@ The falsification hypothesis is mechanistic, not statistical. PRODIGY is
          + 0.18681*%NIS_apolar + 0.13810*%NIS_charged - 15.9433
 
 and the two %NIS terms are computed over the WHOLE assembled complex. For a 26-47mer peptide
-against the 583-residue AChE, the non-interacting surface is essentially AChE's own surface;
+against the 543-residue AChE catalytic core, the non-interacting surface is essentially
+AChE's own surface;
 the peptide barely perturbs it. The prediction should therefore collapse toward
 (intercept + AChE's NIS contribution), modulated only by a handful of interface-contact
 counts. If so, the spread across different peptides will be small relative to the -4.3 to
@@ -44,10 +45,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from cbc import prespec as ps  # noqa: E402
+from cbc import inference as inf, prespec as ps  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
-STUDY_ID = "prodigy-discrimination-v1"
+STUDY_ID = "prodigy-discrimination-v2"
 ARM_D = Path("/tmp/cbc_variance")
 RESULT = REPO / "data" / "study_prodigy.json"
 
@@ -55,6 +56,18 @@ RESULT = REPO / "data" / "study_prodigy.json"
 FIT_RANGE = (-18.6, -4.3)
 FIT_SPAN = FIT_RANGE[1] - FIT_RANGE[0]      # 14.3 kcal/mol
 
+
+
+def prespec_args() -> tuple:
+    """The arguments --register builds the plan with.
+
+    Named once so the registration path and the hash-stability test cannot disagree.
+    Without it the test skipped this study, and the skip was reported with a
+    hard-coded True — a check that could not fail, covering 3 of 8 studies.
+    """
+    _iv = json.loads((REPO / "data" / "study_inference_variance.json").read_text())
+    _members = sorted({r["code"] for r in _iv["rows"] if r.get("arm") == "D"})
+    return (sum(1 for c in _members for d in ARM_D.glob(f"{c}_D_s*") if d.is_dir()),)
 
 def build_prespec(n: int) -> ps.Prespecification:
     return ps.Prespecification(
@@ -89,7 +102,9 @@ def build_prespec(n: int) -> ps.Prespecification:
         alpha=0.05,
         test_type="parametric",
         stopping_rule=(
-            "Fixed: every arm-D complex already produced by study inference-variance-v1 is "
+            "Fixed: every arm-D complex produced by the CURRENT variance study is scored, its "
+            "membership read from data/study_inference_variance.json rather than from a "
+            "work directory, "
             "scored exactly once. No new structure is predicted, no complex is added or "
             "removed after scoring begins. A structure PRODIGY cannot parse is reported as a "
             "failure with its error and excluded with the exclusion stated."),
@@ -133,15 +148,21 @@ def build_prespec(n: int) -> ps.Prespecification:
             "fraction_of_fit_range_occupied",
         ),
         exclusions=(
-            "Only arm-D complexes from study inference-variance-v1 are scored. Single-chain "
+            "Only arm-D complexes from the current inference-variance artefact are scored, on the "
+            "AChE ligand-accessible construct (543-residue catalytic core, canonical "
+            "32-574). Single-chain "
             "structures are excluded by construction: PRODIGY requires two chains, and a "
             "lone peptide has no interface."),
+        supersedes="prodigy-discrimination-v1",
+        supersedes_reason=(
+            "v1's plan named study inference-variance-v1 as the arm-D source and characterised the complexes it would score against the 583-residue AChE mature chain. The variance study has since been superseded twice: arm D now follows its registered selection rule and folds the 543-residue catalytic core, so two of the three candidates and the entire receptor construct changed. The study was re-scored on that corrected arm D, and this plan states what it actually scores -- membership read from the variance artefact rather than from a work directory, which had come to hold both construct generations side by side. No hypothesis, threshold or metric changes."),
         known_confounds=(
             "1. The structures are Boltz-2 predictions in single-sequence mode, not crystal "
             "structures, and PRODIGY was fitted on crystal structures. A poor interface "
             "prediction would also produce low discrimination, so a confirmed H1 does not by "
             "itself separate 'PRODIGY cannot discriminate' from 'these interfaces are not "
-            "real'. Study #2 measured the interface PAE minimum at ~16-17 A for exactly "
+            "real'. Study #2 measures an across-seed SD of the interface PAE minimum of "
+            "4.62 A on exactly "
             "these complexes, which means the interfaces are NOT confidently placed — this "
             "is stated up front rather than discovered afterwards. 2. Only 3 candidates "
             "against 1 receptor, so nothing here generalises beyond AChE. 3. n=3 for the "
@@ -155,8 +176,20 @@ def run() -> None:
     from Bio.PDB import MMCIFParser
 
     rows: list[dict] = []
-    dirs = sorted(d for d in ARM_D.glob("*_D_s*") if d.is_dir())
+    # Arm-D membership comes from the variance study's ARTEFACT, not from whatever the work
+    # directory happens to contain. Globbing it was a landmine: re-running the variance study
+    # with a corrected arm-D selection and a corrected AChE construct left BOTH generations
+    # side by side -- 25 directories in which three candidates carry a 583-residue receptor
+    # and three carry the 543-residue catalytic core, one code appearing in both. A glob would
+    # have scored all of them and mixed two construct generations without saying so.
+    iv = json.loads((REPO / "data" / "study_inference_variance.json").read_text())
+    members = sorted({r["code"] for r in iv["rows"] if r.get("arm") == "D"})
+    dirs = [d for c in members
+            for d in sorted(ARM_D.glob(f"{c}_D_s*")) if d.is_dir()]
     parser = MMCIFParser(QUIET=True)
+    print(f"  arm D per {iv.get('study_id', 'the variance artefact')}: {members}")
+    print(f"  scoring {len(dirs)} directories "
+          f"({len(list(ARM_D.glob('*_D_s*')))} match the old glob)")
 
     for i, d in enumerate(dirs, 1):
         cifs = list(d.rglob("*_model_0.cif"))
@@ -219,26 +252,71 @@ def analyse() -> int:
     ratio = (between_sd / within_sd) if within_sd > 0 else float("inf")
     brange = max(means.values()) - min(means.values())
 
-    # Term-by-term variance decomposition on the fitted equation.
+    # Term-by-term variance decomposition on the fitted equation, by the registered method:
+    # hold a term at its grand mean and see how much of the between-candidate variance
+    # disappears. The previous version summed STANDARD DEVIATIONS and called the ratio a
+    # variance fraction, which is not a variance decomposition in any sense -- it published
+    # 10.6% where the variance share is 2.1%, a factor of five, under a metric key literally
+    # named nis_variance_fraction. Freezing terms also handles the covariance between them,
+    # which summing per-term contributions silently assumes away.
     COEF = {"ic_cc": -0.09459, "ic_ca": -0.10007, "ic_pp": 0.19577, "ic_pa": -0.22671,
             "nis_apolar": 0.18681, "nis_charged": 0.13810}
-    contrib = {k: statistics.stdev([statistics.fmean(x[k] for x in rs) * c
-                                    for rs in by.values()]) if len(by) > 1 else 0.0
-               for k, c in COEF.items()}
-    total = sum(contrib.values()) or 1.0
-    nis_frac = (contrib["nis_apolar"] + contrib["nis_charged"]) / total
+    per_cand = {code: {k: statistics.fmean(x[k] for x in rs) for k in COEF}
+                for code, rs in by.items()}
+    grand = {k: statistics.fmean(v[k] for v in per_cand.values()) for k in COEF}
 
-    p1 = 0.0 if ratio < 2.0 else 1.0
-    p2 = 0.0 if brange < 0.20 * 14.3 else 1.0
-    p3 = 0.0 if nis_frac > 0.80 else 1.0
-    raw = [("H1_no_discrimination", p1), ("H2_range_collapse", p2),
-           ("H3_nis_dominates", p3)]
-    order = sorted(range(3), key=lambda i: raw[i][1])
-    adj = [0.0] * 3
-    run = 0.0
-    for rank, i in enumerate(order):
-        run = max(run, (3 - rank) * raw[i][1])
-        adj[i] = min(1.0, run)
+    def _var(frozen: tuple[str, ...]) -> float:
+        vals = [sum(c * (grand[k] if k in frozen else v[k]) for k, c in COEF.items())
+                for v in per_cand.values()]
+        return statistics.variance(vals) if len(vals) > 1 else 0.0
+
+    total_var = _var(())
+    nis_frac = (1.0 - _var(("nis_apolar", "nis_charged")) / total_var) if total_var > 0 else 0.0
+    contrib = {k: round(1.0 - _var((k,)) / total_var, 5) if total_var > 0 else 0.0
+               for k in COEF}
+
+    # Every hypothesis here is a threshold criterion on a descriptive statistic. No test
+    # statistic is computed anywhere in this study, so it emits no p-values; the previous
+    # version published a full `p_holm` block of zeros and ones. See cbc/inference.py.
+    # The README leans on two quantities to retract this study's earlier null claim: a one-way
+    # ANOVA showing candidate identity IS detectable, and a bootstrap interval showing the
+    # discrimination ratio cannot be separated from the 2.0 threshold. Both were computed ad
+    # hoc when the claim was corrected, so a third party could not regenerate either from a
+    # clean checkout. They are computed here now, seeded, and written to the artefact.
+    try:
+        from scipy import stats as _st
+        groups = [v for v in by.values() if len(v) > 1]
+        _F, _p = _st.f_oneway(*[[x["dg"] for x in g] for g in groups]) if len(groups) > 1 \
+            else (None, None)
+    except Exception:                                        # noqa: BLE001
+        _F = _p = None
+    import random as _rnd
+    _rng = _rnd.Random(0)
+    _boot = []
+    _codes = list(by)
+    for _ in range(10000):
+        _gs = [[_rng.choice([x["dg"] for x in by[c]]) for _ in by[c]] for c in _codes]
+        try:
+            _b = statistics.stdev([statistics.fmean(g) for g in _gs])
+            _w = statistics.fmean([statistics.variance(g) for g in _gs if len(g) > 1]) ** 0.5
+            if _w > 0:
+                _boot.append(_b / _w)
+        except statistics.StatisticsError:
+            pass
+    _boot.sort()
+    _ci = ([round(_boot[int(.025 * len(_boot))], 4), round(_boot[int(.975 * len(_boot))], 4)]
+           if _boot else None)
+
+    ruling = inf.decide(criteria={
+        "H1_no_discrimination": inf.Criterion(
+            ratio < 2.0, round(ratio, 4), "native/decoy spread ratio < 2.0"),
+        "H2_range_collapse": inf.Criterion(
+            brange < 0.20 * 14.3, round(brange, 4),
+            "predicted range < 20% of the 14.3 kcal/mol reference span"),
+        "H3_nis_dominates": inf.Criterion(
+            nis_frac > 0.80, round(nis_frac, 4),
+            "%NIS terms account for > 80% of the predicted spread"),
+    }, tests={})
 
     report = {
         "study_id": STUDY_ID, "prespec_hash": payload["prespec_hash"],
@@ -250,6 +328,11 @@ def analyse() -> int:
             "between_candidate_range": round(brange, 4),
             "mean_predicted_dg": round(statistics.fmean(r["dg"] for r in ok), 4),
             "nis_variance_fraction": round(nis_frac, 4),
+            "anova_candidate_identity_F": round(float(_F), 4) if _F is not None else None,
+            "anova_candidate_identity_p": round(float(_p), 5) if _p is not None else None,
+            "discrimination_ratio_ci95_bootstrap": _ci,
+            "bootstrap_resamples": 10000,
+            "bootstrap_seed": 0,
             "fraction_of_fit_range_occupied": round(brange / 14.3, 4),
             "ic_counts_per_candidate": {
                 c: {k: round(statistics.fmean(x[k] for x in rs), 1)
@@ -258,12 +341,7 @@ def analyse() -> int:
         },
         "per_candidate_mean_dg": {c: round(v, 3) for c, v in means.items()},
         "term_contributions_sd": {k: round(v, 4) for k, v in contrib.items()},
-        "p_holm": {raw[i][0]: round(adj[i], 5) for i in range(3)},
-        "verdicts": {
-            "H1_no_discrimination": "CONFIRMED" if p1 == 0 else "FALSIFIED",
-            "H2_range_collapse": "CONFIRMED" if p2 == 0 else "FALSIFIED",
-            "H3_nis_dominates": "CONFIRMED" if p3 == 0 else "FALSIFIED",
-        },
+        **ruling,
     }
     report["prespec_audit"] = ps.verify_result(STUDY_ID, report)
     RESULT.write_text(json.dumps({**payload, "analysis": report}, indent=1))
@@ -283,10 +361,15 @@ def analyse() -> int:
         ics = m["ic_counts_per_candidate"][c]
         print(f"  {c[:30]:32s} {v:8.3f}   CC={ics['ic_cc']:5.1f} CA={ics['ic_ca']:5.1f} "
               f"PP={ics['ic_pp']:5.1f} PA={ics['ic_pa']:5.1f}")
-    print(f"\n%NIS share of between-candidate variance: {m['nis_variance_fraction']:.1%}")
+    _f = m["nis_variance_fraction"]
+    print(f"\n%NIS share of between-candidate variance: {_f:.1%}"
+          + ("  (NEGATIVE: freezing the two %NIS terms at their grand mean INCREASES the\n"
+             "   variance, so those terms are anti-correlated with the interface-contact terms\n"
+             "   and damp the spread rather than driving it. A negative share is well defined\n"
+             "   in a decomposition that keeps covariance; it is not an error.)"
+             if _f < 0 else ""))
     print("\nPRE-SPECIFIED VERDICTS")
-    for h, v in report["verdicts"].items():
-        print(f"  {h:26s} {v:10s} Holm p = {report['p_holm'][h]}")
+    print(inf.format_verdicts(report))
     a = report["prespec_audit"]
     print(f"\nprespec audit: {'CONFIRMATORY' if a['confirmatory'] else 'DEVIATIONS'}")
     for d in a["deviations"]:
@@ -302,8 +385,13 @@ def main() -> int:
     ap.add_argument("--analyse", action="store_true")
     a = ap.parse_args()
     if a.register:
-        n = len([d for d in ARM_D.glob("*_D_s*") if d.is_dir()])
-        spec = build_prespec(n)
+        # Same source as run(): the variance artefact, not the work directory. Globbing here
+        # registered n = 25 while the study scores 15, because the directory holds both the
+        # superseded and the current arm-D generations.
+        _iv = json.loads((REPO / "data" / "study_inference_variance.json").read_text())
+        _members = sorted({r["code"] for r in _iv["rows"] if r.get("arm") == "D"})
+        n = sum(1 for c in _members for d in ARM_D.glob(f"{c}_D_s*") if d.is_dir())
+        spec = build_prespec(*prespec_args())
         problems = spec.check()
         if problems:
             print("NOT REGISTRABLE:")

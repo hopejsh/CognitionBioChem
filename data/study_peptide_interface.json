@@ -21,15 +21,17 @@
    "iptm": 0.3004900813102722,
    "ptm": 0.3362734615802765,
    "complex_plddt": 0.4803510010242462,
-   "model": "/tmp/cbc_pep/4S15/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/f1a7a7514a21/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AC",
-   "dockq": 0.039,
-   "irmsd": 8.828,
-   "lrmsd": 27.004,
+   "dockq": 0.031,
+   "irmsd": 13.343,
+   "lrmsd": 28.817,
    "fnat": 0.0,
    "clashes": 1.0,
-   "mapping_used": "AB:BC",
-   "mapping_as_expected": false
+   "mapping_used": "AB:AC",
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "4XHV",
@@ -49,7 +51,7 @@
    "iptm": 0.8967278003692627,
    "ptm": 0.936711311340332,
    "complex_plddt": 0.957445502281189,
-   "model": "/tmp/cbc_pep/4XHV/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/4e48bce6b5e4/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.899,
    "irmsd": 0.695,
@@ -57,7 +59,9 @@
    "fnat": 0.886,
    "clashes": 0.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "dockq_search",
+   "mapping_fallback_reason": "KeyError: 'A'"
   },
   {
    "pdb_id": "4XO9",
@@ -77,7 +81,7 @@
    "iptm": 0.8946818709373474,
    "ptm": 0.8468410968780518,
    "complex_plddt": 0.8144567608833313,
-   "model": "/tmp/cbc_pep/4XO9/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/50c226d5cd3f/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.339,
    "irmsd": 7.53,
@@ -85,7 +89,9 @@
    "fnat": 0.583,
    "clashes": 0.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "4XOE",
@@ -105,7 +111,7 @@
    "iptm": 0.7209686636924744,
    "ptm": 0.7631999850273132,
    "complex_plddt": 0.7576572299003601,
-   "model": "/tmp/cbc_pep/4XOE/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/618045374b6e/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.279,
    "irmsd": 7.89,
@@ -113,7 +119,9 @@
    "fnat": 0.588,
    "clashes": 1.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "dockq_search",
+   "mapping_fallback_reason": "KeyError: 'A'"
   },
   {
    "pdb_id": "4XOJ",
@@ -133,7 +141,7 @@
    "iptm": 0.9862698316574097,
    "ptm": 0.9401066899299622,
    "complex_plddt": 0.946906566619873,
-   "model": "/tmp/cbc_pep/4XOJ/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/b0c9761bd1d1/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.952,
    "irmsd": 0.482,
@@ -141,7 +149,9 @@
    "fnat": 0.966,
    "clashes": 0.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "4XT9",
@@ -161,7 +171,7 @@
    "iptm": 0.9231666326522827,
    "ptm": 0.9662455916404724,
    "complex_plddt": 0.9722898602485657,
-   "model": "/tmp/cbc_pep/4XT9/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/83d130fd1e8c/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.978,
    "irmsd": 0.373,
@@ -169,7 +179,9 @@
    "fnat": 1.0,
    "clashes": 0.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "4Y29",
@@ -189,7 +201,7 @@
    "iptm": 0.8305281400680542,
    "ptm": 0.9469719529151917,
    "complex_plddt": 0.9215132594108582,
-   "model": "/tmp/cbc_pep/4Y29/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/01b6520fcf8c/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.963,
    "irmsd": 0.418,
@@ -197,7 +209,9 @@
    "fnat": 0.97,
    "clashes": 0.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "4Y32",
@@ -217,7 +231,7 @@
    "iptm": 0.8925052285194397,
    "ptm": 0.9596796035766602,
    "complex_plddt": 0.9727122783660889,
-   "model": "/tmp/cbc_pep/4Y32/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/baf6c23f5a41/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AC",
    "dockq": 0.846,
    "irmsd": 0.58,
@@ -225,7 +239,9 @@
    "fnat": 0.714,
    "clashes": 1.0,
    "mapping_used": "AB:AC",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "10LG",
@@ -245,7 +261,7 @@
    "iptm": 0.9165648818016052,
    "ptm": 0.7266613841056824,
    "complex_plddt": 0.7344971895217896,
-   "model": "/tmp/cbc_pep/10LG/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/d28c85f90fa9/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.381,
    "irmsd": 3.023,
@@ -253,7 +269,9 @@
    "fnat": 0.453,
    "clashes": 1.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "10TC",
@@ -273,15 +291,17 @@
    "iptm": 0.9450889825820923,
    "ptm": 0.9759609699249268,
    "complex_plddt": 0.9824607968330383,
-   "model": "/tmp/cbc_pep/10TC/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/7005556ce5cd/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
-   "dockq": 0.969,
-   "irmsd": 0.313,
-   "lrmsd": 0.432,
-   "fnat": 0.952,
+   "dockq": 0.831,
+   "irmsd": 1.044,
+   "lrmsd": 2.464,
+   "fnat": 0.897,
    "clashes": 0.0,
-   "mapping_used": "AB:GH",
-   "mapping_as_expected": false
+   "mapping_used": "AB:AB",
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "12ZJ",
@@ -301,7 +321,7 @@
    "iptm": 0.7191354632377625,
    "ptm": 0.8934921026229858,
    "complex_plddt": 0.8419461846351624,
-   "model": "/tmp/cbc_pep/12ZJ/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/ac2bc2326d0d/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.193,
    "irmsd": 5.458,
@@ -309,7 +329,9 @@
    "fnat": 0.229,
    "clashes": 1.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "21EE",
@@ -329,7 +351,7 @@
    "iptm": 0.33958902955055237,
    "ptm": 0.4267129600048065,
    "complex_plddt": 0.49717095494270325,
-   "model": "/tmp/cbc_pep/21EE/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/f216afb569dc/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.167,
    "irmsd": 7.558,
@@ -337,7 +359,9 @@
    "fnat": 0.091,
    "clashes": 0.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "23AG",
@@ -357,7 +381,7 @@
    "iptm": 0.8186440467834473,
    "ptm": 0.9273748397827148,
    "complex_plddt": 0.9090681672096252,
-   "model": "/tmp/cbc_pep/23AG/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/93810e4a8adc/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AB",
    "dockq": 0.165,
    "irmsd": 4.028,
@@ -365,7 +389,9 @@
    "fnat": 0.0,
    "clashes": 0.0,
    "mapping_used": "AB:AB",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "29TJ",
@@ -385,7 +411,7 @@
    "iptm": 0.9341909885406494,
    "ptm": 0.9277472496032715,
    "complex_plddt": 0.8176975846290588,
-   "model": "/tmp/cbc_pep/29TJ/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/134ca5921d24/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:BP",
    "dockq": 0.483,
    "irmsd": 1.971,
@@ -393,7 +419,9 @@
    "fnat": 0.317,
    "clashes": 0.0,
    "mapping_used": "AB:BP",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   },
   {
    "pdb_id": "31EE",
@@ -413,7 +441,7 @@
    "iptm": 0.15750667452812195,
    "ptm": 0.3377884328365326,
    "complex_plddt": 0.39079633355140686,
-   "model": "/tmp/cbc_pep/31EE/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/a8d017852d03/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AC",
    "dockq": 0.019,
    "irmsd": 14.86,
@@ -421,7 +449,9 @@
    "fnat": 0.0,
    "clashes": 0.0,
    "mapping_used": "AB:BC",
-   "mapping_as_expected": false
+   "mapping_as_expected": false,
+   "mapping_route": "dockq_search",
+   "mapping_fallback_reason": "ERROR:root:Could not find interfaces in the native model. Please double check the inputs or select different chains with the --mapping flag."
   },
   {
    "pdb_id": "31GN",
@@ -441,7 +471,7 @@
    "iptm": 0.5908287167549133,
    "ptm": 0.7356599569320679,
    "complex_plddt": 0.7174948453903198,
-   "model": "/tmp/cbc_pep/31GN/boltz_results_input/predictions/input/input_model_0.cif",
+   "model": "runs/7d097ab5329e/boltz_results_input_predictions_input_input_model_0.cif",
    "mapping": "AB:AC",
    "dockq": 0.049,
    "irmsd": 8.308,
@@ -449,7 +479,9 @@
    "fnat": 0.0,
    "clashes": 0.0,
    "mapping_used": "AB:AC",
-   "mapping_as_expected": true
+   "mapping_as_expected": true,
+   "mapping_route": "curated",
+   "mapping_fallback_reason": null
   }
  ],
  "analysis": {
@@ -461,7 +493,7 @@
    "fraction_dockq_acceptable": 0.625,
    "median_dockq": 0.36,
    "mean_iptm": 0.7417,
-   "spearman_iptm_dockq": 0.8471,
+   "spearman_iptm_dockq": 0.8,
    "fraction_iptm_above_0.8": 0.625,
    "iptm_band_confusion": {
     "confident_and_acceptable": 9,
@@ -475,7 +507,7 @@
    "median_fnat": 0.518,
    "per_entry": {
     "4S15": {
-     "dockq": 0.039,
+     "dockq": 0.031,
      "iptm": 0.3004900813102722,
      "split": "pre_cutoff"
     },
@@ -520,7 +552,7 @@
      "split": "post_cutoff"
     },
     "10TC": {
-     "dockq": 0.969,
+     "dockq": 0.831,
      "iptm": 0.9450889825820923,
      "split": "post_cutoff"
     },
@@ -555,7 +587,12 @@
      "split": "post_cutoff"
     }
    },
-   "wall_clock_seconds_per_complex": 42.1
+   "wall_clock_seconds_per_complex": {
+    "mean_seconds_per_computed_fold": 42.1,
+    "n_computed": 16,
+    "n_reused": 0,
+    "note": ""
+   }
   },
   "strata": {
    "pre_cutoff": {
@@ -579,16 +616,60 @@
     "median_dockq": 0.18
    }
   },
-  "spearman_p": 3e-05,
-  "p_holm": {
-   "H1_overall_accuracy": 0.0,
-   "H2_iptm_calibration": 3e-05,
-   "H3_assay_power_GATE": 0.0
+  "chain_mapping": {
+   "curated": [
+    "10LG",
+    "10TC",
+    "12ZJ",
+    "21EE",
+    "23AG",
+    "29TJ",
+    "31GN",
+    "4S15",
+    "4XO9",
+    "4XOJ",
+    "4XT9",
+    "4Y29",
+    "4Y32"
+   ],
+   "dockq_search_required": {
+    "4XHV": "KeyError: 'A'",
+    "4XOE": "KeyError: 'A'",
+    "31EE": "ERROR:root:Could not find interfaces in the native model. Please double check the inputs or select different chains with the --mapping flag."
+   },
+   "note": "The registered plan specifies an explicit chain mapping. It is used wherever DockQ accepts it. The entries listed under dockq_search_required are the only ones where it does not, each with the reason DockQ gave; their scores come from DockQ's own chain search. This replaces a blanket switch to auto-mapping that was described as verified while nothing checked it."
   },
+  "spearman_p": 0.0002,
   "verdicts": {
    "H1_overall_accuracy": "CONFIRMED",
-   "H2_iptm_calibration": "CONFIRMED",
-   "H3_assay_power_GATE": "CONFIRMED"
+   "H3_assay_power_GATE": "CONFIRMED",
+   "H2_iptm_calibration": "CONFIRMED"
+  },
+  "criteria": {
+   "H1_overall_accuracy": {
+    "met": true,
+    "observed": 0.625,
+    "threshold": "fraction_dockq_acceptable > 0.3"
+   },
+   "H3_assay_power_GATE": {
+    "met": true,
+    "observed": 0.875,
+    "threshold": "pre-cutoff fraction > 0.5"
+   }
+  },
+  "multiplicity": {
+   "family_size": 1,
+   "correction": "holm",
+   "excluded_from_correction": [
+    "H1_overall_accuracy",
+    "H3_assay_power_GATE"
+   ]
+  },
+  "p_raw": {
+   "H2_iptm_calibration": 0.00019857097280000065
+  },
+  "p_holm": {
+   "H2_iptm_calibration": 0.00019857097280000065
   },
   "GATE_FOR_STUDY_9": {
    "open": true,
@@ -600,7 +681,8 @@
    "prespec_hash": "515be79a7d12c8f1929323d3eb48781f859e01463ac3c25b9be45fbcb66d2227",
    "registered_utc": "2026-08-18T05:04:46+00:00",
    "deviations": [
-    "analysis_plan specified an explicit DockQ chain mapping; DockQ's own chain search was used instead because the explicit form raises KeyError on some inputs while scoring the identical structures correctly when left to choose (measured on 4XHV: explicit=KeyError, auto=0.899). Selected mappings are recorded and verified."
+    "registered n_comparisons=3 under 'holm', but the executed family holds 1: ['H1_overall_accuracy', 'H3_assay_power_GATE'] were re-classified as threshold criteria rather than tests after registration. The re-classification is defensible \u2014 a 0/1 indicator is not a p-value and corrupts the correction \u2014 but it is a change to the inferential procedure made after seeing the data, and it belongs on the record rather than in the code alone.",
+    "analysis_plan specified an explicit DockQ chain mapping. It was used for 13 of 16 entries. DockQ's own chain search was needed for ['31EE', '4XHV', '4XOE']: 4XHV and 4XOE raise KeyError('A') under the explicit form, and 31EE finds no interface under the curated AB:AC because the curation named the wrong receptor copy -- peptide C sits on chain B. An earlier version applied the search to all entries and called the result verified; that silently substituted a 4-residue copy of 10TC's 8-residue peptide and inflated its DockQ from 0.831 to 0.969, the best score in the post-cutoff stratum."
    ],
    "confirmatory": false,
    "note": "One declared deviation, made for a measured technical reason and recorded rather than absorbed silently."

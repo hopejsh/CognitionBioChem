@@ -75,6 +75,133 @@
    }
   ]
  },
+ "comments": [
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15379550"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15572695"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15601839"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15657435"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "15983046"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "16006525"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "16687406"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "16888629"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "17046835"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "17127771"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "18251510"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "18387606"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "19424503"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "20452972"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "20495340"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "23274085"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "24089205"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "24896564"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "26517842"
+      },
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "36882524"
+      }
+     ],
+     "value": "Component of the BCR(KEAP1) E3 ubiquitin ligase complex, at least composed of 2 molecules of CUL3, 2 molecules of KEAP1, and RBX1 (PubMed:15572695, PubMed:15601839, PubMed:15983046, PubMed:17127771, PubMed:18251510, PubMed:24896564). Interacts with NFE2L2/NRF2; the interaction is direct (PubMed:15379550, PubMed:15601839, PubMed:16006525, PubMed:16888629, PubMed:18387606). Forms a ternary complex with NFE2L2/NRF2 and PGAM5 (PubMed:17046835). Interacts with (phosphorylated) SQSTM1/p62; the interaction is direct and inactivates the BCR(KEAP1) complex by sequestering it in inclusion bodies, promoting its degradation (PubMed:20452972, PubMed:20495340). Interacts with NFE2L1 (PubMed:16687406). Interacts with BPTF and PTMA (PubMed:15657435). Interacts with MAP1LC3B (PubMed:24089205). Interacts indirectly with ENC1 (PubMed:19424503). Interacts with SESN1 and SESN2 (PubMed:23274085). Interacts with HSP90AA1 and HSP90AB1 (PubMed:26517842). Interacts with PGCKA1; this interaction prevents the ubiquitination of KEAP1 by TRIM25, thus protecting KEAP1 from degradation (PubMed:36882524)"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  },
+  {
+   "texts": [
+    {
+     "evidences": [
+      {
+       "evidenceCode": "ECO:0000269",
+       "source": "PubMed",
+       "id": "24630991"
+      }
+     ],
+     "value": "(Microbial infection) Interacts with ebolavirus protein VP24; this interaction activates transcription factor NFE2L2/NRF2 by blocking its interaction with KEAP1"
+    }
+   ],
+   "commentType": "SUBUNIT"
+  }
+ ],
  "features": [
   {
    "type": "Chain",

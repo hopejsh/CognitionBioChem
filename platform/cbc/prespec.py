@@ -90,6 +90,12 @@ class Prespecification:
     secondary_metrics: tuple[str, ...] = ()
     exclusions: str = ""
     known_confounds: str = ""
+    #: Lineage. A study whose protocol is corrected after data were seen must not overwrite
+    #: its own plan — that would let the record be edited to fit the result, which is the
+    #: failure pre-registration exists to prevent. It registers a new plan that names the one
+    #: it replaces and states why, and the superseded plan and its results stay on disk.
+    supersedes: str = ""
+    supersedes_reason: str = ""
     registered_utc: str = ""
 
     # ---- content hash ------------------------------------------------------- #
@@ -99,6 +105,15 @@ class Prespecification:
         an unchanged plan yields the same hash."""
         d = asdict(self)
         d.pop("registered_utc", None)
+        # Lineage fields were added after five plans had already been registered, so those
+        # plans' stored content has no `supersedes` key at all. Including an empty one here
+        # would make the same unchanged plan hash differently than it did, and re-registering
+        # it would write a SECOND file for that study -- whereupon load() refuses to resolve
+        # the study at all, permanently. An absent lineage and an empty lineage are the same
+        # statement, so they must hash the same: drop them when empty.
+        for k in ("supersedes", "supersedes_reason"):
+            if not d.get(k):
+                d.pop(k, None)
         return d
 
     def hash(self) -> str:
@@ -110,6 +125,15 @@ class Prespecification:
         return self.hash()[:12]
 
     # ---- validity checks run at registration -------------------------------- #
+
+    def _check_lineage(self) -> list[str]:
+        if self.supersedes and not self.supersedes_reason.strip():
+            return [f"plan declares it supersedes {self.supersedes!r} but gives no reason. "
+                    "A protocol changed after data were seen is only legitimate if the "
+                    "change and its justification are on the record."]
+        if self.supersedes_reason.strip() and not self.supersedes:
+            return ["a supersession reason is given but no superseded study_id is named."]
+        return []
 
     def min_attainable_p(self) -> float:
         """Smallest adjusted p-value this design could ever produce.
@@ -168,6 +192,7 @@ class Prespecification:
                 f"all hypotheses are predicted by {predictors.pop()!r}, so no outcome could "
                 "distinguish competing positions. State at least one hypothesis that a "
                 "rival position predicts differently.")
+        problems += self._check_lineage()
         return problems
 
     def _n_needed(self) -> int:
@@ -237,12 +262,56 @@ def verify_result(study_id: str, result: dict[str, Any],
             f"{c['primary_metric']!r} was pre-specified — switching the primary metric after "
             "seeing data is the specific defect pre-registration exists to prevent")
 
-    reported = set(result.get("metrics", {}))
+    metrics = result.get("metrics", {}) or {}
+    reported = set(metrics)
     planned = {c["primary_metric"], *c["secondary_metrics"]}
     extra = reported - planned
     if extra:
         dev.append(f"metrics reported that were not pre-specified (exploratory): "
                    f"{sorted(extra)}")
+
+    # The check above only ever looked for metrics that appeared and should not have. The
+    # opposite direction — a pre-specified analysis that quietly did not appear — is the
+    # canonical selective-reporting failure, and it is the one pre-registration exists to
+    # expose. Without this, a study could drop every registered secondary metric and an entire
+    # registered hypothesis and still be certified confirmatory: true.
+    missing = sorted(k for k in planned if metrics.get(k) is None)
+    if missing:
+        dev.append(
+            f"pre-specified metrics absent or null in the result: {missing}. Dropping a "
+            "registered analysis after seeing the data is selective reporting; if a metric "
+            "could not be computed, the reason belongs in the record.")
+
+    # The registered plan states a multiplicity correction and a family size. Round 2 moved
+    # threshold criteria out of the Holm family in seven of eight studies -- a change to the
+    # inferential procedure made after the data were seen, which is the canonical protocol
+    # deviation and precisely what this module exists to expose. It reported none, and in two
+    # cases stamped the result confirmatory. The executed family is now compared against the
+    # registered one.
+    mult = result.get("multiplicity") or {}
+    if mult:
+        planned_k = c.get("n_comparisons")
+        actual_k = mult.get("family_size")
+        if planned_k is not None and actual_k is not None and actual_k != planned_k:
+            excluded = mult.get("excluded_from_correction") or []
+            dev.append(
+                f"registered n_comparisons={planned_k} under "
+                f"{c.get('multiplicity_correction')!r}, but the executed family holds "
+                f"{actual_k}: {sorted(excluded)} were re-classified as threshold criteria "
+                "rather than tests after registration. The re-classification is defensible — "
+                "a 0/1 indicator is not a p-value and corrupts the correction — but it is a "
+                "change to the inferential procedure made after seeing the data, and it "
+                "belongs on the record rather than in the code alone.")
+
+    verdicts = result.get("verdicts", {}) or {}
+    planned_h = [h["name"] for h in c.get("hypotheses", [])]
+    undecided = [h for h in planned_h
+                 if verdicts.get(h) not in ("CONFIRMED", "FALSIFIED")]
+    if undecided:
+        dev.append(
+            f"registered hypotheses without a CONFIRMED/FALSIFIED verdict: {undecided} "
+            f"(reported as {[verdicts.get(h) for h in undecided]}). A hypothesis that was "
+            "registered and then not decided is a deviation, whatever the reason.")
 
     return {
         "study_id": study_id,

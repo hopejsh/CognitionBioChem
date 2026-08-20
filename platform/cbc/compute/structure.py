@@ -21,6 +21,7 @@ outputs should not be reported interchangeably.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import shutil
@@ -168,12 +169,47 @@ def _write_boltz_input(chains: Sequence[Chain], path: Path,
     return path
 
 
+def boltz_cmd(yaml_path: str | Path, out: str | Path, *, accelerator: str = "cpu",
+              recycling_steps: int = 3, diffusion_samples: int = 1,
+              seed: int | None = None, use_msa_server: bool = False,
+              sampling_steps: int | None = None) -> list[str]:
+    """The exact argv Boltz is invoked with. Extracted so that anything reasoning about a
+    previous run's identity builds it from the same code the run itself used."""
+    cmd = [str(BOLTZ_BIN), "predict", str(yaml_path),
+           "--out_dir", str(out), "--accelerator", accelerator,
+           "--recycling_steps", str(recycling_steps),
+           "--diffusion_samples", str(diffusion_samples),
+           "--output_format", "mmcif", "--override"]
+    # Without an explicit seed the sampler is unseeded, so a run cannot be repeated and the
+    # across-seed variance of pLDDT/ipTM cannot be measured. Any structural number
+    # interpreted without that envelope is being read to a precision it does not have.
+    if seed is not None:
+        cmd += ["--seed", str(seed)]
+    if use_msa_server:
+        cmd += ["--use_msa_server"]
+    if sampling_steps is not None:
+        cmd += ["--sampling_steps", str(sampling_steps)]
+    return cmd
+
+
+def run_stamp(yaml_path: str | Path, out: str | Path, cmd: list[str],
+              version: str) -> dict[str, Any]:
+    """Identity of a run: the hash of the input Boltz consumed plus every sampling argument
+    that lives on the command line rather than in the input file."""
+    return {
+        "input_yaml_sha256": hashlib.sha256(Path(yaml_path).read_bytes()).hexdigest(),
+        "argv": [a for a in cmd[1:] if a not in (str(yaml_path), str(out))],
+        "boltz_version": version,
+    }
+
+
 def run_boltz(chains: Sequence[Chain], out_dir: str | Path, *,
               affinity_binder: str | None = None, accelerator: str = "cpu",
               recycling_steps: int = 3, diffusion_samples: int = 1,
               timeout: int = 14400, seed: int | None = None,
               use_msa_server: bool = False,
-              sampling_steps: int | None = None) -> dict[str, Any]:
+              sampling_steps: int | None = None,
+              reuse: bool = False) -> dict[str, Any]:
     """Run a real Boltz-2 prediction.
 
     `affinity_binder` names the ligand chain whose binding affinity should be predicted by
@@ -193,23 +229,58 @@ def run_boltz(chains: Sequence[Chain], out_dir: str | Path, *,
     out.mkdir(parents=True, exist_ok=True)
     yaml_path = _write_boltz_input(chains, out / "input.yaml", affinity_binder)
 
-    cmd = [str(BOLTZ_BIN), "predict", str(yaml_path),
-           "--out_dir", str(out), "--accelerator", accelerator,
-           "--recycling_steps", str(recycling_steps),
-           "--diffusion_samples", str(diffusion_samples),
-           "--output_format", "mmcif", "--override"]
-    # Without an explicit seed the sampler is unseeded, so a run cannot be repeated and the
-    # across-seed variance of pLDDT/ipTM cannot be measured. Any structural number
-    # interpreted without that envelope is being read to a precision it does not have.
-    if seed is not None:
-        cmd += ["--seed", str(seed)]
-    if use_msa_server:
-        cmd += ["--use_msa_server"]
-    if sampling_steps is not None:
-        cmd += ["--sampling_steps", str(sampling_steps)]
+    cmd = boltz_cmd(yaml_path, out, accelerator=accelerator,
+                    recycling_steps=recycling_steps, diffusion_samples=diffusion_samples,
+                    seed=seed, use_msa_server=use_msa_server, sampling_steps=sampling_steps)
+    # Content-addressed reuse. The manifest records a hash of the exact input.yaml Boltz
+    # consumes plus every sampling argument that is passed on the command line rather than in
+    # the yaml. Reuse happens only on an exact match of both, so changing the receptor
+    # construct, the peptide, the seed or the recycling depth forces a recompute; a directory
+    # keyed on a run label alone would have silently returned the old structure instead.
+    manifest = out / "run_manifest.json"
+    stamp = run_stamp(yaml_path, out, cmd, info.version)
+    if reuse and manifest.exists():
+        try:
+            prior = json.loads(manifest.read_text())
+        except json.JSONDecodeError:
+            prior = None
+        if prior == stamp:
+            cached = _collect_boltz_outputs(out)
+            # The manifest alone is not sufficient evidence. A run that was interrupted, or
+            # that itself consumed a stale preprocessing cache, can leave a manifest naming
+            # the CURRENT input beside a model built from a PREVIOUS one -- which is exactly
+            # what happened here once. So the cached model is checked against the requested
+            # chains before it is trusted, and a mismatch falls through to a real run rather
+            # than being reported as a reuse.
+            has_conf = ((cached.get("confidence") or {}).get("iptm") is not None or
+                        (cached.get("confidence") or {}).get("complex_plddt") is not None)
+            if has_conf and not _chain_length_mismatch(chains, cached):
+                return {"backend": "boltz-2", "version": info.version, "licence": "MIT",
+                        "citation": info.citation, "command": " ".join(cmd),
+                        "returncode": 0, "accelerator": accelerator,
+                        "msa_mode": chains[0].msa if chains else "unknown",
+                        "recycling_steps": recycling_steps,
+                        "diffusion_samples": diffusion_samples, "seed": seed,
+                        "use_msa_server": use_msa_server, "sampling_steps": sampling_steps,
+                        "stdout_tail": "", "stderr_tail": "", "reused": True, **cached}
+
+    # Boltz's --override replaces the PREDICTIONS but not the preprocessing cache under
+    # boltz_results_*/processed/, which is keyed on the input record NAME. Rerunning into a
+    # directory whose input.yaml has changed therefore folds the PREVIOUS input and writes a
+    # result that looks fresh: measured here, a receptor rebuilt from 212 residues down to
+    # 156 produced a model still 212 residues long and an ipTM identical to the old run to
+    # all 16 digits. Nothing in the exit code, the logs or the output timestamps distinguishes
+    # that from a real run. The stale tree is therefore removed before every actual run; the
+    # only path that keeps it is the reuse path above, which has already proved the inputs
+    # are byte-identical.
+    for stale in out.glob("boltz_results_*"):
+        if stale.is_dir():
+            shutil.rmtree(stale)
+
     proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
 
     result: dict[str, Any] = {
+        "reused": False,
         "backend": "boltz-2",
         "version": info.version,
         "licence": "MIT",
@@ -231,7 +302,68 @@ def run_boltz(chains: Sequence[Chain], out_dir: str | Path, *,
         return result
 
     result.update(_collect_boltz_outputs(out))
+
+    # Post-condition. A prediction is only this prediction if the model it produced has the
+    # chains that were asked for. Checking this is what turned a silent stale-cache reuse --
+    # right exit code, fresh timestamps, plausible ipTM -- into a visible error. It costs one
+    # pass over the mmCIF and it is the difference between a result and a result-shaped file.
+    mismatch = _chain_length_mismatch(chains, result)
+    if mismatch:
+        result["returncode"] = 1
+        result["error"] = f"model does not match the requested input: {mismatch}"
+        result.pop("confidence", None)
+        return result
+
+    if (result.get("confidence") or {}):
+        manifest.write_text(json.dumps(stamp, indent=1))
     return result
+
+
+def _chain_length_mismatch(chains: Sequence[Chain], result: dict[str, Any]) -> str | None:
+    """Compare the residue count per chain in the written model against what was requested.
+
+    Returns a description of the discrepancy, or None if the model matches. Ligand chains are
+    skipped: they are counted in atoms, not residues, so a residue tally says nothing there.
+
+    The mmCIF atom_site column order is declared per file by the loop header and is not fixed,
+    so the header is read rather than assumed. Assuming it silently yields one "chain" per
+    residue number, which reads as a mismatch on every file and would have made this guard
+    fire constantly and then be switched off.
+    """
+    model = (result.get("files") or {}).get("model")
+    if not model:
+        return None
+    want = [len(c.sequence) for c in chains if c.kind == "protein"]
+    if not want:
+        return None
+    try:
+        lines = Path(model).read_text().splitlines()
+    except OSError:
+        return None
+
+    cols: dict[str, int] = {}
+    seen: dict[str, set[str]] = {}
+    n = 0
+    for line in lines:
+        t = line.strip()
+        if t.startswith("_atom_site."):
+            cols[t.split(".", 1)[1].split()[0]] = n
+            n += 1
+            continue
+        if not line.startswith(("ATOM", "HETATM")):
+            continue
+        ci, ri = cols.get("label_asym_id"), cols.get("label_seq_id")
+        if ci is None or ri is None:
+            return None
+        f = line.split()
+        if len(f) > max(ci, ri):
+            seen.setdefault(f[ci], set()).add(f[ri])
+    if not seen:
+        return None
+    got = [len(v) for _, v in sorted(seen.items())][:len(want)]
+    if got != want:
+        return f"requested protein chain lengths {want}, model contains {got}"
+    return None
 
 
 def _collect_boltz_outputs(out: Path) -> dict[str, Any]:

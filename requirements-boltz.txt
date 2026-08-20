@@ -1,0 +1,5 @@
+# Structure prediction environment (.venv312), Python 3.12.
+# Separate because boltz pins a scipy with no cp314 wheel.
+#   /opt/homebrew/opt/python@3.12/bin/python3.12 -m venv .venv312
+#   ./.venv312/bin/pip install -r requirements-boltz.txt
+boltz==2.2.1

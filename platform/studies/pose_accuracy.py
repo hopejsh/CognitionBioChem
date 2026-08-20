@@ -44,7 +44,7 @@ from cbc.compute import structure as st  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
 STUDY_ID = "pose-accuracy-v1"
-SET = Path("/tmp/posebench_set.json")
+SET = REPO / "data" / "study_inputs" / "posebench_set.json"
 WORK = Path("/tmp/cbc_pose")
 REFS = Path("/tmp/cbc_pose_refs")
 RESULT = REPO / "data" / "study_pose_accuracy.json"
@@ -52,6 +52,16 @@ RESULT = REPO / "data" / "study_pose_accuracy.json"
 #: The field's conventional success threshold for a docked pose.
 RMSD_SUCCESS = 2.0
 
+
+
+def prespec_args() -> tuple:
+    """The arguments --register builds the plan with.
+
+    Named once so the registration path and the hash-stability test cannot disagree.
+    Without it the test skipped this study, and the skip was reported with a
+    hard-coded True — a check that could not fail, covering 3 of 8 studies.
+    """
+    return (len(json.loads(SET.read_text())),)
 
 def build_prespec(n: int) -> ps.Prespecification:
     return ps.Prespecification(
@@ -240,8 +250,7 @@ def main() -> int:
     ap.add_argument("--analyse", action="store_true")
     a = ap.parse_args()
     if a.register:
-        n = len(json.loads(SET.read_text()))
-        spec = build_prespec(n)
+        spec = build_prespec(*prespec_args())
         problems = spec.check()
         if problems:
             print("NOT REGISTRABLE:")

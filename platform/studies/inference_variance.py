@@ -36,10 +36,10 @@ from cbc import prespec as ps  # noqa: E402
 from cbc.compute import structure as st  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
-STUDY_ID = "inference-variance-v1"
+STUDY_ID = "inference-variance-v3"
 WORK = Path("/tmp/cbc_variance")
 RESULT = REPO / "data" / "study_inference_variance.json"
-ACHE_MATURE = Path("/tmp/ache_mature.txt")
+ACHE_MATURE = REPO / "data" / "study_inputs" / "ache_mature.txt"
 
 SEEDS = (1, 2, 3, 4, 5)
 N_REPLICATES = 3          # same-seed repeats, for the determinism arm
@@ -64,6 +64,16 @@ def pick_candidates() -> list[tuple[str, str]]:
                     for i in range(N_CANDIDATES)]
     return valid[:N_CANDIDATES]
 
+
+
+def prespec_args() -> tuple:
+    """The arguments --register builds the plan with.
+
+    Named once so the registration path and the hash-stability test cannot disagree
+    about them: the test previously guessed, guessed wrong for the two-argument
+    studies, and reported drift that did not exist.
+    """
+    return (pick_candidates(),)
 
 def build_prespec(cands: list[tuple[str, str]]) -> ps.Prespecification:
     n_folds = (N_CANDIDATES * N_REPLICATES
@@ -112,7 +122,9 @@ def build_prespec(cands: list[tuple[str, str]]) -> ps.Prespecification:
             "variances). Arm C (MSA factor): the same 6 candidates at seeds 1-5 with "
             "--use_msa_server and the msa key omitted; compare arm means by paired t-test "
             "across candidates. Arm D (interface): 3 candidates co-folded with human AChE "
-            "P22303 mature chain at seeds 1-5, msa=empty; report ipTM and minimum interface "
+            "P22303 LIGAND-ACCESSIBLE CONSTRUCT (543-residue catalytic core, canonical 32-574, "
+            "read from data/target_registry.json) at seeds 1-5, msa=empty; report ipTM and "
+            "minimum interface "
             "PAE per seed with their SDs. Holm across the three hypotheses. All metrics "
             "reported separately; no metric is pooled across arms."),
         hypotheses=(
@@ -153,6 +165,9 @@ def build_prespec(cands: list[tuple[str, str]]) -> ps.Prespecification:
             "Sequences containing non-standard residues are excluded before registration. "
             "Arm D uses the 3 candidates with the highest, median and lowest mean pLDDT from "
             "the existing single-chain runs, fixed before any variance fold is executed."),
+        supersedes="inference-variance-v2",
+        supersedes_reason=(
+            "v2 was registered specifically to correct arm D's construct and its selection rule, and its own analysis_plan still specified the superseded 583-residue AChE mature chain -- byte-identical to v1's on that clause. A hash-locked plan that contradicts the reason it was registered cannot serve as the frozen reference results are compared against, and verify_result cannot see it because it compares metrics, hypotheses and multiplicity only. v3 states the executed construct. No arm, seed, metric or verdict changes; arms A, B and C are unaffected and, with content-addressed reuse now enabled for this study, are reused after each stored model is re-parsed and checked against the chains requested; arm D was already recomputed under v2."),
         known_confounds=(
             "1. Seeding fixes the noise draw but not floating-point reduction order on Metal, "
             "and Boltz has a documented aten::linalg_svd CPU fallback, so H2 may fail for "
@@ -168,12 +183,18 @@ def build_prespec(cands: list[tuple[str, str]]) -> ps.Prespecification:
 def _fold(code: str, chains, tag: str, seed: int, msa_server: bool) -> dict:
     out = WORK / f"{code}_{tag}_s{seed}"
     t0 = time.time()
+    # Content-addressed reuse, as in studies #9 and #10: a cell recomputes only when the
+    # input.yaml Boltz consumes or a sampling argument actually changes, and the cached model
+    # is re-parsed and checked against the requested chains before it is trusted. Without it
+    # this study re-folded all 87 cells on every registration, ~70 minutes to reproduce
+    # numbers that are deterministic at fixed seed.
     r = st.run_boltz(chains, out, accelerator="gpu", seed=seed,
                      diffusion_samples=1, recycling_steps=3,
-                     use_msa_server=msa_server, timeout=3600)
+                     use_msa_server=msa_server, timeout=3600, reuse=True)
     dt = time.time() - t0
     c = r.get("confidence") or {}
     rec = {"code": code, "arm": tag, "seed": seed, "seconds": round(dt, 1),
+           "reused": bool(r.get("reused")), "ok": r.get("returncode") == 0,
            "returncode": r.get("returncode"),
            "complex_plddt": c.get("complex_plddt"), "ptm": c.get("ptm"),
            "iptm": c.get("iptm"), "confidence_score": c.get("confidence_score")}
@@ -230,9 +251,22 @@ def run() -> None:
             rows.append(r); log(r)
 
     print("\nARM D — two-chain complexes (ipTM, interface PAE)")
-    prot = ACHE_MATURE.read_text().strip() if ACHE_MATURE.exists() else None
+    # Arm D used the 583-residue AChE mature chain, which the construct audit established is
+    # not a valid lone-chain construct: its C-terminal 40 residues are an obligate-assembly
+    # segment that folds disordered alone and absorbs interface contacts. Since arm D exists
+    # to set the ipTM and interface-PAE noise floors that studies #7, #9 and #10 are read
+    # against, and those studies now fold the 543-residue catalytic core, the floors have to
+    # be measured on the same construct. Read it from the registry rather than from a file
+    # that can drift away from it.
+    _reg = json.loads((REPO / "data" / "target_registry.json").read_text())["targets"]["ACHE"]
+    _span = _reg["ligand_accessible_span"]
+    prot = _reg["sequence"][_span[0] - 1:_span[1]]
     if prot:
-        for code, seq in cands[:: max(1, len(cands) // N_COMPLEX)][:N_COMPLEX]:
+        # Registered exclusions say "highest, median and lowest mean pLDDT". A fixed stride
+        # over the sorted list is not that: at len 6 it takes ranks 0, 2, 4 and never the
+        # highest. pick_candidates() returns ascending order, so take the ends and the middle.
+        _idx = sorted({0, len(cands) // 2, len(cands) - 1})[:N_COMPLEX]
+        for code, seq in [cands[i] for i in _idx]:
             for s in SEEDS:
                 r = _fold(code, [st.Chain("A", prot, "protein", msa="empty"),
                                  st.Chain("B", seq, "protein", msa="empty")], "D", s, False)
@@ -255,7 +289,7 @@ def main() -> int:
     a = ap.parse_args()
 
     if a.register:
-        spec = build_prespec(pick_candidates())
+        spec = build_prespec(*prespec_args())
         problems = spec.check()
         if problems:
             print("NOT REGISTRABLE:")

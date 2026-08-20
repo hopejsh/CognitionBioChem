@@ -328,15 +328,21 @@
   ],
   "memorization_rho": 0.074,
   "huperzine_z": 0.94,
+  "criteria": {},
+  "multiplicity": {
+   "family_size": 3,
+   "correction": "holm",
+   "excluded_from_correction": []
+  },
   "p_raw": {
-   "H1_ranking_ability": 0.27136,
-   "H2_memorization_signature": 0.79316,
-   "H3_huperzine_representative": 0.34724
+   "H1_ranking_ability": 0.27135583600386837,
+   "H2_memorization_signature": 0.7931558638740533,
+   "H3_huperzine_representative": 0.3472407246897249
   },
   "p_holm": {
-   "H1_ranking_ability": 0.81407,
-   "H2_memorization_signature": 0.81407,
-   "H3_huperzine_representative": 0.81407
+   "H1_ranking_ability": 0.8140675080116051,
+   "H3_huperzine_representative": 0.8140675080116051,
+   "H2_memorization_signature": 0.8140675080116051
   },
   "verdicts": {
    "H1_ranking_ability": "FALSIFIED",

@@ -2,39 +2,136 @@
  "_comment": "Residue identities asserted by the legacy dataset, checked against the actual UniProt sequence. Produced by the curation workflow's independent verifier, which retrieved each sequence and sliced it at the cited position. 'convention' records whether the number is canonical UniProt numbering (including signal peptide) or mature-chain numbering.",
  "_method": "UniProt sequence retrieval + direct position lookup",
  "fabricated": [
-  {"target": "TREM2", "uniprot": "Q9NZC2", "asserted": "Lys112", "actual": "Ser112",
-   "note": "wrong in canonical numbering; no convention makes it a lysine"},
-  {"target": "NTRK1", "uniprot": "P04629", "asserted": "His312", "actual": "Ser312",
-   "note": "mature numbering gives Gly344 — wrong in both conventions"},
-  {"target": "NTRK1", "uniprot": "P04629", "asserted": "Leu331", "actual": "Glu331",
-   "note": "mature numbering gives Ala363 — wrong in both conventions"},
-  {"target": "GRIN2A", "uniprot": "Q12879", "asserted": "Glu201", "actual": "Gln201",
-   "note": "mature numbering gives His223 — wrong in both conventions"},
-  {"target": "GRIN2A", "uniprot": "Q12879", "asserted": "Lys210", "actual": "Phe210",
-   "note": "mature numbering gives Ser232 — wrong in both conventions"},
-  {"target": "FZD8", "uniprot": "Q9H461", "asserted": "Arg104", "actual": "Leu104",
-   "note": "Phe72, Tyr125 and Asp99 in the same record are correct"},
-  {"target": "PTAFR", "uniprot": "P25105", "asserted": "His14", "actual": "Arg14",
-   "note": "P25105 has no signal peptide, so no numbering offset can explain this"},
-  {"target": "PTAFR", "uniprot": "P25105", "asserted": "Tyr200", "actual": "Leu200",
-   "note": "Phe174 in the same record is correct"}
+  {
+   "target": "TREM2",
+   "uniprot": "Q9NZC2",
+   "asserted": "Lys112",
+   "actual": "Ser112",
+   "note": "wrong in canonical numbering; no convention makes it a lysine"
+  },
+  {
+   "target": "NTRK1",
+   "uniprot": "P04629",
+   "asserted": "His312",
+   "actual": "Ser312",
+   "note": "mature numbering gives Gly344 \u2014 wrong in both conventions"
+  },
+  {
+   "target": "NTRK1",
+   "uniprot": "P04629",
+   "asserted": "Leu331",
+   "actual": "Glu331",
+   "note": "mature numbering gives Ala363 \u2014 wrong in both conventions"
+  },
+  {
+   "target": "GRIN2A",
+   "uniprot": "Q12879",
+   "asserted": "Glu201",
+   "actual": "Gln201",
+   "note": "mature numbering gives His223 \u2014 wrong in both conventions"
+  },
+  {
+   "target": "GRIN2A",
+   "uniprot": "Q12879",
+   "asserted": "Lys210",
+   "actual": "Phe210",
+   "note": "mature numbering gives Ser232 \u2014 wrong in both conventions"
+  },
+  {
+   "target": "FZD8",
+   "uniprot": "Q9H461",
+   "asserted": "Arg104",
+   "actual": "Leu104",
+   "note": "Phe72, Tyr125 and Asp99 in the same record are correct"
+  },
+  {
+   "target": "PTAFR",
+   "uniprot": "P25105",
+   "asserted": "His14",
+   "actual": "Arg14",
+   "note": "P25105 has no signal peptide, so no numbering offset can explain this"
+  },
+  {
+   "target": "PTAFR",
+   "uniprot": "P25105",
+   "asserted": "Tyr200",
+   "actual": "Leu200",
+   "note": "Phe174 in the same record is correct"
+  }
  ],
  "numbering_convention_errors": [
-  {"target": "ACHE", "uniprot": "P22303",
+  {
+   "target": "ACHE",
+   "uniprot": "P22303",
    "asserted": "AChE CAS (Trp84, Phe330, Tyr121) & PAS (Trp286, Tyr72, Tyr341)",
    "problem": "two organisms' numbering conventions inside a single parenthesis",
-   "resolution": "Trp84/Phe330/Tyr121 are Torpedo californica numbering; the human equivalents are Trp86/Phe338/Tyr124 in mature-chain numbering. Trp286/Tyr72/Tyr341 are human MATURE-chain numbering; in canonical P22303 numbering (SIGNAL 1-31, CHAIN 32-614) they are positions 317, 103 and 372. Every residue annotation must be re-derived against one declared reference."}
+   "resolution": "Trp84/Phe330/Tyr121 are Torpedo californica numbering; the human equivalents are Trp86/Tyr337/Tyr124 in mature-chain numbering, read from a BLOSUM62 pairwise alignment of P04058 against P22303 rather than from a uniform offset. The offset is NOT constant: it is +2 at Torpedo 84, +3 at 121 and +7 at 279/330/334, so no single shift maps the set. Torpedo Phe330 aligns to a TYROSINE in human AChE (Y337); the earlier Phe338 preserved the amino-acid letter at the cost of the alignment, which is the substitution this audit exists to catch. Trp286/Tyr72/Tyr341 are human MATURE-chain numbering; in canonical P22303 numbering (SIGNAL 1-31, CHAIN 32-614) they are positions 317, 103 and 372. Every residue annotation must be re-derived against one declared reference."
+  }
  ],
  "verified_correct": [
-  {"target": "TLR4", "uniprot": "O00206", "residues": ["Arg264", "Lys341", "Glu439"]},
-  {"target": "KEAP1", "uniprot": "Q14145", "residues": ["Tyr334", "Arg415", "Arg483", "Ser602"]},
-  {"target": "CHRNA7", "uniprot": "P36544", "residues": ["Tyr188", "Trp149", "Tyr195"],
-   "convention": "mature numbering, +22 offset"},
-  {"target": "APP", "uniprot": "P05067", "residues": ["Lys28", "Asp23"],
-   "convention": "Abeta numbering; APP 699 and 694"},
-  {"target": "FZD8", "uniprot": "Q9H461", "residues": ["Phe72", "Tyr125", "Asp99"]},
-  {"target": "PTAFR", "uniprot": "P25105", "residues": ["Phe174"]},
-  {"target": "ACHE", "uniprot": "P22303", "residues": ["Trp317", "Tyr103", "Tyr372"],
-   "convention": "canonical numbering; these are the mature-chain Trp286/Tyr72/Tyr341"}
+  {
+   "target": "TLR4",
+   "uniprot": "O00206",
+   "residues": [
+    "Arg264",
+    "Lys341",
+    "Glu439"
+   ]
+  },
+  {
+   "target": "KEAP1",
+   "uniprot": "Q14145",
+   "residues": [
+    "Tyr334",
+    "Arg415",
+    "Arg483",
+    "Ser602"
+   ]
+  },
+  {
+   "target": "CHRNA7",
+   "uniprot": "P36544",
+   "residues": [
+    "Tyr188",
+    "Trp149",
+    "Tyr195"
+   ],
+   "convention": "mature numbering, +22 offset"
+  },
+  {
+   "target": "APP",
+   "uniprot": "P05067",
+   "residues": [
+    "Lys28",
+    "Asp23"
+   ],
+   "convention": "Abeta numbering; APP 699 and 694"
+  },
+  {
+   "target": "FZD8",
+   "uniprot": "Q9H461",
+   "residues": [
+    "Phe72",
+    "Tyr125",
+    "Asp99"
+   ]
+  },
+  {
+   "target": "PTAFR",
+   "uniprot": "P25105",
+   "residues": [
+    "Phe174"
+   ]
+  },
+  {
+   "target": "ACHE",
+   "uniprot": "P22303",
+   "residues": [
+    "Trp317",
+    "Tyr103",
+    "Tyr372"
+   ],
+   "convention": "canonical numbering; these are the mature-chain Trp286/Tyr72/Tyr341"
+  }
  ]
 }
