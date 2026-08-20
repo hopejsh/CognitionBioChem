@@ -1,0 +1,255 @@
+{
+  "generated": "2026-08-20",
+  "method": "Every entry marked verified=PubMed was resolved through the PubMed E-utilities on 2026-08-20: the citation was looked up, the returned PMID was fetched, and the title, authors, journal, volume and pages below are the ones PubMed returned. Nothing here was written from memory. Entries that are not PubMed-indexed say so and name where they were checked instead.",
+  "attribution": "Bibliographic metadata retrieved from PubMed (NLM/NCBI).",
+  "n_total": 23,
+  "n_pubmed_verified": 19,
+  "references": [
+    {
+      "key": "jumper2021",
+      "authors": "Jumper J, Evans R, Pritzel A, et al.",
+      "year": 2021,
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "venue": "Nature 596(7873):583-589",
+      "pmid": "34265844",
+      "doi": "10.1038/s41586-021-03819-2",
+      "verified": "PubMed",
+      "used_for": "AlphaFold2; pLDDT and PAE confidence measures"
+    },
+    {
+      "key": "varadi2024",
+      "authors": "Varadi M, Bertoni D, Magana P, et al.",
+      "year": 2024,
+      "title": "AlphaFold Protein Structure Database in 2024: providing structure coverage for over 214 million protein sequences",
+      "venue": "Nucleic Acids Research 52(D1):D368-D375",
+      "pmid": "37933859",
+      "doi": "10.1093/nar/gkad1011",
+      "verified": "PubMed",
+      "used_for": "the 16 deposited receptor models compared against Boltz-2"
+    },
+    {
+      "key": "cheng1973",
+      "authors": "Cheng Y, Prusoff WH",
+      "year": 1973,
+      "title": "Relationship between the inhibition constant (K1) and the concentration of inhibitor which causes 50 per cent inhibition (I50) of an enzymatic reaction",
+      "venue": "Biochemical Pharmacology 22(23):3099-3108",
+      "pmid": "4202581",
+      "doi": "10.1016/0006-2952(73)90196-2",
+      "verified": "PubMed",
+      "used_for": "why an IC50 is not a Ki, and why the affinity head's pooled label has no single referent",
+      "note": "The repository cites this correctly as PMID 4202581 in research/adjudication.json, and records there that the equation was taken from three open-access secondary sources because the PubMed record has no abstract and the full text is paywalled -- an unusually careful piece of sourcing, and worth repeating here rather than glossing."
+    },
+    {
+      "key": "kyte1982",
+      "authors": "Kyte J, Doolittle RF",
+      "year": 1982,
+      "title": "A simple method for displaying the hydropathic character of a protein",
+      "venue": "Journal of Molecular Biology 157(1):105-132",
+      "pmid": "7108955",
+      "doi": "10.1016/0022-2836(82)90515-0",
+      "verified": "PubMed",
+      "used_for": "GRAVY hydropathy computed for every candidate sequence"
+    },
+    {
+      "key": "berman2000",
+      "authors": "Berman HM, Westbrook J, Feng Z, et al.",
+      "year": 2000,
+      "title": "The Protein Data Bank",
+      "venue": "Nucleic Acids Research 28(1):235-242",
+      "pmid": "10592235",
+      "doi": "10.1093/nar/28.1.235",
+      "verified": "PubMed",
+      "used_for": "the 32 crystal depositions used as experimental ground truth"
+    },
+    {
+      "key": "vangone2015",
+      "authors": "Vangone A, Bonvin AMJJ",
+      "year": 2015,
+      "title": "Contacts-based prediction of binding affinity in protein-protein complexes",
+      "venue": "eLife 4:e07454",
+      "pmid": "26193119",
+      "doi": "10.7554/eLife.07454",
+      "verified": "PubMed",
+      "used_for": "the contact-based model underlying PRODIGY, tested in Slate #11"
+    },
+    {
+      "key": "xue2016",
+      "authors": "Xue LC, Rodrigues JPGLM, Kastritis PL, Bonvin AMJJ, Vangone A",
+      "year": 2016,
+      "title": "PRODIGY: a web server for predicting the binding affinity of protein-protein complexes",
+      "venue": "Bioinformatics 32(23):3676-3678",
+      "pmid": "27503228",
+      "doi": "10.1093/bioinformatics/btw514",
+      "verified": "PubMed",
+      "used_for": "the method Slate #11 asked to fill the empty affinity field"
+    },
+    {
+      "key": "cer2009",
+      "authors": "Cer RZ, Mudunuri U, Stephens R, Lebeda FJ",
+      "year": 2009,
+      "title": "IC50-to-Ki: a web-based tool for converting IC50 to Ki values for inhibitors of enzyme activity and ligand binding",
+      "venue": "Nucleic Acids Research 37(Web Server):W441-W445",
+      "pmid": "19395593",
+      "doi": "10.1093/nar/gkp253",
+      "verified": "PubMed",
+      "used_for": "the conversion this project deliberately does NOT apply, because its assumptions are unmet"
+    },
+    {
+      "key": "kalliokoski2013",
+      "authors": "Kalliokoski T, Kramer C, Vulpetti A, Gedeck P",
+      "year": 2013,
+      "title": "Comparability of mixed IC50 data - a statistical analysis",
+      "venue": "PLoS ONE 8(4):e61007",
+      "pmid": "23613770",
+      "doi": "10.1371/journal.pone.0061007",
+      "verified": "PubMed",
+      "used_for": "the generic ChEMBL IC50 noise floor against which Slate #1's model error is judged"
+    },
+    {
+      "key": "kramer2012",
+      "authors": "Kramer C, Kalliokoski T, Gedeck P, Vulpetti A",
+      "year": 2012,
+      "title": "The experimental uncertainty of heterogeneous public Ki data",
+      "venue": "Journal of Medicinal Chemistry 55(11):5165-5173",
+      "pmid": "22643060",
+      "doi": "10.1021/jm300131x",
+      "verified": "PubMed",
+      "used_for": "reference-side uncertainty; the ceiling on any model's achievable R2"
+    },
+    {
+      "key": "landrum2024",
+      "authors": "Landrum GA, Riniker S",
+      "year": 2024,
+      "title": "Combining IC50 or Ki Values from Different Sources Is a Source of Significant Noise",
+      "venue": "Journal of Chemical Information and Modeling 64(5):1560-1567",
+      "pmid": "38394344",
+      "doi": "10.1021/acs.jcim.4c00049",
+      "verified": "PubMed",
+      "used_for": "why pooling assays inflates apparent model error; corroborates Slate #1's ceiling"
+    },
+    {
+      "key": "basu2016",
+      "authors": "Basu S, Wallner B",
+      "year": 2016,
+      "title": "DockQ: A Quality Measure for Protein-Protein Docking Models",
+      "venue": "PLoS ONE 11(8):e0161879",
+      "pmid": "27560519",
+      "doi": "10.1371/journal.pone.0161879",
+      "verified": "PubMed",
+      "used_for": "the interface quality score used throughout Slate #7"
+    },
+    {
+      "key": "mirabello2024",
+      "authors": "Mirabello C, Wallner B",
+      "year": 2024,
+      "title": "DockQ v2: improved automatic quality measure for protein multimers, nucleic acids, and small molecules",
+      "venue": "Bioinformatics 40(10):btae586",
+      "pmid": "39348158",
+      "doi": "10.1093/bioinformatics/btae586",
+      "verified": "PubMed",
+      "used_for": "the DockQ implementation actually installed and run"
+    },
+    {
+      "key": "lensink2007",
+      "authors": "Lensink MF, Mendez R, Wodak SJ",
+      "year": 2007,
+      "title": "Docking and scoring protein complexes: CAPRI 3rd Edition",
+      "venue": "Proteins 69(4):704-718",
+      "pmid": "17918726",
+      "doi": "10.1002/prot.21804",
+      "verified": "PubMed",
+      "used_for": "the acceptable/medium/high bands DockQ reproduces"
+    },
+    {
+      "key": "buttenschoen2024",
+      "authors": "Buttenschoen M, Morris GM, Deane CM",
+      "year": 2024,
+      "title": "PoseBusters: AI-based docking methods fail to generate physically valid poses or generalise to novel sequences",
+      "venue": "Chemical Science 15(9):3130-3139",
+      "pmid": "38425520",
+      "doi": "10.1039/d3sc04185a",
+      "verified": "PubMed",
+      "used_for": "the physical-validity checks; the direct precedent for this project's premise"
+    },
+    {
+      "key": "swanson2024",
+      "authors": "Swanson K, Walther P, Leitz J, et al.",
+      "year": 2024,
+      "title": "ADMET-AI: a machine learning ADMET platform for evaluation of large-scale chemical libraries",
+      "venue": "Bioinformatics 40(7):btae416",
+      "pmid": "38913862",
+      "doi": "10.1093/bioinformatics/btae416",
+      "verified": "PubMed",
+      "used_for": "ADMET prediction, and its applicability domain"
+    },
+    {
+      "key": "mendez2019",
+      "authors": "Mendez D, Gaulton A, Bento AP, et al.",
+      "year": 2019,
+      "title": "ChEMBL: towards direct deposition of bioassay data",
+      "venue": "Nucleic Acids Research 47(D1):D930-D940",
+      "pmid": "30398643",
+      "doi": "10.1093/nar/gky1075",
+      "verified": "PubMed",
+      "used_for": "the bioactivity source for the AChE benchmark"
+    },
+    {
+      "key": "zdrazil2024",
+      "authors": "Zdrazil B, Felix E, Hunter F, et al.",
+      "year": 2024,
+      "title": "The ChEMBL Database in 2023: a drug discovery platform spanning multiple bioactivity data types and time periods",
+      "venue": "Nucleic Acids Research 52(D1):D1180-D1192",
+      "pmid": "37933841",
+      "doi": "10.1093/nar/gkad1004",
+      "verified": "PubMed",
+      "used_for": "current ChEMBL release description"
+    },
+    {
+      "key": "uniprot2025",
+      "authors": "The UniProt Consortium",
+      "year": 2025,
+      "title": "UniProt: the Universal Protein Knowledgebase in 2025",
+      "venue": "Nucleic Acids Research 53(D1):D609-D617",
+      "pmid": "39552041",
+      "doi": "10.1093/nar/gkae1010",
+      "verified": "PubMed",
+      "used_for": "canonical sequences, signal peptides, topology and disulfides for all 16 targets"
+    },
+    {
+      "key": "passaro2025",
+      "authors": "Passaro S, Corso G, Wohlwend J, et al.",
+      "year": 2025,
+      "title": "Boltz-2: Towards Accurate and Efficient Binding Affinity Prediction",
+      "venue": "bioRxiv (preprint)",
+      "verified": "Consensus/Semantic Scholar, re-checked 2026-08-20: bioRxiv preprint, not PubMed-indexed; title, first author and year returned verbatim",
+      "used_for": "the predictor that produced every structure in this repository (v2.2.1, MIT)"
+    },
+    {
+      "key": "bret2026",
+      "authors": "Bret G, et al.",
+      "year": 2026,
+      "title": "Assessing Boltz-2 Performance for the Binding Classification of Docking Hits",
+      "venue": "Journal of Chemical Information and Modeling",
+      "verified": "Consensus/Semantic Scholar, re-checked 2026-08-20: title, first author, year and venue returned verbatim; the abstract states the binding-site mutation and target-exchange insensitivity cited here",
+      "used_for": "independent evidence that Boltz-2 affinity output can be insensitive to binding-site mutation and even to target exchange -- convergent with this project's negative result"
+    },
+    {
+      "key": "wan2026",
+      "authors": "Wan S, et al.",
+      "year": 2026,
+      "title": "On the Reliability of AI Methods in Drug Discovery: Evaluation of Boltz-2 for Structure and Binding Affinity Prediction",
+      "venue": "arXiv (preprint)",
+      "verified": "Consensus/Semantic Scholar, re-checked 2026-08-20: arXiv preprint; the phrase 'lacks the energetic resolution required for lead identification' is the abstract's own wording",
+      "used_for": "independent evidence that Boltz-2 lacks the energetic resolution for lead identification"
+    },
+    {
+      "key": "holm1979",
+      "authors": "Holm S",
+      "year": 1979,
+      "title": "A simple sequentially rejective multiple test procedure",
+      "venue": "Scandinavian Journal of Statistics 6(2):65-70",
+      "verified": "NOT PubMed-indexed (statistics journal). Cited from the standard literature; a reader should confirm it independently.",
+      "used_for": "the multiplicity correction applied to every registered hypothesis family"
+    }
+  ]
+}

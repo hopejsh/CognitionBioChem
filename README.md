@@ -130,6 +130,33 @@ Run everything:
 Six suites. The data gate is **expected** to exit non-zero on the legacy dataset — a gate
 that passed on it would be the defect.
 
+### The written account and the deck
+
+Two long-form documents are generated from the same artefacts the page reads, so neither can
+quote a number the data no longer supports. Both stamp the commit they were built from.
+
+```bash
+./.venv/bin/python platform/build_figures.py \
+  && ./.venv/bin/python platform/build_report.py \
+  && ./.venv/bin/python platform/build_deck.py
+```
+
+| File | What it is |
+| --- | --- |
+| [`docs/CognitionBioChem_Report.docx`](docs/CognitionBioChem_Report.docx) | Why the project exists, the scientific background, what was built, how the question was asked, the results, the limits, and 23 references — each recording how it was verified |
+| [`docs/CognitionBioChem_Deck.html`](docs/CognitionBioChem_Deck.html) | A 19-slide conference deck. Arrow keys navigate; it prints to 16:9 pages |
+| [`docs/CognitionBioChem_Deck.pdf`](docs/CognitionBioChem_Deck.pdf) | The same deck, exported by the same command so the two cannot drift |
+| [`docs/REFERENCES.json`](docs/REFERENCES.json) | Every citation with its PMID, DOI and the record of how it was checked. `build_report.py` raises rather than cite a key that is not in this file |
+| [`docs/figures/`](docs/figures/) | `fig*.png` are drawn by `build_figures.py` from the artefacts; `ui*.png` are browser captures of the running page, which no script can regenerate |
+
+Nineteen of the 23 references were resolved through the PubMed E-utilities; three through
+Consensus/Semantic Scholar (two 2026 papers and the Boltz-2 preprint, none of them
+PubMed-indexed); and Holm 1979 is marked as not PubMed-indexed with the venue it was checked
+against. Bibliographic metadata retrieved from PubMed (NLM/NCBI).
+
+The deck's PDF export needs Google Chrome; without it `build_deck.py` writes the HTML and says
+it skipped the PDF, rather than leaving a stale one in place.
+
 For structure prediction, a separate Python 3.12 environment is required because Boltz pins
 a scipy with no cp314 wheel:
 
@@ -844,6 +871,9 @@ platform/
   validate.py         the data-integrity gate
   verify_frontend.py  DOM, data and rendering-rule contract for the page
   check_naming.py     build guard: no pooled score rendered as a free energy
+  build_figures.py    the five generated figures both documents embed
+  build_report.py     the written account (.docx), every number read from an artefact
+  build_deck.py       the conference deck (.html + .pdf), from the same artefacts
 runs/                 content-addressed prediction artefacts + manifest
 prespec/              registered, hash-locked analysis plans
 memory/               append-only provenance ledger (see memory/DESIGN.md)
@@ -853,6 +883,8 @@ data/                 validated, provenance-carrying data
 data/alphafold_db/    deposited AlphaFold models, downloaded under CC BY 4.0
 data/structures.json  51 structures the viewer can open, all under custody
 data/slate.json       the pre-registered studies, assembled from plans and artefacts
+docs/figures/         the five generated figures and five UI captures both documents use
+docs/REFERENCES.json  every citation, with how it was verified
 index.html, app.js    the workbench page
 ```
 
