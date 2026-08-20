@@ -41,3 +41,7 @@ docs/CognitionBioChem_Report_KO.docx
 docs/CognitionBioChem_Deck.html
 docs/CognitionBioChem_Deck.pdf
 docs/CognitionBioChem_Deck.pptx
+
+# Word's own lock files, created while a document is open.
+~$*
+docs/~$*
