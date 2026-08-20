@@ -64,8 +64,21 @@ keywords. It is already written, so the deposit needs no manual editing on the Z
 
 ## 2. SciCrunch — **done**
 
-**RRID:SCR_028851**, issued 2026-08-20. Cite it inline in a Methods section; the DOI goes in
-the reference list.
+**RRID:SCR_028851**, assigned 2026-08-20. Cite it inline in a Methods section; the DOI goes
+in the reference list.
+
+**Assignment and resolution are two different events.** SciCrunch hands out the ID at the end
+of the submit flow, but the record only becomes resolvable after a curator approves it. On the
+day of submission `scicrunch.org/resolver/SCR_028851` answered *"RRID:SCR_028851 was not found
+in our database"*, which is the expected state, not an error. Check it again before using the
+RRID in a manuscript:
+
+```
+open https://scicrunch.org/resolver/SCR_028851
+```
+
+If it still does not resolve after a few weeks, `info@rrid.site` is the contact SciCrunch's own
+page gives.
 
 The submit flow assigns the ID at the end of *Basic Information*. Step 2, *Additional
 Information*, is optional enrichment and most of its fields are for **data repositories** and
