@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0",
  "built": "2026-08-20",
- "git_sha": "0295546-dirty",
+ "git_sha": "b83e1d9-dirty",
  "disclosure": {
   "headline": "Structure prediction is real; binding affinity is not calibrated and no free energy is emitted.",
   "detail": "Boltz-2 v2.2.1 (MIT) runs locally and produced every PREDICTED structure under runs/ and in the pre-registered studies. runs/ also holds 32 RCSB crystal depositions, carrying a '-reference' kind in runs/manifest.json: those are experimental ground truth for studies #6 and #7 and were produced by no predictor. The platform also parses genuine output from AlphaFold DB and AlphaFold 3. ADMET is predicted by ADMET-AI where the molecule is inside its applicability domain, and refused with a stated reason where it is not. Binding affinity is PREDICTED but NOT CALIBRATED, and is never rendered as a free energy: the affinity head is fitted to pooled Ki/Kd/IC50/EC50 labels, so no thermodynamic quantity can be recovered from it. Every field is labelled with its provenance; fields marked 'not computed' are honestly empty. Values asserted by an earlier version that no calculation supports are preserved under 'retracted_claims' and are not displayed as results.",
@@ -8415,6 +8415,48 @@
    "target": "\u03b17 nAChR ECD"
   }
  ],
+ "citation": {
+  "title": "CognitionBioChem: A structural pharmacology workbench that reports a negative result",
+  "version": "1.0.0",
+  "date_released": "2026-08-20",
+  "authors": [
+   "Seung Ho Jung"
+  ],
+  "orcid": [
+   "https://orcid.org/0000-0001-7914-5306"
+  ],
+  "repository": "https://github.com/hopejsh/CognitionBioChem",
+  "licenses": [
+   "Apache-2.0",
+   "CC-BY-4.0",
+   "CC-BY-SA-3.0",
+   "CC0-1.0",
+   "MIT"
+  ],
+  "identifiers": [
+   {
+    "type": "doi",
+    "value": "10.5281/zenodo.22032684",
+    "description": "Concept DOI -- always resolves to the latest release"
+   },
+   {
+    "type": "doi",
+    "value": "10.5281/zenodo.22032685",
+    "description": "Version DOI -- permanently fixed to v1.0.0 (this release)"
+   },
+   {
+    "type": "other",
+    "value": "RRID:SCR_028851",
+    "description": "Research Resource Identifier -- cite this inline in a Methods section"
+   },
+   {
+    "type": "other",
+    "value": "biotools:cognitionbiochem",
+    "description": "ELIXIR bio.tools registry entry -- https://bio.tools/cognitionbiochem"
+   }
+  ],
+  "note": "Read from CITATION.cff at build time. The headline result of this project is negative: cite the software for what it does -- pre-registration, provenance enforcement, custody of prediction artefacts -- and not as evidence that any candidate here binds anything."
+ },
  "motif_provenance": {
   "motifs": [
    {

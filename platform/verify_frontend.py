@@ -277,6 +277,23 @@ def main() -> int:
         import yaml as _yaml
         cff = _yaml.safe_load((REPO / "CITATION.cff").read_text())
         lic = cff["license"] if isinstance(cff["license"], list) else [cff["license"]]
+        # The page renders identifiers from dataset.citation. If that block ever stops being
+        # a copy of CITATION.cff, the page and the registries start telling a reader two
+        # different things about how to cite the same release.
+        cit = ds.get("citation")
+        check("the dataset carries a citation block read from CITATION.cff", bool(cit))
+        if cit:
+            want = {(i["type"], i["value"]) for i in (cff.get("identifiers") or [])}
+            have = {(i["type"], i["value"]) for i in cit["identifiers"]}
+            check(f"all {len(want)} identifiers on the page match CITATION.cff", want == have,
+                  f"page {sorted(have)} vs cff {sorted(want)}")
+            check("the page states the version CITATION.cff states",
+                  cit["version"] == cff.get("version"),
+                  f"{cit['version']} vs {cff.get('version')}")
+            check("the citation block warns against citing it as a positive result",
+                  "negative" in (cit.get("note") or ""))
+            check("index.html hosts the citation block", 'id="citation-block"' in html)
+
         check("CITATION.cff lists every licence the deposit carries",
               {"Apache-2.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC0-1.0", "MIT"} <= set(lic),
               f"lists {lic}")
@@ -453,6 +470,15 @@ def main() -> int:
           not missing_hosts, str(missing_hosts))
     check("the section table covers every renderer that loadData runs", len(hosts) >= 9,
           f"found {len(hosts)}")
+    # The host-id check above passed while the table referenced a renderer that did not exist.
+    # `['citation-block', renderCitation]` evaluates the identifier when the array is built, so
+    # an undefined name is a ReferenceError thrown before the per-section try/catch can catch
+    # anything -- it takes down every renderer on the page, not one. node --check does not see
+    # it either, because it is a runtime error and not a syntax error. Check the definitions.
+    named = re.findall(r"\['[a-z-]+',\s*(render[A-Za-z]+)\]", app)
+    undefined = [n for n in named if f"function {n}(" not in app]
+    check(f"all {len(named)} renderers in the section table are defined", not undefined,
+          str(undefined))
 
     print("\n[slate] every study on the page traces to a registered plan")
     slp = REPO / "data" / "slate.json"

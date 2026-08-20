@@ -8,7 +8,7 @@ recorded here so the question is not reopened later.
 | **Zenodo** (DOI) | yes | archives a software release and mints a citable identifier |
 | **SciCrunch** (RRID) | yes | registers research resources, software included |
 | **bio.tools** | yes | the ELIXIR registry of bioinformatics software; this is squarely in scope |
-| **Research Software Directory** | **check first** | see §5 — the main instance has a scoped listing policy |
+| **Research Software Directory** | **not pursued** | see §5 — the main instance's catalogue is scoped to one organisation's orbit |
 | **ELN Finder** | **no** | a registry of *electronic lab notebooks*. This is a structural pharmacology workbench, not a notebook. Registering it there would return the wrong result to someone searching for an ELN. |
 
 ---
@@ -230,7 +230,30 @@ pasted or imported.
 Note that `biotoolsID` must be unique across the registry. `cognitionbiochem` is the proposed
 one; if it is taken the form will say so and a suffix is fine.
 
-## 5. Research Software Directory — check eligibility before investing effort
+## 5. Research Software Directory — **not pursued**
+
+Decided against on 2026-08-20, and recorded here so the question is not reopened.
+
+The main instance, <https://research-software-directory.org>, is operated by the Netherlands
+eScience Center and its catalogue is scoped to software connected to that organisation and its
+partners. This project has no such connection, so the eligibility question would have been
+answered by someone else's policy rather than by anything about the software. Preparing
+metadata against a catalogue that may not accept it is effort spent on a coin flip.
+
+**The three registries already in place cover what registries are for**, and each answers a
+different question:
+
+| Identifier | Answers |
+|---|---|
+| `10.5281/zenodo.22032684` | how to cite the archived release |
+| `RRID:SCR_028851` | how to name the tool in a Methods section |
+| `biotools:cognitionbiochem` | how someone looking for a structure-prediction tool finds it |
+
+If an RSD listing is ever wanted, `CITATION.cff` and `codemeta.json` are already in the
+repository root, which is where the RSD looks — so the preparation is done either way. Other
+instances exist for other communities, for example the Helmholtz HIFIS one.
+
+### The original notes, kept for whoever revisits this
 
 The RSD is open-source software with several instances, and they do not share a listing
 policy. <https://research-software-directory.org> is operated by the **Netherlands eScience

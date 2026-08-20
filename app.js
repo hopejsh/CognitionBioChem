@@ -138,6 +138,7 @@ async function loadData() {
     ['overview-stats', renderOverview],
     ['validation-detail', renderValidation], ['compound-list', renderCompounds],
     ['candidate-list', renderCandidates], ['retracted-list', renderRetracted],
+    ['citation-block', renderCitation],
     ['slate-detail', renderSlate], ['gallery-list', renderGallery],
     ['af-arms', renderAlphaFold]
   ];
@@ -504,6 +505,44 @@ function renderRetractedInline(rc) {
       a gap of ${esc(a.discrepancy.value)} kcal/mol
       (${esc(a.discrepancy_orders.value)} orders of magnitude). ${esc(a.verdict)}.</p>` : ''}
   </details>`;
+}
+
+/* The identifiers lived in the README and nowhere the page could show them, so a reader who
+   never opened the repository could not cite the work. Everything here comes from
+   dataset.citation, which build_dataset.py reads out of CITATION.cff — the same file the
+   registries read, so the page cannot fall out of step with them. */
+function renderCitation() {
+  const c = (state.dataset || {}).citation;
+  const host = document.getElementById('citation-block');
+  if (!host) return;
+  if (!c) {
+    host.innerHTML = '<p class="val-missing">CITATION.cff was not read at build time.</p>';
+    return;
+  }
+  const concept = (c.identifiers || []).find(i => i.type === 'doi');
+  host.innerHTML = `
+    <blockquote class="seq" style="font-family:inherit">
+      ${esc(c.authors.join(', '))} (${esc((c.date_released || '').slice(0, 4))}).
+      <em>${esc(c.title)}</em> (Version ${esc(c.version)}) [Computer software]. Zenodo.
+      ${concept ? `https://doi.org/${esc(concept.value)}` : ''}
+    </blockquote>
+    <table class="prov-table">
+      <thead><tr><th>Identifier</th><th>What it names</th></tr></thead>
+      <tbody>${(c.identifiers || []).map(i => `
+        <tr><td class="mono">${esc(i.value)}</td>
+            <td>${esc(i.description || '')}</td></tr>`).join('')}</tbody>
+    </table>
+    <div class="prop-grid">
+      <div><span>Version</span><strong>${esc(c.version)}</strong></div>
+      <div><span>Released</span><strong>${esc(c.date_released)}</strong></div>
+      <div><span>ORCID</span><strong class="mono">${
+        esc((c.orcid[0] || '').replace('https://orcid.org/', ''))}</strong></div>
+      <div><span>Licences</span><strong>${esc(c.licenses.join(', '))}</strong></div>
+    </div>
+    <p class="note"><strong>${esc(c.note)}</strong></p>
+    <p class="hint">The code is Apache-2.0. The other four cover third-party data this
+      repository redistributes, and CC-BY-SA-3.0 is share-alike — see <code>NOTICE</code>
+      for which files fall under which.</p>`;
 }
 
 function renderRetracted() {

@@ -229,6 +229,37 @@ def build_candidate(name: str, seq: str, extra: dict, cur: dict) -> dict:
     return rec
 
 
+def citation_block() -> dict:
+    """Everything the page needs to say how to cite, read out of CITATION.cff.
+
+    The identifiers were in the README and nowhere else, so a reader who only ever saw the
+    page could not cite the work. Typing them into the markup instead would have put four
+    identifiers on a page that promises none of its numbers are hand-typed, and they would
+    have gone stale the first time a release minted a new version DOI. CITATION.cff is the
+    file the registries already read; this makes the page read it too.
+    """
+    import yaml
+    d = yaml.safe_load((REPO / "CITATION.cff").read_text())
+    ids = d.get("identifiers") or []
+    lic = d["license"] if isinstance(d.get("license"), list) else [d.get("license")]
+    return {
+        "title": d.get("title"),
+        "version": d.get("version"),
+        "date_released": str(d.get("date-released") or ""),
+        "authors": [f"{a.get('given-names','')} {a.get('family-names','')}".strip()
+                    for a in d.get("authors", [])],
+        "orcid": [a.get("orcid") for a in d.get("authors", []) if a.get("orcid")],
+        "repository": d.get("repository-code"),
+        "licenses": [x for x in lic if x],
+        "identifiers": [{"type": i.get("type"), "value": i.get("value"),
+                         "description": i.get("description")} for i in ids],
+        "note": ("Read from CITATION.cff at build time. The headline result of this project is "
+                 "negative: cite the software for what it does -- pre-registration, provenance "
+                 "enforcement, custody of prediction artefacts -- and not as evidence that any "
+                 "candidate here binds anything."),
+    }
+
+
 def attribution_summary(motifs_record: dict, candidates: list[dict]) -> dict:
     """Count what is actually attributed, rather than restating a remembered number.
 
@@ -316,6 +347,9 @@ def main() -> int:
         ds["candidates"].append(
             build_candidate(c["code"], c.get("fasta", ""),
                             {"target": c.get("target", "")}, cur))
+
+    if (REPO / "CITATION.cff").exists():
+        ds["citation"] = citation_block()
 
     if cur.get("motifs"):
         ds["motif_provenance"] = cur["motifs"]

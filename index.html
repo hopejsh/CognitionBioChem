@@ -357,6 +357,13 @@
 <section class="panel" id="tab-provenance" role="tabpanel"
          aria-labelledby="tab-btn-provenance" tabindex="0">
   <div class="card">
+    <h2>How to cite this workbench</h2>
+    <p class="note">Read from <code>CITATION.cff</code> at build time — the same file the
+      registries read, so the page cannot fall out of step with them.</p>
+    <div id="citation-block"></div>
+  </div>
+
+  <div class="card">
     <h2>Provenance model</h2>
     <p>Every scientific value in this workbench carries a status. The UI cannot render a
       number whose status is <code>placeholder</code> or <code>not_computed</code> — those
