@@ -22,9 +22,12 @@ every **predicted** structure in `runs/`; `runs/` also holds 32 RCSB crystal dep
 used as experimental ground truth by studies #6 and #7, which no predictor made. ADMET prediction is **real** where it is in domain. Binding
 affinity is **predicted but not calibrated**, and is never reported as a free energy.
 
-The peptide sequences are **hand-assembled concatenations of published natural motifs,
-pastiche scaffolds and one de novo amphipathic helix**, joined by GGGGS linkers. No generative
-model produced them. Per-segment attribution lives in `data/dataset.json` → `motif_provenance`,
+The peptide sequences are **chimeric peptides** — published natural motifs, motif-like
+segments with no identifiable natural source, and one de novo amphipathic helix,
+**concatenated head to tail with GGGGS linkers**.
+No generative model, sequence optimisation or structure-based design software was used at any
+stage; the composition of each construct reflects manual curation, not an optimised design
+objective. Per-segment attribution lives in `data/dataset.json` → `motif_provenance`,
 and it is thinner than the word *attribution* suggests: of 16 motif entries only **7 carry a
 UniProt accession**. The other 9 describe themselves in that record as chimeras, pastiches, a de
 novo helix, a linker, and in one case not a peptide sequence at all, and 12 further unattributed
@@ -129,6 +132,33 @@ Run everything:
 
 Seven suites. The data gate is **expected** to exit non-zero on the legacy dataset — a gate
 that passed on it would be the defect.
+
+### The manuscript
+
+A paper draft of the study, in English and Korean, with a conference deck for each. The prose
+lives in `paper/` and is rendered by the generators below; the built documents are not tracked
+for the same reason the report is not.
+
+```bash
+./.venv/bin/python platform/build_paper.py       && ./.venv/bin/python platform/build_paper.py --ko
+./.venv/bin/python platform/build_paper_deck.py  && ./.venv/bin/python platform/build_paper_deck.py --ko
+./.venv/bin/python platform/build_pptx.py docs/CognitionBioChem_Paper_Deck.html
+./.venv/bin/python platform/build_pptx.py docs/CognitionBioChem_Paper_Deck_KO.html
+```
+
+Every reference in it was retrieved through the PubMed E-utilities by the specialist that
+proposed it, re-fetched by an independent checker, and re-fetched a third time directly from
+NCBI esummary and compared on title and first author: 184 of 184 matched, and
+[`paper/REFERENCES_PAPER.json`](paper/REFERENCES_PAPER.json) records how each was verified.
+Beyond existence, 453 claim-source pairs were checked against the cited abstracts — 402 were
+supported and 46 were corrected, three of them because the cited paper concluded the opposite
+of the sentence citing it.
+
+The vocabulary was audited the same way. 101 candidate terms were searched in PubMed and
+Consensus and ruled on in [`paper/TERMINOLOGY_RULINGS.json`](paper/TERMINOLOGY_RULINGS.json):
+40 replaced as coinages or as terms the field gives to something else, 9 qualified, 4 defined,
+and 24 confirmed as standard vocabulary and left alone. `platform/check_paper.py` holds the
+two editions to the same numbers, the same citation order and the same figure order.
 
 ### The written account and the deck
 
@@ -345,8 +375,8 @@ remains untested for larger jobs.
 **MSA.** Enabling the ColabFold MSA server shifted mean **single-chain pLDDT** by 0.33 units,
 far under seed noise, paired t-test p = 0.489 on the raw p (see the note on why this one is
 not multiplicity-adjusted). **Four of six candidates were bit-identical with and without MSA** —
-the search returned nothing usable, exactly as expected for hand-assembled motif concatenations
-with no natural homologues.
+the search returned nothing usable, exactly as expected for manually concatenated motifs with
+no natural homologues.
 
 **That finding is about lone peptides, and it does not transfer to complexes.** An MSA cannot
 help a sequence with no homologues, but in a peptide–receptor complex it helps the *receptor*,
@@ -887,6 +917,11 @@ platform/
   build_deck.py       the conference deck (.html + .pdf), from the same artefacts
   build_pptx.py       the deck again as editable PowerPoint, parsed from that HTML
   check_reports.py    guard: the two report editions must describe the same work
+  build_paper.py      the manuscript (.docx), English and Korean, from paper/
+  build_paper_deck.py the manuscript's conference deck, English and Korean
+  check_paper.py      guard: every number traces to an artefact; the editions agree
+  cbc/paper.py        the format-neutral parser both manuscript renderers share
+  cbc/deck_style.py   the stylesheet and shell every deck shares
 runs/                 content-addressed prediction artefacts + manifest
 prespec/              registered, hash-locked analysis plans
 memory/               append-only provenance ledger (see memory/DESIGN.md)
@@ -896,6 +931,7 @@ data/                 validated, provenance-carrying data
 data/alphafold_db/    deposited AlphaFold models, downloaded under CC BY 4.0
 data/structures.json  51 structures the viewer can open, all under custody
 data/slate.json       the pre-registered studies, assembled from plans and artefacts
+paper/                the manuscript prose, both editions, and its verified reference library
 docs/figures/         the five generated figures and five UI captures the documents embed
 docs/REFERENCES.json  every citation, with how it was verified
 index.html, app.js    the workbench page

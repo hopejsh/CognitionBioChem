@@ -278,9 +278,9 @@ def attribution_summary(motifs_record: dict, candidates: list[dict]) -> dict:
     motifs = motifs_record.get("motifs") or []
     loose = motifs_record.get("unattributed_segments") or []
     attributed = [m for m in motifs if m.get("uniprot_accession")]
-    pastiche = [m for m in motifs if not m.get("uniprot_accession")]
+    unattributed = [m for m in motifs if not m.get("uniprot_accession")]
 
-    frags = {m["motif"] for m in pastiche
+    frags = {m["motif"] for m in unattributed
              if isinstance(m.get("motif"), str) and m["motif"].isalpha()}
     for entry in loose:
         frags.update(re.findall(r"\b[ACDEFGHIKLMNPQRSTVWY]{5,}\b", str(entry)))
@@ -288,7 +288,7 @@ def attribution_summary(motifs_record: dict, candidates: list[dict]) -> dict:
                 if any(f in c.get("sequence", "") for f in frags)]
     return {
         "attributed_motifs": len(attributed),
-        "unattributed_motif_entries": len(pastiche),
+        "unattributed_motif_entries": len(unattributed),
         "unattributed_segments": len(loose),
         "distinct_unattributed_fragments": len(frags),
         "candidates_carrying_one": len(carriers),
@@ -328,9 +328,11 @@ def main() -> int:
                 # halves: 12 of the segments are unattributed, one of them labelled there
                 # as a "de novo cationic amphipathic helix" -- and that 36-mer is the
                 # sequence of the duplicate AChE pair that studies #9 and #10 screen.
-                "The peptide sequences are hand-assembled concatenations of published "
-                "natural motifs, pastiche scaffolds and one de novo amphipathic helix, "
-                "joined by GGGGS linkers. No generative model produced them. Per-segment "
+                "The peptide sequences are chimeric peptides: published natural motifs, "
+                "motif-like segments with no identifiable natural source, and one de novo "
+                "amphipathic helix, concatenated head to "
+                "tail with GGGGS linkers. No generative model, sequence optimisation or "
+                "structure-based design software was used at any stage. Per-segment "
                 "attribution is in data/dataset.json motif_provenance, which records 16 "
                 "attributed motifs and 12 unattributed segments; 14 of 35 candidates "
                 "carry at least one unattributed segment."),
@@ -357,9 +359,13 @@ def main() -> int:
         # sentence is a function of them rather than a memory of them.
         a = attribution_summary(cur["motifs"], ds["candidates"])
         ds["disclosure"]["sequences"] = (
-            "The peptide sequences are hand-assembled concatenations of published natural "
-            "motifs, pastiche scaffolds and one de novo amphipathic helix, joined by GGGGS "
-            "linkers. No generative model produced them. Per-segment attribution is in "
+            "The peptide sequences are chimeric peptides: published natural motifs, "
+            "motif-like segments with no identifiable natural source, and one de novo "
+            "amphipathic helix, concatenated head to tail "
+            "with GGGGS linkers. No generative model, sequence optimisation or "
+            "structure-based design software was used at any stage; the composition of each "
+            "construct reflects manual curation rather than an optimised design objective. "
+            "Per-segment attribution is in "
             "data/dataset.json motif_provenance, and it is thinner than the word "
             "'attribution' suggests: of "
             f"{a['attributed_motifs'] + a['unattributed_motif_entries']} motif entries only "
