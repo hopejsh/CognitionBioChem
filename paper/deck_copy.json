@@ -1,0 +1,435 @@
+{
+  "title": "Beaten by Its Own Shuffles",
+  "description": "A twenty-minute talk on a pre-registered screen against a composition-matched null in which co-folding interface confidence failed to separate thirteen designed CNS-target peptides from permutations of their own residues.",
+  "slides": [
+    {
+      "type": "title",
+      "kind": "premise",
+      "headline": "Does interface confidence read the design, or only the residues?",
+      "thesis": "Not here. Thirteen chimeric peptides did not separate from composition-matched shuffles of their own residues under this predictor: paired difference 0.0009 ipTM, p = 0.98. This is a negative result and is reported as one.",
+      "meta": [
+        "Boltz-2 v2.2.1 · 13 candidates · 7 receptor domains from a 16-target cognition registry",
+        "10 composition-matched shuffles per candidate · full MSA",
+        "Pre-registered under a SHA-256 hash · no assay of any kind was performed"
+      ],
+      "stamp": "plan fixed by SHA-256 hash before any data existed"
+    },
+    {
+      "type": "prose",
+      "kind": "premise",
+      "headline": "The habit this work tests",
+      "sub": "Fold, read confidence, believe it",
+      "paras": [
+        "Fold the designed sequence against its intended receptor, read the interface confidence, treat a high value as evidence that the peptide engages the target.",
+        "The habit is not absurd — confidence filtering raised de novo binder success roughly ten-fold. But interface confidence estimates how well a complex is modelled given that a complex forms. The predictor is never offered the option of declining.",
+        "The control that would test the reading is cheap and usually absent: the same receptor, folded against the candidate's own residues in a different order."
+      ],
+      "foot": "Bennett et al. 2023; Schmid & Walter 2025"
+    },
+    {
+      "type": "led",
+      "kind": "premise",
+      "headline": "Three channels, and what none of them is",
+      "led": [
+        {
+          "key": "pLDDT",
+          "text": "A per-residue estimate of how well the model's local environment will agree with an experimental structure of that same chain."
+        },
+        {
+          "key": "PAE",
+          "text": "A predicted positional error for each residue pair. Restricted to inter-chain pairs it is interface PAE: descriptive, with no reference-free threshold that transfers across systems."
+        },
+        {
+          "key": "ipTM",
+          "text": "A TM-score estimate restricted to cross-chain pairs — a quality-of-model estimate conditioned on the supplied chains forming a complex. It is the primary endpoint here."
+        },
+        {
+          "key": "None of them",
+          "text": "A probability that the modelled state is populated in solution. All three are regressions onto geometric agreement with a crystal structure."
+        },
+        {
+          "key": "None of them",
+          "text": "An energy. No free energy is emitted anywhere in this pipeline by the neural predictor."
+        }
+      ],
+      "foot": "Jumper et al. 2021; Evans et al. 2021; Varadi et al. 2022; Elfmann & Stülke 2023"
+    },
+    {
+      "type": "split",
+      "kind": "premise",
+      "headline": "Sixteen targets, graded before anything was designed",
+      "sub": "Selected for mechanistic relevance to cognition, not for tractability",
+      "paras": [
+        "Each registry entry carries an explicit grade for the strength of human genetic support for a role in cognition. The grade is part of the record, and it shows which targets were carried forward anyway.",
+        "TREM2 is the one entry graded strong, and it earns the grade twice over — and still supplies no pocket, only a solvent-exposed surface the field disagrees about.",
+        "Thirteen candidates were screened against seven of these domains. The registry is not a list of validated targets; it is a list of targets a designer might plausibly reach for."
+      ],
+      "stats": [
+        {
+          "value": "16",
+          "label": "proteins registered before design"
+        },
+        {
+          "value": "1",
+          "label": "strong genetic support"
+        },
+        {
+          "value": "2",
+          "label": "moderate"
+        },
+        {
+          "value": "4",
+          "label": "weak"
+        },
+        {
+          "value": "2",
+          "label": "contradictory"
+        },
+        {
+          "value": "7",
+          "label": "no human genetic support"
+        }
+      ]
+    },
+    {
+      "type": "prose",
+      "kind": "premise",
+      "headline": "The candidates are chimeric constructs, and the audit says so",
+      "paras": [
+        "Manually concatenated from published short linear motifs, motif-like segments and one de novo helix, joined by GGGGS linkers. No generative model produced them; no sequence optimisation, learned or physics-based, and no structure-based design software refined them.",
+        "Of 16 motif entries only 7 carry a UniProt accession. Thirty-one of 35 candidates carry at least one of 22 fragments the design record itself marks unattributed. A fragment that cannot be traced to a source cannot be said to have inherited affinity from one.",
+        "Deep-learning design was avoided deliberately: a sequence optimised against the same network that then scores it cannot be used to ask whether that network reads design content — by which we mean throughout the order-dependent content a design places in a sequence, its motif identities, linker boundaries and helical register, as distinct from the amino acid composition that a shuffle holds fixed."
+      ],
+      "foot": "Van Roey et al. 2014; Chen et al. 2013"
+    },
+    {
+      "type": "stats",
+      "kind": "method",
+      "headline": "The null is built from the candidate's own residues",
+      "sub": "A random permutation of the candidate's own residues destroys order and nothing else",
+      "stats": [
+        {
+          "value": "10",
+          "label": "shuffles per candidate"
+        },
+        {
+          "value": "0",
+          "label": "change in composition or length"
+        },
+        {
+          "value": "1",
+          "label": "variable: residue order"
+        },
+        {
+          "value": "0.0909",
+          "label": "per-candidate null probability"
+        },
+        {
+          "value": "11",
+          "label": "predictions per candidate, not one"
+        },
+        {
+          "value": "13",
+          "label": "candidates in the full-MSA screen"
+        }
+      ],
+      "pull": "Held fixed: length, net charge, hydrophobic fraction, glycine/serine content. Destroyed: every motif, every linker boundary, the helical-face arrangement of the single helical segment. Decoys ran against the same construct with identical settings.",
+      "foot": "Jiang et al. 2008; Schäffer et al. 2001; Mysinger et al. 2012"
+    },
+    {
+      "type": "prose",
+      "kind": "method",
+      "headline": "Pre-registered — and a threshold comparison yields no p-value",
+      "paras": [
+        "Eight studies, twenty-five hypotheses: 13 confirmed, 11 falsified, 1 not tested. Candidates, decoy construction, endpoints and decision rules were fixed under a SHA-256 hash before any prediction ran.",
+        "Five hypotheses were decided by a test statistic and nineteen by a fixed threshold. Holm correction was applied only to the five: a threshold comparison carries no p-value and belongs to no correction family.",
+        "Correction runs the wrong way for a null in any case — every step-down adjustment maps a p-value upward, so it can only convert rejections into non-rejections. A slate settled predominantly by thresholds is exploratory throughout, and pre-registration binds only as far as the registered document is specific enough to be violated."
+      ],
+      "stamp": "8 studies · 25 hypotheses · SHA-256-hashed before data",
+      "foot": "Simmons et al. 2011; Aickin & Gensler 1996; Claesen et al. 2021"
+    },
+    {
+      "type": "split",
+      "kind": "method",
+      "headline": "The gate came before the screen, and it splits in two",
+      "sub": "16 X-ray peptide–receptor complexes, curated in advance in two date strata",
+      "paras": [
+        "Pre-cutoff, deposited where the model could have seen them: 7 of 8 CAPRI-acceptable, median DockQ 0.8725 — above the high-quality landmark. Post-cutoff, where it could not: 3 of 8 acceptable, median DockQ 0.18 — below the CAPRI acceptable-quality cutoff of 0.23.",
+        "The pooled figures average two strata that do not agree. Pooled 62% acceptable and pooled median DockQ 0.36 are an upper bound on what this pipeline does on an interface it has not already been shown, and must not be quoted alone.",
+        "ipTM tracked DockQ at Spearman rho 0.8 across the sixteen, while misclassifying 5 of them against its own confidence bands. The regime does not transfer either: benchmark peptides are 7 to 17 residues, the screened candidates 31 to 47."
+      ],
+      "stats": [
+        {
+          "value": "0.875",
+          "label": "acceptable pre-cutoff, 7 of 8"
+        },
+        {
+          "value": "0.8725",
+          "label": "median DockQ, pre-cutoff"
+        },
+        {
+          "value": "0.375",
+          "label": "acceptable post-cutoff, 3 of 8"
+        },
+        {
+          "value": "0.18",
+          "label": "median DockQ, post-cutoff"
+        },
+        {
+          "value": "0.23",
+          "label": "CAPRI acceptable-quality cutoff"
+        },
+        {
+          "value": "62%",
+          "label": "pooled — upper bound only"
+        }
+      ],
+      "stamp": "gate pre-registered as the precondition for reading the screen",
+      "foot": "Basu & Wallner 2016; Mirabello & Wallner 2024; Zhou et al. 2025"
+    },
+    {
+      "type": "stats",
+      "kind": "method",
+      "headline": "The sampler's own noise sets the resolution limit on score differences",
+      "sub": "87 runs over 6 constructs; the standard deviations are pooled across them",
+      "stats": [
+        {
+          "value": "0.14943",
+          "label": "pooled across-seed ipTM SD"
+        },
+        {
+          "value": "2.6615",
+          "label": "pooled complex pLDDT SD"
+        },
+        {
+          "value": "4.6157",
+          "label": "pooled minimum interface PAE SD"
+        },
+        {
+          "value": "0.0689–0.2344",
+          "label": "per-construct ipTM SD, three recorded"
+        },
+        {
+          "value": "0.0",
+          "label": "spread at a fixed seed"
+        },
+        {
+          "value": "87",
+          "label": "runs over six constructs"
+        }
+      ],
+      "pull": "The floor is pooled and coarse, and not sharply determined — more than a threefold spread across the three constructs recorded individually. The variation is seed-to-seed, not run-to-run: at a fixed seed, three replicates returned one value.",
+      "foot": "Henderson et al. 2018; Halsey et al. 2015"
+    },
+    {
+      "type": "stats",
+      "kind": "result",
+      "headline": "Designed and decoy did not separate",
+      "sub": "Thirteen candidates, ten shuffles each, full alignment",
+      "stats": [
+        {
+          "value": "0.6287",
+          "label": "mean designed ipTM"
+        },
+        {
+          "value": "0.6278",
+          "label": "mean decoy ipTM"
+        },
+        {
+          "value": "0.0009",
+          "label": "paired difference"
+        },
+        {
+          "value": "0.0057",
+          "label": "Cohen's dz"
+        },
+        {
+          "value": "0.98",
+          "label": "paired t-test p"
+        },
+        {
+          "value": "166",
+          "label": "noise floor over that difference"
+        }
+      ],
+      "pull": "No difference detected at the achieved precision. Not equivalence: no smallest effect of interest was fixed in advance, and thirteen pairs is a low-power design.",
+      "foot": "Altman & Bland 1995; Lakens et al. 2017"
+    },
+    {
+      "type": "figure",
+      "kind": "result",
+      "headline": "Each design against its own ten shuffles",
+      "fig": "fig1_native_vs_decoy.png",
+      "caption": "Designed ipTM for each of the thirteen candidates against its ten composition-matched shuffles. Eleven designed values failed to exceed every shuffle. The single highest ipTM anywhere in the screen, 0.9724, belongs to a shuffle of MicroDual-Trem2-Nrf2-M5, not to the design. Per-candidate differences span −0.2411 to +0.3228: signal that cancels, not signal uniformly absent."
+    },
+    {
+      "type": "split",
+      "kind": "result",
+      "headline": "Two candidates beat all their decoys. That is what no effect looks like.",
+      "sub": "Exploratory and post hoc — not a pre-registered test, and not two hits",
+      "paras": [
+        "Under exchangeability a design's chance of being the maximum of eleven values is 1/11 = 0.0909, so over thirteen candidates the expected number of winners is 1.182. Two winners is close to the modal outcome of a screen with no effect at all.",
+        "Both margins sit inside the instrument's noise. BasalNgf-TrkA-B3 beat its best decoy by 0.0682 and BasalAChE-Abeta-B4 by 0.0136 — 0.4564 and 0.09101 of one seed standard deviation. A rerun with different seeds could plausibly erase or reverse either.",
+        "This screen-level calculation was made after the per-candidate results were seen. It carries no pre-specified error control. Neither candidate is presented here as a hit; calling them hits would be the specific error the design was built to prevent, committed one level up."
+      ],
+      "stats": [
+        {
+          "value": "2",
+          "label": "candidates beat all ten decoys"
+        },
+        {
+          "value": "1.182",
+          "label": "expected under the null"
+        },
+        {
+          "value": "0.3338",
+          "label": "P(X ≥ 2)"
+        },
+        {
+          "value": "0.0682",
+          "label": "larger margin over best decoy"
+        },
+        {
+          "value": "0.0136",
+          "label": "smaller margin over best decoy"
+        },
+        {
+          "value": "0.14943",
+          "label": "seed-to-seed ipTM SD"
+        }
+      ],
+      "foot": "Storey & Tibshirani 2003; Elias & Gygi 2007"
+    },
+    {
+      "type": "figure",
+      "kind": "result",
+      "headline": "Observed winners against the screen-level null",
+      "fig": "fig2_screen_level_null.png",
+      "caption": "Two observed winners against a binomial null with per-candidate probability 0.0909 over thirteen candidates: expectation 1.182, P(X ≥ 2) = 0.3338. The observed count falls inside the bulk of the null distribution. The comparison of observed to expected, not the winners themselves, is the evidence — and the calculation is exploratory."
+    },
+    {
+      "type": "figure",
+      "kind": "result",
+      "headline": "Falsified in every retained version",
+      "fig": "fig3_falsified_every_version.png",
+      "caption": "The primary hypothesis was falsified in all 11 retained versions of the record, across candidate sets of differing size ending at the thirteen reported here. Successive corrections moved the precision of the estimate, not its sign. This is weak evidence of a strong thing: it does not show the peptides cannot bind."
+    },
+    {
+      "type": "split",
+      "kind": "result",
+      "headline": "Where a confident-looking complex gets its confidence",
+      "sub": "BasalAChE-Abeta-B4 against the acetylcholinesterase catalytic gorge",
+      "paras": [
+        "Complex pLDDT is a mean over every modelled residue, so a receptor domain co-folded with a short peptide gives a length-weighted average dominated by the receptor. It is substantially the receptor's number wearing the complex's name.",
+        "That the receptor scores well is unsurprising rather than informative: acetylcholinesterase has been solved at atomic resolution since 1991. On a chain with that much precedent the confidence head is interpolating.",
+        "The peptide is the chain that bears on the design question and the one the predictor is least equipped to score. A motif-and-linker chimera has no evolutionary record, and for sequences without one pLDDT correlates positively with predicted disorder — the reverse of its behaviour on conserved proteins."
+      ],
+      "stats": [
+        {
+          "value": "0.8105",
+          "label": "designed ipTM, fourth highest"
+        },
+        {
+          "value": "0.0136",
+          "label": "margin over best decoy"
+        },
+        {
+          "value": "0.0910",
+          "label": "of one seed standard deviation"
+        },
+        {
+          "value": "0.1493",
+          "label": "margin over decoy mean"
+        },
+        {
+          "value": "0.9991",
+          "label": "of one seed standard deviation"
+        }
+      ],
+      "foot": "Sussman et al. 1991; Middendorf et al. 2024"
+    },
+    {
+      "type": "figure",
+      "kind": "result",
+      "headline": "A deeper alignment raises the level and creates nothing",
+      "fig": "fig4_alphafold_vs_boltz.png",
+      "caption": "Exploratory. Median Pearson r between Boltz-2 and AlphaFold DB confidence for the receptor chains rose from 0.7154 single-sequence to 0.8637 with a full MSA — a difference of two summary medians, not robust to the choice of reference structure. A correlated second opinion, not corroboration: both arms are PDB-supervised and the database entries are monomer predictions.",
+      "foot": "AlphaFold Protein Structure Database used under CC BY 4.0; Varadi et al. 2022"
+    },
+    {
+      "type": "led",
+      "kind": "result",
+      "headline": "Independent work points the same way, on a contested record",
+      "led": [
+        {
+          "key": "Smorodina 2026",
+          "text": "106 nanobody–antigen complexes against 11,342 shuffled non-cognate pairings, across AlphaFold3, Boltz-2 and Chai-1: geometrically plausible complexes throughout, ipTM frequently failing to discriminate cognate from non-cognate. A preprint, not peer reviewed."
+        },
+        {
+          "key": "Bret et al. 2026",
+          "text": "Boltz-2's active/inactive classification insensitive to key binding-site mutations and, in some cases, to target exchange. Same failure in kind — a different head from the ipTM channel used here, and on small molecules."
+        },
+        {
+          "key": "Wen et al. 2026",
+          "text": "Shortcut learning on RNA–small molecule data, where negatives differed systematically from positives in bulk physicochemical properties. Bias-matched decoys are the fix, in a different molecular class."
+        },
+        {
+          "key": "Ünsal et al. 2026",
+          "text": "Nine co-folding methods including Boltz-2, benchmarked on 200 antibody–antigen complexes: native confidence scores did not deliver the required precision and recall, so a purpose-built metric was needed."
+        },
+        {
+          "key": "Yin & Pierce 2024",
+          "text": "About 30% near-native success over 427 non-redundant antibody–antigen complexes, rising to about 50% with increased sampling. Whether short designed peptides behave like these targets is untested here."
+        },
+        {
+          "key": "Kim et al. 2025 (contra)",
+          "text": "A prospective evaluation on 557 Mac1–ligand complexes solved after the training cut-offs put Boltz-2 among the methods reproducing more than 50% of poses to better than 2 Å RMSD. The literature is contested and should not be flattened."
+        }
+      ],
+      "sub": "Different molecular classes, different nulls, the same metric"
+    },
+    {
+      "type": "led",
+      "kind": "limit",
+      "headline": "What this does not show",
+      "led": [
+        {
+          "key": "Not binding",
+          "text": "No assay of any kind was performed — no binding assay, no cell assay, no animal work. Nothing here bears on whether any of the thirteen peptides engages its intended domain."
+        },
+        {
+          "key": "Not equivalence",
+          "text": "No smallest effect of interest was fixed in advance, so no equivalence test was run and none is claimed. Absence of evidence is not evidence of absence."
+        },
+        {
+          "key": "Not a verdict on the predictor",
+          "text": "Pose accuracy and the discrimination of binders from decoys are separable axes. Where a reference structure existed, ipTM tracked DockQ at Spearman rho 0.8."
+        },
+        {
+          "key": "Not a resolved null",
+          "text": "The post-cutoff stratum — 3 of 8 acceptable, median DockQ 0.18 — leaves a real null and an instrument that cannot see an interface it has not been shown indistinguishable."
+        },
+        {
+          "key": "Not about design as such",
+          "text": "Thirteen unoptimised chimeras, one predictor, one sampler. Receptor construct definitions may also be wrong, and a paired design cannot detect that: a wrong target degrades design and decoy identically."
+        },
+        {
+          "key": "Not developability",
+          "text": "No blood–brain-barrier measurement or prediction was made. The ADMET model refused these constructs as outside its applicability domain, and that refusal was correct."
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "kind": "result",
+      "headline": "The instrument, not the peptides",
+      "thesis": "ipTM from this predictor, on this construct class, does not rank manually concatenated motif constructs above permutations of their own residues — so a screen ordering such constructs by that quantity cannot be shown to be ordering anything above its own seed-to-seed noise.",
+      "meta": [
+        "One recommendation: report a per-candidate composition-matched null and the sampler's seed-to-seed spread alongside confidence-based rankings of this kind.",
+        "The cost is eleven predictions per candidate instead of one, plus a handful of reseeded repeats.",
+        "The difference would have been believed had it appeared. It was 0.0009, against a measured noise floor of 0.14943."
+      ],
+      "foot": "Workman & Krogh 1999; Mysinger et al. 2012; Henderson et al. 2018"
+    }
+  ]
+}

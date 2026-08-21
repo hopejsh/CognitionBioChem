@@ -1,0 +1,3238 @@
+{
+  "schema_version": 1,
+  "method": "Every entry was proposed by a domain specialist that had retrieved it through the PubMed E-utilities, re-fetched independently by a second agent, and then re-fetched a third time directly from NCBI esummary and compared on title and first author. 184 of 184 matched. Titles, authors, journals, volumes, pages, years and DOIs below are NCBI's, not any agent's. Bibliographic metadata retrieved from PubMed (NLM/NCBI).",
+  "n_pubmed": 186,
+  "n_other": 4,
+  "references": [
+    {
+      "key": "bartus1982",
+      "pmid": "7046051",
+      "doi": "10.1126/science.7046051",
+      "authors": "Bartus RT, et al.",
+      "all_authors_n": 4,
+      "year": "1982",
+      "title": "The cholinergic hypothesis of geriatric memory dysfunction",
+      "journal": "Science (New York, N.Y.)",
+      "citation": "217(4558):408-14",
+      "is_review": true,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Canonical statement of the cholinergic hypothesis; cholinergic dysfunction in the aged/demented CNS, antimuscarinic blockade reproduces memory deficits, cholinergic stimulation improves memory only under tightly controlled conditions, and clinical trials to that date were not therapeutically successful.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "whitehouse1982",
+      "pmid": "7058341",
+      "doi": "10.1126/science.7058341",
+      "authors": "Whitehouse PJ, et al.",
+      "all_authors_n": 6,
+      "year": "1982",
+      "title": "Alzheimer's disease and senile dementia: loss of neurons in the basal forebrain",
+      "journal": "Science (New York, N.Y.)",
+      "citation": "215(4537):1237-9",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Profound (greater than 75%) and selective degeneration of cholinergic neurons of the nucleus basalis of Meynert in Alzheimer's disease and senile dementia, providing the anatomical substrate for the cortical cholinergic deficit.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "huston1988",
+      "pmid": "3045807",
+      "doi": "10.1073/pnas.85.16.5879",
+      "authors": "Huston JS, et al.",
+      "all_authors_n": 10,
+      "year": "1988",
+      "title": "Protein engineering of antibody binding sites: recovery of specific activity in an anti-digoxin single-chain Fv analogue produced in Escherichia coli",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "citation": "85(16):5879-83",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Origin of the Gly-Ser linker family: anti-digoxin 26-10 VH and VL joined by a 15-residue interdomain linker; the sFv retained digoxin specificity but bound ~6-fold more weakly (Ka 3.2e7 vs 1.9e8 per M for the parent Fab).",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "rothman1990",
+      "pmid": "2081237",
+      "doi": "",
+      "authors": "Rothman KJ",
+      "all_authors_n": 1,
+      "year": "1990",
+      "title": "No adjustments are needed for multiple comparisons",
+      "journal": "Epidemiology (Cambridge, Mass.)",
+      "citation": "1(1):43-6",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Routine multiplicity adjustment buys reduced type I error at the price of inflated type II error and rests on an implausible 'universal null hypothesis'.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "sussman1991",
+      "pmid": "1678899",
+      "doi": "10.1126/science.1678899",
+      "authors": "Sussman JL, et al.",
+      "all_authors_n": 7,
+      "year": "1991",
+      "title": "Atomic structure of acetylcholinesterase from Torpedo californica: a prototypic acetylcholine-binding protein",
+      "journal": "Science (New York, N.Y.)",
+      "citation": "253(5022):872-9",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "2.8 A structure of Torpedo californica AChE: 537-residue alpha/beta monomer, 12-stranded mixed beta sheet with 14 alpha helices, Ser-His-Glu triad, and an active site at the bottom of a deep narrow gorge lined by 14 aromatic residues that bind the quaternary ammonium rather than a formally anionic site.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "holliger1993",
+      "pmid": "8341653",
+      "doi": "10.1073/pnas.90.14.6444",
+      "authors": "Holliger P, et al.",
+      "all_authors_n": 3,
+      "year": "1993",
+      "title": "\"Diabodies\": small bivalent and bispecific antibody fragments",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "citation": "90(14):6444-8",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "scFv with 5- and 15-residue linkers retained parental affinity, but a linker too short for intrachain pairing forces interchain pairing, generating bivalent diabody dimers; linker length selects oligomeric state and geometry, not merely slack.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "altman1995",
+      "pmid": "7647644",
+      "doi": "10.1136/bmj.311.7003.485",
+      "authors": "Altman DG, Bland JM",
+      "all_authors_n": 2,
+      "year": "1995",
+      "title": "Absence of evidence is not evidence of absence",
+      "journal": "BMJ (Clinical research ed.)",
+      "citation": "311(7003):485",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "A non-significant result is not evidence of absence.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "clackson1995",
+      "pmid": "7529940",
+      "doi": "10.1126/science.7529940",
+      "authors": "Clackson T, Wells JA",
+      "all_authors_n": 2,
+      "year": "1995",
+      "title": "A hot spot of binding energy in a hormone-receptor interface",
+      "journal": "Science (New York, N.Y.)",
+      "citation": "267(5196):383-6",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "In the hGH:hGHbp interface ~30 side chains per partner contact, and alanine scanning shows a central hydrophobic region dominated by two tryptophans carries >3/4 of the binding free energy.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "aickin1996",
+      "pmid": "8629727",
+      "doi": "10.2105/ajph.86.5.726",
+      "authors": "Aickin M, Gensler H",
+      "all_authors_n": 2,
+      "year": "1996",
+      "title": "Adjusting for multiple testing when reporting research results: the Bonferroni vs Holm methods",
+      "journal": "American journal of public health",
+      "citation": "86(5):726-8",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Holm's step-down procedure is uniformly better than Bonferroni under the same assumptions, and can be expressed as an adjustment applied to p-values rather than to the rejection threshold.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "inestrosa1996",
+      "pmid": "8608006",
+      "doi": "10.1016/s0896-6273(00)80108-7",
+      "authors": "Inestrosa NC, et al.",
+      "all_authors_n": 9,
+      "year": "1996",
+      "title": "Acetylcholinesterase accelerates assembly of amyloid-beta-peptides into Alzheimer's fibrils: possible role of the peripheral site of the enzyme",
+      "journal": "Neuron",
+      "citation": "16(4):881-91",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Bovine, human and mouse AChE accelerate assembly of Abeta into fibrils; the effect is unaffected by the active-site inhibitor edrophonium but is affected by the peripheral-site ligand propidium, and butyrylcholinesterase (which lacks a peripheral site) does not produce it. In-vitro only, with no demonstrated clinical consequence.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "bodick1997",
+      "pmid": "9109749",
+      "doi": "10.1001/archneur.1997.00550160091022",
+      "authors": "Bodick NC, et al.",
+      "all_authors_n": 13,
+      "year": "1997",
+      "title": "Effects of xanomeline, a selective muscarinic receptor agonist, on cognitive function and behavioral symptoms in Alzheimer disease",
+      "journal": "Archives of neurology",
+      "citation": "54(4):465-73",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Xanomeline in 343 patients with mild-to-moderate Alzheimer's disease over six months improved ADAS-Cog and CIBIC+ at the high dose with dose-dependent reductions in vocal outbursts, suspiciousness, delusions, agitation and hallucinations, while 52% of high-dose patients discontinued for adverse events and syncope occurred in 12.6%. Efficacy demonstrated, tolerability prohibitive.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "raves1997",
+      "pmid": "8989325",
+      "doi": "10.1038/nsb0197-57",
+      "authors": "Raves ML, et al.",
+      "all_authors_n": 6,
+      "year": "1997",
+      "title": "Structure of acetylcholinesterase complexed with the nootropic alkaloid, (-)-huperzine A",
+      "journal": "Nature structural biology",
+      "citation": "4(1):57-63",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "2.5 A co-crystal of AChE with (-)-huperzine A shows an unexpected inhibitor orientation with 'surprisingly few strong direct interactions with protein residues to explain its high affinity', the affinity instead distributed over hydrophobic contacts with the gorge's aromatic residues; also the club-moss/Chinese folk medicine provenance and attribution of activity to AChE inhibition.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "tanaka1997",
+      "pmid": "9180080",
+      "doi": "10.1126/science.276.5319.1699",
+      "authors": "Tanaka K, et al.",
+      "all_authors_n": 15,
+      "year": "1997",
+      "title": "Epilepsy and exacerbation of brain injury in mice lacking the glutamate transporter GLT-1",
+      "journal": "Science (New York, N.Y.)",
+      "citation": "276(5319):1699-702",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "GLT-1 (EAAT2/SLC1A2) null mice show lethal spontaneous seizures and increased susceptibility to acute cortical injury, establishing the transporter's necessity genetically.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "perneger1998",
+      "pmid": "9553006",
+      "doi": "10.1136/bmj.316.7139.1236",
+      "authors": "Perneger TV",
+      "all_authors_n": 1,
+      "year": "1998",
+      "title": "What's wrong with Bonferroni adjustments",
+      "journal": "BMJ (Clinical research ed.)",
+      "citation": "316(7139):1236-8",
+      "is_review": true,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Bonferroni-type adjustment makes the interpretation of a given comparison depend on how many other comparisons are in the paper, which is not a property of the data.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "the1999",
+      "pmid": "10227630",
+      "doi": "10.1212/wnl.52.7.1427",
+      "authors": "The BDNF Study Group (Phase III)",
+      "all_authors_n": 0,
+      "year": "1999",
+      "title": "A controlled trial of recombinant methionyl human BDNF in ALS: The BDNF Study Group (Phase III)",
+      "journal": "Neurology",
+      "citation": "52(7):1427-33",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Recombinant methionyl human BDNF failed its primary endpoints in a 1,135-patient phase III ALS trial; ~85% 9-month survival across arms; only post hoc subgroups significant.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kryger1999",
+      "pmid": "10368299",
+      "doi": "10.1016/s0969-2126(99)80040-9",
+      "authors": "Kryger G, et al.",
+      "all_authors_n": 3,
+      "year": "1999",
+      "title": "Structure of acetylcholinesterase complexed with E2020 (Aricept): implications for the design of new anti-Alzheimer drugs",
+      "journal": "Structure (London, England : 1993)",
+      "citation": "7(3):297-307",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Donepezil (E2020) lies along the whole AChE gorge from the anionic subsite to the peripheral anionic site via aromatic stacking, and does not contact the catalytic triad or oxyanion hole directly, only through bridging solvent.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "tang1999",
+      "pmid": "10485705",
+      "doi": "10.1038/43432",
+      "authors": "Tang YP, et al.",
+      "all_authors_n": 8,
+      "year": "1999",
+      "title": "Genetic enhancement of learning and memory in mice",
+      "journal": "Nature",
+      "citation": "401(6748):63-9",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "Forebrain overexpression of NR2B (GluN2B) in transgenic mice enhanced NMDA receptor activation, facilitated synaptic potentiation at 10-100 Hz stimulation, and improved performance across multiple learning and memory tasks.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "wiesmann1999",
+      "pmid": "10490030",
+      "doi": "10.1038/43705",
+      "authors": "Wiesmann C, et al.",
+      "all_authors_n": 4,
+      "year": "1999",
+      "title": "Crystal structure of nerve growth factor in complex with the ligand-binding domain of the TrkA receptor",
+      "journal": "Nature",
+      "citation": "401(6749):184-8",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "2.2 A crystal structure of NGF bound to TrkA-d5; d5 necessary and sufficient for NGF binding; interface is two patches, NGF N-terminus becomes helical on complex formation.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "workman1999",
+      "pmid": "10572183",
+      "doi": "10.1093/nar/27.24.4816",
+      "authors": "Workman C, Krogh A",
+      "all_authors_n": 2,
+      "year": "1999",
+      "title": "No evidence that mRNAs have lower folding free energies than random sequences with the same dinucleotide distribution",
+      "journal": "Nucleic acids research",
+      "citation": "27(24):4816-22",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "The mRNA folding-stability claim did not survive a dinucleotide-matched null: for 46 mRNAs the predicted free energy was not significantly different from dinucleotide-matched randoms, the effect appeared only against mononucleotide-matched randoms, and even tRNAs became indistinguishable from their randomisations.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "maliartchouk2000",
+      "pmid": "10648649",
+      "doi": "",
+      "authors": "Maliartchouk S, et al.",
+      "all_authors_n": 7,
+      "year": "2000",
+      "title": "A designed peptidomimetic agonistic ligand of TrkA nerve growth factor receptors",
+      "journal": "Molecular pharmacology",
+      "citation": "57(2):385-91",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "D3, a proteolytically stable beta-turn peptidomimetic, binds the Ig-like C2 region of the TrkA ectodomain, competes another TrkA agonist, and gives selective trophic protection and differentiation.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "rivas2000",
+      "pmid": "11038329",
+      "doi": "10.1093/bioinformatics/16.7.583",
+      "authors": "Rivas E, Eddy SR",
+      "all_authors_n": 2,
+      "year": "2000",
+      "title": "Secondary structure alone is generally not statistically significant for the detection of noncoding RNAs",
+      "journal": "Bioinformatics (Oxford, England)",
+      "citation": "16(7):583-605",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "In a genome-scanning setting there is a statistical effect but 'it comes mostly from local base-composition bias and not from RNA secondary structure'; once significance is assessed by Monte Carlo shuffling in fixed-length windows the ncRNA signals are usually indistinguishable from noise.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "wang2000",
+      "pmid": "10936198",
+      "doi": "10.1046/j.1471-4159.2000.0751155.x",
+      "authors": "Wang HY, et al.",
+      "all_authors_n": 4,
+      "year": "2000",
+      "title": "Amyloid peptide Abeta(1-42) binds selectively and with picomolar affinity to alpha7 nicotinic acetylcholine receptors",
+      "journal": "Journal of neurochemistry",
+      "citation": "75(3):1155-61",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Abeta(1-42) binds alpha7 nAChR with Ki 4.1 pM (rat) and 5.0 pM (guinea pig), approximately 5000-fold selective over alpha4beta2 (30 and 23 nM). Cited as the extraordinary picomolar-affinity claim whose specificity is later contested.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "banfield2001",
+      "pmid": "11738045",
+      "doi": "10.1016/s0969-2126(01)00681-5",
+      "authors": "Banfield MJ, et al.",
+      "all_authors_n": 6,
+      "year": "2001",
+      "title": "Specificity in Trk receptor:neurotrophin interactions: the crystal structure of TrkB-d5 in complex with neurotrophin-4/5",
+      "journal": "Structure (London, England : 1993)",
+      "citation": "9(12):1191-9",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "2.7 A TrkB-d5:NT-4/5 structure; one neurotrophin dimer crosslinks two receptor molecules; conserved patch plus pair-specific site formed by ordering of the neurotrophin N terminus.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "romero2001",
+      "pmid": "11093259",
+      "doi": "10.1002/1097-0134(20010101)42:1<38::aid-prot50>3.0.co;2-3",
+      "authors": "Romero P, et al.",
+      "all_authors_n": 6,
+      "year": "2001",
+      "title": "Sequence complexity of disordered protein",
+      "journal": "Proteins",
+      "citation": "42(1):38-48",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Intrinsic disorder is largely compositional: segments identified by crystallography, NMR and CD show Shannon-entropy distributions shifted to lower values than ordered proteins, and are enriched in R, K, E, P, S and depleted in C, W, Y, I, V.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "schaffer2001",
+      "pmid": "11452024",
+      "doi": "10.1093/nar/29.14.2994",
+      "authors": "Schäffer AA, et al.",
+      "all_authors_n": 8,
+      "year": "2001",
+      "title": "Improving the accuracy of PSI-BLAST protein database searches with composition-based statistics and other refinements",
+      "journal": "Nucleic acids research",
+      "citation": "29(14):2994-3005",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Correcting for amino-acid composition is a load-bearing engineering step in sequence search: ROC rose 0.758 +/- 0.005 to 0.895 +/- 0.003 over 103 expert-curated queries, and the majority of the gain came from tuning the position-specific scoring system to each database sequence's amino-acid composition.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "wei2001",
+      "pmid": "11175877",
+      "doi": "10.1038/83993",
+      "authors": "Wei F, et al.",
+      "all_authors_n": 7,
+      "year": "2001",
+      "title": "Genetic enhancement of inflammatory pain by forebrain NR2B overexpression",
+      "journal": "Nature neuroscience",
+      "citation": "4(2):164-9",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "The same forebrain NR2B-overexpressing transgenic manipulation that improved learning also enhanced responses to inflammatory (formalin, CFA) pain - the cognitive gain is not free.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "aarts2002",
+      "pmid": "12399596",
+      "doi": "10.1126/science.1072873",
+      "authors": "Aarts M, et al.",
+      "all_authors_n": 9,
+      "year": "2002",
+      "title": "Treatment of ischemic brain damage by perturbing NMDA receptor- PSD-95 protein interactions",
+      "journal": "Science (New York, N.Y.)",
+      "citation": "298(5594):846-50",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Tat-NR2B9c, the C-terminal PDZ-binding motif of NR2B fused to the TAT CPP, dissociates NMDA receptors from PSD-95, protects cultured neurons and reduces infarct volume in rats.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "minichiello2002",
+      "pmid": "12367511",
+      "doi": "10.1016/s0896-6273(02)00942-x",
+      "authors": "Minichiello L, et al.",
+      "all_authors_n": 6,
+      "year": "2002",
+      "title": "Mechanism of TrkB-mediated hippocampal long-term potentiation",
+      "journal": "Neuron",
+      "citation": "36(1):121-37",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "TrkB PLC-gamma docking-site knock-in mice lose hippocampal LTP while Shc-site mice do not; PLC mutants retain MAPK activation but lose CREB/CaMKIV phosphorylation.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "paloneva2002",
+      "pmid": "12080485",
+      "doi": "10.1086/342259",
+      "authors": "Paloneva J, et al.",
+      "all_authors_n": 13,
+      "year": "2002",
+      "title": "Mutations in two genes encoding different subunits of a receptor signaling complex result in an identical disease phenotype",
+      "journal": "American journal of human genetics",
+      "citation": "71(3):656-62",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "TREM2 loss-of-function mutations cause Nasu-Hakola disease (PLOSL), phenocopying mutations in the signalling partner TYROBP/DAP12 - the recessive end of TREM2 human genetic causality.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "perindureau2002",
+      "pmid": "12122058",
+      "doi": "10.1523/JNEUROSCI.22-14-05955.2002",
+      "authors": "Perin-Dureau F, et al.",
+      "all_authors_n": 4,
+      "year": "2002",
+      "title": "Mapping the binding site of the neuroprotectant ifenprodil on NMDA receptors",
+      "journal": "The Journal of neuroscience : the official journal of the Society for Neuroscience",
+      "citation": "22(14):5955-65",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "The earlier mutagenesis-based model placing ifenprodil within the GluN2B (NR2B) LIVBP-like domain cleft by a Venus-flytrap mechanism, subsequently corrected by crystallography.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "zhao2002",
+      "pmid": "12445575",
+      "doi": "10.1016/s0014-2999(02)02589-x",
+      "authors": "Zhao Q, Tang XC",
+      "all_authors_n": 2,
+      "year": "2002",
+      "title": "Effects of huperzine A on acetylcholinesterase isoforms in vitro: comparison with tacrine, donepezil, rivastigmine and physostigmine",
+      "journal": "European journal of pharmacology",
+      "citation": "455(2-3):101-7",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Huperzine A preferentially inhibits tetrameric (G4) AChE while tacrine and rivastigmine prefer the monomeric (G1) form; in cortex huperzine A Ki approximately 7 nM against G4 versus donepezil 4 nM; inhibition constants differed significantly from region to region across cortex, hippocampus and striatum. Supports the claim that the huperzine A reference potency is isoform- and tissue-dependent.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "egan2003",
+      "pmid": "12553913",
+      "doi": "10.1016/s0092-8674(03)00035-7",
+      "authors": "Egan MF, et al.",
+      "all_authors_n": 12,
+      "year": "2003",
+      "title": "The BDNF val66met polymorphism affects activity-dependent secretion of BDNF and human memory and hippocampal function",
+      "journal": "Cell",
+      "citation": "112(2):257-69",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "BDNF Val66Met Met allele associated with poorer episodic memory, abnormal hippocampal fMRI activation, lower hippocampal NAA, and impaired depolarisation-induced secretion with failure to localise to secretory granules.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "mendez2003",
+      "pmid": "12784368",
+      "doi": "10.1002/prot.10393",
+      "authors": "Méndez R, et al.",
+      "all_authors_n": 4,
+      "year": "2003",
+      "title": "Assessment of blind predictions of protein-protein interactions: current status of docking methods",
+      "journal": "Proteins",
+      "citation": "52(1):51-67",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "The first CAPRI assessment evaluated 465 predictions from 19 groups over seven target complexes, comparing residue-residue contacts and interface residues to the X-ray structure and separately analysing the fit of the smaller (ligand) partner; this fixed the vocabulary for judging predicted complexes.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "oleary2003",
+      "pmid": "12730196",
+      "doi": "10.1074/jbc.M303209200",
+      "authors": "O'Leary PD, Hughes RA",
+      "all_authors_n": 2,
+      "year": "2003",
+      "title": "Design of potent peptide mimetics of brain-derived neurotrophic factor",
+      "journal": "The Journal of biological chemistry",
+      "citation": "278(28):25738-44",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Monocyclic monomeric loop-2 BDNF mimic was an inhibitor; bicyclic dimers were partial agonists; a conformationally constrained tricyclic dimer reached EC50 11 pM in chick sensory neuron survival while remaining a partial agonist.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "richard2003",
+      "pmid": "12411431",
+      "doi": "10.1074/jbc.M209548200",
+      "authors": "Richard JP, et al.",
+      "all_authors_n": 8,
+      "year": "2003",
+      "title": "Cell-penetrating peptides. A reevaluation of the mechanism of cellular uptake",
+      "journal": "The Journal of biological chemistry",
+      "citation": "278(1):585-90",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Energy-independent non-endocytic translocation of TAT(48-60) and R9 was substantially a fixation and flow-cytometry artefact; on live unfixed cells the peptides show endosomal distribution with endocytosis-like temperature and ATP dependence.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "storey2003",
+      "pmid": "12883005",
+      "doi": "10.1073/pnas.1530509100",
+      "authors": "Storey JD, Tibshirani R",
+      "all_authors_n": 2,
+      "year": "2003",
+      "title": "Statistical significance for genomewide studies",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "citation": "100(16):9440-5",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "The false-discovery-rate framework was introduced into genomics to make screen-level multiple-comparison arithmetic automatic and interpretable at scale, attaching a q-value to each tested feature rather than a per-feature p-value.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "chan2004",
+      "pmid": "15161896",
+      "doi": "10.1001/jama.291.20.2457",
+      "authors": "Chan AW, et al.",
+      "all_authors_n": 5,
+      "year": "2004",
+      "title": "Empirical evidence for selective reporting of outcomes in randomized trials: comparison of protocols to published articles",
+      "journal": "JAMA",
+      "citation": "291(20):2457-65",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Published trial reports diverge from protocols in a way that tracks statistical significance: 50% of efficacy and 65% of harm outcomes incompletely reported, pooled OR 2.4 (95% CI 1.4-4.0) efficacy and 4.7 (95% CI 1.8-12.0) harm for full reporting of significant outcomes, 62% of trials with a changed/introduced/omitted primary outcome.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "courtney2004",
+      "pmid": "15220031",
+      "doi": "10.1016/S0140-6736(04)16499-4",
+      "authors": "Courtney C, et al.",
+      "all_authors_n": 13,
+      "year": "2004",
+      "title": "Long-term donepezil treatment in 565 patients with Alzheimer's disease (AD2000): randomised double-blind trial",
+      "journal": "Lancet (London, England)",
+      "citation": "363(9427):2105-15",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "AD2000 randomised 565 community-resident patients for up to three years: donepezil gave 0.8 MMSE points and 1.0 BADLS points advantage over the first two years, but no difference in entry to institutional care (42% vs 44% at three years, p=0.4), progression of disability, carer psychopathology or costs; donepezil judged not cost effective with benefits below minimally relevant thresholds.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "de2004",
+      "pmid": "15356289",
+      "doi": "10.1056/NEJMe048225",
+      "authors": "De Angelis C, et al.",
+      "all_authors_n": 13,
+      "year": "2004",
+      "title": "Clinical trial registration: a statement from the International Committee of Medical Journal Editors",
+      "journal": "The New England journal of medicine",
+      "citation": "351(12):1250-1",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "The ICMJE requirement that trials be registered in a public registry before enrolment is the institutional ancestor of modern pre-registration schemes.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "liu2004",
+      "pmid": "15143284",
+      "doi": "10.1126/science.1096615",
+      "authors": "Liu L, et al.",
+      "all_authors_n": 8,
+      "year": "2004",
+      "title": "Role of NMDA receptor subtypes in governing the direction of hippocampal synaptic plasticity",
+      "journal": "Science (New York, N.Y.)",
+      "citation": "304(5673):1021-4",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "Pharmacological dissection at CA1 synapses: blocking GluN2B(NR2B)-containing receptors abolished LTD without affecting LTP, while preferential inhibition of GluN2A(NR2A)-containing receptors prevented LTP without affecting LTD.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "clote2005",
+      "pmid": "15840812",
+      "doi": "10.1261/rna.7220505",
+      "authors": "Clote P, et al.",
+      "all_authors_n": 4,
+      "year": "2005",
+      "title": "Structural RNA has lower folding energy than random RNA of the same dinucleotide frequency",
+      "journal": "RNA (New York, N.Y.)",
+      "citation": "11(5):578-91",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "The contesting result: under the same dinucleotide-preserving null, type III hammerhead ribozymes, SRP RNAs, U2 snRNAs and certain riboswitches do have significantly lower folding energy than dinucleotide-matched randoms, while whole mRNA and its 5'-UTR, 3'-UTR and CDS regions have energies comparable to random.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "ioannidis2005",
+      "pmid": "16060722",
+      "doi": "10.1371/journal.pmed.0020124",
+      "authors": "Ioannidis JP",
+      "all_authors_n": 1,
+      "year": "2005",
+      "title": "Why most published research findings are false",
+      "journal": "PLoS medicine",
+      "citation": "2(8):e124",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Positive predictive value of a finding falls with smaller studies, smaller effects, a greater number and lesser pre-selection of tested relationships, and greater flexibility in designs, definitions, outcomes and analytical modes.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "pardridge2005",
+      "pmid": "15717053",
+      "doi": "10.1602/neurorx.2.1.3",
+      "authors": "Pardridge WM",
+      "all_authors_n": 1,
+      "year": "2005",
+      "title": "The blood-brain barrier: bottleneck in brain drug development",
+      "journal": "NeuroRx : the journal of the American Society for Experimental NeuroTherapeutics",
+      "citation": "2(1):3-14",
+      "is_review": true,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "The BBB excludes essentially 100% of large-molecule neurotherapeutics and >98% of small-molecule drugs; passive diffusion across brain endothelium falls off with molecular weight and hydrogen-bond donor count.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "dawbarn2006",
+      "pmid": "16856868",
+      "doi": "10.1042/BST0340587",
+      "authors": "Dawbarn D, et al.",
+      "all_authors_n": 10,
+      "year": "2006",
+      "title": "NGF receptor TrkAd5: therapeutic agent and drug design target",
+      "journal": "Biochemical Society transactions",
+      "citation": "34(Pt 4):587-90",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Recombinant TrkAd5 expressed in E. coli binds NGF with picomolar affinity.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "werle2006",
+      "pmid": "16622600",
+      "doi": "10.1007/s00726-005-0289-3",
+      "authors": "Werle M, Bernkop-Schnürch A",
+      "all_authors_n": 2,
+      "year": "2006",
+      "title": "Strategies to improve plasma half life time of peptide and protein drugs",
+      "journal": "Amino acids",
+      "citation": "30(4):351-67",
+      "is_review": true,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Somatostatin's few-minute plasma half-life rises to ~1.5 h in octreotide via truncation plus D-amino acid substitution; a 40 kDa PEG conjugate of IFN-alpha-2b shows 330-fold half-life extension over the native protein.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "elias2007",
+      "pmid": "17327847",
+      "doi": "10.1038/nmeth1019",
+      "authors": "Elias JE, Gygi SP",
+      "all_authors_n": 2,
+      "year": "2007",
+      "title": "Target-decoy search strategy for increased confidence in large-scale protein identifications by mass spectrometry",
+      "journal": "Nature methods",
+      "citation": "4(3):207-14",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Proteomics solves the screen-level null structurally: a concatenated target-decoy database lets decoy hit frequency estimate the error rate of the whole identification set; the authors argue concatenated searches are preferable to separate target and decoy searches and that the theoretical error of the estimate can be bounded.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "lensink2007",
+      "pmid": "17918726",
+      "doi": "10.1002/prot.21804",
+      "authors": "Lensink MF, et al.",
+      "all_authors_n": 3,
+      "year": "2007",
+      "title": "Docking and scoring protein complexes: CAPRI 3rd Edition",
+      "journal": "Proteins",
+      "citation": "69(4):704-18",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "CAPRI rounds 6-12 scored 1994 predictions from 63 groups and eight servers; 31 groups produced acceptable/medium models but only one high-accuracy submission, and the first scoring experiment found groups could separate correct from incorrect association modes but were unable to identify the best models -- i.e. discrimination and ranking are distinct problems.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "jiang2008",
+      "pmid": "18405375",
+      "doi": "10.1186/1471-2105-9-192",
+      "authors": "Jiang M, et al.",
+      "all_authors_n": 4,
+      "year": "2008",
+      "title": "uShuffle: a useful tool for shuffling biological sequences while preserving the k-let counts",
+      "journal": "BMC bioinformatics",
+      "citation": "9:192",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "uShuffle implements exact k-let-preserving uniform permutation via the latest variant of the Euler algorithm with Wilson's algorithm for arborescence generation, for arbitrary alphabet and let size -- the reference tool for higher-order sequence nulls.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "preskorn2008",
+      "pmid": "19011431",
+      "doi": "10.1097/JCP.0b013e31818a6cea",
+      "authors": "Preskorn SH, et al.",
+      "all_authors_n": 6,
+      "year": "2008",
+      "title": "An innovative design to establish proof of concept of the antidepressant effects of the NR2B subunit selective N-methyl-D-aspartate antagonist, CP-101,606, in patients with treatment-refractory major depressive disorder",
+      "journal": "Journal of clinical psychopharmacology",
+      "citation": "28(6):631-7",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "The GluN2B-selective antagonist CP-101,606 (traxoprodil) produced a MADRS advantage in treatment-refractory depression in a small randomised proof-of-concept study reported at an 80% confidence interval and P < 0.10 - a signal, not a confirmatory result.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "turner2008",
+      "pmid": "18199864",
+      "doi": "10.1056/NEJMsa065779",
+      "authors": "Turner EH, et al.",
+      "all_authors_n": 5,
+      "year": "2008",
+      "title": "Selective publication of antidepressant trials and its influence on apparent efficacy",
+      "journal": "The New England journal of medicine",
+      "citation": "358(3):252-60",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Selective publication inflates apparent efficacy: of 74 FDA-registered studies covering 12,564 patients, 31% unpublished; literature implied 94% positive against an FDA figure of 51%; meta-analytic effect size inflated 11-69% per drug, 32% overall.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "gielen2009",
+      "pmid": "19404260",
+      "doi": "10.1038/nature07993",
+      "authors": "Gielen M, et al.",
+      "all_authors_n": 5,
+      "year": "2009",
+      "title": "Mechanism of differential control of NMDA receptor activity by NR2 subunits",
+      "journal": "Nature",
+      "citation": "459(7247):703-7",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "Channel maximal open probability spans ~50-fold across subtypes (~0.5 GluN2A, ~0.1 GluN2B, ~0.01 GluN2C/D); subunit-specific gating is controlled by the GluN2 ATD and ATD-LBD linker via the spontaneous open-cleft/closed-cleft equilibrium, supporting bidirectional 'closer'/'opener' pharmacology.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "park2009",
+      "pmid": "19252480",
+      "doi": "10.1038/nature07830",
+      "authors": "Park BS, et al.",
+      "all_authors_n": 6,
+      "year": "2009",
+      "title": "The structural basis of lipopolysaccharide recognition by the TLR4-MD-2 complex",
+      "journal": "Nature",
+      "citation": "458(7242):1191-5",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "LPS binds a large hydrophobic pocket in MD-2 with five of six acyl chains buried and the sixth exposed to contact conserved TLR4 phenylalanines, driving an m-shaped 2:2:2 multimer further stabilised by ionic contacts between LPS phosphates and a basic cluster on TLR4 and MD-2 - a lipid-shaped, largely buried interface.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "thomas2009",
+      "pmid": "19774344",
+      "doi": "10.1007/s11095-009-9964-5",
+      "authors": "Thomas FC, et al.",
+      "all_authors_n": 11,
+      "year": "2009",
+      "title": "Uptake of ANG1005, a novel paclitaxel derivative, through the blood-brain barrier into brain and experimental brain metastases of breast cancer",
+      "journal": "Pharmaceutical research",
+      "citation": "26(11):2486-94",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "In situ rat brain perfusion gives ANG1005 a brain influx coefficient K_in of 7.3e-3 mL/s/g versus 8.5e-5 for free paclitaxel (~86-fold), >70% tracer retained after capillary depletion, 4- to 54-fold higher uptake into brain and intracerebral metastases in vivo.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "jang2010",
+      "pmid": "20133810",
+      "doi": "10.1073/pnas.0913572107",
+      "authors": "Jang SW, et al.",
+      "all_authors_n": 11,
+      "year": "2010",
+      "title": "A selective TrkB agonist with potent neurotrophic activities by 7,8-dihydroxyflavone",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "citation": "107(6):2687-92",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "7,8-dihydroxyflavone reported as a bioactive high-affinity TrkB agonist provoking dimerisation and autophosphorylation, protecting wild-type but not TrkB-deficient neurons, and reducing infarct volume TrkB-dependently.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "khan2010",
+      "pmid": "20374280",
+      "doi": "10.1111/j.1460-9568.2010.07116.x",
+      "authors": "Khan GM, et al.",
+      "all_authors_n": 5,
+      "year": "2010",
+      "title": "beta-Amyloid activates presynaptic alpha7 nicotinic acetylcholine receptors reconstituted into a model nerve cell system: involvement of lipid rafts",
+      "journal": "The European journal of neuroscience",
+      "citation": "31(5):788-96",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Investigators working on the same interaction a decade later note that 'conflicting data exist as to the nature of the Abeta-alpha7 nAChR interaction, and whether it is the result of specific binding', and that both agonist-like and antagonist-like effects have been reported. Supports the claim that the Abeta-alpha7 binding mode is disputed in the primary literature.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "massa2010",
+      "pmid": "20407211",
+      "doi": "10.1172/JCI41356",
+      "authors": "Massa SM, et al.",
+      "all_authors_n": 9,
+      "year": "2010",
+      "title": "Small molecule BDNF mimetics activate TrkB signaling and prevent neuronal degeneration in rodents",
+      "journal": "The Journal of clinical investigation",
+      "citation": "120(5):1774-85",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "LM22A-4 came from in silico screening against a BDNF loop-domain pharmacophore plus low-throughput screening in mouse fetal hippocampal neurons, with nanomolar TrkB-selective activity, ectodomain binding, and signalling kinetics differing from BDNF.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "mcleay2010",
+      "pmid": "20356413",
+      "doi": "10.1186/1471-2105-11-165",
+      "authors": "McLeay RC, Bailey TL",
+      "all_authors_n": 2,
+      "year": "2010",
+      "title": "Motif Enrichment Analysis: a unified framework and an evaluation on ChIP data",
+      "journal": "BMC bioinformatics",
+      "citation": "11:165",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Threshold selection is its own trap: data-driven threshold methods perform poorly unless the range of admissible thresholds is limited a priori, and Fisher exact, rank-sum and multi-hypergeometric tests performed badly even when the threshold was chosen optimally in hindsight.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "stewart2010",
+      "pmid": "20037584",
+      "doi": "10.1038/ni.1836",
+      "authors": "Stewart CR, et al.",
+      "all_authors_n": 14,
+      "year": "2010",
+      "title": "CD36 ligands promote sterile inflammation through assembly of a Toll-like receptor 4 and 6 heterodimer",
+      "journal": "Nature immunology",
+      "citation": "11(2):155-61",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Oxidised LDL and Abeta signal through a TLR4-TLR6 heterodimer whose assembly is licensed by the scavenger receptor CD36, giving a molecular route from amyloid to sterile microglial inflammation.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "karakas2011",
+      "pmid": "21677647",
+      "doi": "10.1038/nature10180",
+      "authors": "Karakas E, et al.",
+      "all_authors_n": 3,
+      "year": "2011",
+      "title": "Subunit arrangement and phenylethanolamine binding in GluN1/GluN2B NMDA receptors",
+      "journal": "Nature",
+      "citation": "475(7355):249-53",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "The phenylethanolamine (ifenprodil) site lies at the GluN1-GluN2B ATD heterodimer interface rather than within the GluN2B cleft; an engineered inter-subunit disulfide restricting bi-lobe motion markedly decreases ifenprodil sensitivity.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "matsunaga2011",
+      "pmid": "20881006",
+      "doi": "10.1124/mol.110.068064",
+      "authors": "Matsunaga N, et al.",
+      "all_authors_n": 4,
+      "year": "2011",
+      "title": "TAK-242 (resatorvid), a small-molecule inhibitor of Toll-like receptor (TLR) 4 signaling, binds selectively to TLR4 and interferes with interactions between TLR4 and its adaptor molecules",
+      "journal": "Molecular pharmacology",
+      "citation": "79(1):34-41",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "TAK-242 (resatorvid) inhibits TLR4 signalling without engaging the ectodomain: it binds Cys747 in the intracellular TIR domain and works by disrupting TLR4's interaction with TIRAP and TRAM.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "rafii2011",
+      "pmid": "21502597",
+      "doi": "10.1212/WNL.0b013e318216eb7b",
+      "authors": "Rafii MS, et al.",
+      "all_authors_n": 9,
+      "year": "2011",
+      "title": "A phase II trial of huperzine A in mild to moderate Alzheimer disease",
+      "journal": "Neurology",
+      "citation": "76(16):1389-94",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "In 210 randomised patients, huperzine A 200 ug BID did not change ADAS-Cog at 16 weeks (negative primary endpoint); secondary analysis at 400 ug BID gave 2.27-point ADAS-Cog improvement vs 0.29-point placebo decline at week 11 (p=0.001), decaying to 1.92 vs 0.34 at week 16 (p=0.07), with no significant effect on global impression, NPI or ADL. Class III evidence of no demonstrable cognitive effect at the primary dose.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "simmons2011",
+      "pmid": "22006061",
+      "doi": "10.1177/0956797611417632",
+      "authors": "Simmons JP, et al.",
+      "all_authors_n": 3,
+      "year": "2011",
+      "title": "False-positive psychology: undisclosed flexibility in data collection and analysis allows presenting anything as significant",
+      "journal": "Psychological science",
+      "citation": "22(11):1359-66",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Undisclosed flexibility in data collection, analysis and reporting raises the actual false-positive rate far above the nominal 5%; the proposed remedy is six author requirements and four reviewer guidelines.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "cheung2012",
+      "pmid": "23035744",
+      "doi": "10.1021/jm300871x",
+      "authors": "Cheung J, et al.",
+      "all_authors_n": 8,
+      "year": "2012",
+      "title": "Structures of human acetylcholinesterase in complex with pharmacologically important ligands",
+      "journal": "Journal of medicinal chemistry",
+      "citation": "55(22):10282-6",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "High-resolution human AChE structures show donepezil binding differently to human AChE than to the Torpedo enzyme, so the template species is not interchangeable for structure-based work.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "danial2012",
+      "pmid": "22770564",
+      "doi": "10.1021/bc3002248",
+      "authors": "Danial M, et al.",
+      "all_authors_n": 5,
+      "year": "2012",
+      "title": "Site-specific PEGylation of HR2 peptides: effects of PEG conjugation position and chain length on HIV-1 membrane fusion inhibition and proteolytic degradation",
+      "journal": "Bioconjugate chemistry",
+      "citation": "23(8):1648-60",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Site-specific PEGylation of gp41 HR2-derived fusion inhibitors bought up to 3.4-fold longer proteolytic degradation half-life, but every conjugate lost fusion-inhibitory activity; the loss could be minimised by moving PEG to a non-interacting helix face.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "mysinger2012",
+      "pmid": "22716043",
+      "doi": "10.1021/jm300687e",
+      "authors": "Mysinger MM, et al.",
+      "all_authors_n": 4,
+      "year": "2012",
+      "title": "Directory of useful decoys, enhanced (DUD-E): better ligands and decoys for better benchmarking",
+      "journal": "Journal of medicinal chemistry",
+      "citation": "55(14):6582-94",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Property-matched decoy design as the engineered analogue of composition-matched sequence decoys: 102 targets, 22,886 clustered ligands, 50 property-matched decoys per ligand, net charge added to the matched properties, and topologically most-dissimilar decoys selected so they are unlikely to be true actives.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "button2013",
+      "pmid": "23571845",
+      "doi": "10.1038/nrn3475",
+      "authors": "Button KS, et al.",
+      "all_authors_n": 7,
+      "year": "2013",
+      "title": "Power failure: why small sample size undermines the reliability of neuroscience",
+      "journal": "Nature reviews. Neuroscience",
+      "citation": "14(5):365-76",
+      "is_review": true,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Low statistical power reduces the likelihood that a significant result reflects a true effect and produces overestimates of effect size, so small paired designs are in a regime where sign and magnitude of a recovered effect are unreliable.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "chen2013",
+      "pmid": "23026637",
+      "doi": "10.1016/j.addr.2012.09.039",
+      "authors": "Chen X, et al.",
+      "all_authors_n": 3,
+      "year": "2013",
+      "title": "Fusion protein linkers: property, design and functionality",
+      "journal": "Advanced drug delivery reviews",
+      "citation": "65(10):1357-69",
+      "is_review": true,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Empirical linkers classify into flexible (Gly/Ser-rich), rigid (e.g. A(EAAAK)nA) and in vivo cleavable classes; linker choice changes expression yield, biological activity and pharmacokinetics.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "guerreiro2013",
+      "pmid": "23150934",
+      "doi": "10.1056/NEJMoa1211851",
+      "authors": "Guerreiro R, et al.",
+      "all_authors_n": 24,
+      "year": "2013",
+      "title": "TREM2 variants in Alzheimer's disease",
+      "journal": "The New England journal of medicine",
+      "citation": "368(2):117-27",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Independent replication of TREM2 as an Alzheimer's risk gene: excess burden of exon 2 variants in 1,092 cases versus 1,107 controls (22 versus 5 variant alleles), with replication in a further 1,887 cases and 4,061 controls.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "jonsson2013",
+      "pmid": "23150908",
+      "doi": "10.1056/NEJMoa1211103",
+      "authors": "Jonsson T, et al.",
+      "all_authors_n": 24,
+      "year": "2013",
+      "title": "Variant of TREM2 associated with the risk of Alzheimer's disease",
+      "journal": "The New England journal of medicine",
+      "citation": "368(2):107-16",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "TREM2 p.Arg47His (rs75932628-T) confers OR 2.92 (95% CI 2.09-4.09, P=3.42x10^-10) for Alzheimer's disease in 2,261 sequenced Icelandic genomes; combined OR 2.90 (2.16-3.91, P=2.1x10^-12); 0.46% frequency in controls aged 85+; non-demented carriers aged 80-100 had poorer cognition (P=0.003).",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kalliokoski2013",
+      "pmid": "23613770",
+      "doi": "10.1371/journal.pone.0061007",
+      "authors": "Kalliokoski T, et al.",
+      "all_authors_n": 4,
+      "year": "2013",
+      "title": "Comparability of mixed IC₅₀ data - a statistical analysis",
+      "journal": "PloS one",
+      "citation": "8(4):e61007",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "The standard deviation of independently measured public ChEMBL IC50 values on identical protein-ligand systems is about 25% larger than that of Ki data, and is greater than the standard deviation of in-house intra-laboratory / inter-day IC50 data. Frames the label noise against which an affinity benchmark's MAE must be judged.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "lemke2013",
+      "pmid": "23933819",
+      "doi": "10.1038/ng.2728",
+      "authors": "Lemke JR, et al.",
+      "all_authors_n": 71,
+      "year": "2013",
+      "title": "Mutations in GRIN2A cause idiopathic focal epilepsy with rolandic spikes",
+      "journal": "Nature genetics",
+      "citation": "45(9):1067-72",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "GRIN2A is a major genetic risk factor for idiopathic focal epilepsy with rolandic spikes; heterozygous mutations in 27/359 affected individuals (7.5%), with detection rate rising from BECTS to CSWS, plus exon-disrupting microdeletions in 3/286.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "longo2013",
+      "pmid": "23977697",
+      "doi": "10.1038/nrd4024",
+      "authors": "Longo FM, Massa SM",
+      "all_authors_n": 2,
+      "year": "2013",
+      "title": "Small-molecule modulation of neurotrophin receptors: a strategy for the treatment of neurological disease",
+      "journal": "Nature reviews. Drug discovery",
+      "citation": "12(7):507-25",
+      "is_review": true,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Advocacy review proposing small-molecule targeting of individual neurotrophin receptors (TRKA, TRKB, TRKC, p75, sortilin).",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "okamoto2013",
+      "pmid": "23151250",
+      "doi": "10.1021/cb3005403",
+      "authors": "Okamoto T, et al.",
+      "all_authors_n": 10,
+      "year": "2013",
+      "title": "Stabilizing the pro-apoptotic BimBH3 helix (BimSAHB) does not necessarily enhance affinity or biological activity",
+      "journal": "ACS chemical biology",
+      "citation": "8(2):297-302",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Hydrocarbon stapling of the BimBH3 helix reduced affinity for pro-survival Bcl-2 proteins and the stapled peptide did not induce apoptosis in cells, indicating it was not inherently cell-permeable.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "opal2013",
+      "pmid": "23512062",
+      "doi": "10.1001/jama.2013.2194",
+      "authors": "Opal SM, et al.",
+      "all_authors_n": 29,
+      "year": "2013",
+      "title": "Effect of eritoran, an antagonist of MD2-TLR4, on mortality in patients with severe sepsis: the ACCESS randomized trial",
+      "journal": "JAMA",
+      "citation": "309(11):1154-62",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Eritoran, a synthetic lipid A antagonist occupying the MD-2 site, failed in a 1,961-patient phase 3 trial in severe sepsis: 28-day all-cause mortality 28.1% versus 26.9% on placebo (P=0.59), with no subgroup effect.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "yang2013",
+      "pmid": "24086396",
+      "doi": "10.1371/journal.pone.0074916",
+      "authors": "Yang G, et al.",
+      "all_authors_n": 4,
+      "year": "2013",
+      "title": "Huperzine A for Alzheimer's disease: a systematic review and meta-analysis of randomized clinical trials",
+      "journal": "PloS one",
+      "citation": "8(9):e74916",
+      "is_review": true,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Meta-analysis of 20 RCTs with 1823 participants reporting MMSE benefit at 8, 12 and 16 weeks, but with most trials at high risk of bias, no trial evaluating quality of life, and one trial finding no change on ADAS-Cog.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "zeng2013",
+      "pmid": "23831349",
+      "doi": "10.1016/j.neulet.2013.06.061",
+      "authors": "Zeng F, et al.",
+      "all_authors_n": 20,
+      "year": "2013",
+      "title": "The relationship between single nucleotide polymorphisms of the NTRK2 gene and sporadic Alzheimer's disease in the Chinese Han population",
+      "journal": "Neuroscience letters",
+      "citation": "550:55-9",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Five NTRK2 SNPs (four promoter, one intronic) in 216 sporadic AD cases and 244 controls in a Chinese Han cohort showed no association with disease or by haplotype.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "cudkowicz2014",
+      "pmid": "25297012",
+      "doi": "10.1016/S1474-4422(14)70222-4",
+      "authors": "Cudkowicz ME, et al.",
+      "all_authors_n": 21,
+      "year": "2014",
+      "title": "Safety and efficacy of ceftriaxone for amyotrophic lateral sclerosis: a multi-stage, randomised, double-blind, placebo-controlled trial",
+      "journal": "The Lancet. Neurology",
+      "citation": "13(11):1083-1091",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "Ceftriaxone, pursued because it raises EAAT2 expression and activity, showed a favourable early-stage functional slope but no efficacy in the stage 3 ALS population, with excess serious hepatobiliary adverse events - raising uptake capacity has not yet produced a drug.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "lee2014",
+      "pmid": "24974285",
+      "doi": "10.1016/B978-0-12-417158-9.00002-9",
+      "authors": "Lee S, et al.",
+      "all_authors_n": 4,
+      "year": "2014",
+      "title": "Photoreactive stapled peptides to identify and characterize BCL-2 family interaction sites by mass spectrometry",
+      "journal": "Methods in enzymology",
+      "citation": "544:25-48",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Bioactive alpha-helical motifs become unfolded when taken out of context from native signaling proteins and must be chemically re-restrained to recover helicity; excised motifs lose their parent-context conformation.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "van2014",
+      "pmid": "24926813",
+      "doi": "10.1021/cr400585q",
+      "authors": "Van Roey K, et al.",
+      "all_authors_n": 8,
+      "year": "2014",
+      "title": "Short linear motifs: ubiquitous and functionally diverse protein interaction modules directing cell regulation",
+      "journal": "Chemical reviews",
+      "citation": "114(13):6733-78",
+      "is_review": true,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "A large fraction of regulatory protein-protein interactions are mediated by short linear motifs in disordered regions, so the natural ligand for many interface pockets is itself a peptide.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "atagi2015",
+      "pmid": "26374899",
+      "doi": "10.1074/jbc.M115.679043",
+      "authors": "Atagi Y, et al.",
+      "all_authors_n": 14,
+      "year": "2015",
+      "title": "Apolipoprotein E Is a Ligand for Triggering Receptor Expressed on Myeloid Cells 2 (TREM2)",
+      "journal": "The Journal of biological chemistry",
+      "citation": "290(43):26043-50",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Apolipoprotein E reported as a high-affinity TREM2 ligand whose binding is markedly reduced by the R47H variant.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "halsey2015",
+      "pmid": "25719825",
+      "doi": "10.1038/nmeth.3288",
+      "authors": "Halsey LG, et al.",
+      "all_authors_n": 4,
+      "year": "2015",
+      "title": "The fickle P value generates irreproducible results",
+      "journal": "Nature methods",
+      "citation": "12(3):179-85",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "A p-value is itself a random variable with wide sampling variability, so a single large p from a single run says little about what the next run would return.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kaplan2015",
+      "pmid": "26244868",
+      "doi": "10.1371/journal.pone.0132382",
+      "authors": "Kaplan RM, Irvin VL",
+      "all_authors_n": 2,
+      "year": "2015",
+      "title": "Likelihood of Null Effects of Large NHLBI Clinical Trials Has Increased over Time",
+      "journal": "PloS one",
+      "citation": "10(8):e0132382",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Large NHLBI cardiovascular trials shifted toward null results after 2000 (17/30 vs 2/25 significant, chi-square 12.2, df 1, p=0.0005), with pre-registration on ClinicalTrials.gov strongly associated with the shift and industry co-sponsorship unrelated to it.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "keefe2015",
+      "pmid": "26089183",
+      "doi": "10.1038/npp.2015.176",
+      "authors": "Keefe RS, et al.",
+      "all_authors_n": 8,
+      "year": "2015",
+      "title": "Randomized, Double-Blind, Placebo-Controlled Study of Encenicline, an α7 Nicotinic Acetylcholine Receptor Agonist, as a Treatment for Cognitive Impairment in Schizophrenia",
+      "journal": "Neuropsychopharmacology : official publication of the American College of Neuropsychopharmacology",
+      "citation": "40(13):3053-60",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "319-patient phase 2 trial of encenicline in schizophrenia: primary endpoint (Overall Cognition Index) effect Cohen's d=0.257 (p=0.034) at 0.27 mg, not significant at 0.9 mg on that endpoint, while the PANSS Cognition Impairment Domain reached d=0.40 at 0.9 mg. Supports the claim that alpha7 agonism has produced only small, dose-non-monotonic effects.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "wang2015",
+      "pmid": "25728668",
+      "doi": "10.1016/j.cell.2015.01.049",
+      "authors": "Wang Y, et al.",
+      "all_authors_n": 13,
+      "year": "2015",
+      "title": "TREM2 lipid sensing sustains the microglial response in an Alzheimer's disease model",
+      "journal": "Cell",
+      "citation": "160(6):1061-71",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "TREM2 senses a broad array of anionic and zwitterionic lipids associated with fibrillar Abeta and damaged neuronal membranes, with R47H impairing detection; TREM2 deficiency and haploinsufficiency leave 5XFAD microglia unable to cluster around plaques and prone to apoptosis.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "basu2016",
+      "pmid": "27307625",
+      "doi": "10.1093/bioinformatics/btw257",
+      "authors": "Basu S, Wallner B",
+      "all_authors_n": 2,
+      "year": "2016",
+      "title": "Finding correct protein-protein docking models using ProQDock",
+      "journal": "Bioinformatics (Oxford, England)",
+      "citation": "32(12):i262-i270",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "Individual physical features correlate only weakly with DockQ -- the best single feature, electrostatic complementarity, reaching 0.25 -- while a trained combination (ProQDock) reached 0.49, setting a durable ceiling on interface scoring.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "basu2016b",
+      "pmid": "27560519",
+      "doi": "10.1371/journal.pone.0161879",
+      "authors": "Basu S, Wallner B",
+      "all_authors_n": 2,
+      "year": "2016",
+      "title": "DockQ: A Quality Measure for Protein-Protein Docking Models",
+      "journal": "PloS one",
+      "citation": "11(8):e0161879",
+      "is_review": false,
+      "domains": [
+        "cofolding",
+        "interface-eval"
+      ],
+      "used_for": "DockQ is a continuous [0,1] score combining Fnat, LRMS and iRMS that almost completely reproduces the CAPRI Incorrect/Acceptable/Medium/High classification.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "chaput2016",
+      "pmid": "27803745",
+      "doi": "10.1186/s13321-016-0167-x",
+      "authors": "Chaput L, et al.",
+      "all_authors_n": 4,
+      "year": "2016",
+      "title": "Benchmark of four popular virtual screening programs: construction of the active/decoy dataset remains a major determinant of measured performance",
+      "journal": "Journal of cheminformatics",
+      "citation": "8:56",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Measured discrimination is a property of the decoy set: on full DUD-E, BEDROC(alpha=80.5) > 0.5 for Glide on 30 of 102 targets, Gold 27, FlexX 14, Surflex 11; after removing targets with significant residual bias only 47 targets remain and the counts collapse to 5, 4, 2 and 2.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "greenland2016",
+      "pmid": "27209009",
+      "doi": "10.1007/s10654-016-0149-3",
+      "authors": "Greenland S, et al.",
+      "all_authors_n": 7,
+      "year": "2016",
+      "title": "Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations",
+      "journal": "European journal of epidemiology",
+      "citation": "31(4):337-50",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Twenty-five documented misinterpretations of p-values, confidence intervals and power exist because the p-value alone cannot carry information about precision or effect magnitude.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "hackos2016",
+      "pmid": "26875626",
+      "doi": "10.1016/j.neuron.2016.01.016",
+      "authors": "Hackos DH, et al.",
+      "all_authors_n": 15,
+      "year": "2016",
+      "title": "Positive Allosteric Modulators of GluN2A-Containing NMDARs with Distinct Modes of Action and Impacts on Circuit Function",
+      "journal": "Neuron",
+      "citation": "89(5):983-99",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "The best-validated positive allosteric site is at the GluN1-GluN2A ligand-binding-domain dimer interface, not the ATD; PAMs potentiate synaptic NMDARs in wild-type but not GluN2A-knockout slices and in triheteromeric GluN1/GluN2A/GluN2B receptors, with variable glutamate dependence and differential effects on plasticity induction.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kober2016",
+      "pmid": "27995897",
+      "doi": "10.7554/eLife.20391",
+      "authors": "Kober DL, et al.",
+      "all_authors_n": 7,
+      "year": "2016",
+      "title": "Neurodegenerative disease mutations in TREM2 reveal a functional surface and distinct loss-of-function mechanisms",
+      "journal": "eLife",
+      "citation": "5",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "3.1 A crystal structure of the TREM2 Ig-V ectodomain showing that Nasu-Hakola mutations map to buried positions and destabilise the fold, whereas Alzheimer's risk variants sit on a solvent-exposed surface and impair ligand binding rather than folding.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "romerohernandez2016",
+      "pmid": "27916457",
+      "doi": "10.1016/j.neuron.2016.11.006",
+      "authors": "Romero-Hernandez A, et al.",
+      "all_authors_n": 4,
+      "year": "2016",
+      "title": "Molecular Basis for Subtype Specificity and High-Affinity Zinc Inhibition in the GluN1-GluN2A NMDA Receptor Amino-Terminal Domain",
+      "journal": "Neuron",
+      "citation": "92(6):1324-1336",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "The GluN1-GluN2A ATD heterodimer has an architecture distinct from GluN1-GluN2B and carries the high-affinity nanomolar zinc site; perturbing hinge hydrogen-bond networks alters both zinc inhibition and open probability.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "boltaev2017",
+      "pmid": "28831019",
+      "doi": "10.1126/scisignal.aal1670",
+      "authors": "Boltaev U, et al.",
+      "all_authors_n": 11,
+      "year": "2017",
+      "title": "Multiplex quantitative assays indicate a need for reevaluating reported small-molecule TrkB agonists",
+      "journal": "Science signaling",
+      "citation": "10(493)",
+      "is_review": false,
+      "domains": [
+        "neurotrophin",
+        "peptide-cns"
+      ],
+      "used_for": "A panel of complementary quantitative assays for TrkB activation, downstream signalling and gene expression reproduced BDNF responses but not those of reported small-molecule TrkB agonists.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kerenshaul2017",
+      "pmid": "28602351",
+      "doi": "10.1016/j.cell.2017.05.018",
+      "authors": "Keren-Shaul H, et al.",
+      "all_authors_n": 14,
+      "year": "2017",
+      "title": "A Unique Microglia Type Associated with Restricting Development of Alzheimer's Disease",
+      "journal": "Cell",
+      "citation": "169(7):1276-1290.e17",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Definition of the disease-associated microglia (DAM) programme by single-cell transcriptomics in AD-transgenic mice: a plaque-associated phagocytic state activated in two steps, the first TREM2-independent (loss of homeostatic checkpoints) and the second TREM2-dependent.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "lakens2017",
+      "pmid": "28736600",
+      "doi": "10.1177/1948550617697177",
+      "authors": "Lakens D",
+      "all_authors_n": 1,
+      "year": "2017",
+      "title": "Equivalence Tests: A Practical Primer for t Tests, Correlations, and Meta-Analyses",
+      "journal": "Social psychological and personality science",
+      "citation": "8(4):355-362",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Equivalence testing via two one-sided tests (TOST) with bounds set from the smallest effect size of interest licenses the claim that effects large enough to matter are absent.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "leyns2017",
+      "pmid": "29073081",
+      "doi": "10.1073/pnas.1710311114",
+      "authors": "Leyns CEG, et al.",
+      "all_authors_n": 10,
+      "year": "2017",
+      "title": "TREM2 deficiency attenuates neuroinflammation and protects against neurodegeneration in a mouse model of tauopathy",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "citation": "114(43):11524-11529",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "In pure tauopathy (PS19), Trem2 deletion reduced brain atrophy at 9 months and reduced microgliosis without changing phospho-tau or insoluble tau levels - evidence that the direction of TREM2 benefit is pathology-dependent.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "marcu2017",
+      "pmid": "28002624",
+      "doi": "10.1002/prot.25230",
+      "authors": "Marcu O, et al.",
+      "all_authors_n": 7,
+      "year": "2017",
+      "title": "FlexPepDock lessons from CAPRI peptide-protein rounds and suggested new criteria for assessment of model quality and utility",
+      "journal": "Proteins",
+      "citation": "85(3):445-462",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "The CAPRI criteria met peptide-receptor targets for the first time in rounds 28-29 across three systems and the assessors found the standard bins ill-suited; the reassessment proposed loosening the backbone/ligand RMSD threshold, adding a side-chain RMSD restriction, and a new interface hydrogen-bond recovery measure, and reported that much can be learned from rather inaccurate models about binding hotspots.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "platzer2017",
+      "pmid": "28377535",
+      "doi": "10.1136/jmedgenet-2016-104509",
+      "authors": "Platzer K, et al.",
+      "all_authors_n": 75,
+      "year": "2017",
+      "title": "GRIN2B encephalopathy: novel findings on phenotype, variant clustering, functional consequences and treatment aspects",
+      "journal": "Journal of medical genetics",
+      "citation": "54(7):460-470",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "De novo GRIN2B variants classified as pathogenic/likely pathogenic cluster in transmembrane segments and ligand-binding sites with mixed gain- and loss-of-function consequences; variant receptors retained memantine sensitivity in vitro but no objectifiable clinical benefit of memantine was demonstrated.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "sims2017",
+      "pmid": "28714976",
+      "doi": "10.1038/ng.3916",
+      "authors": "Sims R, et al.",
+      "all_authors_n": 449,
+      "year": "2017",
+      "title": "Rare coding variants in PLCG2, ABI3, and TREM2 implicate microglial-mediated innate immunity in Alzheimer's disease",
+      "journal": "Nature genetics",
+      "citation": "49(9):1373-1384",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Three-stage study of 85,133 subjects identifying TREM2 p.Arg62His (rs143332484, OR 1.67) alongside protective PLCG2 p.Pro522Arg (OR 0.68) and risk-conferring ABI3 p.Ser209Phe (OR 1.43), all in microglia-enriched genes.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "thornton2017",
+      "pmid": "28855301",
+      "doi": "10.15252/emmm.201707673",
+      "authors": "Thornton P, et al.",
+      "all_authors_n": 18,
+      "year": "2017",
+      "title": "TREM2 shedding by cleavage at the H157-S158 bond is accelerated for the Alzheimer's disease-associated H157Y variant",
+      "journal": "EMBO molecular medicine",
+      "citation": "9(10):1366-1378",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "TREM2 is constitutively shed at the His157-Ser158 bond by an ADAM10-dependent, ADAM17-independent activity releasing a ~17 kDa N-terminal fragment; the AD-associated H157Y variant is shed faster, apparently via a distinct sheddase.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "birks2018",
+      "pmid": "29923184",
+      "doi": "10.1002/14651858.CD001190.pub3",
+      "authors": "Birks JS, Harvey RJ",
+      "all_authors_n": 2,
+      "year": "2018",
+      "title": "Donepezil for dementia due to Alzheimer's disease",
+      "journal": "The Cochrane database of systematic reviews",
+      "citation": "6(6):CD001190",
+      "is_review": true,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Cochrane review of 30 studies / 8257 participants: donepezil 10 mg/day at 24-26 weeks gives ADAS-Cog MD -2.67 (95% CI -3.31 to -2.02; 1130 participants, 5 studies) and MMSE MD +1.05 (0.73 to 1.37); no benefit on NPI (MD -1.62, 95% CI -3.43 to 0.19) or quality of life; withdrawals 24% vs 20%, adverse events 72% vs 65%; 23 mg/day no more efficacious than 10 mg; only one trial lasted 52 weeks.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "gruning2018",
+      "pmid": "29953862",
+      "doi": "10.1016/j.cels.2018.03.014",
+      "authors": "Grüning B, et al.",
+      "all_authors_n": 10,
+      "year": "2018",
+      "title": "Practical Computational Reproducibility in the Life Sciences",
+      "journal": "Cell systems",
+      "citation": "6(6):631-635",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Portable package builds (Bioconda-style), containerised execution environments, and workflow engines are jointly the accepted prescription for making a computational pipeline re-runnable.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "hampel2018",
+      "pmid": "29850777",
+      "doi": "10.1093/brain/awy132",
+      "authors": "Hampel H, et al.",
+      "all_authors_n": 11,
+      "year": "2018",
+      "title": "The cholinergic system in the pathophysiology and treatment of Alzheimer's disease",
+      "journal": "Brain : a journal of neurology",
+      "citation": "141(7):1917-1933",
+      "is_review": true,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Modern multi-author restatement of the cholinergic hypothesis as centred on progressive loss of limbic and neocortical cholinergic innervation, defending cholinesterase inhibitors as one of the few therapies proven clinically useful in Alzheimer's dementia.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "hansen2018",
+      "pmid": "30037851",
+      "doi": "10.1085/jgp.201812032",
+      "authors": "Hansen KB, et al.",
+      "all_authors_n": 7,
+      "year": "2018",
+      "title": "Structure, function, and allosteric modulation of NMDA receptors",
+      "journal": "The Journal of general physiology",
+      "citation": "150(8):1081-1105",
+      "is_review": true,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "NMDA receptors are obligate heterotetramers of two GluN1 plus two GluN2(A-D)/GluN3(A-B) subunits, organised into ATD, LBD and TMD layers; GluN2 identity sets most biophysical and pharmacological character of the assembled receptor.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "lau2018",
+      "pmid": "28720325",
+      "doi": "10.1016/j.bmc.2017.06.052",
+      "authors": "Lau JL, Dunn MK",
+      "all_authors_n": 2,
+      "year": "2018",
+      "title": "Therapeutic peptides: Historical perspectives, current development trends, and future directions",
+      "journal": "Bioorganic & medicinal chemistry",
+      "citation": "26(10):2700-2707",
+      "is_review": true,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Over 60 peptide drugs approved in the US and other major markets, with >150 peptides in active clinical development; pipeline has diversified beyond endogenous human sequences.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "merkouris2018",
+      "pmid": "29987039",
+      "doi": "10.1073/pnas.1806660115",
+      "authors": "Merkouris S, et al.",
+      "all_authors_n": 15,
+      "year": "2018",
+      "title": "Fully human agonist antibodies to TrkB using autocrine cell-based selection from a combinatorial antibody library",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "citation": "115(30):E7023-E7032",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "ZEB85, selected from a combinatorial human scFv library by function-based cellular assay, is a full TrkB agonist comparable in potency to BDNF in human ES-cell-derived GABAergic neurons.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "rafii2018",
+      "pmid": "29582053",
+      "doi": "10.1001/jamaneurol.2018.0233",
+      "authors": "Rafii MS, et al.",
+      "all_authors_n": 8,
+      "year": "2018",
+      "title": "Adeno-Associated Viral Vector (Serotype 2)-Nerve Growth Factor for Patients With Alzheimer Disease: A Randomized Clinical Trial",
+      "journal": "JAMA neurology",
+      "citation": "75(7):834-841",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "AAV2-NGF into nucleus basalis of Meynert in 49 mild-to-moderate AD participants was well tolerated but showed no ADAS-cog difference from sham at 24 months (P = .17).",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "sudom2018",
+      "pmid": "29794134",
+      "doi": "10.1074/jbc.RA118.002352",
+      "authors": "Sudom A, et al.",
+      "all_authors_n": 19,
+      "year": "2018",
+      "title": "Molecular basis for the loss-of-function effects of the Alzheimer's disease-associated R47H variant of the immune receptor TREM2",
+      "journal": "The Journal of biological chemistry",
+      "citation": "293(32):12634-12646",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Higher-resolution structures of TREM2 R47H (1.8 A), apo wild type (2.2 A) and phosphatidylserine-bound wild type (2.2 A) showing Arg47 maintains the CDR2 loop conformation and the putative positive ligand-interacting surface disrupted by R47H.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "toh2018",
+      "pmid": "29858545",
+      "doi": "10.1002/brb3.1009",
+      "authors": "Toh YL, et al.",
+      "all_authors_n": 5,
+      "year": "2018",
+      "title": "Impact of brain-derived neurotrophic factor genetic polymorphism on cognition: A systematic review",
+      "journal": "Brain and behavior",
+      "citation": "8(7):e01009",
+      "is_review": true,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Systematic review of 82 studies: 40 (48.8%) reported an association; Val/Val-favouring 30.5% vs Met-favouring 18.3%; memory 26/63 (41.3%), executive function 18/47 (38.3%), attention 4/23 (17.4%), none for verbal fluency; effect of the Met allele not clearly established.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "wallach2018",
+      "pmid": "29698607",
+      "doi": "10.1021/acs.jcim.7b00403",
+      "authors": "Wallach I, Heifets A",
+      "all_authors_n": 2,
+      "year": "2018",
+      "title": "Most Ligand-Based Classification Benchmarks Reward Memorization Rather than Generalization",
+      "journal": "Journal of chemical information and modeling",
+      "citation": "58(5):916-932",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "The AVE redundancy measure correlates with measured performance across seven widely used benchmarks irrespective of predicted property, fingerprint, similarity measure or previously applied unbiasing -- so reported ligand-based performance may reflect benchmark overfitting rather than prospective accuracy.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "xiang2018",
+      "pmid": "30185230",
+      "doi": "10.1186/s13024-018-0280-6",
+      "authors": "Xiang X, et al.",
+      "all_authors_n": 13,
+      "year": "2018",
+      "title": "The Trem2 R47H Alzheimer's risk variant impairs splicing and reduces Trem2 mRNA and protein in mice but not in humans",
+      "journal": "Molecular neurodegeneration",
+      "citation": "13(1):49",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Two independent Trem2 R47H knock-in mouse lines activate a cryptic splice site introducing a premature stop codon, producing Trem2 haploinsufficiency; minigene assays, iPSC-derived human microglia and R47H carrier brain show this does not occur in humans, so phenotypes from those mice cannot be read as R47H phenotypes.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "chen2019",
+      "pmid": "31430292",
+      "doi": "10.1371/journal.pone.0220113",
+      "authors": "Chen L, et al.",
+      "all_authors_n": 8,
+      "year": "2019",
+      "title": "Hidden bias in the DUD-E dataset leads to misleading performance of deep learning in structure-based virtual screening",
+      "journal": "PloS one",
+      "citation": "14(8):e0220113",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "CNN enrichment on DUD-E is attributable to analogue and decoy bias hidden in the dataset rather than learned protein-ligand recognition, and deep models trained on PDBbind did not outperform AutoDock Vina on DUD-E enrichment.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "ewers2019",
+      "pmid": "31462511",
+      "doi": "10.1126/scitranslmed.aav6221",
+      "authors": "Ewers M, et al.",
+      "all_authors_n": 14,
+      "year": "2019",
+      "title": "Increased soluble TREM2 in cerebrospinal fluid is associated with reduced cognitive and clinical decline in Alzheimer's disease",
+      "journal": "Science translational medicine",
+      "citation": "11(507)",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "In 385 subjects followed a mean of 4 years, higher baseline CSF sTREM2 predicted attenuated memory and cognitive decline in amyloid- and p-tau-positive individuals, and a higher sTREM2/p-tau181 ratio predicted slower clinical conversion.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "fjelldal2019",
+      "pmid": "31164987",
+      "doi": "10.1002/prp2.480",
+      "authors": "Fjelldal MF, et al.",
+      "all_authors_n": 6,
+      "year": "2019",
+      "title": "Exploring the overlapping binding sites of ifenprodil and EVT-101 in GluN2B-containing NMDA receptors using novel chicken embryo forebrain cultures and molecular modeling",
+      "journal": "Pharmacology research & perspectives",
+      "citation": "7(3):e00480",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "Potency order EVT-101 > Ro 25-6981 > ifenprodil > eliprodil in native GluN2B-containing cultures with Ro 04-5595 at 186 +/- 32 nmol/L; docking/MD assign Ro 04-5595 to the EVT-101 pocket rather than the ifenprodil pocket, indicating the GluN2B ATD region is not one pocket.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "mcshane2019",
+      "pmid": "30891742",
+      "doi": "10.1002/14651858.CD003154.pub6",
+      "authors": "McShane R, et al.",
+      "all_authors_n": 9,
+      "year": "2019",
+      "title": "Memantine for dementia",
+      "journal": "The Cochrane database of systematic reviews",
+      "citation": "3(3):CD003154",
+      "is_review": true,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "Memantine, a non-subunit-selective uncompetitive open-channel blocker, gives a small but consistent six-month benefit in moderate-to-severe Alzheimer's disease and probably no benefit in mild disease - the ceiling the NMDA-directed field has actually reached.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "pregnolato2019",
+      "pmid": "31068830",
+      "doi": "10.3389/fphys.2019.00417",
+      "authors": "Pregnolato S, et al.",
+      "all_authors_n": 4,
+      "year": "2019",
+      "title": "Glutamate Transport and Preterm Brain Injury",
+      "journal": "Frontiers in physiology",
+      "citation": "10:417",
+      "is_review": true,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "EAAT2 (GLT-1, SLC1A2) is the astrocytic transporter responsible for the large majority (~95%) of glutamate clearance in the brain.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "strehlow2019",
+      "pmid": "30544257",
+      "doi": "10.1093/brain/awy304",
+      "authors": "Strehlow V, et al.",
+      "all_authors_n": 22,
+      "year": "2019",
+      "title": "GRIN2A-related disorders: genotype and functional consequence predict phenotype",
+      "journal": "Brain : a journal of neurology",
+      "citation": "142(1):80-92",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "Domain-dependent mechanism in GRIN2A: transmembrane/linker missense variants are predominantly gain-of-function with severe phenotypes, whereas ATD and LBD missense variants plus null variants are loss-of-function with milder phenotypes - the ATD is the region where human missense variation reduces receptor function.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "yi2019",
+      "pmid": "31541561",
+      "doi": "10.1113/JP278168",
+      "authors": "Yi F, et al.",
+      "all_authors_n": 5,
+      "year": "2019",
+      "title": "Functional and pharmacological properties of triheteromeric GluN1/2B/2D NMDA receptors",
+      "journal": "The Journal of physiology",
+      "citation": "597(22):5495-5514",
+      "is_review": false,
+      "domains": [
+        "glutamate"
+      ],
+      "used_for": "In GluN1/2B/2D triheteromers ifenprodil, EVT-101 and CP-101,606 inhibit with similar potency but markedly lower efficacy (~65% vs ~95% at GluN1/2B), and spermine potentiates GluN1/2B/2D but not GluN1/2A/2B; signatures reproduced in hippocampal interneurons but not CA1 pyramidal cells.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "zhang2019",
+      "pmid": "31447849",
+      "doi": "10.3389/fimmu.2019.01841",
+      "authors": "Zhang L, et al.",
+      "all_authors_n": 8,
+      "year": "2019",
+      "title": "Design and Development of a Novel Peptide for Treating Intestinal Inflammation",
+      "journal": "Frontiers in immunology",
+      "citation": "10:1841",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Representative precedent for the motif-concatenation design idiom: a hybrid peptide fusing the active centres of LL-37 and thymosin alpha-1, selected by molecular docking, showing anti-inflammatory activity in an LPS-challenged murine intestinal model with the mechanism attributed to LPS neutralisation and TLR4/MD-2 binding - a docking pose plus a functional readout, with no measured affinity for the named receptor complex.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "hill2020",
+      "pmid": "32087818",
+      "doi": "10.1016/S0140-6736(20)30258-0",
+      "authors": "Hill MD, et al.",
+      "all_authors_n": 71,
+      "year": "2020",
+      "title": "Efficacy and safety of nerinetide for the treatment of acute ischaemic stroke (ESCAPE-NA1): a multicentre, double-blind, randomised controlled trial",
+      "journal": "Lancet (London, England)",
+      "citation": "395(10227):878-887",
+      "is_review": false,
+      "domains": [
+        "glutamate",
+        "peptide-cns"
+      ],
+      "used_for": "Nerinetide, a PSD-95-interfering peptide with strong preclinical ischaemia-reperfusion data, failed its phase 3 primary endpoint - preclinical potency at a glutamatergic node did not convert clinically.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kober2020",
+      "pmid": "33090700",
+      "doi": "10.1002/alz.12194",
+      "authors": "Kober DL, et al.",
+      "all_authors_n": 14,
+      "year": "2020",
+      "title": "Functional insights from biophysical study of TREM2 interactions with apoE and Aβ(1-42)",
+      "journal": "Alzheimer's & dementia : the journal of the Alzheimer's Association",
+      "citation": "",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Biolayer interferometry showing TREM2-apoE engagement is protein-mediated with little contribution from lipidation, shows slight isoform ordering (E4>E3>E2), requires the apoE hinge region, and is only minimally affected by basic-patch disease variants - implying at least two separable TREM2 ligand-binding surfaces; also that sTREM2 binds monomeric Abeta42 and inhibits its polymerisation.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kumthekar2020",
+      "pmid": "31969331",
+      "doi": "10.1158/1078-0432.CCR-19-3258",
+      "authors": "Kumthekar P, et al.",
+      "all_authors_n": 16,
+      "year": "2020",
+      "title": "ANG1005, a Brain-Penetrating Peptide-Drug Conjugate, Shows Activity in Patients with Breast Cancer with Leptomeningeal Carcinomatosis and Recurrent Brain Metastases",
+      "journal": "Clinical cancer research : an official journal of the American Association for Cancer Research",
+      "citation": "26(12):2789-2799",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Multicentre phase II study (n=72, 28 with leptomeningeal carcinomatosis): intracranial ORR 15% by investigator assessment and 8% by independent radiology review; the preset iORR rule by independent review was not met.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "wang2020",
+      "pmid": "32579671",
+      "doi": "10.1084/jem.20200785",
+      "authors": "Wang S, et al.",
+      "all_authors_n": 16,
+      "year": "2020",
+      "title": "Anti-human TREM2 induces microglia proliferation and reduces pathology in an Alzheimer's disease model",
+      "journal": "The Journal of experimental medicine",
+      "citation": "217(9)",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "The murine surrogate AL002c induced microglial proliferation by single-cell RNA-seq in AD mice expressing either common-variant or R47H human TREM2, and on prolonged dosing reduced filamentous plaque burden and neurite dystrophy.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "zhou2020",
+      "pmid": "31932797",
+      "doi": "10.1038/s41591-019-0695-9",
+      "authors": "Zhou Y, et al.",
+      "all_authors_n": 25,
+      "year": "2020",
+      "title": "Human and mouse single-nucleus transcriptomics reveal TREM2-dependent and TREM2-independent cellular responses in Alzheimer's disease",
+      "journal": "Nature medicine",
+      "citation": "26(1):131-142",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "Single-nucleus sequencing of 5XFAD and human AD brain confirms Trem2-dependent DAM in mouse but finds markedly different human glial phenotypes, with the human microglial signature closer to IRF8-driven reactive microglia; the TREM2 requirement is preserved (weaker reactive phenotype in R47H and R62H carriers) but the state is not the mouse state.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "casarotto2021",
+      "pmid": "33606976",
+      "doi": "10.1016/j.cell.2021.01.034",
+      "authors": "Casarotto PC, et al.",
+      "all_authors_n": 28,
+      "year": "2021",
+      "title": "Antidepressant drugs act by directly binding to TRKB neurotrophin receptors",
+      "journal": "Cell",
+      "citation": "184(5):1299-1313.e19",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Antidepressants bind a site at the transmembrane region of TRKB dimers, allosterically facilitating BDNF signalling; the TRKB transmembrane domain has a cholesterol-sensing function; mutating the binding motif abolishes cellular, behavioural and plasticity responses.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "claesen2021",
+      "pmid": "34729209",
+      "doi": "10.1098/rsos.211037",
+      "authors": "Claesen A, et al.",
+      "all_authors_n": 4,
+      "year": "2021",
+      "title": "Comparing dream to reality: an assessment of adherence of the first generation of preregistered studies",
+      "journal": "Royal Society open science",
+      "citation": "8(10):211037",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Of 27 articles carrying the Preregistered badge between February 2015 and November 2017, only two had no deviation from plan; one disclosed all deviations and nine disclosed none, with sample size, exclusion criteria and statistical analysis the usual points of drift.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "errington2021",
+      "pmid": "34874005",
+      "doi": "10.7554/eLife.71601",
+      "authors": "Errington TM, et al.",
+      "all_authors_n": 7,
+      "year": "2021",
+      "title": "Investigating the replicability of preclinical cancer biology",
+      "journal": "eLife",
+      "citation": "10",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Of 158 effects assessed, the median replication effect size for positive effects was 85% smaller than the original and 92% of replication effect sizes were smaller than their originals.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "errington2021b",
+      "pmid": "34874008",
+      "doi": "10.7554/eLife.67995",
+      "authors": "Errington TM, et al.",
+      "all_authors_n": 5,
+      "year": "2021",
+      "title": "Challenges for assessing replicability in preclinical cancer biology",
+      "journal": "eLife",
+      "citation": "10",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Data needed to compute effect sizes and run power analyses were publicly accessible for just 4 of 193 experiments, none of the 193 were described in enough detail to design a repeat without contacting the authors, 67% of peer-reviewed protocols required modification, and the project shrank from 193 experiments in 53 papers to 50 in 23.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "hageman2021",
+      "pmid": "33913686",
+      "doi": "10.1021/acs.analchem.0c05279",
+      "authors": "Hageman TS, et al.",
+      "all_authors_n": 3,
+      "year": "2021",
+      "title": "Statistical Equivalence Testing of Higher-Order Protein Structures with Differential Hydrogen Exchange-Mass Spectrometry (HX-MS)",
+      "journal": "Analytical chemistry",
+      "citation": "93(18):6980-6988",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Significance testing is unsuitable for establishing similarity of higher-order protein structure; a TOST procedure with resampling-derived equivalence criteria found three infliximab biosimilars equivalent to the reference product while 5% deglycosylated NIST mAb was not.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "imrie2021",
+      "pmid": "33532838",
+      "doi": "10.1093/bioinformatics/btab080",
+      "authors": "Imrie F, et al.",
+      "all_authors_n": 3,
+      "year": "2021",
+      "title": "Generating property-matched decoy molecules using deep learning",
+      "journal": "Bioinformatics (Oxford, England)",
+      "citation": "37(15):2134-2141",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Tightening the null lowers the score: DeepCoy improved Deviation from Optimal Embedding from 0.166 to 0.032 on DUD-E and 0.109 to 0.038 on DEKOIS 2.0, and docking AUC ROC with AutoDock Vina fell from 0.70 to 0.63 against the harder decoys.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "jumper2021",
+      "pmid": "34265844",
+      "doi": "10.1038/s41586-021-03819-2",
+      "authors": "Jumper J, et al.",
+      "all_authors_n": 34,
+      "year": "2021",
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "journal": "Nature",
+      "citation": "596(7873):583-589",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "AF2 was validated on CASP14 monomers and reports pLDDT (per-residue lDDT estimate) and PAE (pairwise positional-error estimate) as self-assessment channels regressed onto geometric agreement with experimental structure.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kumar2021",
+      "pmid": "34452198",
+      "doi": "10.3390/pharmaceutics13081237",
+      "authors": "Kumar V, et al.",
+      "all_authors_n": 5,
+      "year": "2021",
+      "title": "B3Pred: A Random-Forest-Based Method for Predicting and Designing Blood-Brain Barrier Penetrating Peptides",
+      "journal": "Pharmaceutics",
+      "citation": "13(8)",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "B3Pred, a random-forest classifier trained on the B3Pdb set, reports 85.08% accuracy and AUROC 0.93 on cross-validation.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "lee2021",
+      "pmid": "33675684",
+      "doi": "10.1016/j.neuron.2021.02.010",
+      "authors": "Lee SH, et al.",
+      "all_authors_n": 18,
+      "year": "2021",
+      "title": "Trem2 restrains the enhancement of tau accumulation and neurodegeneration by β-amyloid pathology",
+      "journal": "Neuron",
+      "citation": "109(8):1283-1301.e6",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "In a model carrying both amyloid and tau (TauPS2APP), Trem2 deletion exacerbated tau accumulation, spreading and atrophy, while having no effect in the tau-only line - the opposite direction to the pure tauopathy result.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "necci2021",
+      "pmid": "33875885",
+      "doi": "10.1038/s41592-021-01117-3",
+      "authors": "Necci M, et al.",
+      "all_authors_n": 3,
+      "year": "2021",
+      "title": "Critical assessment of protein intrinsic disorder prediction",
+      "journal": "Nature methods",
+      "citation": "18(5):472-481",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Blind CAID assessment: 43 methods on 646 DisProt proteins; best disorder predictor F = 0.483 on the full dataset, F = 0.792 after filtering bona fide structured regions, but disordered binding regions only F = 0.231 -- the compositional property is tractable, the binding specificity on top of it is not.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "noviello2021",
+      "pmid": "33735609",
+      "doi": "10.1016/j.cell.2021.02.049",
+      "authors": "Noviello CM, et al.",
+      "all_authors_n": 8,
+      "year": "2021",
+      "title": "Structure and gating mechanism of the α7 nicotinic acetylcholine receptor",
+      "journal": "Cell",
+      "citation": "184(8):2121-2134.e13",
+      "is_review": false,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "The alpha7 nicotinic receptor is a homopentamer, exceptionally Ca2+-permeable, and desensitises faster than any other Cys-loop receptor; it had long resisted structural analysis, with cryo-EM structures of the human receptor in resting, activated and desensitised states obtained only in 2021.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "pankiewicz2021",
+      "pmid": "34451801",
+      "doi": "10.3390/ph14080704",
+      "authors": "Pankiewicz P, et al.",
+      "all_authors_n": 22,
+      "year": "2021",
+      "title": "Do Small Molecules Activate the TrkB Receptor in the Same Manner as BDNF? Limitations of Published TrkB Low Molecular Agonists and Screening for Novel TrkB Orthosteric Agonists",
+      "journal": "Pharmaceuticals (Basel, Switzerland)",
+      "citation": "14(8)",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "7,8-DHF binds TrkB only weakly (Kd = 1.3 uM) with no dimerisation, signalling or cytoprotection in SN56 T48 or differentiated SH-SY5Y cells, poor PK at 1 mg/kg i.v. and 50 mg/kg p.o., non-selectivity across 133 targets, and no reliable novel orthosteric agonist from their own screen.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "tierney2021",
+      "pmid": "34555021",
+      "doi": "10.1371/journal.pbio.3001398",
+      "authors": "Tierney BT, et al.",
+      "all_authors_n": 8,
+      "year": "2021",
+      "title": "Leveraging vibration of effects analysis for robust discovery in observational biomedical data science",
+      "journal": "PLoS biology",
+      "citation": "19(9):e3001398",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Fitting millions of model specifications over a combinatorially defined space produces effect distributions wide enough to contain contradictory conclusions, and the adjustment variables responsible can be identified.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "zhou2021",
+      "pmid": "33470550",
+      "doi": "10.1002/wnan.1695",
+      "authors": "Zhou X, et al.",
+      "all_authors_n": 3,
+      "year": "2021",
+      "title": "Brain penetrating peptides and peptide-drug conjugates to overcome the blood-brain barrier and target CNS diseases",
+      "journal": "Wiley interdisciplinary reviews. Nanomedicine and nanobiotechnology",
+      "citation": "13(4):e1695",
+      "is_review": true,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Reviews of brain-penetrating peptides and peptide-drug conjugates catalogue many candidate shuttles, but few have quantitative capillary-depletion-corrected in vivo brain uptake.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "bellenguez2022",
+      "pmid": "35379992",
+      "doi": "10.1038/s41588-022-01024-z",
+      "authors": "Bellenguez C, et al.",
+      "all_authors_n": 403,
+      "year": "2022",
+      "title": "New insights into the genetic etiology of Alzheimer's disease and related dementias",
+      "journal": "Nature genetics",
+      "citation": "54(4):412-436",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Two-stage AD GWAS of 111,326 diagnosed/proxy cases and 677,663 controls found 75 risk loci; pathway enrichment confirmed amyloid/tau and highlighted microglia, with no neurotrophin-receptor process highlighted.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "bryant2022",
+      "pmid": "35273146",
+      "doi": "10.1038/s41467-022-28865-w",
+      "authors": "Bryant P, et al.",
+      "all_authors_n": 3,
+      "year": "2022",
+      "title": "Improved prediction of protein-protein interactions using AlphaFold2",
+      "journal": "Nature communications",
+      "citation": "13(1):1265",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "pDockQ, a simple function of the predicted interface, recovered 51% of interacting pairs at 1% false-positive rate while AlphaFold2 produced acceptable models for 63% of heterodimers -- signal exists in confidence-derived scores, but on a curated dimer set rather than for designed binders.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "charoenkwan2022",
+      "pmid": "36284036",
+      "doi": "10.1007/s10822-022-00476-z",
+      "authors": "Charoenkwan P, et al.",
+      "all_authors_n": 6,
+      "year": "2022",
+      "title": "Improved prediction and characterization of blood-brain barrier penetrating peptides using estimated propensity scores of dipeptides",
+      "journal": "Journal of computer-aided molecular design",
+      "citation": "36(11):781-796",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Existing B3PP predictors may fail in terms of generalization ability and interpretability.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "dauparas2022",
+      "pmid": "36108050",
+      "doi": "10.1126/science.add2187",
+      "authors": "Dauparas J, et al.",
+      "all_authors_n": 22,
+      "year": "2022",
+      "title": "Robust deep learning-based protein sequence design using ProteinMPNN",
+      "journal": "Science (New York, N.Y.)",
+      "citation": "378(6615):49-56",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "ProteinMPNN recovers 52.4% of native sequence on native backbones against 32.9% for Rosetta.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "el2022",
+      "pmid": "36150547",
+      "doi": "10.1016/j.jclinepi.2022.09.001",
+      "authors": "El Bahri M, et al.",
+      "all_authors_n": 6,
+      "year": "2022",
+      "title": "A multiverse analysis of meta-analyses assessing acupuncture efficacy for smoking cessation evidenced vibration of effects",
+      "journal": "Journal of clinical epidemiology",
+      "citation": "152:140-150",
+      "is_review": true,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "7 meta-analyses and 39 RCTs recombined into 496,528 meta-analyses; 104,491 significantly favoured acupuncture and 392,037 did not (96 significantly favouring control), with 10th and 90th percentiles of effect size on opposite sides of the null - a Janus effect.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "johanssonakhe2022",
+      "pmid": "36304330",
+      "doi": "10.3389/fbinf.2022.959160",
+      "authors": "Johansson-Åkhe I, Wallner B",
+      "all_authors_n": 2,
+      "year": "2022",
+      "title": "Improving peptide-protein docking with AlphaFold-Multimer using forced sampling",
+      "journal": "Frontiers in bioinformatics",
+      "citation": "2:959160",
+      "is_review": false,
+      "domains": [
+        "cofolding",
+        "interface-eval"
+      ],
+      "used_for": "AlphaFold-Multimer gave acceptable-or-better models for 66/112 peptide-protein complexes (25 high quality); forced sampling raised this to 75/112 and median first-ranked DockQ from 0.47 to 0.55, with best-possible DockQ 0.58 to 0.72; at 1% FPR it recovered 26% of true peptide-protein interactions at 85% precision.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "tsaban2022",
+      "pmid": "35013344",
+      "doi": "10.1038/s41467-021-27838-9",
+      "authors": "Tsaban T, et al.",
+      "all_authors_n": 6,
+      "year": "2022",
+      "title": "Harnessing protein folding neural networks for peptide-protein docking",
+      "journal": "Nature communications",
+      "citation": "13(1):176",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "AlphaFold2 models peptide-protein complexes without any MSA for the peptide partner, raising the question of what the network has memorised versus learned.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "varadi2022",
+      "pmid": "34791371",
+      "doi": "10.1093/nar/gkab1061",
+      "authors": "Varadi M, et al.",
+      "all_authors_n": 27,
+      "year": "2022",
+      "title": "AlphaFold Protein Structure Database: massively expanding the structural coverage of protein-sequence space with high-accuracy models",
+      "journal": "Nucleic acids research",
+      "citation": "50(D1):D439-D444",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "AlphaFold DB exposes per-residue and pairwise model-confidence estimates and predicted aligned errors for over 360,000 predicted structures, described as model-confidence estimates rather than biophysical quantities.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "bennett2023",
+      "pmid": "37149653",
+      "doi": "10.1038/s41467-023-38328-5",
+      "authors": "Bennett NR, et al.",
+      "all_authors_n": 14,
+      "year": "2023",
+      "title": "Improving de novo protein binder design with deep learning",
+      "journal": "Nature communications",
+      "citation": "14(1):2625",
+      "is_review": false,
+      "domains": [
+        "cofolding",
+        "peptide-cns"
+      ],
+      "used_for": "Using AlphaFold2 or RoseTTAFold to assess whether a designed sequence adopts its designed structure and binds the target as designed increases design success rates nearly 10-fold.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "elfmann2023",
+      "pmid": "37140053",
+      "doi": "10.1093/nar/gkad350",
+      "authors": "Elfmann C, Stülke J",
+      "all_authors_n": 2,
+      "year": "2023",
+      "title": "PAE viewer: a webserver for the interactive visualization of the predicted aligned error for multimer structure predictions and crosslinks",
+      "journal": "Nucleic acids research",
+      "citation": "51(W1):W404-W410",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "Interface PAE is a descriptive quantity -- the predicted aligned error matrix restricted to inter-chain residue pairs -- that allows an estimation of prediction quality but whose interpretation is difficult for non-specialists; it is not a calibrated probability of binding.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kapoor2023",
+      "pmid": "37720327",
+      "doi": "10.1016/j.patter.2023.100804",
+      "authors": "Kapoor S, Narayanan A",
+      "all_authors_n": 2,
+      "year": "2023",
+      "title": "Leakage and the reproducibility crisis in machine-learning-based science",
+      "journal": "Patterns (New York, N.Y.)",
+      "citation": "4(9):100804",
+      "is_review": true,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "The field's default is still to under-control: a survey of ML-based science found leakage in 17 fields collectively affecting 294 papers, in some cases leading to 'wildly overoptimistic' conclusions.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "lensink2023",
+      "pmid": "37905971",
+      "doi": "10.1002/prot.26609",
+      "authors": "Lensink MF, et al.",
+      "all_authors_n": 113,
+      "year": "2023",
+      "title": "Impact of AlphaFold on structure prediction of protein complexes: The CASP15-CAPRI experiment",
+      "journal": "Proteins",
+      "citation": "91(12):1658-1683",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "CASP15-CAPRI reported high-quality models for about 40% of 37 targets, up from 8% two years earlier, yet performance remained poor for complexes with antibodies and nanobodies where evolutionary relationships between the binding partners are lacking -- locating the mechanism as co-evolutionary/template signal linking the two chains.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "watson2023",
+      "pmid": "37433327",
+      "doi": "10.1038/s41586-023-06415-8",
+      "authors": "Watson JL, et al.",
+      "all_authors_n": 28,
+      "year": "2023",
+      "title": "De novo design of protein structure and function with RFdiffusion",
+      "journal": "Nature",
+      "citation": "620(7976):1089-1100",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "RFdiffusion is the current backbone-generation component of the computational design stack.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "abramson2024",
+      "pmid": "38718835",
+      "doi": "10.1038/s41586-024-07487-w",
+      "authors": "Abramson J, et al.",
+      "all_authors_n": 48,
+      "year": "2024",
+      "title": "Accurate structure prediction of biomolecular interactions with AlphaFold 3",
+      "journal": "Nature",
+      "citation": "630(8016):493-500",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "AF3's diffusion-based architecture jointly predicts proteins, nucleic acids, small molecules, ions and modified residues, with reported gains over specialised docking tools for protein-ligand and over AlphaFold-Multimer v2.3 for antibody-antigen.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "bret2024",
+      "pmid": "38238291",
+      "doi": "10.1038/s41467-023-44288-7",
+      "authors": "Bret H, et al.",
+      "all_authors_n": 5,
+      "year": "2024",
+      "title": "From interaction networks to interfaces, scanning intrinsically disordered regions using AlphaFold2",
+      "journal": "Nature communications",
+      "citation": "15(1):597",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "On IDR-derived protein-peptide complexes non-redundant with AF2 training structures, AF2-Multimer identified the correct interface site and structure in only 40% of cases from full-length sequences, rising to ~90% after fragment delineation and added evolutionary information; discriminating alternative binding partners by confidence score is challenging for small interaction motifs.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "buttenschoen2024",
+      "pmid": "38425520",
+      "doi": "10.1039/d3sc04185a",
+      "authors": "Buttenschoen M, et al.",
+      "all_authors_n": 3,
+      "year": "2024",
+      "title": "PoseBusters: AI-based docking methods fail to generate physically valid poses or generalise to novel sequences",
+      "journal": "Chemical science",
+      "citation": "15(9):3130-3139",
+      "is_review": false,
+      "domains": [
+        "cofolding",
+        "interface-eval"
+      ],
+      "used_for": "Deep-learning docking methods frequently emit stereochemically and sterically invalid poses; on physical plausibility and generalisation to novel sequences no deep-learning method outperformed classical docking tools.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "li2024",
+      "pmid": "37645037",
+      "doi": "",
+      "authors": "Li J, et al.",
+      "all_authors_n": 7,
+      "year": "2024",
+      "title": "Leak Proof PDBBind: A Reorganized Dataset of Protein-Ligand Complexes for More Generalizable Binding Affinity Prediction",
+      "journal": "ArXiv",
+      "citation": "",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "LP-PDBBind defines leakage explicitly as proteins AND ligands with high sequence and structural similarity, and pairs a date-based independent set (BDB2020+, complexes deposited since 2020) with similarity filtering rather than relying on deposition date alone.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "long2024",
+      "pmid": "39444037",
+      "doi": "10.1186/s13195-024-01599-1",
+      "authors": "Long H, et al.",
+      "all_authors_n": 15,
+      "year": "2024",
+      "title": "Preclinical and first-in-human evaluation of AL002, a novel TREM2 agonistic antibody for Alzheimer's disease",
+      "journal": "Alzheimer's research & therapy",
+      "citation": "16(1):235",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "In cynomolgus monkeys weekly IV AL002 dose-dependently lowered CSF sTREM2 and total TREM2 in hippocampus and frontal cortex and raised downstream signalling biomarkers; in the 64-subject first-in-human phase 1 (INVOKE-1, NCT03635047) a single infusion produced dose-dependent CSF sTREM2 reduction with parallel increases in microglial recruitment markers.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "middendorf2024",
+      "pmid": "38226524",
+      "doi": "10.1002/prot.26652",
+      "authors": "Middendorf L, Eicholt LA",
+      "all_authors_n": 2,
+      "year": "2024",
+      "title": "Random, de novo, and conserved proteins: How structure and disorder predictors perform differently",
+      "journal": "Proteins",
+      "citation": "92(6):757-767",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "For Drosophila de novo genes and matched random sequences, pLDDT correlates positively with predicted disorder — opposite to the negative correlation for conserved proteins — and predictor performance is hampered by the lack of sequence identity.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "mirabello2024",
+      "pmid": "39348158",
+      "doi": "10.1093/bioinformatics/btae586",
+      "authors": "Mirabello C, Wallner B",
+      "all_authors_n": 2,
+      "year": "2024",
+      "title": "DockQ v2: improved automatic quality measure for protein multimers, nucleic acids, and small molecules",
+      "journal": "Bioinformatics (Oxford, England)",
+      "citation": "40(10)",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "DockQ v2 is a Python reimplementation adding automatic handling of multiple interfaces in large multi-chain assemblies, automatic chain mapping, and scoring of protein-nucleic-acid and protein-small-molecule interfaces -- a robustness and scope upgrade, not a recalibration, so v2 scores remain comparable to the 2016 landmarks.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "nguyen2024",
+      "pmid": "36355830",
+      "doi": "10.1111/bph.15982",
+      "authors": "Nguyen HTM, et al.",
+      "all_authors_n": 7,
+      "year": "2024",
+      "title": "Opportunities and challenges for the development of M(1) muscarinic receptor positive allosteric modulators in the treatment for neurocognitive deficits",
+      "journal": "British journal of pharmacology",
+      "citation": "181(14):2114-2142",
+      "is_review": true,
+      "domains": [
+        "cholinergic"
+      ],
+      "used_for": "Structurally diverse, highly selective M1 positive allosteric modulators rescue cognitive deficits preclinically, yet only a few reached early-stage clinical trials and many failed to progress because of on-target cholinergic adverse effects; the M1 orthosteric pocket is the conserved region the field moved away from.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "rettie2024",
+      "pmid": "39605685",
+      "doi": "10.1101/2024.11.18.622547",
+      "authors": "Rettie SA, et al.",
+      "all_authors_n": 26,
+      "year": "2024",
+      "title": "Accurate de novo design of high-affinity protein binding macrocycles using deep learning",
+      "journal": "bioRxiv : the preprint server for biology",
+      "citation": "",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "Preprint version carrying individual dissociation constants: 1-10 uM for MCL1 and MDM2, 6 nM for the best anti-GABARAP macrocycle, below 10 nM for RbtA.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "samuel2024",
+      "pmid": "38206590",
+      "doi": "10.1093/gigascience/giad113",
+      "authors": "Samuel S, Mietchen D",
+      "all_authors_n": 2,
+      "year": "2024",
+      "title": "Computational reproducibility of Jupyter notebooks from biomedical publications",
+      "journal": "GigaScience",
+      "citation": "13",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Of 27,271 Jupyter notebooks from 2,660 GitHub repositories across 3,467 publications, 22,578 were Python and 15,817 declared dependencies; 10,388 installed cleanly, 1,203 ran without error, and 879 reproduced the reported results - roughly 3% of the corpus.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "shanks2024",
+      "pmid": "38760589",
+      "doi": "10.1038/s41591-024-02977-w",
+      "authors": "Shanks HRC, et al.",
+      "all_authors_n": 10,
+      "year": "2024",
+      "title": "p75 neurotrophin receptor modulation in mild to moderate Alzheimer disease: a randomized, placebo-controlled phase 2a trial",
+      "journal": "Nature medicine",
+      "citation": "30(6):1761-1770",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "26-week phase 2a of p75NTR modulator LM11A-31 in 242 mild-to-moderate AD participants met safety primary endpoint and separated on MRI/FDG-PET/CSF domains with no significant cognitive effect.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "van2024",
+      "pmid": "39388105",
+      "doi": "10.1037/met0000687",
+      "authors": "van den Akker OR, et al.",
+      "all_authors_n": 31,
+      "year": "2024",
+      "title": "The potential of preregistration in psychology: Assessing preregistration producibility and preregistration-study consistency",
+      "journal": "Psychological methods",
+      "citation": "",
+      "is_review": false,
+      "domains": [
+        "reproducibility"
+      ],
+      "used_for": "Across 300 psychology studies, preregistrations routinely lack the methodological detail needed to conduct the study as written and undisclosed deviations are frequent; inconsistencies cluster in data-collection procedures, statistical models and exclusion criteria, and more comprehensive templates yield more producible plans.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "yin2024",
+      "pmid": "38073135",
+      "doi": "10.1002/pro.4865",
+      "authors": "Yin R, Pierce BG",
+      "all_authors_n": 2,
+      "year": "2024",
+      "title": "Evaluation of AlphaFold antibody-antigen modeling with implications for improving predictive accuracy",
+      "journal": "Protein science : a publication of the Protein Society",
+      "citation": "33(1):e4865",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "AlphaFold antibody-antigen modelling over 427 non-redundant complexes: near-native success ~30%, rising to ~50% with increased sampling",
+      "verified": "PubMed esummary, fetched 2026-08-20; found by the reviewing pass rather than by the domain specialist and added on the same evidence standard"
+    },
+    {
+      "key": "dai2025",
+      "pmid": "41225185",
+      "doi": "10.1038/s42004-025-01727-4",
+      "authors": "Dai X, et al.",
+      "all_authors_n": 3,
+      "year": "2025",
+      "title": "Topological deep learning for enhancing peptide-protein complex prediction",
+      "journal": "Communications chemistry",
+      "citation": "8(1):347",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "TopoDockQ was built because peptide-protein model selection suffers high false-positive rates; relative to AlphaFold2's built-in confidence score it reduced false positives by at least 42% and raised precision by 6.7% across five datasets filtered to <=70% peptide-protein sequence identity.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "gallegoortega2025",
+      "pmid": "40056826",
+      "doi": "10.1016/j.biopha.2025.117944",
+      "authors": "Gallego-Ortega A, et al.",
+      "all_authors_n": 7,
+      "year": "2025",
+      "title": "The action of 7,8-dihydroxyflavone preserves retinal ganglion cell survival and visual function via the TrkB pathway in NMDA-induced retinal excitotoxicity",
+      "journal": "Biomedicine & pharmacotherapy = Biomedecine & pharmacotherapie",
+      "citation": "185:117944",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Recent primary paper describing 7,8-DHF as a potent selective TrkB agonist and attributing retinal ganglion cell protection in NMDA excitotoxicity to the TrkB pathway.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "gao2025",
+      "pmid": "39341363",
+      "doi": "10.1016/j.bbadis.2024.167529",
+      "authors": "Gao AYL, et al.",
+      "all_authors_n": 9,
+      "year": "2025",
+      "title": "Impaired hippocampal plasticity associated with loss of recycling endosomal SLC9A6/NHE6 is ameliorated by the TrkB agonist 7,8-dihydroxyflavone",
+      "journal": "Biochimica et biophysica acta. Molecular basis of disease",
+      "citation": "1871(1):167529",
+      "is_review": false,
+      "domains": [
+        "neurotrophin"
+      ],
+      "used_for": "Recent primary paper that describes 7,8-DHF as a selective TrkB agonist and attributes rescue of hippocampal spine density and LTP in Nhe6-knockout neurons to TrkB activation.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "graber2025",
+      "pmid": "41143208",
+      "doi": "10.1038/s42256-025-01124-5",
+      "authors": "Graber D, et al.",
+      "all_authors_n": 6,
+      "year": "2025",
+      "title": "Resolving data bias improves generalization in binding affinity prediction",
+      "journal": "Nature machine intelligence",
+      "citation": "7(10):1713-1725",
+      "is_review": false,
+      "domains": [
+        "cofolding",
+        "interface-eval"
+      ],
+      "used_for": "Train-test leakage between PDBbind and the CASF benchmarks severely inflated deep-learning binding-affinity metrics; retraining top models on the leakage-filtered CleanSplit caused benchmark performance to drop substantially.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "heneka2025",
+      "pmid": "39653749",
+      "doi": "10.1038/s41577-024-01104-7",
+      "authors": "Heneka MT, et al.",
+      "all_authors_n": 71,
+      "year": "2025",
+      "title": "Neuroinflammation in Alzheimer disease",
+      "journal": "Nature reviews. Immunology",
+      "citation": "25(5):321-352",
+      "is_review": true,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "General support for innate immunity remaining a central and genetically supported axis in Alzheimer's disease.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "hill2025",
+      "pmid": "39955119",
+      "doi": "10.1016/S0140-6736(25)00194-1",
+      "authors": "Hill MD, et al.",
+      "all_authors_n": 99,
+      "year": "2025",
+      "title": "Efficacy and safety of nerinetide in acute ischaemic stroke in patients undergoing endovascular thrombectomy without previous thrombolysis (ESCAPE-NEXT): a multicentre, double-blind, randomised controlled trial",
+      "journal": "Lancet (London, England)",
+      "citation": "405(10478):560-570",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "ESCAPE-NEXT randomised 850 patients; 45% vs 46% reached mRS 0-2, odds ratio 0.97 (95% CI 0.72-1.30), p=0.82.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "hoegen2025",
+      "pmid": "40285358",
+      "doi": "10.1093/bib/bbaf186",
+      "authors": "Hoegen Dijkhof LR, et al.",
+      "all_authors_n": 5,
+      "year": "2025",
+      "title": "Deep learning in GPCR drug discovery: benchmarking the path to accurate peptide binding",
+      "journal": "Briefings in bioinformatics",
+      "citation": "26(2)",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "Pose accuracy and binder discrimination are decoupled: the top model reached AUC 0.86 on 124 GPCR peptide ligands against 1,240 decoys, improved by rescoring on local interactions rather than raw confidence, while AF2 reproduced correct binding modes in 94% of 67 recent complexes.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "kim2025",
+      "pmid": "41509292",
+      "doi": "10.64898/2025.12.25.696505",
+      "authors": "Kim J, et al.",
+      "all_authors_n": 20,
+      "year": "2025",
+      "title": "Large scale prospective evaluation of co-folding across 557 Mac1-ligand complexes and three virtual screens",
+      "journal": "bioRxiv : the preprint server for biology",
+      "citation": "",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "On 557 Mac1-ligand complexes determined after training cut-offs, AF3, Boltz-2 and Chai-1 each reproduced >50% of poses to <2 A RMSD; common conformational rearrangements were not recapitulated; AF3 and Chai-1 pose confidence tracked potency weakly but significantly; Boltz-2 affinity correlated most strongly and after calibration beat a baseline predictor on MAE; AF3 pose confidence did not separate true ligands from high-scoring docking false positives as well as docking scores or Boltz-2 affinity.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "liu2025",
+      "pmid": "40671257",
+      "doi": "10.1021/acs.jcim.5c00653",
+      "authors": "Liu Y, et al.",
+      "all_authors_n": 4,
+      "year": "2025",
+      "title": "AF3Score: A Score-Only Adaptation of AlphaFold3 for Biomolecular Structure Evaluation",
+      "journal": "Journal of chemical information and modeling",
+      "citation": "65(15):8207-8214",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "Combining an AlphaFold3-derived score-only model with AlphaFold2-derived methods raised the rate of experimentally validated binders from 15.2% to 31.6% -- roughly two in three top-ranked designs still fail.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "passaro2025",
+      "pmid": "40667369",
+      "doi": "10.1101/2025.06.14.659707",
+      "authors": "Passaro S, et al.",
+      "all_authors_n": 14,
+      "year": "2025",
+      "title": "Boltz-2: Towards Accurate and Efficient Binding Affinity Prediction",
+      "journal": "bioRxiv : the preprint server for biology",
+      "citation": "",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "Boltz-2 adds an affinity module and is presented as the first AI model approaching free-energy-perturbation accuracy for small-molecule binding affinity at least 1000x more cheaply.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "raouraoua2025",
+      "pmid": "39868877",
+      "doi": "10.1002/prot.26802",
+      "authors": "Raouraoua N, et al.",
+      "all_authors_n": 3,
+      "year": "2025",
+      "title": "Massive Sampling Strategy for Antibody-Antigen Targets in CAPRI Round 55 With MassiveFold",
+      "journal": "Proteins",
+      "citation": "",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "MassiveFold produced more than 6000 predictions per CAPRI Round 55 target, categorically yielding acceptable-to-high-quality predictions, yet the AlphaFold2 confidence score could not be used to identify the best models in the set.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "rettie2025",
+      "pmid": "40542165",
+      "doi": "10.1038/s41589-025-01929-w",
+      "authors": "Rettie SA, et al.",
+      "all_authors_n": 26,
+      "year": "2025",
+      "title": "Accurate de novo design of high-affinity protein-binding macrocycles using deep learning",
+      "journal": "Nature chemical biology",
+      "citation": "21(12):1948-1956",
+      "is_review": false,
+      "domains": [
+        "peptide-cns"
+      ],
+      "used_for": "RFpeptides tested <=20 designed macrocycles per target across four targets and obtained binders against all four, with three crystal structures within 1.5 A Ca RMSD of the design models.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "schmid2025",
+      "pmid": "40015271",
+      "doi": "10.1016/j.molcel.2025.01.034",
+      "authors": "Schmid EW, Walter JC",
+      "all_authors_n": 2,
+      "year": "2025",
+      "title": "Predictomes, a classifier-curated database of AlphaFold-modeled protein-protein interactions",
+      "journal": "Molecular cell",
+      "citation": "85(6):1216-1232.e5",
+      "is_review": false,
+      "domains": [
+        "cofolding",
+        "interface-eval",
+        "null-models"
+      ],
+      "used_for": "Standard AF-M confidence metrics do not reliably separate relevant PPIs from an abundance of false positives; a separate classifier (SPOC) was needed. Built from an all-by-all matrix of nearly 300 human genome-maintenance proteins yielding ~40,000 predictions.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "wohlwend2025",
+      "pmid": "39605745",
+      "doi": "10.1101/2024.11.19.624167",
+      "authors": "Wohlwend J, et al.",
+      "all_authors_n": 13,
+      "year": "2025",
+      "title": "Boltz-1 Democratizing Biomolecular Interaction Modeling",
+      "journal": "bioRxiv : the preprint server for biology",
+      "citation": "",
+      "is_review": false,
+      "domains": [
+        "cofolding",
+        "interface-eval"
+      ],
+      "used_for": "Boltz-1 is an MIT-licensed open model claiming AlphaFold3-level accuracy and introduces Boltz-steering, an inference-time technique to fix hallucinations and non-physical predictions.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "zhai2025",
+      "pmid": "40792461",
+      "doi": "10.1021/acs.jcim.5c01084",
+      "authors": "Zhai S, et al.",
+      "all_authors_n": 11,
+      "year": "2025",
+      "title": "PepPCBench is a Comprehensive Benchmarking Framework for Protein-Peptide Complex Structure Prediction",
+      "journal": "Journal of chemical information and modeling",
+      "citation": "65(16):8497-8513",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "PepPCSet (261 experimentally resolved complexes, peptides 5-30 residues) benchmarks AF3, AFM, Chai-1, HelixFold3 and RoseTTAFold-All-Atom; accuracy depends on training-set similarity and confidence metrics correlate poorly with experimental binding affinities.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "bret2026",
+      "pmid": "41592323",
+      "doi": "10.1021/acs.jcim.5c02630",
+      "authors": "Bret G, et al.",
+      "all_authors_n": 3,
+      "year": "2026",
+      "title": "Assessing Boltz-2 Performance for the Binding Classification of Docking Hits",
+      "journal": "Journal of chemical information and modeling",
+      "citation": "66(3):1511-1521",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "Boltz-2 affinity predictions challenged with target mutation and target shuffling: binary active/inactive classification remains insensitive to key binding-site mutations and in some cases to target exchange, raising concerns about hidden features governing the predictions.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "ko2026",
+      "pmid": "42509551",
+      "doi": "10.1186/s12920-026-02432-4",
+      "authors": "Ko S, et al.",
+      "all_authors_n": 6,
+      "year": "2026",
+      "title": "Benchmarking sequence-based and AlphaFold-based methods for pMHC-II binding core prediction: distinct strengths and consensus approaches",
+      "journal": "BMC medical genomics",
+      "citation": "19(Suppl 1)",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "On 72 pMHC-II complexes supplemented with shuffled negative peptides and curated non-binders, AF3 reached the highest positive recall (0.86) and fine-tuned AF2 0.81, but both frequently misclassified unbound peptides as binders, whereas NetMHCIIpan-4.3 reached 0.93 negative recall at 0.44 positive recall.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "leng2026",
+      "pmid": "41636346",
+      "doi": "10.1039/d5cp04981d",
+      "authors": "Leng J, et al.",
+      "all_authors_n": 10,
+      "year": "2026",
+      "title": "Revealing the limits of covalent docking and advancing affinity prediction with covalent-aware multi-task learning",
+      "journal": "Physical chemistry chemical physics : PCCP",
+      "citation": "28(7):4822-4834",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "A covalent-docking benchmark found Boltz-2 the strongest pose reproducer but reported it as a reference upper bound rather than a leakage-free generalisation estimate, since both the benchmark and the training corpus are PDB-derived.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "mummery2026",
+      "pmid": "41787076",
+      "doi": "10.1038/s41591-026-04273-1",
+      "authors": "Mummery CJ, et al.",
+      "all_authors_n": 21,
+      "year": "2026",
+      "title": "The TREM2 agonistic antibody AL002 in early Alzheimer's disease: a phase 2 randomized trial",
+      "journal": "Nature medicine",
+      "citation": "32(5):1708-1716",
+      "is_review": false,
+      "domains": [
+        "trem2"
+      ],
+      "used_for": "INVOKE-2 (NCT04592874) randomised 381 participants with early AD 1:1:1:1 to AL002 15, 40 or 60 mg/kg or placebo IV every 4 weeks for 48-96 weeks. CSF target engagement was confirmed (sTREM2 down, osteopontin up) but the trial missed its primary endpoint: week-96 CDR-SB least-squares mean differences versus placebo of -0.31 (-1.61 to 0.98), 0.13 (-1.18 to 1.43) and -0.17 (-1.49 to 1.15), all P>0.05. Most frequent TEAEs were MRI changes resembling ARIA.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "unsal2026",
+      "pmid": "41903187",
+      "doi": "10.1093/bib/bbag137",
+      "authors": "Ünsal S, et al.",
+      "all_authors_n": 4,
+      "year": "2026",
+      "title": "Confidence scoring for deep learning-predicted antibody-antigen complexes: AntiConf as a precision-driven metric",
+      "journal": "Briefings in bioinformatics",
+      "citation": "27(2)",
+      "is_review": false,
+      "domains": [
+        "cofolding"
+      ],
+      "used_for": "nine co-folding methods including Boltz-2 benchmarked on 200 antibody-antigen complexes; confidence scores analysed for precision and recall",
+      "verified": "PubMed esummary, fetched 2026-08-20; found by the reviewing pass rather than by the domain specialist and added on the same evidence standard"
+    },
+    {
+      "key": "raouraoua2026",
+      "pmid": "40874652",
+      "doi": "10.1002/prot.70040",
+      "authors": "Raouraoua N, et al.",
+      "all_authors_n": 3,
+      "year": "2026",
+      "title": "MassiveFold Data for CASP16-CAPRI: A Systematic Massive Sampling Experiment",
+      "journal": "Proteins",
+      "citation": "94(1):425-431",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "Up to 8040 models per target, with the largest gains from massive sampling on the hardest interfaces; interface difficulty defined by DockQ is itself predictable from the median ipTM of a routine run, and the persistent challenge is choosing optimal models from massive sampling datasets.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "sumner2026",
+      "pmid": "42316655",
+      "doi": "10.1103/krhp-fxv3",
+      "authors": "Sumner J, et al.",
+      "all_authors_n": 8,
+      "year": "2026",
+      "title": "Assessment of scoring functions for computational models of protein-protein interfaces",
+      "journal": "Physical review. E",
+      "citation": "113(5-1):054417",
+      "is_review": false,
+      "domains": [
+        "interface-eval"
+      ],
+      "used_for": "A systematic assessment of seven physical, statistical and deep-learning interface scoring functions sampled uniformly over DockQ on non-redundant PDB heterodimers found high per-target Spearman correlations for some targets and weak ones for many; strong cases had highly intertwined monomers and many interface contacts, and correlations degraded sharply once monomers were deformed away from bound conformations.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    },
+    {
+      "key": "wen2026",
+      "pmid": "42176352",
+      "doi": "10.1021/acs.jcim.6c00360",
+      "authors": "Wen Y, et al.",
+      "all_authors_n": 3,
+      "year": "2026",
+      "title": "Overcoming Shortcut Learning in RNA-Small Molecule Modeling via Bias-Matched Decoys and Structure-Aware Network Design",
+      "journal": "Journal of chemical information and modeling",
+      "citation": "66(11):6403-6417",
+      "is_review": false,
+      "domains": [
+        "null-models"
+      ],
+      "used_for": "The same shortcut-learning failure mode on nucleic-acid targets: ROBIN training-set negatives drawn from an external database (BindingDB) differ systematically in physicochemical properties from the positives, letting models reach high accuracy by simple property filtering; property-matched decoys (RNAdecoyDB) were built to close the gap.",
+      "verified": "PubMed esummary, re-fetched 2026-08-20; title and first author matched against the proposing agent's claim"
+    }
+  ],
+  "non_pubmed": [
+    {
+      "pmid": null,
+      "doi": null,
+      "first_author": "Evans R",
+      "year": 2021,
+      "title": "Protein complex prediction with AlphaFold-Multimer",
+      "journal": "bioRxiv (preprint)",
+      "is_review": false,
+      "claim_it_supports": "AlphaFold-Multimer adds interface-aware confidence (pTM, ipTM); on 4,446 recent complexes heteromeric interfaces were recovered at DockQ >= 0.23 in 70% of cases and DockQ >= 0.8 in 26%.",
+      "source": "Consensus/Semantic Scholar",
+      "verified_note": "Not indexed in PubMed (title search returns no matching record); confirmed via Consensus: Richard Evans et al., 2021, bioRxiv. Abstract retrieved through Consensus independently states the 4,446-complex set, 70% at DockQ>=0.23 and 26% at DockQ>=0.8 for heteromeric interfaces, matching the numbers used in the text. DOI not returned by the tool and deliberately not supplied rather than guessed. Consensus record: https://consensus.app/papers/details/aa94b53f1ed05435bc57035cab4e518e/",
+      "domain": "cofolding",
+      "key": "evans2021"
+    },
+    {
+      "pmid": null,
+      "doi": null,
+      "first_author": "Zhou F",
+      "year": 2025,
+      "title": "Benchmarking AlphaFold3-like Methods for Protein-Peptide Complex Prediction",
+      "journal": "bioRxiv (preprint)",
+      "is_review": false,
+      "claim_it_supports": "On a benchmark that did not exclude training structures, AF3-generation methods reached 70-80% stringent success (Fnat>=0.8, Protenix highest at 80.8%) vs 53% for AF2-Multimer; on the leakage-excluded set they dropped to 40-56% while AF2-Multimer stayed flat.",
+      "source": "Consensus/Semantic Scholar",
+      "verified_note": "Not indexed in PubMed; confirmed via Consensus: Fan Zhou et al., 2025, bioRxiv. The abstract returned by Consensus states 70-80%, Protenix 80.8%, AF2-multimer 53%, and the 40-56% drop on the leakage-excluded set — matching the text exactly. DOI not returned by the tool and deliberately not supplied rather than guessed. Consensus record: https://consensus.app/papers/details/81dc252054f25d51a09f5301c2861f6f/",
+      "domain": "cofolding",
+      "key": "zhou2025"
+    },
+    {
+      "pmid": null,
+      "doi": null,
+      "first_author": "Smorodina E",
+      "year": 2026,
+      "title": "Structural Plausibility Without Binding Specificity: Limits of AI-Based Antibody-Antigen Structure Prediction Confidence Scores",
+      "journal": "bioRxiv (preprint, not peer reviewed)",
+      "is_review": false,
+      "claim_it_supports": "The nearest published analogue to the present experiment: 106 nanobody-antigen complexes against 11,342 shuffled non-cognate pairings across AlphaFold3, Boltz-2 and Chai-1 produce geometrically plausible complexes while ipTM frequently fails to discriminate cognate from non-cognate pairings; increased sampling improves structural refinement but not pairing discrimination, so compute is better spent on independent seeds plus explicit negative controls.",
+      "source": "Consensus/Semantic Scholar (not PubMed-indexed)",
+      "verified_note": "Not in PubMed; verified via Consensus/Semantic Scholar, which returns the exact title with first author Eva Smorodina, 2026, bioRxiv. The retrieved abstract confirms every specific used in the prose: 106 nanobody-antigen complexes, 11,342 shuffled non-cognate pairings, AlphaFold3/Boltz-2/Chai-1, ipTM discrimination failure, sampling improving refinement but not discrimination, and the independent-seeds-plus-negative-controls recommendation. No DOI was returned by the search; obtain the bioRxiv DOI before submission. Must be cited as a non-peer-reviewed preprint, as the prose already does.",
+      "domain": "null-models",
+      "key": "smorodina2026"
+    },
+    {
+      "pmid": null,
+      "doi": null,
+      "first_author": "Henderson, Peter",
+      "year": 2017,
+      "title": "Deep Reinforcement Learning that Matters",
+      "journal": "Not reported by the search tool (preprint; not indexed in PubMed)",
+      "is_review": false,
+      "claim_it_supports": "Non-determinism in benchmark environments combined with variance intrinsic to the methods makes single-run comparisons against baselines uninterpretable; reporting across multiple seeds with variance estimates is the minimum standard.",
+      "source": "Consensus/Semantic Scholar",
+      "verified_note": "Not PubMed-indexed - this is a machine-learning venue, outside PubMed's scope, so verification used Consensus/Semantic Scholar as the fallback source. Consensus returns the exact title with first author Peter Henderson, year 2017, 2441 citations. The abstract Consensus returned confirms the cited claim verbatim ('non-determinism in standard benchmark environments, combined with variance intrinsic to the methods, can make reported results tough to interpret'). Consensus reported no DOI and no venue, so both are left null/unstated rather than guessed.",
+      "domain": "reproducibility",
+      "key": "henderson2018"
+    }
+  ]
+}

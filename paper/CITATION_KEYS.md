@@ -1,0 +1,422 @@
+# Citation keys you may use — and no others
+
+Write a citation as [@key]. Several together: [@key1; @key2].
+A key that is not in this list will be rejected and the sentence resting on it deleted.
+
+## cholinergic
+- `[@bartus1982]` Bartus RT, et al. (1982) *The cholinergic hypothesis of geriatric memory dysfunction*. Science (New York, N.Y.). PMID 7046051 [review]
+    - supports: Canonical statement of the cholinergic hypothesis; cholinergic dysfunction in the aged/demented CNS, antimuscarinic blockade reproduces memory deficits, cholinergic stimulation improves memory only under tightly controlled conditi
+- `[@whitehouse1982]` Whitehouse PJ, et al. (1982) *Alzheimer's disease and senile dementia: loss of neurons in the basal forebrain*. Science (New York, N.Y.). PMID 7058341
+    - supports: Profound (greater than 75%) and selective degeneration of cholinergic neurons of the nucleus basalis of Meynert in Alzheimer's disease and senile dementia, providing the anatomical substrate for the cortical cholinergic deficit.
+- `[@sussman1991]` Sussman JL, et al. (1991) *Atomic structure of acetylcholinesterase from Torpedo californica: a prototypic acetylcholine-binding protein*. Science (New York, N.Y.). PMID 1678899
+    - supports: 2.8 A structure of Torpedo californica AChE: 537-residue alpha/beta monomer, 12-stranded mixed beta sheet with 14 alpha helices, Ser-His-Glu triad, and an active site at the bottom of a deep narrow gorge lined by 14 aromatic resid
+- `[@inestrosa1996]` Inestrosa NC, et al. (1996) *Acetylcholinesterase accelerates assembly of amyloid-beta-peptides into Alzheimer's fibrils: possible role of the peripheral site of the enzyme*. Neuron. PMID 8608006
+    - supports: Bovine, human and mouse AChE accelerate assembly of Abeta into fibrils; the effect is unaffected by the active-site inhibitor edrophonium but is affected by the peripheral-site ligand propidium, and butyrylcholinesterase (which la
+- `[@bodick1997]` Bodick NC, et al. (1997) *Effects of xanomeline, a selective muscarinic receptor agonist, on cognitive function and behavioral symptoms in Alzheimer disease*. Archives of neurology. PMID 9109749
+    - supports: Xanomeline in 343 patients with mild-to-moderate Alzheimer's disease over six months improved ADAS-Cog and CIBIC+ at the high dose with dose-dependent reductions in vocal outbursts, suspiciousness, delusions, agitation and halluci
+- `[@raves1997]` Raves ML, et al. (1997) *Structure of acetylcholinesterase complexed with the nootropic alkaloid, (-)-huperzine A*. Nature structural biology. PMID 8989325
+    - supports: 2.5 A co-crystal of AChE with (-)-huperzine A shows an unexpected inhibitor orientation with 'surprisingly few strong direct interactions with protein residues to explain its high affinity', the affinity instead distributed over h
+- `[@kryger1999]` Kryger G, et al. (1999) *Structure of acetylcholinesterase complexed with E2020 (Aricept): implications for the design of new anti-Alzheimer drugs*. Structure (London, England : 1993). PMID 10368299
+    - supports: Donepezil (E2020) lies along the whole AChE gorge from the anionic subsite to the peripheral anionic site via aromatic stacking, and does not contact the catalytic triad or oxyanion hole directly, only through bridging solvent.
+- `[@wang2000]` Wang HY, et al. (2000) *Amyloid peptide Abeta(1-42) binds selectively and with picomolar affinity to alpha7 nicotinic acetylcholine receptors*. Journal of neurochemistry. PMID 10936198
+    - supports: Abeta(1-42) binds alpha7 nAChR with Ki 4.1 pM (rat) and 5.0 pM (guinea pig), approximately 5000-fold selective over alpha4beta2 (30 and 23 nM). Cited as the extraordinary picomolar-affinity claim whose specificity is later contest
+- `[@zhao2002]` Zhao Q, Tang XC (2002) *Effects of huperzine A on acetylcholinesterase isoforms in vitro: comparison with tacrine, donepezil, rivastigmine and physostigmine*. European journal of pharmacology. PMID 12445575
+    - supports: Huperzine A preferentially inhibits tetrameric (G4) AChE while tacrine and rivastigmine prefer the monomeric (G1) form; in cortex huperzine A Ki approximately 7 nM against G4 versus donepezil 4 nM; inhibition constants differed si
+- `[@courtney2004]` Courtney C, et al. (2004) *Long-term donepezil treatment in 565 patients with Alzheimer's disease (AD2000): randomised double-blind trial*. Lancet (London, England). PMID 15220031
+    - supports: AD2000 randomised 565 community-resident patients for up to three years: donepezil gave 0.8 MMSE points and 1.0 BADLS points advantage over the first two years, but no difference in entry to institutional care (42% vs 44% at three
+- `[@khan2010]` Khan GM, et al. (2010) *beta-Amyloid activates presynaptic alpha7 nicotinic acetylcholine receptors reconstituted into a model nerve cell system: involvement of lipid rafts*. The European journal of neuroscience. PMID 20374280
+    - supports: Investigators working on the same interaction a decade later note that 'conflicting data exist as to the nature of the Abeta-alpha7 nAChR interaction, and whether it is the result of specific binding', and that both agonist-like a
+- `[@rafii2011]` Rafii MS, et al. (2011) *A phase II trial of huperzine A in mild to moderate Alzheimer disease*. Neurology. PMID 21502597
+    - supports: In 210 randomised patients, huperzine A 200 ug BID did not change ADAS-Cog at 16 weeks (negative primary endpoint); secondary analysis at 400 ug BID gave 2.27-point ADAS-Cog improvement vs 0.29-point placebo decline at week 11 (p=
+- `[@cheung2012]` Cheung J, et al. (2012) *Structures of human acetylcholinesterase in complex with pharmacologically important ligands*. Journal of medicinal chemistry. PMID 23035744
+    - supports: High-resolution human AChE structures show donepezil binding differently to human AChE than to the Torpedo enzyme, so the template species is not interchangeable for structure-based work.
+- `[@kalliokoski2013]` Kalliokoski T, et al. (2013) *Comparability of mixed IC₅₀ data - a statistical analysis*. PloS one. PMID 23613770
+    - supports: The standard deviation of independently measured public ChEMBL IC50 values on identical protein-ligand systems is about 25% larger than that of Ki data, and is greater than the standard deviation of in-house intra-laboratory / int
+- `[@yang2013]` Yang G, et al. (2013) *Huperzine A for Alzheimer's disease: a systematic review and meta-analysis of randomized clinical trials*. PloS one. PMID 24086396 [review]
+    - supports: Meta-analysis of 20 RCTs with 1823 participants reporting MMSE benefit at 8, 12 and 16 weeks, but with most trials at high risk of bias, no trial evaluating quality of life, and one trial finding no change on ADAS-Cog.
+- `[@keefe2015]` Keefe RS, et al. (2015) *Randomized, Double-Blind, Placebo-Controlled Study of Encenicline, an α7 Nicotinic Acetylcholine Receptor Agonist, as a Treatment for Cognitive Impairment in Schizophrenia*. Neuropsychopharmacology : official publication of the American College of Neuropsychopharmacology. PMID 26089183
+    - supports: 319-patient phase 2 trial of encenicline in schizophrenia: primary endpoint (Overall Cognition Index) effect Cohen's d=0.257 (p=0.034) at 0.27 mg, not significant at 0.9 mg on that endpoint, while the PANSS Cognition Impairment Do
+- `[@birks2018]` Birks JS, Harvey RJ (2018) *Donepezil for dementia due to Alzheimer's disease*. The Cochrane database of systematic reviews. PMID 29923184 [review]
+    - supports: Cochrane review of 30 studies / 8257 participants: donepezil 10 mg/day at 24-26 weeks gives ADAS-Cog MD -2.67 (95% CI -3.31 to -2.02; 1130 participants, 5 studies) and MMSE MD +1.05 (0.73 to 1.37); no benefit on NPI (MD -1.62, 95%
+- `[@hampel2018]` Hampel H, et al. (2018) *The cholinergic system in the pathophysiology and treatment of Alzheimer's disease*. Brain : a journal of neurology. PMID 29850777 [review]
+    - supports: Modern multi-author restatement of the cholinergic hypothesis as centred on progressive loss of limbic and neocortical cholinergic innervation, defending cholinesterase inhibitors as one of the few therapies proven clinically usef
+- `[@noviello2021]` Noviello CM, et al. (2021) *Structure and gating mechanism of the α7 nicotinic acetylcholine receptor*. Cell. PMID 33735609
+    - supports: The alpha7 nicotinic receptor is a homopentamer, exceptionally Ca2+-permeable, and desensitises faster than any other Cys-loop receptor; it had long resisted structural analysis, with cryo-EM structures of the human receptor in re
+- `[@nguyen2024]` Nguyen HTM, et al. (2024) *Opportunities and challenges for the development of M(1) muscarinic receptor positive allosteric modulators in the treatment for neurocognitive deficits*. British journal of pharmacology. PMID 36355830 [review]
+    - supports: Structurally diverse, highly selective M1 positive allosteric modulators rescue cognitive deficits preclinically, yet only a few reached early-stage clinical trials and many failed to progress because of on-target cholinergic adve
+
+## cofolding
+- `[@basu2016b]` Basu S, Wallner B (2016) *DockQ: A Quality Measure for Protein-Protein Docking Models*. PloS one. PMID 27560519
+    - supports: DockQ is a continuous [0,1] score combining Fnat, LRMS and iRMS that almost completely reproduces the CAPRI Incorrect/Acceptable/Medium/High classification.
+- `[@jumper2021]` Jumper J, et al. (2021) *Highly accurate protein structure prediction with AlphaFold*. Nature. PMID 34265844
+    - supports: AF2 was validated on CASP14 monomers and reports pLDDT (per-residue lDDT estimate) and PAE (pairwise positional-error estimate) as self-assessment channels regressed onto geometric agreement with experimental structure.
+- `[@evans2021]` Evans R (2021) *Protein complex prediction with AlphaFold-Multimer*. bioRxiv (preprint). (preprint, not PubMed-indexed)
+    - supports: AlphaFold-Multimer adds interface-aware confidence (pTM, ipTM); on 4,446 recent complexes heteromeric interfaces were recovered at DockQ >= 0.23 in 70% of cases and DockQ >= 0.8 in 26%.
+- `[@johanssonakhe2022]` Johansson-Åkhe I, Wallner B (2022) *Improving peptide-protein docking with AlphaFold-Multimer using forced sampling*. Frontiers in bioinformatics. PMID 36304330
+    - supports: AlphaFold-Multimer gave acceptable-or-better models for 66/112 peptide-protein complexes (25 high quality); forced sampling raised this to 75/112 and median first-ranked DockQ from 0.47 to 0.55, with best-possible DockQ 0.58 to 0.
+- `[@varadi2022]` Varadi M, et al. (2022) *AlphaFold Protein Structure Database: massively expanding the structural coverage of protein-sequence space with high-accuracy models*. Nucleic acids research. PMID 34791371
+    - supports: AlphaFold DB exposes per-residue and pairwise model-confidence estimates and predicted aligned errors for over 360,000 predicted structures, described as model-confidence estimates rather than biophysical quantities.
+- `[@bennett2023]` Bennett NR, et al. (2023) *Improving de novo protein binder design with deep learning*. Nature communications. PMID 37149653
+    - supports: Using AlphaFold2 or RoseTTAFold to assess whether a designed sequence adopts its designed structure and binds the target as designed increases design success rates nearly 10-fold.
+- `[@abramson2024]` Abramson J, et al. (2024) *Accurate structure prediction of biomolecular interactions with AlphaFold 3*. Nature. PMID 38718835
+    - supports: AF3's diffusion-based architecture jointly predicts proteins, nucleic acids, small molecules, ions and modified residues, with reported gains over specialised docking tools for protein-ligand and over AlphaFold-Multimer v2.3 for a
+- `[@bret2024]` Bret H, et al. (2024) *From interaction networks to interfaces, scanning intrinsically disordered regions using AlphaFold2*. Nature communications. PMID 38238291
+    - supports: On IDR-derived protein-peptide complexes non-redundant with AF2 training structures, AF2-Multimer identified the correct interface site and structure in only 40% of cases from full-length sequences, rising to ~90% after fragment d
+- `[@buttenschoen2024]` Buttenschoen M, et al. (2024) *PoseBusters: AI-based docking methods fail to generate physically valid poses or generalise to novel sequences*. Chemical science. PMID 38425520
+    - supports: Deep-learning docking methods frequently emit stereochemically and sterically invalid poses; on physical plausibility and generalisation to novel sequences no deep-learning method outperformed classical docking tools.
+- `[@middendorf2024]` Middendorf L, Eicholt LA (2024) *Random, de novo, and conserved proteins: How structure and disorder predictors perform differently*. Proteins. PMID 38226524
+    - supports: For Drosophila de novo genes and matched random sequences, pLDDT correlates positively with predicted disorder — opposite to the negative correlation for conserved proteins — and predictor performance is hampered by the lack of se
+- `[@yin2024]` Yin R, Pierce BG (2024) *Evaluation of AlphaFold antibody-antigen modeling with implications for improving predictive accuracy*. Protein science : a publication of the Protein Society. PMID 38073135
+    - supports: AlphaFold antibody-antigen modelling over 427 non-redundant complexes: near-native success ~30%, rising to ~50% with increased sampling
+- `[@graber2025]` Graber D, et al. (2025) *Resolving data bias improves generalization in binding affinity prediction*. Nature machine intelligence. PMID 41143208
+    - supports: Train-test leakage between PDBbind and the CASF benchmarks severely inflated deep-learning binding-affinity metrics; retraining top models on the leakage-filtered CleanSplit caused benchmark performance to drop substantially.
+- `[@kim2025]` Kim J, et al. (2025) *Large scale prospective evaluation of co-folding across 557 Mac1-ligand complexes and three virtual screens*. bioRxiv : the preprint server for biology. PMID 41509292
+    - supports: On 557 Mac1-ligand complexes determined after training cut-offs, AF3, Boltz-2 and Chai-1 each reproduced >50% of poses to <2 A RMSD; common conformational rearrangements were not recapitulated; AF3 and Chai-1 pose confidence track
+- `[@passaro2025]` Passaro S, et al. (2025) *Boltz-2: Towards Accurate and Efficient Binding Affinity Prediction*. bioRxiv : the preprint server for biology. PMID 40667369
+    - supports: Boltz-2 adds an affinity module and is presented as the first AI model approaching free-energy-perturbation accuracy for small-molecule binding affinity at least 1000x more cheaply.
+- `[@raouraoua2025]` Raouraoua N, et al. (2025) *Massive Sampling Strategy for Antibody-Antigen Targets in CAPRI Round 55 With MassiveFold*. Proteins. PMID 39868877
+    - supports: MassiveFold produced more than 6000 predictions per CAPRI Round 55 target, categorically yielding acceptable-to-high-quality predictions, yet the AlphaFold2 confidence score could not be used to identify the best models in the set
+- `[@schmid2025]` Schmid EW, Walter JC (2025) *Predictomes, a classifier-curated database of AlphaFold-modeled protein-protein interactions*. Molecular cell. PMID 40015271
+    - supports: Standard AF-M confidence metrics do not reliably separate relevant PPIs from an abundance of false positives; a separate classifier (SPOC) was needed. Built from an all-by-all matrix of nearly 300 human genome-maintenance proteins
+- `[@wohlwend2025]` Wohlwend J, et al. (2025) *Boltz-1 Democratizing Biomolecular Interaction Modeling*. bioRxiv : the preprint server for biology. PMID 39605745
+    - supports: Boltz-1 is an MIT-licensed open model claiming AlphaFold3-level accuracy and introduces Boltz-steering, an inference-time technique to fix hallucinations and non-physical predictions.
+- `[@zhai2025]` Zhai S, et al. (2025) *PepPCBench is a Comprehensive Benchmarking Framework for Protein-Peptide Complex Structure Prediction*. Journal of chemical information and modeling. PMID 40792461
+    - supports: PepPCSet (261 experimentally resolved complexes, peptides 5-30 residues) benchmarks AF3, AFM, Chai-1, HelixFold3 and RoseTTAFold-All-Atom; accuracy depends on training-set similarity and confidence metrics correlate poorly with ex
+- `[@zhou2025]` Zhou F (2025) *Benchmarking AlphaFold3-like Methods for Protein-Peptide Complex Prediction*. bioRxiv (preprint). (preprint, not PubMed-indexed)
+    - supports: On a benchmark that did not exclude training structures, AF3-generation methods reached 70-80% stringent success (Fnat>=0.8, Protenix highest at 80.8%) vs 53% for AF2-Multimer; on the leakage-excluded set they dropped to 40-56% wh
+- `[@bret2026]` Bret G, et al. (2026) *Assessing Boltz-2 Performance for the Binding Classification of Docking Hits*. Journal of chemical information and modeling. PMID 41592323
+    - supports: Boltz-2 affinity predictions challenged with target mutation and target shuffling: binary active/inactive classification remains insensitive to key binding-site mutations and in some cases to target exchange, raising concerns abou
+- `[@ko2026]` Ko S, et al. (2026) *Benchmarking sequence-based and AlphaFold-based methods for pMHC-II binding core prediction: distinct strengths and consensus approaches*. BMC medical genomics. PMID 42509551
+    - supports: On 72 pMHC-II complexes supplemented with shuffled negative peptides and curated non-binders, AF3 reached the highest positive recall (0.86) and fine-tuned AF2 0.81, but both frequently misclassified unbound peptides as binders, w
+- `[@leng2026]` Leng J, et al. (2026) *Revealing the limits of covalent docking and advancing affinity prediction with covalent-aware multi-task learning*. Physical chemistry chemical physics : PCCP. PMID 41636346
+    - supports: A covalent-docking benchmark found Boltz-2 the strongest pose reproducer but reported it as a reference upper bound rather than a leakage-free generalisation estimate, since both the benchmark and the training corpus are PDB-deriv
+- `[@unsal2026]` Ünsal S, et al. (2026) *Confidence scoring for deep learning-predicted antibody-antigen complexes: AntiConf as a precision-driven metric*. Briefings in bioinformatics. PMID 41903187
+    - supports: nine co-folding methods including Boltz-2 benchmarked on 200 antibody-antigen complexes; confidence scores analysed for precision and recall
+
+## glutamate
+- `[@tanaka1997]` Tanaka K, et al. (1997) *Epilepsy and exacerbation of brain injury in mice lacking the glutamate transporter GLT-1*. Science (New York, N.Y.). PMID 9180080
+    - supports: GLT-1 (EAAT2/SLC1A2) null mice show lethal spontaneous seizures and increased susceptibility to acute cortical injury, establishing the transporter's necessity genetically.
+- `[@tang1999]` Tang YP, et al. (1999) *Genetic enhancement of learning and memory in mice*. Nature. PMID 10485705
+    - supports: Forebrain overexpression of NR2B (GluN2B) in transgenic mice enhanced NMDA receptor activation, facilitated synaptic potentiation at 10-100 Hz stimulation, and improved performance across multiple learning and memory tasks.
+- `[@wei2001]` Wei F, et al. (2001) *Genetic enhancement of inflammatory pain by forebrain NR2B overexpression*. Nature neuroscience. PMID 11175877
+    - supports: The same forebrain NR2B-overexpressing transgenic manipulation that improved learning also enhanced responses to inflammatory (formalin, CFA) pain - the cognitive gain is not free.
+- `[@perindureau2002]` Perin-Dureau F, et al. (2002) *Mapping the binding site of the neuroprotectant ifenprodil on NMDA receptors*. The Journal of neuroscience : the official journal of the Society for Neuroscience. PMID 12122058
+    - supports: The earlier mutagenesis-based model placing ifenprodil within the GluN2B (NR2B) LIVBP-like domain cleft by a Venus-flytrap mechanism, subsequently corrected by crystallography.
+- `[@liu2004]` Liu L, et al. (2004) *Role of NMDA receptor subtypes in governing the direction of hippocampal synaptic plasticity*. Science (New York, N.Y.). PMID 15143284
+    - supports: Pharmacological dissection at CA1 synapses: blocking GluN2B(NR2B)-containing receptors abolished LTD without affecting LTP, while preferential inhibition of GluN2A(NR2A)-containing receptors prevented LTP without affecting LTD.
+- `[@preskorn2008]` Preskorn SH, et al. (2008) *An innovative design to establish proof of concept of the antidepressant effects of the NR2B subunit selective N-methyl-D-aspartate antagonist, CP-101,606, in patients with treatment-refractory major depressive disorder*. Journal of clinical psychopharmacology. PMID 19011431
+    - supports: The GluN2B-selective antagonist CP-101,606 (traxoprodil) produced a MADRS advantage in treatment-refractory depression in a small randomised proof-of-concept study reported at an 80% confidence interval and P < 0.10 - a signal, no
+- `[@gielen2009]` Gielen M, et al. (2009) *Mechanism of differential control of NMDA receptor activity by NR2 subunits*. Nature. PMID 19404260
+    - supports: Channel maximal open probability spans ~50-fold across subtypes (~0.5 GluN2A, ~0.1 GluN2B, ~0.01 GluN2C/D); subunit-specific gating is controlled by the GluN2 ATD and ATD-LBD linker via the spontaneous open-cleft/closed-cleft equi
+- `[@karakas2011]` Karakas E, et al. (2011) *Subunit arrangement and phenylethanolamine binding in GluN1/GluN2B NMDA receptors*. Nature. PMID 21677647
+    - supports: The phenylethanolamine (ifenprodil) site lies at the GluN1-GluN2B ATD heterodimer interface rather than within the GluN2B cleft; an engineered inter-subunit disulfide restricting bi-lobe motion markedly decreases ifenprodil sensit
+- `[@lemke2013]` Lemke JR, et al. (2013) *Mutations in GRIN2A cause idiopathic focal epilepsy with rolandic spikes*. Nature genetics. PMID 23933819
+    - supports: GRIN2A is a major genetic risk factor for idiopathic focal epilepsy with rolandic spikes; heterozygous mutations in 27/359 affected individuals (7.5%), with detection rate rising from BECTS to CSWS, plus exon-disrupting microdelet
+- `[@cudkowicz2014]` Cudkowicz ME, et al. (2014) *Safety and efficacy of ceftriaxone for amyotrophic lateral sclerosis: a multi-stage, randomised, double-blind, placebo-controlled trial*. The Lancet. Neurology. PMID 25297012
+    - supports: Ceftriaxone, pursued because it raises EAAT2 expression and activity, showed a favourable early-stage functional slope but no efficacy in the stage 3 ALS population, with excess serious hepatobiliary adverse events - raising uptak
+- `[@hackos2016]` Hackos DH, et al. (2016) *Positive Allosteric Modulators of GluN2A-Containing NMDARs with Distinct Modes of Action and Impacts on Circuit Function*. Neuron. PMID 26875626
+    - supports: The best-validated positive allosteric site is at the GluN1-GluN2A ligand-binding-domain dimer interface, not the ATD; PAMs potentiate synaptic NMDARs in wild-type but not GluN2A-knockout slices and in triheteromeric GluN1/GluN2A/
+- `[@romerohernandez2016]` Romero-Hernandez A, et al. (2016) *Molecular Basis for Subtype Specificity and High-Affinity Zinc Inhibition in the GluN1-GluN2A NMDA Receptor Amino-Terminal Domain*. Neuron. PMID 27916457
+    - supports: The GluN1-GluN2A ATD heterodimer has an architecture distinct from GluN1-GluN2B and carries the high-affinity nanomolar zinc site; perturbing hinge hydrogen-bond networks alters both zinc inhibition and open probability.
+- `[@platzer2017]` Platzer K, et al. (2017) *GRIN2B encephalopathy: novel findings on phenotype, variant clustering, functional consequences and treatment aspects*. Journal of medical genetics. PMID 28377535
+    - supports: De novo GRIN2B variants classified as pathogenic/likely pathogenic cluster in transmembrane segments and ligand-binding sites with mixed gain- and loss-of-function consequences; variant receptors retained memantine sensitivity in 
+- `[@hansen2018]` Hansen KB, et al. (2018) *Structure, function, and allosteric modulation of NMDA receptors*. The Journal of general physiology. PMID 30037851 [review]
+    - supports: NMDA receptors are obligate heterotetramers of two GluN1 plus two GluN2(A-D)/GluN3(A-B) subunits, organised into ATD, LBD and TMD layers; GluN2 identity sets most biophysical and pharmacological character of the assembled receptor
+- `[@fjelldal2019]` Fjelldal MF, et al. (2019) *Exploring the overlapping binding sites of ifenprodil and EVT-101 in GluN2B-containing NMDA receptors using novel chicken embryo forebrain cultures and molecular modeling*. Pharmacology research & perspectives. PMID 31164987
+    - supports: Potency order EVT-101 > Ro 25-6981 > ifenprodil > eliprodil in native GluN2B-containing cultures with Ro 04-5595 at 186 +/- 32 nmol/L; docking/MD assign Ro 04-5595 to the EVT-101 pocket rather than the ifenprodil pocket, indicatin
+- `[@mcshane2019]` McShane R, et al. (2019) *Memantine for dementia*. The Cochrane database of systematic reviews. PMID 30891742 [review]
+    - supports: Memantine, a non-subunit-selective uncompetitive open-channel blocker, gives a small but consistent six-month benefit in moderate-to-severe Alzheimer's disease and probably no benefit in mild disease - the ceiling the NMDA-directe
+- `[@pregnolato2019]` Pregnolato S, et al. (2019) *Glutamate Transport and Preterm Brain Injury*. Frontiers in physiology. PMID 31068830 [review]
+    - supports: EAAT2 (GLT-1, SLC1A2) is the astrocytic transporter responsible for the large majority (~95%) of glutamate clearance in the brain.
+- `[@strehlow2019]` Strehlow V, et al. (2019) *GRIN2A-related disorders: genotype and functional consequence predict phenotype*. Brain : a journal of neurology. PMID 30544257
+    - supports: Domain-dependent mechanism in GRIN2A: transmembrane/linker missense variants are predominantly gain-of-function with severe phenotypes, whereas ATD and LBD missense variants plus null variants are loss-of-function with milder phen
+- `[@yi2019]` Yi F, et al. (2019) *Functional and pharmacological properties of triheteromeric GluN1/2B/2D NMDA receptors*. The Journal of physiology. PMID 31541561
+    - supports: In GluN1/2B/2D triheteromers ifenprodil, EVT-101 and CP-101,606 inhibit with similar potency but markedly lower efficacy (~65% vs ~95% at GluN1/2B), and spermine potentiates GluN1/2B/2D but not GluN1/2A/2B; signatures reproduced i
+- `[@hill2020]` Hill MD, et al. (2020) *Efficacy and safety of nerinetide for the treatment of acute ischaemic stroke (ESCAPE-NA1): a multicentre, double-blind, randomised controlled trial*. Lancet (London, England). PMID 32087818
+    - supports: Nerinetide, a PSD-95-interfering peptide with strong preclinical ischaemia-reperfusion data, failed its phase 3 primary endpoint - preclinical potency at a glutamatergic node did not convert clinically.
+
+## interface-eval
+- `[@mendez2003]` Méndez R, et al. (2003) *Assessment of blind predictions of protein-protein interactions: current status of docking methods*. Proteins. PMID 12784368
+    - supports: The first CAPRI assessment evaluated 465 predictions from 19 groups over seven target complexes, comparing residue-residue contacts and interface residues to the X-ray structure and separately analysing the fit of the smaller (lig
+- `[@lensink2007]` Lensink MF, et al. (2007) *Docking and scoring protein complexes: CAPRI 3rd Edition*. Proteins. PMID 17918726
+    - supports: CAPRI rounds 6-12 scored 1994 predictions from 63 groups and eight servers; 31 groups produced acceptable/medium models but only one high-accuracy submission, and the first scoring experiment found groups could separate correct fr
+- `[@basu2016]` Basu S, Wallner B (2016) *Finding correct protein-protein docking models using ProQDock*. Bioinformatics (Oxford, England). PMID 27307625
+    - supports: Individual physical features correlate only weakly with DockQ -- the best single feature, electrostatic complementarity, reaching 0.25 -- while a trained combination (ProQDock) reached 0.49, setting a durable ceiling on interface 
+- `[@basu2016b]` Basu S, Wallner B (2016) *DockQ: A Quality Measure for Protein-Protein Docking Models*. PloS one. PMID 27560519
+    - supports: DockQ is a continuous [0,1] score combining Fnat, LRMS and iRMS that almost completely reproduces the CAPRI Incorrect/Acceptable/Medium/High classification.
+- `[@marcu2017]` Marcu O, et al. (2017) *FlexPepDock lessons from CAPRI peptide-protein rounds and suggested new criteria for assessment of model quality and utility*. Proteins. PMID 28002624
+    - supports: The CAPRI criteria met peptide-receptor targets for the first time in rounds 28-29 across three systems and the assessors found the standard bins ill-suited; the reassessment proposed loosening the backbone/ligand RMSD threshold, 
+- `[@bryant2022]` Bryant P, et al. (2022) *Improved prediction of protein-protein interactions using AlphaFold2*. Nature communications. PMID 35273146
+    - supports: pDockQ, a simple function of the predicted interface, recovered 51% of interacting pairs at 1% false-positive rate while AlphaFold2 produced acceptable models for 63% of heterodimers -- signal exists in confidence-derived scores, 
+- `[@johanssonakhe2022]` Johansson-Åkhe I, Wallner B (2022) *Improving peptide-protein docking with AlphaFold-Multimer using forced sampling*. Frontiers in bioinformatics. PMID 36304330
+    - supports: AlphaFold-Multimer gave acceptable-or-better models for 66/112 peptide-protein complexes (25 high quality); forced sampling raised this to 75/112 and median first-ranked DockQ from 0.47 to 0.55, with best-possible DockQ 0.58 to 0.
+- `[@tsaban2022]` Tsaban T, et al. (2022) *Harnessing protein folding neural networks for peptide-protein docking*. Nature communications. PMID 35013344
+    - supports: AlphaFold2 models peptide-protein complexes without any MSA for the peptide partner, raising the question of what the network has memorised versus learned.
+- `[@elfmann2023]` Elfmann C, Stülke J (2023) *PAE viewer: a webserver for the interactive visualization of the predicted aligned error for multimer structure predictions and crosslinks*. Nucleic acids research. PMID 37140053
+    - supports: Interface PAE is a descriptive quantity -- the predicted aligned error matrix restricted to inter-chain residue pairs -- that allows an estimation of prediction quality but whose interpretation is difficult for non-specialists; it
+- `[@lensink2023]` Lensink MF, et al. (2023) *Impact of AlphaFold on structure prediction of protein complexes: The CASP15-CAPRI experiment*. Proteins. PMID 37905971
+    - supports: CASP15-CAPRI reported high-quality models for about 40% of 37 targets, up from 8% two years earlier, yet performance remained poor for complexes with antibodies and nanobodies where evolutionary relationships between the binding p
+- `[@buttenschoen2024]` Buttenschoen M, et al. (2024) *PoseBusters: AI-based docking methods fail to generate physically valid poses or generalise to novel sequences*. Chemical science. PMID 38425520
+    - supports: Deep-learning docking methods frequently emit stereochemically and sterically invalid poses; on physical plausibility and generalisation to novel sequences no deep-learning method outperformed classical docking tools.
+- `[@li2024]` Li J, et al. (2024) *Leak Proof PDBBind: A Reorganized Dataset of Protein-Ligand Complexes for More Generalizable Binding Affinity Prediction*. ArXiv. PMID 37645037
+    - supports: LP-PDBBind defines leakage explicitly as proteins AND ligands with high sequence and structural similarity, and pairs a date-based independent set (BDB2020+, complexes deposited since 2020) with similarity filtering rather than re
+- `[@mirabello2024]` Mirabello C, Wallner B (2024) *DockQ v2: improved automatic quality measure for protein multimers, nucleic acids, and small molecules*. Bioinformatics (Oxford, England). PMID 39348158
+    - supports: DockQ v2 is a Python reimplementation adding automatic handling of multiple interfaces in large multi-chain assemblies, automatic chain mapping, and scoring of protein-nucleic-acid and protein-small-molecule interfaces -- a robust
+- `[@dai2025]` Dai X, et al. (2025) *Topological deep learning for enhancing peptide-protein complex prediction*. Communications chemistry. PMID 41225185
+    - supports: TopoDockQ was built because peptide-protein model selection suffers high false-positive rates; relative to AlphaFold2's built-in confidence score it reduced false positives by at least 42% and raised precision by 6.7% across five 
+- `[@graber2025]` Graber D, et al. (2025) *Resolving data bias improves generalization in binding affinity prediction*. Nature machine intelligence. PMID 41143208
+    - supports: Train-test leakage between PDBbind and the CASF benchmarks severely inflated deep-learning binding-affinity metrics; retraining top models on the leakage-filtered CleanSplit caused benchmark performance to drop substantially.
+- `[@liu2025]` Liu Y, et al. (2025) *AF3Score: A Score-Only Adaptation of AlphaFold3 for Biomolecular Structure Evaluation*. Journal of chemical information and modeling. PMID 40671257
+    - supports: Combining an AlphaFold3-derived score-only model with AlphaFold2-derived methods raised the rate of experimentally validated binders from 15.2% to 31.6% -- roughly two in three top-ranked designs still fail.
+- `[@schmid2025]` Schmid EW, Walter JC (2025) *Predictomes, a classifier-curated database of AlphaFold-modeled protein-protein interactions*. Molecular cell. PMID 40015271
+    - supports: Standard AF-M confidence metrics do not reliably separate relevant PPIs from an abundance of false positives; a separate classifier (SPOC) was needed. Built from an all-by-all matrix of nearly 300 human genome-maintenance proteins
+- `[@wohlwend2025]` Wohlwend J, et al. (2025) *Boltz-1 Democratizing Biomolecular Interaction Modeling*. bioRxiv : the preprint server for biology. PMID 39605745
+    - supports: Boltz-1 is an MIT-licensed open model claiming AlphaFold3-level accuracy and introduces Boltz-steering, an inference-time technique to fix hallucinations and non-physical predictions.
+- `[@raouraoua2026]` Raouraoua N, et al. (2026) *MassiveFold Data for CASP16-CAPRI: A Systematic Massive Sampling Experiment*. Proteins. PMID 40874652
+    - supports: Up to 8040 models per target, with the largest gains from massive sampling on the hardest interfaces; interface difficulty defined by DockQ is itself predictable from the median ipTM of a routine run, and the persistent challenge 
+- `[@sumner2026]` Sumner J, et al. (2026) *Assessment of scoring functions for computational models of protein-protein interfaces*. Physical review. E. PMID 42316655
+    - supports: A systematic assessment of seven physical, statistical and deep-learning interface scoring functions sampled uniformly over DockQ on non-redundant PDB heterodimers found high per-target Spearman correlations for some targets and w
+
+## neurotrophin
+- `[@clackson1995]` Clackson T, Wells JA (1995) *A hot spot of binding energy in a hormone-receptor interface*. Science (New York, N.Y.). PMID 7529940
+    - supports: In the hGH:hGHbp interface ~30 side chains per partner contact, and alanine scanning shows a central hydrophobic region dominated by two tryptophans carries >3/4 of the binding free energy.
+- `[@the1999]` The BDNF Study Group (Phase III) (1999) *A controlled trial of recombinant methionyl human BDNF in ALS: The BDNF Study Group (Phase III)*. Neurology. PMID 10227630
+    - supports: Recombinant methionyl human BDNF failed its primary endpoints in a 1,135-patient phase III ALS trial; ~85% 9-month survival across arms; only post hoc subgroups significant.
+- `[@wiesmann1999]` Wiesmann C, et al. (1999) *Crystal structure of nerve growth factor in complex with the ligand-binding domain of the TrkA receptor*. Nature. PMID 10490030
+    - supports: 2.2 A crystal structure of NGF bound to TrkA-d5; d5 necessary and sufficient for NGF binding; interface is two patches, NGF N-terminus becomes helical on complex formation.
+- `[@maliartchouk2000]` Maliartchouk S, et al. (2000) *A designed peptidomimetic agonistic ligand of TrkA nerve growth factor receptors*. Molecular pharmacology. PMID 10648649
+    - supports: D3, a proteolytically stable beta-turn peptidomimetic, binds the Ig-like C2 region of the TrkA ectodomain, competes another TrkA agonist, and gives selective trophic protection and differentiation.
+- `[@banfield2001]` Banfield MJ, et al. (2001) *Specificity in Trk receptor:neurotrophin interactions: the crystal structure of TrkB-d5 in complex with neurotrophin-4/5*. Structure (London, England : 1993). PMID 11738045
+    - supports: 2.7 A TrkB-d5:NT-4/5 structure; one neurotrophin dimer crosslinks two receptor molecules; conserved patch plus pair-specific site formed by ordering of the neurotrophin N terminus.
+- `[@minichiello2002]` Minichiello L, et al. (2002) *Mechanism of TrkB-mediated hippocampal long-term potentiation*. Neuron. PMID 12367511
+    - supports: TrkB PLC-gamma docking-site knock-in mice lose hippocampal LTP while Shc-site mice do not; PLC mutants retain MAPK activation but lose CREB/CaMKIV phosphorylation.
+- `[@egan2003]` Egan MF, et al. (2003) *The BDNF val66met polymorphism affects activity-dependent secretion of BDNF and human memory and hippocampal function*. Cell. PMID 12553913
+    - supports: BDNF Val66Met Met allele associated with poorer episodic memory, abnormal hippocampal fMRI activation, lower hippocampal NAA, and impaired depolarisation-induced secretion with failure to localise to secretory granules.
+- `[@oleary2003]` O'Leary PD, Hughes RA (2003) *Design of potent peptide mimetics of brain-derived neurotrophic factor*. The Journal of biological chemistry. PMID 12730196
+    - supports: Monocyclic monomeric loop-2 BDNF mimic was an inhibitor; bicyclic dimers were partial agonists; a conformationally constrained tricyclic dimer reached EC50 11 pM in chick sensory neuron survival while remaining a partial agonist.
+- `[@dawbarn2006]` Dawbarn D, et al. (2006) *NGF receptor TrkAd5: therapeutic agent and drug design target*. Biochemical Society transactions. PMID 16856868
+    - supports: Recombinant TrkAd5 expressed in E. coli binds NGF with picomolar affinity.
+- `[@jang2010]` Jang SW, et al. (2010) *A selective TrkB agonist with potent neurotrophic activities by 7,8-dihydroxyflavone*. Proceedings of the National Academy of Sciences of the United States of America. PMID 20133810
+    - supports: 7,8-dihydroxyflavone reported as a bioactive high-affinity TrkB agonist provoking dimerisation and autophosphorylation, protecting wild-type but not TrkB-deficient neurons, and reducing infarct volume TrkB-dependently.
+- `[@massa2010]` Massa SM, et al. (2010) *Small molecule BDNF mimetics activate TrkB signaling and prevent neuronal degeneration in rodents*. The Journal of clinical investigation. PMID 20407211
+    - supports: LM22A-4 came from in silico screening against a BDNF loop-domain pharmacophore plus low-throughput screening in mouse fetal hippocampal neurons, with nanomolar TrkB-selective activity, ectodomain binding, and signalling kinetics d
+- `[@longo2013]` Longo FM, Massa SM (2013) *Small-molecule modulation of neurotrophin receptors: a strategy for the treatment of neurological disease*. Nature reviews. Drug discovery. PMID 23977697 [review]
+    - supports: Advocacy review proposing small-molecule targeting of individual neurotrophin receptors (TRKA, TRKB, TRKC, p75, sortilin).
+- `[@zeng2013]` Zeng F, et al. (2013) *The relationship between single nucleotide polymorphisms of the NTRK2 gene and sporadic Alzheimer's disease in the Chinese Han population*. Neuroscience letters. PMID 23831349
+    - supports: Five NTRK2 SNPs (four promoter, one intronic) in 216 sporadic AD cases and 244 controls in a Chinese Han cohort showed no association with disease or by haplotype.
+- `[@boltaev2017]` Boltaev U, et al. (2017) *Multiplex quantitative assays indicate a need for reevaluating reported small-molecule TrkB agonists*. Science signaling. PMID 28831019
+    - supports: A panel of complementary quantitative assays for TrkB activation, downstream signalling and gene expression reproduced BDNF responses but not those of reported small-molecule TrkB agonists.
+- `[@merkouris2018]` Merkouris S, et al. (2018) *Fully human agonist antibodies to TrkB using autocrine cell-based selection from a combinatorial antibody library*. Proceedings of the National Academy of Sciences of the United States of America. PMID 29987039
+    - supports: ZEB85, selected from a combinatorial human scFv library by function-based cellular assay, is a full TrkB agonist comparable in potency to BDNF in human ES-cell-derived GABAergic neurons.
+- `[@rafii2018]` Rafii MS, et al. (2018) *Adeno-Associated Viral Vector (Serotype 2)-Nerve Growth Factor for Patients With Alzheimer Disease: A Randomized Clinical Trial*. JAMA neurology. PMID 29582053
+    - supports: AAV2-NGF into nucleus basalis of Meynert in 49 mild-to-moderate AD participants was well tolerated but showed no ADAS-cog difference from sham at 24 months (P = .17).
+- `[@toh2018]` Toh YL, et al. (2018) *Impact of brain-derived neurotrophic factor genetic polymorphism on cognition: A systematic review*. Brain and behavior. PMID 29858545 [review]
+    - supports: Systematic review of 82 studies: 40 (48.8%) reported an association; Val/Val-favouring 30.5% vs Met-favouring 18.3%; memory 26/63 (41.3%), executive function 18/47 (38.3%), attention 4/23 (17.4%), none for verbal fluency; effect o
+- `[@casarotto2021]` Casarotto PC, et al. (2021) *Antidepressant drugs act by directly binding to TRKB neurotrophin receptors*. Cell. PMID 33606976
+    - supports: Antidepressants bind a site at the transmembrane region of TRKB dimers, allosterically facilitating BDNF signalling; the TRKB transmembrane domain has a cholesterol-sensing function; mutating the binding motif abolishes cellular, 
+- `[@pankiewicz2021]` Pankiewicz P, et al. (2021) *Do Small Molecules Activate the TrkB Receptor in the Same Manner as BDNF? Limitations of Published TrkB Low Molecular Agonists and Screening for Novel TrkB Orthosteric Agonists*. Pharmaceuticals (Basel, Switzerland). PMID 34451801
+    - supports: 7,8-DHF binds TrkB only weakly (Kd = 1.3 uM) with no dimerisation, signalling or cytoprotection in SN56 T48 or differentiated SH-SY5Y cells, poor PK at 1 mg/kg i.v. and 50 mg/kg p.o., non-selectivity across 133 targets, and no rel
+- `[@bellenguez2022]` Bellenguez C, et al. (2022) *New insights into the genetic etiology of Alzheimer's disease and related dementias*. Nature genetics. PMID 35379992
+    - supports: Two-stage AD GWAS of 111,326 diagnosed/proxy cases and 677,663 controls found 75 risk loci; pathway enrichment confirmed amyloid/tau and highlighted microglia, with no neurotrophin-receptor process highlighted.
+- `[@shanks2024]` Shanks HRC, et al. (2024) *p75 neurotrophin receptor modulation in mild to moderate Alzheimer disease: a randomized, placebo-controlled phase 2a trial*. Nature medicine. PMID 38760589
+    - supports: 26-week phase 2a of p75NTR modulator LM11A-31 in 242 mild-to-moderate AD participants met safety primary endpoint and separated on MRI/FDG-PET/CSF domains with no significant cognitive effect.
+- `[@gallegoortega2025]` Gallego-Ortega A, et al. (2025) *The action of 7,8-dihydroxyflavone preserves retinal ganglion cell survival and visual function via the TrkB pathway in NMDA-induced retinal excitotoxicity*. Biomedicine & pharmacotherapy = Biomedecine & pharmacotherapie. PMID 40056826
+    - supports: Recent primary paper describing 7,8-DHF as a potent selective TrkB agonist and attributing retinal ganglion cell protection in NMDA excitotoxicity to the TrkB pathway.
+- `[@gao2025]` Gao AYL, et al. (2025) *Impaired hippocampal plasticity associated with loss of recycling endosomal SLC9A6/NHE6 is ameliorated by the TrkB agonist 7,8-dihydroxyflavone*. Biochimica et biophysica acta. Molecular basis of disease. PMID 39341363
+    - supports: Recent primary paper that describes 7,8-DHF as a selective TrkB agonist and attributes rescue of hippocampal spine density and LTP in Nhe6-knockout neurons to TrkB activation.
+
+## null-models
+- `[@workman1999]` Workman C, Krogh A (1999) *No evidence that mRNAs have lower folding free energies than random sequences with the same dinucleotide distribution*. Nucleic acids research. PMID 10572183
+    - supports: The mRNA folding-stability claim did not survive a dinucleotide-matched null: for 46 mRNAs the predicted free energy was not significantly different from dinucleotide-matched randoms, the effect appeared only against mononucleotid
+- `[@rivas2000]` Rivas E, Eddy SR (2000) *Secondary structure alone is generally not statistically significant for the detection of noncoding RNAs*. Bioinformatics (Oxford, England). PMID 11038329
+    - supports: In a genome-scanning setting there is a statistical effect but 'it comes mostly from local base-composition bias and not from RNA secondary structure'; once significance is assessed by Monte Carlo shuffling in fixed-length windows
+- `[@romero2001]` Romero P, et al. (2001) *Sequence complexity of disordered protein*. Proteins. PMID 11093259
+    - supports: Intrinsic disorder is largely compositional: segments identified by crystallography, NMR and CD show Shannon-entropy distributions shifted to lower values than ordered proteins, and are enriched in R, K, E, P, S and depleted in C,
+- `[@schaffer2001]` Schäffer AA, et al. (2001) *Improving the accuracy of PSI-BLAST protein database searches with composition-based statistics and other refinements*. Nucleic acids research. PMID 11452024
+    - supports: Correcting for amino-acid composition is a load-bearing engineering step in sequence search: ROC rose 0.758 +/- 0.005 to 0.895 +/- 0.003 over 103 expert-curated queries, and the majority of the gain came from tuning the position-s
+- `[@storey2003]` Storey JD, Tibshirani R (2003) *Statistical significance for genomewide studies*. Proceedings of the National Academy of Sciences of the United States of America. PMID 12883005
+    - supports: The false-discovery-rate framework was introduced into genomics to make screen-level multiple-comparison arithmetic automatic and interpretable at scale, attaching a q-value to each tested feature rather than a per-feature p-value
+- `[@clote2005]` Clote P, et al. (2005) *Structural RNA has lower folding energy than random RNA of the same dinucleotide frequency*. RNA (New York, N.Y.). PMID 15840812
+    - supports: The contesting result: under the same dinucleotide-preserving null, type III hammerhead ribozymes, SRP RNAs, U2 snRNAs and certain riboswitches do have significantly lower folding energy than dinucleotide-matched randoms, while wh
+- `[@elias2007]` Elias JE, Gygi SP (2007) *Target-decoy search strategy for increased confidence in large-scale protein identifications by mass spectrometry*. Nature methods. PMID 17327847
+    - supports: Proteomics solves the screen-level null structurally: a concatenated target-decoy database lets decoy hit frequency estimate the error rate of the whole identification set; the authors argue concatenated searches are preferable to
+- `[@jiang2008]` Jiang M, et al. (2008) *uShuffle: a useful tool for shuffling biological sequences while preserving the k-let counts*. BMC bioinformatics. PMID 18405375
+    - supports: uShuffle implements exact k-let-preserving uniform permutation via the latest variant of the Euler algorithm with Wilson's algorithm for arborescence generation, for arbitrary alphabet and let size -- the reference tool for higher
+- `[@mcleay2010]` McLeay RC, Bailey TL (2010) *Motif Enrichment Analysis: a unified framework and an evaluation on ChIP data*. BMC bioinformatics. PMID 20356413
+    - supports: Threshold selection is its own trap: data-driven threshold methods perform poorly unless the range of admissible thresholds is limited a priori, and Fisher exact, rank-sum and multi-hypergeometric tests performed badly even when t
+- `[@mysinger2012]` Mysinger MM, et al. (2012) *Directory of useful decoys, enhanced (DUD-E): better ligands and decoys for better benchmarking*. Journal of medicinal chemistry. PMID 22716043
+    - supports: Property-matched decoy design as the engineered analogue of composition-matched sequence decoys: 102 targets, 22,886 clustered ligands, 50 property-matched decoys per ligand, net charge added to the matched properties, and topolog
+- `[@chaput2016]` Chaput L, et al. (2016) *Benchmark of four popular virtual screening programs: construction of the active/decoy dataset remains a major determinant of measured performance*. Journal of cheminformatics. PMID 27803745
+    - supports: Measured discrimination is a property of the decoy set: on full DUD-E, BEDROC(alpha=80.5) > 0.5 for Glide on 30 of 102 targets, Gold 27, FlexX 14, Surflex 11; after removing targets with significant residual bias only 47 targets r
+- `[@wallach2018]` Wallach I, Heifets A (2018) *Most Ligand-Based Classification Benchmarks Reward Memorization Rather than Generalization*. Journal of chemical information and modeling. PMID 29698607
+    - supports: The AVE redundancy measure correlates with measured performance across seven widely used benchmarks irrespective of predicted property, fingerprint, similarity measure or previously applied unbiasing -- so reported ligand-based pe
+- `[@chen2019]` Chen L, et al. (2019) *Hidden bias in the DUD-E dataset leads to misleading performance of deep learning in structure-based virtual screening*. PloS one. PMID 31430292
+    - supports: CNN enrichment on DUD-E is attributable to analogue and decoy bias hidden in the dataset rather than learned protein-ligand recognition, and deep models trained on PDBbind did not outperform AutoDock Vina on DUD-E enrichment.
+- `[@imrie2021]` Imrie F, et al. (2021) *Generating property-matched decoy molecules using deep learning*. Bioinformatics (Oxford, England). PMID 33532838
+    - supports: Tightening the null lowers the score: DeepCoy improved Deviation from Optimal Embedding from 0.166 to 0.032 on DUD-E and 0.109 to 0.038 on DEKOIS 2.0, and docking AUC ROC with AutoDock Vina fell from 0.70 to 0.63 against the harde
+- `[@necci2021]` Necci M, et al. (2021) *Critical assessment of protein intrinsic disorder prediction*. Nature methods. PMID 33875885
+    - supports: Blind CAID assessment: 43 methods on 646 DisProt proteins; best disorder predictor F = 0.483 on the full dataset, F = 0.792 after filtering bona fide structured regions, but disordered binding regions only F = 0.231 -- the composi
+- `[@kapoor2023]` Kapoor S, Narayanan A (2023) *Leakage and the reproducibility crisis in machine-learning-based science*. Patterns (New York, N.Y.). PMID 37720327 [review]
+    - supports: The field's default is still to under-control: a survey of ML-based science found leakage in 17 fields collectively affecting 294 papers, in some cases leading to 'wildly overoptimistic' conclusions.
+- `[@hoegen2025]` Hoegen Dijkhof LR, et al. (2025) *Deep learning in GPCR drug discovery: benchmarking the path to accurate peptide binding*. Briefings in bioinformatics. PMID 40285358
+    - supports: Pose accuracy and binder discrimination are decoupled: the top model reached AUC 0.86 on 124 GPCR peptide ligands against 1,240 decoys, improved by rescoring on local interactions rather than raw confidence, while AF2 reproduced c
+- `[@schmid2025]` Schmid EW, Walter JC (2025) *Predictomes, a classifier-curated database of AlphaFold-modeled protein-protein interactions*. Molecular cell. PMID 40015271
+    - supports: Standard AF-M confidence metrics do not reliably separate relevant PPIs from an abundance of false positives; a separate classifier (SPOC) was needed. Built from an all-by-all matrix of nearly 300 human genome-maintenance proteins
+- `[@wen2026]` Wen Y, et al. (2026) *Overcoming Shortcut Learning in RNA-Small Molecule Modeling via Bias-Matched Decoys and Structure-Aware Network Design*. Journal of chemical information and modeling. PMID 42176352
+    - supports: The same shortcut-learning failure mode on nucleic-acid targets: ROBIN training-set negatives drawn from an external database (BindingDB) differ systematically in physicochemical properties from the positives, letting models reach
+- `[@smorodina2026]` Smorodina E (2026) *Structural Plausibility Without Binding Specificity: Limits of AI-Based Antibody-Antigen Structure Prediction Confidence Scores*. bioRxiv (preprint, not peer reviewed). (preprint, not PubMed-indexed)
+    - supports: The nearest published analogue to the present experiment: 106 nanobody-antigen complexes against 11,342 shuffled non-cognate pairings across AlphaFold3, Boltz-2 and Chai-1 produce geometrically plausible complexes while ipTM frequ
+
+## peptide-cns
+- `[@huston1988]` Huston JS, et al. (1988) *Protein engineering of antibody binding sites: recovery of specific activity in an anti-digoxin single-chain Fv analogue produced in Escherichia coli*. Proceedings of the National Academy of Sciences of the United States of America. PMID 3045807
+    - supports: Origin of the Gly-Ser linker family: anti-digoxin 26-10 VH and VL joined by a 15-residue interdomain linker; the sFv retained digoxin specificity but bound ~6-fold more weakly (Ka 3.2e7 vs 1.9e8 per M for the parent Fab).
+- `[@holliger1993]` Holliger P, et al. (1993) *"Diabodies": small bivalent and bispecific antibody fragments*. Proceedings of the National Academy of Sciences of the United States of America. PMID 8341653
+    - supports: scFv with 5- and 15-residue linkers retained parental affinity, but a linker too short for intrachain pairing forces interchain pairing, generating bivalent diabody dimers; linker length selects oligomeric state and geometry, not 
+- `[@aarts2002]` Aarts M, et al. (2002) *Treatment of ischemic brain damage by perturbing NMDA receptor- PSD-95 protein interactions*. Science (New York, N.Y.). PMID 12399596
+    - supports: Tat-NR2B9c, the C-terminal PDZ-binding motif of NR2B fused to the TAT CPP, dissociates NMDA receptors from PSD-95, protects cultured neurons and reduces infarct volume in rats.
+- `[@richard2003]` Richard JP, et al. (2003) *Cell-penetrating peptides. A reevaluation of the mechanism of cellular uptake*. The Journal of biological chemistry. PMID 12411431
+    - supports: Energy-independent non-endocytic translocation of TAT(48-60) and R9 was substantially a fixation and flow-cytometry artefact; on live unfixed cells the peptides show endosomal distribution with endocytosis-like temperature and ATP
+- `[@pardridge2005]` Pardridge WM (2005) *The blood-brain barrier: bottleneck in brain drug development*. NeuroRx : the journal of the American Society for Experimental NeuroTherapeutics. PMID 15717053 [review]
+    - supports: The BBB excludes essentially 100% of large-molecule neurotherapeutics and >98% of small-molecule drugs; passive diffusion across brain endothelium falls off with molecular weight and hydrogen-bond donor count.
+- `[@werle2006]` Werle M, Bernkop-Schnürch A (2006) *Strategies to improve plasma half life time of peptide and protein drugs*. Amino acids. PMID 16622600 [review]
+    - supports: Somatostatin's few-minute plasma half-life rises to ~1.5 h in octreotide via truncation plus D-amino acid substitution; a 40 kDa PEG conjugate of IFN-alpha-2b shows 330-fold half-life extension over the native protein.
+- `[@thomas2009]` Thomas FC, et al. (2009) *Uptake of ANG1005, a novel paclitaxel derivative, through the blood-brain barrier into brain and experimental brain metastases of breast cancer*. Pharmaceutical research. PMID 19774344
+    - supports: In situ rat brain perfusion gives ANG1005 a brain influx coefficient K_in of 7.3e-3 mL/s/g versus 8.5e-5 for free paclitaxel (~86-fold), >70% tracer retained after capillary depletion, 4- to 54-fold higher uptake into brain and in
+- `[@danial2012]` Danial M, et al. (2012) *Site-specific PEGylation of HR2 peptides: effects of PEG conjugation position and chain length on HIV-1 membrane fusion inhibition and proteolytic degradation*. Bioconjugate chemistry. PMID 22770564
+    - supports: Site-specific PEGylation of gp41 HR2-derived fusion inhibitors bought up to 3.4-fold longer proteolytic degradation half-life, but every conjugate lost fusion-inhibitory activity; the loss could be minimised by moving PEG to a non
+- `[@chen2013]` Chen X, et al. (2013) *Fusion protein linkers: property, design and functionality*. Advanced drug delivery reviews. PMID 23026637 [review]
+    - supports: Empirical linkers classify into flexible (Gly/Ser-rich), rigid (e.g. A(EAAAK)nA) and in vivo cleavable classes; linker choice changes expression yield, biological activity and pharmacokinetics.
+- `[@okamoto2013]` Okamoto T, et al. (2013) *Stabilizing the pro-apoptotic BimBH3 helix (BimSAHB) does not necessarily enhance affinity or biological activity*. ACS chemical biology. PMID 23151250
+    - supports: Hydrocarbon stapling of the BimBH3 helix reduced affinity for pro-survival Bcl-2 proteins and the stapled peptide did not induce apoptosis in cells, indicating it was not inherently cell-permeable.
+- `[@lee2014]` Lee S, et al. (2014) *Photoreactive stapled peptides to identify and characterize BCL-2 family interaction sites by mass spectrometry*. Methods in enzymology. PMID 24974285
+    - supports: Bioactive alpha-helical motifs become unfolded when taken out of context from native signaling proteins and must be chemically re-restrained to recover helicity; excised motifs lose their parent-context conformation.
+- `[@van2014]` Van Roey K, et al. (2014) *Short linear motifs: ubiquitous and functionally diverse protein interaction modules directing cell regulation*. Chemical reviews. PMID 24926813 [review]
+    - supports: A large fraction of regulatory protein-protein interactions are mediated by short linear motifs in disordered regions, so the natural ligand for many interface pockets is itself a peptide.
+- `[@boltaev2017]` Boltaev U, et al. (2017) *Multiplex quantitative assays indicate a need for reevaluating reported small-molecule TrkB agonists*. Science signaling. PMID 28831019
+    - supports: A panel of complementary quantitative assays for TrkB activation, downstream signalling and gene expression reproduced BDNF responses but not those of reported small-molecule TrkB agonists.
+- `[@lau2018]` Lau JL, Dunn MK (2018) *Therapeutic peptides: Historical perspectives, current development trends, and future directions*. Bioorganic & medicinal chemistry. PMID 28720325 [review]
+    - supports: Over 60 peptide drugs approved in the US and other major markets, with >150 peptides in active clinical development; pipeline has diversified beyond endogenous human sequences.
+- `[@hill2020]` Hill MD, et al. (2020) *Efficacy and safety of nerinetide for the treatment of acute ischaemic stroke (ESCAPE-NA1): a multicentre, double-blind, randomised controlled trial*. Lancet (London, England). PMID 32087818
+    - supports: Nerinetide, a PSD-95-interfering peptide with strong preclinical ischaemia-reperfusion data, failed its phase 3 primary endpoint - preclinical potency at a glutamatergic node did not convert clinically.
+- `[@kumthekar2020]` Kumthekar P, et al. (2020) *ANG1005, a Brain-Penetrating Peptide-Drug Conjugate, Shows Activity in Patients with Breast Cancer with Leptomeningeal Carcinomatosis and Recurrent Brain Metastases*. Clinical cancer research : an official journal of the American Association for Cancer Research. PMID 31969331
+    - supports: Multicentre phase II study (n=72, 28 with leptomeningeal carcinomatosis): intracranial ORR 15% by investigator assessment and 8% by independent radiology review; the preset iORR rule by independent review was not met.
+- `[@kumar2021]` Kumar V, et al. (2021) *B3Pred: A Random-Forest-Based Method for Predicting and Designing Blood-Brain Barrier Penetrating Peptides*. Pharmaceutics. PMID 34452198
+    - supports: B3Pred, a random-forest classifier trained on the B3Pdb set, reports 85.08% accuracy and AUROC 0.93 on cross-validation.
+- `[@zhou2021]` Zhou X, et al. (2021) *Brain penetrating peptides and peptide-drug conjugates to overcome the blood-brain barrier and target CNS diseases*. Wiley interdisciplinary reviews. Nanomedicine and nanobiotechnology. PMID 33470550 [review]
+    - supports: Reviews of brain-penetrating peptides and peptide-drug conjugates catalogue many candidate shuttles, but few have quantitative capillary-depletion-corrected in vivo brain uptake.
+- `[@charoenkwan2022]` Charoenkwan P, et al. (2022) *Improved prediction and characterization of blood-brain barrier penetrating peptides using estimated propensity scores of dipeptides*. Journal of computer-aided molecular design. PMID 36284036
+    - supports: Existing B3PP predictors may fail in terms of generalization ability and interpretability.
+- `[@dauparas2022]` Dauparas J, et al. (2022) *Robust deep learning-based protein sequence design using ProteinMPNN*. Science (New York, N.Y.). PMID 36108050
+    - supports: ProteinMPNN recovers 52.4% of native sequence on native backbones against 32.9% for Rosetta.
+- `[@bennett2023]` Bennett NR, et al. (2023) *Improving de novo protein binder design with deep learning*. Nature communications. PMID 37149653
+    - supports: Using AlphaFold2 or RoseTTAFold to assess whether a designed sequence adopts its designed structure and binds the target as designed increases design success rates nearly 10-fold.
+- `[@watson2023]` Watson JL, et al. (2023) *De novo design of protein structure and function with RFdiffusion*. Nature. PMID 37433327
+    - supports: RFdiffusion is the current backbone-generation component of the computational design stack.
+- `[@rettie2024]` Rettie SA, et al. (2024) *Accurate de novo design of high-affinity protein binding macrocycles using deep learning*. bioRxiv : the preprint server for biology. PMID 39605685
+    - supports: Preprint version carrying individual dissociation constants: 1-10 uM for MCL1 and MDM2, 6 nM for the best anti-GABARAP macrocycle, below 10 nM for RbtA.
+- `[@hill2025]` Hill MD, et al. (2025) *Efficacy and safety of nerinetide in acute ischaemic stroke in patients undergoing endovascular thrombectomy without previous thrombolysis (ESCAPE-NEXT): a multicentre, double-blind, randomised controlled trial*. Lancet (London, England). PMID 39955119
+    - supports: ESCAPE-NEXT randomised 850 patients; 45% vs 46% reached mRS 0-2, odds ratio 0.97 (95% CI 0.72-1.30), p=0.82.
+- `[@rettie2025]` Rettie SA, et al. (2025) *Accurate de novo design of high-affinity protein-binding macrocycles using deep learning*. Nature chemical biology. PMID 40542165
+    - supports: RFpeptides tested <=20 designed macrocycles per target across four targets and obtained binders against all four, with three crystal structures within 1.5 A Ca RMSD of the design models.
+
+## reproducibility
+- `[@rothman1990]` Rothman KJ (1990) *No adjustments are needed for multiple comparisons*. Epidemiology (Cambridge, Mass.). PMID 2081237
+    - supports: Routine multiplicity adjustment buys reduced type I error at the price of inflated type II error and rests on an implausible 'universal null hypothesis'.
+- `[@altman1995]` Altman DG, Bland JM (1995) *Absence of evidence is not evidence of absence*. BMJ (Clinical research ed.). PMID 7647644
+    - supports: A non-significant result is not evidence of absence.
+- `[@aickin1996]` Aickin M, Gensler H (1996) *Adjusting for multiple testing when reporting research results: the Bonferroni vs Holm methods*. American journal of public health. PMID 8629727
+    - supports: Holm's step-down procedure is uniformly better than Bonferroni under the same assumptions, and can be expressed as an adjustment applied to p-values rather than to the rejection threshold.
+- `[@perneger1998]` Perneger TV (1998) *What's wrong with Bonferroni adjustments*. BMJ (Clinical research ed.). PMID 9553006 [review]
+    - supports: Bonferroni-type adjustment makes the interpretation of a given comparison depend on how many other comparisons are in the paper, which is not a property of the data.
+- `[@chan2004]` Chan AW, et al. (2004) *Empirical evidence for selective reporting of outcomes in randomized trials: comparison of protocols to published articles*. JAMA. PMID 15161896
+    - supports: Published trial reports diverge from protocols in a way that tracks statistical significance: 50% of efficacy and 65% of harm outcomes incompletely reported, pooled OR 2.4 (95% CI 1.4-4.0) efficacy and 4.7 (95% CI 1.8-12.0) harm f
+- `[@de2004]` De Angelis C, et al. (2004) *Clinical trial registration: a statement from the International Committee of Medical Journal Editors*. The New England journal of medicine. PMID 15356289
+    - supports: The ICMJE requirement that trials be registered in a public registry before enrolment is the institutional ancestor of modern pre-registration schemes.
+- `[@ioannidis2005]` Ioannidis JP (2005) *Why most published research findings are false*. PLoS medicine. PMID 16060722
+    - supports: Positive predictive value of a finding falls with smaller studies, smaller effects, a greater number and lesser pre-selection of tested relationships, and greater flexibility in designs, definitions, outcomes and analytical modes.
+- `[@turner2008]` Turner EH, et al. (2008) *Selective publication of antidepressant trials and its influence on apparent efficacy*. The New England journal of medicine. PMID 18199864
+    - supports: Selective publication inflates apparent efficacy: of 74 FDA-registered studies covering 12,564 patients, 31% unpublished; literature implied 94% positive against an FDA figure of 51%; meta-analytic effect size inflated 11-69% per 
+- `[@simmons2011]` Simmons JP, et al. (2011) *False-positive psychology: undisclosed flexibility in data collection and analysis allows presenting anything as significant*. Psychological science. PMID 22006061
+    - supports: Undisclosed flexibility in data collection, analysis and reporting raises the actual false-positive rate far above the nominal 5%; the proposed remedy is six author requirements and four reviewer guidelines.
+- `[@button2013]` Button KS, et al. (2013) *Power failure: why small sample size undermines the reliability of neuroscience*. Nature reviews. Neuroscience. PMID 23571845 [review]
+    - supports: Low statistical power reduces the likelihood that a significant result reflects a true effect and produces overestimates of effect size, so small paired designs are in a regime where sign and magnitude of a recovered effect are un
+- `[@halsey2015]` Halsey LG, et al. (2015) *The fickle P value generates irreproducible results*. Nature methods. PMID 25719825
+    - supports: A p-value is itself a random variable with wide sampling variability, so a single large p from a single run says little about what the next run would return.
+- `[@kaplan2015]` Kaplan RM, Irvin VL (2015) *Likelihood of Null Effects of Large NHLBI Clinical Trials Has Increased over Time*. PloS one. PMID 26244868
+    - supports: Large NHLBI cardiovascular trials shifted toward null results after 2000 (17/30 vs 2/25 significant, chi-square 12.2, df 1, p=0.0005), with pre-registration on ClinicalTrials.gov strongly associated with the shift and industry co-
+- `[@greenland2016]` Greenland S, et al. (2016) *Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations*. European journal of epidemiology. PMID 27209009
+    - supports: Twenty-five documented misinterpretations of p-values, confidence intervals and power exist because the p-value alone cannot carry information about precision or effect magnitude.
+- `[@lakens2017]` Lakens D (2017) *Equivalence Tests: A Practical Primer for t Tests, Correlations, and Meta-Analyses*. Social psychological and personality science. PMID 28736600
+    - supports: Equivalence testing via two one-sided tests (TOST) with bounds set from the smallest effect size of interest licenses the claim that effects large enough to matter are absent.
+- `[@henderson2018]` Henderson, Peter (2017) *Deep Reinforcement Learning that Matters*. Not reported by the search tool (preprint; not indexed in PubMed). (preprint, not PubMed-indexed)
+    - supports: Non-determinism in benchmark environments combined with variance intrinsic to the methods makes single-run comparisons against baselines uninterpretable; reporting across multiple seeds with variance estimates is the minimum stand
+- `[@gruning2018]` Grüning B, et al. (2018) *Practical Computational Reproducibility in the Life Sciences*. Cell systems. PMID 29953862
+    - supports: Portable package builds (Bioconda-style), containerised execution environments, and workflow engines are jointly the accepted prescription for making a computational pipeline re-runnable.
+- `[@claesen2021]` Claesen A, et al. (2021) *Comparing dream to reality: an assessment of adherence of the first generation of preregistered studies*. Royal Society open science. PMID 34729209
+    - supports: Of 27 articles carrying the Preregistered badge between February 2015 and November 2017, only two had no deviation from plan; one disclosed all deviations and nine disclosed none, with sample size, exclusion criteria and statistic
+- `[@errington2021]` Errington TM, et al. (2021) *Investigating the replicability of preclinical cancer biology*. eLife. PMID 34874005
+    - supports: Of 158 effects assessed, the median replication effect size for positive effects was 85% smaller than the original and 92% of replication effect sizes were smaller than their originals.
+- `[@errington2021b]` Errington TM, et al. (2021) *Challenges for assessing replicability in preclinical cancer biology*. eLife. PMID 34874008
+    - supports: Data needed to compute effect sizes and run power analyses were publicly accessible for just 4 of 193 experiments, none of the 193 were described in enough detail to design a repeat without contacting the authors, 67% of peer-revi
+- `[@hageman2021]` Hageman TS, et al. (2021) *Statistical Equivalence Testing of Higher-Order Protein Structures with Differential Hydrogen Exchange-Mass Spectrometry (HX-MS)*. Analytical chemistry. PMID 33913686
+    - supports: Significance testing is unsuitable for establishing similarity of higher-order protein structure; a TOST procedure with resampling-derived equivalence criteria found three infliximab biosimilars equivalent to the reference product
+- `[@tierney2021]` Tierney BT, et al. (2021) *Leveraging vibration of effects analysis for robust discovery in observational biomedical data science*. PLoS biology. PMID 34555021
+    - supports: Fitting millions of model specifications over a combinatorially defined space produces effect distributions wide enough to contain contradictory conclusions, and the adjustment variables responsible can be identified.
+- `[@el2022]` El Bahri M, et al. (2022) *A multiverse analysis of meta-analyses assessing acupuncture efficacy for smoking cessation evidenced vibration of effects*. Journal of clinical epidemiology. PMID 36150547 [review]
+    - supports: 7 meta-analyses and 39 RCTs recombined into 496,528 meta-analyses; 104,491 significantly favoured acupuncture and 392,037 did not (96 significantly favouring control), with 10th and 90th percentiles of effect size on opposite side
+- `[@samuel2024]` Samuel S, Mietchen D (2024) *Computational reproducibility of Jupyter notebooks from biomedical publications*. GigaScience. PMID 38206590
+    - supports: Of 27,271 Jupyter notebooks from 2,660 GitHub repositories across 3,467 publications, 22,578 were Python and 15,817 declared dependencies; 10,388 installed cleanly, 1,203 ran without error, and 879 reproduced the reported results 
+- `[@van2024]` van den Akker OR, et al. (2024) *The potential of preregistration in psychology: Assessing preregistration producibility and preregistration-study consistency*. Psychological methods. PMID 39388105
+    - supports: Across 300 psychology studies, preregistrations routinely lack the methodological detail needed to conduct the study as written and undisclosed deviations are frequent; inconsistencies cluster in data-collection procedures, statis
+
+## trem2
+- `[@paloneva2002]` Paloneva J, et al. (2002) *Mutations in two genes encoding different subunits of a receptor signaling complex result in an identical disease phenotype*. American journal of human genetics. PMID 12080485
+    - supports: TREM2 loss-of-function mutations cause Nasu-Hakola disease (PLOSL), phenocopying mutations in the signalling partner TYROBP/DAP12 - the recessive end of TREM2 human genetic causality.
+- `[@park2009]` Park BS, et al. (2009) *The structural basis of lipopolysaccharide recognition by the TLR4-MD-2 complex*. Nature. PMID 19252480
+    - supports: LPS binds a large hydrophobic pocket in MD-2 with five of six acyl chains buried and the sixth exposed to contact conserved TLR4 phenylalanines, driving an m-shaped 2:2:2 multimer further stabilised by ionic contacts between LPS p
+- `[@stewart2010]` Stewart CR, et al. (2010) *CD36 ligands promote sterile inflammation through assembly of a Toll-like receptor 4 and 6 heterodimer*. Nature immunology. PMID 20037584
+    - supports: Oxidised LDL and Abeta signal through a TLR4-TLR6 heterodimer whose assembly is licensed by the scavenger receptor CD36, giving a molecular route from amyloid to sterile microglial inflammation.
+- `[@matsunaga2011]` Matsunaga N, et al. (2011) *TAK-242 (resatorvid), a small-molecule inhibitor of Toll-like receptor (TLR) 4 signaling, binds selectively to TLR4 and interferes with interactions between TLR4 and its adaptor molecules*. Molecular pharmacology. PMID 20881006
+    - supports: TAK-242 (resatorvid) inhibits TLR4 signalling without engaging the ectodomain: it binds Cys747 in the intracellular TIR domain and works by disrupting TLR4's interaction with TIRAP and TRAM.
+- `[@guerreiro2013]` Guerreiro R, et al. (2013) *TREM2 variants in Alzheimer's disease*. The New England journal of medicine. PMID 23150934
+    - supports: Independent replication of TREM2 as an Alzheimer's risk gene: excess burden of exon 2 variants in 1,092 cases versus 1,107 controls (22 versus 5 variant alleles), with replication in a further 1,887 cases and 4,061 controls.
+- `[@jonsson2013]` Jonsson T, et al. (2013) *Variant of TREM2 associated with the risk of Alzheimer's disease*. The New England journal of medicine. PMID 23150908
+    - supports: TREM2 p.Arg47His (rs75932628-T) confers OR 2.92 (95% CI 2.09-4.09, P=3.42x10^-10) for Alzheimer's disease in 2,261 sequenced Icelandic genomes; combined OR 2.90 (2.16-3.91, P=2.1x10^-12); 0.46% frequency in controls aged 85+; non-
+- `[@opal2013]` Opal SM, et al. (2013) *Effect of eritoran, an antagonist of MD2-TLR4, on mortality in patients with severe sepsis: the ACCESS randomized trial*. JAMA. PMID 23512062
+    - supports: Eritoran, a synthetic lipid A antagonist occupying the MD-2 site, failed in a 1,961-patient phase 3 trial in severe sepsis: 28-day all-cause mortality 28.1% versus 26.9% on placebo (P=0.59), with no subgroup effect.
+- `[@atagi2015]` Atagi Y, et al. (2015) *Apolipoprotein E Is a Ligand for Triggering Receptor Expressed on Myeloid Cells 2 (TREM2)*. The Journal of biological chemistry. PMID 26374899
+    - supports: Apolipoprotein E reported as a high-affinity TREM2 ligand whose binding is markedly reduced by the R47H variant.
+- `[@wang2015]` Wang Y, et al. (2015) *TREM2 lipid sensing sustains the microglial response in an Alzheimer's disease model*. Cell. PMID 25728668
+    - supports: TREM2 senses a broad array of anionic and zwitterionic lipids associated with fibrillar Abeta and damaged neuronal membranes, with R47H impairing detection; TREM2 deficiency and haploinsufficiency leave 5XFAD microglia unable to c
+- `[@kober2016]` Kober DL, et al. (2016) *Neurodegenerative disease mutations in TREM2 reveal a functional surface and distinct loss-of-function mechanisms*. eLife. PMID 27995897
+    - supports: 3.1 A crystal structure of the TREM2 Ig-V ectodomain showing that Nasu-Hakola mutations map to buried positions and destabilise the fold, whereas Alzheimer's risk variants sit on a solvent-exposed surface and impair ligand binding
+- `[@kerenshaul2017]` Keren-Shaul H, et al. (2017) *A Unique Microglia Type Associated with Restricting Development of Alzheimer's Disease*. Cell. PMID 28602351
+    - supports: Definition of the disease-associated microglia (DAM) programme by single-cell transcriptomics in AD-transgenic mice: a plaque-associated phagocytic state activated in two steps, the first TREM2-independent (loss of homeostatic che
+- `[@leyns2017]` Leyns CEG, et al. (2017) *TREM2 deficiency attenuates neuroinflammation and protects against neurodegeneration in a mouse model of tauopathy*. Proceedings of the National Academy of Sciences of the United States of America. PMID 29073081
+    - supports: In pure tauopathy (PS19), Trem2 deletion reduced brain atrophy at 9 months and reduced microgliosis without changing phospho-tau or insoluble tau levels - evidence that the direction of TREM2 benefit is pathology-dependent.
+- `[@sims2017]` Sims R, et al. (2017) *Rare coding variants in PLCG2, ABI3, and TREM2 implicate microglial-mediated innate immunity in Alzheimer's disease*. Nature genetics. PMID 28714976
+    - supports: Three-stage study of 85,133 subjects identifying TREM2 p.Arg62His (rs143332484, OR 1.67) alongside protective PLCG2 p.Pro522Arg (OR 0.68) and risk-conferring ABI3 p.Ser209Phe (OR 1.43), all in microglia-enriched genes.
+- `[@thornton2017]` Thornton P, et al. (2017) *TREM2 shedding by cleavage at the H157-S158 bond is accelerated for the Alzheimer's disease-associated H157Y variant*. EMBO molecular medicine. PMID 28855301
+    - supports: TREM2 is constitutively shed at the His157-Ser158 bond by an ADAM10-dependent, ADAM17-independent activity releasing a ~17 kDa N-terminal fragment; the AD-associated H157Y variant is shed faster, apparently via a distinct sheddase
+- `[@sudom2018]` Sudom A, et al. (2018) *Molecular basis for the loss-of-function effects of the Alzheimer's disease-associated R47H variant of the immune receptor TREM2*. The Journal of biological chemistry. PMID 29794134
+    - supports: Higher-resolution structures of TREM2 R47H (1.8 A), apo wild type (2.2 A) and phosphatidylserine-bound wild type (2.2 A) showing Arg47 maintains the CDR2 loop conformation and the putative positive ligand-interacting surface disru
+- `[@xiang2018]` Xiang X, et al. (2018) *The Trem2 R47H Alzheimer's risk variant impairs splicing and reduces Trem2 mRNA and protein in mice but not in humans*. Molecular neurodegeneration. PMID 30185230
+    - supports: Two independent Trem2 R47H knock-in mouse lines activate a cryptic splice site introducing a premature stop codon, producing Trem2 haploinsufficiency; minigene assays, iPSC-derived human microglia and R47H carrier brain show this 
+- `[@ewers2019]` Ewers M, et al. (2019) *Increased soluble TREM2 in cerebrospinal fluid is associated with reduced cognitive and clinical decline in Alzheimer's disease*. Science translational medicine. PMID 31462511
+    - supports: In 385 subjects followed a mean of 4 years, higher baseline CSF sTREM2 predicted attenuated memory and cognitive decline in amyloid- and p-tau-positive individuals, and a higher sTREM2/p-tau181 ratio predicted slower clinical conv
+- `[@zhang2019]` Zhang L, et al. (2019) *Design and Development of a Novel Peptide for Treating Intestinal Inflammation*. Frontiers in immunology. PMID 31447849
+    - supports: Representative precedent for the motif-concatenation design idiom: a hybrid peptide fusing the active centres of LL-37 and thymosin alpha-1, selected by molecular docking, showing anti-inflammatory activity in an LPS-challenged mu
+- `[@kober2020]` Kober DL, et al. (2020) *Functional insights from biophysical study of TREM2 interactions with apoE and Aβ(1-42)*. Alzheimer's & dementia : the journal of the Alzheimer's Association. PMID 33090700
+    - supports: Biolayer interferometry showing TREM2-apoE engagement is protein-mediated with little contribution from lipidation, shows slight isoform ordering (E4>E3>E2), requires the apoE hinge region, and is only minimally affected by basic-
+- `[@wang2020]` Wang S, et al. (2020) *Anti-human TREM2 induces microglia proliferation and reduces pathology in an Alzheimer's disease model*. The Journal of experimental medicine. PMID 32579671
+    - supports: The murine surrogate AL002c induced microglial proliferation by single-cell RNA-seq in AD mice expressing either common-variant or R47H human TREM2, and on prolonged dosing reduced filamentous plaque burden and neurite dystrophy.
+- `[@zhou2020]` Zhou Y, et al. (2020) *Human and mouse single-nucleus transcriptomics reveal TREM2-dependent and TREM2-independent cellular responses in Alzheimer's disease*. Nature medicine. PMID 31932797
+    - supports: Single-nucleus sequencing of 5XFAD and human AD brain confirms Trem2-dependent DAM in mouse but finds markedly different human glial phenotypes, with the human microglial signature closer to IRF8-driven reactive microglia; the TRE
+- `[@lee2021]` Lee SH, et al. (2021) *Trem2 restrains the enhancement of tau accumulation and neurodegeneration by β-amyloid pathology*. Neuron. PMID 33675684
+    - supports: In a model carrying both amyloid and tau (TauPS2APP), Trem2 deletion exacerbated tau accumulation, spreading and atrophy, while having no effect in the tau-only line - the opposite direction to the pure tauopathy result.
+- `[@long2024]` Long H, et al. (2024) *Preclinical and first-in-human evaluation of AL002, a novel TREM2 agonistic antibody for Alzheimer's disease*. Alzheimer's research & therapy. PMID 39444037
+    - supports: In cynomolgus monkeys weekly IV AL002 dose-dependently lowered CSF sTREM2 and total TREM2 in hippocampus and frontal cortex and raised downstream signalling biomarkers; in the 64-subject first-in-human phase 1 (INVOKE-1, NCT036350
+- `[@heneka2025]` Heneka MT, et al. (2025) *Neuroinflammation in Alzheimer disease*. Nature reviews. Immunology. PMID 39653749 [review]
+    - supports: General support for innate immunity remaining a central and genetically supported axis in Alzheimer's disease.
+- `[@mummery2026]` Mummery CJ, et al. (2026) *The TREM2 agonistic antibody AL002 in early Alzheimer's disease: a phase 2 randomized trial*. Nature medicine. PMID 41787076
+    - supports: INVOKE-2 (NCT04592874) randomised 381 participants with early AD 1:1:1:1 to AL002 15, 40 or 60 mg/kg or placebo IV every 4 weeks for 48-96 weeks. CSF target engagement was confirmed (sTREM2 down, osteopontin up) but the trial miss

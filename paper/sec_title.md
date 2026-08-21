@@ -1,0 +1,2 @@
+Co-folding interface confidence from Boltz-2 does not separate thirteen chimeric CNS-target peptides from composition-matched shuffles of their own residues
+A pre-registered screen of 13 chimeric peptides, manually concatenated with no generative model and no sequence optimisation, against 7 receptor domains drawn from a 16-target cognition registry, each candidate scored against 10 composition-matched shuffles of its own residues.

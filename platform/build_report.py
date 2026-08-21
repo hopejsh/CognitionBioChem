@@ -160,7 +160,7 @@ def build() -> int:
     # ---------------------------------------------------------------- abstract ------ #
     h(doc, "Summary", 1)
     para(doc,
-         f"This project asked whether a set of hand-assembled peptide sequences, designed "
+         f"This project asked whether a set of manually concatenated peptide sequences, built "
          f"against cognition-related CNS targets, bind those targets. The answer is no, and "
          f"the work was organised so that the answer would be believable either way.")
     para(doc,
@@ -598,8 +598,9 @@ def build() -> int:
         "The AlphaFold comparison confounds three things at once in its first arm — predictor, "
         "MSA, and monomer-versus-complex context — and two in its second. It says nothing about "
         "the peptide or the interface.",
-f"The candidate sequences are hand-assembled concatenations of published motifs, "
-        f"pastiche scaffolds and one de novo helix, joined by GGGGS linkers. Of "
+f"The candidate sequences are chimeric peptides — published motifs, motif-like "
+        f"segments with no identifiable natural source, and one de novo helix, "
+        f"concatenated head to tail with GGGGS linkers. Of "
         f"{att['attributed_motifs'] + att['unattributed_motif_entries']} motif entries only "
         f"{att['attributed_motifs']} carry a UniProt accession; scanning for all "
         f"{att['distinct_unattributed_fragments']} unattributed fragments, "
