@@ -33,6 +33,7 @@ from docx.shared import Inches, Pt, RGBColor
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "platform"))
 from cbc.paper import ORDER, parse, plain, render_reference  # noqa: E402
+from cbc.hangul import sweep as _sweep_fonts  # noqa: E402
 from cbc.provenance import git_sha  # noqa: E402
 from cbc.report_data import load  # noqa: E402
 
@@ -261,6 +262,7 @@ def build(lang: str = "en") -> int:
             r.bold = True
             r.font.size = Pt(9)
             r.font.color.rgb = GREY
+            _stamp(r, CFG["sans"])   # "그림 1." is Hangul; an unstamped run gets substituted
             runs_into(cap, b["caption"], size=9, color=GREY, italic=True)
 
     # ------------------------------------------------------------------ back matter - #
@@ -308,7 +310,13 @@ def build(lang: str = "en") -> int:
             note.font.size = Pt(8)
             note.italic = True
             note.font.color.rgb = GREY
+            _stamp(note, CFG["body"])   # the tag is translated even though the entry is not
 
+    if CFG["east_asia"]:
+        repaired = _sweep_fonts(doc, CFG["east_asia"])
+        if repaired:
+            print(f"  stamped {repaired} Korean runs the writers had left on the Latin slot "
+                  f"only")
     doc.save(OUT)
     print(f"wrote {OUT.relative_to(REPO)}")
     print(f"  sections   : {len(ORDER)}")
