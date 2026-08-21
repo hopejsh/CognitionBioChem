@@ -33,6 +33,7 @@ from docx.shared import Inches, Pt, RGBColor
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "platform"))
 from cbc.provenance import git_sha  # noqa: E402
+from cbc.hangul import sweep as _sweep_fonts  # noqa: E402
 from cbc.report_data import J, A, load  # noqa: E402
 
 FIG = REPO / "docs" / "figures"
@@ -681,6 +682,9 @@ f"후보 서열들은 발표된 모티프, 짜깁기한 스캐폴드, 그리고 
         para(doc, f"검증되었으나 이 문서에서 인용하지 않음: {', '.join(unused)}.",
              size=8.5, italic=True)
 
+    repaired = _sweep_fonts(doc, FONT_KO)
+    if repaired:
+        print(f"  stamped {repaired} Korean runs the writers had left on the Latin slot only")
     doc.save(OUT)
     print(f"wrote {OUT.relative_to(REPO)}")
     print(f"  references cited: {len(CITED)} of {len(REF)} verified")

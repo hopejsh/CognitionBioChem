@@ -57,10 +57,21 @@ FONT_MONO = "Menlo"
 #: None of the three faces above carries a single Hangul glyph, so a Korean deck rendered with
 #: them names a font that cannot draw its own text and PowerPoint substitutes silently --
 #: differently on every machine. A deck whose markup declares lang="ko" gets faces that cover
-#: it. Menlo stays for the mono column, which carries Latin identifiers and numerals only.
+#: it.
 FONT_KO_DISPLAY = "Apple SD Gothic Neo"
 FONT_KO_BODY = "Apple SD Gothic Neo"
 FONT_KO_MONO = "Menlo"
+
+#: Menlo stays on the mono column even in Korean, because that column carries version strings,
+#: hashes and identifiers that should look like identifiers. What it does NOT carry is only
+#: Latin: the eyebrow labels, the stamps and the title-slide meta lines are styled mono and are
+#: written in Korean, so a hundred Hangul runs were being asked of a face that has no Hangul.
+#: The fix is not to move the column off Menlo but to name the second slot -- see _face().
+FONT_EA: str | None = None
+FONT_KO_EA = "Apple SD Gothic Neo"
+
+#: Faces this module names that carry no Hangul at all. Used only by the post-build check.
+HANGUL_BLIND = {"Menlo", "Avenir Next Condensed", "Iowan Old Style"}
 
 # The deck is laid out in a 1120x630 CSS-pixel frame. One deck pixel is 1/84 inch, so every
 # position and size below can be written in the same units the stylesheet uses.
@@ -366,6 +377,33 @@ def box(slide, x, y, w, h, anchor=MSO_ANCHOR.TOP):
     return tb, tf
 
 
+def _face(f, latin: str) -> None:
+    """Name the face for Latin text and, separately, the face for East Asian text.
+
+    python-pptx's ``font.name`` writes one slot, <a:latin>, and PowerPoint consults that slot
+    only for Latin codepoints. Hangul is routed to <a:ea>, and when no <a:ea> is named the
+    application substitutes whatever it has -- a different face on a different machine, which
+    is the failure this whole module's font handling exists to prevent.
+
+    Naming both slots is also what lets a single run hold `Boltz-2 v2.2.1 · 후보 13종` and draw
+    each half correctly: the identifier in Menlo, the Korean in a face that has Hangul. That is
+    what the slot pair is for, and it is why the mono column does not have to be given up.
+    """
+    f.name = latin
+    if not FONT_EA:
+        return
+    rPr = f._rPr
+    prev = rPr.find(qn("a:latin"))
+    for tag in ("a:ea", "a:cs"):
+        el = rPr.find(qn(tag))
+        if el is None:
+            el = rPr.makeelement(qn(tag), {"typeface": FONT_EA})
+            prev.addnext(el)      # the schema fixes the order: latin, then ea, then cs
+        else:
+            el.set("typeface", FONT_EA)
+        prev = el
+
+
 def put(para, runs, *, size_px, face=None, color=INK, bold=False, italic=False,
         line=LINE, space_after_px=0, align=PP_ALIGN.LEFT, spc=None, upper=False,
         strike=False):
@@ -380,7 +418,7 @@ def put(para, runs, *, size_px, face=None, color=INK, bold=False, italic=False,
         r.text = text.upper() if upper else text
         f = r.font
         f.size = pt(size_px)
-        f.name = FONT_MONO if "mono" in style or "key" in style else face
+        _face(f, FONT_MONO if "mono" in style or "key" in style else face)
         f.bold = bold or "bold" in style
         f.italic = italic or "italic" in style
         f.color.rgb = color
@@ -393,7 +431,8 @@ def put(para, runs, *, size_px, face=None, color=INK, bold=False, italic=False,
             f._rPr.set("strike", "sngStrike")
         for chip, col in CHIP.items():
             if f"chip-{chip}" in style:
-                f.color.rgb, f.name, f.size = col, FONT_MONO, pt(size_px * 0.88)
+                f.color.rgb, f.size = col, pt(size_px * 0.88)
+                _face(f, FONT_MONO)
         if "sub" in style:
             f._rPr.set("baseline", "-25000")
         if spc:
@@ -709,6 +748,39 @@ def _visible_text(html: str) -> str:
     return re.sub(r"\s+", " ", _Inline.unescape(html))
 
 
+def _assert_every_glyph_has_a_face(prs) -> None:
+    """No run may be set in a face that cannot draw the run's own text.
+
+    This is the check that should have been run the first time the Korean deck was given
+    Korean typefaces. Counting the faces in the finished file showed a plausible mixture and
+    was taken as proof, but a face count cannot see that a hundred of those runs were Korean
+    text in Menlo -- the count is the same either way. Ask the question the reader would ask
+    instead: for each run that contains Hangul, which face will actually draw it?
+    """
+    from pptx.oxml.ns import qn as _qn
+    hangul = re.compile(r"[가-힣ㄱ-ㅎㅏ-ㅣ]")
+    stranded = []
+    for i, slide in enumerate(prs.slides, 1):
+        for sh in slide.shapes:
+            frames = [sh.text_frame] if sh.has_text_frame else []
+            if getattr(sh, "has_table", False) and sh.has_table:
+                frames += [c.text_frame for row in sh.table.rows for c in row.cells]
+            for tf in frames:
+                for para in tf.paragraphs:
+                    for r in para.runs:
+                        if not hangul.search(r.text):
+                            continue
+                        ea = r.font._rPr.find(_qn("a:ea"))
+                        drawn = (ea.get("typeface") if ea is not None else None) or r.font.name
+                        if drawn in HANGUL_BLIND or not drawn:
+                            stranded.append((i, drawn, r.text[:48]))
+    if stranded:
+        raise AssertionError(
+            f"{len(stranded)} runs carry Hangul in a face that has none, so PowerPoint would "
+            f"substitute a different typeface for each on every machine:\n  "
+            + "\n  ".join(f"slide {i}  {f}: {t!r}" for i, f, t in stranded[:6]))
+
+
 def _assert_nothing_dropped(prs, html: str) -> None:
     """Every word the deck shows must appear on the matching PowerPoint slide.
 
@@ -740,7 +812,7 @@ def _assert_nothing_dropped(prs, html: str) -> None:
 
 
 def build(src: Path | None = None, out: Path | None = None) -> int:
-    global FONT_DISPLAY, FONT_BODY, FONT_MONO
+    global FONT_DISPLAY, FONT_BODY, FONT_MONO, FONT_EA
     # A relative path on the command line is relative to the caller's directory, but every
     # message this module prints is relative to the repository root. Resolve once, here.
     src = (Path(src).resolve() if src else DEFAULT_SRC)
@@ -748,8 +820,18 @@ def build(src: Path | None = None, out: Path | None = None) -> int:
     if not src.exists():
         raise FileNotFoundError(f"{src} is missing; build the HTML deck first")
     raw = src.read_text()
-    if 'data-lang="ko"' in raw:
+    # The language marker is an attribute on the deck element, not a string that happens to
+    # appear in the file. Both decks share one stylesheet, and that stylesheet contains
+    # [data-lang="ko"] selectors, so a bare substring test found "ko" in the ENGLISH deck and
+    # set Korean faces for it. Read the attribute where it is actually declared.
+    m = re.search(r'<main[^>]*\bdata-lang="([a-z]{2})"', raw)
+    if not m:
+        raise AssertionError(
+            f"{src.name} declares no data-lang on its deck element; refusing to guess which "
+            f"typefaces it needs -- a Latin face silently drops every Hangul glyph")
+    if m.group(1) == "ko":
         FONT_DISPLAY, FONT_BODY, FONT_MONO = FONT_KO_DISPLAY, FONT_KO_BODY, FONT_KO_MONO
+        FONT_EA = FONT_KO_EA
     slides = parse_slides(raw)
 
     prs = Presentation()
@@ -785,6 +867,7 @@ def build(src: Path | None = None, out: Path | None = None) -> int:
         f"on these slides is read from a study artefact at build time -- re-run the "
         f"generators rather than retyping one.")
     _assert_nothing_dropped(prs, raw)
+    _assert_every_glyph_has_a_face(prs)
     prs.save(out)
     shown = out.relative_to(REPO) if out.is_relative_to(REPO) else out
     print(f"wrote {shown}")
