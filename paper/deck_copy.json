@@ -94,11 +94,11 @@
     {
       "type": "prose",
       "kind": "premise",
-      "headline": "The candidates are chimeric constructs, and the audit says so",
+      "headline": "The candidates are chimeric peptides, and the audit says so",
       "paras": [
         "Manually concatenated from published short linear motifs, motif-like segments and one de novo helix, joined by GGGGS linkers. No generative model produced them; no sequence optimisation, learned or physics-based, and no structure-based design software refined them.",
         "Of 16 motif entries only 7 carry a UniProt accession. Thirty-one of 35 candidates carry at least one of 22 fragments the design record itself marks unattributed. A fragment that cannot be traced to a source cannot be said to have inherited affinity from one.",
-        "Deep-learning design was avoided deliberately: a sequence optimised against the same network that then scores it cannot be used to ask whether that network reads design content — by which we mean throughout the order-dependent content a design places in a sequence, its motif identities, linker boundaries and helical register, as distinct from the amino acid composition that a shuffle holds fixed."
+        "Deep-learning design was avoided deliberately: a sequence optimised against the same network that then scores it cannot be used to ask whether that network reads design content — by which we mean throughout the order-dependent content a design places in a sequence, its motif identities, linker boundaries and the helical-face arrangement of the single helical segment, as distinct from the amino acid composition that a shuffle holds fixed."
       ],
       "foot": "Van Roey et al. 2014; Chen et al. 2013"
     },

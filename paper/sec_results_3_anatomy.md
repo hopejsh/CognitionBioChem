@@ -53,7 +53,8 @@ the property that distinguishes flexible from rigid linkers [@chen2013], and bio
 motifs are known to lose their bound-state conformation when excised from a parent protein
 [@lee2014]. The Abeta-derived component of this candidate inherits a further uncertainty:
 the acetylcholinesterase–amyloid link on which it rests is a peripheral-site-dependent
-in-vitro fibril-assembly effect [@inestrosa1996], not a characterised binding geometry.
+in-vitro fibril-assembly effect [@inestrosa1996], not a characterised binding geometry
+([FIG: fig5_complex_structure.png]).
 
 [FIGURE: fig5_complex_structure.png — BasalAChE-Abeta-B4 modelled against the ACHE catalytic gorge, receptor and peptide chains coloured by per-residue pLDDT on a common scale.]
 
@@ -116,7 +117,7 @@ The check therefore supports one modest statement — the receptor-side confiden
 is reproduced by a second model reporting the same kind of confidence quantity, which
 makes it unlikely to be a quirk of this run, and is not evidence that either profile is
 accurate — and no statement about the peptides, whose chains have no counterpart in the
-database at all.
+database at all ([FIG: fig4_alphafold_vs_boltz.png]).
 
 [FIGURE: fig4_alphafold_vs_boltz.png — Per-residue pLDDT for the target chains, Boltz-2 against AlphaFold DB, single-sequence and full-MSA arms, with per-chain Pearson correlations and effective sample sizes.]
 

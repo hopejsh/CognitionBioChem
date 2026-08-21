@@ -82,10 +82,12 @@ defined the pharmacophore [@kryger1999].
 Construct definition was corrected over the slate's history. Each correction changed the precision
 of the numbers; none changed the direction of the answer, and H1 was falsified in all 11 retained
 versions. The affinity arm carries the same softness in its references, and correcting them made the
-arm weaker rather than stronger: over 14 observed compounds the Spearman correlation fell from
-0.3036 in the uncorrected benchmark to 0.1912 with corrected references, a delta of -0.1128, with a
-bootstrap 95% confidence interval of [-0.4622, 0.7303] spanning zero at p 0.51258 and a median
-absolute error of 1.0471 log10 units. The corrected references are themselves dispersed — median
+arm weaker rather than stronger: the Spearman correlation fell from 0.3036 in the uncorrected
+benchmark, measured over 15 observed compounds, to 0.1912 over the 14 that have a corrected
+reference. The registered comparison records that fall as a delta of -0.1128, taken against the
+three-decimal 0.304 the plan carried rather than against 0.3036, with a bootstrap 95% confidence
+interval of [-0.4622, 0.7303] spanning zero at p 0.51258 and a median absolute error of 1.0471
+log10 units. The corrected references are themselves dispersed — median
 log10 standard deviation 0.4445, maximum spread across records for a single compound 4.996 log10
 units, median 4.5 records per compound and 2 compounds resting on a single record — which is what
 the literature on mixed public affinity labels would predict [@kalliokoski2013], and which the

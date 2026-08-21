@@ -33,7 +33,7 @@ same shortcut is documented for deep models on RNA–small molecule data, whose 
 differed systematically from the positives in bulk physicochemical properties [@wen2026].
 Measured discrimination is a property of the control set at least as much as of the method.
 
-For sequences the mechanics are settled: mono-residue permutation destroys order and every motif
+For sequences the mechanics are settled: a uniform random permutation of residues destroys order and every motif
 while holding the residue multiset fixed, and k-let-preserving permutation is available when a
 stronger null is wanted [@jiang2008]. Such a null is capable of killing a broad claim while
 leaving a narrow one standing — mRNAs did not fold more stably than dinucleotide-matched randoms

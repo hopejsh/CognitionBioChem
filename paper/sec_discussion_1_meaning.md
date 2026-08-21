@@ -152,7 +152,7 @@ expected 1.182, observed 2, P(X >= 2) = 0.3338.]
 
 Three explanations survive, and the study ranks them only partially.
 
-The designs may be genuinely inert. This is not remote: they are chimeric constructs, manually
+The designs may be genuinely inert. This is not remote: they are chimeric peptides, manually
 concatenated from published motifs, motif-like segments and one de novo helix joined by GGGGS
 linkers, with no generative model or optimisation loop involved; only 7 of the 16 motif entries
 carry a UniProt accession, and 31 of 35 candidates carry at least one of 22 fragments the

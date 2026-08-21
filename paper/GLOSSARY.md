@@ -99,6 +99,16 @@
 | stratified / stratum | 층화된 / 층 | |
 | upper bound | 상한 | |
 | exploratory / confirmatory | 탐색적 / 확증적 | |
+| paired difference | 대응 차이 | 논문의 중심 통계량. 쌍체/짝지은/쌍대로 쓰지 않는다 |
+| paired t-test | 대응표본 t검정 | |
+| designed (sequence) | 설계 | 원 서열로 쓰지 않는다. 후보에는 대응하는 천연 서열이 없다 |
+| (catalytic) gorge | 협곡 | |
+| orthosteric | 오르토스테릭 | |
+| degron | 데그론 | |
+| training corpus | 학습 말뭉치 | |
+| inference-time steering | 추론 시점 조향 | 제품 기능명 "Boltz-steering"만 원문 유지 |
+| retained (version) | 보존된 | |
+| margin (native − best decoy) | 마진 | |
 
 ## 논문 문체 추가 지침
 

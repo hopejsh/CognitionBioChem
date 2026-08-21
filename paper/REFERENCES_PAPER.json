@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "method": "Every entry was proposed by a domain specialist that had retrieved it through the PubMed E-utilities, re-fetched independently by a second agent, and then re-fetched a third time directly from NCBI esummary and compared on title and first author. 184 of 184 matched. Titles, authors, journals, volumes, pages, years and DOIs below are NCBI's, not any agent's. Bibliographic metadata retrieved from PubMed (NLM/NCBI).",
+  "method": "The library holds 186 PubMed-indexed references and 4 that PubMed does not index. 184 of the 186 were proposed by a domain specialist that had retrieved them through the PubMed E-utilities, re-fetched independently by a second agent, and then re-fetched a third time directly from NCBI esummary and compared on title and first author: 184 of 184 matched. The remaining 2 -- yin2024 (PMID 38073135) and unsal2026 (PMID 41903187) -- were found by the reviewing pass rather than proposed by a specialist, and each carries a single NCBI esummary fetch rather than the three-fetch chain; their own verified field says so. Titles, authors, journals, volumes, pages, years and DOIs below are NCBI's, not any agent's. Bibliographic metadata retrieved from PubMed (NLM/NCBI).",
   "n_pubmed": 186,
   "n_other": 4,
   "references": [
@@ -3223,10 +3223,10 @@
     {
       "pmid": null,
       "doi": null,
-      "first_author": "Henderson, Peter",
+      "first_author": "Henderson P",
       "year": 2017,
       "title": "Deep Reinforcement Learning that Matters",
-      "journal": "Not reported by the search tool (preprint; not indexed in PubMed)",
+      "journal": null,
       "is_review": false,
       "claim_it_supports": "Non-determinism in benchmark environments combined with variance intrinsic to the methods makes single-run comparisons against baselines uninterpretable; reporting across multiple seeds with variance estimates is the minimum standard.",
       "source": "Consensus/Semantic Scholar",

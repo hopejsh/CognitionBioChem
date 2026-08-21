@@ -37,7 +37,8 @@ equivalence test was run and none is claimed [@lakens2017]. Thirteen pairs is a 
 which the magnitude of any recovered effect would be inflated and unreliable [@button2013], and a
 single p-value is a draw from a wide sampling distribution [@halsey2015; @greenland2016]. The
 defensible statement is the narrow one: on this construct set, under this predictor, no separation
-between designed peptides and composition-matched shuffles of their own residues was detected.
+between designed peptides and composition-matched shuffles of their own residues was detected
+([FIG: fig1_native_vs_decoy.png]).
 
 [FIGURE: fig1_native_vs_decoy.png — Designed ipTM against the distribution of composition-matched decoy ipTM for each of the thirteen candidates; the paired difference is 0.0009.]
 
@@ -117,7 +118,7 @@ performed after the per-candidate results were seen. It was not part of the pre-
 which fixed the candidates, the decoy construction and the paired test statistic under a SHA-256
 hash before any prediction was run. It is therefore exploratory, and is reported as an arithmetic
 observation about what the pre-registered design implies, not as a test that carries pre-specified
-error control [@simmons2011; @ioannidis2005].
+error control ([FIG: fig2_screen_level_null.png]) [@simmons2011; @ioannidis2005].
 
 [FIGURE: fig2_screen_level_null.png — Observed count of candidates beating all of their own decoys against the binomial null with per-candidate probability 0.0909 over thirteen candidates.]
 
@@ -153,6 +154,7 @@ on sixteen X-ray peptide-receptor complexes the same pipeline returned 62% CAPRI
 with a median DockQ [@basu2016b; @mirabello2024] of 0.36 and a Spearman correlation of 0.8 between
 ipTM and DockQ. The model places peptides at interfaces with measurable accuracy. It
 did not, on this construct set, distinguish a designed sequence from a permutation of the same
-residues.
+residues, and did not in any retained version of the analysis
+([FIG: fig3_falsified_every_version.png]).
 
 [FIGURE: fig3_falsified_every_version.png — The primary hypothesis was falsified in all 11 retained versions of the record, across successive revisions of the candidate set.]

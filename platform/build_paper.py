@@ -56,11 +56,14 @@ LANG = {
         "preprint": "  [preprint; not PubMed-indexed]",
         "stamp": "Manuscript generated from commit {sha} · {date}",
         "refs_note": (
-            "Every entry below was retrieved through the PubMed E-utilities by the specialist "
-            "that proposed it, re-fetched independently by a second checker, and re-fetched a "
-            "third time directly from NCBI esummary and compared on title and first author "
-            "before being admitted. Titles, authors, journals, volumes, pages, years and DOIs "
-            "are NCBI's. Four entries are preprints that PubMed does not index and say so. "
+            "Of the 186 PubMed-indexed entries below, 184 were retrieved through the PubMed "
+            "E-utilities by the specialist that proposed them, re-fetched independently by a "
+            "second checker, and re-fetched a third time directly from NCBI esummary and "
+            "compared on title and first author before being admitted. Two -- Yin & Pierce "
+            "(PMID 38073135) and Unsal et al. (PMID 41903187) -- were found by the reviewing "
+            "pass rather than proposed by a specialist, and carry a single NCBI esummary "
+            "fetch. Titles, authors, journals, volumes, pages, years and DOIs are NCBI's. Four "
+            "further entries are preprints that PubMed does not index and say so. "
             "Bibliographic metadata retrieved from PubMed (NLM/NCBI)."),
     },
     "ko": {
@@ -73,10 +76,13 @@ LANG = {
         "preprint": "  [프리프린트, PubMed 미색인]",
         "stamp": "커밋 {sha}에서 생성 · {date}",
         "refs_note": (
-            "아래 모든 항목은 그것을 제안한 전문가가 PubMed E-utilities로 직접 조회했고, 독립적인 "
-            "검증자가 다시 받아왔으며, 세 번째로 NCBI esummary에서 직접 다시 받아 제목과 제1저자를 "
-            "대조한 뒤에야 채택되었다. 제목·저자·학술지·권·페이지·연도·DOI는 NCBI가 돌려준 값이다. "
-            "네 항목은 PubMed에 색인되지 않은 프리프린트이며 그 사실을 함께 밝힌다. 참고문헌 자체는 "
+            "아래 PubMed 색인 항목 186건 가운데 184건은 그것을 제안한 전문가가 PubMed "
+            "E-utilities로 직접 조회했고, 독립적인 검증자가 다시 받아왔으며, 세 번째로 NCBI "
+            "esummary에서 직접 다시 받아 제목과 제1저자를 대조한 뒤에야 채택되었다. 나머지 2건 — "
+            "Yin & Pierce(PMID 38073135), Unsal 등(PMID 41903187) — 은 전문가의 제안이 아니라 "
+            "검토 과정에서 발견되었고, NCBI esummary 조회 1회만을 거쳤다. "
+            "제목·저자·학술지·권·페이지·연도·DOI는 NCBI가 돌려준 값이다. "
+            "다른 네 항목은 PubMed에 색인되지 않은 프리프린트이며 그 사실을 함께 밝힌다. 참고문헌 자체는 "
             "번역하지 않는다 — 인용은 찾을 수 있어야 하기 때문이다. "
             "서지 정보는 PubMed(NLM/NCBI)에서 가져왔다."),
     },
