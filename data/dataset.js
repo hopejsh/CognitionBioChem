@@ -4,7 +4,7 @@
 window.__CBC_DATASET__ = {
  "schema_version": "1.0",
  "built": "2026-08-20",
- "git_sha": "36d300b-dirty",
+ "git_sha": "533aff3",
  "disclosure": {
   "headline": "Structure prediction is real; binding affinity is not calibrated and no free energy is emitted.",
   "detail": "Boltz-2 v2.2.1 (MIT) runs locally and produced every PREDICTED structure under runs/ and in the pre-registered studies. runs/ also holds 32 RCSB crystal depositions, carrying a '-reference' kind in runs/manifest.json: those are experimental ground truth for studies #6 and #7 and were produced by no predictor. The platform also parses genuine output from AlphaFold DB and AlphaFold 3. ADMET is predicted by ADMET-AI where the molecule is inside its applicability domain, and refused with a stated reason where it is not. Binding affinity is PREDICTED but NOT CALIBRATED, and is never rendered as a free energy: the affinity head is fitted to pooled Ki/Kd/IC50/EC50 labels, so no thermodynamic quantity can be recovered from it. Every field is labelled with its provenance; fields marked 'not computed' are honestly empty. Values asserted by an earlier version that no calculation supports are preserved under 'retracted_claims' and are not displayed as results.",
