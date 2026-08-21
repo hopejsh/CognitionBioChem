@@ -4,7 +4,7 @@ A structural pharmacology workbench for cognition-related CNS targets. It **runs
 structure prediction**, computes real chemical and physicochemical properties, validates
 every record against a contract, and attaches a provenance record to every value.
 
-[![Verification](https://img.shields.io/badge/verification-6_suites_passing-brightgreen?style=flat-square)](verify_all.py)
+[![Verification](https://img.shields.io/badge/verification-8_suites_passing-brightgreen?style=flat-square)](verify_all.py)
 [![Studies](https://img.shields.io/badge/pre--registered_studies-8-blueviolet?style=flat-square)](prespec/)
 [![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
 [![Data gate](https://img.shields.io/badge/data_gate-114_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
@@ -130,8 +130,9 @@ Run everything:
 ./.venv/bin/python verify_all.py
 ```
 
-Seven suites. The data gate is **expected** to exit non-zero on the legacy dataset — a gate
-that passed on it would be the defect.
+Eight suites, the last of which is the manuscript's own numeric guard. The data gate is
+**expected** to exit non-zero on the legacy dataset — a gate that passed on it would be the
+defect.
 
 ### The manuscript
 
@@ -146,19 +147,23 @@ for the same reason the report is not.
 ./.venv/bin/python platform/build_pptx.py docs/CognitionBioChem_Paper_Deck_KO.html
 ```
 
-Every reference in it was retrieved through the PubMed E-utilities by the specialist that
-proposed it, re-fetched by an independent checker, and re-fetched a third time directly from
-NCBI esummary and compared on title and first author: 184 of 184 matched, and
-[`paper/REFERENCES_PAPER.json`](paper/REFERENCES_PAPER.json) records how each was verified.
-Beyond existence, 453 claim-source pairs were checked against the cited abstracts — 402 were
+The library holds 186 PubMed-indexed references and 4 that PubMed does not index. 184 of the
+186 were retrieved through the PubMed E-utilities by the specialist that proposed them,
+re-fetched by an independent checker, and re-fetched a third time directly from NCBI esummary
+and compared on title and first author: 184 of 184 matched. Two — `yin2024` and `unsal2026` —
+were found by the reviewing pass rather than proposed by a specialist and carry a single
+esummary fetch; [`paper/REFERENCES_PAPER.json`](paper/REFERENCES_PAPER.json) records that for
+each entry, and the manuscript's own note above the bibliography says the same. Beyond
+existence, 453 claim-source pairs were checked against the cited abstracts — 402 were
 supported and 46 were corrected, three of them because the cited paper concluded the opposite
 of the sentence citing it.
 
-The vocabulary was audited the same way. 101 candidate terms were searched in PubMed and
-Consensus and ruled on in [`paper/TERMINOLOGY_RULINGS.json`](paper/TERMINOLOGY_RULINGS.json):
-40 replaced as coinages or as terms the field gives to something else, 9 qualified, 4 defined,
-and 24 confirmed as standard vocabulary and left alone. `platform/check_paper.py` holds the
-two editions to the same numbers, the same citation order and the same figure order.
+The vocabulary was audited the same way. Terms were searched in PubMed and Consensus and ruled
+on in [`paper/TERMINOLOGY_RULINGS.json`](paper/TERMINOLOGY_RULINGS.json), which holds 77
+rulings: 40 replaced as coinages or as terms the field gives to something else, 9 qualified, 4
+defined, and 24 confirmed as standard vocabulary and left alone. `platform/check_paper.py`
+holds the two editions to the same numbers, the same citation order and the same figure order,
+and is one of the suites `verify_all.py` runs.
 
 ### The written account and the deck
 

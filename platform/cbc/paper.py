@@ -56,6 +56,13 @@ FIGURE_HOME = {
 }
 
 CITE = re.compile(r"\[@([^\]]+)\]")
+
+#: An inline reference to a figure: [FIG: fig1_native_vs_decoy.png] renders as "Figure 3" in
+#: English and "그림 3" in Korean. The number is never written in the source. Five figures were
+#: printed with numbers that no sentence ever used, which is how a display item ends up
+#: carrying no information -- and writing "Figure 3" by hand would break the moment FIGURE_HOME
+#: moved one, silently, in both editions at once.
+FIGREF = re.compile(r"\[FIG:\s*([\w.\-]+)\s*\]")
 FIGURE = re.compile(r"^\[FIGURE:\s*([\w.\-]+)\s*(?:—|--|-)\s*(.+?)\]\s*$")
 
 #: A citation is replaced by this before inline formatting is parsed, so that the square
@@ -70,6 +77,8 @@ class Paper:
     cited: list[str] = field(default_factory=list)        # keys, in citation order
     refs: dict[str, dict] = field(default_factory=dict)   # key -> reference record
     figures: list[tuple[str, str]] = field(default_factory=list)
+    fig_numbers: dict[str, int] = field(default_factory=dict)
+    fig_label: str = "Figure {n}"
 
     def numbered_references(self) -> list[dict]:
         return [dict(self.refs[k], n=i + 1) for i, k in enumerate(self.cited)]
@@ -94,6 +103,26 @@ def load_library(path: str | Path) -> dict[str, dict]:
     return out
 
 
+def _figure_numbers(d: Path, suffix: str) -> dict[str, int]:
+    """Assign each figure its number by walking ORDER, before any prose is parsed."""
+    seen: list[str] = []
+    for sec_id, _, _ in ORDER:
+        path = d / f"sec_{sec_id}{suffix}.md"
+        if not path.exists():
+            continue
+        for line in path.read_text().split("\n"):
+            m = FIGURE.match(line.strip())
+            if not m:
+                continue
+            name = m.group(1)
+            home = FIGURE_HOME.get(name)
+            if home and home != sec_id:
+                continue
+            if name not in seen:
+                seen.append(name)
+    return {name: i + 1 for i, name in enumerate(seen)}
+
+
 def _inline(text: str, paper: Paper) -> list[dict]:
     """Split a line into styled runs, resolving citations to numbers as they are met."""
 
@@ -110,6 +139,15 @@ def _inline(text: str, paper: Paper) -> list[dict]:
             nums.append(str(paper.cited.index(key) + 1))
         return "{{CITE:" + ",".join(nums) + "}}"
 
+    def fig_sub(m):
+        name = m.group(1)
+        if name not in paper.fig_numbers:
+            raise KeyError(
+                f"[FIG: {name}] refers to a figure this paper does not print -- refusing to "
+                f"render a cross-reference that points at nothing")
+        return paper.fig_label.format(n=paper.fig_numbers[name])
+
+    text = FIGREF.sub(fig_sub, text)
     text = CITE.sub(cite_sub, text)
 
     runs: list[dict] = []
@@ -156,8 +194,9 @@ def _parse_section(md: str, paper: Paper, sec_id: str = "") -> None:
             })
             rows = []
 
-    for raw in md.split("\n"):
-        line = raw.rstrip()
+    pending = md.split("\n")
+    while pending:
+        line = pending.pop(0).rstrip()
 
         if line.startswith("|"):
             _flush(buf, paper)
@@ -165,7 +204,22 @@ def _parse_section(md: str, paper: Paper, sec_id: str = "") -> None:
             continue
         flush_table()
 
-        m = FIGURE.match(line.strip())
+        # A figure marker is one logical line, but an author writing 90-column markdown wraps
+        # it, and a wrapped marker matched nothing and printed as literal source text in the
+        # middle of the Discussion -- in both editions, because both authors wrapped it. Join
+        # the continuation lines before matching, and refuse to render one that never closes.
+        stripped = line.strip()
+        if stripped.startswith("[FIGURE:") and not stripped.endswith("]"):
+            joined = [stripped]
+            while pending and not joined[-1].endswith("]"):
+                joined.append(pending.pop(0).strip())
+            stripped = " ".join(joined)
+            if not stripped.endswith("]"):
+                raise ValueError(
+                    f"a [FIGURE: ...] marker in {sec_id or 'a section'} is never closed with "
+                    f"']' -- it would print as literal markup: {stripped[:90]}")
+
+        m = FIGURE.match(stripped)
         if m:
             _flush(buf, paper)
             name = m.group(1)
@@ -211,6 +265,10 @@ def _parse_section(md: str, paper: Paper, sec_id: str = "") -> None:
 
 #: What each top-level part is called, per edition. Only the labels are translated; the
 #: structure, the citation numbers and the figure numbers are the same object in both.
+#: How a figure is named in running prose. The caption label lives in the renderer; this is
+#: the in-text form, and the two must agree, which is why both are per-edition constants.
+FIG_LABEL = {"en": "Figure {n}", "ko": "그림 {n}"}
+
 PART_TITLES = {
     "en": {"Introduction": "Introduction", "Methods": "Methods", "Results": "Results",
            "Discussion": "Discussion", "Conclusions": "Conclusions"},
@@ -230,6 +288,8 @@ def parse(section_dir: str | Path, library: str | Path, *, lang: str = "en") -> 
     d = Path(section_dir)
     suffix = "" if lang == "en" else f".{lang}"
     paper = Paper(refs=load_library(library))
+    paper.fig_numbers = _figure_numbers(d, suffix)
+    paper.fig_label = FIG_LABEL[lang]
     for sec_id, opens, part_title in ORDER:
         path = d / f"sec_{sec_id}{suffix}.md"
         if not path.exists():

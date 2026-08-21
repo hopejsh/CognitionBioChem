@@ -10,3 +10,13 @@ biopython>=1.85
 posebusters==0.6.5
 prodigy-prot==2.4.0
 admet-ai==2.0.1
+
+# The document and figure generators. These were missing, and their absence was invisible
+# here because the venv already had them: a fresh clone could run the studies but not
+# platform/build_report.py, build_paper.py, build_pptx.py or build_figures.py -- the four
+# commands the README documents. Versions are the ones the documents were built with.
+python-docx==1.2.0        # build_report.py, build_report_ko.py, build_paper.py, check_reports.py
+python-pptx==1.0.2        # build_pptx.py
+matplotlib>=3.11          # build_figures.py
+pillow>=12.0              # build_pptx.py, for image sizing
+pyyaml>=6.0               # build_dataset.py, verify_frontend.py
