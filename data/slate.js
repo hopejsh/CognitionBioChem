@@ -4,7 +4,7 @@
 window.__CBC_SLATE__ = {
   "schema_version": "1.2",
   "built": "2026-08-20",
-  "git_sha": "36d300b-dirty",
+  "git_sha": "533aff3",
   "note": "Assembled by platform/build_slate.py from the registered plans, the study artefacts and the README. No verdict, threshold or p-value is computed here -- all are copied from the artefact that produced them.",
   "counts": {
     "studies": 8,
