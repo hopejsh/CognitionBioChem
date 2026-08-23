@@ -13,6 +13,7 @@ import json
 import math
 import re
 import shutil
+import statistics
 import subprocess
 import sys
 import tempfile
@@ -1242,6 +1243,591 @@ def test_every_published_row_resolves_to_a_run_under_custody():
               else f"{unnamed} rows yielded no job name")
     check(f"{total} published rows checked against the run manifest", total > 250,
           f"only {total} rows found; the mapping above may have gone stale")
+
+
+# --------------------------------------------------------------------------- #
+# Every study's analysis, recomputed from that study's own rows
+# --------------------------------------------------------------------------- #
+# A study artefact carries two things: the rows a run produced, and an analysis block
+# summarising them. Nothing until now checked that the second follows from the first. Every
+# other guard in this file checks provenance (a row resolves to a run) or currency (an index
+# matches its generator); none of them would notice a mean computed over the wrong subset, a
+# metric left behind when its rows were re-run, or a p-value carried over from an earlier
+# version of a study. The published summary could disagree with the rows printed directly
+# above it and the suite would pass.
+#
+# The manuscript run that added study #12 checked this by hand and deposited a 48 KB
+# transcript of the arithmetic. A transcript records that someone once agreed; it does not
+# object when the artefact changes. This does.
+#
+# One recompute function per artefact, written from the pre-registered definition rather than
+# by importing the analyser -- importing it would only prove the analyser is deterministic.
+# Tolerance is derived from the precision each value was PUBLISHED at: a value stored as
+# 0.0895 must agree to within half of the last decimal it shows. Two kinds of quantity are
+# out of reach and are named rather than skipped silently:
+#
+#   * study #6's per-entry RMSD is symmetry-corrected against coordinate files with RDKit, so
+#     it is not a function of rows[] at all. Its per-entry values are taken as given and
+#     everything the analysis derives FROM them -- the fractions, the strata, the Wilson
+#     intervals, Fisher's exact p -- is recomputed.
+#   * study #11's variance decomposition needs the six fitted PRODIGY coefficients, which are
+#     external constants and appear nowhere in the artefact.
+
+def _decimals(x: float) -> int:
+    """How many decimals a stored value shows -- i.e. the precision it was published at."""
+    s = repr(float(x))
+    if "e" in s or "E" in s:
+        return 12
+    frac = s.split(".")[1].rstrip("0")
+    return len(frac)
+
+
+def _pct(vals: list[float], q: float) -> float:
+    """numpy's default percentile, on a sorted list, without importing numpy."""
+    k = (len(vals) - 1) * q / 100.0
+    lo, hi = math.floor(k), math.ceil(k)
+    return vals[lo] if lo == hi else vals[lo] * (hi - k) + vals[hi] * (k - lo)
+
+
+def _wilson95(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    if n == 0:
+        return (0.0, 1.0)
+    p = k / n
+    d = 1 + z * z / n
+    centre = (p + z * z / (2 * n)) / d
+    half = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return (max(0.0, centre - half), min(1.0, centre + half))
+
+
+def _fisher2x2(a: int, b: int, c: int, d: int) -> float:
+    """Two-sided Fisher exact p, computed exactly."""
+    n = a + b + c + d
+    row1, col1 = a + b, a + c
+    obs = math.comb(row1, a) * math.comb(n - row1, c) / math.comb(n, col1)
+    total = 0.0
+    for i in range(max(0, col1 - (n - row1)), min(row1, col1) + 1):
+        pr = math.comb(row1, i) * math.comb(n - row1, col1 - i) / math.comb(n, col1)
+        if pr <= obs * (1 + 1e-9):
+            total += pr
+    return min(1.0, total)
+
+
+def _native_vs_decoys(rows: list[dict], key: str = "code") -> dict:
+    """The shape shared by #9, #10 and #12: one native per item, the rest its own null."""
+    by: dict[str, dict] = {}
+    for r in rows:
+        if not r.get("ok"):
+            continue
+        d = by.setdefault(r[key], {"native": None, "decoys": []})
+        if r["kind"] == "native":
+            d["native"] = r["iptm"]
+        else:
+            d["decoys"].append(r["iptm"])
+    return by
+
+
+def _rc_ache_affinity(d: dict, add) -> None:
+    import numpy as np
+    from scipy import stats
+
+    a, m = d["analysis"], d["analysis"]["metrics"]
+    ok = [r for r in d["rows"] if r.get("ok")]
+    pred = [r["pred_pic50"] for r in ok]
+    meas = [r["meas_pic50"] for r in ok]
+    err = [abs(p - q) for p, q in zip(pred, meas)]
+    nrec = [r["n_records"] for r in ok]
+    rr = stats.spearmanr(pred, meas)
+    add("n_observed", len(ok), a["n_observed"])
+    add("spearman rho", float(rr.statistic), m["spearman_rho_predicted_vs_measured_pIC50"])
+    add("H1 p", float(rr.pvalue), a["p_raw"]["H1_ranking_ability"])
+    add("mean absolute error", statistics.fmean(err), m["mean_absolute_error_log10"])
+    add("rmse", math.sqrt(statistics.fmean([(p - q) ** 2 for p, q in zip(pred, meas)])),
+        m["rmse_log10"])
+    add("pearson r", float(stats.pearsonr(pred, meas).statistic), m["pearson_r_pIC50"])
+    add("kendall tau", float(stats.kendalltau(pred, meas).statistic), m["kendall_tau"])
+    add("fraction within 1 log", statistics.fmean([float(e <= 1) for e in err]),
+        m["fraction_within_1_log"])
+    mem = stats.spearmanr(err, nrec)
+    add("memorization rho", float(mem.statistic), a["memorization_rho"])
+    add("H2 p", float(mem.pvalue), a["p_raw"]["H2_memorization_signature"])
+    hup = next(r for r in ok if "HUPERZINE" in r["name"].upper())
+    hup_err = abs(hup["error_log10"])
+    add("huperzine error", hup_err, m["huperzine_absolute_error_log10"])
+    z = (hup_err - statistics.fmean(err)) / statistics.stdev(err)
+    add("huperzine z", z, a["huperzine_z"])
+    add("H3 p", float(2 * (1 - stats.norm.cdf(abs(z)))),
+        a["p_raw"]["H3_huperzine_representative"])
+    # The bootstrap interval is seeded, so it is reproducible arithmetic like any other.
+    rng = np.random.default_rng(0)
+    p_arr, m_arr = np.array(pred), np.array(meas)
+    boot = sorted(b for b in
+                  (stats.spearmanr(p_arr[s], m_arr[s]).statistic
+                   for s in (rng.integers(0, len(ok), len(ok)) for _ in range(10000)))
+                  if not math.isnan(b))
+    add("spearman CI lo", _pct(boot, 2.5), a["spearman_ci95"][0])
+    add("spearman CI hi", _pct(boot, 97.5), a["spearman_ci95"][1])
+
+
+def _rc_affinity_corrected(d: dict, add) -> None:
+    import numpy as np
+    from scipy import stats
+
+    a, m = d["analysis"], d["analysis"]["metrics"]
+    ok = [r for r in d["rows"] if r.get("corrected")]
+    pred = [r["pred_pic50"] for r in ok]
+    meas = [r["meas_pic50_corrected"] for r in ok]
+    err = [abs(p - q) for p, q in zip(pred, meas)]
+    rr = stats.spearmanr(pred, meas)
+    add("n_observed", len(ok), a["n_observed"])
+    add("spearman rho", float(rr.statistic), m["spearman_rho_corrected"])
+    add("spearman p", float(rr.pvalue), a["spearman_p"])
+    # rho_v1 is the superseded study's published rho, not a quantity these rows can produce;
+    # the delta the artefact reports must still be the difference of the two.
+    add("delta rho", float(rr.statistic) - m["rho_v1"], m["delta_rho"])
+    add("median absolute error", statistics.median(err), m["median_absolute_error_log10"])
+    disp = [r["reference"]["log10_sd"] for r in ok
+            if r["reference"].get("log10_sd") is not None]
+    add("median reference sd", statistics.median(disp), m["median_reference_log10_sd"])
+    add("median records", statistics.median([r["reference"]["n"] for r in ok]),
+        m["median_records_per_compound"])
+    add("single-record compounds", sum(1 for r in ok if r["reference"]["n"] == 1),
+        m["n_compounds_with_single_record"])
+    add("max reference spread", max(r["reference"]["log10_spread"] for r in ok),
+        m["max_reference_log10_spread"])
+    add("pearson r", float(stats.pearsonr(pred, meas).statistic), m["pearson_r"])
+    add("kendall tau", float(stats.kendalltau(pred, meas).statistic), m["kendall_tau"])
+    rng = np.random.default_rng(0)
+    p_arr, m_arr = np.array(pred), np.array(meas)
+    boot = sorted(b for b in
+                  (stats.spearmanr(p_arr[s], m_arr[s]).statistic
+                   for s in (rng.integers(0, len(ok), len(ok)) for _ in range(10000)))
+                  if not math.isnan(b))
+    add("spearman CI lo", _pct(boot, 2.5), a["spearman_ci95"][0])
+    add("spearman CI hi", _pct(boot, 97.5), a["spearman_ci95"][1])
+
+
+def _rc_candidate_screen(d: dict, add) -> None:
+    a, m = d["analysis"], d["analysis"]["metrics"]
+    by = _native_vs_decoys(d["rows"])
+    stored = {p["code"]: p for p in a["per_candidate"]}
+    add("n_observed", sum(1 for r in d["rows"] if r.get("ok")), a["n_observed"])
+    add("candidates", len(by), len(stored))
+    natives, decoys, sweeps = [], [], 0
+    for code, v in by.items():
+        s = stored[code]
+        n_ge = sum(1 for x in v["decoys"] if x >= v["native"])
+        add(f"{code} native", v["native"], s["native_iptm"])
+        add(f"{code} decoy mean", statistics.fmean(v["decoys"]), s["decoy_mean"])
+        add(f"{code} decoy max", max(v["decoys"]), s["decoy_max"])
+        add(f"{code} beats all decoys", all(v["native"] > x for x in v["decoys"]),
+            s["beats_all_decoys"])
+        add(f"{code} empirical p", (1 + n_ge) / (len(v["decoys"]) + 1), s["empirical_p"])
+        natives.append(v["native"])
+        decoys += v["decoys"]
+        sweeps += bool(all(v["native"] > x for x in v["decoys"]))
+    add("mean native", statistics.fmean(natives), m["mean_native_iptm"])
+    add("mean decoy", statistics.fmean(decoys), m["mean_decoy_iptm"])
+    add("native minus decoy", statistics.fmean(natives) - statistics.fmean(decoys),
+        m["native_minus_decoy_mean"])
+    add("fraction beating the null", sweeps / len(by), m["fraction_candidates_beating_null"])
+    add("candidates above 0.8", sum(1 for v in natives if v > 0.8),
+        m["n_candidates_above_0.8"])
+    add("candidates below 0.6", sum(1 for v in natives if v < 0.6),
+        m["n_candidates_below_0.6"])
+
+
+def _rc_msa_specificity(d: dict, add) -> None:
+    from scipy import stats
+
+    a, m = d["analysis"], d["analysis"]["metrics"]
+    stored = {p["code"]: p for p in a["per_candidate"]}
+    diffs, natives, decoy_means = [], [], []
+    for code, v in _native_vs_decoys(d["rows"]).items():
+        # The plan admits a candidate only with at least five decoys; a candidate the
+        # analyser dropped for that reason must not reappear here.
+        if v["native"] is None or len(v["decoys"]) < 5:
+            continue
+        s = stored[code]
+        dm = statistics.fmean(v["decoys"])
+        n_ge = sum(1 for x in v["decoys"] if x >= v["native"])
+        add(f"{code} native", v["native"], s["native_iptm"])
+        add(f"{code} n decoys", len(v["decoys"]), s["n_decoys"])
+        add(f"{code} decoy mean", dm, s["decoy_mean"])
+        add(f"{code} decoy max", max(v["decoys"]), s["decoy_max"])
+        add(f"{code} difference", v["native"] - dm, s["difference"])
+        add(f"{code} beats all decoys", all(v["native"] > x for x in v["decoys"]),
+            s["beats_all_decoys"])
+        add(f"{code} empirical p", (1 + n_ge) / (len(v["decoys"]) + 1), s["empirical_p"])
+        diffs.append(v["native"] - dm)
+        natives.append(v["native"])
+        decoy_means.append(dm)
+    add("candidates", len(diffs), len(stored))
+    add("paired mean difference", statistics.fmean(diffs),
+        m["paired_native_minus_decoy_mean"])
+    add("mean native", statistics.fmean(natives), m["mean_native_iptm"])
+    add("mean decoy", statistics.fmean(decoy_means), m["mean_decoy_iptm"])
+    add("cohens dz", statistics.fmean(diffs) / statistics.stdev(diffs), m["cohens_dz"])
+    add("paired t p", float(stats.ttest_1samp(diffs, 0.0).pvalue), a["paired_t_p"])
+    nul = m["beats_all_decoys_null"]
+    sweeps = sum(1 for s in stored.values() if s["beats_all_decoys"])
+    n_dec = max(s["n_decoys"] for s in stored.values())
+    p0 = 1 / (n_dec + 1)
+    add("sweeps", sweeps, nul["observed"])
+    add("sweeps expected", len(stored) * p0, nul["expected_under_null"])
+    add("P(X >= observed)", float(stats.binom.sf(sweeps - 1, len(stored), p0)),
+        nul["p_at_least_observed"])
+
+
+def _rc_peptide_interface(d: dict, add) -> None:
+    from scipy import stats
+
+    a, m = d["analysis"], d["analysis"]["metrics"]
+    ok = [r for r in d["rows"] if r.get("ok")]
+    dockq = [r["dockq"] for r in ok]
+    iptm = [r["iptm"] for r in ok if r.get("iptm") is not None]
+    paired = [(r["iptm"], r["dockq"]) for r in ok if r.get("iptm") is not None]
+    add("n_observed", len(ok), a["n_observed"])
+    add("fraction DockQ acceptable", statistics.fmean([float(v >= 0.23) for v in dockq]),
+        m["fraction_dockq_acceptable"])
+    add("median DockQ", statistics.median(dockq), m["median_dockq"])
+    add("mean ipTM", statistics.fmean(iptm), m["mean_iptm"])
+    rr = stats.spearmanr([x for x, _ in paired], [y for _, y in paired])
+    add("spearman ipTM/DockQ", float(rr.statistic), m["spearman_iptm_dockq"])
+    add("spearman p", float(rr.pvalue), a["spearman_p"])
+    add("fraction ipTM > 0.8", statistics.fmean([float(v > 0.8) for v in iptm]),
+        m["fraction_iptm_above_0.8"])
+    band = {k: 0 for k in m["iptm_band_confusion"]}
+    for x, y in paired:
+        good = y >= 0.23
+        if x > 0.8:
+            band["confident_and_acceptable" if good else "confident_but_wrong"] += 1
+        elif x < 0.6:
+            band["failed_band_but_acceptable" if good else "failed_band_and_wrong"] += 1
+        else:
+            band["grey_and_acceptable" if good else "grey_and_wrong"] += 1
+    for k, v in band.items():
+        add(f"band {k}", v, m["iptm_band_confusion"][k])
+    add("median iRMSD", statistics.median([r["irmsd"] for r in ok if "irmsd" in r]),
+        m["median_irmsd"])
+    add("median fnat", statistics.median([r["fnat"] for r in ok if "fnat" in r]),
+        m["median_fnat"])
+    # The pre-cutoff fraction is the gate for study #9, so it is the one number in this
+    # artefact another study's admissibility depends on.
+    for name in ("pre_cutoff", "post_cutoff"):
+        rs = [r for r in ok if r["split"] == name]
+        k = sum(1 for r in rs if r["dockq"] >= 0.23)
+        add(f"{name} k", k, a["strata"][name]["k"])
+        add(f"{name} n", len(rs), a["strata"][name]["n"])
+        add(f"{name} fraction", k / len(rs), a["strata"][name]["fraction"])
+        add(f"{name} median DockQ", statistics.median([r["dockq"] for r in rs]),
+            a["strata"][name]["median_dockq"])
+        lo, hi = _wilson95(k, len(rs))
+        add(f"{name} Wilson lo", lo, a["strata"][name]["wilson95"][0])
+        add(f"{name} Wilson hi", hi, a["strata"][name]["wilson95"][1])
+
+
+def _rc_pose_accuracy(d: dict, add) -> None:
+    a, m = d["analysis"], d["analysis"]["metrics"]
+    rmsd = m["per_entry_rmsd"]
+    stratum = {r["pdb_id"]: r.get("stratum") for r in d["rows"]}
+    vals = list(rmsd.values())
+    # Every scored entry must still be a row of this study, even though its RMSD was
+    # produced from coordinate files rather than from the row.
+    add("every scored entry is a row of this study",
+        all(pid in stratum for pid in rmsd), True)
+    add("n_observed", len(vals), a["n_observed"])
+    add("fraction under 2A", statistics.fmean([float(v <= 2.0) for v in vals]),
+        m["fraction_rmsd_under_2A"])
+    add("fraction under 5A", statistics.fmean([float(v <= 5.0) for v in vals]),
+        m["fraction_rmsd_under_5A"])
+    add("median RMSD", statistics.median(vals), m["median_rmsd"])
+    add("mean RMSD", statistics.fmean(vals), m["mean_rmsd"])
+    tally: dict[str, list[int]] = {}
+    for pid, v in rmsd.items():
+        t = tally.setdefault(stratum[pid], [0, 0])
+        t[0] += v <= 2.0
+        t[1] += 1
+    for name in ("recall", "congeneric_extension"):
+        k, n = tally[name]
+        add(f"{name} k", k, a["strata"][name]["k"])
+        add(f"{name} n", n, a["strata"][name]["n"])
+        add(f"{name} fraction", k / n, a["strata"][name]["fraction"])
+        lo, hi = _wilson95(k, n)
+        add(f"{name} Wilson lo", lo, a["strata"][name]["wilson95"][0])
+        add(f"{name} Wilson hi", hi, a["strata"][name]["wilson95"][1])
+    (k1, n1), (k2, n2) = tally["recall"], tally["congeneric_extension"]
+    add("interpolation premium", k1 / n1 - k2 / n2, a["interpolation_premium"])
+    add("Fisher p", _fisher2x2(k1, n1 - k1, k2, n2 - k2),
+        a["fisher_p_recall_vs_congeneric"])
+
+
+def _rc_prodigy(d: dict, add) -> None:
+    import random
+    from scipy import stats
+
+    a, m = d["analysis"], d["analysis"]["metrics"]
+    by: dict[str, list[dict]] = {}
+    for r in d["rows"]:
+        if r.get("ok"):
+            by.setdefault(r["code"], []).append(r)
+    means = {c: statistics.fmean(x["dg"] for x in rs) for c, rs in by.items()}
+    between = statistics.stdev(means.values())
+    within = statistics.fmean([statistics.variance([x["dg"] for x in rs])
+                               for rs in by.values() if len(rs) > 1]) ** 0.5
+    add("n_observed", sum(1 for r in d["rows"] if r.get("ok")), a["n_observed"])
+    add("between-candidate SD", between, m["between_candidate_sd"])
+    add("within-candidate SD", within, m["within_candidate_sd"])
+    add("discrimination ratio", between / within, m["discrimination_ratio"])
+    add("between-candidate range", max(means.values()) - min(means.values()),
+        m["between_candidate_range"])
+    add("mean predicted dG",
+        statistics.fmean([r["dg"] for r in d["rows"] if r.get("ok")]), m["mean_predicted_dg"])
+    add("fraction of fit range",
+        (max(means.values()) - min(means.values())) / 14.3,
+        m["fraction_of_fit_range_occupied"])
+    for code, v in a["per_candidate_mean_dg"].items():
+        add(f"{code} mean dG", means[code], v)
+    for code, ic in m["ic_counts_per_candidate"].items():
+        for k, v in ic.items():
+            add(f"{code} {k}", statistics.fmean(x[k] for x in by[code]), v)
+    groups = [[x["dg"] for x in rs] for rs in by.values() if len(rs) > 1]
+    F, p = stats.f_oneway(*groups)
+    add("ANOVA F", float(F), m["anova_candidate_identity_F"])
+    add("ANOVA p", float(p), m["anova_candidate_identity_p"])
+    # Seeded bootstrap, so the published interval is reproducible arithmetic.
+    rng = random.Random(m["bootstrap_seed"])
+    boot = []
+    for _ in range(m["bootstrap_resamples"]):
+        gs = [[rng.choice([x["dg"] for x in by[c]]) for _ in by[c]] for c in by]
+        try:
+            b = statistics.stdev([statistics.fmean(g) for g in gs])
+            w = statistics.fmean([statistics.variance(g) for g in gs if len(g) > 1]) ** 0.5
+        except statistics.StatisticsError:
+            continue
+        if w > 0:
+            boot.append(b / w)
+    boot.sort()
+    add("ratio CI lo", boot[int(.025 * len(boot))],
+        m["discrimination_ratio_ci95_bootstrap"][0])
+    add("ratio CI hi", boot[int(.975 * len(boot))],
+        m["discrimination_ratio_ci95_bootstrap"][1])
+
+
+def _rc_inference_variance(d: dict, add) -> None:
+    """#2 is the one study whose rows and analysis are in different files."""
+    rows = json.loads((REPO / "data" / "study_inference_variance.json").read_text())["rows"]
+    m = d["metrics"]
+
+    def arm(letter):
+        out: dict[str, list[dict]] = {}
+        for r in rows:
+            if r.get("arm", "").startswith(letter) and r.get("returncode") == 0:
+                out.setdefault(r["code"], []).append(r)
+        return out
+
+    def pooled(per: dict[str, list[float]]):
+        """sqrt(mean of within-candidate variances) -- NOT the SD of the pooled values."""
+        sds = {c: statistics.stdev(v) for c, v in per.items() if len(v) > 1}
+        return math.sqrt(statistics.fmean([s ** 2 for s in sds.values()])), sds
+
+    armA = arm("A")
+    for code, rs in armA.items():
+        vals = [r["complex_plddt"] for r in rs if r.get("complex_plddt") is not None]
+        add(f"{code} same-seed distinct values", len(set(vals)),
+            m["same_seed_distinct_values"][code])
+    plddt: dict[str, list[float]] = {}
+    ptm: dict[str, list[float]] = {}
+    for code, rs in armA.items():
+        plddt.setdefault(code, []).append(rs[0]["complex_plddt"])
+        if rs[0].get("ptm") is not None:
+            ptm.setdefault(code, []).append(rs[0]["ptm"])
+    for code, rs in arm("B").items():
+        for r in rs:
+            if r.get("complex_plddt") is not None:
+                plddt.setdefault(code, []).append(r["complex_plddt"])
+            if r.get("ptm") is not None:
+                ptm.setdefault(code, []).append(r["ptm"])
+    sd_plddt, sds = pooled(plddt)
+    add("across-seed SD pLDDT", sd_plddt * 100, m["across_seed_sd_complex_plddt"])
+    add("across-seed SD pTM", pooled(ptm)[0], m["across_seed_sd_ptm"])
+    for code, v in d["per_candidate_sd_plddt"].items():
+        add(f"{code} SD pLDDT", sds[code] * 100, v)
+    iptm: dict[str, list[float]] = {}
+    ipae: dict[str, list[float]] = {}
+    for code, rs in arm("D").items():
+        for r in rs:
+            if r.get("iptm") is not None:
+                iptm.setdefault(code, []).append(r["iptm"])
+            if r.get("interface_pae_min") is not None:
+                ipae.setdefault(code, []).append(r["interface_pae_min"])
+    add("across-seed SD ipTM", pooled(iptm)[0], m["across_seed_sd_iptm"])
+    if ipae:
+        add("across-seed SD interface PAE", pooled(ipae)[0],
+            m["across_seed_sd_interface_pae_min"])
+    paired = []
+    for code, rs in arm("C").items():
+        with_msa = [r["complex_plddt"] for r in rs if r.get("complex_plddt") is not None]
+        without = plddt.get(code, [])
+        if with_msa and without:
+            paired.append((statistics.fmean(without), statistics.fmean(with_msa)))
+    add("MSA mean shift", statistics.fmean([(w - o) * 100 for o, w in paired]),
+        m["msa_mean_shift"])
+
+
+def _rc_interface_null_positive_control(d: dict, add) -> None:
+    from scipy import stats
+
+    a, m = d["analysis"], d["analysis"]["metrics"]
+    pt = a["primary_test"]
+    stored = {c["pdb_id"]: c for c in m["per_complex"]}
+    n_perm = max(c["n_permutations"] for c in stored.values())
+    by = _native_vs_decoys(d["rows"], key="pdb_id")
+    natives, perms_all, diffs, sweeps = [], [], [], 0
+    rows_by_id = {r["pdb_id"]: r for r in d["rows"] if r["kind"] == "native"}
+    for pid, v in by.items():
+        s = stored[pid]
+        pm = statistics.fmean(v["decoys"])
+        n_ge = sum(1 for x in v["decoys"] if x >= v["native"])
+        add(f"{pid} native", v["native"], s["native_iptm"])
+        add(f"{pid} permutations", len(v["decoys"]), s["n_permutations"])
+        add(f"{pid} permutation mean", pm, s["permutation_mean"])
+        add(f"{pid} permutation max", max(v["decoys"]), s["permutation_max"])
+        add(f"{pid} difference", v["native"] - pm, s["difference"])
+        add(f"{pid} beats all permutations", all(v["native"] > x for x in v["decoys"]),
+            s["beats_all_permutations"])
+        add(f"{pid} empirical p", (1 + n_ge) / (len(v["decoys"]) + 1), s["empirical_p"])
+        natives.append(v["native"])
+        perms_all += v["decoys"]
+        diffs.append(v["native"] - pm)
+        sweeps += bool(all(v["native"] > x for x in v["decoys"]))
+    n = len(diffs)
+    mean, sd = statistics.fmean(diffs), statistics.stdev(diffs)
+    se = sd / math.sqrt(n)
+    t, p = stats.ttest_1samp(diffs, 0.0)
+    tcrit = float(stats.t.ppf(0.975, n - 1))
+    add("n pairs", n, pt["n_pairs"])
+    add("mean difference", mean, pt["mean_difference"])
+    add("SD of differences", sd, pt["sd_of_differences"])
+    add("SE of the mean", se, pt["se_of_mean"])
+    add("t", float(t), pt["t"])
+    add("df", n - 1, pt["df"])
+    add("p two-sided", float(p), pt["p_exact_two_sided"])
+    add("CI lo", mean - tcrit * se, pt["ci95_mean_difference"][0])
+    add("CI hi", mean + tcrit * se, pt["ci95_mean_difference"][1])
+    add("cohens dz", mean / sd, pt["cohens_dz"])
+    add("differences positive", sum(1 for x in diffs if x > 0),
+        pt["n_differences_positive"])
+    add("paired mean metric", mean, m["paired_native_minus_permutation_mean"])
+    add("dz metric", mean / sd, m["cohens_dz"])
+    add("mean native ipTM", statistics.fmean(natives), m["mean_native_iptm"])
+    add("mean permutation ipTM", statistics.fmean(perms_all), m["mean_permutation_iptm"])
+    add("paired t p", float(p), a["paired_t_p"])
+    sw = stats.shapiro(diffs)
+    add("Shapiro-Wilk W", float(sw.statistic), a["assumption_checks"]["shapiro_wilk_W"])
+    add("Shapiro-Wilk p", float(sw.pvalue), a["assumption_checks"]["shapiro_wilk_p"])
+    # H2: the criterion the study registered in advance and did not meet.
+    h2 = a["secondary_tests"]["H2_binomial_reference"]
+    p0 = 1 / (n_perm + 1)
+    add("sweeps observed", sweeps, h2["observed_sweeps"])
+    add("sweeps metric", sweeps, m["n_complexes_beating_all_permutations"])
+    add("complexes", n, h2["n_complexes"])
+    add("sweeps expected", n * p0, h2["expected_under_null"])
+    add("P(X >= observed)", float(stats.binom.sf(sweeps - 1, n, p0)),
+        h2["p_at_least_observed"])
+    add("P(X >= registered threshold)",
+        float(stats.binom.sf(h2["registered_threshold"] - 1, n, p0)), h2["p_at_threshold"])
+    # H3 is a contrast against another study, and the registered comparator is named in the
+    # plan: candidate-screen-v8, the single-sequence arm. Its differences come from ITS
+    # artefact, already rounded to four decimals there, which is why this one check is given
+    # an explicit tolerance rather than the published-precision one.
+    h3 = a["secondary_tests"]["H3_welch_contrast"]
+    v8 = json.loads((REPO / "data" / "study_candidate_screen.json").read_text())
+    d8 = [c["native_iptm"] - c["decoy_mean"] for c in v8["analysis"]["per_candidate"]]
+    add("comparator n", len(d8), h3["n_designed"])
+    add("comparator mean", statistics.fmean(d8), h3["designed_mean"])
+    add("contrast", mean - statistics.fmean(d8), h3["contrast"])
+    add("Welch p", float(stats.ttest_ind(diffs, d8, equal_var=False).pvalue),
+        h3["p_exact_two_sided"], 1e-4)
+    # The two stratifications were registered before the folds were scored, which is the only
+    # thing that keeps them from being a subgroup chosen after the fact.
+    for block, name_of in (
+            (m["paired_difference_by_dockq_stratum"],
+             lambda r: ("gate_dockq_acceptable" if r["gate_dockq"] >= 0.23
+                        else "gate_dockq_incorrect")),
+            (m["paired_difference_by_split"], lambda r: r["split"])):
+        groups: dict[str, list[float]] = {}
+        for pid, v in by.items():
+            groups.setdefault(name_of(rows_by_id[pid]), []).append(
+                v["native"] - statistics.fmean(v["decoys"]))
+        for name, vals in groups.items():
+            add(f"{name} n", len(vals), block[name]["n"])
+            add(f"{name} mean difference", statistics.fmean(vals),
+                block[name]["mean_difference"])
+
+
+#: Every study artefact in data/, and the function that rebuilds its analysis from its rows.
+#: A study with no entry here fails the test rather than being skipped, so a new artefact
+#: cannot arrive unchecked -- which is the whole point of writing this as a test of the
+#: repository rather than a test of one commit.
+RECOMPUTE = {
+    "study_ache_affinity.json": _rc_ache_affinity,
+    "study_affinity_corrected.json": _rc_affinity_corrected,
+    "study_candidate_screen.json": _rc_candidate_screen,
+    "study_msa_specificity.json": _rc_msa_specificity,
+    "study_peptide_interface.json": _rc_peptide_interface,
+    "study_pose_accuracy.json": _rc_pose_accuracy,
+    "study_prodigy.json": _rc_prodigy,
+    "study_inference_variance_analysis.json": _rc_inference_variance,
+    "study_interface_null_positive_control.json": _rc_interface_null_positive_control,
+    # Rows only: this file carries the folds, and its analysis lives in the file above.
+    "study_inference_variance.json": None,
+}
+
+
+def test_every_analysis_block_recomputes_from_its_own_rows():
+    """Every published statistic must follow from the rows published beside it."""
+    print("\n[recompute] every analysis block follows from its own rows")
+    found = sorted(p.name for p in (REPO / "data").glob("study_*.json"))
+    unregistered = [n for n in found if n not in RECOMPUTE]
+    check(f"all {len(found)} study artefacts in data/ have a recompute", not unregistered,
+          f"no recompute for {unregistered}; add one rather than exempting the artefact"
+          if unregistered else "")
+    total = 0
+    for name in found:
+        fn = RECOMPUTE.get(name)
+        if fn is None:
+            continue
+        payload = json.loads((REPO / "data" / name).read_text())
+        checks: list[tuple] = []
+
+        def add(label, got, want, tol=None, _c=checks):
+            _c.append((label, got, want, tol))
+
+        try:
+            fn(payload, add)
+        except Exception as exc:  # noqa: BLE001
+            check(f"{name}: the analysis recomputes from rows[]", False,
+                  f"recompute raised {exc!r}")
+            continue
+        bad = []
+        for label, got, want, tol in checks:
+            if want is None:
+                bad.append(f"{label}: nothing published to compare against")
+                continue
+            if isinstance(got, bool) or isinstance(got, str):
+                ok = got == want
+            else:
+                # Agreement to the precision the value was PUBLISHED at: a stored 0.0895
+                # must be reproduced to within half of its last decimal.
+                t = tol if tol is not None else 0.5 * 10 ** -_decimals(want) + 1e-9
+                ok = abs(float(got) - float(want)) <= t
+            if not ok:
+                bad.append(f"{label}: rows give {got!r}, artefact says {want!r}")
+        total += len(checks)
+        check(f"{name}: all {len(checks)} published statistics recompute from its rows",
+              not bad, "; ".join(bad[:3]) + (f" (+{len(bad) - 3} more)" if len(bad) > 3 else ""))
+    check(f"{total} published statistics recomputed across the slate", total > 350,
+          "" if total > 350 else "a recompute above has probably gone empty")
 
 
 def test_generated_indices_are_current():

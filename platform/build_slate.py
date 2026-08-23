@@ -106,6 +106,32 @@ def plans() -> dict[str, dict]:
     return out
 
 
+def _confirmatory_note(studies: list[dict]) -> str:
+    """The prose form of counts.studies_confirmatory, derived from the same audits.
+
+    A hand-typed universal ("every study deviated") is a claim about all future studies
+    written before they exist. verify_all.py already carries the version of this lesson
+    that cost something: hand-maintained counts "will eventually lie".
+    """
+    def name(s: dict) -> str:
+        return f"#{s['slate_number']}" if s["slate_number"] else s["study_id"]
+
+    deviated = [s for s in studies if s["confirmatory"] is not True]
+    clean = [s for s in studies if s["confirmatory"] is True]
+    tail = ("The deviations are machine-detected and listed per study; results affected by "
+            "them are exploratory, not confirmatory. Pre-registration did not make those "
+            "results confirmatory -- it made the deviations visible.")
+    if not clean:
+        return ("Every study in this slate deviated from its registered plan in at least one "
+                "respect, so every study's own audit records confirmatory = false. " + tail)
+    return (f"{len(deviated)} of the {len(studies)} studies in this slate deviated from their "
+            f"registered plan in at least one respect, so their audits record "
+            f"confirmatory = false. " + tail + " The exception is "
+            + ", ".join(name(s) for s in clean)
+            + f", whose audit records no deviation at all and confirmatory = true"
+            + (" -- the first study in this slate to do so." if len(clean) == 1 else "."))
+
+
 def anchor_for(title: str) -> str:
     return "#" + re.sub(r"[^a-z0-9\s-]", "", title.lower()).strip().replace(" ", "-")
 
@@ -465,12 +491,13 @@ def build() -> int:
                         "Several confirmations are confirmations of unwelcome statements -- "
                         "that a method does not discriminate, or that candidates fall in a "
                         "failed band.",
-        "confirmatory_note": "Every study in this slate deviated from its registered plan in "
-                             "at least one respect, so every study's own audit records "
-                             "confirmatory = false. The deviations are machine-detected and "
-                             "listed per study; results affected by them are exploratory, not "
-                             "confirmatory. Pre-registration did not make these results "
-                             "confirmatory -- it made the deviations visible.",
+        # This sentence used to read "Every study in this slate deviated from its
+        # registered plan in at least one respect". It was typed by hand and it stopped
+        # being true the moment a study registered a plan and ran it without deviating,
+        # while the counts block three lines up already said studies_confirmatory = 1.
+        # It is now derived from the same audits the count is derived from, so the two
+        # cannot disagree again.
+        "confirmatory_note": _confirmatory_note(studies),
         # A reader scanning #1, #2, #6...#11 under a tile reading "8 Studies" cannot tell an
         # infrastructure section from a suppressed negative. The gap is explained in the
         # README and was explained nowhere on the page.

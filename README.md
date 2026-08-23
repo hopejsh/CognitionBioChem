@@ -5,7 +5,7 @@ structure prediction**, computes real chemical and physicochemical properties, v
 every record against a contract, and attaches a provenance record to every value.
 
 [![Verification](https://img.shields.io/badge/verification-8_suites_passing-brightgreen?style=flat-square)](verify_all.py)
-[![Studies](https://img.shields.io/badge/pre--registered_studies-8-blueviolet?style=flat-square)](prespec/)
+[![Studies](https://img.shields.io/badge/pre--registered_studies-9-blueviolet?style=flat-square)](prespec/)
 [![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
 [![Data gate](https://img.shields.io/badge/data_gate-114_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
 [![Structure](https://img.shields.io/badge/structure-Boltz--2_2.2.1_(MIT)-blue?style=flat-square)](platform/cbc/compute/structure.py)
@@ -87,7 +87,7 @@ distinguishable from sampler noise**. No claim of agreement is licensed for thos
 | Structure prediction | Boltz-2 2.2.1 (MIT), local, Apple MPS | **real** |
 | Predictor-output parsing | mmCIF + AF3 / AlphaFold DB / Boltz confidence files | real (no Chai reader; see `platform/cbc/predictor.py`) |
 | Structure gallery | 13 candidate–receptor complexes, 22 peptide folds, 16 AlphaFold DB receptors | real — every entry opens a file under `runs/` or `data/alphafold_db/`, with its own pLDDT, PAE and interface PAE |
-| Study reporting | 8 pre-registered studies, 25 hypotheses of which 24 are decided | real — verdicts copied from artefacts, never recomputed for display |
+| Study reporting | 9 pre-registered studies, 28 hypotheses of which 27 are decided | real — verdicts copied from artefacts, never recomputed for display |
 | All-atom physical validity | clashes, bond lengths, chirality, disulfides | real |
 | Chemical structure validation | RDKit: parse, formula, InChIKey, stereochemistry | real |
 | Peptide properties | MW, net charge pH 7.4, pI, GRAVY, cysteine parity | real |
@@ -269,13 +269,13 @@ broken. It rejects three defects at registration time:
 The reachability arithmetic distinguishes permutation tests (floor `1/(B+1)`) from parametric
 tests (no floor from n alone) — conflating the two makes the check wrong in both directions.
 
-**On the numbering.** The slate runs #1, #2, #4, #6–#11. Two of those are not experiments:
+**On the numbering.** The slate runs #1, #2, #4, #6–#12. Two of those are not experiments:
 **#4** is the target-construct registry, which has no hypothesis and no plan hash, and this
 section (#1) sits inside the pre-registration chapter because it is what the mechanism was
 built for. **#3 and #5 do not exist** — they were allocated to studies that were never
 registered and never run, and the numbers were not reused so that every citation in this
-document keeps pointing at the same thing. Nothing has been withdrawn: `prespec/` holds 26
-registered plans across 8 study families, `data/` holds an artefact for all 8, and
+document keeps pointing at the same thing. Nothing has been withdrawn: `prespec/` holds 27
+registered plans across 9 study families, `data/` holds an artefact for all 9, and
 `data/slate.json` is built by joining those two against this file.
 
 ### Slate #1 — the first pre-registered study
@@ -778,10 +778,40 @@ indistinguishable.
 **Two candidates beat all ten of their own decoys. That is what chance looks like at this scale.**
 A candidate beats all 10 of its decoys with probability 1/11 = 0.091 under the null, so across
 13 candidates **1.18 are expected to do it by chance**, and P(X ≥ 2) = **0.334**. Two is the
-expected outcome. The composition-matched null protects a *candidate* from being read as a hit;
-it does nothing for a *screen* read the same way, and this is the same error one level up. The
-screen-level null is computed in the artefact and flagged by the audit as exploratory, because it
-was added after seeing the data.
+expected outcome. **The composition-matched null does not protect a *candidate* from being read
+as a hit, and this repository's own positive control is what established that.** Slate #12 put
+the per-candidate reading to a registered test: the same sixteen X-ray peptide–receptor complexes
+the pipeline was calibrated on in #7, each folded against ten permutations of its own peptide,
+with every threshold fixed in writing before a fold was scored.
+
+**In aggregate the null works.** The mean paired native-minus-permutation difference is
+**+0.0895 ipTM** (95% CI +0.0278 to +0.1512, t(15) = 3.09, p = 0.0074, Holm **0.0148**,
+dz = 0.77, 13 of 16 positive). This score is therefore not blind to the order of a peptide's
+residues, and the flat result above can no longer be blamed on a score that cannot read residue
+order at all.
+
+**Case by case it does not.** Only **4 of 16** complexes beat all ten of their own permutations,
+against a threshold of **5 of 16** registered in advance — Bin(16, 1/11) expects 1.45, and
+P(X ≥ 4) = 0.0511 against P(X ≥ 5) = 0.0115 — so the per-case hypothesis is recorded as
+falsified, at a margin of 0.0011 the plan refused in advance to move the line for.
+
+**And the limit is in the design, not in the budget.** With m permutations a single complex's
+empirical p cannot fall below 1/(m+1) — 0.0909 at ten, above α = 0.05 — so no per-candidate call
+was licensed at *any* outcome those folds could have returned. Raising m lowers that floor
+(1/21 = 0.0476 at twenty) but makes a sweep proportionately harder to achieve, so it buys a
+criterion that can be called, not one that is easier to pass.
+
+**The per-candidate reading of this column is therefore withdrawn.** What the column licenses is
+a verdict on a *batch* of native–decoy pairs taken together; it licenses none on any single pair.
+It does nothing for a *screen* read the same way either, and this is the same error one level up.
+The screen-level null is computed in the artefact and flagged by the audit as exploratory, because
+it was added after seeing the data.
+
+**One custody gap, stated rather than papered over.** Every number in the four paragraphs above is
+in `data/study_interface_null_positive_control.json`, but 160 of that artefact's 176 rows name a
+fold output under `runs/interface-null-positive-control/`, and that run tree is **not** in this
+repository. Those 160 rows' `model` paths therefore do not resolve in a clone: the statistics
+travel, the coordinates they were read from do not.
 
 **The MSA raises the level without changing the ranking**, as #9's registered confound predicted —
 it helps the receptor, which has thousands of homologues, not the peptide, which has none. The
@@ -806,6 +836,141 @@ the size of the gap: across the screen's six retained versions it ran −0.006, 
 left the sampler-noise floor. The verdict is what survived every correction, not the margin. H2's criterion is met, but the screen-level null says two is chance. H3
 reversed twice. One verdict is robust and two are artefacts of where thresholds were placed,
 which is the more useful thing to know about this study than any individual number in it.
+
+---
+## Slate #12 — the composition-matched null discriminates in aggregate, and not case by case
+
+`platform/studies/interface_null_positive_control.py`, plan `69a5009d6f62`, registered
+**2026-08-22T06:43:11Z, before any permutation was folded**. The positive control this
+repository's central instrument never had: the **same sixteen deposited peptide–receptor
+complexes** the interface gate scored in #7, each folded against **ten uniform random
+permutations of its own peptide**, under #7's single-sequence settings so that the only thing
+differing between the two arms is the order of the peptide's residues. 176 rows — 16 native
+folds reused from the gate, 160 permutation folds — **zero failures, zero complexes dropped**.
+The protocol audit reports **no deviations**, which makes this the first study in the slate
+whose own audit records `confirmatory = true`.
+
+| Hypothesis | Verdict |
+|---|---|
+| H1 natives separate from permutations of themselves | **confirmed** (+0.0895 ipTM, Holm p = 0.0148, dz = 0.77) |
+| H2 the null fires case by case | **falsified** (4 of 16 against a threshold of 5 registered in advance) |
+| H3 the natural separation exceeds the designed | **falsified** (Welch p = 0.107, CI −0.021 to +0.197) |
+
+**The falsification is the operative result, and the repository was recommending the thing it
+falsifies.** Until this study, `README.md` and the tracked paper offered a composition-matched
+decoy set as a *per-candidate* control — the form in which a reviewer would actually apply it,
+to one design. H2 put exactly that claim to a registered test and it did not reach the
+registered strength: only **4 of 16** complexes scored above every one of their own ten
+permutations, against a threshold of **5** fixed in writing before the first fold. Under
+Bin(16, 1/11) the expectation is **1.45**, P(X ≥ 4) = **0.0511** and P(X ≥ 5) = **0.0115**, so
+the observed count misses α by **0.0011** — and the plan stated in the same sentence that four
+would not clear α and five would, which is what makes the margin a result rather than a licence
+to move the line. **The per-candidate reading of the composition-matched null is withdrawn
+throughout this document and in `paper/`.**
+
+**And no per-case call was reachable at any outcome those folds could have returned.** With m
+permutations a single complex's empirical p floors at 1/(m + 1) — **0.0909 at ten, above
+α = 0.05** — so the per-complex p values in the artefact are descriptive by construction and
+H2 had to be decided on a *count* against a binomial reference instead. That floor is the same
+arithmetic `platform/cbc/prespec.py` rejects plans for, applied here in advance rather than
+discovered afterwards: the plan says so, and says it is why the primary test is paired across
+complexes. Raising m lowers the floor (1/21 = 0.0476 at twenty) but makes a sweep
+proportionately harder to achieve, so it buys a criterion that **can be called**, not one that
+is easier to pass.
+
+**What H1 confirms is real and is narrower than it looks.** The mean paired difference is
+**+0.0895 ipTM** (native mean 0.742 against permutation mean 0.652), 95% CI **+0.0278 to
++0.1512**, t(15) = 3.09, p = 0.0074, **Holm p = 0.0148**, dz = 0.77 (CI 0.20–1.33), with **13
+of 16 differences positive**. So this score is **not blind to the order of a peptide's
+residues**, and #9's and #10's flat results can no longer be attributed to a score that cannot
+read residue order at all. What the confirmation licenses is a verdict on a **batch** of
+native–permutation pairs taken together. It licenses none on any single pair.
+
+Normality of the sixteen differences is not rejected (Shapiro–Wilk W = 0.939, p = 0.342), and
+at n = 16 that check is evidence of no gross violation rather than evidence of normality. Two
+distribution-free cross-checks are reported in the artefact and **carry no verdict because they
+were not registered**: Wilcoxon signed-rank p = 0.0076 and a sign test at 13/16, p = 0.0213.
+Both agree with the registered parametric test, so the H1 verdict does not rest on the
+normality assumption — they are shown because a check capable of overturning the primary test
+must be shown to have been run.
+
+**H3 is the cell that stayed empty.** It would have decided the screen's negative by a direct
+contrast — natural separation against the designed separation of `candidate-screen-v8` under
+the same single-sequence settings — instead of by reading two studies side by side. The natural
+mean is **75× the designed mean** (0.0895 against 0.0012) and the two sets are still not
+separated: Welch t = 1.68 on 21.50 df, **p = 0.1067**, 95% CI on the difference of means
+**−0.021 to +0.197, containing zero**. The designed differences scatter from −0.277 to +0.275
+about a mean of 0.0012 with 7 of 13 positive; the natural ones sit 13 of 16 positive about
+0.0895. **Not detected is not shown absent** — that is confound 7 in the registered plan, and
+the verdict is FALSIFIED rather than "no difference". The equivalent comparison against
+`msa-specificity-v9`'s designed mean of 0.0009 (6 of 13 positive) is registered as a
+*comparison and never as a test*, because that arm differs in alignment mode as well as in
+sequence set.
+
+| PDB | split | peptide | receptor | gate DockQ | native ipTM | perm. mean | **perm. max** | Δ | beats all |
+|---|---|---|---|---|---|---|---|---|---|
+| 4Y29 | pre | 10 | 269 | 0.963 | 0.831 | 0.566 | 0.815 | **+0.265** | **YES** |
+| 4XO9 | pre | 14 | 279 | 0.339 | 0.895 | 0.670 | **0.902** | +0.225 | no |
+| 23AG | post | 11 | 104 | 0.165 | 0.819 | 0.598 | **0.847** | +0.220 | no |
+| 4XT9 | pre | 8 | 243 | 0.978 | 0.923 | 0.712 | 0.832 | **+0.211** | **YES** |
+| 10LG | post | 17 | 284 | 0.381 | 0.917 | 0.722 | 0.871 | **+0.195** | **YES** |
+| 4XHV | pre | 10 | 94 | 0.899 | 0.897 | 0.745 | **0.961** | +0.152 | no |
+| 4XOJ | pre | 13 | 246 | 0.952 | 0.986 | 0.851 | 0.924 | **+0.136** | **YES** |
+| 21EE | post | 15 | 80 | 0.167 | 0.340 | 0.254 | **0.391** | +0.086 | no |
+| 10TC | post | 8 | 304 | 0.831 | 0.945 | 0.860 | **0.954** | +0.085 | no |
+| 29TJ | post | 10 | 289 | 0.483 | 0.934 | 0.914 | **0.962** | +0.020 | no |
+| 4S15 | pre | 12 | 256 | 0.031 | 0.300 | 0.282 | **0.458** | +0.018 | no |
+| 4Y32 | pre | 7 | 236 | 0.846 | 0.892 | 0.878 | **0.973** | +0.014 | no |
+| 4XOE | pre | 14 | 279 | 0.279 | 0.721 | 0.707 | **0.909** | +0.014 | no |
+| 31GN | post | 10 | 222 | 0.049 | 0.591 | 0.599 | **0.844** | **−0.008** | no |
+| 31EE | post | 12 | 271 | 0.019 | 0.158 | 0.254 | **0.514** | **−0.097** | no |
+| 12ZJ | post | 13 | 145 | 0.193 | 0.719 | 0.823 | **0.919** | **−0.104** | no |
+
+**Three complexes ran backwards, and the repository shows the number without the reason.**
+31GN, 31EE and 12ZJ scored **below** their own permutations, and all three are among the six
+the gate placed incorrectly. The registered descriptive stratification says the same thing
+without deciding it: **+0.1316** where the gate reached CAPRI-acceptable (n = 10) against
+**+0.0193** where it did not (n = 6). The reading that suggests itself — that the control can
+point the wrong way on a case where the pipeline never found the interface — is a hypothesis
+this study **cannot** test, because the stratification was registered as descriptive and
+carries no verdict. The same applies to the deposition split: **+0.1293** pre-cutoff (n = 8)
+against **+0.0497** post-cutoff (n = 8), on the same sixteen complexes where #7 already found
+recovery concentrated pre-cutoff (7/8 against 3/8). **Neither study can separate deposition era
+from memorisation**, and this one was not designed to.
+
+**160 of this study's 176 rows point at a run tree that is not in this repository.** The 16
+native rows reuse the gate's folds and their `model` paths resolve in a clone; the 160
+permutation rows name outputs under `runs/interface-null-positive-control/` — 805 files, 28 MB,
+161 fold directories including the 4XHV reproduction re-fold — and **that tree is deliberately
+not tracked here**. **The custody of this study is therefore incomplete, and stating so is
+preferable to a path that dead-ends.** What travels is every number above, in
+`data/study_interface_null_positive_control.json`, together with everything needed to make the
+folds again: the input set and its `sequence_set_sha256` `14ac1f0f6238…`, the permutation
+generator named down to `random.Random(1)` re-seeded per complex, the frozen native ipTM values
+the run was checked against, and the settings. What does not travel is the coordinates those
+ipTM values were read from. Regenerating them is `--fetch` then `--run` on the module above; at
+this study's **measured 45.5 s per computed fold** (7,284 s of compute across two prior
+invocations, all 160 folds served from cache on the final one) that is **≈ 2.0 GPU-hours** for
+the 160 permutation folds. Until then the confidence values here are reproducible by re-running
+and are not verifiable against stored bytes — unlike every other study in this slate.
+
+The one custody check that did travel: **4XHV was re-folded from scratch and reproduced its
+reused native ipTM exactly**, Δ = 0.0000 against a 0.01 tolerance registered in advance, so the
+sixteen values carried over from #7 are still the values this pipeline produces.
+
+**What this control does and does not validate.** It is measured on **7–17 residue peptides**
+bound to **80–304 residue** receptors, in **single-sequence mode**, where a permutation explores
+10^3.1–10^11.8 distinct arrangements. #9 and #10 screened **31–47 residue** peptides on
+156–608 residue ectodomains, where the same operation explores roughly 10^26–10^43, and #10 ran
+with a full MSA. **There is no overlap in peptide length at all, and no result here bounds the
+null under an MSA.** The sixteen peptides also reached the PDB by co-crystallising, so the set
+is enriched for strong ordered binders and **+0.0895 is an optimistic bound on what the null
+can discriminate, not a typical value**. Both are named in the registered confounds rather than
+discovered afterwards. Closing the first gap needs a positive control at the candidates' own
+length and receptor class — 16 complexes × 10 permutations, ≈ 2.0 GPU-hours of compute, and a
+set of 31–47 residue peptide–receptor complexes with X-ray evidence and clean chain mappings
+that does not currently exist. Closing the second needs all 176 folds re-run with
+`--use_msa_server`, ≈ 17 GPU-hours at #10's measured 345.5 s per fold. Neither is proposed here.
 
 ---
 
@@ -916,7 +1081,7 @@ platform/
   verify_frontend.py  DOM, data and rendering-rule contract for the page
   check_naming.py     build guard: no pooled score rendered as a free energy
   cbc/report_data.py  the artefacts and derived quantities both report editions share
-  build_figures.py    the five generated figures every document embeds
+  build_figures.py    the five figures every document embeds, plus fig6 for study #12
   build_report.py     the written account (.docx), every number read from an artefact
   build_report_ko.py  the Korean edition of the same account, same numbers
   build_deck.py       the conference deck (.html + .pdf), from the same artefacts
@@ -963,6 +1128,31 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 
 ## Known limitations
 
+- **Equivalence was never tested, so nothing here demonstrates the absence of a difference.**
+  Not one of the 27 plans in `prespec/` pre-specified an equivalence bound or an equivalence
+  margin — `grep -rliE "equivalence|margin|TOST" prespec/` returns nothing. Every non-detection
+  in this repository is therefore a failure to reject and no more than that: the screen's paired
+  native-minus-decoy difference of **+0.0009** (#10), the contrast between the natural and the
+  designed arm of the positive control (#12, Welch p = 0.107, 95% CI −0.021 to +0.197), and #2's
+  reading that an MSA is immaterial for designed peptides. #2 comes closest, because its H3
+  compares the MSA shift against that study's own across-seed noise floor — but a noise floor is
+  what the instrument can resolve, not the smallest difference that would matter, and the
+  criterion is still settled in part by a p that failed to reject. Read every "no difference" in
+  this repository as "not detected at this n".
+- **The positive control is an optimistic bound on the screen it validates.** Study #12's
+  sixteen complexes are crystallised natural peptides of **7–17 residues**; the designed
+  candidates the null is used on are **31–47 residues**. The two sets do not overlap in length
+  at all, so the instrument was demonstrated on easier material than it is applied to, and
+  "the composition-matched null discriminates" carries from the one to the other by assumption
+  rather than by measurement. #12's plan named this before any permutation was folded, and
+  naming it is all that has been done about it.
+- **The control did not run in the screen's alignment mode either.** #12 folded with
+  `msa: empty` — the interface gate's settings, chosen so that the order of a peptide's residues
+  was the only thing differing between its two arms — while the headline screen #10 ran with
+  `--use_msa_server`. An MSA lifts decoys as well as designs: in #10, **11 of 13** candidates
+  have a scramble scoring above their own native, six have one above 0.8, and
+  `MicroTrem2-Agonist-M1`'s best scramble reaches **0.963** against a native of 0.693. The arm
+  in which the null was shown to work is not the arm in which the negative result was measured.
 - Studies #6, #7 and #9 run in single-sequence mode (`msa: empty`); study #10 runs with
   `--use_msa_server`. The variance study measured the MSA to cost the *isolated designed
   peptides* essentially nothing, which is expected for sequences with no homologues — but that

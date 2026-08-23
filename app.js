@@ -1433,7 +1433,10 @@ function renderStructureProvenance(e) {
           : (s.empirical_p != null && s.empirical_p >= 0.05) ? 'warn' : 'ok'}">${s.beats_all_decoys
           ? 'This candidate outscored every composition-matched shuffle of its own residues — '
             + `and its own empirical p is ${s.empirical_p}, which clears no conventional `
-            + 'threshold. ' + esc(screenLevelNull())
+            + 'threshold. Slate #12 put that per-candidate reading to a registered test and it '
+            + 'did not survive: the composition-matched null separates natives from their own '
+            + 'permutations across a set of pairs taken together, and licenses no verdict on a '
+            + 'single pair. ' + esc(screenLevelNull())
           : 'At least one shuffle of this candidate’s own amino acids scored as high or '
             + 'higher. Confidence here is not evidence of a designed interaction.'}</p>` : ''}
       ${e.comparison ? `

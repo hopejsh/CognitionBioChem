@@ -336,9 +336,11 @@ slide("result", "Two winners is what chance looks like",
       {nul["p_at_least_observed"]}</span>. Every winner carries the same empirical
       p&nbsp;=&nbsp;{max(w["empirical_p"] for w in winners)}, the smallest value this design can
       produce.</p>
-    <p class="pull" style="margin-top:1em">The composition-matched null protects a candidate
-      from being read as a hit. It does nothing for a screen read the same way &mdash; and that
-      is the same error one level up.</p>
+    <p class="pull" style="margin-top:1em">The composition-matched null does not protect a
+      candidate from being read as a hit. Slate #12 put that reading to a registered test and it
+      did not survive: the null separates natives from their own permutations across a set of
+      pairs taken together, and licenses no verdict on a single pair. It does nothing for a
+      screen read the same way either &mdash; and that is the same error one level up.</p>
     <p style="margin-top:.9em"><span class="mono" style="color:var(--muted)">This screen-level
       null was computed after the data were seen, and is flagged exploratory in the artefact for
       exactly that reason.</span></p>

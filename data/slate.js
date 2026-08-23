@@ -3,25 +3,25 @@
 // only so the page still works when opened from a file: URL.
 window.__CBC_SLATE__ = {
   "schema_version": "1.2",
-  "built": "2026-08-20",
-  "git_sha": "533aff3",
+  "built": "2026-08-22",
+  "git_sha": "262b016-dirty",
   "note": "Assembled by platform/build_slate.py from the registered plans, the study artefacts and the README. No verdict, threshold or p-value is computed here -- all are copied from the artefact that produced them.",
   "counts": {
-    "studies": 8,
-    "hypotheses": 25,
-    "confirmed": 13,
-    "falsified": 11,
+    "studies": 9,
+    "hypotheses": 28,
+    "confirmed": 14,
+    "falsified": 13,
     "not_tested": 1,
-    "decided": 24,
-    "decided_by_a_test": 5,
-    "decided_by_a_threshold": 19,
+    "decided": 27,
+    "decided_by_a_test": 7,
+    "decided_by_a_threshold": 20,
     "decided_by_neither": 0,
     "unregistered": 1,
-    "studies_confirmatory": 0
+    "studies_confirmatory": 1
   },
   "reading_note": "A CONFIRMED criterion is not a test result. Most hypotheses here are pre-specified threshold comparisons on a descriptive statistic, decided by looking at a number against a line drawn in advance, and the count of confirmations is not a score. A few of those rules name a test statistic inside them and are flagged with `threshold_embeds_a_test`; where they do, the value is in the observed column and no multiplicity correction was applied to it. Several confirmations are confirmations of unwelcome statements -- that a method does not discriminate, or that candidates fall in a failed band.",
-  "confirmatory_note": "Every study in this slate deviated from its registered plan in at least one respect, so every study's own audit records confirmatory = false. The deviations are machine-detected and listed per study; results affected by them are exploratory, not confirmatory. Pre-registration did not make these results confirmatory -- it made the deviations visible.",
-  "numbering_note": "The slate runs #1, #2, #6, #7, #8, #9, #10, #11. #4 is the target-construct registry, which has no hypothesis and no plan hash, so it has no entry here. #3 and #5 were allocated to studies that were never registered and never run, and the numbers were not reused so that every citation keeps pointing at the same thing. Nothing has been withdrawn: prespec/ holds 26 registered plans and every study family in it appears above.",
+  "confirmatory_note": "8 of the 9 studies in this slate deviated from their registered plan in at least one respect, so their audits record confirmatory = false. The deviations are machine-detected and listed per study; results affected by them are exploratory, not confirmatory. Pre-registration did not make those results confirmatory -- it made the deviations visible. The exception is #12, whose audit records no deviation at all and confirmatory = true -- the first study in this slate to do so.",
+  "numbering_note": "The slate runs #1, #2, #6, #7, #8, #9, #10, #11, #12. #4 is the target-construct registry, which has no hypothesis and no plan hash, so it has no entry here. #3 and #5 were allocated to studies that were never registered and never run, and the numbers were not reused so that every citation keeps pointing at the same thing. Nothing has been withdrawn: prespec/ holds 27 registered plans and every study family in it appears above.",
   "separation_across_versions": {
     "note": "every retained version of the two screening studies, oldest first",
     "n_versions": 11,
@@ -1170,6 +1170,450 @@ window.__CBC_SLATE__ = {
         "listed_in_failures": 0,
         "rows_marked_not_ok": 1,
         "distinct": 1,
+        "note": "the two records overlap; distinct is the count of separate units of work that failed"
+      }
+    },
+    {
+      "slate_number": 12,
+      "title": "the composition-matched null discriminates in aggregate, and not case by case",
+      "readme_anchor": "#slate-12--the-composition-matched-null-discriminates-in-aggregate-and-not-case-by-case",
+      "readme_join_conflict": null,
+      "study_id": "interface-null-positive-control-v1",
+      "plan_hash": "69a5009d6f62",
+      "plan_file": "prespec/interface-null-positive-control-v1.69a5009d6f62.json",
+      "registered_utc": "2026-08-22T06:43:11+00:00",
+      "supersedes": null,
+      "supersedes_reason": null,
+      "artefact": "data/study_interface_null_positive_control.json",
+      "question": "Do peptides with experimentally demonstrated binding \u2014 the sixteen deposited peptide-receptor complexes of the interface gate \u2014 separate from uniform random permutations of their own residues on Boltz-2 interface confidence, under the same single-sequence settings the gate used? This is the cell the composition-matched null has never had filled: no sequence with a demonstrated interaction has been scored against permutations of itself anywhere in this work, which is why the null is demonstrated to reject and is not demonstrated to discriminate.",
+      "primary_metric": "paired_native_minus_permutation_mean",
+      "decision_threshold": "H1 (PRIMARY) confirmed if the mean paired difference \u2014 native ipTM minus the mean ipTM of its own ten permutations \u2014 is positive with a Holm-adjusted paired t-test p < 0.05 over a registered family of two tests. H2 confirmed if at least 5 of the 16 complexes score above EVERY one of their own ten permutations; that threshold is fixed now because under the per-complex null a complex sweeps its ten with probability 1/11, giving an expected count of 1.45, P(X >= 5) = 0.0115 and P(X >= 4) = 0.0511 \u2014 four sweeps would not clear alpha and five will. H2 is a threshold criterion on a count, decided by looking at the number, and is registered HERE, in advance, as excluded from the Holm family: a 0/1 indicator is not a p-value and would steal a multiplier from the genuine tests. The executed family is therefore two, matching n_comparisons. H3 confirmed if the sixteen natural paired differences exceed the thirteen designed paired differences of candidate-screen-v8 with a Holm-adjusted Welch t-test p < 0.05 in that direction.",
+      "known_confounds": [
+        "1. LENGTH. These peptides are 7-17 residues; the screened candidates are 31-47, with no overlap at all. Whatever this study shows about the null holds at 7-17 residues and is transferred to 31-47 only by assumption. 2. CRYSTALLISATION BIAS. A peptide-receptor complex reaches the PDB only if the peptide binds well enough to co-crystallise, so this set is enriched for strong, structurally ordered binders. It gives an OPTIMISTIC bound on what the null can discriminate \u2014 the same bias the gate's own plan records about its recovery rate \u2014 and a null that discriminates here is not thereby shown to discriminate on weak or transient binders. 3. THE NULL IS NOT EQUALLY STRONG ACROSS THE TWO SETS. A permutation of a short peptide explores a far smaller space than a permutation of a long one: 4Y32's 7-mer has 1,260 distinct arrangements (log10 3.1) and 4XT9's and 10TC's 8-mers 6,720, against roughly 10^26 to 10^43 for the 31-47 residue candidates. A short permuted peptide also retains more of the native's local order by chance and its composition constrains the achievable interface more tightly, so the two studies' nulls are not the same instrument at the same strength, and the screen's flat result and any separation here cannot be subtracted from one another cleanly. H3's contrast is confounded with exactly this, and with receptor class (80-304 residue soluble functional modules here, 156-608 residue cysteine-rich glycosylated ectodomains there) and with permutation count (m = 10 here, m = 3 in candidate-screen-v8); a confirmed H3 is therefore attributable to the SETS, not to design content alone, and is reported that way. 4. REUSED NATIVE ARM. The sixteen natives were folded earlier than the permutations, so any change of Boltz version, driver or hardware between the two would appear as a difference between arms rather than between sequences. Mitigated by re-folding 4XHV at identical settings and requiring its ipTM to reproduce within 0.01; if it does not, all sixteen natives are recomputed. 5. PER-COMPLEX RESOLUTION. With m = 10 the per-complex empirical p floors at 1/11 = 0.0909, which exceeds alpha = 0.05, so NO per-complex call is made at the registered alpha and no single complex can be declared a hit on its own p. Those values are descriptive; the per-complex question is answered only in aggregate, through H2's count against the binomial reference. 6. SINGLE-SEQUENCE MODE. All folds run with an empty alignment, which Boltz documents as degrading accuracy, and both arms are depressed together. A falsified H1 bounds the null in single-sequence mode only; it does not establish that the null fails to discriminate with a full MSA, where a pilot moved one native from 0.3402 to 0.7588 while moving its decoy from 0.3478 to 0.2986. 7. POWER. n = 16 paired differences, and 16 versus 13 for the Welch contrast; only a large and consistent effect will register, and a falsified H1 with a small positive mean is 'not detected', not 'shown absent'. 8. ipTM IS THE MODEL'S SELF-ASSESSMENT. It agrees with DockQ on these sixteen (Spearman rho = 0.80) but it is not an affinity, and separation on ipTM is evidence about what this pipeline distinguishes, not about what the molecules do."
+      ],
+      "multiplicity": {
+        "family_size": 2,
+        "correction": "holm",
+        "excluded_from_correction": [
+          "H2_the_null_discriminates_case_by_case"
+        ]
+      },
+      "excluded_from_correction": [
+        "H2_the_null_discriminates_case_by_case"
+      ],
+      "n_observed": 176,
+      "n_planned": 176,
+      "n_candidates": null,
+      "hypotheses": [
+        {
+          "name": "H1_natural_peptides_separate_from_their_permutations",
+          "registered": true,
+          "statement": "Peptides with experimentally demonstrated binding score higher on interface confidence than uniform random permutations of their own residues, so the composition-matched null discriminates when there is order-dependent binding content for it to find.",
+          "confirmed_if": "mean paired difference > 0 with Holm-adjusted paired t-test p < 0.05",
+          "verdict": "CONFIRMED",
+          "kind": "test",
+          "rule_cites_a_test_statistic": true,
+          "p_holm": 0.014829365327435317,
+          "p_raw": 0.007414682663717659
+        },
+        {
+          "name": "H2_the_null_discriminates_case_by_case",
+          "registered": true,
+          "statement": "The null fires on individual complexes and not only on a mean over sixteen \u2014 the form in which a control offered for routine use on a single design would actually be applied.",
+          "confirmed_if": "at least 5 of 16 complexes score above all ten of their own permutations (P = 0.0115 under the per-complex null)",
+          "verdict": "FALSIFIED",
+          "kind": "criterion",
+          "rule_cites_a_test_statistic": true,
+          "threshold_embeds_a_test": "the decision rule names a test statistic, but the study filed this hypothesis as a threshold criterion and applied no multiplicity correction to it; the test's value is inside the observed column",
+          "observed": 4,
+          "observed_text": "4",
+          "threshold": "at least 5 of 16 complexes beat all 10 of their own permutations",
+          "confirmed_by_absence_note": null
+        },
+        {
+          "name": "H3_natural_separation_exceeds_designed",
+          "registered": true,
+          "statement": "The natural peptides' separation from their own permutations is larger than the designed candidates' separation measured under the same single-sequence settings in candidate-screen-v8, so the missing cell is filled by a contrast rather than by two studies read side by side.",
+          "confirmed_if": "mean natural difference > mean designed difference with Holm-adjusted Welch t-test p < 0.05",
+          "verdict": "FALSIFIED",
+          "kind": "test",
+          "rule_cites_a_test_statistic": true,
+          "p_holm": 0.10670101054657981,
+          "p_raw": 0.10670101054657981
+        }
+      ],
+      "metrics": {
+        "paired_native_minus_permutation_mean": 0.0895,
+        "mean_native_iptm": 0.7417,
+        "mean_permutation_iptm": 0.6522,
+        "cohens_dz": 0.7734,
+        "per_complex_empirical_p": {
+          "4Y29": 0.0909,
+          "4XO9": 0.1818,
+          "23AG": 0.1818,
+          "4XT9": 0.0909,
+          "10LG": 0.0909,
+          "4XHV": 0.2727,
+          "4XOJ": 0.0909,
+          "21EE": 0.2727,
+          "10TC": 0.1818,
+          "29TJ": 0.5455,
+          "4S15": 0.3636,
+          "4Y32": 0.6364,
+          "4XOE": 0.3636,
+          "31GN": 0.5455,
+          "31EE": 0.9091,
+          "12ZJ": 0.8182
+        },
+        "n_complexes_beating_all_permutations": 4,
+        "beats_all_permutations_null": {
+          "per_complex_null_probability": 0.0909,
+          "expected_under_null": 1.455,
+          "observed": 4,
+          "p_at_least_observed": 0.05114,
+          "threshold_registered": 5,
+          "interpretation": "with 10 permutations each, a complex sweeps all of them with probability 0.0909 under the null, so 1.45 of 16 are expected to by chance; observing 4 has probability 0.0511."
+        },
+        "paired_difference_by_dockq_stratum": {
+          "gate_dockq_acceptable": {
+            "n": 10,
+            "mean_difference": 0.1316
+          },
+          "gate_dockq_incorrect": {
+            "n": 6,
+            "mean_difference": 0.0193
+          },
+          "note": "registered descriptive stratification; carries no verdict"
+        },
+        "paired_difference_by_split": {
+          "pre_cutoff": {
+            "n": 8,
+            "mean_difference": 0.1293
+          },
+          "post_cutoff": {
+            "n": 8,
+            "mean_difference": 0.0497
+          },
+          "note": "registered descriptive stratification; carries no verdict"
+        },
+        "log10_distinct_permutations": {
+          "4Y29": 4.88,
+          "4XO9": 8.66,
+          "23AG": 6.22,
+          "4XT9": 3.83,
+          "10LG": 11.79,
+          "4XHV": 5.66,
+          "4XOJ": 8.41,
+          "21EE": 10.61,
+          "10TC": 3.83,
+          "29TJ": 5.96,
+          "4S15": 6.6,
+          "4Y32": 3.1,
+          "4XOE": 8.66,
+          "31GN": 5.48,
+          "31EE": 6.7,
+          "12ZJ": 8.41
+        },
+        "natural_minus_designed_contrast": {
+          "natural_mean": 0.0895,
+          "designed_mean_candidate_screen_v8": 0.0012,
+          "contrast": 0.0883,
+          "n_natural": 16,
+          "n_designed": 13,
+          "welch_p": 0.1067
+        },
+        "contrast_vs_msa_specificity_v9": {
+          "designed_mean_msa_arm": 0.0009,
+          "n_designed": 13,
+          "contrast": 0.0886,
+          "note": "registered sensitivity comparison, not a test: that arm used the MSA server, so it differs from this study in alignment mode as well as in sequence set"
+        },
+        "per_complex": [
+          {
+            "pdb_id": "4Y29",
+            "split": "pre_cutoff",
+            "peptide_len": 10,
+            "receptor_len": 269,
+            "gate_dockq": 0.963,
+            "native_iptm": 0.8305,
+            "n_permutations": 10,
+            "permutation_mean": 0.5658,
+            "permutation_max": 0.8149,
+            "difference": 0.2648,
+            "beats_all_permutations": true,
+            "empirical_p": 0.0909,
+            "log10_distinct_permutations": 4.88
+          },
+          {
+            "pdb_id": "4XO9",
+            "split": "pre_cutoff",
+            "peptide_len": 14,
+            "receptor_len": 279,
+            "gate_dockq": 0.339,
+            "native_iptm": 0.8947,
+            "n_permutations": 10,
+            "permutation_mean": 0.6702,
+            "permutation_max": 0.902,
+            "difference": 0.2245,
+            "beats_all_permutations": false,
+            "empirical_p": 0.1818,
+            "log10_distinct_permutations": 8.66
+          },
+          {
+            "pdb_id": "23AG",
+            "split": "post_cutoff",
+            "peptide_len": 11,
+            "receptor_len": 104,
+            "gate_dockq": 0.165,
+            "native_iptm": 0.8186,
+            "n_permutations": 10,
+            "permutation_mean": 0.5983,
+            "permutation_max": 0.8469,
+            "difference": 0.2204,
+            "beats_all_permutations": false,
+            "empirical_p": 0.1818,
+            "log10_distinct_permutations": 6.22
+          },
+          {
+            "pdb_id": "4XT9",
+            "split": "pre_cutoff",
+            "peptide_len": 8,
+            "receptor_len": 243,
+            "gate_dockq": 0.978,
+            "native_iptm": 0.9232,
+            "n_permutations": 10,
+            "permutation_mean": 0.7118,
+            "permutation_max": 0.8323,
+            "difference": 0.2114,
+            "beats_all_permutations": true,
+            "empirical_p": 0.0909,
+            "log10_distinct_permutations": 3.83
+          },
+          {
+            "pdb_id": "10LG",
+            "split": "post_cutoff",
+            "peptide_len": 17,
+            "receptor_len": 284,
+            "gate_dockq": 0.381,
+            "native_iptm": 0.9166,
+            "n_permutations": 10,
+            "permutation_mean": 0.7219,
+            "permutation_max": 0.8711,
+            "difference": 0.1947,
+            "beats_all_permutations": true,
+            "empirical_p": 0.0909,
+            "log10_distinct_permutations": 11.79
+          },
+          {
+            "pdb_id": "4XHV",
+            "split": "pre_cutoff",
+            "peptide_len": 10,
+            "receptor_len": 94,
+            "gate_dockq": 0.899,
+            "native_iptm": 0.8967,
+            "n_permutations": 10,
+            "permutation_mean": 0.7446,
+            "permutation_max": 0.9614,
+            "difference": 0.1521,
+            "beats_all_permutations": false,
+            "empirical_p": 0.2727,
+            "log10_distinct_permutations": 5.66
+          },
+          {
+            "pdb_id": "4XOJ",
+            "split": "pre_cutoff",
+            "peptide_len": 13,
+            "receptor_len": 246,
+            "gate_dockq": 0.952,
+            "native_iptm": 0.9863,
+            "n_permutations": 10,
+            "permutation_mean": 0.8505,
+            "permutation_max": 0.9237,
+            "difference": 0.1358,
+            "beats_all_permutations": true,
+            "empirical_p": 0.0909,
+            "log10_distinct_permutations": 8.41
+          },
+          {
+            "pdb_id": "21EE",
+            "split": "post_cutoff",
+            "peptide_len": 15,
+            "receptor_len": 80,
+            "gate_dockq": 0.167,
+            "native_iptm": 0.3396,
+            "n_permutations": 10,
+            "permutation_mean": 0.2539,
+            "permutation_max": 0.3912,
+            "difference": 0.0857,
+            "beats_all_permutations": false,
+            "empirical_p": 0.2727,
+            "log10_distinct_permutations": 10.61
+          },
+          {
+            "pdb_id": "10TC",
+            "split": "post_cutoff",
+            "peptide_len": 8,
+            "receptor_len": 304,
+            "gate_dockq": 0.831,
+            "native_iptm": 0.9451,
+            "n_permutations": 10,
+            "permutation_mean": 0.8598,
+            "permutation_max": 0.954,
+            "difference": 0.0853,
+            "beats_all_permutations": false,
+            "empirical_p": 0.1818,
+            "log10_distinct_permutations": 3.83
+          },
+          {
+            "pdb_id": "29TJ",
+            "split": "post_cutoff",
+            "peptide_len": 10,
+            "receptor_len": 289,
+            "gate_dockq": 0.483,
+            "native_iptm": 0.9342,
+            "n_permutations": 10,
+            "permutation_mean": 0.9139,
+            "permutation_max": 0.9616,
+            "difference": 0.0203,
+            "beats_all_permutations": false,
+            "empirical_p": 0.5455,
+            "log10_distinct_permutations": 5.96
+          },
+          {
+            "pdb_id": "4S15",
+            "split": "pre_cutoff",
+            "peptide_len": 12,
+            "receptor_len": 256,
+            "gate_dockq": 0.031,
+            "native_iptm": 0.3005,
+            "n_permutations": 10,
+            "permutation_mean": 0.2822,
+            "permutation_max": 0.4583,
+            "difference": 0.0183,
+            "beats_all_permutations": false,
+            "empirical_p": 0.3636,
+            "log10_distinct_permutations": 6.6
+          },
+          {
+            "pdb_id": "4Y32",
+            "split": "pre_cutoff",
+            "peptide_len": 7,
+            "receptor_len": 236,
+            "gate_dockq": 0.846,
+            "native_iptm": 0.8925,
+            "n_permutations": 10,
+            "permutation_mean": 0.8785,
+            "permutation_max": 0.973,
+            "difference": 0.014,
+            "beats_all_permutations": false,
+            "empirical_p": 0.6364,
+            "log10_distinct_permutations": 3.1
+          },
+          {
+            "pdb_id": "4XOE",
+            "split": "pre_cutoff",
+            "peptide_len": 14,
+            "receptor_len": 279,
+            "gate_dockq": 0.279,
+            "native_iptm": 0.721,
+            "n_permutations": 10,
+            "permutation_mean": 0.7074,
+            "permutation_max": 0.909,
+            "difference": 0.0136,
+            "beats_all_permutations": false,
+            "empirical_p": 0.3636,
+            "log10_distinct_permutations": 8.66
+          },
+          {
+            "pdb_id": "31GN",
+            "split": "post_cutoff",
+            "peptide_len": 10,
+            "receptor_len": 222,
+            "gate_dockq": 0.049,
+            "native_iptm": 0.5908,
+            "n_permutations": 10,
+            "permutation_mean": 0.5992,
+            "permutation_max": 0.8442,
+            "difference": -0.0083,
+            "beats_all_permutations": false,
+            "empirical_p": 0.5455,
+            "log10_distinct_permutations": 5.48
+          },
+          {
+            "pdb_id": "31EE",
+            "split": "post_cutoff",
+            "peptide_len": 12,
+            "receptor_len": 271,
+            "gate_dockq": 0.019,
+            "native_iptm": 0.1575,
+            "n_permutations": 10,
+            "permutation_mean": 0.254,
+            "permutation_max": 0.5143,
+            "difference": -0.0965,
+            "beats_all_permutations": false,
+            "empirical_p": 0.9091,
+            "log10_distinct_permutations": 6.7
+          },
+          {
+            "pdb_id": "12ZJ",
+            "split": "post_cutoff",
+            "peptide_len": 13,
+            "receptor_len": 145,
+            "gate_dockq": 0.193,
+            "native_iptm": 0.7191,
+            "n_permutations": 10,
+            "permutation_mean": 0.823,
+            "permutation_max": 0.9191,
+            "difference": -0.1038,
+            "beats_all_permutations": false,
+            "empirical_p": 0.8182,
+            "log10_distinct_permutations": 8.41
+          }
+        ],
+        "native_fold_reproduction_check": {
+          "pdb_id": "4XHV",
+          "frozen_iptm": 0.8967278003692627,
+          "recomputed_iptm": 0.8967278003692627,
+          "delta": 0.0,
+          "tolerance": 0.01,
+          "reproduces": true,
+          "reused_from_cache": true,
+          "seconds": 0.0,
+          "model": "runs/interface-null-positive-control/4XHV_native_repro/boltz_results_input/predictions/input/input_model_0.cif",
+          "counted_as_a_scored_fold": false,
+          "consequence": "reused native folds are used as registered"
+        },
+        "wall_clock_seconds_per_fold": {
+          "mean_seconds_per_computed_fold": null,
+          "n_computed": 0,
+          "n_reused": 176,
+          "note": "no cell was recomputed in this run; every fold was served from a content-verified cache"
+        }
+      },
+      "exploratory_metrics": {
+        "beats_all_permutations_null": {
+          "per_complex_null_probability": 0.0909,
+          "expected_under_null": 1.455,
+          "observed": 4,
+          "p_at_least_observed": 0.05114,
+          "threshold_registered": 5,
+          "interpretation": "with 10 permutations each, a complex sweeps all of them with probability 0.0909 under the null, so 1.45 of 16 are expected to by chance; observing 4 has probability 0.0511."
+        }
+      },
+      "prespec_audit": {
+        "study_id": "interface-null-positive-control-v1",
+        "prespec_hash": "69a5009d6f627a947c621d78b8c5a853d83bf8aca46fee61e6e99ad797db5d7f",
+        "registered_utc": "2026-08-22T06:43:11+00:00",
+        "deviations": [],
+        "confirmatory": true,
+        "note": "All pre-specified analyses were carried out as planned."
+      },
+      "confirmatory": true,
+      "n_failures": 0,
+      "n_failures_detail": {
+        "listed_in_failures": 0,
+        "rows_marked_not_ok": 0,
+        "distinct": 0,
         "note": "the two records overlap; distinct is the count of separate units of work that failed"
       }
     }

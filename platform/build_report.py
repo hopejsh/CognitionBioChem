@@ -482,8 +482,11 @@ def build() -> int:
          f"P(X ≥ {nul['observed']}) = {nul['p_at_least_observed']}. Every winner has the same "
          f"empirical p of {max(w['empirical_p'] for w in winners)}, the smallest value this "
          f"design can produce, which clears no conventional "
-         f"threshold. The composition-matched null protects a candidate from being read as a "
-         f"hit; it does nothing for a screen read the same way, and this is the same error one "
+         f"threshold. The composition-matched null does not protect a candidate from being read "
+         f"as a hit: Slate #12 put that reading to a registered test and it did not survive, "
+         f"separating natives from their own permutations across a set of pairs taken together "
+         f"while licensing no verdict on a single pair. It does nothing for a screen read the "
+         f"same way either, and this is the same error one "
          f"level up. The screen-level null was computed after the data were seen and is flagged "
          f"as exploratory in the artefact for that reason.")
     figure(doc, "fig2_screen_level_null.png",
