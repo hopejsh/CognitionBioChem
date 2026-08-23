@@ -3,12 +3,12 @@
 
 # Memory index
 
-- Claims: **859** across 47 agents
-- Verified: **81** | Refuted: **1** | Disputed: **0**
-- Edges: 385 | Status records: 103 | Artifacts: 22
+- Claims: **860** across 47 agents
+- Verified: **81** | Refuted: **3** | Disputed: **0**
+- Edges: 387 | Status records: 105 | Artifacts: 22
 
   - `finding`: 279
-  - `verdict`: 124
+  - `verdict`: 125
   - `evidence`: 256
   - `decision`: 18
   - `requirement`: 136

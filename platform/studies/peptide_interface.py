@@ -410,8 +410,16 @@ def analyse() -> int:
         "GATE_FOR_STUDY_9": {
             "open": gate_open,
             "ruling": (
-                "OPEN: the pipeline recovers a majority of memorisable interfaces, so a "
-                "screen of unknown candidates can in principle detect a true binder."
+                "OPEN, WITH THE LIMIT STUDY #12 LATER MEASURED: the pipeline recovers a "
+                "majority of memorisable interfaces, so a screen of unknown candidates "
+                "can in principle detect a true binder -- but only in aggregate. Study "
+                "#12 (interface-null-positive-control-v1, prespec 69a5009d6f62) folded "
+                "these same 16 deposited complexes against ten permutations of each "
+                "peptide and found only 4 of 16 scored above all ten of their own, "
+                "against a threshold of 5 registered in advance. Losing that comparison "
+                "is what most demonstrated binders do here, so this gate licenses a "
+                "verdict on a batch of native-versus-shuffle pairs and none on any "
+                "single candidate."
                 if gate_open else
                 "CLOSED: the pipeline does not recover a majority of interfaces it could "
                 "have memorised. A screen of unknown candidates therefore cannot license a "

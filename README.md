@@ -607,21 +607,37 @@ grey-and-acceptable and 1 grey-and-wrong. So ipTM < 0.6 produced no false negati
 **4 observations**. That is an interpretation key with an honest denominator, not a calibrated
 scale.
 
-**Gate for #9: OPEN, WITH A LIMIT I ORIGINALLY OMITTED.** The pipeline recovers 7 of 8
-memorisable interfaces, so it has demonstrated sensitivity, and a low score in #9 is evidence
-about the candidate rather than about the method. That much stands. What the original wording
-of this section did not say is the range over which it was demonstrated. The 16 complexes here
+**Gate for #9: OPEN, WITH A LIMIT I ORIGINALLY OMITTED AND A CLAIM I HAVE SINCE WITHDRAWN.**
+The pipeline recovers 7 of 8 memorisable interfaces, so it has demonstrated sensitivity over
+the range #7 measured. This paragraph used to continue: *"and a low score in #9 is evidence
+about the candidate rather than about the method. That much stands."* **It does not stand.
+Slate #12 falsified it and that clause is retracted.** Five superseded artefacts under
+`data/superseded/` still carry the retracted clause verbatim; they are kept unedited
+because they record what was believed when they were written, the same reason a registered
+plan is never rewritten after the fact. #12 folded these same 16 deposited
+complexes — every one of them a binder established by an X-ray structure, 0.91–2.40 Å — against
+**ten uniform random permutations of each peptide**, under thresholds registered before the
+first permutation was scored. **Only 4 of 16 beat all ten permutations of themselves.** Losing
+that comparison is what most demonstrated binders do on this instrument, so a low score is not
+evidence about the candidate in the way the retracted clause claimed. What #12 does license is
+narrower and is real: natives beat their own permutations **in aggregate** by +0.0895 ipTM
+(Holm p = 0.0148, 13 of 16 differences positive), a verdict on a batch of pairs and on no
+single pair. **Slate #12 sits further down this document, but it should be read before the #9
+table 75 lines below** — #9's own section now carries the same limit, and so does its artefact.
+
+The second omission is one of range. What the original wording of this section did not say is
+the range over which sensitivity was demonstrated. The 16 complexes here
 have peptides of **7–17 residues** and receptors of **80–304**. The candidates screened in #9
 are **31–47 residues** — longer than anything measured here — on receptors of 156–608. No #9
 candidate lies inside the calibrated peptide range, and only TREM2 (156 aa) and CHRNA7 (211 aa)
 lie inside the calibrated receptor range.
 
-So the sensitivity argument transfers, but the **numeric bands do not**. Every use of the 0.6
+So the aggregate sensitivity argument transfers, but the **numeric bands do not**. Every use of the 0.6
 and 0.8 thresholds in #9 and #10 is an extrapolation and is now labelled as one, in the
 registered protocol as well as here. #9's primary metric was never one of them: the
 native-versus-composition-matched-decoy contrast generates its own reference distribution
 inside the study and needs no external calibration. That is why the headline negative survives
-the correction while the band language does not.
+the range correction while the band language does not.
 
 ---
 
@@ -657,27 +673,65 @@ disagrees by five orders of magnitude. Tacrine 201 records / 2.57, physostigmine
 `platform/studies/candidate_screen.py`, plan `4486520b8863` (v8; supersedes v7 and every
 earlier version, all retained), audit **one declared deviation** (below). Every candidate the
 screening criterion admits, co-folded with its receptor and with three composition-matched
-shuffles that preserve length, charge, pI and GRAVY exactly.
+shuffles that preserve length, charge, pI and GRAVY exactly. **52 folds, zero failures** — 13
+candidates, one native and three decoys each — and every one of the 52 was served from a
+content-verified cache rather than recomputed (`n_reused` 52, `n_computed` 0).
 
-**Not one candidate beat its own null. 13 out of 13.**
+**The question this screen asks is whether a co-folding confidence score ranks a designed
+sequence above shuffles of its own residues. It does not: across the whole set, mean native ipTM
+0.462 against mean decoy 0.460, a separation of +0.0012. And that near-zero is not an average
+over rows that individually separate — the score puts 0 of the 13 natives above all three
+shuffles of themselves.**
 
-| Candidate | Target | construct | native ipTM | best decoy | band |
+**That is a finding about the score. Nothing here was assayed.** No binding measurement, no
+cell assay, no animal — every number in this section is `ipTM` read off a structure prediction.
+A design that scores below its own shuffle has not been shown to be inactive, any more than one
+scoring above it has been shown to bind. The candidates leave this section exactly as untested
+as they entered it, which is what the limitations list means by *no wet-lab validation of
+anything*.
+
+| Candidate | Target | construct | native ipTM | best decoy | ipTM band |
 |---|---|---|---|---|---|
-| BasalNgf-TrkA-B3 | NTRK1 | 391 aa ectodomain | 0.817 | **0.872** | confident |
-| PfcDual-nACh-GluN2A-P5 | CHRNA7 | 211 aa ectodomain | 0.757 | **0.894** | grey |
-| MicroTlr4-Antagonist-M3 | TLR4 | 608 aa ectodomain | 0.710 | **0.823** | grey |
-| MicroDual-Trem2-Nrf2-M5 | TREM2 | 156 aa ectodomain | 0.637 | **0.779** | grey |
-| MicroTrem2-Agonist-M1 | TREM2 | 156 aa ectodomain | 0.526 | **0.567** | failed |
-| PfcTrk-ErkEnhancer-P2 | NTRK2 | 399 aa ectodomain | 0.442 | **0.486** | failed |
-| HippoDual-TrkB-AMPK-X5 | NTRK2 | 399 aa ectodomain | 0.440 | **0.482** | failed |
-| PfcACh-PAM-P1 | CHRNA7 | 211 aa ectodomain | 0.403 | **0.830** | failed |
-| BasalSuper-AChE-TrkA-B5 | ACHE | 543 aa catalytic core | 0.351 | **0.493** | failed |
-| PfcGluN2A-LTP-P3 | GRIN2A | 534 aa ectodomain | 0.328 | **0.389** | failed |
-| HippoAChE-AlkaPept-X2 | ACHE | 543 aa catalytic core | 0.248 | **0.382** | failed |
-| BasalAChE-Abeta-B4 | ACHE | 543 aa catalytic core | 0.221 | **0.622** | failed |
-| HippoTrk-Saponin-X1 | NTRK2 | 399 aa ectodomain | 0.121 | **0.208** | failed |
+| BasalNgf-TrkA-B3 | NTRK1 | 391 aa ectodomain | 0.817 | **0.872** | confident (> 0.8) |
+| PfcDual-nACh-GluN2A-P5 | CHRNA7 | 211 aa ectodomain | 0.757 | **0.894** | grey (0.6–0.8) |
+| MicroTlr4-Antagonist-M3 | TLR4 | 608 aa ectodomain | 0.710 | **0.823** | grey (0.6–0.8) |
+| MicroDual-Trem2-Nrf2-M5 | TREM2 | 156 aa ectodomain | 0.637 | **0.779** | grey (0.6–0.8) |
+| MicroTrem2-Agonist-M1 | TREM2 | 156 aa ectodomain | 0.526 | **0.567** | low (< 0.6) |
+| PfcTrk-ErkEnhancer-P2 | NTRK2 | 399 aa ectodomain | 0.442 | **0.486** | low (< 0.6) |
+| HippoDual-TrkB-AMPK-X5 | NTRK2 | 399 aa ectodomain | 0.440 | **0.482** | low (< 0.6) |
+| PfcACh-PAM-P1 | CHRNA7 | 211 aa ectodomain | 0.403 | **0.830** | low (< 0.6) |
+| BasalSuper-AChE-TrkA-B5 | ACHE | 543 aa catalytic core | 0.351 | **0.493** | low (< 0.6) |
+| PfcGluN2A-LTP-P3 | GRIN2A | 534 aa ectodomain | 0.328 | **0.389** | low (< 0.6) |
+| HippoAChE-AlkaPept-X2 | ACHE | 543 aa catalytic core | 0.248 | **0.382** | low (< 0.6) |
+| BasalAChE-Abeta-B4 | ACHE | 543 aa catalytic core | 0.221 | **0.622** | low (< 0.6) |
+| HippoTrk-Saponin-X1 | NTRK2 | 399 aa ectodomain | 0.121 | **0.208** | low (< 0.6) |
 
-Mean native ipTM **0.462** against mean decoy **0.460** — a difference of
+**What the band column means, and what it does not.** The band is a bin on the native ipTM
+alone. It carries no information about the decoy comparison beside it and none about whether
+the peptide binds anything. **confident (> 0.8)** is the band in which study #7 found 9 of 10
+folds had a CAPRI-acceptable interface; **grey (0.6–0.8)** is the band #7 could not resolve;
+**low (< 0.6)** is the band in which #7 found 0 of 4 acceptable, on 4 observations. The
+artefact's `band` field and the hypothesis name `H3_candidates_in_failed_band` still spell the
+low band `failed` — that is the name of a score bin, not a verdict on a molecule, and this
+table no longer repeats the word. Two limits ride on all three bins. #7 measured them on
+peptides of 7–17 residues against receptors of 80–304, while these candidates are 31–47
+residues against receptors of 156–608, so every band here is an extrapolation and #7 records it
+as one. And the bins track the score rather than the design: 9 of the 13 natives sit in the low
+band, and for **7 of those 9, all three shuffles of the same residues land in the low band
+too**.
+
+**No single row of this table was callable, whatever the folds had returned.** With *m* decoys
+a candidate's empirical *p* cannot fall below 1/(*m*+1) — **0.25** at the three decoys used
+here, and still **0.0909** at the ten used in #10 and #12, both above α = 0.05. The observed
+per-candidate values run 0.5 to 1.0 and could not have run lower than 0.25. So the per-row
+reading was unreachable by arithmetic before any sequence was folded, and Slate #12 measured
+what it would have been worth: sixteen peptide–receptor complexes whose binding is established
+by X-ray structures, each folded against ten permutations of its own peptide, and only **4 of
+16** beat all ten. Losing this comparison is what most demonstrated binders do. What the design
+supports is the aggregate contrast below; it supports no statement about any one candidate.
+
+**The aggregate contrast is zero to the resolution this design has.** Mean native ipTM
+**0.462** against mean decoy **0.460** — a difference of
 **+0.0012**, indistinguishable from zero and far inside the 0.149 ipTM sampler noise
 measured in study #2. All three hypotheses are decided by pre-specified thresholds, not by tests,
 so this study reports **no p-values at all**, and the protocol audit records that as a deviation:
@@ -685,6 +739,21 @@ the plan registered `n_comparisons: 3` under Holm and the executed family holds 
 Re-classifying a 0/1 indicator out of a Holm family is defensible — it is not a p-value and it
 corrupts the correction — but it is a change to the inferential procedure made after the data
 were seen, so it belongs on the record rather than in the code alone.
+
+**The three registered verdicts.** Fixed in plan `4486520b8863` before any fold was scored, and
+recorded in the artefact under `analysis.verdicts`.
+
+| Hypothesis | Registered threshold | Observed | Verdict |
+|---|---|---|---|
+| H1 any candidate binds | beats all its decoys **and** ipTM > 0.8 | 0 candidates | **FALSIFIED** |
+| H2 natives beat decoys on average | mean native − mean decoy > 0.1 | +0.0012 | **FALSIFIED** |
+| H3 candidates in failed band | at least half of the 13 below ipTM 0.6 | 9 | **CONFIRMED** |
+
+The one hypothesis that survived is worth reading literally. What H3 **CONFIRMED** asserts is
+that 9 of 13 native ipTM values fell below 0.6 — a fact about where a number landed, in a band
+#7 could calibrate on only 4 observations and only outside this size range. It asserts nothing
+about what 9 molecules do. H1 and H2 are the same kind of statement in the negative: one score
+did not clear a threshold, and two sets of scores did not separate.
 
 **The population is derived, not hand-listed, and the derivation is in the artefact.**
 `coverage()` resolves every valid-sequence candidate in the catalogue against the registry and
@@ -702,17 +771,20 @@ both are primarily homomers. Narrowed to hetero-only evidence it caught nothing 
 excluded as cytoplasmic, which settles the question — **a keyword scan over a UniProt SUBUNIT
 comment cannot establish whether a binding site lies at a subunit interface.** Oligomeric state
 is recorded and disclosed but no longer excludes. Two candidates declaring a GluN2A target then became visible and are screened here — one against
-GRIN2A and one against CHRNA7, which is the receptor its own construct record names — and both
-lose to their own decoys. 8 candidates remain excluded, each with its
-ground in the artefact, and **0** admissible candidates are left unscreened.
+GRIN2A and one against CHRNA7, which is the receptor its own construct record names — and on
+neither of them does the score separate the designed sequence from shuffles of its own residues.
+8 candidates remain excluded, each with its ground in the artefact, and **0** admissible
+candidates are left unscreened.
 
 **Why an absolute threshold would have produced a hit.** `BasalNgf-TrkA-B3` reaches ipTM
 **0.817**, inside the band study #7 associated with correct interfaces. Its own scrambled sequence
 reaches **0.872**. A screen reading absolute confidence would have reported it as the programme's
-lead. `PfcACh-PAM-P1` is the same story at 0.403 native against **0.830** scrambled, and
-`PfcDual-nACh-GluN2A-P5` at 0.757 against **0.894**. These are Arg/Trp-rich cationic amphipathic
-peptides, the class most prone to scoring on composition alone, which is exactly why the null is
-composition-matched rather than random.
+lead. The same spread between a sequence and a shuffle of its own residues opens at
+`PfcACh-PAM-P1`, 0.403 native against **0.830** scrambled, and at `PfcDual-nACh-GluN2A-P5`,
+0.757 against **0.894**. In each of those pairs the higher number belongs to the scramble, so
+whatever this score is reading, it is not the designed arrangement of the residues. These are
+Arg/Trp-rich cationic amphipathic peptides, the class most prone to scoring on composition
+alone, which is exactly why the null is composition-matched rather than random.
 
 **The duplicate is now counted once, and it had been inflating the effect size.**
 `HippoAChE-AlkaPept-X2` and `BasalAChE-GorgeBlock-B1` carry the identical 36-mer against the

@@ -5,7 +5,17 @@ This is the study the whole platform was built to make possible, and it could no
 honestly until study #7 measured whether the pipeline has any sensitivity. That gate is now
 OPEN: #7 recovered 7 of 8 memorisable peptide interfaces (DockQ >= 0.23) and established that
 ipTM tracks interface correctness at Spearman rho = 0.800, with ZERO false negatives below
-ipTM 0.6. So a low score here is evidence about the candidate rather than about the method.
+ipTM 0.6.
+
+RETRACTION. This docstring used to continue: "So a low score here is evidence about the
+candidate rather than about the method." Study #12 (interface-null-positive-control-v1)
+falsified that: the same 16 deposited X-ray complexes, all established binders, were folded
+against ten uniform random permutations of each peptide, and only 4 of 16 beat all ten of
+their own permutations against a threshold of 5 registered in advance. Losing this comparison
+is what most demonstrated binders do here, so a low score is NOT evidence about the candidate
+in that sense. #12 confirmed the aggregate form only (+0.0895 ipTM, Holm p = 0.0148, 13 of 16
+positive), so the per-candidate columns this study emits are descriptive and carry no verdict
+on any candidate.
 
 The design point is that a raw ipTM has no reference distribution. These candidates are
 Arg/Trp-rich cationic amphipathic peptides, the sequence class most prone to promiscuous
@@ -489,8 +499,25 @@ def analyse() -> int:
             "Study #7 measured, on 16 peptide-receptor complexes with known answers: ipTM > "
             "0.8 was correct in 9 of 10 cases; ipTM < 0.6 was correct in 0 of 4, with no "
             "false negatives. The gate for this study was OPEN because #7 recovered 7 of 8 "
-            "memorisable interfaces, so the pipeline has demonstrated sensitivity and a low "
-            "score here is evidence about the candidate rather than about the method."),
+            "memorisable interfaces, so the pipeline has demonstrated sensitivity over the "
+            "range #7 measured (peptides 7-17 aa, receptors 80-304 aa; the candidates here "
+            "are 31-47 aa on receptors of 156-608, so every band above is an extrapolation). "
+            "RETRACTION. This key previously ended: 'and a low score here is evidence about "
+            "the candidate rather than about the method.' Study #12, "
+            "interface-null-positive-control-v1 (prespec 69a5009d6f62, registered before any "
+            "permutation was folded; data/study_interface_null_positive_control.json), "
+            "falsified that clause and it is withdrawn. #12 folded the same 16 deposited "
+            "X-ray complexes -- every one an established binder -- against ten uniform "
+            "random permutations of each peptide, and only 4 of 16 scored above all ten "
+            "permutations of themselves, against a threshold of 5 registered in advance "
+            "(H2 FALSIFIED). Losing this comparison is therefore what most demonstrated "
+            "binders do on this instrument, and a low score here is NOT evidence about the "
+            "candidate in the way the retracted clause claimed. What #12 confirmed is "
+            "narrower and holds: natives beat their own permutations in aggregate by "
+            "+0.0895 ipTM (Holm p = 0.0148, 13 of 16 differences positive), which licenses "
+            "a verdict on a batch of native-versus-shuffle pairs and none on any single "
+            "pair. The per-candidate readings below -- beats_all_decoys and empirical_p -- "
+            "are descriptive for that reason and carry no verdict on any candidate."),
         "failures": [{"code": r["code"], "kind": r.get("kind"),
                       "error": str(r.get("error"))[:120]}
                      for r in payload["rows"] if not r.get("ok")],

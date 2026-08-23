@@ -2,7 +2,7 @@
   "artefact": "alphafold_db_vs_boltz2",
   "status": "EXPLORATORY -- not a pre-registered study, and labelled so deliberately. It has no hypothesis, no verdict and no place in the numbered slate.",
   "generator": "platform/studies/alphafold_db_compare.py",
-  "git_sha": "57d4f49",
+  "git_sha": "4218c4f",
   "question": "Do two independent predictors agree about WHERE each receptor construct is confidently folded?",
   "method": "For every registry target with a Boltz-2 receptor fold, take AlphaFold DB's per-residue pLDDT over the construct's canonical span and correlate it against Boltz-2's chain-A per-residue pLDDT, residue by residue. Both vectors are read from the mmCIF B-factor column by the same parser the workbench uses on user-supplied predictor output. Both vectors are checked to lie on 0-100 before any mean is taken, and a row is refused rather than rescaled if either does not; no file in this repository triggers that, because every model under custody already writes 0-100.",
   "confounds": [
