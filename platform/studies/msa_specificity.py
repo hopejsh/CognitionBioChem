@@ -38,7 +38,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from cbc import inference as inf, prespec as ps  # noqa: E402
 from cbc.compute import structure as st  # noqa: E402
-from studies.candidate_screen import CANDIDATE_TARGETS, _candidates, _receptor_seq, _scrambles  # noqa: E402
+from studies.candidate_screen import (  # noqa: E402
+    CANDIDATE_TARGETS, _candidates, _receptor_seq, _scrambles,
+    counted_once_variants, peptide_multiplicity,
+)
 
 REPO = Path(__file__).resolve().parents[2]
 STUDY_ID = "msa-specificity-v9"
@@ -144,6 +147,14 @@ def build_prespec(n_folds: int, n_cand: int) -> ps.Prespecification:
             "deliberate — with everything else held fixed, any difference is attributable to "
             "the MSA alone."),
         supersedes="msa-specificity-v8",
+        # REGISTERED, HASH-LOCKED, AND ONE COUNT IN IT IS WRONG. "13 distinct designs" is
+        # 13 candidate-receptor CONSTRUCTS covering 12 distinct peptides -- one 41-mer is
+        # declared against two receptors and de-duplication is on (peptide, target). The
+        # string is not edited: this plan is registered under a content hash and rewriting
+        # it would break the property the whole slate rests on. The correction is filed as
+        # ret_0005 in retractions.jsonl and travels with the string wherever a generator
+        # republishes it; both screens derive the two counts in
+        # analysis.peptide_multiplicity. Do not "fix" the line below.
         supersedes_reason=(
             "Synchronised with candidate-screen-v8: coverage() no longer short-circuits on the hand-written map, the oligomeric flag no longer excludes, and the two GRIN2A candidates the criterion admits are screened, giving 13 distinct designs. The power caveat is now derived from n_cand rather than typed, because that string had gone stale three times. No hypothesis, threshold or decision rule changes."),
         known_confounds=(
@@ -237,6 +248,93 @@ def _beats_all_null(observed: int, n_candidates: int, n_decoys: int) -> dict:
             f"{tail:.3f}."),
     }
 
+def _shared_peptide_sensitivity(per: list[dict], mult: dict, alpha: float = 0.05) -> dict | None:
+    """This study's headlines, recomputed with each shared peptide counted once.
+
+    The paired difference is the primary metric, and it is a mean over CONSTRUCTS. Two of the
+    thirteen constructs are the same 41-mer against two different receptors -- the same
+    native and the same ten shuffles at the same seed, so the peptide arm is shared entire --
+    and both of its differences are negative, one of them the most negative in the set. The
+    +0.0009 headline is therefore held near zero partly by one molecule voting twice, and the
+    sentence "as close to exactly zero as this design can resolve" is a statement about a
+    thirteen-row mean rather than about thirteen designs.
+
+    The paired t-test has the same problem in its degrees of freedom: n = 13 differences over
+    12 molecules, so df is overstated by one -- the identical harm this screen already
+    documents for the AChE pair. And the screen-level null, Bin(n, 1/(N+1)), treats the
+    constructs as independent designs; at twelve the expectation and the tail both move.
+
+    Nothing registered is recomputed. Changing the de-duplication key would change the
+    analysis and needs a new plan; this states what the registered numbers are sensitive to.
+    """
+    from scipy import stats
+
+    variants = counted_once_variants(mult, [p["code"] for p in per])
+    if not variants:
+        return None
+    by = {p["code"]: p for p in per}
+
+    def stat(codes: list[str]) -> dict:
+        rows = [by[c] for c in codes]
+        diffs = [r["native_iptm"] - r["decoy_mean"] for r in rows]
+        nat = [r["native_iptm"] for r in rows]
+        dm = [r["decoy_mean"] for r in rows]
+        rise = [r["delta_vs_study9"] for r in rows if r["delta_vs_study9"] is not None]
+        beat = sum(1 for r in rows if r["beats_all_decoys"])
+        conf_spec = sum(1 for r in rows
+                        if r["beats_all_decoys"] and r["native_iptm"] > IPTM_CONFIDENT)
+        md = statistics.fmean(diffs)
+        t_p = float(stats.ttest_1samp(diffs, 0.0).pvalue)
+        return {
+            "n_constructs": len(rows),
+            "paired_native_minus_decoy_mean": round(md, 4),
+            "mean_native_iptm": round(statistics.fmean(nat), 4),
+            "mean_decoy_iptm": round(statistics.fmean(dm), 4),
+            "cohens_dz": round(md / statistics.stdev(diffs), 4),
+            "paired_t_p": round(t_p, 5),
+            "paired_t_df": len(rows) - 1,
+            "delta_vs_study9": round(statistics.fmean(rise), 4) if rise else None,
+            "beats_all_decoys_null": _beats_all_null(beat, len(rows), N_DECOYS),
+            "H1_natives_separate_from_decoys": (
+                "CONFIRMED" if md > 0 and t_p < alpha else "FALSIFIED"),
+            "H2_a_candidate_is_confident_and_specific": (
+                "criterion met" if conf_spec > 0 else "criterion not met"),
+            "H3_msa_raises_natives": (
+                "criterion met" if rise and statistics.fmean(rise) > 0.15
+                else "criterion not met"),
+        }
+
+    counted_once = {("drop " + ", ".join(v["drops"])): stat(v["codes"]) for v in variants}
+    as_reported = stat([p["code"] for p in per])
+    moved = sorted({k for k in ("H1_natives_separate_from_decoys",
+                                "H2_a_candidate_is_confident_and_specific",
+                                "H3_msa_raises_natives")
+                    if any(v[k] != as_reported[k] for v in counted_once.values())})
+    spread = [v["paired_native_minus_decoy_mean"] for v in counted_once.values()]
+    return {
+        "as_reported": as_reported,
+        "counted_once": counted_once,
+        "verdicts_that_move": moved,
+        "interpretation": (
+            f"{as_reported['n_constructs']} screened constructs cover "
+            f"{mult['n_distinct_peptides']} distinct peptides. Counting the shared peptide "
+            f"once moves the paired difference from "
+            f"{as_reported['paired_native_minus_decoy_mean']:+.4f} to "
+            f"{min(spread):+.4f}/{max(spread):+.4f} depending on which receptor's fold is "
+            f"kept, drops the t-test's df from {as_reported['paired_t_df']} to "
+            f"{as_reported['paired_t_df'] - 1}, and lowers the screen-level null's "
+            f"expectation from {as_reported['beats_all_decoys_null']['expected_under_null']} "
+            f"to {list(counted_once.values())[0]['beats_all_decoys_null']['expected_under_null']}. "
+            f"The largest paired difference any of those choices produces is "
+            f"{max(spread):+.4f}. "
+            + ("No registered verdict changes at any of those choices, so what the "
+               "duplicate inflates is the claim that the difference is indistinguishable "
+               "from EXACTLY zero, not the finding that it is indistinguishable from zero."
+               if not moved else
+               f"These verdicts change: {', '.join(moved)}.")),
+    }
+
+
 def analyse() -> int:
     from scipy import stats
     payload = json.loads(RESULT.read_text())
@@ -282,6 +380,8 @@ def analyse() -> int:
 
     natives = [p["native_iptm"] for p in per]
     d9 = [p["delta_vs_study9"] for p in per if p["delta_vs_study9"] is not None]
+    mult = peptide_multiplicity(payload["rows"], [p["code"] for p in per])
+    sensitivity = _shared_peptide_sensitivity(per, mult)
     n_conf_spec = sum(1 for p in per
                       if p["beats_all_decoys"] and p["native_iptm"] > IPTM_CONFIDENT)
 
@@ -330,9 +430,18 @@ def analyse() -> int:
             "n_candidates_above_0.8": sum(1 for p in per
                                           if p["native_iptm"] > IPTM_CONFIDENT),
             "wall_clock_seconds_per_fold": inf.wall_clock(ok),
+            # Exploratory, and the prespec audit says so. Every metric above is a mean or a
+            # count over CONSTRUCTS, and two of the constructs are one molecule; this is
+            # what each headline becomes when it is counted once. The registered values are
+            # not touched -- changing the de-duplication key changes the analysis and needs
+            # a new plan.
+            **({"shared_peptide_sensitivity": sensitivity} if sensitivity else {}),
         },
         "paired_t_p": round(t_p, 5),
         "per_candidate": per,
+        # The screened population by MOLECULE rather than by construct, so "13 constructs,
+        # 12 distinct peptides" has an artefact to source to instead of a paragraph.
+        "peptide_multiplicity": mult,
         **ruling,
         "failures": [{"code": r["code"], "kind": r.get("kind"),
                       "error": str(r.get("error"))[:120]}

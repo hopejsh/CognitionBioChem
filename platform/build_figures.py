@@ -180,7 +180,7 @@ def fig3():
         "H1 «the designed sequences separate from their own shuffles» was "
         f"FALSIFIED in all {ver['n_versions']} retained versions\n"
         f"across candidate sets from {min(v['n_candidates'] for v in vs)} to "
-        f"{max(v['n_candidates'] for v in vs)} designs",
+        f"{max(v['n_candidates'] for v in vs)} constructs",
         fontsize=9.5, loc="left", pad=10)
     for s in ("top", "right", "left"):
         ax.spines[s].set_visible(False)

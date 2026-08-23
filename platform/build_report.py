@@ -366,21 +366,38 @@ def build() -> int:
          f"by the same position so no outcome could discriminate. {plans} plans are retained "
          f"across {c['studies']} study families; superseded versions are kept, not overwritten, "
          f"and each records why it was superseded.")
+    # Read from data/slate.json, not typed. Until study #12 registered a plan and ran it
+    # without deviating, "not one study in this slate is confirmatory" [SLATE-COUNT-HISTORICAL] was true and was
+    # hand-written on four surfaces: this report, its Korean edition, the deck, and the
+    # Slate tab of the workbench. It stopped being true on all four at once and was
+    # corrected on none of them; build_slate.py now derives the sentence from the same
+    # per-study audits that produce counts.studies_confirmatory.
     para(doc,
-         f"An important consequence is recorded honestly on the page: not one study in this "
-         f"slate is confirmatory. Every one deviated from its registered plan in at least one "
-         f"respect, and each study's own audit says so. Pre-registration did not make these "
-         f"results confirmatory — it made the deviations visible.")
+         f"An important consequence is recorded honestly on the page: "
+         f"{slate['confirmatory_headline'].replace('--', '—')} "
+         f"The deviations are machine-detected and each study's own audit lists them. "
+         f"Pre-registration did not make the affected results confirmatory — it made the "
+         f"deviations visible.")
 
     h(doc, "3.3  Custody of the computation", 2)
     runs, published_rows = D["runs"], D["published_rows"]
     para(doc,
          f"Every prediction run is content-addressed: the directory name is a hash over the "
          f"names and contents of its files, so the identifier changes if any output changes. "
-         f"{runs} runs are under custody. A test asserts that every row any study reports "
-         f"resolves to a run still in the manifest — {published_rows} rows across the six studies "
-         f"that fold anything — which is "
-         f"what distinguishes a run that was re-hashed from one that was lost.")
+         f"{runs} runs are under custody. Across the {D['fold_studies']} studies that fold "
+         f"anything, {D['fold_rows']} rows report a prediction. A test resolves "
+         f"{published_rows} of them to a run still in the manifest — by job name where the "
+         f"study names the job, by path where the row records one — which is what "
+         f"distinguishes a run that was re-hashed from one that was lost. The remaining "
+         f"{D['custody_rows_missing']} do not resolve, and that is stated rather than "
+         f"implied: this sentence used to claim that every published row resolved, over a "
+         f"hand-typed list of six studies that omitted the two that would have changed the "
+         f"number.")
+    # The exception in the artefact's own numbers. It is one paragraph rather than a clause
+    # because a shortfall folded into a sentence about a success is a shortfall a reader
+    # skips, and this is the only place the repository claimed more provenance than it has.
+    for n_, note in zip(D["custody_gap_studies"], D["custody_gap_notes"]):
+        para(doc, f"Slate #{n_}: {note}", size=9.5, italic=True)
     figure(doc, "ui4_structure_gallery.png",
            f"The structure gallery. Every entry is a model the pipeline produced, opened from "
            f"the run directory whose content hash names it; the confidence terms shown per "
@@ -466,6 +483,26 @@ def build() -> int:
          f"dz = {m['cohens_dz']:+.2f}. For {beaten} of {len(per)} candidates the best of the "
          f"{n_decoys} shuffles scores above the designed sequence, and for {beaten_mean} of {len(per)} the "
          f"decoy mean does.")
+    # Constructs and molecules are different denominators, and every number in the paragraph
+    # above is a mean or a count over the first. One 41-mer is folded against two receptors,
+    # so a screen reported as thirteen designs is twelve. Read from the artefact so that a
+    # re-analysis moves the sentence; the Korean edition carries the same paragraph.
+    mult = msa.get("peptide_multiplicity") or {}
+    sens = m.get("shared_peptide_sensitivity") or {}
+    if mult.get("n_distinct_peptides") not in (None, mult.get("n_constructs")):
+        once = [v["paired_native_minus_decoy_mean"] for v in sens["counted_once"].values()]
+        para(doc,
+             f"Those {mult['n_constructs']} rows are {mult['n_distinct_peptides']} distinct "
+             f"peptides. De-duplication was applied on the (peptide, target) pair, which does "
+             f"not collapse one sequence declared against two receptors, so a single 41-mer is "
+             f"screened twice with identical decoy arms and votes twice in every mean and "
+             f"count above. Counting it once moves the paired difference from "
+             f"{sens['as_reported']['paired_native_minus_decoy_mean']:+.4f} to "
+             f"{min(once):+.4f} or {max(once):+.4f}, depending on which receptor's fold is "
+             f"kept, and changes no verdict. The registered figures are the "
+             f"{mult['n_constructs']}-construct ones: changing the de-duplication key after "
+             f"the data were seen would change the analysis, so the recomputation is carried "
+             f"in the artefact as an unregistered exploratory sensitivity.")
     figure(doc, "fig1_native_vs_decoy.png",
            f"Each designed peptide against {n_decoys} shuffles of its own amino "
            f"acids. The diamond is the designed sequence; the bar spans the decoy mean to the "
@@ -560,11 +597,30 @@ def build() -> int:
 
     h(doc, "5.6  The full slate", 2)
     rows = []
+    # An n column that renders every study alike claims a provenance one of them does not
+    # have: 160 of study #12's 176 rows name a run tree this repository deliberately does not
+    # carry, so its numbers are reproducible by re-running and are not checkable against
+    # stored bytes. build_slate.py counts that against runs/manifest.json and the marker
+    # travels with the count rather than being left for the reader to assume away.
+    gap = [s_ for s_ in slate["studies"] if s_["custody"]["complete"] is False]
     for s_ in slate["studies"]:
         num = f"#{s_['slate_number']}" if s_["slate_number"] else "—"
         v = " / ".join(f"{x['verdict'][0]}" for x in s_["hypotheses"] if x["verdict"])
-        rows.append([num, s_["title"][:44], s_["plan_hash"], s_["n_observed"] or "—", v])
+        n_ = f"{s_['n_observed'] or '—'}{' *' if s_ in gap else ''}"
+        rows.append([num, s_["title"][:44], s_["plan_hash"], n_, v])
     table(doc, ["#", "Study", "Plan hash", "n", "Verdicts"], rows)
+    for s_ in gap:
+        # Short here and in full in §3.3: the same sentence twice in one document is the
+        # duplication this repository keeps paying for. The marker must still appear on the
+        # count itself, because a reader who reads only this table would otherwise count
+        # #12's n exactly like the other eight.
+        cu = s_["custody"]
+        para(doc,
+             f"* Slate #{s_['slate_number']}: "
+             f"{cu['rows_whose_bytes_this_repository_does_not_hold']} of these "
+             f"{cu['rows']} rows name fold outputs this repository does not carry, so they "
+             f"are reproducible by re-running and are not verifiable against stored bytes. "
+             f"Section 3.3 states the full custody position.", size=9.5, italic=True)
     para(doc,
          f"C = confirmed, F = falsified, N = not tested. Of {c['hypotheses']} hypotheses, "
          f"{c['confirmed']} were confirmed, {c['falsified']} falsified and {c['not_tested']} "
@@ -610,8 +666,9 @@ f"The candidate sequences are chimeric peptides — published motifs, motif-like
         f"{att['candidates_carrying_one']} of {att['candidates_total']} candidates carry at "
         f"least one. These are not optimised designs, and a negative result on them is not a "
         f"negative result on peptide design.",
-        "Not one study is confirmatory. Every one deviated from its registered plan in at least "
-        "one respect. The deviations are machine-detected and listed per study.",
+        # Derived for the same reason as the sentence in section 3.2 above.
+        f"{slate['confirmatory_headline'].replace('--', '—')} The deviations are "
+        f"machine-detected and listed per study.",
     ]:
         bullet(doc, txt)
 

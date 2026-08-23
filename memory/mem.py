@@ -843,6 +843,28 @@ class Index:
                 "SELECT * FROM edge WHERE dst = ? ORDER BY ts", (claim,))],
         }
 
+    def decided_status(self) -> dict[str, dict]:
+        """The status record that DECIDED each claim's status, keyed by claim id.
+
+        Folded by the identical key `sync` uses, so what a view prints can never disagree
+        with the badge `item.status` produced. Read-only: this reports a decision somebody
+        else filed, it never makes one.
+
+        `write_views` needs the deciding record, not just the resulting word, because a
+        badge is not a correction. A claim rendered with a glyph and nothing else tells a
+        reader that something happened to it and not what -- and the reader who most needs
+        to know is the one who arrived at that line from a search and will quote it.
+        """
+        best: dict[str, tuple] = {}
+        for r in self.db.execute(
+                "SELECT target, status, agent, rationale, evidence, ts, id "
+                "FROM status_rec ORDER BY target, ts, id"):
+            key = (r["ts"], STATUS_RANK.get(r["status"], 0), r["id"])
+            cur = best.get(r["target"])
+            if cur is None or key > cur[0]:
+                best[r["target"]] = (key, dict(r))
+        return {target: rec for target, (_key, rec) in best.items()}
+
     def refuted_with_evidence(self, tag: str | None = None) -> list[dict]:
         """R3: the multi-hop query, as a join over edges that were born structured."""
         sql = """
@@ -875,6 +897,8 @@ class Index:
             "agents": q("SELECT count(DISTINCT agent) FROM item"),
             "verified": q("SELECT count(*) FROM item WHERE status='VERIFIED'"),
             "refuted": q("SELECT count(*) FROM item WHERE status='REFUTED'"),
+            "withdrawn": q("SELECT count(*) FROM item WHERE status='WITHDRAWN'"),
+            "superseded": q("SELECT count(*) FROM item WHERE status='SUPERSEDED'"),
             "disputed": q("SELECT count(*) FROM v_dispute"),
             "ledger_bytes": sum(p.stat().st_size for p in ledger_files(self.ledger_dir)),
             "vec_features": int(self.vectors.feats.shape[0]) if self.vectors else 0,
@@ -893,6 +917,27 @@ BANNER = ("<!-- GENERATED FILE - do not edit. Source of truth: memory/ledger/*.j
           "     Regenerate: python3 memory/mem.py views -->\n")
 
 
+def _decision_line(rec: dict | None) -> str:
+    """The one line that travels with a claim whose status is no longer ASSERTED.
+
+    Rendered as a CONTINUATION of the claim's own list item -- indented, no bullet -- and
+    that is load-bearing rather than cosmetic. `memory/views/claims.md` renders 860 claims
+    as consecutive list items with no blank line between them, so a withdrawal written as a
+    nested bullet would start a new authored block and read as a separate entry: attached to
+    the claim for a human skimming, detached for anything that parses blocks
+    (`platform/retractions.py:block_around` is one such reader, and an earlier version of
+    this file is the example in its docstring). A continuation line stays inside the item it
+    corrects.
+
+    Whitespace is collapsed because a rationale is free text and a newline inside it would
+    break the item in exactly the way described above.
+    """
+    if not rec or rec["status"] == "ASSERTED":
+        return ""
+    why = " ".join((rec["rationale"] or "").split())
+    return f"  **{rec['status']}** by `{rec['agent']}`" + (f": {why}" if why else "") + "  \n"
+
+
 def write_views(idx: Index, views_dir: Path | None = None) -> list[Path]:
     """Byte-stable markdown mirror: no timestamps, no mtime-derived hashes, so a
     CI byte-comparison can actually pass (v1's banner made that impossible)."""
@@ -904,6 +949,7 @@ def write_views(idx: Index, views_dir: Path | None = None) -> list[Path]:
     lines = [BANNER, "# Memory index\n",
              f"- Claims: **{s['claims']}** across {s['agents']} agents",
              f"- Verified: **{s['verified']}** | Refuted: **{s['refuted']}** "
+             f"| Withdrawn: **{s['withdrawn']}** | Superseded: **{s['superseded']}** "
              f"| Disputed: **{s['disputed']}**",
              f"- Edges: {s['edges']} | Status records: {s['status_records']} "
              f"| Artifacts: {s['artifacts']}", ""]
@@ -915,6 +961,7 @@ def write_views(idx: Index, views_dir: Path | None = None) -> list[Path]:
 
     rows = idx.db.execute(
         "SELECT * FROM item ORDER BY agent, kind, id").fetchall()
+    decided = idx.decided_status()
     out = [BANNER, "# Claims\n"]
     cur = None
     for r in rows:
@@ -924,7 +971,8 @@ def write_views(idx: Index, views_dir: Path | None = None) -> list[Path]:
                  "WITHDRAWN": "🚫"}.get(r["status"], "•")
         src = f"{r['source_type']}:{r['source_ref']}" if r["source_ref"] else r["source_type"]
         out.append(f"- {badge} **[{r['kind']}]** {r['text']}  \n"
-                   f"  `{r['id']}` · conf {r['confidence']:.2f} · source `{src}`"
+                   + _decision_line(decided.get(r["id"]))
+                   + f"  `{r['id']}` · conf {r['confidence']:.2f} · source `{src}`"
                    + (f" · tags {r['tags']}" if r["tags"] else ""))
     p = d / "claims.md"; p.write_text("\n".join(out) + "\n"); written.append(p)
 

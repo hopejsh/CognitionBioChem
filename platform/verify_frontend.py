@@ -558,6 +558,71 @@ def main() -> int:
                if st.get("n_failures_detail")
                and st["n_failures"] > st["n_failures_detail"]["distinct"]]
         check("no study double-counts a technical failure", not dbl, str(dbl))
+        # CUSTODY. The workbench's promise is that a number on the page traces to a file a
+        # reader can open, and study #12 breaks it: 160 of its 176 rows name fold outputs
+        # under runs/interface-null-positive-control/, which is deliberately not committed.
+        # That was true from the day the study shipped and the README said so; slate.json had
+        # no field for it and the page rendered #12 with the same fields as eight studies
+        # whose coordinates are here. Recomputed from the artefacts and the manifest, not
+        # read back out of the file it is checking -- and against the MANIFEST, never against
+        # the filesystem, because all 176 paths resolve on the machine that built slate.json.
+        man = REPO / "runs" / "manifest.json"
+        check("runs/manifest.json exists", man.exists())
+        if man.exists():
+            mf = json.loads(man.read_text())
+            held = {f"{r['path']}/{f['file']}" for r in mf.get("runs", [])
+                    for f in r.get("files", [])}
+            wrong, quiet = [], []
+            for st in sl["studies"]:
+                cu = st.get("custody")
+                if not cu:
+                    wrong.append(f"{st['study_id']}: no custody block")
+                    continue
+                arts = [st["artefact"], *(st.get("companion_artefacts") or [])]
+                n_rows = n_cite = n_held = n_short = 0
+                for art in arts:
+                    for r in (json.loads((REPO / art).read_text()).get("rows") or []):
+                        if not isinstance(r, dict):
+                            continue
+                        n_rows += 1
+                        ps = [v for v in r.values()
+                              if isinstance(v, str) and v.startswith("runs/")]
+                        if not ps:
+                            continue
+                        n_cite += 1
+                        if all(q in held for q in ps):
+                            n_held += 1
+                        else:
+                            n_short += 1
+                if (cu["rows"], cu["rows_citing_a_fold_output"],
+                        cu["rows_whose_bytes_this_repository_holds"],
+                        cu["rows_whose_bytes_this_repository_does_not_hold"]) != (
+                        n_rows, n_cite, n_held, n_short):
+                    wrong.append(f"{st['study_id']}: page says "
+                                 f"{cu['rows_whose_bytes_this_repository_holds']}"
+                                 f"/{cu['rows_citing_a_fold_output']} of {cu['rows']}, "
+                                 f"artefacts+manifest say {n_held}/{n_cite} of {n_rows}")
+                if n_short and cu.get("complete") is not False:
+                    quiet.append(st["study_id"])
+            check("every study's custody count is what its rows and the manifest say",
+                  not wrong, str(wrong[:3]))
+            check("a study missing fold bytes is marked incomplete, not silent",
+                  not quiet, str(quiet))
+            gap = [st["study_id"] for st in sl["studies"]
+                   if st["custody"]["complete"] is False]
+            # The point of the field is that it is not always empty. If study #12's folds are
+            # ever committed this check should be retired deliberately, not pass by drift.
+            check("the study whose folds are not carried here says so on the page",
+                  gap == ["interface-null-positive-control-v1"], str(gap))
+            check("the page renders the custody shortfall rather than only storing it",
+                  "renderCustody" in app and "custody" in app)
+            cc = sl["counts"]
+            check("the custody tally matches the studies it counts",
+                  cc["studies_with_an_incomplete_custody_record"] == len(gap)
+                  and cc["studies_whose_fold_bytes_are_all_in_this_repository"]
+                  == sum(1 for st in sl["studies"] if st["custody"]["complete"] is True),
+                  f"{cc['studies_with_an_incomplete_custody_record']} vs {len(gap)}")
+
         # A generated file stamped with a bare commit claims a clean-tree reproduction.
         # The same exclusion the generators use. Without it this check fails structurally the
         # moment a generator runs: writing its own output dirties the tree and invalidates the
@@ -576,6 +641,23 @@ def main() -> int:
         check("a confirmed threshold is not presented as a test",
               sl["counts"]["decided_by_a_threshold"] > 0
               and "not a score" in sl["reading_note"])
+        # The #slate-confirmatory notice used to open with a hand-written bold sentence --
+        # "Not one study in this slate is confirmatory." -- printed directly above the
+        # generated paragraph that names #12 as the exception, and directly below a stat
+        # card reading "1 confirmatory - see below". Nothing checked it because nothing
+        # checked app.js for a claim about a count at all. Both lines of the notice are
+        # generated now; these two checks are what keep them generated.
+        check("the confirmatory notice's heading is read from the artefact",
+              "confirmatory_headline" in sl
+              and "sl.confirmatory_headline" in app
+              and "confirmatory.</strong>" not in app,
+              sl.get("confirmatory_headline", "<absent>"))
+        denies = re.search(r"not\s+one\s+(?:of\s+the\s+\d+\s+)?stud(?:y|ies)",
+                           sl.get("confirmatory_headline", ""), re.I)
+        check("the heading denies a confirmatory study only when there is none",
+              bool(denies) == (sl["counts"]["studies_confirmatory"] == 0),
+              f"{sl['counts']['studies_confirmatory']} confirmatory · "
+              f"{sl.get('confirmatory_headline', '<absent>')!r}")
 
     print("\n[alphafold] the comparison states what it cannot support")
     afp = REPO / "data" / "alphafold_db_comparison.json"

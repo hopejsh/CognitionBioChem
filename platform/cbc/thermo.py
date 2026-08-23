@@ -24,14 +24,45 @@ UNIT_TO_MOLAR = {
     "nM": 1e-9, "pM": 1e-12, "fM": 1e-15,
 }
 
-# Empirical reference points for "how tight is tight", used to flag implausibility.
+# Empirical reference points for "how tight is tight". These calibrate an ACHIEVABILITY
+# question -- what affinity has actually been reached, by what modality, and after how much
+# experimental work -- and none of them is a physical limit.
+#
+# An earlier version of this module took the loosest quoted biotin-streptavidin value
+# (-18.3) as the tightest non-covalent binding physically available and rejected anything
+# past it as not credible. This project's own verification refuted that reading on three
+# counts and it is withdrawn as retraction ret_0004 (retractions.jsonl; verdict
+# PARTIALLY_REFUTED by ver.computational-chemistry-binding-thermody, 2026-08-17):
+#   (a) the source cited for the constant, Delgadillo et al., PLoS ONE 2019;14:e0204194,
+#       reports K_D ~ 1e-15 M for biotin-avidin, i.e. -20.5 kcal/mol -- the -18.3 is the
+#       loosest end of a range spanning two orders of magnitude in K_D;
+#   (b) the ~-15 kcal/mol plateau of Kuntz et al., PNAS 1999;96:9997 is a per-heavy-atom
+#       result for SMALL MOLECULES and says nothing about a peptide interface; and
+#   (c) barnase-barstar, a natural non-covalent protein-protein complex, sits at
+#       dG0 ~ -19 kcal/mol, so a value in that range is not outside non-covalent chemistry.
+# What survived the refutation is the modality argument, and that is what this table and
+# DE_NOVO_DESIGN_BEST_DG below now encode.
 REFERENCE_AFFINITIES = {
-    "biotin-streptavidin (among the tightest known non-covalent complexes)": -18.3,
+    "barnase-barstar, natural protein-protein complex (Kd ~ 1.3e-14 M)": -18.9,
+    "biotin-streptavidin, Kuntz et al. PNAS 1999 Table 1 (Kd 3.7e-14 M; other sources "
+    "report K_D ~ 1e-15 M, i.e. -20.5)": -18.3,
+    "Kuntz et al. PNAS 1999 plateau for tight SMALL-MOLECULE ligands (per heavy atom)": -15.0,
+    "tightest de novo designed mini-binder measured, after experimental affinity "
+    "maturation (Cao et al. Nature 2022; Kd ~ 20 pM)": -14.6,
     "typical high-affinity antibody-antigen": -12.5,
     "typical optimized small-molecule drug (Kd ~ 1 nM)": -12.3,
     "typical designed mini-binder (Kd ~ 100 nM)": -9.6,
     "typical unoptimized peptide-protein (Kd ~ 10 uM)": -6.8,
 }
+
+#: The plausibility threshold, and the reason it is not the minimum of the table above.
+#: Cao et al., Nature 2022;605:551-560 (PMID 35332283) report de novo binders "smaller than
+#: 65 amino acids" reaching "nanomolar to picomolar affinities" only "following experimental
+#: optimization" -- Kd ~ 20 pM at the tightest, i.e. dG = RT ln(2e-11) = -14.60 kcal/mol.
+#: A stated dG more negative than this is outside what the modality has been SHOWN to reach.
+#: It is not outside what non-covalent chemistry permits, and this constant must never be
+#: described that way: barnase-barstar is 4.3 kcal/mol tighter and is a real complex.
+DE_NOVO_DESIGN_BEST_DG = -14.6
 
 # Honest error bars for the methods that can actually produce a dG estimate.
 METHOD_ACCURACY = {
@@ -146,14 +177,21 @@ def check(label: str, dg: float | None, kd_molar: float | None, kd_text: str = "
                 "At most one of the two numbers can be right.")
 
     if dg is not None:
-        tightest = min(REFERENCE_AFFINITIES.values())
-        if dg < tightest:
+        # The comparison is against what de novo design has been shown to reach, NOT
+        # against the tightest entry in REFERENCE_AFFINITIES -- that entry is a natural
+        # protein-protein complex, and using it here is the ceiling argument withdrawn as
+        # ret_0004. See DE_NOVO_DESIGN_BEST_DG.
+        if dg < DE_NOVO_DESIGN_BEST_DG:
             rep.plausible = False
             rep.issues.append(
-                f"dG = {dg:.1f} kcal/mol is tighter than biotin-streptavidin "
-                f"({tightest} kcal/mol), among the strongest non-covalent interactions "
-                "known. A designed peptide conjugate reaching this is not credible "
-                "without experimental measurement.")
+                f"dG = {dg:.1f} kcal/mol is {DE_NOVO_DESIGN_BEST_DG - dg:.1f} kcal/mol "
+                f"beyond the tightest affinity de novo design has been measured to reach "
+                f"({DE_NOVO_DESIGN_BEST_DG} kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), "
+                "and that was reached only after experimental affinity maturation and only "
+                "for hyperstable folded mini-proteins under 65 residues. This is an "
+                "achievability limit for the modality, not a limit on non-covalent binding: "
+                "natural complexes bind tighter. A stated value past it needs an "
+                "experimental measurement rather than a prediction.")
         else:
             rep.plausible = True
         if abs(dg * 10 - round(dg * 10)) < 1e-9:

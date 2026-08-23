@@ -199,6 +199,45 @@ h3.warn { color: var(--warn); }
 .flags ul { margin: 6px 0 0; padding-left: 18px; color: #7a5a1e; }
 .warn-inline { color: var(--warn); font-size: 12.5px; }
 
+/* A CORRECTION IS NOT A CAPTION.
+
+   The misleading-claims audit's finding was not that this repository fails to correct
+   itself — it corrects itself constantly — but that a correction reaches one surface and
+   the claim it corrects goes on rendering on five others. The last few pixels of that
+   journey are here. A withdrawal that arrives beside a green verdict pill set in 12.5px
+   `.warn-inline`, which is the same treatment as a formatting aside, is a correction the
+   reader's eye files as a caption and skips; the audit's own instruction was that a
+   footnote below the fold is not a fix.
+
+   So a correction gets a rule down its left edge, its own ground, and body type. It is
+   deliberately louder than `.notice` and deliberately not red: neither a withdrawn
+   statement nor a limited reading is an error in the study, and colouring it like a failure
+   would tell a colour-scanning reader something false — the same mistake `.pill-met` was
+   introduced to undo. `<s>` inside it marks exactly the words that no longer stand. */
+/* No `display` here on purpose. A <div> is already block and a <td> is already table-cell,
+   and forcing block onto the table-cell form collapsed the colspan=4 row to the width of
+   its own text — so the correction rendered narrower than the verdict it corrects. */
+.correction {
+  margin: 10px 0; padding: 11px 14px 11px 13px;
+  background: rgba(245, 158, 11, .07);
+  border: 1px solid rgba(245, 158, 11, .3);
+  border-left: 4px solid rgba(245, 158, 11, .75);
+  border-radius: 8px; font-size: 13px; line-height: 1.55; color: #6b4405;
+}
+td.correction { border-radius: 0; border-left-width: 4px; }
+.correction strong { color: #7a4a00; }
+.correction s { color: #8a5a00; opacity: .8; }
+.correction p { margin: 6px 0 0; }
+.correction .hint { display: inline-block; margin-top: 6px; }
+
+/* The glance table's kind tags are grey by design — "decided by a threshold" is metadata.
+   These two are not metadata: they are the flag that the pill beside them means less than
+   it appears to, and they must survive a reader who is scanning the table and reading
+   nothing. */
+.pill .kind.flag {
+  background: rgba(245, 158, 11, .22); color: #6b4405; opacity: 1; font-weight: 600;
+}
+
 .seq {
   background: rgba(15, 23, 42, .10); border: 1px solid var(--border); border-radius: 8px;
   padding: 10px 12px; font-size: 12px; word-break: break-all; color: #14508f;

@@ -1,7 +1,7 @@
 {
  "schema_version": "1.0",
  "built": "2026-08-23",
- "git_sha": "2c18275",
+ "git_sha": "b8b6dd3-dirty",
  "disclosure": {
   "headline": "Structure prediction is real; binding affinity is not calibrated and no free energy is emitted.",
   "detail": "Boltz-2 v2.2.1 (MIT) runs locally and produced every PREDICTED structure under runs/ and in the pre-registered studies. runs/ also holds 32 RCSB crystal depositions, carrying a '-reference' kind in runs/manifest.json: those are experimental ground truth for studies #6 and #7 and were produced by no predictor. The platform also parses genuine output from AlphaFold DB and AlphaFold 3. ADMET is predicted by ADMET-AI where the molecule is inside its applicability domain, and refused with a stated reason where it is not. Binding affinity is PREDICTED but NOT CALIBRATED, and is never rendered as a free energy: the affinity head is fitted to pooled Ki/Kd/IC50/EC50 labels, so no thermodynamic quantity can be recovered from it. Every field is labelled with its provenance; fields marked 'not computed' are honestly empty. Values asserted by an earlier version that no calculation supports are preserved under 'retracted_claims' and are not displayed as results.",
@@ -8417,8 +8417,8 @@
  ],
  "citation": {
   "title": "CognitionBioChem: A structural pharmacology workbench that reports a negative result",
-  "version": "1.0.0",
-  "date_released": "2026-08-20",
+  "version": "1.1.0",
+  "date_released": "2026-08-23",
   "authors": [
    "Seung Ho Jung"
   ],
@@ -8437,12 +8437,12 @@
    {
     "type": "doi",
     "value": "10.5281/zenodo.22032684",
-    "description": "Concept DOI -- always resolves to the latest release"
+    "description": "Concept DOI -- always resolves to the latest PUBLISHED release, which today is v1.0.0. Version 1.1.0 is not yet deposited: it has no git tag and no version DOI. The most recent published release is v1.0.0, and the concept DOI resolves to that record until 1.1.0 is published."
    },
    {
     "type": "doi",
     "value": "10.5281/zenodo.22032685",
-    "description": "Version DOI -- permanently fixed to v1.0.0 (this release)"
+    "description": "Version DOI -- permanently fixed to v1.0.0, published 2026-08-20. It is NOT this tree. Study #12, interface-null-positive-control-v1, was registered 2026-08-22T06:43:11Z, two days after that deposit, and it is what withdrew the per-candidate reading of the composition-matched null. The v1.0.0 record therefore describes an eight-study slate that does not contain the study which forced this project's central retraction. Cite this DOI only to name those exact bytes."
    },
    {
     "type": "other",

@@ -4,10 +4,10 @@ A structural pharmacology workbench for cognition-related CNS targets. It **runs
 structure prediction**, computes real chemical and physicochemical properties, validates
 every record against a contract, and attaches a provenance record to every value.
 
-[![Verification](https://img.shields.io/badge/verification-8_suites_passing-brightgreen?style=flat-square)](verify_all.py)
+[![Verification](https://img.shields.io/badge/verification-12_suites_passing-brightgreen?style=flat-square)](verify_all.py)
 [![Studies](https://img.shields.io/badge/pre--registered_studies-9-blueviolet?style=flat-square)](prespec/)
 [![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
-[![Data gate](https://img.shields.io/badge/data_gate-114_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
+[![Data gate](https://img.shields.io/badge/data_gate-138_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
 [![Structure](https://img.shields.io/badge/structure-Boltz--2_2.2.1_(MIT)-blue?style=flat-square)](platform/cbc/compute/structure.py)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22032684.svg)](https://doi.org/10.5281/zenodo.22032684)
 [![License](https://img.shields.io/badge/code-Apache--2.0-blue?style=flat-square)](LICENSE)
@@ -130,9 +130,14 @@ Run everything:
 ./.venv/bin/python verify_all.py
 ```
 
-Eight suites. The last two are the guards that hold a generated document to the artefacts,
-and both **skip — saying so — when there is nothing built to read**, which is the state of
-every clone. The data gate is **expected** to exit non-zero on the legacy dataset: a gate
+Twelve suites. Two of them hold a generated document to the artefacts, and both **skip —
+saying so — when there is nothing built to read**, which is the state of every clone. Four
+more are about corrections rather than about results: one fails where any surface still
+asserts a claim this project has since withdrawn, one fails where a count typed beside the
+word *studies* or *suites* no longer matches `data/`, one fails where a version stamp names a
+release it is not about — `VERSION` said 1.1.0 while ten stamps across six files told a reader
+to cite 1.0.0 — and the last plants those three defects in a scratch copy and fails whichever
+guard shrugs. The data gate is **expected** to exit non-zero on the legacy dataset: a gate
 that passed on it would be the defect.
 
 ## What this repository publishes
@@ -422,6 +427,31 @@ inherits the last target named in the same record, and where there is none it is
 inherited residues themselves all resolved correctly, so the fabricated count is unchanged
 at 23; what changed is that the gate no longer hides what it could not check.
 
+A third correction raised it to **138**, and this one withdrew a claim rather than adding a
+check. The `affinity_implausible` category used to compare each stated ΔG against
+biotin–streptavidin at −18.3 kcal/mol and reject anything past it as beyond what non-covalent
+chemistry allows. This project's own adversarial verification refuted that reading, and it is
+withdrawn as `ret_0004` in `retractions.jsonl`: the source cited for the constant reports
+K_D ~ 1e-15 M (ΔG = −20.5), not the 4e-14 the −18.3 comes from; the −15 kcal/mol plateau of
+Kuntz et al. (PNAS 1999) is a per-heavy-atom result for **small molecules** and does not bound
+a peptide interface; and barnase–barstar, a *natural* non-covalent protein–protein complex,
+sits at ΔG° ≈ −18.9 kcal/mol — tighter than two of the five records the gate was
+rejecting, exactly equal to a third, and within 0.6 kcal/mol of the tightest. There is no
+ceiling there to be beyond.
+
+What survives the refutation is an **achievability** argument, so the threshold is now the
+tightest affinity a de novo designed binder has ever been *measured* to reach: K_D ≈ 20 pM,
+ΔG = −14.6 kcal/mol, and only after experimental affinity maturation of a hyperstable folded
+mini-protein under 65 residues (Cao et al., *Nature* 2022). Replacing a ceiling that does not
+exist with a record that does took the category from **5** records to **29** — all 25 drug
+records and 4 of the 10 AF3 candidates — because the old constant had been quietly certifying
+twenty-four further claims as plausible, ΔG −14.8 to −18.2, i.e. K_D 14.2 pM to 45.6 fM. Every
+failure message now states its own gap in kcal/mol and says that the limit is one of
+achievability, not of physics. The constant is `DE_NOVO_DESIGN_BEST_DG` in
+`platform/cbc/thermo.py`, with the three refuting checks recorded beside it, and
+`platform/check_retractions.py` fails the build if the withdrawn wording reappears on any
+public surface.
+
 `PTAFR` deserves separate mention — P25105 has no signal peptide, so the two conventions
 coincide and `His14` cannot be excused as a convention artifact.
 
@@ -671,11 +701,22 @@ disagrees by five orders of magnitude. Tacrine 201 records / 2.57, physostigmine
 ## Slate #9 — the candidate screen
 
 `platform/studies/candidate_screen.py`, plan `4486520b8863` (v8; supersedes v7 and every
-earlier version, all retained), audit **one declared deviation** (below). Every candidate the
+earlier version, all retained), audit **two declared deviations** (below). Every candidate the
 screening criterion admits, co-folded with its receptor and with three composition-matched
 shuffles that preserve length, charge, pI and GRAVY exactly. **52 folds, zero failures** — 13
-candidates, one native and three decoys each — and every one of the 52 was served from a
-content-verified cache rather than recomputed (`n_reused` 52, `n_computed` 0).
+candidate–receptor constructs, one native and three decoys each — and every one of the 52 was
+served from a content-verified cache rather than recomputed (`n_reused` 52, `n_computed` 0).
+
+**Thirteen constructs, twelve distinct peptides.** Two of the rows below —
+`PfcACh-PAM-P1` against CHRNA7 and `MicroTlr4-Antagonist-M3` against TLR4 — are the same
+41-mer, and not only the same native: the same three shuffles at the same seed make up both
+their decoy arms, so the two rows are one peptide folded against two receptors rather than
+two designs. De-duplication is applied on `(peptide, target)`, which collapses the AChE pair
+described below and does not collapse this one. Every mean and count in this section is taken
+over the thirteen constructs, so that peptide votes twice in all of them;
+`analysis.peptide_multiplicity` records the population and
+`analysis.metrics.shared_peptide_sensitivity` records what each figure becomes when it votes
+once. Both artefacts derive the two counts; neither number is typed into this page.
 
 **The question this screen asks is whether a co-folding confidence score ranks a designed
 sequence above shuffles of its own residues. It does not: across the whole set, mean native ipTM
@@ -694,17 +735,21 @@ anything*.
 |---|---|---|---|---|---|
 | BasalNgf-TrkA-B3 | NTRK1 | 391 aa ectodomain | 0.817 | **0.872** | confident (> 0.8) |
 | PfcDual-nACh-GluN2A-P5 | CHRNA7 | 211 aa ectodomain | 0.757 | **0.894** | grey (0.6–0.8) |
-| MicroTlr4-Antagonist-M3 | TLR4 | 608 aa ectodomain | 0.710 | **0.823** | grey (0.6–0.8) |
+| MicroTlr4-Antagonist-M3 † | TLR4 | 608 aa ectodomain | 0.710 | **0.823** | grey (0.6–0.8) |
 | MicroDual-Trem2-Nrf2-M5 | TREM2 | 156 aa ectodomain | 0.637 | **0.779** | grey (0.6–0.8) |
 | MicroTrem2-Agonist-M1 | TREM2 | 156 aa ectodomain | 0.526 | **0.567** | low (< 0.6) |
 | PfcTrk-ErkEnhancer-P2 | NTRK2 | 399 aa ectodomain | 0.442 | **0.486** | low (< 0.6) |
 | HippoDual-TrkB-AMPK-X5 | NTRK2 | 399 aa ectodomain | 0.440 | **0.482** | low (< 0.6) |
-| PfcACh-PAM-P1 | CHRNA7 | 211 aa ectodomain | 0.403 | **0.830** | low (< 0.6) |
+| PfcACh-PAM-P1 † | CHRNA7 | 211 aa ectodomain | 0.403 | **0.830** | low (< 0.6) |
 | BasalSuper-AChE-TrkA-B5 | ACHE | 543 aa catalytic core | 0.351 | **0.493** | low (< 0.6) |
 | PfcGluN2A-LTP-P3 | GRIN2A | 534 aa ectodomain | 0.328 | **0.389** | low (< 0.6) |
 | HippoAChE-AlkaPept-X2 | ACHE | 543 aa catalytic core | 0.248 | **0.382** | low (< 0.6) |
 | BasalAChE-Abeta-B4 | ACHE | 543 aa catalytic core | 0.221 | **0.622** | low (< 0.6) |
 | HippoTrk-Saponin-X1 | NTRK2 | 399 aa ectodomain | 0.121 | **0.208** | low (< 0.6) |
+
+† These two rows are the **same 41-mer**, `SEAEFRLFRDVWANYCACYPGWLGCDERACPRCHGFWREVC`, folded
+against two different receptors, with the same three shuffles in both decoy arms. Thirteen
+rows, twelve distinct peptides.
 
 **What the band column means, and what it does not.** The band is a bin on the native ipTM
 alone. It carries no information about the decoy comparison beside it and none about whether
@@ -733,12 +778,20 @@ supports is the aggregate contrast below; it supports no statement about any one
 **The aggregate contrast is zero to the resolution this design has.** Mean native ipTM
 **0.462** against mean decoy **0.460** — a difference of
 **+0.0012**, indistinguishable from zero and far inside the 0.149 ipTM sampler noise
-measured in study #2. All three hypotheses are decided by pre-specified thresholds, not by tests,
+measured in study #2. That difference is a mean over thirteen constructs covering twelve
+peptides. With the shared peptide counted once it is **+0.0033** (keeping the CHRNA7 fold) or
+**+0.0243** (keeping the TLR4 fold), and all three verdicts hold at either choice — the count
+below 0.6 goes 9 of 13 to 9 of 12 or 8 of 12, still at least half. All three hypotheses are
+decided by pre-specified thresholds, not by tests,
 so this study reports **no p-values at all**, and the protocol audit records that as a deviation:
 the plan registered `n_comparisons: 3` under Holm and the executed family holds **0**.
 Re-classifying a 0/1 indicator out of a Holm family is defensible — it is not a p-value and it
 corrupts the correction — but it is a change to the inferential procedure made after the data
-were seen, so it belongs on the record rather than in the code alone.
+were seen, so it belongs on the record rather than in the code alone. The **second declared
+deviation** is `shared_peptide_sensitivity` itself: it was computed after the data were seen,
+so the audit lists it as an unregistered exploratory metric. It replaces nothing — changing
+the de-duplication key would change the analysis and needs a new registered plan — and the
+registered figure remains the thirteen-construct one.
 
 **The three registered verdicts.** Fixed in plan `4486520b8863` before any fold was scored, and
 recorded in the artefact under `analysis.verdicts`.
@@ -786,7 +839,8 @@ whatever this score is reading, it is not the designed arrangement of the residu
 Arg/Trp-rich cationic amphipathic peptides, the class most prone to scoring on composition
 alone, which is exactly why the null is composition-matched rather than random.
 
-**The duplicate is now counted once, and it had been inflating the effect size.**
+**One duplicate is counted once, and the other is not — and the second one is still inflating
+an effect size.**
 `HippoAChE-AlkaPept-X2` and `BasalAChE-GorgeBlock-B1` carry the identical 36-mer against the
 identical AChE construct — one of the duplicate pairs the data gate flags — and both were being
 screened. Identical inputs gave byte-identical outputs, which is a real consistency check passed:
@@ -799,8 +853,29 @@ difference in the set. In study #10 it moved the paired mean difference from −
 and Cohen's *dz* from −0.117 to −0.220 — roughly doubling the reported effect — and overstated
 the t-test's degrees of freedom by one. v4 de-duplicated on (peptide, target), keeping the first
 code and recording the other as an alias; that run reported nine distinct designs, and the current
-v8 reports **13**. No fold is discarded;
+v8 screens **13 constructs**. No fold is discarded;
 the duplicate's cells remain under custody and are simply not counted twice.
+
+**And the key that fixed the AChE pair is the reason a second pair survived.**
+`(peptide, target)` collapses two codes only when they name the same receptor. `PfcACh-PAM-P1`
+names CHRNA7 and `MicroTlr4-Antagonist-M3` names TLR4, so the identical 41-mer they share
+passes the key untouched and is screened twice — the data gate flags exactly this sequence as
+`duplicate_sequence`, shared by those two codes and a third, `CognACh-Mod-06`, which the
+coverage criterion does not admit. So **13 constructs cover 12 distinct peptides**, and the
+harm described in the paragraph above applies again, in the same three ways: every mean and
+count is taken over constructs, so that molecule votes twice; the paired t-test in #10 carries
+n = 13 differences over 12 molecules, so its degrees of freedom are overstated by one; and the
+screen-level binomial that asks how many candidates beat all their decoys by chance treats the
+thirteen as independent designs, which lowers its expectation from **1.18** to **1.09** and
+P(X ≥ 2) from **0.334** to **0.299** when it is twelve.
+
+This one is **not** silently fixed, and deliberately so. Changing the de-duplication key is a
+change to the analysis, and both plans are hash-locked; recomputing the primary metric under a
+new key after seeing the data is the defect pre-registration exists to prevent. What the
+artefacts carry instead is `analysis.peptide_multiplicity` — the population, by molecule — and
+`analysis.metrics.shared_peptide_sensitivity`, the registered figures recomputed with the
+shared peptide counted once, listed by the protocol audit as exploratory because that is what
+it is. No verdict in either study moves at any of those choices.
 
 ---
 
@@ -808,7 +883,9 @@ the duplicate's cells remain under custody and are simply not counted twice.
 
 `platform/studies/msa_specificity.py`, plan `8511b6cc30ea` (v9; supersedes v8 and every
 earlier version, all retained). Study #9 re-run with `--use_msa_server`, the same corrected
-constructs, the same RNG seed, **10 decoys each instead of 3**, and all 13 distinct candidates.
+constructs, the same RNG seed, **10 decoys each instead of 3**, and the same **13
+candidate–receptor constructs — 12 distinct peptides**, since one 41-mer is screened against
+two receptors (marked † below, and explained under #9).
 143 folds, zero failures. Every stored model was re-parsed and checked against the chains its
 own input requested.
 
@@ -825,25 +902,39 @@ own input requested.
 | BasalNgf-TrkA-B3 | NTRK1 | 0.817 | 0.818 | +0.001 | 0.495 | 0.750 | **YES** |
 | BasalAChE-Abeta-B4 | ACHE | 0.221 | 0.810 | +0.590 | 0.661 | 0.797 | **YES** |
 | PfcDual-nACh-GluN2A-P5 | CHRNA7 | 0.757 | 0.746 | -0.011 | 0.594 | **0.866** | no |
-| MicroTlr4-Antagonist-M3 | TLR4 | 0.710 | 0.722 | +0.012 | 0.853 | **0.934** | no |
+| MicroTlr4-Antagonist-M3 † | TLR4 | 0.710 | 0.722 | +0.012 | 0.853 | **0.934** | no |
 | MicroTrem2-Agonist-M1 | TREM2 | 0.526 | 0.693 | +0.167 | 0.848 | **0.963** | no |
 | HippoTrk-Saponin-X1 | NTRK2 | 0.121 | 0.541 | +0.420 | 0.421 | **0.566** | no |
 | PfcTrk-ErkEnhancer-P2 | NTRK2 | 0.442 | 0.540 | +0.098 | 0.574 | **0.804** | no |
 | PfcGluN2A-LTP-P3 | GRIN2A | 0.328 | 0.495 | +0.168 | 0.468 | **0.770** | no |
 | BasalSuper-AChE-TrkA-B5 | ACHE | 0.351 | 0.489 | +0.139 | 0.505 | **0.696** | no |
-| PfcACh-PAM-P1 | CHRNA7 | 0.403 | 0.357 | -0.046 | 0.598 | **0.760** | no |
+| PfcACh-PAM-P1 † | CHRNA7 | 0.403 | 0.357 | -0.046 | 0.598 | **0.760** | no |
 | HippoAChE-AlkaPept-X2 | ACHE | 0.248 | 0.227 | -0.021 | 0.440 | **0.791** | no |
 
-**The paired comparison is now as close to exactly zero as this design can resolve.** Mean native
+† The same 41-mer against two receptors, with identical decoy arms. Both of its rows are
+negative and one of them, −0.241, is the most negative difference in the table.
+
+**The paired comparison is indistinguishable from zero, and the reason it lands on *exactly*
+zero is that one peptide votes twice.** Mean native
 0.629 against mean decoy 0.628 — a paired difference of **+0.0009**
-(p = 0.98, dz = +0.01). With thirteen candidates, ten composition-matched decoys each and a
-full MSA, the designed sequences and rearrangements of their own amino acids are
-indistinguishable.
+(p = 0.98, dz = +0.01) over thirteen constructs. Those thirteen are twelve molecules, and
+counting the shared one once moves the difference to **+0.0119** (keeping the CHRNA7 fold) or
+**+0.0211** (keeping the TLR4 fold), with the t-test's degrees of freedom falling from 12 to
+11. Every one of those values is inside the 0.149 ipTM sampler-noise floor from study #2 —
+the largest, +0.0211, is 0.14× the floor — and H1 is FALSIFIED at all three, so the finding
+does not move. What does move is the headline: **+0.0009 is a thirteen-construct artefact, and
+the honest statement is that the difference is indistinguishable from zero, not that it is
+exactly zero.** The recomputation is in
+`data/study_msa_specificity.json` → `analysis.metrics.shared_peptide_sensitivity`, and the
+protocol audit lists it as exploratory because it was computed after the data were seen.
 
 **Two candidates beat all ten of their own decoys. That is what chance looks like at this scale.**
 A candidate beats all 10 of its decoys with probability 1/11 = 0.091 under the null, so across
-13 candidates **1.18 are expected to do it by chance**, and P(X ≥ 2) = **0.334**. Two is the
-expected outcome. **The composition-matched null does not protect a *candidate* from being read
+13 constructs **1.18 are expected to do it by chance**, and P(X ≥ 2) = **0.334**. Two is the
+expected outcome. That binomial treats the thirteen as independent designs and they are twelve;
+over twelve the expectation is **1.09** and P(X ≥ 2) is **0.299**, which does not change the
+reading — neither of the two sweeps is the shared peptide, and two is still what chance
+produces. **The composition-matched null does not protect a *candidate* from being read
 as a hit, and this repository's own positive control is what established that.** Slate #12 put
 the per-candidate reading to a registered test: the same sixteen X-ray peptide–receptor complexes
 the pipeline was calibrated on in #7, each folded against ten permutations of its own peptide,
@@ -881,14 +972,17 @@ travel, the coordinates they were read from do not.
 **The MSA raises the level without changing the ranking**, as #9's registered confound predicted —
 it helps the receptor, which has thousands of homologues, not the peptide, which has none. The
 mean rise is **+0.167**, which is 1.12× the 0.149 ipTM sampler-noise floor from study #2, so the
-average rise is real but only marginally resolvable. It lifts decoys too: 11 of 13 candidates have
-a decoy above their native, 6 decoys clear 0.8, and `MicroTrem2-Agonist-M1`'s best scramble reaches
+average rise is real but only marginally resolvable. It lifts decoys too: 11 of 13 constructs have
+a decoy above their native (10 of 12 once the shared peptide is counted once, either way), 6
+decoys clear 0.8, and `MicroTrem2-Agonist-M1`'s best scramble reaches
 **0.963** against a native of 0.693. Reported without a null, that scramble would have been the
 programme's lead compound.
 
 **H3 has been decided five different ways by margins smaller than the study's own resolution.**
 Its registered threshold is a rise of 0.15: v1 measured +0.219, v4 +0.134 with a duplicated
-candidate still counted, v7 +0.151 on nine candidates, v8 +0.183, and v9 measures +0.167 on thirteen candidates. A
+candidate still counted, v7 +0.151 on nine candidates, v8 +0.183, and v9 measures +0.167 on
+thirteen constructs — **+0.180** or **+0.185** with the shared peptide counted once, which
+crosses none of the lines either. A
 criterion that changes sign when one duplicated row is removed is measuring where the threshold
 was drawn, not the MSA. The honest statement is that the MSA raises complex ipTM by roughly
 0.13–0.18 on this set.
@@ -966,7 +1060,14 @@ mean is **75× the designed mean** (0.0895 against 0.0012) and the two sets are 
 separated: Welch t = 1.68 on 21.50 df, **p = 0.1067**, 95% CI on the difference of means
 **−0.021 to +0.197, containing zero**. The designed differences scatter from −0.277 to +0.275
 about a mean of 0.0012 with 7 of 13 positive; the natural ones sit 13 of 16 positive about
-0.0895. **Not detected is not shown absent** — that is confound 7 in the registered plan, and
+0.0895. **This test treats the thirteen designed differences as thirteen independent
+observations, and they are twelve molecules** — the shared 41-mer described under #9 supplies
+two of them, and the Welch degrees of freedom are computed from n = 13. Counted once the test
+returns p = **0.1377** or **0.2035** depending on which receptor's fold is kept, against the
+registered 0.1067; the interval contains zero in all three, so the FALSIFIED verdict does not
+move. That figure is not recomputed in this study's artefact: its plan is hash-locked and the
+contrast is registered, so the dependence is disclosed here rather than silently corrected
+there. **Not detected is not shown absent** — that is confound 7 in the registered plan, and
 the verdict is FALSIFIED rather than "no difference". The equivalent comparison against
 `msa-specificity-v9`'s designed mean of 0.0009 (6 of 13 positive) is registered as a
 *comparison and never as a test*, because that arm differs in alignment mode as well as in
@@ -1145,6 +1246,18 @@ platform/
   validate.py         the data-integrity gate
   verify_frontend.py  DOM, data and rendering-rule contract for the page
   check_naming.py     build guard: no pooled score rendered as a free energy
+  retractions.py      the retraction ledger's loader, the two rules that decide whether a
+                      withdrawal travels with the claim it withdraws, and the three anchor
+                      kinds -- a withdrawn statement, a withdrawn reading of a verdict, and
+                      a plan field the page republishes after the count in it moved
+  check_retractions.py guard: no public surface may assert a withdrawn claim without its
+                      withdrawal beside it, and every reading limit and plan-field
+                      correction the ledger requires must be on the page
+  check_metadata_counts.py guard: every hand-typed slate count -- numerals and number-words
+                      alike -- must equal data/slate.json, prespec/ and len(SUITES)
+  tools/mutation_suite.py plants the defect each guard exists to catch in a scratch copy
+                      and fails the guard that shrugs; slots enumerated from the guards'
+                      own surface lists, so an unwatched surface reports UNCOVERED
   cbc/report_data.py  the artefacts and derived quantities both report renderers unpack
   build_figures.py    draws docs/figures/ from the artefacts -- the one generator whose
                       output is tracked, six figures including fig6 for study #12
@@ -1167,6 +1280,8 @@ platform/
   cbc/deck_style.py   the stylesheet and shell every slide renderer shares
 runs/                 content-addressed prediction artefacts + manifest
 prespec/              registered, hash-locked analysis plans
+retractions.jsonl     one record per withdrawn claim: the regexes that recognise it, the
+                      study or verification that withdrew it, and what to read instead
 memory/               append-only provenance ledger (see memory/DESIGN.md)
 reviews/              panel findings, adjudications, generated report
 research/             database, algorithm and methodology surveys
@@ -1259,7 +1374,7 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 ## How to cite
 
 > Jung, S. H. (2026). *CognitionBioChem: A structural pharmacology workbench that reports a
-> negative result* (Version 1.0.0) [Computer software]. Zenodo.
+> negative result* (Version 1.1.0) [Computer software]. Zenodo.
 > https://doi.org/10.5281/zenodo.22032684
 
 ```bibtex
@@ -1267,19 +1382,29 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
   author    = {Jung, Seung Ho},
   title     = {CognitionBioChem: A structural pharmacology workbench that reports a negative result},
   year      = {2026},
-  version   = {1.0.0},
+  version   = {1.1.0},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.22032684},
   url       = {https://doi.org/10.5281/zenodo.22032684}
 }
 ```
 
+**Read this before you paste either block above.** Version 1.1.0 is not yet deposited: it has
+no git tag and no version DOI. The most recent published release is v1.0.0, and the concept
+DOI resolves to that record until 1.1.0 is published. So the two blocks name the version of the
+software you have; the DOI in them resolves, today, to the v1.0.0 deposit of 2026-08-20. If
+that gap matters for what you are writing, say which you mean — and see the two ways to close
+it in `docs/REGISTRATION.md` §1.
+
 Zenodo issues two DOIs and they are not interchangeable. **`10.5281/zenodo.22032684`** is the *concept* DOI
-and always resolves to the newest release — cite this one normally. **`10.5281/zenodo.22032685`** is the
-*version* DOI, permanently fixed to v1.0.0, and is what you cite when the exact bytes matter —
-a reproducibility statement, for instance. The version DOI has to be written into
-`CITATION.cff` by hand after each release, because the webhook issues it only once the tag is
-already pushed.
+and always resolves to the newest **published** release — cite this one normally. **`10.5281/zenodo.22032685`**
+is the *version* DOI, permanently fixed to v1.0.0, and is what you cite when the exact bytes matter —
+a reproducibility statement, for instance. It is **not** this tree: study #12,
+`interface-null-positive-control-v1`, was registered 2026-08-22T06:43:11Z, two days after that
+deposit, and it is the study that withdrew the per-candidate reading of the composition-matched
+null. Anyone citing `…22032685` is naming an eight-study slate that does not contain it. The
+version DOI has to be written into `CITATION.cff` by hand after each release, because the
+webhook issues it only once the tag is already pushed.
 
 If your journal uses Research Resource Identifiers, cite **CognitionBioChem
 (RRID:SCR_028851)** inline in the running text; the DOI belongs in the reference list. The
@@ -1297,12 +1422,15 @@ and `biotools.json` are all in the repository root. ELN Finder is deliberately e
 peptides did not separate from composition-matched shuffles of their own amino acids. If you
 cite the software, cite it for what it does — pre-registration, provenance enforcement and
 custody of prediction artefacts — and not as evidence that any candidate here binds anything.
-`data/slate.json` carries every verdict, including the eleven falsifications.
+`data/slate.json` carries every verdict, including the thirteen falsifications.
 
 **Releasing.** `./release.sh 1.1.0` — it verifies the repository, the notes, the tree, the
 tag, `VERSION` and the full test suite before it publishes anything, and refuses a placeholder
-version. Do not hand-type the git and gh commands; `docs/REGISTRATION.md` records what happened
-the two times they were.
+version. Its own `VERSION` check only compares that file to the version you type; what holds
+`VERSION` to the *citable record* is `platform/check_version_stamps.py`, which the suite it
+runs now includes. Do not hand-type the git and gh commands; `docs/REGISTRATION.md` records
+what happened the two times they were, and lists what still has to be done by hand after the
+tag is pushed.
 
 **Development note.** This project was built with substantial AI assistance, and the internal
 review that found the fabricated values was a multi-agent LLM process, not human peer review.

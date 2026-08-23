@@ -19,6 +19,37 @@ import sys
 from pathlib import Path
 from typing import Any
 
+#: A row is a fold row when it carries something only a prediction produces. Naming the
+#: quantities rather than the studies is what stops the list going stale the next time a
+#: study is added: the eighth and ninth studies were missing from the tuple this replaced.
+_FOLD_KEYS = ("iptm", "ptm", "plddt", "complex_plddt", "model", "structure", "pred_cif",
+              "dockq")
+
+
+def _fold_row_custody(slate: dict, J) -> dict:
+    """Rows produced by a fold, how many resolve to retained bytes, and how many do not."""
+    rows = studies = 0
+    for st in slate["studies"]:
+        n = 0
+        for art in [st["artefact"], *(st.get("companion_artefacts") or [])]:
+            for r in (J(art).get("rows") or []):
+                if r.get("ok") is not False and any(k in r for k in _FOLD_KEYS):
+                    n += 1
+        rows += n
+        studies += 1 if n else 0
+    missing = sum(st["custody"]["rows_whose_bytes_this_repository_does_not_hold"]
+                  for st in slate["studies"])
+    gaps = [st for st in slate["studies"] if st["custody"]["complete"] is False]
+    return {
+        "fold_rows": rows,
+        "fold_studies": studies,
+        "published_rows": rows - missing,
+        "custody_rows_missing": missing,
+        "custody_gap_studies": [st["slate_number"] for st in gaps],
+        "custody_gap_notes": [st["custody"]["note"] for st in gaps],
+    }
+
+
 REPO = Path(__file__).resolve().parents[2]
 
 PY = str(REPO / ".venv" / "bin" / "python")
@@ -119,10 +150,18 @@ def load(*, run_suites: bool = True) -> dict[str, Any]:
         "runs": len(J("runs/manifest.json")["runs"]),
         # The custody test counts rows the study reports as having produced a result; a row
         # whose fold failed carries ok=False and has no run to resolve.
-        "published_rows": sum(
-            sum(1 for r in J(f"data/study_{k}.json")["rows"] if r.get("ok") is not False)
-            for k in ("candidate_screen", "msa_specificity", "inference_variance",
-                      "pose_accuracy", "peptide_interface", "ache_affinity")),
+        #
+        # This used to be a hand-typed tuple of six study names, and the report built on it
+        # said "a test asserts that EVERY row any study reports resolves to a run still in
+        # the manifest". Both halves were wrong and in the same direction. Study #8 was not
+        # on the list, so fifteen published rows had nothing asserting their bytes at all.
+        # Study #12 was not on the list either, and 160 of its 176 rows name
+        # runs/interface-null-positive-control/, which is deliberately not committed and
+        # resolves for nobody who clones this repository -- so the universal was false of the
+        # one study it most needed to cover. The list is derived now: a study folds if any
+        # row carries a confidence term or a path, and the shortfall comes from slate.json's
+        # custody blocks, which build_slate.py counts against runs/manifest.json.
+        **_fold_row_custody(slate, J),
         "plans": len(list((REPO / "prespec").glob("*.json"))),
         "gate_pl": [r["peptide_len"] for r in J("data/study_peptide_interface.json")["rows"]],
         "gate_rl": [r["receptor_len"] for r in J("data/study_peptide_interface.json")["rows"]],

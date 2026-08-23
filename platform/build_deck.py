@@ -228,7 +228,9 @@ slide("method", "The composition-matched null",
       folded recorded per candidate with its basis and canonical numbering.</p>
   </div>
   <div class="stats">
-    <div class="stat"><b>{len(per)}</b><span>candidates</span></div>
+    <div class="stat"><b>{len(per)}</b><span>constructs &middot; {
+      (msa.get("peptide_multiplicity") or {}).get("n_distinct_peptides", len(per))
+      } distinct peptides</span></div>
     <div class="stat"><b>{n_decoys}</b><span>shuffles each</span></div>
     <div class="stat"><b>{msa["n_observed"]}</b><span>folds, full-MSA arm</span></div>
     <div class="stat"><b>3</b><span>construct corrections &mdash; none changed the direction</span></div>
@@ -364,7 +366,7 @@ slide("result", "The verdict survived every correction. The margin did not.",
       expansion from {scr_decoys} to {n_decoys} shuffles. H1 was falsified in all
       <span class="hl-a">{ver["n_versions"]}</span> retained versions, over candidate sets from
       {min(v["n_candidates"] for v in ver["versions"])} to
-      {max(v["n_candidates"] for v in ver["versions"])} designs.</p>
+      {max(v["n_candidates"] for v in ver["versions"])} constructs.</p>
     <p>What did not hold steady is the size of the gap. Across the screen&rsquo;s
       {len(scr_series)} versions the mean native&minus;decoy ran<br>
       <span class="mono">{" &nbsp;".join(f"{v:+.4f}" for v in scr_series)}</span><br>
@@ -423,10 +425,24 @@ for s_ in slate["studies"]:
     vs = "".join(
         f'<span class="chip {x["verdict"][0].lower()}">{x["verdict"][:1]}</span> '
         for x in s_["hypotheses"] if x["verdict"])
+    # An n column that renders every study alike claimed a provenance one of them does not
+    # have. 160 of study #12's 176 rows name a run tree this repository deliberately does not
+    # carry, so its numbers are reproducible by re-running and not checkable against stored
+    # bytes. build_slate.py counts that against runs/manifest.json; the slide says so where
+    # the count is, rather than leaving the reader to assume the eight-study rule holds.
+    cu = s_["custody"]
+    gap = ('' if cu["complete"] is not False else
+           f'<br><span style="color:#a05a00">'
+           f'{cu["rows_whose_bytes_this_repository_does_not_hold"]} of {cu["rows"]} '
+           f'rows have no folds here</span>')
     rows += (f'<tr><td class="h">#{s_["slate_number"]}</td><td>{s_["title"]}</td>'
              f'<td class="h">{s_["plan_hash"]}</td>'
-             f'<td class="h" style="text-align:right">{s_["n_observed"] or "&mdash;"}</td>'
+             f'<td class="h" style="text-align:right">{s_["n_observed"] or "&mdash;"}{gap}</td>'
              f'<td style="white-space:nowrap">{vs}</td></tr>')
+custody_foot = " ".join(
+    f'<br><strong>#{s_["slate_number"]}:</strong> '
+    f'{s_["custody"]["note"].split(" Everything needed")[0]}'
+    for s_ in slate["studies"] if s_["custody"]["complete"] is False)
 slide("result", "The whole slate, verdicts and all",
       f'''<div class="tablewrap"><table>
   <thead><tr><th>#</th><th>Study</th><th>Plan hash</th><th style="text-align:right">n</th>
@@ -438,6 +454,7 @@ slide("result", "The whole slate, verdicts and all",
   <span class="chip n">N</span> not tested &mdash;
   in hues that carry no good/bad reading, because several of the confirmations here confirm
   unwelcome statements, and the central falsification is the finding.
+  {custody_foot}
   Of {c["hypotheses"]} hypotheses, {c["decided_by_a_test"]} were decided by a test statistic and
   {c["decided_by_a_threshold"]} by a pre-specified threshold.
   <b>A confirmed criterion is not a test result.</b></p>''',
@@ -457,6 +474,15 @@ figslide("result", "Verdicts as the workbench renders them",
 
 # ---- 15 limits ----------------------------------------------------------------------------
 prom = pro["metrics"]
+# Read, not typed. This bullet said "Not one study in the slate is confirmatory"  [SLATE-COUNT-HISTORICAL: the superseded sentence, quoted]  and went on
+# saying it after study #12's audit recorded confirmatory = true with an empty deviation list.
+# The same sentence was hand-written on four surfaces -- this deck, both report editions and
+# the Slate tab -- so correcting it in front of one reader left it standing for the other
+# three. build_slate.py derives both the label and the sentence from the per-study audits.
+_sc = slate["counts"]["studies_confirmatory"]
+CONF_KEY = ("not confirmatory" if _sc == 0
+            else f"{_sc} of {slate['counts']['studies']} confirmatory")
+CONF_LINE = slate["confirmatory_headline"].replace("--", "&mdash;").replace("\u2014", "&mdash;")
 slide("limit", "What this does not show",
       f'''<ul class="led" data-marks="neutral">
   <li><span class="k">not proof</span><span><b>It does not show these peptides cannot
@@ -481,9 +507,9 @@ slide("limit", "What this does not show",
     {att["candidates_carrying_one"]} of {att["candidates_total"]} candidates carry at least one
     of {att["distinct_unattributed_fragments"]} unattributed fragments. These are not optimised
     designs, and a negative result on them is not a negative result on peptide design.</span></li>
-  <li><span class="k">not confirmatory</span><span>Not one study in the slate is confirmatory.
-    Every one deviated from its registered plan in at least one respect. Pre-registration did
-    not make the results confirmatory &mdash; it made the deviations visible.</span></li>
+  <li><span class="k">{CONF_KEY}</span><span>{CONF_LINE}
+    The deviations are machine-detected and listed per study. Pre-registration did not make
+    those results confirmatory &mdash; it made the deviations visible.</span></li>
 </ul>''',
       sub="Stated because they are load-bearing, not to pre-empt the question.",
       foot="every item is machine-checked in the artefacts")

@@ -6,26 +6,47 @@ abstract: >-
   discipline that a displayed number must trace to a computation. Boltz-2 v2.2.1 runs locally
   and produced every predicted structure; chemistry is validated with RDKit; every value
   carries a provenance record, and fields that were never computed render as labels rather
-  than figures. Eight studies were pre-registered under content hashes before any data was
-  seen, and their artefacts, analysis plans and prediction runs are all under content-addressed
-  custody in the repository.
+  than figures. Nine studies were pre-registered under content hashes before any data was
+  seen, under 27 registered analysis plans counting every superseded version, and their
+  artefacts, analysis plans and prediction runs are all under content-addressed custody in the
+  repository.
 
   The headline result is negative and is the reason the project exists in this form. Across a
-  13-candidate screen and a 143-fold full-MSA rerun, designed peptides did not separate from
+  screen of 13 candidate-receptor constructs covering 12 distinct peptides - one 41-mer is
+  screened against two different receptors, so it is counted twice in every mean and count -
+  and a 143-fold full-MSA rerun, designed peptides did not separate from
   composition-matched shuffles of their own amino acids: mean native ipTM 0.629 against a mean
   decoy of 0.628. That hypothesis has been falsified in all eleven retained versions of the two
-  screening studies, across candidate sets from six to thirteen designs. An earlier version of
-  this project displayed fabricated affinity, confidence and safety values as though they had
-  been computed; those claims are preserved under `retracted_claims` rather than deleted, and
-  the renderers that produced them are gone.
+  screening studies, across candidate sets from six to thirteen constructs.
+
+  A registered positive control then measured the null itself, and narrowed how that negative
+  may be read. Sixteen deposited X-ray peptide-receptor complexes were folded against ten
+  uniform random permutations of each peptide: the natives beat their own permutations in
+  aggregate by +0.0895 ipTM (Holm p = 0.0148, 13 of 16 differences positive), but only 4 of 16
+  beat all ten permutations of themselves against a threshold of 5 registered in advance, and
+  the natural separation could not be shown to exceed the designed one (Welch p = 0.107). The
+  per-candidate reading of the composition-matched null is withdrawn throughout the repository
+  as a result: the screen's negative result is a statement about a batch of designs, and the
+  null licenses no verdict on any single one. That control is also the only study in the slate
+  whose protocol audit records no deviation from its registered plan; the other eight deviated
+  in at least one respect and each says so.
+
+  An earlier version of this project displayed fabricated affinity, confidence and safety
+  values as though they had been computed; those claims are preserved under `retracted_claims`
+  rather than deleted, and the renderers that produced them are gone.
 type: software
 authors:
   - given-names: Seung Ho
     family-names: Jung
     email: seung.jung@gmail.com
     orcid: "https://orcid.org/0000-0001-7914-5306"
-version: 1.0.0
-date-released: "2026-08-20"
+version: 1.1.0
+# The date this version was PREPARED, not the date it was published: 1.1.0 has no tag and no
+# deposit. v1.0.0 was released 2026-08-20 and its date is preserved in the version-DOI entry
+# below, where it belongs -- attached to the release it describes. Leaving 2026-08-20 here
+# paired "Version 1.1.0" with v1.0.0's release date on the Provenance tab, in both report
+# editions and on the deck, all of which interpolate the two side by side.
+date-released: "2026-08-23"
 # The code is Apache-2.0. The repository also redistributes third-party scientific data
 # under the other four, and CC-BY-SA-3.0 is share-alike, so a reuser inherits an
 # obligation from it. Listing only Apache-2.0 would understate that. NOTICE says which
@@ -45,12 +66,29 @@ doi: 10.5281/zenodo.22032684
 identifiers:
   - type: doi
     value: 10.5281/zenodo.22032684
-    description: Concept DOI -- always resolves to the latest release
+    description: >-
+      Concept DOI -- always resolves to the latest PUBLISHED release, which today is v1.0.0.
+      Version 1.1.0 is not yet deposited: it has no git tag and no version DOI. The most
+      recent published release is v1.0.0, and the concept DOI resolves to that record until
+      1.1.0 is published.
   # This one must be updated BY HAND at every release: the version DOI is issued by the Zenodo
   # webhook only after the tag is already pushed, so no CI step can know it in advance.
+  #
+  # It is also the one stamp in this file that must NOT follow `version:` above. A version DOI
+  # is frozen to the bytes of one deposit forever, so relabelling this line 1.1.0 would make
+  # the record say something Zenodo will never make true. The description read "permanently
+  # fixed to v1.0.0 (this release)" while `version:` above read 1.0.0 and the abstract already
+  # described the nine-study slate -- so a reader was told to cite v1.0.0 for content v1.0.0
+  # does not contain. What was wrong was "(this release)", not "v1.0.0".
   - type: doi
     value: 10.5281/zenodo.22032685
-    description: Version DOI -- permanently fixed to v1.0.0 (this release)
+    description: >-
+      Version DOI -- permanently fixed to v1.0.0, published 2026-08-20. It is NOT this tree.
+      Study #12, interface-null-positive-control-v1, was registered 2026-08-22T06:43:11Z, two
+      days after that deposit, and it is what withdrew the per-candidate reading of the
+      composition-matched null. The v1.0.0 record therefore describes an eight-study slate
+      that does not contain the study which forced this project's central retraction. Cite
+      this DOI only to name those exact bytes.
   - type: other
     value: "RRID:SCR_028851"
     description: Research Resource Identifier -- cite this inline in a Methods section

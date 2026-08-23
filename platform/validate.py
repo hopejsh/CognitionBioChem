@@ -104,8 +104,15 @@ class Gate:
                           f"{rep.discrepancy_kcal:.2f} kcal/mol "
                           f"({rep.discrepancy_orders:.1f} orders of magnitude)")
             if rep.plausible is False:
+                # Achievability, not a physical ceiling. The biotin-streptavidin ceiling
+                # this check used to name is withdrawn as ret_0004; see
+                # thermo.DE_NOVO_DESIGN_BEST_DG for what replaced it and why.
                 self.fail("affinity_implausible", name,
-                          f"dG {dg} kcal/mol is tighter than biotin-streptavidin")
+                          f"dG {dg} kcal/mol is "
+                          f"{thermo.DE_NOVO_DESIGN_BEST_DG - dg:.1f} kcal/mol beyond the "
+                          f"tightest de novo designed binder ever measured "
+                          f"({thermo.DE_NOVO_DESIGN_BEST_DG} kcal/mol, Kd ~ 20 pM, Cao et "
+                          f"al. Nature 2022, after experimental affinity maturation)")
 
     def check_duplicates(self, groups: dict[str, list[tuple[str, dict]]]) -> None:
         for seq, entries in groups.items():

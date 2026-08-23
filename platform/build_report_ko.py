@@ -163,6 +163,22 @@ def build() -> int:
 
     cit, msa, scr = D["cit"], D["msa"], D["scr"]
     slate, struct, af = D["slate"], D["struct"], D["af"]
+    # 확증적 연구 수를 말하는 문장은 손으로 쓰지 않고 감사 기록에서 만든다.
+    #
+    # "이 슬레이트의 어느 연구도 확증적이지 않다"(SLATE-COUNT-HISTORICAL: 폐기된 문장의 인용)는 문장은
+    # 영문판, 이 국문판, 덱, 그리고
+    # 워크벤치의 슬레이트 탭까지 네 곳에 손으로 적혀 있었다. 연구 #12의 감사가 이탈 목록을
+    # 비운 채로 돌아온 순간 네 곳 모두에서 동시에 거짓이 되었지만, 어느 곳도 고쳐지지
+    # 않았다. 숫자를 말하는 문장은 그 숫자에서 생성한다.
+    _conf = [s for s in slate["studies"] if s.get("confirmatory") is True]
+    _who = ", ".join(f"#{s['slate_number']}" if s.get("slate_number") else s["study_id"]
+                     for s in _conf)
+    CONF_KO = (
+        f"이 슬레이트의 {len(slate['studies'])}개 연구 가운데 확증적인 연구는 하나도 없다."
+        if not _conf else
+        f"이 슬레이트의 {len(slate['studies'])}개 연구 가운데 확증적인 연구는 "
+        f"{len(_conf)}개({_who})이고, 나머지 {len(slate['studies']) - len(_conf)}개는 "
+        f"등록된 계획을 적어도 한 가지 측면에서 벗어났다.")
     m, c, nul, ver, per = D["m"], D["c"], D["nul"], D["ver"], D["per"]
     n_decoys, winners, win_margins = D["n_decoys"], D["winners"], D["win_margins"]
     scr_series, scr_decoys, n_checks = D["scr_series"], D["scr_decoys"], D["n_checks"]
@@ -387,20 +403,46 @@ def build() -> int:
          f"않고 남기며, 각각 어째서 대체되었는지를 "
          f"기록한다.")
     para(doc,
-         f"중요한 귀결 하나가 페이지에 정직하게 기록되어 있다. 이 슬레이트의 어느 연구도 "
-         f"확증적이지 않다. 모든 연구가 적어도 한 가지 측면에서 등록된 계획을 벗어났고, 각 "
-         f"연구의 자체 감사가 그 사실을 밝히고 있다. 사전 등록이 이 결과들을 확증적으로 만들어 "
-         f"준 것은 아니다 — 사전 등록이 한 일은 이탈을 눈에 보이게 만든 것이다.")
+         f"중요한 귀결 하나가 페이지에 정직하게 기록되어 있다. {CONF_KO} 이탈 사항은 기계로 "
+         f"검출되며 각 연구의 자체 감사가 그 목록을 싣고 있다. 사전 등록이 해당 결과들을 "
+         f"확증적으로 만들어 준 것은 아니다 — 사전 등록이 한 일은 이탈을 눈에 보이게 만든 "
+         f"것이다.")
 
     h(doc, "3.3  계산의 보관", 2)
     runs, published_rows = D["runs"], D["published_rows"]
     para(doc,
          f"모든 예측 실행은 내용 주소화되어 있다. 디렉터리 이름이 그 파일들의 이름과 내용에 "
          f"대한 해시이므로, 출력이 하나라도 바뀌면 식별자가 바뀐다. {runs}건의 실행이 보관 "
-         f"중이다. 어떤 연구가 보고하든 그 모든 행이 여전히 매니페스트에 남아 있는 실행으로 "
-         f"해소된다는 것을 한 테스트가 확인하며 — 무언가를 폴딩하는 여섯 연구를 통틀어 "
-         f"{published_rows}행이다 — 이것이 다시 해시된 실행과 "
-         f"유실된 실행을 갈라놓는 지점이다.")
+         f"중이다. 무언가를 폴딩하는 {D['fold_studies']}개 연구를 통틀어 예측을 보고하는 "
+         f"행은 {D['fold_rows']}행이다. 그 가운데 {published_rows}행이 여전히 매니페스트에 "
+         f"남아 있는 실행으로 해소된다는 것을 한 테스트가 확인한다 — 연구가 작업 이름을 "
+         f"붙인 경우에는 이름으로, 행이 경로를 기록한 경우에는 경로로 해소한다. 이것이 다시 "
+         f"해시된 실행과 유실된 실행을 갈라놓는 지점이다. 나머지 "
+         f"{D['custody_rows_missing']}행은 해소되지 않으며, 그 사실을 함축이 아니라 명시로 "
+         f"적는다. 이 문장은 예전에 여섯 연구를 손으로 적은 목록 위에서 모든 공표된 행이 "
+         f"해소된다고 주장했고, 그 목록은 숫자를 바꿨을 두 연구를 빠뜨리고 있었다.")
+    # 예외는 산출물 자체의 숫자로 적는다. 성공을 말하는 문장 안에 절로 끼워 넣은 부족분은
+    # 독자가 건너뛰는 부족분이며, 이곳은 이 저장소가 가진 것보다 강한 출처를 주장했던
+    # 유일한 자리다.
+    for n_, note in zip(D["custody_gap_studies"], D["custody_gap_notes"]):
+        cu = next(st["custody"] for st in D["slate"]["studies"]
+                  if st["slate_number"] == n_)
+        r = cu.get("regeneration") or {}
+        para(doc,
+             f"슬레이트 #{n_}: 이 연구의 {cu['rows']}개 행 가운데 "
+             f"{cu['rows_whose_bytes_this_repository_does_not_hold']}개가 "
+             + ", ".join(cu["run_trees_not_in_this_repository"])
+             + " 아래의 폴딩 결과를 가리킨다. 이 저장소가 의도적으로 담지 않는 실행 "
+             "트리다. 따라서 그 "
+             f"{cu['rows_whose_bytes_this_repository_does_not_hold']}개의 신뢰도 값은 "
+             "연구를 다시 돌려서 재현할 수는 있지만 저장된 바이트와 대조해 검증할 수는 "
+             f"없다. 폴딩 결과가 runs/manifest.json에 있는 나머지 "
+             f"{cu['rows_whose_bytes_this_repository_holds']}개 행과 다른 점이다. "
+             "다시 만드는 데 필요한 것은 모두 산출물과 함께 이동한다"
+             + (f" ({', '.join(sorted(cu['input_digests']))})" if cu["input_digests"] else "")
+             + (f"; 재생성 명령은 {r['command']}, 약 {r['gpu_hours']:.1f} GPU-시간이다."
+                if r.get("command") and r.get("gpu_hours") else "."),
+             size=9.5, italic=True)
     figure(doc, "ui4_structure_gallery.png",
            f"구조 갤러리. 각 항목은 파이프라인이 산출한 모델이며, 내용 해시가 그 이름이 된 실행 "
            f"디렉터리에서 열린다. 항목마다 표시되는 신뢰도 항목은 그 모델이 실제로 정의하는 "
@@ -484,6 +526,25 @@ def build() -> int:
          f"dz = {m['cohens_dz']:+.2f}이다. 후보 {len(per)}개 중 {beaten}개에서는 "
          f"섞은 서열 {n_decoys}개 중 최고값이 설계 서열보다 높은 점수를 냈고, {len(per)}개 중 "
          f"{beaten_mean}개에서는 디코이 평균이 그렇다.")
+    # 구성체 수와 분자 수는 서로 다른 분모이며, 위 문단의 모든 값은 앞의 것에 대한 평균과
+    # 개수다. 41잔기 서열 1종이 서로 다른 두 수용체에 대해 접혀 있으므로 설계물 13종으로
+    # 보고되는 스크리닝은 실제로는 12종이다. 영문판과 같은 문단이며 산출물에서 읽는다.
+    mult = msa.get("peptide_multiplicity") or {}
+    sens = m.get("shared_peptide_sensitivity") or {}
+    if mult.get("n_distinct_peptides") not in (None, mult.get("n_constructs")):
+        once = [v["paired_native_minus_decoy_mean"] for v in sens["counted_once"].values()]
+        para(doc,
+             f"이 {mult['n_constructs']}개 행은 서로 다른 펩타이드 "
+             f"{mult['n_distinct_peptides']}종이다. 중복 제거는 (펩타이드, 표적) 쌍에 대해 "
+             f"적용되었고 이 기준은 두 수용체를 표방하는 한 서열을 합치지 않으므로, 41잔기 "
+             f"서열 1종이 동일한 디코이 팔을 가진 채 두 번 스크리닝되어 위의 모든 평균과 "
+             f"개수에 두 번 반영된다. 한 번만 세면 쌍대 차이는 "
+             f"{sens['as_reported']['paired_native_minus_decoy_mean']:+.4f}에서 어느 수용체의 "
+             f"폴드를 남기느냐에 따라 {min(once):+.4f} 또는 {max(once):+.4f}로 움직이며, "
+             f"어떤 판정도 바뀌지 않는다. 사전 등록된 값은 구성체 "
+             f"{mult['n_constructs']}개 기준의 값이다. 데이터를 본 뒤에 중복 제거 기준을 "
+             f"바꾸는 것은 분석을 바꾸는 일이므로, 재계산은 사전 등록되지 않은 탐색적 민감도 "
+             f"분석으로 산출물에 실려 있다.")
     figure(doc, "fig1_native_vs_decoy.png",
            f"각 설계 펩타이드를 자기 아미노산을 섞어 만든 서열 {n_decoys}개와 "
            f"대비한 것이다. 마름모는 설계 서열이고, 막대는 디코이 평균에서 최고 "
@@ -578,11 +639,29 @@ def build() -> int:
 
     h(doc, "5.6  전체 슬레이트", 2)
     rows = []
+    # n 열이 모든 연구를 똑같이 그리면, 한 연구가 갖고 있지 않은 출처를 주장하게 된다.
+    # 연구 #12의 176개 행 가운데 160개는 이 저장소가 의도적으로 담지 않는 실행 트리를
+    # 가리키므로, 그 값들은 다시 돌려서 재현할 수는 있어도 저장된 바이트와 대조해 검증할
+    # 수는 없다. build_slate.py가 runs/manifest.json에 대고 그 부족분을 세고, 표식은
+    # 개수와 함께 움직인다.
+    gap = [s_ for s_ in slate["studies"] if s_["custody"]["complete"] is False]
     for s_ in slate["studies"]:
         num = f"#{s_['slate_number']}" if s_["slate_number"] else "—"
         v = " / ".join(f"{x['verdict'][0]}" for x in s_["hypotheses"] if x["verdict"])
-        rows.append([num, s_["title"][:44], s_["plan_hash"], s_["n_observed"] or "—", v])
+        n_ = f"{s_['n_observed'] or '—'}{' *' if s_ in gap else ''}"
+        rows.append([num, s_["title"][:44], s_["plan_hash"], n_, v])
     table(doc, ["#", "연구", "계획 해시", "n", "판정"], rows)
+    for s_ in gap:
+        # 여기서는 짧게, 3.3절에서 온전히. 같은 문장을 한 문서 안에서 두 번 쓰는 것이 이
+        # 저장소가 거듭 대가를 치러 온 중복이다. 다만 표식은 개수 옆에 남아야 한다. 이 표만
+        # 읽는 독자는 #12의 n을 나머지 여덟과 똑같이 셀 것이기 때문이다.
+        cu = s_["custody"]
+        para(doc,
+             f"* 슬레이트 #{s_['slate_number']}: 이 {cu['rows']}개 행 가운데 "
+             f"{cu['rows_whose_bytes_this_repository_does_not_hold']}개는 이 저장소가 담지 "
+             "않는 폴딩 결과를 가리키므로, 다시 돌려서 재현할 수는 있어도 저장된 바이트와 "
+             "대조해 검증할 수는 없다. 보관에 관한 전체 서술은 3.3절에 있다.",
+             size=9.5, italic=True)
     para(doc,
          f"C = confirmed(확인), F = falsified(반증), N = not tested(미검정). 가설 "
          f"{c['hypotheses']}개 가운데 {c['confirmed']}개가 확인되었고 {c['falsified']}개가 "
@@ -627,8 +706,8 @@ f"후보 서열들은 발표된 모티프, 짜깁기한 스캐폴드, 그리고 
         f"{att['candidates_total']}개 중 {att['candidates_carrying_one']}개가 적어도 하나를 "
         f"지니고 있다. 이들은 최적화된 설계가 아니며, 이들에 대한 음성 결과는 펩타이드 설계에 "
         f"대한 음성 결과가 아니다.",
-        "확증적인 연구는 하나도 없다. 모든 연구가 적어도 한 가지 측면에서 등록된 계획을 "
-        "벗어났다. 이탈 사항은 기계로 검출되며, 연구별로 나열되어 있다.",
+        # 위 3.2절의 문장과 같은 이유로 생성한다.
+        f"{CONF_KO} 이탈 사항은 기계로 검출되며, 연구별로 나열되어 있다.",
     ]:
         bullet(doc, txt)
 

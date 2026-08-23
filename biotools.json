@@ -1,11 +1,11 @@
 {
   "owner": "seung",
   "name": "CognitionBioChem",
-  "description": "A structural pharmacology workbench for cognition-related CNS targets, built so that a displayed number must trace to a computation. Runs Boltz-2 locally for structure prediction, validates chemistry with RDKit, enforces a provenance record on every value, and reports eight studies pre-registered under content hashes before any data was seen. Its headline result is negative: designed peptides did not separate from composition-matched shuffles of their own amino acids.",
+  "description": "A structural pharmacology workbench for cognition-related CNS targets, built so that a displayed number must trace to a computation. Runs Boltz-2 locally for structure prediction, validates chemistry with RDKit, enforces a provenance record on every value, and reports nine studies pre-registered under content hashes before any data was seen. Its headline result is negative: designed peptides did not separate from composition-matched shuffles of their own amino acids, and a registered positive control on sixteen deposited X-ray peptide-receptor complexes then established that the composition-matched null licenses no verdict on any single case, so that negative holds for a batch of designs and not for any one of them. Version 1.1.0 is not yet deposited: it has no git tag and no version DOI. The most recent published release is v1.0.0, and the concept DOI resolves to that record until 1.1.0 is published.",
   "homepage": "https://github.com/hopejsh/CognitionBioChem",
   "biotoolsID": "cognitionbiochem",
   "version": [
-    "1.0.0"
+    "1.1.0"
   ],
   "toolType": [
     "Command-line tool",
@@ -167,7 +167,8 @@
     {
       "url": "https://github.com/hopejsh/CognitionBioChem/archive/refs/tags/v1.0.0.tar.gz",
       "type": "Source code",
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "note": "The newest archive that exists. bio.tools' `version` field above is the version of the software in the repository (1.1.0); this download is the most recent PUBLISHED release, and a tag URL cannot name a tag that has not been pushed. Both are re-pasted here after every release."
     }
   ],
   "link": [
@@ -193,7 +194,7 @@
     {
       "value": "doi:10.5281/zenodo.22032685",
       "type": "doi",
-      "version": "1.0.0"
+      "version": "version DOI, permanently fixed to v1.0.0 -- not this tree"
     },
     {
       "value": "RRID:SCR_028851",

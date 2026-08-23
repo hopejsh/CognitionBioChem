@@ -1296,6 +1296,48 @@
     "n_computed": 0,
     "n_reused": 52,
     "note": "no cell was recomputed in this run; every fold was served from a content-verified cache"
+   },
+   "shared_peptide_sensitivity": {
+    "as_reported": {
+     "n_constructs": 13,
+     "fraction_candidates_beating_null": 0.0,
+     "mean_native_iptm": 0.4615,
+     "mean_decoy_iptm": 0.4603,
+     "native_minus_decoy_mean": 0.0012,
+     "n_candidates_above_0.8": 1,
+     "n_candidates_below_0.6": 9,
+     "H1_any_candidate_binds": "FALSIFIED",
+     "H2_natives_beat_decoys_on_average": "FALSIFIED",
+     "H3_candidates_in_failed_band": "CONFIRMED"
+    },
+    "counted_once": {
+     "drop PfcACh-PAM-P1": {
+      "n_constructs": 12,
+      "fraction_candidates_beating_null": 0.0,
+      "mean_native_iptm": 0.4664,
+      "mean_decoy_iptm": 0.442,
+      "native_minus_decoy_mean": 0.0243,
+      "n_candidates_above_0.8": 1,
+      "n_candidates_below_0.6": 8,
+      "H1_any_candidate_binds": "FALSIFIED",
+      "H2_natives_beat_decoys_on_average": "FALSIFIED",
+      "H3_candidates_in_failed_band": "CONFIRMED"
+     },
+     "drop MicroTlr4-Antagonist-M3": {
+      "n_constructs": 12,
+      "fraction_candidates_beating_null": 0.0,
+      "mean_native_iptm": 0.4408,
+      "mean_decoy_iptm": 0.4375,
+      "native_minus_decoy_mean": 0.0033,
+      "n_candidates_above_0.8": 1,
+      "n_candidates_below_0.6": 9,
+      "H1_any_candidate_binds": "FALSIFIED",
+      "H2_natives_beat_decoys_on_average": "FALSIFIED",
+      "H3_candidates_in_failed_band": "CONFIRMED"
+     }
+    },
+    "verdicts_that_move": [],
+    "interpretation": "13 screened constructs cover 12 distinct peptides, so every mean and count above is taken over a set in which one peptide appears twice. Counting it once moves the mean native-minus-decoy difference from +0.0012 to +0.0033/+0.0243 depending on which receptor's fold is kept. No registered verdict changes at any of those choices."
    }
   },
   "per_candidate": [
@@ -1495,6 +1537,29 @@
     "band": "failed"
    }
   ],
+  "peptide_multiplicity": {
+   "n_constructs": 13,
+   "n_distinct_peptides": 12,
+   "deduplication_key": "(peptide, target)",
+   "shared_sequence_groups": [
+    {
+     "peptide_length": 41,
+     "peptide_sha256_12": "c048ba665d79",
+     "codes": [
+      {
+       "code": "MicroTlr4-Antagonist-M3",
+       "target": "TLR4"
+      },
+      {
+       "code": "PfcACh-PAM-P1",
+       "target": "CHRNA7"
+      }
+     ],
+     "decoy_arms_identical": true
+    }
+   ],
+   "note": "13 candidate-receptor constructs cover 12 distinct peptides. De-duplication is applied on (peptide, target), so one peptide declared against two receptors is screened, and counted, twice. Every mean and count in this study is taken over constructs, so a shared peptide votes once per construct; see metrics.shared_peptide_sensitivity for what each headline becomes when it votes once."
+  },
   "coverage": {
    "screened": [
     "BasalAChE-Abeta-B4",
@@ -1648,6 +1713,7 @@
    "prespec_hash": "4486520b88637eb3edff3757622170719ab5cee25e689c711bee26d5b212a9d0",
    "registered_utc": "2026-08-20T06:09:45+00:00",
    "deviations": [
+    "metrics reported that were not pre-specified (exploratory): ['shared_peptide_sensitivity']",
     "registered n_comparisons=3 under 'holm', but the executed family holds 0: ['H1_any_candidate_binds', 'H2_natives_beat_decoys_on_average', 'H3_candidates_in_failed_band'] were re-classified as threshold criteria rather than tests after registration. The re-classification is defensible \u2014 a 0/1 indicator is not a p-value and corrupts the correction \u2014 but it is a change to the inferential procedure made after seeing the data, and it belongs on the record rather than in the code alone."
    ],
    "confirmatory": false,

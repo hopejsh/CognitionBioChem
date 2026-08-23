@@ -29,9 +29,9 @@ PY = str(VENV) if VENV.exists() else sys.executable
 #: summarises changes will eventually lie. The counts are now read back from each suite's
 #: own output, so they cannot disagree with it.
 SUITES = [
-    # This ran under sys.executable while the other five ran under the project venv. On a
-    # clean checkout that follows the README, sys.executable has no numpy, so the FIRST of
-    # six suites died at import and the documented "run everything" command reported FAIL.
+    # This ran under sys.executable while every other suite ran under the project venv. On
+    # a clean checkout that follows the README, sys.executable has no numpy, so the FIRST
+    # suite died at import and the documented "run everything" command reported FAIL.
     ("Memory ledger regression suite", [PY, "memory/tests/test_mem.py"], 0,
      "16-writer concurrency, idempotency, torn-tail recovery, and one test "
      "per flaw the three critics found in the rejected v1 spec"),
@@ -63,12 +63,72 @@ SUITES = [
      [PY, "platform/check_paper.py"], 0,
      "every numeral the paper states about this study traces to an artefact or to "
      "arithmetic on one; the two editions agree on numbers, citations and figures"),
+    # The two guards over the mechanism that produced this repository's misleading claims:
+    # a finding is minted once, fans out across dozens of surfaces, is later withdrawn by a
+    # measurement made inside this same repository, and survives on every surface the person
+    # making the correction was not looking at. Neither guard asks whether a sentence is
+    # true. Each asks whether it still agrees with the artefacts, which is the half that
+    # failed all nine times.
+    ("Retraction guard (a withdrawn claim never travels without its withdrawal)",
+     [PY, "platform/check_retractions.py"], 0,
+     "every public surface against retractions.jsonl -- README, the page, the citable "
+     "metadata, data/ prose fields, docs/ including the built .docx and .pptx, paper/, "
+     "module docstrings, the generated ledger views -- plus the joins the ledger requires "
+     "on the page; prespec/, data/superseded/ and memory/ledger/ are exempt AS FILES"),
+    ("Metadata count guard (hand-typed slate counts equal the artefacts)",
+     [PY, "platform/check_metadata_counts.py"], 0,
+     "every count typed beside studies, hypotheses, plans, suites, candidates or a verdict "
+     "total, in numerals AND in number-words AND as nouns, bound to data/slate.json, "
+     "len(glob('prespec/*.json')) and len(SUITES) in this file -- and, separately, every "
+     "text file in the tree classified as either a watched surface or a named exemption, "
+     "because the three counts that went stale here did so on files nobody had decided "
+     "about"),
+    # The third guard over the same mechanism, one field further out. The two above hold what
+    # the repository SAYS about its work to the artefacts. This one holds what it says about
+    # ITSELF -- the version a reader is told to cite -- to VERSION and to what has actually
+    # been published. Ten stamps across six files read 1.0.0 while VERSION read 1.1.0, and
+    # release.sh's only version check compares VERSION to the argument you type, so
+    # `./release.sh 1.1.0` passed every gate above and would have published a tag whose
+    # citable record said 1.0.0.
+    ("Version stamp guard (every stamp names the version it is about)",
+     [PY, "platform/check_version_stamps.py"], 0,
+     "every stamp describing this tree equals VERSION; every reference pinned to a "
+     "published deposit -- a version DOI, a tag URL, a release tarball -- names a release "
+     "that exists and is never relabelled to follow VERSION"),
+    # Listed last because it runs the three guards above some seventy times, against scratch
+    # copies of this repository with a defect planted in each. It is the answer to the
+    # question those three entries cannot answer about themselves: a green line is
+    # indistinguishable from a green line, and check_paper.py reported 10 passed / 0 failed
+    # on a manuscript whose slate counts were a month out of date. On its first run it found
+    # that the retraction guard could not fail on a .docx or a .pptx -- the whole document
+    # was collapsed to one line, so the word "retracted" anywhere in it acknowledged every
+    # withdrawn claim in it, and the rendered manuscript is exactly where one of the nine
+    # was hiding.
+    ("Mutation suite (each guard proven able to fail, on every surface it watches)",
+     [PY, "platform/tools/mutation_suite.py"], 0,
+     "plants the defect each guard exists to catch in a scratch copy and requires the guard "
+     "to fail on it and to name the file; slots are enumerated from the guards' own surface "
+     "lists, so a surface added without a mutation reports UNCOVERED rather than passing"),
+    #
+    # A NOTE ON ADDING AN ENTRY HERE, which is not a one-line edit any more.
+    #
+    # check_metadata_counts.py reads len(SUITES) from this list and binds it to every
+    # sentence that states a suite count -- the README badge, the "N suites." line in the
+    # Quick start, the "N verification suites" clause in .zenodo.json, and the generated
+    # release note. The counts are not repeated here: a note that names them is one more
+    # surface to go stale, and this one already had, saying "Eleven"/"11" against a list of
+    # twelve. Append an entry without correcting the real surfaces and the guard fails on the
+    # commit that added the suite, which is the intended behaviour and is why the count is
+    # bound rather than typed.
+    # Do it as one change: append the entry, correct the surfaces, rebuild
+    # docs/RELEASE_NOTES_v<VERSION>.md with platform/build_release_notes.py, and confirm
+    # `./.venv/bin/python platform/check_metadata_counts.py` still exits 0.
 ]
 
 #: What each suite must PRINT for its exit code to be believed.
 #:
 #: An exit code alone cannot separate a suite that failed from one that crashed, because
-#: Python also exits 1 on an uncaught exception. That is harmless for the five suites whose
+#: Python also exits 1 on an uncaught exception. That is harmless for every suite whose
 #: success is exit 0 -- a crash gives 1 and mismatches -- but the data gate's success IS
 #: exit 1, so corrupting an input it reads made it die at import and this file printed
 #: "[PASS] Data-integrity gate (expected to FAIL on legacy data) · exit 1 (expected 1)".
@@ -87,23 +147,56 @@ EVIDENCE = {
         re.compile(r"^\d+ passed, \d+ failed", re.M),
     "Prose-to-artefact numeric provenance":
         re.compile(r"^\d+ passed, \d+ failed", re.M),
+    # The scale line, not the verdict line: it is printed on both the passing and the failing
+    # path, so a crash cannot impersonate either one.
+    "Retraction guard (a withdrawn claim never travels without its withdrawal)":
+        re.compile(r"^\d+ withdrawn claim\(s\) · \d+ surface\(s\) scanned", re.M),
+    "Metadata count guard (hand-typed slate counts equal the artefacts)":
+        re.compile(r"^\d+ count claim\(s\) bound across \d+ surface\(s\)", re.M),
+    # The scale line again, not the verdict: printed on both paths, so a crash at import
+    # cannot impersonate either one.
+    "Version stamp guard (every stamp names the version it is about)":
+        re.compile(r"^\d+ identity stamp\(s\) and \d+ pinned reference\(s\) checked",
+                   re.M),
+    "Mutation suite (each guard proven able to fail, on every surface it watches)":
+        re.compile(r"^\d+ caught, \d+ survived", re.M),
 }
 
-#: Patterns that recover a suite's own self-reported scale from its output.
+#: (pattern, how to say what it counted). Each recovers a suite's own self-reported scale
+#: from its output; none of them is asserted here, because a number typed into this file is
+#: the same fan-out the retraction ledger exists to stop.
 SCALE = (
-    re.compile(r"^(\d+) passed, (\d+) failed", re.M),
-    re.compile(r"^FAIL — (\d+) violations across (\d+) categories", re.M),
+    (re.compile(r"^(\d+) passed, (\d+) failed", re.M),
+     lambda m: f"{int(m.group(1)) + int(m.group(2))} checks"),
+    (re.compile(r"^FAIL — (\d+) violations across (\d+) categories", re.M),
+     lambda m: f"{m.group(1)} violations across {m.group(2)} categories"),
+    (re.compile(r"^(\d+) withdrawn claim\(s\) · (\d+) surface\(s\) scanned", re.M),
+     lambda m: f"{m.group(2)} surfaces against {m.group(1)} withdrawn claims"),
+    # One pattern spanning both of the count guard's scale lines, because `measured_scale`
+    # returns the FIRST entry that matches and a second entry for the coverage line would
+    # therefore never be reached. The two numbers are the two halves of that guard -- what it
+    # bound, and how much of the tree it decided about -- and printing only the first is how
+    # a reader concludes that 54 surfaces is the whole repository.
+    (re.compile(r"^(\d+) count claim\(s\) bound across (\d+) surface\(s\)\n"
+                r"(\d+) text file\(s\) classified: (\d+) watched, (\d+) exempted",
+                re.M),
+     lambda m: f"{m.group(1)} counts bound across {m.group(2)} surfaces · "
+               f"{m.group(3)} text files classified, {m.group(5)} exempted by name"),
+    (re.compile(r"^(\d+) identity stamp\(s\) and (\d+) pinned reference\(s\) checked "
+                r"across (\d+) surface\(s\)", re.M),
+     lambda m: f"{int(m.group(1)) + int(m.group(2))} version stamps across "
+               f"{m.group(3)} surfaces"),
+    (re.compile(r"^(\d+) caught, (\d+) survived", re.M),
+     lambda m: f"{int(m.group(1)) + int(m.group(2))} mutations planted"),
 )
 
 
 def measured_scale(out: str) -> str:
     """The suite's own count, read from what it printed. Never asserted independently."""
-    m = SCALE[0].search(out)
-    if m:
-        return f"{int(m.group(1)) + int(m.group(2))} checks"
-    m = SCALE[1].search(out)
-    if m:
-        return f"{m.group(1)} violations across {m.group(2)} categories"
+    for pattern, say in SCALE:
+        m = pattern.search(out)
+        if m:
+            return say(m)
     return ""
 
 def main() -> int:
@@ -122,9 +215,11 @@ def main() -> int:
         # exits 1 on an uncaught exception too, and the one suite here whose success IS exit 1
         # therefore reported PASS when a corrupt input made the gate die at import. Demanding
         # the suite's own summary line closes that: a crashed run prints no scale, so it can
-        # no longer impersonate the expected failure. The five suites expecting 0 are not
+        # no longer impersonate the expected failure. The suites expecting 0 are not
         # vulnerable (a crash gives 1, which already mismatches) but are held to the same rule
-        # so that a silently empty run cannot pass either.
+        # so that a silently empty run cannot pass either. No count is written here on
+        # purpose: this comment named "five" while SUITES held twelve, eleven of them
+        # expecting 0, and nothing was scanning this file for slate counts at the time.
         ok = r.returncode == expected and evidence
         results.append((name, ok, r.returncode, expected, dt, blurb, r, scale))
         mark = "PASS" if ok else "FAIL"

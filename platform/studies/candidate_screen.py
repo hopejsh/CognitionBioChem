@@ -35,6 +35,8 @@ and GRAVY are identical to the native by construction; only the order changes.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import itertools
 import json
 import random
 import re
@@ -258,6 +260,168 @@ def _scrambles(seq: str, n: int, seed: int) -> list[str]:
 
 
 
+def peptide_multiplicity(rows: list[dict], codes=None) -> dict:
+    """How many DISTINCT PEPTIDES the screened constructs cover.
+
+    De-duplication in `_candidates()` is applied on `(peptide, target)`. That is the right
+    key for the question "is this fold already computed", and the wrong one for the question
+    "how many molecules is this a screen of": a single peptide aimed at two receptors
+    survives as two constructs, and every mean and count downstream is taken over
+    constructs. `PfcACh-PAM-P1` (CHRNA7) and `MicroTlr4-Antagonist-M3` (TLR4) carry the
+    identical 41-mer, so thirteen screened constructs cover twelve distinct peptides. The
+    two rows do not merely share a native: their whole decoy arm is the same eleven
+    sequences at the same seed, folded against two different receptors — which is what
+    `decoy_arms_identical` records, from the rows rather than from this sentence.
+
+    This is the same harm the screen already documents for the AChE pair
+    (`HippoAChE-AlkaPept-X2` / `BasalAChE-GorgeBlock-B1`), where the duplicate "voted twice
+    in all of them ... roughly doubling the reported effect". That pair collapses under the
+    `(peptide, target)` key because both name ACHE. This one does not, and it went uncounted
+    for exactly that reason.
+
+    Nothing here changes a registered statistic. It records the population as it is, so
+    prose has an artefact to source "13 constructs, 12 distinct peptides" to, and so
+    `shared_peptide_sensitivity()` has the groups to recompute over.
+    """
+    want = set(codes) if codes is not None else None
+    seq: dict[str, str] = {}
+    target: dict[str, str] = {}
+    arms: dict[str, dict[str, str]] = {}
+    for r in rows:
+        if not r.get("ok"):
+            continue
+        if want is not None and r["code"] not in want:
+            continue
+        arms.setdefault(r["code"], {})[r["kind"]] = r.get("peptide_used")
+        if r["kind"] != "native":
+            continue
+        seq[r["code"]] = r["peptide"]
+        target[r["code"]] = r["target"]
+
+    by_seq: dict[str, list[str]] = {}
+    for code in sorted(seq):
+        by_seq.setdefault(seq[code], []).append(code)
+
+    groups = []
+    for s, g in sorted(by_seq.items(), key=lambda kv: kv[1][0]):
+        if len(g) < 2:
+            continue
+        groups.append({
+            "peptide_length": len(s),
+            "peptide_sha256_12": hashlib.sha256(s.encode()).hexdigest()[:12],
+            "codes": [{"code": c, "target": target[c]} for c in g],
+            # Whether the two constructs also share every decoy. They do: the shuffles are
+            # generated from the sequence at a fixed seed, so an identical sequence gives an
+            # identical decoy set. The arms are therefore the same peptides against
+            # different receptors, not two independent draws of a design.
+            "decoy_arms_identical": all(arms[g[0]] == arms[c] for c in g[1:]),
+        })
+
+    n_constructs, n_distinct = len(seq), len(by_seq)
+    return {
+        "n_constructs": n_constructs,
+        "n_distinct_peptides": n_distinct,
+        "deduplication_key": "(peptide, target)",
+        "shared_sequence_groups": groups,
+        "note": (
+            f"{n_constructs} candidate-receptor constructs cover {n_distinct} distinct "
+            f"peptides. De-duplication is applied on (peptide, target), so one peptide "
+            f"declared against two receptors is screened, and counted, twice. Every mean "
+            f"and count in this study is taken over constructs, so a shared peptide votes "
+            f"once per construct; see metrics.shared_peptide_sensitivity for what each "
+            f"headline becomes when it votes once."
+            if groups else
+            f"{n_constructs} constructs, {n_distinct} distinct peptides: no sequence is "
+            f"screened against more than one receptor."),
+    }
+
+
+def counted_once_variants(multiplicity: dict, codes) -> list[dict]:
+    """Every way of keeping one construct per distinct peptide.
+
+    With one shared pair there are two: keep the CHRNA7 fold or keep the TLR4 fold. Which
+    one to keep is not a question the data answers — the two differ by which receptor the
+    same peptide was folded against — so both are reported rather than one being chosen.
+    """
+    groups = multiplicity.get("shared_sequence_groups") or []
+    if not groups:
+        return []
+    members = [[c["code"] for c in g["codes"]] for g in groups]
+    out = []
+    for keep in itertools.product(*members):
+        dropped = sorted(set(c for g in members for c in g) - set(keep))
+        out.append({
+            "keeps": sorted(keep),
+            "drops": dropped,
+            "codes": [c for c in codes if c not in dropped],
+        })
+    return out
+
+
+def _shared_peptide_sensitivity(per: list[dict], mult: dict) -> dict | None:
+    """This study's headlines, recomputed with each shared peptide counted once.
+
+    Registered nothing, replaces nothing. The three verdicts are decided by pre-specified
+    thresholds on the values reported in `metrics`, and those stay exactly as computed; this
+    records how far each of them sits from the line once a molecule that holds two
+    constructs stops voting twice.
+    """
+    variants = counted_once_variants(mult, [p["code"] for p in per])
+    if not variants:
+        return None
+    by = {p["code"]: p for p in per}
+
+    def stat(codes: list[str]) -> dict:
+        rows = [by[c] for c in codes]
+        nat = [r["native_iptm"] for r in rows]
+        dec = [x for r in rows for x in r["decoy_iptm"]]
+        beat = sum(1 for r in rows if r["beats_all_decoys"])
+        below = sum(1 for v in nat if v < IPTM_FAILED_BAND)
+        return {
+            "n_constructs": len(rows),
+            "fraction_candidates_beating_null": round(beat / len(rows), 4),
+            "mean_native_iptm": round(statistics.fmean(nat), 4),
+            "mean_decoy_iptm": round(statistics.fmean(dec), 4),
+            "native_minus_decoy_mean": round(
+                statistics.fmean(nat) - statistics.fmean(dec), 4),
+            "n_candidates_above_0.8": sum(1 for v in nat if v > IPTM_CONFIDENT),
+            "n_candidates_below_0.6": below,
+            "H1_any_candidate_binds": (
+                "FALSIFIED" if not any(r["beats_all_decoys"]
+                                       and r["native_iptm"] > IPTM_CONFIDENT
+                                       for r in rows) else "CONFIRMED"),
+            "H2_natives_beat_decoys_on_average": (
+                "CONFIRMED" if statistics.fmean(nat) - statistics.fmean(dec) > 0.1
+                else "FALSIFIED"),
+            "H3_candidates_in_failed_band": (
+                "CONFIRMED" if below >= len(rows) / 2 else "FALSIFIED"),
+        }
+
+    counted_once = {("drop " + ", ".join(v["drops"])): stat(v["codes"]) for v in variants}
+    as_reported = stat([p["code"] for p in per])
+    moved = sorted({k for k in ("H1_any_candidate_binds",
+                                "H2_natives_beat_decoys_on_average",
+                                "H3_candidates_in_failed_band")
+                    if any(v[k] != as_reported[k] for v in counted_once.values())})
+    spread = [v["native_minus_decoy_mean"] for v in counted_once.values()]
+    return {
+        "as_reported": as_reported,
+        "counted_once": counted_once,
+        "verdicts_that_move": moved,
+        "interpretation": (
+            f"{as_reported['n_constructs']} screened constructs cover "
+            f"{mult['n_distinct_peptides']} distinct peptides, so every mean and count "
+            f"above is taken over a set in which one peptide appears twice. Counting it "
+            f"once moves the mean native-minus-decoy difference from "
+            f"{as_reported['native_minus_decoy_mean']:+.4f} to "
+            f"{min(spread):+.4f}/{max(spread):+.4f} depending on which receptor's fold is "
+            f"kept. "
+            + ("No registered verdict changes at any of those choices."
+               if not moved else
+               f"These verdicts change: {', '.join(moved)}.")),
+    }
+
+
 def prespec_args() -> tuple:
     """The arguments --register builds the plan with.
 
@@ -456,6 +620,9 @@ def analyse() -> int:
     decoys = [x for p in per for x in p["decoy_iptm"]]
     n_beat_and_confident = sum(1 for p in per
                                if p["beats_all_decoys"] and p["native_iptm"] > IPTM_CONFIDENT)
+
+    mult = peptide_multiplicity(payload["rows"], [p["code"] for p in per])
+    sensitivity = _shared_peptide_sensitivity(per, mult)
     diff = (statistics.fmean(natives) - statistics.fmean(decoys)) if per else 0.0
     n_below = sum(1 for p in per if p["native_iptm"] < IPTM_FAILED_BAND)
 
@@ -488,8 +655,19 @@ def analyse() -> int:
             "n_candidates_below_0.6": n_below,
             "per_candidate_empirical_p": {p["code"]: p["empirical_p"] for p in per},
             "wall_clock_seconds_per_fold": inf.wall_clock(ok),
+            # Exploratory, and the prespec audit says so: every metric above is a mean or a
+            # count over CONSTRUCTS, and one peptide holds two of them. This block is what
+            # each headline becomes when that peptide is counted once. It does not replace
+            # the registered value -- changing the de-duplication key is a change to the
+            # analysis and would need a new plan -- it states what the registered value is
+            # sensitive to. Emitted only when there is a shared sequence to be sensitive to.
+            **({"shared_peptide_sensitivity": sensitivity} if sensitivity else {}),
         },
         "per_candidate": per,
+        # The screened population by MOLECULE rather than by construct. The README's own
+        # de-duplication paragraph explains at length why counting one molecule twice is not
+        # harmless, and then counts thirteen; this is the field that sentence must source to.
+        "peptide_multiplicity": mult,
         # The README says coverage() "records why each candidate is in or out". It did
         # not: nothing wrote it anywhere, so the claim pointed at a function a reader
         # would have to run themselves. It is part of the artefact now.

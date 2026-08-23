@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -68,13 +69,23 @@ def main() -> int:
     with mem.Ledger("build-verifier", task="verify the rebuild") as L:
         r = subprocess.run([sys.executable, "verify_all.py"], cwd=REPO,
                            capture_output=True, text=True)
-        passed = "ALL 5 SUITES OK" in r.stdout
+        # NOT `"ALL 5 SUITES OK" in r.stdout`, which is what stood here. verify_all.py
+        # prints `ALL {len(results)} SUITES OK`, so the moment a sixth suite was added this
+        # test could never be true again: a fully green run was recorded into the ledger as
+        # "FAILURES PRESENT" at confidence 0.3, and every builder decision it gates was
+        # written ASSERTED instead of VERIFIED. The suite count reached twelve before anyone
+        # noticed, because a hard-coded count that goes stale FAILS QUIET here -- the run
+        # still exits 0, the script still finishes, and only the recorded verdict is wrong.
+        # The exit code is the thing verify_all.py is entitled to be believed about, and the
+        # summary line is copied verbatim rather than re-stated with numbers of our own.
+        passed = r.returncode == 0 and re.search(r"^ALL \d+ SUITES OK$", r.stdout, re.M)
+        summary = next((ln.strip() for ln in reversed(r.stdout.splitlines())
+                        if re.match(r"^(ALL \d+ SUITES OK|\d+/\d+ suites OK)", ln.strip())),
+                       "no summary line printed")
         ev = L.claim(
-            f"verify_all.py exit code {r.returncode}. "
-            f"{'All 5 suites OK' if passed else 'FAILURES PRESENT'}: memory ledger 74 "
-            f"checks, platform 93 checks, front-end contract 48 checks, data gate "
-            f"(expected non-zero) 77 violations, dataset build with a clean provenance "
-            f"audit. Total 215 automated checks.",
+            f"verify_all.py exit code {r.returncode}. {summary}. "
+            "Suite names, check counts and totals are not restated here: they move whenever "
+            "a suite is added, and verify_all.py's own output is the record.",
             kind="measurement", source_type="test", source_ref="verify_all.py",
             confidence=0.95 if passed else 0.3, tags=["verification", "rebuild"])
 

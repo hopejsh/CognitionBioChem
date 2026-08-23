@@ -240,7 +240,7 @@ function renderHeadline() {
         ? ` H1 has been falsified in all ${ver.n_versions} retained versions of these two `
           + `studies, across candidate sets from `
           + `${Math.min(...ver.versions.map(v => v.n_candidates))} to `
-          + `${Math.max(...ver.versions.map(v => v.n_candidates))} designs — the verdict is `
+          + `${Math.max(...ver.versions.map(v => v.n_candidates))} constructs — the verdict is `
           + `what survived every correction, not the size of the gap, which has moved in `
           + `both directions and has never left the sampler-noise floor.`
         : ''));
@@ -249,10 +249,20 @@ function renderHeadline() {
     ['Mean native ipTM', m10.mean_native_iptm, `vs ${m10.mean_decoy_iptm} for their own shuffles`],
     ['Beat all their decoys', `${nul.observed} of ${s10.n_candidates}`,
       `${nul.expected_under_null} expected by chance · P(X ≥ ${nul.observed}) = ${nul.p_at_least_observed}`],
+    /* The denominator is CONSTRUCTS, not molecules. Two of study #10's thirteen constructs
+       are the same 41-mer against two different receptors — the same native and the same ten
+       shuffles — so a screen described as thirteen designs is twelve. The page carried
+       "13 distinct candidates" (SLATE-COUNT-HISTORICAL: the superseded sentence, quoted so
+       this comment can name what it replaced) for as long as nothing carried the second
+       number. */
+    ['Distinct peptides', `${s10.n_distinct_peptides} of ${s10.n_candidates}`,
+      `${s10.n_candidates} candidate–receptor constructs cover `
+      + `${s10.n_distinct_peptides} distinct peptides`],
     ['H1 natives separate', h1 ? h1.verdict : '—',
       h1 && h1.p_holm != null ? `paired t-test p = ${fmtP(h1.p_holm)}` : ''],
     ['Study #' + s9.slate_number + ' without an MSA', m9.native_minus_decoy_mean,
-      `mean native minus decoy, over ${s9.n_candidates} candidates`]
+      `mean native minus decoy, over ${s9.n_candidates} constructs `
+      + `(${s9.n_distinct_peptides} distinct peptides)`]
   ]);
   setText('headline-note', nul.interpretation || '');
 
@@ -289,7 +299,7 @@ function renderOverview() {
     ['Candidate sequences', ds.candidates.length, `${valid} pass validation`],
     ['Natural products', ds.natural_products.length,
       `${chem} with a verified structure`],
-    ['Retracted claims', retracted, 'preserved, not displayed as results'],
+    ['Fabricated values quarantined', retracted, 'from a previous version; preserved, never displayed as results'],
     ['Gate violations', gate ? gate.failures.length : '—',
       gate ? `${Object.keys(gate.counts).length} categories` : 'run the gate'],
     ['Predictions loaded', state.prediction ? 1 : 0,
@@ -339,8 +349,12 @@ const CATEGORY_EXPLAIN = {
     'The stated target is cytoplasmic, but the molecule is an extracellular peptide with '
     + 'no cell-penetrating mechanism. It cannot reach its target.',
   affinity_implausible:
-    'The stated affinity is tighter than biotin–streptavidin, among the strongest '
-    + 'non-covalent interactions known.',
+    'The stated affinity is tighter than any de novo designed binder has been measured to '
+    + 'reach: the tightest on record is Kd ~ 20 pM (ΔG ≈ −14.6 kcal/mol), and only after '
+    + 'experimental affinity maturation of a hyperstable folded mini-protein under 65 '
+    + 'residues (Cao et al., Nature 2022). This is an achievability limit for the modality, '
+    + 'not a limit on non-covalent binding — natural complexes such as barnase–barstar bind '
+    + 'tighter still (retraction ret_0004).',
   prose_in_sequence_field:
     'The sequence field contains descriptive prose rather than a sequence.'
 };
@@ -496,7 +510,7 @@ function renderCandidates() {
 function renderRetractedInline(rc) {
   const a = rc.thermodynamic_audit;
   return `<details class="retracted">
-    <summary>Retracted claims from the previous version</summary>
+    <summary>Fabricated values quarantined from the previous version</summary>
     <p class="explain">${esc(rc.reason)}</p>
     <ul>${Object.entries(rc.values).map(([k, v]) =>
       `<li><code>${esc(k)}</code>: <s>${esc(v)}</s></li>`).join('')}</ul>
@@ -534,7 +548,11 @@ function renderCitation() {
     </table>
     <div class="prop-grid">
       <div><span>Version</span><strong>${esc(c.version)}</strong></div>
-      <div><span>Released</span><strong>${esc(c.date_released)}</strong></div>
+      <!-- "Released" was the label here, beside a version stamp that is not a release.
+           CITATION.cff's date-released is the date the version named above was PREPARED
+           while that version has no tag and no DOI; the identifier table directly above
+           says which release the version DOI is frozen to. -->
+      <div><span>Dated</span><strong>${esc(c.date_released)}</strong></div>
       <div><span>ORCID</span><strong class="mono">${
         esc((c.orcid[0] || '').replace('https://orcid.org/', ''))}</strong></div>
       <div><span>Licences</span><strong>${esc(c.licenses.join(', '))}</strong></div>
@@ -958,8 +976,18 @@ function renderLowConfidence(p) {
    The pre-registered slate
 
    Read from data/slate.json, which platform/build_slate.py assembles out of the
-   frozen plans and the study artefacts. Nothing here recomputes a verdict; a
-   number that appears on this page appears in an artefact under runs/ custody.
+   frozen plans and the study artefacts. Nothing here recomputes a verdict; every
+   number on this page appears in an artefact this repository ships.
+
+   That last clause used to read "in an artefact under runs/ custody", and for study #12 it
+   was not true. 160 of its 176 rows name fold outputs under
+   runs/interface-null-positive-control/, a tree that is deliberately not committed, so its
+   +0.0895 and its 4-of-16 are reproducible by re-running and are not checkable against
+   stored bytes. The page drew it in the same card as eight studies whose numbers re-derive
+   from coordinates a clone can open, which claimed a provenance the repository does not
+   have — the one direction of error a workbench cannot afford. build_slate.py now counts
+   the shortfall against runs/manifest.json and renderCustody prints it beside the numbers
+   it qualifies.
    -------------------------------------------------------------------------- */
 
 /* Not `ok`/`bad`. See the note beside .pill-met in styles.css: a verdict says whether a
@@ -967,6 +995,139 @@ function renderLowConfidence(p) {
    the study's central falsification is the finding the project exists to report. Colouring
    them good and bad told a colour-scanning reader the opposite. */
 const VERDICT_CLASS = { CONFIRMED: 'met', FALSIFIED: 'unmet', NOT_TESTED: 'warn' };
+
+/* A registered hypothesis statement is frozen at registration and this page republishes it
+   verbatim. When a later study falsifies what it asserts, the plan is NOT edited -- the whole
+   project rests on a registered plan staying byte-identical -- so the withdrawal is joined
+   from retractions.jsonl by platform/build_slate.py and arrives here as h.retraction. It must
+   never be dropped: study #7's H2 read "ipTM ... can be used as a screening filter" beside a
+   green CONFIRMED for a use study #12 spent 176 folds proving is not available. The verdict
+   is not wrong -- the registered threshold really was met -- so the retraction attaches to
+   the statement and says so. */
+function renderRetraction(r, wide) {
+  if (!r) return '';
+  const by = r.retracted_by || {};
+  const who = by.study || by.agent || 'a later verification';
+  const plan = by.prespec ? ` (plan <code>${esc(by.prespec)}</code>)` : '';
+  const body = `<strong>Withdrawn</strong> — this registered statement no longer stands.
+      Falsified by <strong>${esc(who)}</strong>${plan}${by.date ? ` on ${esc(by.date)}` : ''}${
+        by.artefact ? `, <code>${esc(by.artefact)}</code>` : ''}.
+      <br><strong>Read instead:</strong> ${esc(r.replacement)}
+      <br><span class="hint">${esc(r.evidence)}</span>
+      <br><span class="hint">${esc(r.applies_to || '')} · ${esc(r.id)} in
+      <code>retractions.jsonl</code></span>`;
+  return wide ? `<tr><td colspan="4" class="correction">${body}</td></tr>`
+              : `<div class="correction">${body}</div>`;
+}
+
+/* The other half of the same problem, and it must NOT be rendered as the half above.
+
+   Study #10's H2 is "at least one candidate is both better than its null and confident in
+   absolute terms", and 2 of 13 cleared the registered conjunction, so CONFIRMED is a true
+   record of a threshold firing and the sentence was never withdrawn. Striking either would
+   print a falsehood. What IS withdrawn is the reading the rule rests on: the rule asks
+   whether ONE candidate beat ONE set of shuffles, and study #12 established that this
+   comparison licenses nothing about any single case. So the statement and the verdict stand
+   untouched, and what goes beside them is the boundary — arriving as h.reading_limit, joined
+   from retractions.jsonl by build_slate.py against a `decision_rule` anchor. Same ledger,
+   same journey, different sentence, and the difference is the whole point of typing the
+   anchors. */
+function renderReadingLimit(rl, wide) {
+  if (!rl) return '';
+  const by = rl.withdrawn_by || {};
+  const who = by.study || by.agent || 'a later study';
+  const plan = by.prespec ? ` (plan <code>${esc(by.prespec)}</code>)` : '';
+  const body = `<strong>This verdict licenses no claim about any single molecule.</strong>
+      The statement and the verdict both stand — what is limited is what they can be read to
+      mean. ${esc(rl.limit)}
+      <br><strong>The withdrawn reading:</strong> <s>${esc(rl.withdrawn_reading)}</s>
+      — falsified by <strong>${esc(who)}</strong>${plan}${
+        by.date ? ` on ${esc(by.date)}` : ''}.
+      <br><strong>Read instead:</strong> ${esc(rl.read_instead)}
+      <br><span class="hint">${esc(rl.applies_to || '')} · ${esc(rl.retraction)} in
+      <code>retractions.jsonl</code></span>`;
+  return wide ? `<tr><td colspan="4" class="correction">${body}</td></tr>`
+              : `<div class="correction">${body}</div>`;
+}
+
+/* The third shape, and it is neither of the two above.
+
+   A registered plan carries prose that is not a hypothesis -- msa-specificity-v9's
+   `supersedes_reason` explains why it superseded v8 -- and this page republishes it
+   verbatim. That note ends by counting the screened set in "distinct designs", which was
+   the reading the author had when the plan was registered; the two screens have since
+   derived 13 candidate-receptor constructs covering 12 distinct peptides from their own
+   stored rows. Nothing about the plan is
+   wrong as a record, and the plan is hash-locked, so the string is NOT edited on the way
+   here -- doing that would break the one promise prespec/ makes and the page would be
+   claiming a registration it had quietly rewritten. Instead the registered wording ships as
+   registered and the correction ships against it, joined from retractions.jsonl by
+   build_slate.py against a `plan_field` anchor. Both are printed, so a reader can compare
+   the page against prespec/ and find them identical, and still leave with the right number.
+   Drop this renderer and the count goes back to standing alone under "Supersedes". */
+function renderPlanFieldCorrection(pf) {
+  if (!pf) return '';
+  const by = pf.withdrawn_by || {};
+  const who = by.study || by.agent || 'a later measurement';
+  const art = by.artefact ? `, <code>${esc(by.artefact)}</code>` : '';
+  return `<div class="correction"><strong>The registered wording above is quoted exactly and
+      one count in it is out of date.</strong> ${esc(pf.correction)}
+      <br><strong>The withdrawn reading:</strong> <s>${esc(pf.withdrawn_wording)}</s>
+      — corrected by <strong>${esc(who)}</strong>${
+        by.date ? ` on ${esc(by.date)}` : ''}${art}.
+      <br><strong>Read instead:</strong> ${esc(pf.read_instead)}
+      <br><span class="hint">${esc(pf.applies_to || '')} · ${esc(pf.retraction)} in
+      <code>retractions.jsonl</code></span></div>`;
+}
+
+/* Whether a reader can open the bytes a study's numbers were read from.
+
+   The workbench's promise is that every number on it traces to a file you can open. Eight of
+   the nine studies keep it. Study #12 does not and never did: 160 of its 176 rows name fold
+   outputs under runs/interface-null-positive-control/, which is deliberately not committed,
+   and the README has said so in full since the study shipped. What the page did was render
+   #12's card with the same fields as the other eight — the only place in this repository
+   where the surface claims MORE provenance than the artefacts support, which is the failure
+   direction that costs a reader something.
+
+   Arrives as st.custody, computed by build_slate.py against runs/manifest.json rather than
+   against the filesystem, because all 176 paths resolve on the machine that built the file
+   and 160 of them resolve nowhere else. Nothing is typed here: the counts, the run tree, the
+   input digest and the measured GPU-hours all come from the artefact's own rows and its own
+   reuse accounting.
+
+   Silent when custody is complete or when a study's rows name no folds at all. A banner on
+   every card is a banner nobody reads, and the studies that keep the promise should not be
+   made to look like they are apologising for something. */
+function renderCustody(cu) {
+  if (!cu || cu.complete !== false) return '';
+  const r = cu.regeneration || {};
+  return `<div class="notice">
+    <strong>The bytes behind ${cu.rows_whose_bytes_this_repository_does_not_hold} of these
+      ${cu.rows} rows are not in this repository.</strong>
+    <p class="note">${esc(cu.note)}</p>
+    <div class="prop-grid">
+      <div><span>Rows whose folds you can open</span>
+        <strong>${cu.rows_whose_bytes_this_repository_holds} of
+          ${cu.rows_citing_a_fold_output}</strong></div>
+      <div><span>Not carried here</span>
+        <strong class="mono">${cu.run_trees_not_in_this_repository.map(esc).join(', ')}</strong></div>
+      ${Object.entries(cu.input_digests || {}).map(([k, v]) => `
+        <div><span>${esc(k.replace(/_/g, ' '))}</span>
+          <strong class="mono">${esc(String(v).slice(0, 12))}…</strong></div>`).join('')}
+      ${r.gpu_hours ? `<div><span>Cost to regenerate them</span>
+        <strong>≈ ${r.gpu_hours.toFixed(1)} GPU-hours</strong></div>` : ''}
+    </div>
+    ${/* The command is inside cu.note already — it has to be, because that sentence is
+          republished into the report and the deck where there is no code block beside it.
+          Printing it twice in one notice is noise, so only the basis for the hours goes
+          here. */
+      r.compute_basis ? `<p class="hint">${esc(r.compute_basis)}</p>` : ''}
+    <span class="hint">counted from the artefact's own rows against
+      <code>${esc(cu.checked_against)}</code> by
+      <code>platform/build_slate.py</code>. ${esc(cu.basis)}</span>
+  </div>`;
+}
 
 function renderSlate() {
   const sl = state.slate;
@@ -988,20 +1149,38 @@ function renderSlate() {
   setText('slate-reading-note', sl.reading_note);
   setText('slate-numbering-note', sl.numbering_note || '');
   const leg = document.getElementById('slate-legend');
+  /* "the falsification in studies #9 and #10" named the screen result this project exists
+     to report, and a reader who stopped there came away believing those were the only two
+     falsifications in the slate. They are not: most of these studies carry one, #12's
+     among them, and #12's is the one that withdrew this project's own earlier reading. The
+     count is taken from the same verdicts the pills below are drawn from, so the sentence
+     cannot go on implying an exhaustive list. */
+  const falsifiedStudies = sl.studies.filter(
+    st => st.hypotheses.some(h => h.verdict === 'FALSIFIED')).length;
   if (leg) leg.innerHTML =
     `<span class="legend-item"><i style="background:#14508f"></i>criterion met or test
        significant</span>
      <span class="legend-item"><i style="background:#6b21a8"></i>not met</span>
      <span class="hint">These two colours say whether a pre-registered rule fired. They do
        NOT say whether the result is good news: several confirmations here confirm unwelcome
-       statements, and the falsification in studies #9 and #10 is the finding this project
-       exists to report.</span>`;
-  /* Every study in this slate deviated from its registered plan, so every study's own audit
-     records confirmatory = false. The panel headline says the plans were frozen before the
-     data; without this the reader is not told that the freezing did not make the results
-     confirmatory, it made the deviations visible. */
+       statements, and ${falsifiedStudies} of the ${c.studies} studies carry at least one
+       falsified hypothesis. The falsification in the candidate screen and its full-MSA
+       replication is the finding this project exists to report; the one in the positive
+       control is the finding that withdrew this project's own earlier reading of the
+       screen.</span>`;
+  /* Both lines of this notice are generated by build_slate.py from the same per-study
+     audits that produce counts.studies_confirmatory. The headline used to be hand-written:
+     "Not one study in this slate is confirmatory." (SLATE-COUNT-HISTORICAL: the superseded
+     heading, quoted so this comment can say what was removed and why.) It stayed on the page
+     after study #12's audit came back with an empty deviation list, so the panel contradicted
+     itself twice over: the stat card above it read "1 confirmatory — see below" and the
+     paragraph directly below it named #12 as the exception. The same sentence was written by
+     hand on three other surfaces -- platform/build_deck.py, platform/build_report.py and
+     platform/build_report_ko.py -- and every one of them is now a reader of
+     sl.confirmatory_headline instead. A heading that states a count is generated from the
+     count, or it eventually says the opposite of the body it introduces. */
   const cf = document.getElementById('slate-confirmatory');
-  if (cf) cf.innerHTML = `<strong>Not one study in this slate is confirmatory.</strong>
+  if (cf) cf.innerHTML = `<strong>${esc(sl.confirmatory_headline)}</strong>
     <p>${esc(sl.confirmatory_note)}</p>`;
 
   host.innerHTML = `
@@ -1013,15 +1192,29 @@ function renderSlate() {
           <td><strong>${esc(label)}</strong> ${esc(st.title)}<br>
               <span class="hint mono">${esc(st.study_id)}</span></td>
           <td class="mono">${esc(st.plan_hash)}</td>
-          <td>${st.n_observed ?? '—'}</td>
+          <td>${st.n_observed ?? '—'}${/* The scan row must carry the caveat too: a reader
+                who never opens the card below still counts #12 among the nine. */
+                st.custody && st.custody.complete === false
+                  ? `<br><span class="warn-inline">${
+                      st.custody.rows_whose_bytes_this_repository_does_not_hold} of ${
+                      st.custody.rows} rows have no folds here</span>`
+                  : ''}</td>
           <td>${st.hypotheses.map(h => `<span class="pill ${
                 VERDICT_CLASS[h.verdict] === 'met' ? 'pill-met'
                 : VERDICT_CLASS[h.verdict] === 'unmet' ? 'pill-unmet' : ''
-              }" title="${esc(h.statement || '')}">${esc(
+              }" title="${esc(h.statement || '')}${h.retraction
+                ? ` — WITHDRAWN (${esc(h.retraction.id)}): ${esc(h.retraction.replacement)}`
+                : ''}${h.reading_limit
+                ? ` — READING LIMITED (${esc(h.reading_limit.retraction)}): ${
+                    esc(h.reading_limit.limit)}`
+                : ''}">${esc(
                 h.name.replace(/^H\d+_/, '').replace(/_/g, ' '))} — ${
                 esc((h.verdict || 'undecided').toLowerCase().replace(/_/g, ' '))}<em class="kind"> · ${
                 h.kind === 'test' ? 'decided by a test' : 'decided by a threshold'}</em>${
                 h.registered === false ? '<em class="kind"> · unregistered</em>' : ''
+              }${h.retraction ? '<em class="kind flag"> · statement withdrawn</em>' : ''
+              }${h.reading_limit
+                ? '<em class="kind flag"> · no claim about any molecule</em>' : ''
               }</span>`).join(' ')}</td>
         </tr>`;
       }).join('')}</tbody>
@@ -1032,10 +1225,53 @@ function renderSlate() {
       <h3>${st.slate_number ? `Slate #${st.slate_number} — ` : ''}${esc(st.title)}
         <span class="badge database mono">${esc(st.plan_hash)}</span></h3>
       <p>${esc(st.question || '')}</p>
+      ${/* The artefact's own reading of its numbers, copied by build_slate.py from
+            analysis.interpretation_key. Study #9's is where this repository wrote its
+            central retraction down — "This key previously ended: ... Study #12 falsified
+            that clause and it is withdrawn" — and it used to stop at the artefact, three
+            files from anyone reading the verdicts it qualifies. A key that withdraws
+            something is rendered as a correction; one that does not is rendered as a note,
+            because a page where everything shouts is a page where nothing does. */
+        st.interpretation_key ? `<div class="${
+          st.interpretation_key_states_a_withdrawal ? 'correction' : 'status'}">
+          <strong>How this study's own artefact says to read these numbers${
+            st.interpretation_key_states_a_withdrawal
+              ? ', including what it withdraws' : ''}</strong>
+          <p>${esc(st.interpretation_key)}</p>
+          <span class="hint">verbatim from <code>${esc(st.artefact)}</code>,
+            <code>analysis.interpretation_key</code></span>
+        </div>` : ''}
+      ${/* Before the numbers, not after them: this qualifies every figure below it. */
+        renderCustody(st.custody)}
       <div class="prop-grid">
         <div><span>Primary metric</span><strong class="mono">${esc(st.primary_metric || '—')}</strong></div>
         <div><span>Registered</span><strong>${esc((st.registered_utc || '').slice(0, 10))}</strong></div>
         <div><span>Observations</span><strong>${st.n_observed ?? '—'}</strong></div>
+        ${/* Constructs and molecules are different denominators, and every mean and count in
+              a screen is taken over the first. Showing only one of them is how
+              "13 distinct candidates" (SLATE-COUNT-HISTORICAL: superseded, quoted) survived
+              beside an artefact that records twelve sequences. */
+          st.n_candidates
+          ? `<div><span>Screened constructs</span><strong>${st.n_candidates}</strong>
+              ${st.n_distinct_peptides != null
+                ? `<span class="hint">${st.n_distinct_peptides === st.n_candidates
+                    ? 'each a distinct peptide'
+                    : `covering ${st.n_distinct_peptides} distinct peptides — one sequence is
+                       screened against two receptors, so it is counted twice in every mean
+                       and count below`}</span>`
+                : ''}</div>`
+          : ''}
+        ${/* In the same grid as the observation count, because "176 observations" and "16 of
+              those 176 have folds you can open" are the same reader's next question. */
+          st.custody && st.custody.rows_citing_a_fold_output
+          ? `<div><span>Rows whose folds are under custody</span>
+              <strong${st.custody.complete === false ? ' class="warn-inline"' : ''}>${
+                st.custody.rows_whose_bytes_this_repository_holds} of ${
+                st.custody.rows_citing_a_fold_output}</strong>
+              <span class="hint">${st.custody.complete === false
+                ? 'the rest name a run tree this repository does not carry'
+                : 'every one resolves in <code>runs/manifest.json</code>'}</span></div>`
+          : ''}
         <div><span>Technical failures</span><strong>${st.n_failures}</strong>
           ${st.n_failures && st.n_failures_detail ? (() => {
             const d = st.n_failures_detail;
@@ -1051,6 +1287,7 @@ function renderSlate() {
       </div>
       ${st.supersedes ? `<p class="note"><strong>Supersedes</strong>
         <code>${esc(st.supersedes)}</code> — ${esc(st.supersedes_reason || '')}</p>` : ''}
+      ${renderPlanFieldCorrection(st.supersedes_reason_correction)}
       ${(st.excluded_from_correction || []).length ? `<p class="note">
         <strong>Outside the multiplicity correction:</strong>
         ${st.excluded_from_correction.map(n => `<code>${esc(n)}</code>`).join(', ')} —
@@ -1059,7 +1296,8 @@ function renderSlate() {
         <thead><tr><th>Hypothesis</th><th>Decided by</th><th>Observed</th><th>Verdict</th></tr></thead>
         <tbody>${st.hypotheses.map(h => `
           <tr>
-            <td>${esc(h.statement || h.name)}<br>
+            <td>${h.retraction ? `<s>${esc(h.statement || h.name)}</s>`
+                                 : esc(h.statement || h.name)}<br>
                 <span class="hint">confirmed if ${esc(h.confirmed_if || '—')}</span></td>
             <td>${h.kind === 'test'
                   ? `<span class="badge computed">test</span>`
@@ -1073,6 +1311,8 @@ function renderSlate() {
                   ? `<br><span class="warn-inline">this study's own interval contains the
                      threshold</span>` : ''}</td>
           </tr>
+          ${renderRetraction(h.retraction, true)}
+          ${renderReadingLimit(h.reading_limit, true)}
           ${h.confirmed_by_absence_note
             ? `<tr><td colspan="4" class="hint">${esc(h.confirmed_by_absence_note)}</td></tr>`
             : ''}

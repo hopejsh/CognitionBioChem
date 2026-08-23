@@ -3652,6 +3652,72 @@
     "n_computed": 22,
     "n_reused": 121,
     "note": ""
+   },
+   "shared_peptide_sensitivity": {
+    "as_reported": {
+     "n_constructs": 13,
+     "paired_native_minus_decoy_mean": 0.0009,
+     "mean_native_iptm": 0.6287,
+     "mean_decoy_iptm": 0.6278,
+     "cohens_dz": 0.0057,
+     "paired_t_p": 0.98407,
+     "paired_t_df": 12,
+     "delta_vs_study9": 0.1672,
+     "beats_all_decoys_null": {
+      "per_candidate_null_probability": 0.0909,
+      "expected_under_null": 1.182,
+      "observed": 2,
+      "p_at_least_observed": 0.3338,
+      "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.18 of 13 are expected to do so by chance; observing 2 has probability 0.334."
+     },
+     "H1_natives_separate_from_decoys": "FALSIFIED",
+     "H2_a_candidate_is_confident_and_specific": "criterion met",
+     "H3_msa_raises_natives": "criterion met"
+    },
+    "counted_once": {
+     "drop PfcACh-PAM-P1": {
+      "n_constructs": 12,
+      "paired_native_minus_decoy_mean": 0.0211,
+      "mean_native_iptm": 0.6514,
+      "mean_decoy_iptm": 0.6303,
+      "cohens_dz": 0.1395,
+      "paired_t_p": 0.63833,
+      "paired_t_df": 11,
+      "delta_vs_study9": 0.185,
+      "beats_all_decoys_null": {
+       "per_candidate_null_probability": 0.0909,
+       "expected_under_null": 1.091,
+       "observed": 2,
+       "p_at_least_observed": 0.299,
+       "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.09 of 12 are expected to do so by chance; observing 2 has probability 0.299."
+      },
+      "H1_natives_separate_from_decoys": "FALSIFIED",
+      "H2_a_candidate_is_confident_and_specific": "criterion met",
+      "H3_msa_raises_natives": "criterion met"
+     },
+     "drop MicroTlr4-Antagonist-M3": {
+      "n_constructs": 12,
+      "paired_native_minus_decoy_mean": 0.0119,
+      "mean_native_iptm": 0.6209,
+      "mean_decoy_iptm": 0.609,
+      "cohens_dz": 0.0724,
+      "paired_t_p": 0.80672,
+      "paired_t_df": 11,
+      "delta_vs_study9": 0.1801,
+      "beats_all_decoys_null": {
+       "per_candidate_null_probability": 0.0909,
+       "expected_under_null": 1.091,
+       "observed": 2,
+       "p_at_least_observed": 0.299,
+       "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.09 of 12 are expected to do so by chance; observing 2 has probability 0.299."
+      },
+      "H1_natives_separate_from_decoys": "FALSIFIED",
+      "H2_a_candidate_is_confident_and_specific": "criterion met",
+      "H3_msa_raises_natives": "criterion met"
+     }
+    },
+    "verdicts_that_move": [],
+    "interpretation": "13 screened constructs cover 12 distinct peptides. Counting the shared peptide once moves the paired difference from +0.0009 to +0.0119/+0.0211 depending on which receptor's fold is kept, drops the t-test's df from 12 to 11, and lowers the screen-level null's expectation from 1.182 to 1.091. The largest paired difference any of those choices produces is +0.0211. No registered verdict changes at any of those choices, so what the duplicate inflates is the claim that the difference is indistinguishable from EXACTLY zero, not the finding that it is indistinguishable from zero."
    }
   },
   "paired_t_p": 0.98401,
@@ -3839,6 +3905,29 @@
     "band": "failed"
    }
   ],
+  "peptide_multiplicity": {
+   "n_constructs": 13,
+   "n_distinct_peptides": 12,
+   "deduplication_key": "(peptide, target)",
+   "shared_sequence_groups": [
+    {
+     "peptide_length": 41,
+     "peptide_sha256_12": "c048ba665d79",
+     "codes": [
+      {
+       "code": "MicroTlr4-Antagonist-M3",
+       "target": "TLR4"
+      },
+      {
+       "code": "PfcACh-PAM-P1",
+       "target": "CHRNA7"
+      }
+     ],
+     "decoy_arms_identical": true
+    }
+   ],
+   "note": "13 candidate-receptor constructs cover 12 distinct peptides. De-duplication is applied on (peptide, target), so one peptide declared against two receptors is screened, and counted, twice. Every mean and count in this study is taken over constructs, so a shared peptide votes once per construct; see metrics.shared_peptide_sensitivity for what each headline becomes when it votes once."
+  },
   "verdicts": {
    "H2_a_candidate_is_confident_and_specific": "CONFIRMED",
    "H3_msa_raises_natives": "CONFIRMED",
@@ -3876,7 +3965,7 @@
    "prespec_hash": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
    "registered_utc": "2026-08-20T06:10:28+00:00",
    "deviations": [
-    "metrics reported that were not pre-specified (exploratory): ['beats_all_decoys_null']",
+    "metrics reported that were not pre-specified (exploratory): ['beats_all_decoys_null', 'shared_peptide_sensitivity']",
     "registered n_comparisons=3 under 'holm', but the executed family holds 1: ['H2_a_candidate_is_confident_and_specific', 'H3_msa_raises_natives'] were re-classified as threshold criteria rather than tests after registration. The re-classification is defensible \u2014 a 0/1 indicator is not a p-value and corrupts the correction \u2014 but it is a change to the inferential procedure made after seeing the data, and it belongs on the record rather than in the code alone."
    ],
    "confirmatory": false,

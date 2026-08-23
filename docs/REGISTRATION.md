@@ -18,6 +18,15 @@ recorded here so the question is not reopened later.
 Concept DOI **10.5281/zenodo.22032684** · v1.0.0 DOI **10.5281/zenodo.22032685**, minted
 2026-08-20.
 
+> **Where this repository stands right now.** Version 1.1.0 is not yet deposited: it has no git
+> tag and no version DOI. The most recent published release is v1.0.0, and the concept DOI
+> resolves to that record until 1.1.0 is published. `VERSION`, `CITATION.cff`, `codemeta.json`,
+> `.zenodo.json` and `biotools.json` all read `1.1.0` and describe this tree;
+> `10.5281/zenodo.22032685`, the `v1.0.0` tag URL and the v1.0.0 tarball are pinned to a
+> deposit that already exists and keep reading `1.0.0`, because a version DOI and a pushed tag
+> cannot be relabelled. `platform/check_version_stamps.py` holds both halves apart and fails if
+> either drifts.
+
 > **The mistake that cost an hour.** The release command was first run from the wrong working
 > directory. It tagged and released `hopejsh/aaa-rns` instead, that repository also had the
 > Zenodo webhook enabled, and Zenodo immediately minted a bogus `v1.0.0` deposit whose concept
@@ -61,6 +70,56 @@ first produces no DOI, and the fix is to make another one.
 
 `.zenodo.json` in the repository root is what Zenodo reads for title, authors, licence and
 keywords. It is already written, so the deposit needs no manual editing on the Zenodo side.
+
+> **`.zenodo.json` governs the NEXT deposit; it cannot change the one already published.**
+> The v1.0.0 record was minted on 2026-08-20 from the description as it stood then, and that
+> description counted the slate at **eight**, which is what the repository held that day.
+> Study #12, `interface-null-positive-control-v1`, was registered on
+> **2026-08-22T06:43:11Z** — two days
+> after the deposit — so the published record describes a slate that does not contain the
+> study which forced this project's central retraction. Editing this file corrects every
+> future deposit and nothing on Zenodo today.
+>
+> Two ways to correct the existing record, and the choice is the author's:
+>
+> 1. **Edit the published record's metadata in place.** Zenodo allows the description of a
+>    published record to be edited after publication (the *files* are frozen; the metadata is
+>    not), through the record's own edit form on zenodo.org. Both DOIs keep resolving. This is
+>    the only route that fixes what someone citing 10.5281/zenodo.22032685 reads today.
+> 2. **Leave it and let the next release supersede it.** Publishing v1.1.0 creates a new
+>    version of the record from the corrected `.zenodo.json`, and the concept DOI
+>    10.5281/zenodo.22032684 resolves to it. The v1.0.0 version DOI keeps its original
+>    description, which is defensible — a version DOI is meant to be frozen to what that
+>    release said — but anyone citing the version DOI still reads the superseded count.
+>
+> Whichever is chosen, the tagged v1.0.0 release and the working tree disagree about the size
+> of the slate, because #12 arrived after the tag. `VERSION` now reads `1.1.0` and
+> `docs/RELEASE_NOTES_v1.1.0.md` — generated from the artefacts by
+> `platform/build_release_notes.py` — describes the slate that contains #12, so route 2 is
+> prepared and `./release.sh 1.1.0` is the command that takes it. The v1.0.0 note is frozen to
+> what that release said and marked as such at the top of the file; it is not edited to match
+> today. All four metadata files now read `1.1.0` and say plainly that 1.1.0 is undeposited, so
+> the disagreement is disclosed rather than silent — but it is not resolved. It resolves only
+> when v1.1.0 is actually cut and the **new version DOI** the webhook mints is written back
+> into `CITATION.cff`, `biotools.json` and the README, and the disclosure sentence is removed
+> from the five surfaces that carry it. Both steps are hand work; `platform/check_version_stamps.py`
+> fails until they are done, which is the point of it.
+
+**What the author has to do, and what is deliberately left undone here.** No Zenodo deposit was
+created and no tag was pushed in preparing this. Three things remain, in this order:
+
+1. **Decide route 1 or route 2 above for the already-published v1.0.0 record.** Only route 1 —
+   editing the published record's metadata on zenodo.org — changes what someone citing
+   `10.5281/zenodo.22032685` reads today. Nothing in this repository can do it.
+2. **Cut v1.1.0**: `./release.sh 1.1.0`, from this directory, after reading the confirmation
+   prompt. The Zenodo webhook must be switched on for `hopejsh/CognitionBioChem` first (§1
+   step 2) or the release mints no DOI at all.
+3. **Write the minted version DOI back**, by hand, into `CITATION.cff` (`identifiers:`),
+   `biotools.json` (`otherID` and `download`), and the README's version-DOI paragraph; replace
+   `RELEASE-NOTE-GENERATED` with `RELEASE-NOTE-FROZEN` at the top of
+   `docs/RELEASE_NOTES_v1.1.0.md`; then bump `VERSION` for the next cycle. Only after step 3
+   does `check_version_stamps.py` go green again — until then it names each surface that still
+   points at v1.0.0.
 
 ## 2. SciCrunch — **done**
 
@@ -129,14 +188,24 @@ Description:
   A structural pharmacology workbench for cognition-related CNS targets, built so that a
   displayed number must trace to a computation. Boltz-2 v2.2.1 runs locally and produced every
   predicted structure; chemistry is validated with RDKit; every value carries a provenance
-  record, and fields that were never computed render as labels rather than figures. Eight
-  studies were pre-registered under content hashes before any data was seen, and their
-  artefacts, analysis plans and prediction runs are held under content-addressed custody.
+  record, and fields that were never computed render as labels rather than figures. Nine
+  studies were pre-registered under content hashes before any data was seen, under 27
+  registered analysis plans counting every superseded version, and their artefacts, analysis
+  plans and prediction runs are held under content-addressed custody.
 
-  The headline result is negative: across a 13-candidate screen and a 143-fold full-MSA rerun,
+  The headline result is negative: across a screen of 13 candidate-receptor constructs covering
+  12 distinct peptides (one 41-mer is screened against two different receptors, so it is
+  counted twice in every mean and count) and a 143-fold full-MSA rerun,
   designed peptides did not separate from composition-matched shuffles of their own amino
   acids (mean native ipTM 0.629 against a mean decoy of 0.628), and that hypothesis was
-  falsified in all eleven retained versions of the two screening studies.
+  falsified in all eleven retained versions of the two screening studies. A registered positive
+  control then folded sixteen deposited X-ray peptide-receptor complexes against ten uniform
+  random permutations of each peptide: the natives separate from their own permutations in
+  aggregate (+0.0895 ipTM, Holm p = 0.0148), but only 4 of 16 beat all ten permutations of
+  themselves against a threshold of 5 registered in advance, so the composition-matched null
+  licenses no verdict on any single case and the per-candidate reading of it is withdrawn. That
+  control is the only study in the slate whose protocol audit records no deviation from its
+  registered plan.
 
 Keywords:
   structural biology, protein structure prediction, computational chemistry, drug discovery,
@@ -175,11 +244,16 @@ Related identifiers:
 Run through this list each time an identifier arrives; nothing here is automatic.
 
 - [x] `CITATION.cff` — `doi:` and both `identifiers:` DOI entries (RRID still pending)
-- [ ] `.zenodo.json` — nothing to change; Zenodo owns the record after the first deposit
+- [ ] `.zenodo.json` — governs the *next* deposit only. Its description is kept current with
+      `data/slate.json`, but a published record does not change when this file does; see the
+      note in §1 for what correcting an already-minted record costs
 - [x] `README.md` — DOI badge and citation block
 - [x] `codemeta.json` — `identifier` set to the concept DOI
 - [x] `biotools.json` — both DOIs under `otherID`
-- [ ] `VERSION` — bump before the *next* release, not this one
+- [x] `VERSION` — reads `1.1.0`, the version being prepared. It is not a claim that 1.1.0
+      exists as a deposit; `platform/check_version_stamps.py` requires every metadata
+      surface that describes *this tree* to agree with it, and every surface pinned to a
+      *published* deposit to keep naming the release it actually belongs to
 
 One caution that applies to both registries: this repository's finding is negative. The
 citation should be for what the software does, not as evidence that any candidate binds
@@ -276,8 +350,10 @@ So, in order:
 4. The RSD asks for a short "what does it do" statement separate from the description. Use:
 
    > Runs real structure prediction and chemical validation for cognition-related CNS targets,
-   > with a provenance record on every displayed value and eight studies pre-registered under
-   > content hashes. Its headline result is negative.
+   > with a provenance record on every displayed value and nine studies pre-registered under
+   > content hashes. Its headline result is negative, and a registered positive control on
+   > sixteen X-ray peptide-receptor complexes establishes that the screen's null licenses no
+   > verdict on any single case.
 
 If the eligibility check fails, **bio.tools plus Zenodo plus an RRID already covers discovery,
 citation and Methods-section identification**, which is what the registries are for.

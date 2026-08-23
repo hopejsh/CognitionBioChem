@@ -311,8 +311,9 @@
     "discrepancy_kcal": null,
     "discrepancy_orders": null,
     "consistent": null,
-    "plausible": true,
+    "plausible": false,
     "issues": [
+     "dG = -17.9 kcal/mol is 3.3 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -355,8 +356,9 @@
     "discrepancy_kcal": null,
     "discrepancy_orders": null,
     "consistent": null,
-    "plausible": true,
+    "plausible": false,
     "issues": [
+     "dG = -16.8 kcal/mol is 2.2 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -398,8 +400,9 @@
     "discrepancy_kcal": null,
     "discrepancy_orders": null,
     "consistent": null,
-    "plausible": true,
+    "plausible": false,
     "issues": [
+     "dG = -15.1 kcal/mol is 0.5 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -489,8 +492,9 @@
     "discrepancy_kcal": null,
     "discrepancy_orders": null,
     "consistent": null,
-    "plausible": true,
+    "plausible": false,
     "issues": [
+     "dG = -14.8 kcal/mol is 0.2 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -766,7 +770,7 @@
     "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -18.4 kcal/mol implies Kd = 32.6 fM, but the record states Kd = 320 pM \u2014 a gap of 5.4 kcal/mol (4.0 orders of magnitude in Kd). At most one of the two numbers can be right.",
-     "dG = -18.4 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG = -18.4 kcal/mol is 3.8 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -812,9 +816,10 @@
     "discrepancy_kcal": 4.36136359093487,
     "discrepancy_orders": 3.1969016963038306,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.2 kcal/mol implies Kd = 1.33 pM, but the record states Kd = 2.1 nM \u2014 a gap of 4.4 kcal/mol (3.2 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.2 kcal/mol is 1.6 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -857,9 +862,10 @@
     "discrepancy_kcal": 4.2640200849990695,
     "discrepancy_orders": 3.125548411313523,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.8 kcal/mol implies Kd = 2.62 pM, but the record states Kd = 3.5 nM \u2014 a gap of 4.3 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -15.8 kcal/mol is 1.2 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -904,9 +910,10 @@
     "discrepancy_kcal": 4.729799658900996,
     "discrepancy_orders": 3.4669672081791982,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.9 kcal/mol implies Kd = 409 fM, but the record states Kd = 1.2 nM \u2014 a gap of 4.7 kcal/mol (3.5 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.9 kcal/mol is 2.3 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -954,7 +961,7 @@
     "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -19.1 kcal/mol implies Kd = 9.99 fM, but the record states Kd = 140 pM \u2014 a gap of 5.7 kcal/mol (4.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
-     "dG = -19.1 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG = -19.1 kcal/mol is 4.5 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -999,9 +1006,10 @@
     "discrepancy_kcal": 4.570031633132567,
     "discrepancy_orders": 3.349856432628216,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.5 kcal/mol implies Kd = 804 fM, but the record states Kd = 1.8 nM \u2014 a gap of 4.6 kcal/mol (3.3 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.5 kcal/mol is 1.9 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1046,9 +1054,10 @@
     "discrepancy_kcal": 4.825486860684244,
     "discrepancy_orders": 3.5371064138008648,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -17.2 kcal/mol implies Kd = 247 fM, but the record states Kd = 850 pM \u2014 a gap of 4.8 kcal/mol (3.5 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -17.2 kcal/mol is 2.6 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1093,9 +1102,10 @@
     "discrepancy_kcal": 3.9720428634273937,
     "discrepancy_orders": 2.911527622754484,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.4 kcal/mol implies Kd = 5.15 pM, but the record states Kd = 4.2 nM \u2014 a gap of 4.0 kcal/mol (2.9 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -15.4 kcal/mol is 0.8 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1140,9 +1150,10 @@
     "discrepancy_kcal": 4.240478931393518,
     "discrepancy_orders": 3.1082926259781862,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.0 kcal/mol implies Kd = 1.87 pM, but the record states Kd = 2.4 nM \u2014 a gap of 4.2 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.0 kcal/mol is 1.4 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1190,7 +1201,7 @@
     "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -18.7 kcal/mol implies Kd = 19.6 fM, but the record states Kd = 220 pM \u2014 a gap of 5.5 kcal/mol (4.0 orders of magnitude in Kd). At most one of the two numbers can be right.",
-     "dG = -18.7 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG = -18.7 kcal/mol is 4.1 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1236,9 +1247,10 @@
     "discrepancy_kcal": 4.966544486047955,
     "discrepancy_orders": 3.6405023706844273,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -17.5 kcal/mol implies Kd = 149 fM, but the record states Kd = 650 pM \u2014 a gap of 5.0 kcal/mol (3.6 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -17.5 kcal/mol is 2.9 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1283,9 +1295,10 @@
     "discrepancy_kcal": 4.292115603726678,
     "discrepancy_orders": 3.146142569449187,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.9 kcal/mol implies Kd = 2.21 pM, but the record states Kd = 3.1 nM \u2014 a gap of 4.3 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -15.9 kcal/mol is 1.3 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1330,9 +1343,10 @@
     "discrepancy_kcal": 4.7211316167033,
     "discrepancy_orders": 3.4606134891581473,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.8 kcal/mol implies Kd = 485 fM, but the record states Kd = 1.4 nM \u2014 a gap of 4.7 kcal/mol (3.5 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.8 kcal/mol is 2.2 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1377,9 +1391,10 @@
     "discrepancy_kcal": 4.50206564801384,
     "discrepancy_orders": 3.3000370198260716,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.4 kcal/mol implies Kd = 952 fM, but the record states Kd = 1.9 nM \u2014 a gap of 4.5 kcal/mol (3.3 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.4 kcal/mol is 1.8 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1427,7 +1442,7 @@
     "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -19.5 kcal/mol implies Kd = 5.09 fM, but the record states Kd = 80 pM \u2014 a gap of 5.7 kcal/mol (4.2 orders of magnitude in Kd). At most one of the two numbers can be right.",
-     "dG = -19.5 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG = -19.5 kcal/mol is 4.9 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1472,9 +1487,10 @@
     "discrepancy_kcal": 5.13433529024471,
     "discrepancy_orders": 3.7634938836313694,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -17.8 kcal/mol implies Kd = 89.6 fM, but the record states Kd = 520 pM \u2014 a gap of 5.1 kcal/mol (3.8 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -17.8 kcal/mol is 3.2 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1518,9 +1534,10 @@
     "discrepancy_kcal": 4.461363590934871,
     "discrepancy_orders": 3.2702022049554977,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.3 kcal/mol implies Kd = 1.13 pM, but the record states Kd = 2.1 nM \u2014 a gap of 4.5 kcal/mol (3.3 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.3 kcal/mol is 1.7 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1565,9 +1582,10 @@
     "discrepancy_kcal": 4.212744920506362,
     "discrepancy_orders": 3.0879634549283903,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.7 kcal/mol implies Kd = 3.1 pM, but the record states Kd = 3.8 nM \u2014 a gap of 4.2 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -15.7 kcal/mol is 1.1 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1613,9 +1631,10 @@
     "discrepancy_kcal": 4.636166133176767,
     "discrepancy_orders": 3.3983333575548507,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.6 kcal/mol implies Kd = 679 fM, but the record states Kd = 1.7 nM \u2014 a gap of 4.6 kcal/mol (3.4 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.6 kcal/mol is 2.0 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1663,7 +1682,7 @@
     "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -18.9 kcal/mol implies Kd = 14 fM, but the record states Kd = 180 pM \u2014 a gap of 5.6 kcal/mol (4.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
-     "dG = -18.9 kcal/mol is tighter than biotin-streptavidin (-18.3 kcal/mol), among the strongest non-covalent interactions known. A designed peptide conjugate reaching this is not credible without experimental measurement.",
+     "dG = -18.9 kcal/mol is 4.3 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1708,9 +1727,10 @@
     "discrepancy_kcal": 4.662008854704242,
     "discrepancy_orders": 3.4172762038839237,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.7 kcal/mol implies Kd = 574 fM, but the record states Kd = 1.5 nM \u2014 a gap of 4.7 kcal/mol (3.4 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.7 kcal/mol is 2.1 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1755,9 +1775,10 @@
     "discrepancy_kcal": 4.2807109056250905,
     "discrepancy_orders": 3.1377828677305346,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.8 kcal/mol implies Kd = 2.62 pM, but the record states Kd = 3.6 nM \u2014 a gap of 4.3 kcal/mol (3.1 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -15.8 kcal/mol is 1.2 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1802,9 +1823,10 @@
     "discrepancy_kcal": 4.431810889195825,
     "discrepancy_orders": 3.2485399242604664,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -16.1 kcal/mol implies Kd = 1.58 pM, but the record states Kd = 2.8 nM \u2014 a gap of 4.4 kcal/mol (3.2 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -16.1 kcal/mol is 1.5 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1861,9 +1883,10 @@
     "discrepancy_kcal": 3.851158203886042,
     "discrepancy_orders": 2.822918552428838,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -15.2 kcal/mol implies Kd = 7.22 pM, but the record states Kd = 4.8 nM \u2014 a gap of 3.9 kcal/mol (2.8 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -15.2 kcal/mol is 0.6 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1907,9 +1930,10 @@
     "discrepancy_kcal": 5.299773071718253,
     "discrepancy_orders": 3.8847606189535098,
     "consistent": false,
-    "plausible": true,
+    "plausible": false,
     "issues": [
      "dG and Kd are mutually inconsistent at 298.15 K. The stated dG = -18.2 kcal/mol implies Kd = 45.6 fM, but the record states Kd = 350 pM \u2014 a gap of 5.3 kcal/mol (3.9 orders of magnitude in Kd). At most one of the two numbers can be right.",
+     "dG = -18.2 kcal/mol is 3.6 kcal/mol beyond the tightest affinity de novo design has been measured to reach (-14.6 kcal/mol, Kd ~ 20 pM; Cao et al., Nature 2022), and that was reached only after experimental affinity maturation and only for hyperstable folded mini-proteins under 65 residues. This is an achievability limit for the modality, not a limit on non-covalent binding: natural complexes bind tighter. A stated value past it needs an experimental measurement rather than a prediction.",
      "dG is reported to 0.1 kcal/mol with no uncertainty interval. The best available method (relative FEP) has ~1.1 kcal/mol RMSE \u2014 an order of magnitude larger than the stated precision. A single-point value implies an accuracy no method can deliver."
     ]
    }
@@ -1943,7 +1967,7 @@
   },
   "thermo_pairs_checked": 25,
   "thermo_inconsistent": 25,
-  "thermo_implausible": 5,
+  "thermo_implausible": 29,
   "max_discrepancy_kcal": 5.7253206713886104
  }
 }

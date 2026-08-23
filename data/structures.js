@@ -4,7 +4,7 @@
 window.__CBC_STRUCTURES__ = {
   "schema_version": "1.0",
   "built": "2026-08-23",
-  "git_sha": "2c18275",
+  "git_sha": "b8b6dd3-dirty",
   "note": "Every entry points at a file under custody in this repository. Confidences are copied verbatim from each run's own confidence JSON, and every value in `screen` is copied from study #10's artefact. FOUR things are derived here and are the only ones: `interface_pae` (mean and minimum PAE across the two chains, from the retained array), `chains[].mean_plddt` (a mean over the B-factor column), `screen.decoy_mean_beats_native` (a comparison of two copied values, which the study did not make) and the `coverage` counts. An earlier version of this sentence said exactly one quantity was derived, which was wrong by three.",
   "groups": {
     "peptide_monomer": 22,

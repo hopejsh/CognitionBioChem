@@ -4,7 +4,7 @@
 window.__CBC_SLATE__ = {
   "schema_version": "1.2",
   "built": "2026-08-23",
-  "git_sha": "2c18275",
+  "git_sha": "b8b6dd3-dirty",
   "note": "Assembled by platform/build_slate.py from the registered plans, the study artefacts and the README. No verdict, threshold or p-value is computed here -- all are copied from the artefact that produced them.",
   "counts": {
     "studies": 9,
@@ -17,11 +17,14 @@ window.__CBC_SLATE__ = {
     "decided_by_a_threshold": 20,
     "decided_by_neither": 0,
     "unregistered": 1,
-    "studies_confirmatory": 1
+    "studies_confirmatory": 1,
+    "studies_whose_fold_bytes_are_all_in_this_repository": 4,
+    "studies_with_an_incomplete_custody_record": 1
   },
   "reading_note": "A CONFIRMED criterion is not a test result. Most hypotheses here are pre-specified threshold comparisons on a descriptive statistic, decided by looking at a number against a line drawn in advance, and the count of confirmations is not a score. A few of those rules name a test statistic inside them and are flagged with `threshold_embeds_a_test`; where they do, the value is in the observed column and no multiplicity correction was applied to it. Several confirmations are confirmations of unwelcome statements -- that a method does not discriminate, or that candidates fall in a failed band.",
+  "confirmatory_headline": "1 confirmatory study of 9 \u2014 #12; the other 8 deviated from their registered plan.",
   "confirmatory_note": "8 of the 9 studies in this slate deviated from their registered plan in at least one respect, so their audits record confirmatory = false. The deviations are machine-detected and listed per study; results affected by them are exploratory, not confirmatory. Pre-registration did not make those results confirmatory -- it made the deviations visible. The exception is #12, whose audit records no deviation at all and confirmatory = true -- the first study in this slate to do so.",
-  "numbering_note": "The slate runs #1, #2, #6, #7, #8, #9, #10, #11, #12. #4 is the target-construct registry, which has no hypothesis and no plan hash, so it has no entry here. #3 and #5 were allocated to studies that were never registered and never run, and the numbers were not reused so that every citation keeps pointing at the same thing. Nothing has been withdrawn: prespec/ holds 27 registered plans and every study family in it appears above.",
+  "numbering_note": "The slate runs #1, #2, #6, #7, #8, #9, #10, #11, #12. #4 is the target-construct registry, which has no hypothesis and no plan hash, so it has no entry here. #3 and #5 were allocated to studies that were never registered and never run, and the numbers were not reused so that every citation keeps pointing at the same thing. NO SLATE NUMBER HAS BEEN WITHDRAWN: prespec/ holds 27 registered plans and every study family in it appears above. That is a statement about numbering and not about findings \u2014 this project has withdrawn claims, and each withdrawal is recorded in retractions.jsonl and shown beside the claim it retracts.",
   "separation_across_versions": {
     "note": "every retained version of the two screening studies, oldest first",
     "n_versions": 11,
@@ -107,6 +110,7 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-17T20:53:12+00:00",
       "supersedes": null,
       "supersedes_reason": null,
+      "supersedes_reason_correction": null,
       "artefact": "data/study_ache_affinity.json",
       "question": "Does the Boltz-2 affinity head rank the potency of AChE inhibitors on this hardware in single-sequence mode, and does its per-compound error correlate with how heavily that compound has been assayed (a memorization signature)?",
       "primary_metric": "spearman_rho_predicted_vs_measured_pIC50",
@@ -123,6 +127,8 @@ window.__CBC_SLATE__ = {
       "n_observed": 15,
       "n_planned": 17,
       "n_candidates": null,
+      "peptide_multiplicity": null,
+      "n_distinct_peptides": null,
       "hypotheses": [
         {
           "name": "H1_ranking_ability",
@@ -159,6 +165,10 @@ window.__CBC_SLATE__ = {
           "p_is_incidental": "this hypothesis is decided by the threshold above; the study placed it in the correction family, so a Holm-adjusted value exists, but no p-value appears in its decision rule and none decided it"
         }
       ],
+      "retractions": [],
+      "reading_limits": [],
+      "interpretation_key": null,
+      "interpretation_key_states_a_withdrawal": false,
       "metrics": {
         "spearman_rho_predicted_vs_measured_pIC50": 0.3036,
         "mean_absolute_error_log10": 1.3593,
@@ -180,6 +190,19 @@ window.__CBC_SLATE__ = {
         "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."
       },
       "confirmatory": false,
+      "custody": {
+        "rows": 17,
+        "rows_citing_a_fold_output": 0,
+        "rows_whose_bytes_this_repository_holds": 0,
+        "rows_whose_bytes_this_repository_does_not_hold": 0,
+        "complete": null,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [],
+        "input_digests": {},
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "note": "no row in this artefact names a path under runs/, so there is nothing here for the manifest to resolve."
+      },
       "n_failures": 2,
       "n_failures_detail": {
         "listed_in_failures": 0,
@@ -199,6 +222,7 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-19T22:59:10+00:00",
       "supersedes": "inference-variance-v2",
       "supersedes_reason": "v2 was registered specifically to correct arm D's construct and its selection rule, and its own analysis_plan still specified the superseded 583-residue AChE mature chain -- byte-identical to v1's on that clause. A hash-locked plan that contradicts the reason it was registered cannot serve as the frozen reference results are compared against, and verify_result cannot see it because it compares metrics, hypotheses and multiplicity only. v3 states the executed construct. No arm, seed, metric or verdict changes; arms A, B and C are unaffected and, with content-addressed reuse now enabled for this study, are reused after each stored model is re-parsed and checked against the chains requested; arm D was already recomputed under v2.",
+      "supersedes_reason_correction": null,
       "artefact": "data/study_inference_variance_analysis.json",
       "question": "For each structural metric this platform reports, how large is a difference before it means anything? Specifically: what fraction of the observed variance in complex_plddt, pTM, ipTM and interface PAE is attributable to the sampler (seed) and to run-to-run nondeterminism, rather than to the molecule?",
       "primary_metric": "across_seed_sd_complex_plddt",
@@ -223,6 +247,8 @@ window.__CBC_SLATE__ = {
       "n_observed": 87,
       "n_planned": 87,
       "n_candidates": null,
+      "peptide_multiplicity": null,
+      "n_distinct_peptides": null,
       "hypotheses": [
         {
           "name": "H1_seed_noise_small",
@@ -269,6 +295,10 @@ window.__CBC_SLATE__ = {
           "confirmed_by_absence_note": "confirmed by not detecting an effect; this is not evidence of equivalence unless the interval excludes a material difference"
         }
       ],
+      "retractions": [],
+      "reading_limits": [],
+      "interpretation_key": null,
+      "interpretation_key_states_a_withdrawal": false,
       "metrics": {
         "across_seed_sd_complex_plddt": 2.6615,
         "across_seed_sd_ptm": 0.02618,
@@ -304,6 +334,19 @@ window.__CBC_SLATE__ = {
         "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."
       },
       "confirmatory": false,
+      "custody": {
+        "rows": 87,
+        "rows_citing_a_fold_output": 87,
+        "rows_whose_bytes_this_repository_holds": 87,
+        "rows_whose_bytes_this_repository_does_not_hold": 0,
+        "complete": true,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [],
+        "input_digests": {},
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "note": "all 87 rows that name a fold output name bytes this repository carries, so every number in this study re-derives from files a clone can open."
+      },
       "n_failures": 0,
       "n_failures_detail": {
         "listed_in_failures": 0,
@@ -326,6 +369,7 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-18T04:16:59+00:00",
       "supersedes": null,
       "supersedes_reason": null,
+      "supersedes_reason_correction": null,
       "artefact": "data/study_pose_accuracy.json",
       "question": "When Boltz-2 places a small molecule in a protein pocket on this hardware, how often is the pose within 2 A of the crystallographic pose, and does that accuracy differ between complexes that could have been in its training set and complexes deposited after its cutoff?",
       "primary_metric": "fraction_rmsd_under_2A",
@@ -348,6 +392,8 @@ window.__CBC_SLATE__ = {
       "n_observed": 13,
       "n_planned": 16,
       "n_candidates": null,
+      "peptide_multiplicity": null,
+      "n_distinct_peptides": null,
       "hypotheses": [
         {
           "name": "H1_recall_accuracy",
@@ -398,6 +444,10 @@ window.__CBC_SLATE__ = {
           "p_raw": 0.592074592074592
         }
       ],
+      "retractions": [],
+      "reading_limits": [],
+      "interpretation_key": null,
+      "interpretation_key_states_a_withdrawal": false,
       "metrics": {
         "fraction_rmsd_under_2A": 0.3846,
         "median_rmsd": 4.57,
@@ -442,6 +492,19 @@ window.__CBC_SLATE__ = {
         "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."
       },
       "confirmatory": false,
+      "custody": {
+        "rows": 16,
+        "rows_citing_a_fold_output": 15,
+        "rows_whose_bytes_this_repository_holds": 15,
+        "rows_whose_bytes_this_repository_does_not_hold": 0,
+        "complete": true,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [],
+        "input_digests": {},
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "note": "all 15 rows that name a fold output name bytes this repository carries, so every number in this study re-derives from files a clone can open."
+      },
       "n_failures": 3,
       "n_failures_detail": {
         "listed_in_failures": 3,
@@ -461,6 +524,7 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-18T05:04:46+00:00",
       "supersedes": null,
       "supersedes_reason": null,
+      "supersedes_reason_correction": null,
       "artefact": "data/study_peptide_interface.json",
       "question": "On peptide-receptor complexes predicted with Boltz-2 on this hardware, what fraction of interfaces reach CAPRI acceptable quality, how well does ipTM predict that, and does the pipeline have enough sensitivity for a screen of unknown candidates to be interpretable?",
       "primary_metric": "fraction_dockq_acceptable",
@@ -483,6 +547,8 @@ window.__CBC_SLATE__ = {
       "n_observed": 16,
       "n_planned": 16,
       "n_candidates": null,
+      "peptide_multiplicity": null,
+      "n_distinct_peptides": null,
       "hypotheses": [
         {
           "name": "H1_overall_accuracy",
@@ -505,6 +571,24 @@ window.__CBC_SLATE__ = {
           "verdict": "CONFIRMED",
           "kind": "test",
           "rule_cites_a_test_statistic": true,
+          "retraction": {
+            "id": "ret_0002",
+            "claim": "ipTM predicts whether the interface is right, so it can be used as a screening filter on individual complexes.",
+            "retracted_by": {
+              "kind": "study",
+              "study": "interface-null-positive-control-v1",
+              "prespec": "69a5009d6f62",
+              "artefact": "data/study_interface_null_positive_control.json",
+              "hypothesis": "H2_the_null_discriminates_case_by_case",
+              "verdict": "FALSIFIED",
+              "date": "2026-08-22"
+            },
+            "evidence": "Same measurement as ret_0001: 4 of 16 established binders beat all ten permutations of themselves against a registered threshold of 5, and the empirical-p floor of 1/11 = 0.0909 puts a per-complex call out of reach at any outcome. A filter that cannot separate an X-ray binder from a shuffle of its own residues cannot screen an unknown candidate.",
+            "replacement": "ipTM ranks interface quality: Spearman rho(ipTM, DockQ) = 0.800, p = 2e-04, n = 16. That is discrimination over a batch. It is not a per-complex filter, and the CONFIRMED verdict records only that the registered rank-correlation threshold was met.",
+            "ledger": "retractions.jsonl",
+            "applies_to": "the registered statement, not the verdict",
+            "note": "the plan is hash-locked and is not edited; this withdrawal is joined from retractions.jsonl at build time and travels with the statement wherever it is republished"
+          },
           "p_holm": 0.00019857097280000065,
           "p_raw": 0.00019857097280000065
         },
@@ -522,6 +606,12 @@ window.__CBC_SLATE__ = {
           "confirmed_by_absence_note": null
         }
       ],
+      "retractions": [
+        "ret_0002"
+      ],
+      "reading_limits": [],
+      "interpretation_key": null,
+      "interpretation_key_states_a_withdrawal": false,
       "metrics": {
         "fraction_dockq_acceptable": 0.625,
         "median_dockq": 0.36,
@@ -640,6 +730,19 @@ window.__CBC_SLATE__ = {
         "note": "One declared deviation, made for a measured technical reason and recorded rather than absorbed silently."
       },
       "confirmatory": false,
+      "custody": {
+        "rows": 16,
+        "rows_citing_a_fold_output": 16,
+        "rows_whose_bytes_this_repository_holds": 16,
+        "rows_whose_bytes_this_repository_does_not_hold": 0,
+        "complete": true,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [],
+        "input_digests": {},
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "note": "all 16 rows that name a fold output name bytes this repository carries, so every number in this study re-derives from files a clone can open."
+      },
       "n_failures": 0,
       "n_failures_detail": {
         "listed_in_failures": 0,
@@ -659,6 +762,7 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-18T05:28:14+00:00",
       "supersedes": null,
       "supersedes_reason": null,
+      "supersedes_reason_correction": null,
       "artefact": "data/study_affinity_corrected.json",
       "question": "Does the Boltz-2 affinity head rank AChE inhibitor potency once each reference value is the median over ALL ChEMBL records for that compound-target pair rather than whichever single record a flat activity budget happened to capture? And how does the model's error compare with the measured dispersion of the references themselves?",
       "primary_metric": "spearman_rho_corrected",
@@ -683,6 +787,8 @@ window.__CBC_SLATE__ = {
       "n_observed": 14,
       "n_planned": 15,
       "n_candidates": null,
+      "peptide_multiplicity": null,
+      "n_distinct_peptides": null,
       "hypotheses": [
         {
           "name": "H1_ranking_with_good_references",
@@ -733,6 +839,10 @@ window.__CBC_SLATE__ = {
           "confirmed_by_absence_note": null
         }
       ],
+      "retractions": [],
+      "reading_limits": [],
+      "interpretation_key": null,
+      "interpretation_key_states_a_withdrawal": false,
       "metrics": {
         "spearman_rho_corrected": 0.1912,
         "rho_v1": 0.304,
@@ -758,6 +868,19 @@ window.__CBC_SLATE__ = {
         "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."
       },
       "confirmatory": false,
+      "custody": {
+        "rows": 15,
+        "rows_citing_a_fold_output": 0,
+        "rows_whose_bytes_this_repository_holds": 0,
+        "rows_whose_bytes_this_repository_does_not_hold": 0,
+        "complete": null,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [],
+        "input_digests": {},
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "note": "no row in this artefact names a path under runs/, so there is nothing here for the manifest to resolve."
+      },
       "n_failures": 0,
       "n_failures_detail": {
         "listed_in_failures": 0,
@@ -777,6 +900,7 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-20T06:09:45+00:00",
       "supersedes": "candidate-screen-v7",
       "supersedes_reason": "v7 registered an exclusions clause that did not describe what the code does. It read as if a candidate naming several targets were excluded, whereas coverage() screens such a candidate against its reachable target and records the unreachable ones as declared-but-untested; it also still implied the oligomeric flag was an exclusion ground after that had been withdrawn. The text was corrected AFTER v7 had already been executed, which would have meant editing a hash-locked plan in place -- the registry rejected it by refusing to resolve a study with two plans, which is the guard working. v8 carries the corrected wording. No candidate, arm, threshold or decision rule changes; the 52 folds are reused after each stored model is re-parsed and checked against the chains its own input requested.",
+      "supersedes_reason_correction": null,
       "artefact": "data/study_candidate_screen.json",
       "question": "For each platform candidate predicted together with its declared receptor, is the interface distinguishable from what the same model at the same settings assigns to a sequence of identical amino-acid composition in random order?",
       "primary_metric": "fraction_candidates_beating_null",
@@ -801,6 +925,30 @@ window.__CBC_SLATE__ = {
       "n_observed": 52,
       "n_planned": 52,
       "n_candidates": 13,
+      "peptide_multiplicity": {
+        "n_constructs": 13,
+        "n_distinct_peptides": 12,
+        "deduplication_key": "(peptide, target)",
+        "shared_sequence_groups": [
+          {
+            "peptide_length": 41,
+            "peptide_sha256_12": "c048ba665d79",
+            "codes": [
+              {
+                "code": "MicroTlr4-Antagonist-M3",
+                "target": "TLR4"
+              },
+              {
+                "code": "PfcACh-PAM-P1",
+                "target": "CHRNA7"
+              }
+            ],
+            "decoy_arms_identical": true
+          }
+        ],
+        "note": "13 candidate-receptor constructs cover 12 distinct peptides. De-duplication is applied on (peptide, target), so one peptide declared against two receptors is screened, and counted, twice. Every mean and count in this study is taken over constructs, so a shared peptide votes once per construct; see metrics.shared_peptide_sensitivity for what each headline becomes when it votes once."
+      },
+      "n_distinct_peptides": 12,
       "hypotheses": [
         {
           "name": "H1_any_candidate_binds",
@@ -810,6 +958,23 @@ window.__CBC_SLATE__ = {
           "verdict": "FALSIFIED",
           "kind": "criterion",
           "rule_cites_a_test_statistic": false,
+          "reading_limit": {
+            "retraction": "ret_0001",
+            "limit": "FALSIFIED records that no candidate met the registered conjunction -- beat every one of its own composition-matched shuffles AND score above ipTM 0.8. It is not evidence that these thirteen molecules fail to bind. Study #12 put the same comparison to sixteen deposited X-ray peptide-receptor complexes, every one an established binder, against ten uniform random permutations of each: only 4 of 16 beat all of theirs. Losing this comparison is what most demonstrated binders do on this instrument. #9 allotted three decoys per candidate rather than ten, so its per-candidate comparison is coarser still.",
+            "withdrawn_reading": "A low ipTM score in the composition-matched native-versus-shuffle comparison is evidence about the candidate rather than about the method, so the comparison can be read one candidate at a time.",
+            "withdrawn_by": {
+              "kind": "study",
+              "study": "interface-null-positive-control-v1",
+              "prespec": "69a5009d6f62",
+              "artefact": "data/study_interface_null_positive_control.json",
+              "hypothesis": "H2_the_null_discriminates_case_by_case",
+              "verdict": "FALSIFIED",
+              "date": "2026-08-22"
+            },
+            "read_instead": "The comparison licenses a verdict on a batch of native-decoy pairs taken together and none on any single pair. Natives beat their own permutations in aggregate by +0.0895 ipTM (Holm p = 0.0148, 13 of 16 differences positive).",
+            "applies_to": "what the verdict licenses, not the statement and not the verdict",
+            "ledger": "retractions.jsonl"
+          },
           "observed": 0,
           "observed_text": "0",
           "threshold": "at least one candidate beats all decoys AND ipTM > 0.8",
@@ -842,6 +1007,12 @@ window.__CBC_SLATE__ = {
           "confirmed_by_absence_note": null
         }
       ],
+      "retractions": [],
+      "reading_limits": [
+        "ret_0001"
+      ],
+      "interpretation_key": "Study #7 measured, on 16 peptide-receptor complexes with known answers: ipTM > 0.8 was correct in 9 of 10 cases; ipTM < 0.6 was correct in 0 of 4, with no false negatives. The gate for this study was OPEN because #7 recovered 7 of 8 memorisable interfaces, so the pipeline has demonstrated sensitivity over the range #7 measured (peptides 7-17 aa, receptors 80-304 aa; the candidates here are 31-47 aa on receptors of 156-608, so every band above is an extrapolation). RETRACTION. This key previously ended: 'and a low score here is evidence about the candidate rather than about the method.' Study #12, interface-null-positive-control-v1 (prespec 69a5009d6f62, registered before any permutation was folded; data/study_interface_null_positive_control.json), falsified that clause and it is withdrawn. #12 folded the same 16 deposited X-ray complexes -- every one an established binder -- against ten uniform random permutations of each peptide, and only 4 of 16 scored above all ten permutations of themselves, against a threshold of 5 registered in advance (H2 FALSIFIED). Losing this comparison is therefore what most demonstrated binders do on this instrument, and a low score here is NOT evidence about the candidate in the way the retracted clause claimed. What #12 confirmed is narrower and holds: natives beat their own permutations in aggregate by +0.0895 ipTM (Holm p = 0.0148, 13 of 16 differences positive), which licenses a verdict on a batch of native-versus-shuffle pairs and none on any single pair. The per-candidate readings below -- beats_all_decoys and empirical_p -- are descriptive for that reason and carry no verdict on any candidate.",
+      "interpretation_key_states_a_withdrawal": true,
       "metrics": {
         "fraction_candidates_beating_null": 0.0,
         "mean_native_iptm": 0.4615,
@@ -869,20 +1040,119 @@ window.__CBC_SLATE__ = {
           "n_computed": 0,
           "n_reused": 52,
           "note": "no cell was recomputed in this run; every fold was served from a content-verified cache"
+        },
+        "shared_peptide_sensitivity": {
+          "as_reported": {
+            "n_constructs": 13,
+            "fraction_candidates_beating_null": 0.0,
+            "mean_native_iptm": 0.4615,
+            "mean_decoy_iptm": 0.4603,
+            "native_minus_decoy_mean": 0.0012,
+            "n_candidates_above_0.8": 1,
+            "n_candidates_below_0.6": 9,
+            "H1_any_candidate_binds": "FALSIFIED",
+            "H2_natives_beat_decoys_on_average": "FALSIFIED",
+            "H3_candidates_in_failed_band": "CONFIRMED"
+          },
+          "counted_once": {
+            "drop PfcACh-PAM-P1": {
+              "n_constructs": 12,
+              "fraction_candidates_beating_null": 0.0,
+              "mean_native_iptm": 0.4664,
+              "mean_decoy_iptm": 0.442,
+              "native_minus_decoy_mean": 0.0243,
+              "n_candidates_above_0.8": 1,
+              "n_candidates_below_0.6": 8,
+              "H1_any_candidate_binds": "FALSIFIED",
+              "H2_natives_beat_decoys_on_average": "FALSIFIED",
+              "H3_candidates_in_failed_band": "CONFIRMED"
+            },
+            "drop MicroTlr4-Antagonist-M3": {
+              "n_constructs": 12,
+              "fraction_candidates_beating_null": 0.0,
+              "mean_native_iptm": 0.4408,
+              "mean_decoy_iptm": 0.4375,
+              "native_minus_decoy_mean": 0.0033,
+              "n_candidates_above_0.8": 1,
+              "n_candidates_below_0.6": 9,
+              "H1_any_candidate_binds": "FALSIFIED",
+              "H2_natives_beat_decoys_on_average": "FALSIFIED",
+              "H3_candidates_in_failed_band": "CONFIRMED"
+            }
+          },
+          "verdicts_that_move": [],
+          "interpretation": "13 screened constructs cover 12 distinct peptides, so every mean and count above is taken over a set in which one peptide appears twice. Counting it once moves the mean native-minus-decoy difference from +0.0012 to +0.0033/+0.0243 depending on which receptor's fold is kept. No registered verdict changes at any of those choices."
         }
       },
-      "exploratory_metrics": {},
+      "exploratory_metrics": {
+        "shared_peptide_sensitivity": {
+          "as_reported": {
+            "n_constructs": 13,
+            "fraction_candidates_beating_null": 0.0,
+            "mean_native_iptm": 0.4615,
+            "mean_decoy_iptm": 0.4603,
+            "native_minus_decoy_mean": 0.0012,
+            "n_candidates_above_0.8": 1,
+            "n_candidates_below_0.6": 9,
+            "H1_any_candidate_binds": "FALSIFIED",
+            "H2_natives_beat_decoys_on_average": "FALSIFIED",
+            "H3_candidates_in_failed_band": "CONFIRMED"
+          },
+          "counted_once": {
+            "drop PfcACh-PAM-P1": {
+              "n_constructs": 12,
+              "fraction_candidates_beating_null": 0.0,
+              "mean_native_iptm": 0.4664,
+              "mean_decoy_iptm": 0.442,
+              "native_minus_decoy_mean": 0.0243,
+              "n_candidates_above_0.8": 1,
+              "n_candidates_below_0.6": 8,
+              "H1_any_candidate_binds": "FALSIFIED",
+              "H2_natives_beat_decoys_on_average": "FALSIFIED",
+              "H3_candidates_in_failed_band": "CONFIRMED"
+            },
+            "drop MicroTlr4-Antagonist-M3": {
+              "n_constructs": 12,
+              "fraction_candidates_beating_null": 0.0,
+              "mean_native_iptm": 0.4408,
+              "mean_decoy_iptm": 0.4375,
+              "native_minus_decoy_mean": 0.0033,
+              "n_candidates_above_0.8": 1,
+              "n_candidates_below_0.6": 9,
+              "H1_any_candidate_binds": "FALSIFIED",
+              "H2_natives_beat_decoys_on_average": "FALSIFIED",
+              "H3_candidates_in_failed_band": "CONFIRMED"
+            }
+          },
+          "verdicts_that_move": [],
+          "interpretation": "13 screened constructs cover 12 distinct peptides, so every mean and count above is taken over a set in which one peptide appears twice. Counting it once moves the mean native-minus-decoy difference from +0.0012 to +0.0033/+0.0243 depending on which receptor's fold is kept. No registered verdict changes at any of those choices."
+        }
+      },
       "prespec_audit": {
         "study_id": "candidate-screen-v8",
         "prespec_hash": "4486520b88637eb3edff3757622170719ab5cee25e689c711bee26d5b212a9d0",
         "registered_utc": "2026-08-20T06:09:45+00:00",
         "deviations": [
+          "metrics reported that were not pre-specified (exploratory): ['shared_peptide_sensitivity']",
           "registered n_comparisons=3 under 'holm', but the executed family holds 0: ['H1_any_candidate_binds', 'H2_natives_beat_decoys_on_average', 'H3_candidates_in_failed_band'] were re-classified as threshold criteria rather than tests after registration. The re-classification is defensible \u2014 a 0/1 indicator is not a p-value and corrupts the correction \u2014 but it is a change to the inferential procedure made after seeing the data, and it belongs on the record rather than in the code alone."
         ],
         "confirmatory": false,
         "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."
       },
       "confirmatory": false,
+      "custody": {
+        "rows": 52,
+        "rows_citing_a_fold_output": 0,
+        "rows_whose_bytes_this_repository_holds": 0,
+        "rows_whose_bytes_this_repository_does_not_hold": 0,
+        "complete": null,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [],
+        "input_digests": {},
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "note": "no row in this artefact names a path under runs/, so there is nothing here for the manifest to resolve."
+      },
       "n_failures": 0,
       "n_failures_detail": {
         "listed_in_failures": 0,
@@ -902,6 +1172,23 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-20T06:10:28+00:00",
       "supersedes": "msa-specificity-v8",
       "supersedes_reason": "Synchronised with candidate-screen-v8: coverage() no longer short-circuits on the hand-written map, the oligomeric flag no longer excludes, and the two GRIN2A candidates the criterion admits are screened, giving 13 distinct designs. The power caveat is now derived from n_cand rather than typed, because that string had gone stale three times. No hypothesis, threshold or decision rule changes.",
+      "supersedes_reason_correction": {
+        "retraction": "ret_0005",
+        "field": "supersedes_reason",
+        "correction": "Read \"13 distinct designs\" as 13 candidate-receptor CONSTRUCTS. Every other clause of this lineage note stands -- coverage() really did stop short-circuiting, the oligomeric flag really did stop excluding, and the two GRIN2A candidates really were added; what the sentence gets wrong is the noun. De-duplication is applied on (peptide, target), which does not collapse one 41-mer declared against two receptors, so the 13 constructs cover 12 distinct peptides and that peptide votes twice in every mean and count the study reports.",
+        "registered_wording": "Synchronised with candidate-screen-v8: coverage() no longer short-circuits on the hand-written map, the oligomeric flag no longer excludes, and the two GRIN2A candidates the criterion admits are screened, giving 13 distinct designs. The power caveat is now derived from n_cand rather than typed, because that string had gone stale three times. No hypothesis, threshold or decision rule changes.",
+        "withdrawn_wording": "The candidate set these screens fold is 13 distinct designs, so a mean or a count taken over that set is a count over that many distinct molecules.",
+        "withdrawn_by": {
+          "kind": "self_correction",
+          "study": "msa-specificity-v9",
+          "prespec": "8511b6cc30ea",
+          "artefact": "data/study_msa_specificity.json",
+          "date": "2026-08-23"
+        },
+        "read_instead": "The screens fold 13 candidate-receptor constructs covering 12 distinct peptides. One 41-mer is declared against two receptors and de-duplication is applied on (peptide, target), so it is screened twice and votes twice in every mean and count over the set; analysis.metrics.shared_peptide_sensitivity records what each headline becomes when it votes once.",
+        "applies_to": "the wording this page republishes, not the registered plan, which is hash-locked and stays byte-identical",
+        "ledger": "retractions.jsonl"
+      },
       "artefact": "data/study_msa_specificity.json",
       "question": "With a full MSA rather than single-sequence mode, is each candidate's interface with its declared receptor distinguishable from the interfaces the same model assigns to sequences of identical amino-acid composition in random order?",
       "primary_metric": "paired_native_minus_decoy_mean",
@@ -924,6 +1211,30 @@ window.__CBC_SLATE__ = {
       "n_observed": 143,
       "n_planned": 143,
       "n_candidates": 13,
+      "peptide_multiplicity": {
+        "n_constructs": 13,
+        "n_distinct_peptides": 12,
+        "deduplication_key": "(peptide, target)",
+        "shared_sequence_groups": [
+          {
+            "peptide_length": 41,
+            "peptide_sha256_12": "c048ba665d79",
+            "codes": [
+              {
+                "code": "MicroTlr4-Antagonist-M3",
+                "target": "TLR4"
+              },
+              {
+                "code": "PfcACh-PAM-P1",
+                "target": "CHRNA7"
+              }
+            ],
+            "decoy_arms_identical": true
+          }
+        ],
+        "note": "13 candidate-receptor constructs cover 12 distinct peptides. De-duplication is applied on (peptide, target), so one peptide declared against two receptors is screened, and counted, twice. Every mean and count in this study is taken over constructs, so a shared peptide votes once per construct; see metrics.shared_peptide_sensitivity for what each headline becomes when it votes once."
+      },
+      "n_distinct_peptides": 12,
       "hypotheses": [
         {
           "name": "H1_natives_separate_from_decoys",
@@ -944,6 +1255,23 @@ window.__CBC_SLATE__ = {
           "verdict": "CONFIRMED",
           "kind": "criterion",
           "rule_cites_a_test_statistic": false,
+          "reading_limit": {
+            "retraction": "ret_0001",
+            "limit": "CONFIRMED records that the registered threshold fired: 2 of 13 candidates beat all ten of their own composition-matched shuffles and scored above ipTM 0.8. It is not a finding about those two molecules, on two counts the study itself measured. It is not distinguishable from chance -- a candidate sweeps ten decoys with probability 1/11 under the null, so 1.18 of 13 are expected to by chance and observing 2 has probability 0.334 (data/study_msa_specificity.json, metrics.beats_all_decoys_null). And 'specific' here means only that a sequence outscored shuffles of its own residues, which study #12 measured 12 of 16 established X-ray binders failing to do.",
+            "withdrawn_reading": "A low ipTM score in the composition-matched native-versus-shuffle comparison is evidence about the candidate rather than about the method, so the comparison can be read one candidate at a time.",
+            "withdrawn_by": {
+              "kind": "study",
+              "study": "interface-null-positive-control-v1",
+              "prespec": "69a5009d6f62",
+              "artefact": "data/study_interface_null_positive_control.json",
+              "hypothesis": "H2_the_null_discriminates_case_by_case",
+              "verdict": "FALSIFIED",
+              "date": "2026-08-22"
+            },
+            "read_instead": "The comparison licenses a verdict on a batch of native-decoy pairs taken together and none on any single pair. Natives beat their own permutations in aggregate by +0.0895 ipTM (Holm p = 0.0148, 13 of 16 differences positive).",
+            "applies_to": "what the verdict licenses, not the statement and not the verdict",
+            "ledger": "retractions.jsonl"
+          },
           "observed": 2,
           "observed_text": "2",
           "threshold": "at least one candidate beats all decoys AND ipTM > 0.8",
@@ -963,6 +1291,14 @@ window.__CBC_SLATE__ = {
           "confirmed_by_absence_note": null
         }
       ],
+      "retractions": [
+        "ret_0005"
+      ],
+      "reading_limits": [
+        "ret_0001"
+      ],
+      "interpretation_key": null,
+      "interpretation_key_states_a_withdrawal": false,
       "metrics": {
         "paired_native_minus_decoy_mean": 0.0009,
         "mean_native_iptm": 0.6287,
@@ -998,6 +1334,72 @@ window.__CBC_SLATE__ = {
           "n_computed": 22,
           "n_reused": 121,
           "note": ""
+        },
+        "shared_peptide_sensitivity": {
+          "as_reported": {
+            "n_constructs": 13,
+            "paired_native_minus_decoy_mean": 0.0009,
+            "mean_native_iptm": 0.6287,
+            "mean_decoy_iptm": 0.6278,
+            "cohens_dz": 0.0057,
+            "paired_t_p": 0.98407,
+            "paired_t_df": 12,
+            "delta_vs_study9": 0.1672,
+            "beats_all_decoys_null": {
+              "per_candidate_null_probability": 0.0909,
+              "expected_under_null": 1.182,
+              "observed": 2,
+              "p_at_least_observed": 0.3338,
+              "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.18 of 13 are expected to do so by chance; observing 2 has probability 0.334."
+            },
+            "H1_natives_separate_from_decoys": "FALSIFIED",
+            "H2_a_candidate_is_confident_and_specific": "criterion met",
+            "H3_msa_raises_natives": "criterion met"
+          },
+          "counted_once": {
+            "drop PfcACh-PAM-P1": {
+              "n_constructs": 12,
+              "paired_native_minus_decoy_mean": 0.0211,
+              "mean_native_iptm": 0.6514,
+              "mean_decoy_iptm": 0.6303,
+              "cohens_dz": 0.1395,
+              "paired_t_p": 0.63833,
+              "paired_t_df": 11,
+              "delta_vs_study9": 0.185,
+              "beats_all_decoys_null": {
+                "per_candidate_null_probability": 0.0909,
+                "expected_under_null": 1.091,
+                "observed": 2,
+                "p_at_least_observed": 0.299,
+                "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.09 of 12 are expected to do so by chance; observing 2 has probability 0.299."
+              },
+              "H1_natives_separate_from_decoys": "FALSIFIED",
+              "H2_a_candidate_is_confident_and_specific": "criterion met",
+              "H3_msa_raises_natives": "criterion met"
+            },
+            "drop MicroTlr4-Antagonist-M3": {
+              "n_constructs": 12,
+              "paired_native_minus_decoy_mean": 0.0119,
+              "mean_native_iptm": 0.6209,
+              "mean_decoy_iptm": 0.609,
+              "cohens_dz": 0.0724,
+              "paired_t_p": 0.80672,
+              "paired_t_df": 11,
+              "delta_vs_study9": 0.1801,
+              "beats_all_decoys_null": {
+                "per_candidate_null_probability": 0.0909,
+                "expected_under_null": 1.091,
+                "observed": 2,
+                "p_at_least_observed": 0.299,
+                "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.09 of 12 are expected to do so by chance; observing 2 has probability 0.299."
+              },
+              "H1_natives_separate_from_decoys": "FALSIFIED",
+              "H2_a_candidate_is_confident_and_specific": "criterion met",
+              "H3_msa_raises_natives": "criterion met"
+            }
+          },
+          "verdicts_that_move": [],
+          "interpretation": "13 screened constructs cover 12 distinct peptides. Counting the shared peptide once moves the paired difference from +0.0009 to +0.0119/+0.0211 depending on which receptor's fold is kept, drops the t-test's df from 12 to 11, and lowers the screen-level null's expectation from 1.182 to 1.091. The largest paired difference any of those choices produces is +0.0211. No registered verdict changes at any of those choices, so what the duplicate inflates is the claim that the difference is indistinguishable from EXACTLY zero, not the finding that it is indistinguishable from zero."
         }
       },
       "exploratory_metrics": {
@@ -1007,6 +1409,72 @@ window.__CBC_SLATE__ = {
           "observed": 2,
           "p_at_least_observed": 0.3338,
           "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.18 of 13 are expected to do so by chance; observing 2 has probability 0.334."
+        },
+        "shared_peptide_sensitivity": {
+          "as_reported": {
+            "n_constructs": 13,
+            "paired_native_minus_decoy_mean": 0.0009,
+            "mean_native_iptm": 0.6287,
+            "mean_decoy_iptm": 0.6278,
+            "cohens_dz": 0.0057,
+            "paired_t_p": 0.98407,
+            "paired_t_df": 12,
+            "delta_vs_study9": 0.1672,
+            "beats_all_decoys_null": {
+              "per_candidate_null_probability": 0.0909,
+              "expected_under_null": 1.182,
+              "observed": 2,
+              "p_at_least_observed": 0.3338,
+              "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.18 of 13 are expected to do so by chance; observing 2 has probability 0.334."
+            },
+            "H1_natives_separate_from_decoys": "FALSIFIED",
+            "H2_a_candidate_is_confident_and_specific": "criterion met",
+            "H3_msa_raises_natives": "criterion met"
+          },
+          "counted_once": {
+            "drop PfcACh-PAM-P1": {
+              "n_constructs": 12,
+              "paired_native_minus_decoy_mean": 0.0211,
+              "mean_native_iptm": 0.6514,
+              "mean_decoy_iptm": 0.6303,
+              "cohens_dz": 0.1395,
+              "paired_t_p": 0.63833,
+              "paired_t_df": 11,
+              "delta_vs_study9": 0.185,
+              "beats_all_decoys_null": {
+                "per_candidate_null_probability": 0.0909,
+                "expected_under_null": 1.091,
+                "observed": 2,
+                "p_at_least_observed": 0.299,
+                "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.09 of 12 are expected to do so by chance; observing 2 has probability 0.299."
+              },
+              "H1_natives_separate_from_decoys": "FALSIFIED",
+              "H2_a_candidate_is_confident_and_specific": "criterion met",
+              "H3_msa_raises_natives": "criterion met"
+            },
+            "drop MicroTlr4-Antagonist-M3": {
+              "n_constructs": 12,
+              "paired_native_minus_decoy_mean": 0.0119,
+              "mean_native_iptm": 0.6209,
+              "mean_decoy_iptm": 0.609,
+              "cohens_dz": 0.0724,
+              "paired_t_p": 0.80672,
+              "paired_t_df": 11,
+              "delta_vs_study9": 0.1801,
+              "beats_all_decoys_null": {
+                "per_candidate_null_probability": 0.0909,
+                "expected_under_null": 1.091,
+                "observed": 2,
+                "p_at_least_observed": 0.299,
+                "interpretation": "with 10 decoys each, a candidate beats all of them with probability 0.0909 under the null, so 1.09 of 12 are expected to do so by chance; observing 2 has probability 0.299."
+              },
+              "H1_natives_separate_from_decoys": "FALSIFIED",
+              "H2_a_candidate_is_confident_and_specific": "criterion met",
+              "H3_msa_raises_natives": "criterion met"
+            }
+          },
+          "verdicts_that_move": [],
+          "interpretation": "13 screened constructs cover 12 distinct peptides. Counting the shared peptide once moves the paired difference from +0.0009 to +0.0119/+0.0211 depending on which receptor's fold is kept, drops the t-test's df from 12 to 11, and lowers the screen-level null's expectation from 1.182 to 1.091. The largest paired difference any of those choices produces is +0.0211. No registered verdict changes at any of those choices, so what the duplicate inflates is the claim that the difference is indistinguishable from EXACTLY zero, not the finding that it is indistinguishable from zero."
         }
       },
       "prespec_audit": {
@@ -1014,13 +1482,26 @@ window.__CBC_SLATE__ = {
         "prespec_hash": "8511b6cc30ea9a46cf6da932e7c2ca01195d6a0c4469d33f5b80818e096ef804",
         "registered_utc": "2026-08-20T06:10:28+00:00",
         "deviations": [
-          "metrics reported that were not pre-specified (exploratory): ['beats_all_decoys_null']",
+          "metrics reported that were not pre-specified (exploratory): ['beats_all_decoys_null', 'shared_peptide_sensitivity']",
           "registered n_comparisons=3 under 'holm', but the executed family holds 1: ['H2_a_candidate_is_confident_and_specific', 'H3_msa_raises_natives'] were re-classified as threshold criteria rather than tests after registration. The re-classification is defensible \u2014 a 0/1 indicator is not a p-value and corrupts the correction \u2014 but it is a change to the inferential procedure made after seeing the data, and it belongs on the record rather than in the code alone."
         ],
         "confirmatory": false,
         "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."
       },
       "confirmatory": false,
+      "custody": {
+        "rows": 143,
+        "rows_citing_a_fold_output": 0,
+        "rows_whose_bytes_this_repository_holds": 0,
+        "rows_whose_bytes_this_repository_does_not_hold": 0,
+        "complete": null,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [],
+        "input_digests": {},
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "note": "no row in this artefact names a path under runs/, so there is nothing here for the manifest to resolve."
+      },
       "n_failures": 0,
       "n_failures_detail": {
         "listed_in_failures": 0,
@@ -1040,6 +1521,7 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-20T02:33:30+00:00",
       "supersedes": "prodigy-discrimination-v1",
       "supersedes_reason": "v1's plan named study inference-variance-v1 as the arm-D source and characterised the complexes it would score against the 583-residue AChE mature chain. The variance study has since been superseded twice: arm D now follows its registered selection rule and folds the 543-residue catalytic core, so two of the three candidates and the entire receptor construct changed. The study was re-scored on that corrected arm D, and this plan states what it actually scores -- membership read from the variance artefact rather than from a work directory, which had come to hold both construct generations side by side. No hypothesis, threshold or metric changes.",
+      "supersedes_reason_correction": null,
       "artefact": "data/study_prodigy.json",
       "question": "Applied to peptide-receptor complexes predicted by Boltz-2, does PRODIGY's IC-NIS binding-affinity model produce values that discriminate between different peptide candidates, or does it collapse toward a near-constant set by the receptor's non-interacting surface?",
       "primary_metric": "discrimination_ratio",
@@ -1064,6 +1546,8 @@ window.__CBC_SLATE__ = {
       "n_observed": 14,
       "n_planned": 15,
       "n_candidates": null,
+      "peptide_multiplicity": null,
+      "n_distinct_peptides": null,
       "hypotheses": [
         {
           "name": "H1_no_discrimination",
@@ -1114,6 +1598,10 @@ window.__CBC_SLATE__ = {
           "confirmed_by_absence_note": null
         }
       ],
+      "retractions": [],
+      "reading_limits": [],
+      "interpretation_key": null,
+      "interpretation_key_states_a_withdrawal": false,
       "metrics": {
         "discrimination_ratio": 1.4,
         "between_candidate_sd": 1.3378,
@@ -1165,6 +1653,19 @@ window.__CBC_SLATE__ = {
         "note": "Deviations from the registered plan are listed. Results affected by them are exploratory, not confirmatory."
       },
       "confirmatory": false,
+      "custody": {
+        "rows": 15,
+        "rows_citing_a_fold_output": 14,
+        "rows_whose_bytes_this_repository_holds": 14,
+        "rows_whose_bytes_this_repository_does_not_hold": 0,
+        "complete": true,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [],
+        "input_digests": {},
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "note": "all 14 rows that name a fold output name bytes this repository carries, so every number in this study re-derives from files a clone can open."
+      },
       "n_failures": 1,
       "n_failures_detail": {
         "listed_in_failures": 0,
@@ -1184,6 +1685,7 @@ window.__CBC_SLATE__ = {
       "registered_utc": "2026-08-22T06:43:11+00:00",
       "supersedes": null,
       "supersedes_reason": null,
+      "supersedes_reason_correction": null,
       "artefact": "data/study_interface_null_positive_control.json",
       "question": "Do peptides with experimentally demonstrated binding \u2014 the sixteen deposited peptide-receptor complexes of the interface gate \u2014 separate from uniform random permutations of their own residues on Boltz-2 interface confidence, under the same single-sequence settings the gate used? This is the cell the composition-matched null has never had filled: no sequence with a demonstrated interaction has been scored against permutations of itself anywhere in this work, which is why the null is demonstrated to reject and is not demonstrated to discriminate.",
       "primary_metric": "paired_native_minus_permutation_mean",
@@ -1204,6 +1706,8 @@ window.__CBC_SLATE__ = {
       "n_observed": 176,
       "n_planned": 176,
       "n_candidates": null,
+      "peptide_multiplicity": null,
+      "n_distinct_peptides": null,
       "hypotheses": [
         {
           "name": "H1_natural_peptides_separate_from_their_permutations",
@@ -1242,6 +1746,10 @@ window.__CBC_SLATE__ = {
           "p_raw": 0.10670101054657981
         }
       ],
+      "retractions": [],
+      "reading_limits": [],
+      "interpretation_key": null,
+      "interpretation_key_states_a_withdrawal": false,
       "metrics": {
         "paired_native_minus_permutation_mean": 0.0895,
         "mean_native_iptm": 0.7417,
@@ -1609,6 +2117,35 @@ window.__CBC_SLATE__ = {
         "note": "All pre-specified analyses were carried out as planned."
       },
       "confirmatory": true,
+      "custody": {
+        "rows": 176,
+        "rows_citing_a_fold_output": 176,
+        "rows_whose_bytes_this_repository_holds": 16,
+        "rows_whose_bytes_this_repository_does_not_hold": 160,
+        "complete": false,
+        "checked_against": "runs/manifest.json",
+        "files_under_custody": 2573,
+        "run_trees_not_in_this_repository": [
+          "runs/interface-null-positive-control/"
+        ],
+        "input_digests": {
+          "sequence_set_sha256": "14ac1f0f62385b8bc1c72853b42e72b08f8de1c0d8ae58bbd9c5e3eeaa073761"
+        },
+        "basis": "a row is under custody when every runs/ path it names appears in runs/manifest.json with a sha256. Presence on the machine that built this file is not the test: the untracked tree resolves there and nowhere else.",
+        "regeneration": {
+          "module": "platform/studies/interface_null_positive_control.py",
+          "found_by": "the STUDY_ID declared in platform/studies/, not a guessed filename",
+          "steps": [
+            "--fetch",
+            "--run"
+          ],
+          "command": "./.venv/bin/python platform/studies/interface_null_positive_control.py --fetch --run",
+          "compute_seconds": 7284.2,
+          "gpu_hours": 2.02,
+          "compute_basis": "measured: reuse_accounting.cumulative_compute_seconds, the summed wall clock of the 160 folds this artefact computed, which is exactly the 160 rows whose bytes are missing"
+        },
+        "note": "160 of this study's 176 rows name fold outputs under runs/interface-null-positive-control/ \u2014 a run tree this repository deliberately does not carry. Those 160 confidence values are reproducible by re-running the study and are NOT verifiable against stored bytes, unlike the 16 rows whose folds are in runs/manifest.json. Everything needed to make the folds again travels with the artefact (sequence_set_sha256); regenerating them is ./.venv/bin/python platform/studies/interface_null_positive_control.py --fetch --run, \u2248 2.0 GPU-hours."
+      },
       "n_failures": 0,
       "n_failures_detail": {
         "listed_in_failures": 0,

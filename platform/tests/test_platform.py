@@ -1144,6 +1144,39 @@ def test_readme_headline_metrics_match_the_artefacts():
     check(f"{len(checks)} headline metrics appear in the README at their artefact value",
           not missing, str(missing))
 
+    # The screen's population, by molecule. "all 13 distinct candidates" was true of no
+    # artefact in the repository: 13 is the construct count and 12 is the peptide count,
+    # because de-duplication is applied on (peptide, target) and one 41-mer is declared
+    # against two receptors. The README must state the second number wherever it states the
+    # first, and must not call the first one distinct.
+    import re as _re
+    pop = []
+    for rel in ("data/study_candidate_screen.json", "data/study_msa_specificity.json"):
+        mult = metric(rel, "peptide_multiplicity")
+        if not mult:
+            pop.append(f"{rel}: no peptide_multiplicity block to source the count to")
+            continue
+        n_c, n_d = mult["n_constructs"], mult["n_distinct_peptides"]
+        if n_d == n_c:
+            continue
+        if not _re.search(rf"\b{n_d}\b[^.]{{0,80}}distinct peptides", rd):
+            pop.append(f"{rel}: README never states {n_d} distinct peptides")
+        for word in ("distinct candidates", "distinct designs", "distinct peptides"):
+            for m in _re.finditer(rf"\b{n_c}\b\s+{word}", rd):
+                pop.append(f"{rel}: README calls {n_c} constructs '{m.group(0)}'")
+        sens = metric(rel, "metrics", "shared_peptide_sensitivity")
+        if not sens:
+            pop.append(f"{rel}: no shared_peptide_sensitivity to source the disclosure to")
+            continue
+        key = ("paired_native_minus_decoy_mean" if "msa" in rel
+               else "native_minus_decoy_mean")
+        for label, v in sens["counted_once"].items():
+            val = f"{v[key]:.4f}"
+            if val not in rd and val.lstrip("0") not in rd:
+                pop.append(f"{rel}: README omits the counted-once value {val} ({label})")
+    check("the README states the screen's distinct-peptide count and what it moves",
+          not pop, str(pop))
+
     # And the one derived comparison that inverted: the MSA rise against the ipTM noise floor.
     rise = metric("data/study_msa_specificity.json", "metrics", "delta_vs_study9")
     floor = metric("data/study_inference_variance_analysis.json", "metrics", "across_seed_sd_iptm")
@@ -1204,6 +1237,21 @@ def test_every_published_row_resolves_to_a_run_under_custody():
     The job-naming convention differs per study and is written out rather than guessed. A
     hand-run of this check reported 256 missing rows purely because the key was built wrongly,
     which is the failure mode a named mapping prevents.
+
+    A NAMED MAPPING ALSO NAMES WHAT IT LEAVES OUT, AND THIS ONE DID NOT. The docstring says
+    "EVERY row a study reports" and the list below held six studies. Study #12 folds 176 rows
+    and is not on it, and #12 is precisely the study that would fail: 160 of its rows name
+    `runs/interface-null-positive-control/`, an uncommitted tree, so they resolve for nobody
+    who clones this repository. The universal was republished into the written report --
+    "A test asserts that every row any study reports resolves to a run still in the
+    manifest" -- while the test it names had quietly stopped covering the counterexample.
+    That is the whole shape of this audit in one list literal: the correction was made (the
+    README says the tree is not here, in full) on a surface nobody checking custody was
+    looking at. Two checks close it. The mapping must now account for every study in the
+    slate rather than an unstated six, and a study left out must be left out because
+    `slate.json` records its custody as incomplete or records that its rows name no folds --
+    never by omission. And the shortfall itself is checked against the artefacts rather than
+    trusted, so #12 is covered by this test in the only form that is true of it.
     """
     print("\n[custody] every published row has a retained run")
     manifest = json.loads((REPO / "runs" / "manifest.json").read_text())["runs"]
@@ -1224,6 +1272,12 @@ def test_every_published_row_resolves_to_a_run_under_custody():
         ("study_pose_accuracy.json", "pose-accuracy", lambda r: r.get("pdb_id")),
         ("study_peptide_interface.json", "peptide-interface", lambda r: r.get("pdb_id")),
         ("study_ache_affinity.json", "ache-affinity", lambda r: r.get("chembl")),
+        # Study #8 re-analyses study #1's fifteen compounds against corrected references and
+        # reuses their folds, so its rows resolve under the ache-affinity kind. It cites no
+        # path of its own and was on no list, which left fifteen published rows with nothing
+        # asserting their bytes at all -- found by the coverage check at the end of this
+        # function, which is what that check exists for.
+        ("study_affinity_corrected.json", "ache-affinity", lambda r: r.get("chembl")),
     ]
     total = 0
     for name, kind, job_of in STUDIES:
@@ -1243,6 +1297,51 @@ def test_every_published_row_resolves_to_a_run_under_custody():
               else f"{unnamed} rows yielded no job name")
     check(f"{total} published rows checked against the run manifest", total > 250,
           f"only {total} rows found; the mapping above may have gone stale")
+
+    # -- the second mechanism: rows that name their own path --------------------------- #
+    # Two conventions resolve a row to its bytes and both are real. The mapping above keys a
+    # row to a run by NAME; studies #2, #6, #7, #11 and #12 write the run-relative path into
+    # the row itself, so those resolve directly. slate.json's `custody` block counts the
+    # second kind, and it is the one that exposes study #12. Recomputed here from the rows
+    # and the manifest rather than read back out of the file being checked.
+    slate = json.loads((REPO / "data" / "slate.json").read_text())
+    held_files = {f"{r['path']}/{f['file']}"
+                  for r in manifest for f in r.get("files", [])}
+    wrong, declared = [], []
+    for st in slate["studies"]:
+        cu = st.get("custody") or {}
+        n_held = n_short = 0
+        for art in [st["artefact"], *(st.get("companion_artefacts") or [])]:
+            for r in (json.loads((REPO / art).read_text()).get("rows") or []):
+                ps = [v for v in r.values()
+                      if isinstance(v, str) and v.startswith("runs/")]
+                if not ps:
+                    continue
+                if all(q in held_files for q in ps):
+                    n_held += 1
+                else:
+                    n_short += 1
+        if (n_held, n_short) != (cu.get("rows_whose_bytes_this_repository_holds"),
+                                 cu.get("rows_whose_bytes_this_repository_does_not_hold")):
+            wrong.append(f"{st['study_id']}: rows say {n_held}/{n_short}, slate.json says "
+                         f"{cu.get('rows_whose_bytes_this_repository_holds')}/"
+                         f"{cu.get('rows_whose_bytes_this_repository_does_not_hold')}")
+        if n_short:
+            declared.append(f"{st['study_id']} ({n_short} of {n_held + n_short})")
+    check("every study's path-resolved custody count matches the rows and the manifest",
+          not wrong, str(wrong))
+    check("the studies missing fold bytes are declared, not discovered",
+          declared == ["interface-null-positive-control-v1 (160 of 176)"], str(declared))
+
+    # -- nothing is checked by neither mechanism --------------------------------------- #
+    # A study absent from the mapping AND citing no paths has nothing asserted about its
+    # bytes at all, and this test's docstring would still say "EVERY row a study reports".
+    mapped = {n for n, _, _ in STUDIES}
+    silent = [st["study_id"] for st in slate["studies"]
+              if not any(Path(x).name in mapped
+                         for x in [st["artefact"], *(st.get("companion_artefacts") or [])])
+              and not (st.get("custody") or {}).get("rows_citing_a_fold_output")]
+    check("no study's rows are outside both custody mechanisms", not silent, str(silent))
 
 
 # --------------------------------------------------------------------------- #
@@ -1406,6 +1505,71 @@ def _rc_affinity_corrected(d: dict, add) -> None:
     add("spearman CI hi", _pct(boot, 97.5), a["spearman_ci95"][1])
 
 
+def _rc_shared_peptide(d: dict, add, *, paired: bool) -> None:
+    """Recompute the shared-peptide multiplicity and sensitivity from the rows.
+
+    The screen de-duplicates on (peptide, target), which does not collapse one peptide
+    declared against two receptors, so a thirteen-construct screen can be twelve molecules.
+    Nothing here reads the generator: the peptide strings come off the stored rows and the
+    grouping is redone, so a change to the de-duplication key that quietly re-inflated the
+    count would fail here rather than reappear as "13 distinct candidates" in prose.
+    """
+    a = d["analysis"]
+    mult = a.get("peptide_multiplicity")
+    if not mult:
+        add("peptide multiplicity recorded", True, False)
+        return
+    codes = {c["code"] for c in a["per_candidate"]}
+    seq = {r["code"]: r["peptide"] for r in d["rows"]
+           if r["kind"] == "native" and r.get("ok") and r["code"] in codes}
+    add("constructs", len(seq), mult["n_constructs"])
+    add("distinct peptides", len(set(seq.values())), mult["n_distinct_peptides"])
+    shared = sorted(sorted(c for c in seq if seq[c] == s)
+                    for s in set(seq.values())
+                    if sum(1 for c in seq if seq[c] == s) > 1)
+    add("shared groups", len(shared), len(mult["shared_sequence_groups"]))
+    for want, got in zip(shared, mult["shared_sequence_groups"]):
+        add("shared group members",
+            ", ".join(want), ", ".join(sorted(x["code"] for x in got["codes"])))
+        # The two constructs share their whole decoy arm, not only the native.
+        arms = [sorted((r["kind"], r["peptide_used"]) for r in d["rows"]
+                       if r["code"] == c and r.get("ok")) for c in want]
+        add("shared group decoy arms identical",
+            all(x == arms[0] for x in arms), got["decoy_arms_identical"])
+
+    sens = a["metrics"].get("shared_peptide_sensitivity")
+    if not shared:
+        add("no sensitivity block when nothing is shared", sens is None, True)
+        return
+    if sens is None:
+        add("sensitivity block present", True, False)
+        return
+    by = {c["code"]: c for c in a["per_candidate"]}
+    drops = [c for g in shared for c in g]
+    for label, stored in sens["counted_once"].items():
+        kept = [c for c in by if c not in label[len("drop "):].split(", ")]
+        add(f"{label}: n", len(kept), stored["n_constructs"])
+        diffs = [by[c]["native_iptm"] - by[c]["decoy_mean"] for c in kept]
+        nat = [by[c]["native_iptm"] for c in kept]
+        if paired:
+            add(f"{label}: paired mean", statistics.fmean(diffs),
+                stored["paired_native_minus_decoy_mean"])
+            add(f"{label}: dz", statistics.fmean(diffs) / statistics.stdev(diffs),
+                stored["cohens_dz"])
+            add(f"{label}: df", len(kept) - 1, stored["paired_t_df"])
+        else:
+            dec = [x for c in kept for x in by[c]["decoy_iptm"]]
+            add(f"{label}: native minus decoy",
+                statistics.fmean(nat) - statistics.fmean(dec),
+                stored["native_minus_decoy_mean"])
+            add(f"{label}: below 0.6", sum(1 for v in nat if v < 0.6),
+                stored["n_candidates_below_0.6"])
+    add("every shared construct is dropped in some variant",
+        len(sens["counted_once"]), len(drops))
+    # The point of the block: it must say whether a verdict moved, and it must be right.
+    add("verdicts that move", "", ", ".join(sens["verdicts_that_move"]))
+
+
 def _rc_candidate_screen(d: dict, add) -> None:
     a, m = d["analysis"], d["analysis"]["metrics"]
     by = _native_vs_decoys(d["rows"])
@@ -1434,6 +1598,7 @@ def _rc_candidate_screen(d: dict, add) -> None:
         m["n_candidates_above_0.8"])
     add("candidates below 0.6", sum(1 for v in natives if v < 0.6),
         m["n_candidates_below_0.6"])
+    _rc_shared_peptide(d, add, paired=False)
 
 
 def _rc_msa_specificity(d: dict, add) -> None:
@@ -1468,6 +1633,7 @@ def _rc_msa_specificity(d: dict, add) -> None:
     add("mean decoy", statistics.fmean(decoy_means), m["mean_decoy_iptm"])
     add("cohens dz", statistics.fmean(diffs) / statistics.stdev(diffs), m["cohens_dz"])
     add("paired t p", float(stats.ttest_1samp(diffs, 0.0).pvalue), a["paired_t_p"])
+    _rc_shared_peptide(d, add, paired=True)
     nul = m["beats_all_decoys_null"]
     sweeps = sum(1 for s in stored.values() if s["beats_all_decoys"])
     n_dec = max(s["n_decoys"] for s in stored.values())
@@ -1895,6 +2061,401 @@ def test_generated_indices_are_current():
                     if not (pae_dir / n).exists():
                         (pae_dir / n).write_bytes(b)
             Path(backup.name).unlink()
+
+
+def test_release_notes_are_generated_and_published_ones_are_frozen():
+    """The note VERSION points at is a rebuild of the artefacts; older notes are records.
+
+    The defect this encodes. `docs/RELEASE_NOTES_v1.0.0.md` said "**8 pre-registered
+    studies**, 25 hypotheses, 13 confirmed and 11 falsified... **Not one study is
+    confirmatory**" and "313 automated checks across six suites". All of it was true on
+    2026-08-20. Study #12 was registered on 2026-08-22 with an empty deviation list -- the
+    first confirmatory study in the slate -- and `VERSION` still read `1.0.0`, so the file
+    asserting that no study had ever cleared its plan WAS the repository's description of
+    itself. It was hand-written prose; `release.sh` only checked the file existed.
+
+    Two properties, and neither is sufficient alone:
+
+    * The note for `VERSION` must be byte-identical to what
+      `platform/build_release_notes.py` produces from `data/`, `prespec/` and
+      `verify_all.SUITES`. A count in it cannot go stale unless the generator does.
+    * Every OTHER note must be frozen. A published release note is the body of a GitHub
+      release and the description behind a minted version DOI; a rebuild must not be able to
+      rewrite what a release contained, for the same reason `prespec/` is never rewritten.
+      The refusal is exercised here, not merely asserted: the generator is pointed at a
+      published note and must decline to write it.
+    """
+    print("\n[release notes] the note for VERSION is generated; published notes are frozen")
+    gen = REPO / "platform" / "build_release_notes.py"
+    version_file = REPO / "VERSION"
+    version = version_file.read_text().strip()
+    current = REPO / "docs" / f"RELEASE_NOTES_v{version}.md"
+    frozen_re = re.compile(r"<!--\s*RELEASE-NOTE-FROZEN")
+
+    check(f"docs/{current.name} exists for VERSION {version}", current.exists(),
+          "" if current.exists() else "release.sh refuses to tag without it")
+    if not current.exists():
+        return
+
+    r = subprocess.run([sys.executable, str(gen), "--check"],
+                       capture_output=True, text=True, cwd=REPO)
+    check(f"docs/{current.name} is current with platform/build_release_notes.py",
+          r.returncode == 0,
+          "" if r.returncode == 0 else (r.stdout + r.stderr).strip()[-200:])
+    check(f"docs/{current.name} is not frozen, so it follows VERSION",
+          not frozen_re.search(current.read_text()[:4096]))
+
+    published = [n for n in sorted((REPO / "docs").glob("RELEASE_NOTES_v*.md"))
+                 if n != current]
+    for note in published:
+        is_frozen = bool(frozen_re.search(note.read_text()[:4096]))
+        check(f"docs/{note.name} is frozen to the release it describes", is_frozen,
+              "" if is_frozen else "a published note is a record of that release; "
+                                   "mark it RELEASE-NOTE-FROZEN")
+
+    # The refusal, executed. VERSION is moved back to a published version so the generator
+    # resolves to a frozen file, and must exit non-zero without touching it. Restored in
+    # `finally` -- a test that leaves VERSION pointing at an old release would be worse than
+    # the defect it guards.
+    if published:
+        target = published[-1]
+        old_version = version
+        before = target.read_bytes()
+        try:
+            version_file.write_text(target.stem.removeprefix("RELEASE_NOTES_v") + "\n")
+            r = subprocess.run([sys.executable, str(gen)],
+                               capture_output=True, text=True, cwd=REPO)
+            refused = r.returncode != 0 and "REFUSED" in r.stdout
+            check(f"the generator refuses to rewrite docs/{target.name}", refused,
+                  "" if refused else (r.stdout + r.stderr).strip()[-200:])
+            check(f"docs/{target.name} is byte-identical after the refusal",
+                  target.read_bytes() == before)
+        finally:
+            version_file.write_text(old_version + "\n")
+            target.write_bytes(before)
+
+
+# --------------------------------------------------------------------------- #
+# The retraction ledger and its guard
+# --------------------------------------------------------------------------- #
+
+def _retraction_fixture(tmp: Path) -> Path:
+    """A miniature repository: the real ledger, plus one file of every surface class.
+
+    The ledger is the real one on purpose. A fixture ledger would let the guard pass while
+    the shipped records were malformed, which is the failure this whole mechanism exists to
+    make impossible one level up.
+    """
+    root = tmp / "repo"
+    for d in ("data", "data/superseded", "prespec", "memory/ledger", "memory/views",
+              "platform"):
+        (root / d).mkdir(parents=True, exist_ok=True)
+    shutil.copy(REPO / "retractions.jsonl", root / "retractions.jsonl")
+    # check_ledger resolves every cited plan and artefact against the root it is given, so
+    # the fixture has to carry one file per citation. That list used to be typed here --
+    # two plans and two artefacts, correct for ret_0001..ret_0003 -- and ret_0005 was filed
+    # against msa-specificity-v9 without it. The fixture then failed to resolve a plan that
+    # is sitting in prespec/, and BOTH retraction tests raised LedgerError on a ledger the
+    # standalone guard passes. A hand-typed list of what the data contains is the same
+    # defect this round is closing everywhere else, so it is derived now: whatever the
+    # ledger cites, the fixture holds. The plans are copied rather than stubbed because a
+    # `plan_field` anchor is checked against the plan's real `content`.
+    for _line in (REPO / "retractions.jsonl").read_text().splitlines():
+        if not _line.strip() or _line.lstrip().startswith("//"):
+            continue
+        _rec = json.loads(_line)
+        _by = _rec.get("retracted_by") or {}
+        for _glob in ([f"*.{_by['prespec']}.json"] if _by.get("prespec") else []) + [
+                f"{a['study']}.*.json" for a in (_rec.get("anchors") or []) if a.get("study")]:
+            for _src in (REPO / "prespec").glob(_glob):
+                shutil.copy(_src, root / "prespec" / _src.name)
+        if _by.get("artefact"):
+            _dst = root / _by["artefact"]
+            _dst.parent.mkdir(parents=True, exist_ok=True)
+            _dst.write_text("{}\n")
+    (root / "README.md").write_text("# Fixture\n\nNothing withdrawn here.\n")
+    (root / "data" / "slate.json").write_text(json.dumps(
+        {"studies": [{"study_id": "peptide-interface-v1",
+                      "hypotheses": [{"name": "H2_iptm_calibration",
+                                      "statement": "a harmless sentence",
+                                      "verdict": "CONFIRMED"}]}]}, indent=2))
+    return root
+
+
+#: The sentence study #12 falsified, exactly as prespec/peptide-interface-v1 registers it.
+_RETRACTED_SENTENCE = ("ipTM predicts whether the interface is right, "
+                       "so it can be used as a screening filter.")
+
+
+def test_retraction_ledger_is_well_formed():
+    """Every way a retraction record can be wrong that a machine can see.
+
+    The last two are the ones with teeth. A fingerprint that does not match its own claim
+    catches nothing and says nothing; a fingerprint that ALSO matches the replacement makes
+    the corrected reading trip the guard forever, which is how a guard teaches people to
+    write exemptions instead of corrections.
+    """
+    print("\n[retractions] the ledger itself")
+    sys.path.insert(0, str(REPO / "platform"))
+    import retractions as R
+
+    recs = R.load()
+    check("retractions.jsonl parses and validates", len(recs) > 0, f"{len(recs)} records")
+    check("every record cites a replacement reading",
+          all(r.replacement.strip() for r in recs))
+    check("every record cites who withdrew the claim and when",
+          all(r.retracted_by.get("date") and
+              (r.retracted_by.get("study") or r.retracted_by.get("agent")) for r in recs))
+    check("no two records hold the same claim",
+          len({r.id for r in recs}) == len(recs))
+
+    def problems(mutate) -> list[str]:
+        import copy
+        raw = [copy.deepcopy(r.rec) for r in recs]
+        mutate(raw)
+        return R.check_ledger([R.Retraction(x, i) for i, x in enumerate(raw, 1)], repo=REPO)
+
+    check("a duplicate id is refused",
+          any("duplicate id" in p for p in problems(lambda r: r.append(dict(r[0])))))
+    check("a fingerprint that does not match its own claim is refused",
+          any("does not match its own claim" in p
+              for p in problems(lambda r: r[0].__setitem__("fingerprints", ["zzz_nomatch"]))))
+    def _overlap(r):
+        token = re.escape(recs[0].replacement[:24])
+        r[0]["claim"] = r[0]["claim"] + " " + recs[0].replacement[:24]
+        r[0]["fingerprints"] = [token]
+    check("a fingerprint that also matches the replacement is refused",
+          any("matches the replacement" in p for p in problems(_overlap)))
+    check("a null citation with no stated reason is refused",
+          any("absent_reason" in p for p in problems(
+              lambda r: (r[0]["retracted_by"].__setitem__("prespec", None),
+                         r[0]["retracted_by"].pop("prespec_absent_reason", None)))))
+
+
+def test_retraction_guard_fails_on_the_defect_it_names():
+    """Inject the retracted sentence and assert the guard finds it, on every surface class.
+
+    The audit finding this closes: the front page rendered study #7's registered statement
+    -- "ipTM ... can be used as a screening filter" -- verbatim beside a green CONFIRMED,
+    for a use study #12 falsified with 4 of 16 established binders beating all ten
+    permutations of themselves against a threshold of 5 registered in advance. The plan is
+    hash-locked and is never edited. What must be impossible is the statement rendering
+    ALONE.
+    """
+    print("\n[retractions] the guard, proven by making it fail")
+    sys.path.insert(0, str(REPO / "platform"))
+    import check_retractions as CR
+
+    with tempfile.TemporaryDirectory() as td:
+        root = _retraction_fixture(Path(td))
+        hits, scanned, _, _ = CR.run(root)
+        check("a clean fixture passes", not hits, str([h.path for h in hits]))
+        check("the fixture is actually being read", len(scanned) >= 3, f"{len(scanned)}")
+
+        # (a) prose, no withdrawal anywhere near it
+        readme = root / "README.md"
+        readme.write_text(f"# Fixture\n\nOur screen is sound: {_RETRACTED_SENTENCE}\n")
+        hits, _, _, _ = CR.run(root)
+        check("FAILS when the retracted sentence is injected into README.md",
+              any(h.path == "README.md" and h.rec.id == "ret_0002" for h in hits))
+        check("and names the surface and line",
+              any(h.path == "README.md" and h.line > 0 for h in hits))
+
+        # (b) same sentence, withdrawn in the same paragraph -> not an assertion
+        readme.write_text(f"# Fixture\n\nThis section used to say: {_RETRACTED_SENTENCE}\n"
+                          "That clause is retracted; study #12 falsified it.\n")
+        hits, _, _, _ = CR.run(root)
+        check("PASSES when the same sentence carries its withdrawal in the same block",
+              not any(h.path == "README.md" for h in hits))
+        readme.write_text("# Fixture\n")
+
+        # (c) structured: the generated slate, which is where the real defect lived
+        slate = root / "data" / "slate.json"
+        doc = json.loads(slate.read_text())
+        hyp = doc["studies"][0]["hypotheses"][0]
+        hyp["statement"] = _RETRACTED_SENTENCE
+        slate.write_text(json.dumps(doc, indent=2))
+        hits, _, _, _ = CR.run(root)
+        check("FAILS when data/slate.json republishes the registered statement alone",
+              any(h.path == "data/slate.json" and h.rec.id == "ret_0002" for h in hits))
+
+        # (d) ... and stops failing the moment build_slate.py's join is present
+        hyp["retraction"] = {"id": "ret_0002", "replacement": "discrimination, not a filter"}
+        slate.write_text(json.dumps(doc, indent=2))
+        hits, _, _, _ = CR.run(root)
+        check("PASSES once the withdrawal is attached to the same object",
+              not any(h.path == "data/slate.json" for h in hits))
+
+        # (e) delete the join back out: the guard is independent of the generator
+        hyp.pop("retraction")
+        slate.write_text(json.dumps(doc, indent=2))
+        hits, _, _, _ = CR.run(root)
+        check("FAILS again if the generator's join is removed",
+              any(h.path == "data/slate.json" for h in hits))
+
+        # (f) the exemption is by PATH, and the same bytes in an exempt record are silent
+        for rel in ("data/superseded/study_candidate_screen.v2.json",
+                    "prespec/peptide-interface-v1.515be79a7d12.json",
+                    "memory/ledger/study-peptide-interface.jsonl"):
+            (root / rel).write_text(json.dumps({"statement": _RETRACTED_SENTENCE}) + "\n")
+        hits, _, _, _ = CR.run(root)
+        offenders = sorted({h.path for h in hits})
+        check("SILENT on data/superseded/, prespec/ and memory/ledger/ with the same bytes",
+              offenders == ["data/slate.json"], str(offenders))
+
+        # (g) but a rendering of an exempt record is not exempt
+        (root / "memory" / "views" / "claims.md").write_text(
+            f"- **[measurement]** {_RETRACTED_SENTENCE}\n")
+        hits, _, _, _ = CR.run(root)
+        check("NOT silent on memory/views/, which renders the exempt ledger",
+              any(h.path == "memory/views/claims.md" for h in hits))
+
+        # (h) a neighbouring claim's withdrawal must not clear this one. memory/views/
+        # renders 860 claims as consecutive list items and a plain line window let one
+        # item's marker clear another six lines away -- which is how audit finding 4
+        # survived the first version of this guard.
+        (root / "memory" / "views" / "claims.md").write_text(
+            "- **[decision]** Some other claim entirely. RETRACTED.\n"
+            "  `clm_0000000000000000` conf 0.90\n"
+            f"- **[measurement]** {_RETRACTED_SENTENCE}\n"
+            "  `clm_1111111111111111` conf 0.90\n")
+        hits, _, _, _ = CR.run(root)
+        check("a neighbouring item's withdrawal does not clear this claim",
+              any(h.path == "memory/views/claims.md" for h in hits))
+
+        # (i) a nested bullet IS covered by its parent item's withdrawal
+        (root / "memory" / "views" / "claims.md").write_text(
+            "- \u274c **[decision]** refuted by a later study\n"
+            f"  - rationale: the claim was {_RETRACTED_SENTENCE}\n")
+        hits, _, _, _ = CR.run(root)
+        check("a nested bullet inherits its parent item's withdrawal",
+              not any(h.path == "memory/views/claims.md" for h in hits))
+
+        # (j) a skipped surface is reported, never counted as passing
+        _, _, notes, _ = CR.run(root, remote=False)
+        check("the GitHub About field is reported as not read, not as passing",
+              any("github:About" in n for n in notes), str(notes))
+
+
+def test_the_front_page_cannot_publish_a_withdrawn_statement():
+    """The real artefact, not a fixture: study #7's H2 carries its withdrawal.
+
+    build_slate.py joins retractions.jsonl on (study_id, hypothesis name) -- both keys the
+    frozen plan already has -- so the ledger points at the plan and the plan never points
+    back. The plan stays byte-identical; the rendering cannot appear without the withdrawal.
+    """
+    print("\n[retractions] the shipped slate")
+    sys.path.insert(0, str(REPO / "platform"))
+    import retractions as R
+
+    slate = json.loads((REPO / "data" / "slate.json").read_text())
+    recs = R.load()
+    live = []
+    for st in slate["studies"]:
+        for h in st["hypotheses"]:
+            for r in R.for_text(recs, h.get("statement") or ""):
+                if "retraction" not in h:
+                    live.append(f"{st['study_id']}/{h['name']} -> {r.id}")
+    check("no hypothesis statement on the page asserts a retracted claim alone",
+          not live, str(live))
+
+    h7 = next(h for st in slate["studies"] if st["study_id"] == "peptide-interface-v1"
+              for h in st["hypotheses"] if h["name"] == "H2_iptm_calibration")
+    check("study #7's H2 carries its withdrawal", h7.get("retraction", {}).get("id")
+          == "ret_0002", str(h7.get("retraction", {}).get("id")))
+    check("the withdrawal names the study that falsified it",
+          h7["retraction"]["retracted_by"]["study"] == "interface-null-positive-control-v1")
+    check("the withdrawal carries the falsifying study's plan hash",
+          h7["retraction"]["retracted_by"]["prespec"] == "69a5009d6f62")
+    check("the withdrawal carries a replacement reading",
+          bool(h7["retraction"]["replacement"].strip()))
+    check("the CONFIRMED verdict is untouched -- the threshold really was met",
+          h7["verdict"] == "CONFIRMED")
+    check("the registered statement is reproduced exactly as registered",
+          h7["statement"] == json.loads((REPO / "prespec" /
+              "peptide-interface-v1.515be79a7d12.json").read_text()
+              )["content"]["hypotheses"][1]["statement"])
+    check("app.js renders it", "renderRetraction" in (REPO / "app.js").read_text())
+
+
+def test_a_verdict_built_on_a_withdrawn_reading_carries_its_limit():
+    """The second shape the page had, which is NOT a withdrawn statement and must not render
+    as one.
+
+    Study #10's H2 -- "at least one candidate is both better than its null and confident in
+    absolute terms" -- rendered a green CONFIRMED with nothing beside it. Two of thirteen
+    candidates cleared the registered conjunction, so the verdict is a true record of a
+    threshold firing and the statement was never withdrawn; striking either would publish a
+    falsehood. What is withdrawn is the READING the rule rests on. The rule asks whether one
+    candidate beat one set of shuffles of itself, and study #12 measured that comparison on
+    sixteen deposited X-ray complexes -- every one an established binder -- and found only 4
+    of 16 beating all of theirs. The study's own artefact also records that 1.18 of 13 are
+    expected to sweep by chance and that observing 2 has probability 0.334.
+
+    So the ledger anchors a `decision_rule` limit rather than a retraction, and the last two
+    checks here are the ones with teeth: the limit must NOT strike the statement, and the
+    guard must fail when the join is deleted. A withdrawn statement enforces itself, because
+    the statement carries the fingerprint; a withdrawn reading does not, because the
+    statement contains none of its words. Without the landing check, deleting this join
+    removes the only string a scan could see and every scan goes green.
+    """
+    print("\n[retractions] a verdict whose rule rests on a withdrawn reading")
+    sys.path.insert(0, str(REPO / "platform"))
+    import retractions as R
+    import check_retractions as CR
+
+    slate = json.loads((REPO / "data" / "slate.json").read_text())
+    recs = R.load()
+
+    def hyp(study_id, name):
+        return next(h for st in slate["studies"] if st["study_id"] == study_id
+                    for h in st["hypotheses"] if h["name"] == name)
+
+    h10 = hyp("msa-specificity-v9", "H2_a_candidate_is_confident_and_specific")
+    h9 = hyp("candidate-screen-v8", "H1_any_candidate_binds")
+    check("the CONFIRMED chip carries a reading limit",
+          (h10.get("reading_limit") or {}).get("retraction") == "ret_0001",
+          str((h10.get("reading_limit") or {}).get("retraction")))
+    check("so does the FALSIFIED one -- an absent binder is the same overclaim inverted",
+          (h9.get("reading_limit") or {}).get("retraction") == "ret_0001")
+    check("the verdict is untouched -- the registered threshold really did fire",
+          h10["verdict"] == "CONFIRMED")
+    check("the statement is NOT marked withdrawn, because it was not withdrawn",
+          "retraction" not in h10 and "retraction" not in h9)
+    check("the limit names what the verdict does not license",
+          "no" in h10["reading_limit"]["limit"].lower()
+          and bool(h10["reading_limit"]["read_instead"].strip()))
+    check("it quotes the withdrawn reading so the two can be told apart",
+          h10["reading_limit"]["withdrawn_reading"]
+          == next(r for r in recs if r.id == "ret_0001").claim)
+    check("app.js renders it, and separately from a withdrawal",
+          all(s in (REPO / "app.js").read_text()
+              for s in ("renderReadingLimit", "h.reading_limit")))
+
+    # The landing check, proven by removing the join. A fingerprint scan cannot see this
+    # defect: study #10's statement matches no retraction, which is why the anchor exists.
+    with tempfile.TemporaryDirectory() as td:
+        root = _retraction_fixture(Path(td))
+        shutil.copy(REPO / "data" / "slate.json", root / "data" / "slate.json")
+        check("the shipped slate lands every reading limit the ledger requires",
+              not CR.check_anchors_landed(root, recs),
+              str(CR.check_anchors_landed(root, recs)))
+
+        doc = json.loads((root / "data" / "slate.json").read_text())
+        for st in doc["studies"]:
+            for h in st["hypotheses"]:
+                h.pop("reading_limit", None)
+        (root / "data" / "slate.json").write_text(json.dumps(doc, indent=2))
+        problems = CR.check_anchors_landed(root, recs)
+        check("FAILS when build_slate.py's reading-limit join is deleted",
+              len(problems) == 2, str(problems))
+        check("and it names the verdict left standing alone",
+              any("msa-specificity-v9/H2_a_candidate_is_confident_and_specific" in p
+                  for p in problems), str(problems))
+        check("a plain fingerprint scan cannot see it, which is why this check exists",
+              not any(h.path == "data/slate.json" and h.rec.id == "ret_0001"
+                      for h in CR.run(root)[0]))
+
 
 
 def _same_index(a: str, b: str) -> bool:

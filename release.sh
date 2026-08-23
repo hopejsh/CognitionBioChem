@@ -38,6 +38,12 @@ esac
 [ -f "$NOTES" ] || die "no release notes at $NOTES — write them first."
 [ -z "$(git -C "$REPO_DIR" status --porcelain)" ] || die "working tree is dirty; commit first."
 git -C "$REPO_DIR" rev-parse "$TAG" >/dev/null 2>&1 && die "tag $TAG already exists."
+# This compares VERSION to the argument you typed and NOTHING ELSE. It is not the check that
+# stops a release whose citable record names the wrong version -- for one release it did not:
+# VERSION read 1.1.0, CITATION.cff, codemeta.json, .zenodo.json, biotools.json, the README
+# citation block and the page's Provenance tab all read 1.0.0, and `./release.sh 1.1.0` passed
+# here. That gap is closed one line down, inside verify_all.py, by
+# platform/check_version_stamps.py.
 [ "$(cat "$REPO_DIR/VERSION" 2>/dev/null)" = "$VERSION" ] \
   || die "VERSION says '$(cat "$REPO_DIR/VERSION" 2>/dev/null)' but you asked for '$VERSION'."
 ( cd "$REPO_DIR" && ./.venv/bin/python verify_all.py >/dev/null 2>&1 ) \
@@ -57,9 +63,20 @@ cat <<DONE
 
   Released. Zenodo mints the DOI within a few minutes.
 
-  Then, by hand:
+  Then, by hand. None of this is automatic, and check_version_stamps.py fails until it
+  is done -- which is what tells you it is not done.
+
     - take the new VERSION DOI from the Zenodo record
-    - put it in CITATION.cff under identifiers: (the concept DOI never changes)
-    - bump VERSION for the next cycle
+    - put it in CITATION.cff under identifiers:, in biotools.json (otherID AND the
+      download URL + its version), and in the README version-DOI paragraph
+      (the concept DOI never changes)
+    - replace RELEASE-NOTE-GENERATED with RELEASE-NOTE-FROZEN at the top of
+      docs/RELEASE_NOTES_v$VERSION.md -- that marker is what makes this version count as
+      published, here and in check_version_stamps.py
+    - remove the "is not yet deposited" disclosure sentence from the surfaces that carry
+      it (./.venv/bin/python platform/check_version_stamps.py names every one)
+    - rebuild the reading copies, whose version stamps come from CITATION.cff:
+      platform/build_report.py, build_report_ko.py, build_deck.py, build_pptx.py
+    - bump VERSION for the next cycle, then re-add the disclosure for the new version
 
 DONE

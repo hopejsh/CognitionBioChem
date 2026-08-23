@@ -10,7 +10,7 @@ window.__CBC_GATE__ = {
   "sequence_invalid": 4,
   "cysteine_parity": 12,
   "thermodynamic_inconsistency": 25,
-  "affinity_implausible": 5,
+  "affinity_implausible": 29,
   "duplicate_sequence": 7,
   "compartment_mismatch": 5,
   "fabricated_residue": 23,
@@ -201,7 +201,7 @@ window.__CBC_GATE__ = {
   {
    "category": "affinity_implausible",
    "record": "HippoTrk-Saponin-X1",
-   "detail": "dG -18.4 kcal/mol is tighter than biotin-streptavidin"
+   "detail": "dG -18.4 kcal/mol is 3.8 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -209,14 +209,29 @@ window.__CBC_GATE__ = {
    "detail": "dG -16.2 kcal/mol implies Kd 1.33 pM, record states 2.1 nM \u2014 gap 4.36 kcal/mol (3.2 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "HippoAChE-AlkaPept-X2",
+   "detail": "dG -16.2 kcal/mol is 1.6 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "HippoNrf-KeapDecoy-X3",
    "detail": "dG -15.8 kcal/mol implies Kd 2.62 pM, record states 3.5 nM \u2014 gap 4.26 kcal/mol (3.1 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "HippoNrf-KeapDecoy-X3",
+   "detail": "dG -15.8 kcal/mol is 1.2 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "HippoWnt-FzdAgonist-X4",
    "detail": "dG -16.9 kcal/mol implies Kd 409 fM, record states 1.2 nM \u2014 gap 4.73 kcal/mol (3.5 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "HippoWnt-FzdAgonist-X4",
+   "detail": "dG -16.9 kcal/mol is 2.3 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -226,7 +241,7 @@ window.__CBC_GATE__ = {
   {
    "category": "affinity_implausible",
    "record": "HippoDual-TrkB-AMPK-X5",
-   "detail": "dG -19.1 kcal/mol is tighter than biotin-streptavidin"
+   "detail": "dG -19.1 kcal/mol is 4.5 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -234,9 +249,19 @@ window.__CBC_GATE__ = {
    "detail": "dG -16.5 kcal/mol implies Kd 804 fM, record states 1.8 nM \u2014 gap 4.57 kcal/mol (3.3 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "PfcACh-PAM-P1",
+   "detail": "dG -16.5 kcal/mol is 1.9 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "PfcTrk-ErkEnhancer-P2",
    "detail": "dG -17.2 kcal/mol implies Kd 247 fM, record states 850 pM \u2014 gap 4.83 kcal/mol (3.5 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "PfcTrk-ErkEnhancer-P2",
+   "detail": "dG -17.2 kcal/mol is 2.6 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -244,9 +269,19 @@ window.__CBC_GATE__ = {
    "detail": "dG -15.4 kcal/mol implies Kd 5.15 pM, record states 4.2 nM \u2014 gap 3.97 kcal/mol (2.9 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "PfcGluN2A-LTP-P3",
+   "detail": "dG -15.4 kcal/mol is 0.8 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "PfcGsk-WntLinker-P4",
    "detail": "dG -16.0 kcal/mol implies Kd 1.87 pM, record states 2.4 nM \u2014 gap 4.24 kcal/mol (3.1 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "PfcGsk-WntLinker-P4",
+   "detail": "dG -16.0 kcal/mol is 1.4 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -256,7 +291,7 @@ window.__CBC_GATE__ = {
   {
    "category": "affinity_implausible",
    "record": "PfcDual-nACh-GluN2A-P5",
-   "detail": "dG -18.7 kcal/mol is tighter than biotin-streptavidin"
+   "detail": "dG -18.7 kcal/mol is 4.1 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -264,9 +299,19 @@ window.__CBC_GATE__ = {
    "detail": "dG -17.5 kcal/mol implies Kd 149 fM, record states 650 pM \u2014 gap 4.97 kcal/mol (3.6 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "BasalAChE-GorgeBlock-B1",
+   "detail": "dG -17.5 kcal/mol is 2.9 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "BasalM1-PAM-B2",
    "detail": "dG -15.9 kcal/mol implies Kd 2.21 pM, record states 3.1 nM \u2014 gap 4.29 kcal/mol (3.1 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "BasalM1-PAM-B2",
+   "detail": "dG -15.9 kcal/mol is 1.3 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -274,9 +319,19 @@ window.__CBC_GATE__ = {
    "detail": "dG -16.8 kcal/mol implies Kd 485 fM, record states 1.4 nM \u2014 gap 4.72 kcal/mol (3.5 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "BasalNgf-TrkA-B3",
+   "detail": "dG -16.8 kcal/mol is 2.2 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "BasalAChE-Abeta-B4",
    "detail": "dG -16.4 kcal/mol implies Kd 952 fM, record states 1.9 nM \u2014 gap 4.50 kcal/mol (3.3 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "BasalAChE-Abeta-B4",
+   "detail": "dG -16.4 kcal/mol is 1.8 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -286,7 +341,7 @@ window.__CBC_GATE__ = {
   {
    "category": "affinity_implausible",
    "record": "BasalSuper-AChE-TrkA-B5",
-   "detail": "dG -19.5 kcal/mol is tighter than biotin-streptavidin"
+   "detail": "dG -19.5 kcal/mol is 4.9 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -294,9 +349,19 @@ window.__CBC_GATE__ = {
    "detail": "dG -17.8 kcal/mol implies Kd 89.6 fM, record states 520 pM \u2014 gap 5.13 kcal/mol (3.8 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "MicroTrem2-Agonist-M1",
+   "detail": "dG -17.8 kcal/mol is 3.2 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "MicroNrf2-AntiInflam-M2",
    "detail": "dG -16.3 kcal/mol implies Kd 1.13 pM, record states 2.1 nM \u2014 gap 4.46 kcal/mol (3.3 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "MicroNrf2-AntiInflam-M2",
+   "detail": "dG -16.3 kcal/mol is 1.7 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -304,9 +369,19 @@ window.__CBC_GATE__ = {
    "detail": "dG -15.7 kcal/mol implies Kd 3.1 pM, record states 3.8 nM \u2014 gap 4.21 kcal/mol (3.1 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "MicroTlr4-Antagonist-M3",
+   "detail": "dG -15.7 kcal/mol is 1.1 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "MicroAutophagy-Tag-M4",
    "detail": "dG -16.6 kcal/mol implies Kd 679 fM, record states 1.7 nM \u2014 gap 4.64 kcal/mol (3.4 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "MicroAutophagy-Tag-M4",
+   "detail": "dG -16.6 kcal/mol is 2.0 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -316,7 +391,7 @@ window.__CBC_GATE__ = {
   {
    "category": "affinity_implausible",
    "record": "MicroDual-Trem2-Nrf2-M5",
-   "detail": "dG -18.9 kcal/mol is tighter than biotin-streptavidin"
+   "detail": "dG -18.9 kcal/mol is 4.3 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -324,9 +399,19 @@ window.__CBC_GATE__ = {
    "detail": "dG -16.7 kcal/mol implies Kd 574 fM, record states 1.5 nM \u2014 gap 4.66 kcal/mol (3.4 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "AstroEos-NO-A1",
+   "detail": "dG -16.7 kcal/mol is 2.1 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "AstroEaat2-Up-A2",
    "detail": "dG -15.8 kcal/mol implies Kd 2.62 pM, record states 3.6 nM \u2014 gap 4.28 kcal/mol (3.1 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "AstroEaat2-Up-A2",
+   "detail": "dG -15.8 kcal/mol is 1.2 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "thermodynamic_inconsistency",
@@ -334,14 +419,49 @@ window.__CBC_GATE__ = {
    "detail": "dG -16.1 kcal/mol implies Kd 1.58 pM, record states 2.8 nM \u2014 gap 4.43 kcal/mol (3.2 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "AstroZo1-Protect-A3",
+   "detail": "dG -16.1 kcal/mol is 1.5 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "AstroPafr-Block-A4",
    "detail": "dG -15.2 kcal/mol implies Kd 7.22 pM, record states 4.8 nM \u2014 gap 3.85 kcal/mol (2.8 orders of magnitude)"
   },
   {
+   "category": "affinity_implausible",
+   "record": "AstroPafr-Block-A4",
+   "detail": "dG -15.2 kcal/mol is 0.6 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
    "category": "thermodynamic_inconsistency",
    "record": "AstroSuper-CBF-EAAT2-A5",
    "detail": "dG -18.2 kcal/mol implies Kd 45.6 fM, record states 350 pM \u2014 gap 5.30 kcal/mol (3.9 orders of magnitude)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "AstroSuper-CBF-EAAT2-A5",
+   "detail": "dG -18.2 kcal/mol is 3.6 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "CogDual-TrkB-PAS-10",
+   "detail": "dG -17.9 kcal/mol is 3.3 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "CogBDNF-Mimic-04",
+   "detail": "dG -16.8 kcal/mol is 2.2 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "CogNrf-KeapDis-03",
+   "detail": "dG -15.1 kcal/mol is 0.5 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
+  },
+  {
+   "category": "affinity_implausible",
+   "record": "CogAbeta-Clearer-08",
+   "detail": "dG -14.8 kcal/mol is 0.2 kcal/mol beyond the tightest de novo designed binder ever measured (-14.6 kcal/mol, Kd ~ 20 pM, Cao et al. Nature 2022, after experimental affinity maturation)"
   },
   {
    "category": "duplicate_sequence",
