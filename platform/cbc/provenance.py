@@ -62,10 +62,36 @@ GENERATED_ARTEFACTS = (
 
 
 def _tree_is_dirty(root: Path) -> bool:
-    """Dirty ignoring the generators' own output. See GENERATED_ARTEFACTS."""
+    """A TRACKED file differs from HEAD, ignoring the generators' own output.
+
+    Untracked files are not dirt. They were, and that made the stamp unreachable rather than
+    merely conservative: `git status --porcelain` lists a raw predictor fold that was never
+    added, the whole tree is declared dirty, and every artefact built from then on is stamped
+    `-dirty` forever. That is not a hypothetical. `runs/interface-null-positive-control/`
+    holds the permutation folds for study #12, it is not committed, and it is why the commit
+    literally titled "Restamp the generated artefacts against the commit they now describe"
+    restamped `262b016-dirty` to `b1c10f9-dirty` and left the repository exactly as red as it
+    found it. A stamp no run can ever earn is not a warning, it is a constant.
+
+    The question the stamp asks is whether the INPUTS were committed, so the test is whether
+    a checkout reproduces the artefact -- and for these artefacts it does, which was measured
+    rather than assumed. In a fresh clone of HEAD, offline, `build_slate.py`,
+    `build_structures.py`, `build_dataset.py` and `studies/alphafold_db_compare.py --analyse`
+    each reproduce their committed output byte for byte once the stamp itself is set aside,
+    and all 503 entries of `runs/manifest.json` resolve to files the clone has. Nothing an
+    artefact reads is untracked. That is what makes ignoring untracked paths honest here: a
+    file in no commit cannot be an input to a file a clone rebuilds.
+
+    The safety this gives up is narrow and is the one the reproduction test above catches: a
+    NEW input that was written but never added would now stamp bare and claim a reproduction
+    a clone cannot perform. A tracked input that is merely edited still reports dirty, which
+    is the case the suffix was invented for.
+    """
     out = subprocess.run(["git", "status", "--porcelain"], cwd=root,
                          capture_output=True, text=True, timeout=30).stdout
     for line in out.splitlines():
+        if line.startswith("??"):
+            continue
         path = line[3:].strip().strip('"')
         if not path:
             continue

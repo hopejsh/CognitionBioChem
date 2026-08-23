@@ -55,11 +55,11 @@ SUITES = [
      [PY, "platform/check_reports.py"], 0,
      "the two editions describe the same work; no number stated in English is missing "
      "from the Korean"),
-    # The manuscript's own guard was written and then left out of this list, so the command
+    # The prose guard was written and then left out of this list, so the command
     # the README calls "run everything" ran everything except the check on the longest
     # document in the repository. It walks data/ directly rather than trusting the fact sheet
     # the drafters worked from, which is the reason it belongs here and not in a build script.
-    ("Manuscript numeric provenance (English and Korean)",
+    ("Prose-to-artefact numeric provenance",
      [PY, "platform/check_paper.py"], 0,
      "every numeral the paper states about this study traces to an artefact or to "
      "arithmetic on one; the two editions agree on numbers, citations and figures"),
@@ -85,7 +85,7 @@ EVIDENCE = {
         re.compile(r"^PASS — no code path converts", re.M),
     "Report editions agree (English vs Korean)":
         re.compile(r"^\d+ passed, \d+ failed", re.M),
-    "Manuscript numeric provenance (English and Korean)":
+    "Prose-to-artefact numeric provenance":
         re.compile(r"^\d+ passed, \d+ failed", re.M),
 }
 

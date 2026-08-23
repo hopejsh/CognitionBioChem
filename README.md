@@ -130,51 +130,56 @@ Run everything:
 ./.venv/bin/python verify_all.py
 ```
 
-Eight suites, the last of which is the manuscript's own numeric guard. The data gate is
-**expected** to exit non-zero on the legacy dataset — a gate that passed on it would be the
-defect.
+Eight suites. The last two are the guards that hold a generated document to the artefacts,
+and both **skip — saying so — when there is nothing built to read**, which is the state of
+every clone. The data gate is **expected** to exit non-zero on the legacy dataset: a gate
+that passed on it would be the defect.
 
-### The manuscript
+## What this repository publishes
 
-There is a paper draft of this study, in English and Korean, with a conference deck for each.
-**It is not published here.** The prose lives outside the repository, and `paper/` is ignored, so
-a clone carries the study and not the writing about it — the same line `docs/*.docx` already
-draws, extended to the source the documents are built from. Publishing the sentences is the same
-disclosure as publishing the file they render into.
+The study. The pre-registered plans and their hashes, the artefacts with their rows and
+verdicts, the folds behind them, the code that produced all of it, and the guards that hold
+those to each other. Every number this README states is traceable in `data/`, by a reader who
+clones this and runs the suites.
 
-What the repository publishes is the study itself: the registered plans and their hashes, the
-artefacts with their rows and verdicts, the code that produced them, and the guards that hold
-them to each other. Every number this README states is traceable in `data/` without the
-manuscript.
+Long-form writing about the study is not published here, in either language, and neither are
+the documents built from it. `paper/` is ignored, and `docs/*.docx`, `docs/*.pptx`,
+`docs/*.pdf` and `docs/*.html` are ignored with it, so the prose is excluded on the same terms
+as the files it renders into — publishing the sentences is the same disclosure as publishing
+the document. (Those globs are scoped to `docs/`; the workbench page at the repository root is
+tracked and is not one of them.) Writing about a study is the author's, and the author places
+it. What a clone carries is the study and the machinery, and that is the whole of what is
+offered here.
 
-Two audits of that draft are worth recording even though the draft is not here, because they
-were run against this repository's artefacts and their results are facts about the study.
+`platform/check_paper.py` is the guard that binds prose to artefacts. It does not read a fact
+sheet; it walks `data/` directly, collects every value the repository actually holds, and
+requires every numeral a text states about this study to trace to one of them or to arithmetic
+on one — with the study's central quantities anchored to the artefact field they come from, so
+a transposition fails even though it would pass a membership test. It runs in `verify_all.py`
+and **skips, reporting that it skipped, when there is no prose to read**, which is the state of
+every clone. A guard that cannot reach its subject has not passed, and saying so is the honest
+report.
 
-The reference library holds 186 PubMed-indexed references and 4 that PubMed does not index. 184
-of the 186 were retrieved through the PubMed E-utilities by the specialist that proposed them,
-re-fetched by an independent checker, and re-fetched a third time directly from NCBI esummary and
-compared on title and first author: 184 of 184 matched. Two — `yin2024` and `unsal2026` — were
-found by the reviewing pass rather than proposed by a specialist and carry a single esummary
-fetch. Beyond existence, 453 claim-source pairs were checked against the cited abstracts: 402
-were supported and 46 were corrected, three of them because the cited paper concluded the
-opposite of the sentence citing it.
+### The document generators
 
-The vocabulary was audited the same way. Terms were searched in PubMed and Consensus and ruled on
-in a rulings file held with the draft: 77 rulings, of which 40 replaced coinages or terms the
-field gives to something else, 9 qualified, 4 defined, and 24 confirmed as standard vocabulary
-and left alone.
+`platform/` holds the generators that turn artefacts into long-form documents, and they are
+part of the platform in the same way `build_dataset.py` is: code, tracked, runnable, guarded.
+**Their output is not.** Every path they write is ignored, so cloning this repository gives you
+the generators and none of the documents — you can produce a set on your own machine, and you
+will not find that set committed here.
 
-`platform/check_paper.py` holds the two editions to the same numbers, the same citation order and
-the same figure order. It runs in `verify_all.py` and **skips, reporting that it skipped, when the
-draft is not present** — a guard that cannot read its subject has not passed, and saying so is the
-honest report.
+| Code | What it reads, and what holds it |
+| --- | --- |
+| `cbc/report_data.py` | The single dict both report editions unpack: the artefacts and the quantities derived from them. Nothing downstream types a number |
+| `build_report.py`, `build_report_ko.py` | The English and Korean editions of the written account. The Korean is not the English with the strings swapped — both read that same dict, so re-run a study and both change together or neither does. References resolve against `docs/REFERENCES.json`; a key that is not in it raises rather than being cited |
+| `check_reports.py` | The guard between the two editions: same figure count, same table count, same paragraph count, and **no number stated in English missing from the Korean**. It runs in `verify_all.py`, and with nothing built to compare it exits 0 saying it skipped — the word it means |
+| `build_deck.py` | The conference deck, every slide's numbers read from `data/` at build time, figures inlined as data URIs so the deck is one file. PDF export needs Google Chrome; without it the generator writes the HTML and reports that it skipped the PDF rather than leaving a stale one beside it |
+| `build_pptx.py` | The PowerPoint renderer. It parses the HTML `build_deck.py` just produced rather than re-authoring the slides, so the deck's prose lives in exactly one place, and it raises rather than silently dropping markup it does not recognise |
+| `build_paper.py`, `build_paper_deck.py`, `cbc/paper.py` | One renderer per output, serving both language editions from one block list, so the editions cannot disagree about a citation number or a figure number. Their input is the prose, which is not in this repository; in a clone they have nothing to render, and they are kept because the author rebuilds from their own working copy |
+| `build_figures.py` | The exception, and the reason it is one: figures drawn from the artefacts, whose **output is tracked**. They were once committed as PNGs with no generator behind them, which is exactly the defect this repository's own guard names elsewhere |
 
-### The written account and the deck
-
-Five long-form documents are generated from the same artefacts the page reads, so none of them
-can quote a number the data no longer supports. **They are not tracked** — each is a pure
-function of `data/` plus `docs/figures/`, so the generators are in the repository and the
-outputs are not. Build them with:
+The report and deck chain runs from a fresh clone — it reads only tracked inputs — and writes
+into `docs/`, where every path it touches is ignored:
 
 ```bash
 ./.venv/bin/python platform/build_figures.py \
@@ -184,33 +189,17 @@ outputs are not. Build them with:
   && ./.venv/bin/python platform/build_pptx.py
 ```
 
-| Produces | What it is |
-| --- | --- |
-| `docs/CognitionBioChem_Report.docx` | Why the project exists, the scientific background, what was built, how the question was asked, the results, the limits, and 23 references — each recording how it was verified |
-| `docs/CognitionBioChem_Report_KO.docx` | The Korean edition. Not a copy with the strings swapped: both generators unpack the same dict from `cbc.report_data`, so the two cannot disagree about a published figure, and `platform/check_reports.py` enforces it |
-| `docs/CognitionBioChem_Deck.html` | A 19-slide conference deck. Arrow keys navigate; it prints to 16:9 pages |
-| `docs/CognitionBioChem_Deck.pdf` | The same deck, exported by the same command so the two cannot drift |
-| `docs/CognitionBioChem_Deck.pptx` | The same deck as editable PowerPoint — native text frames, tables and pictures, not pictures of slides. `build_pptx.py` parses the generated HTML rather than re-authoring the slides, and refuses to save a file missing any word the deck shows |
+What IS tracked is what those generators read: [`docs/REFERENCES.json`](docs/REFERENCES.json),
+every citation with its PMID, DOI and the record of how it was checked, and
+[`docs/figures/`](docs/figures/), where `fig*.png` are drawn by `build_figures.py` from the
+artefacts and `ui*.png` are browser captures of the running page, which no script can
+regenerate.
 
-What IS tracked is everything those generators read: [`docs/REFERENCES.json`](docs/REFERENCES.json),
-every citation with its PMID, DOI and the record of how it was checked — `build_report.py`
-raises rather than cite a key that is not in it — and [`docs/figures/`](docs/figures/), where
-`fig*.png` are drawn by `build_figures.py` from the artefacts and `ui*.png` are browser
-captures of the running page, which no script can regenerate.
-
-Nineteen of the 23 references were resolved through the PubMed E-utilities; three through
-Consensus/Semantic Scholar (two 2026 papers and the Boltz-2 preprint, none of them
-PubMed-indexed); and Holm 1979 is marked as not PubMed-indexed with the venue it was checked
-against. Bibliographic metadata retrieved from PubMed (NLM/NCBI).
-
-The deck's PDF export needs Google Chrome; without it `build_deck.py` writes the HTML and says
-it skipped the PDF, rather than leaving a stale one in place.
-
-The `.pptx` names macOS faces — Avenir Next Condensed, Iowan Old Style, Menlo — because the
-deck's own web fonts are not installed locally and PowerPoint would substitute them silently.
-Change `FONT_DISPLAY` / `FONT_BODY` / `FONT_MONO` at the top of `build_pptx.py` and re-run to
-name different ones. The Korean edition sets Apple SD Gothic Neo on all four script slots, so
-Word cannot pick a different face for Hangul than for the Latin text beside it.
+`docs/REFERENCES.json` is the smaller, tracked library those generators cite from — 23 entries,
+not the 190 above, which belong to writing held elsewhere. Nineteen of the 23 were resolved
+through the PubMed E-utilities; three through Consensus/Semantic Scholar (two 2026 papers and
+the Boltz-2 preprint, none of them PubMed-indexed); and Holm 1979 is marked as not
+PubMed-indexed with the venue it was checked against. Bibliographic metadata retrieved from PubMed (NLM/NCBI).
 
 ---
 
@@ -520,7 +509,7 @@ twice; the parser now keeps the highest-occupancy copy. `24KK` scores 6.09 Å (a
 congeneric stratum goes from 6 entries to 7, and H2's threshold criterion moves from 0.167 to
 **0.214** — over the pre-registered 0.2 line.
 
-That is not a positive result, and the report no longer lets it read as one. The Fisher exact
+That is not a positive result, and this README no longer lets it read as one. The Fisher exact
 test on the very same 2×2 gives **p = 0.59**: the criterion is met and the test is not
 significant, which is what "underpowered" looks like when both are shown instead of one. Both
 now appear side by side, because the criterion and the test were previously collapsed into a
@@ -861,8 +850,8 @@ whose own audit records `confirmatory = true`.
 | H3 the natural separation exceeds the designed | **falsified** (Welch p = 0.107, CI −0.021 to +0.197) |
 
 **The falsification is the operative result, and the repository was recommending the thing it
-falsifies.** Until this study, `README.md` and the tracked paper offered a composition-matched
-decoy set as a *per-candidate* control — the form in which a reviewer would actually apply it,
+falsifies.** Until this study, `README.md` offered a composition-matched decoy set as a
+*per-candidate* control — the form in which a reviewer would actually apply it,
 to one design. H2 put exactly that claim to a registered test and it did not reach the
 registered strength: only **4 of 16** complexes scored above every one of their own ten
 permutations, against a threshold of **5** fixed in writing before the first fold. Under
@@ -870,7 +859,7 @@ Bin(16, 1/11) the expectation is **1.45**, P(X ≥ 4) = **0.0511** and P(X ≥ 5
 the observed count misses α by **0.0011** — and the plan stated in the same sentence that four
 would not clear α and five would, which is what makes the margin a result rather than a licence
 to move the line. **The per-candidate reading of the composition-matched null is withdrawn
-throughout this document, and in the manuscript draft held outside it.**
+throughout this document, and nothing tracked here recommends it any longer.**
 
 **And no per-case call was reachable at any outcome those folds could have returned.** With m
 permutations a single complex's empirical p floors at 1/(m + 1) — **0.0909 at ten, above
@@ -1084,19 +1073,26 @@ platform/
   validate.py         the data-integrity gate
   verify_frontend.py  DOM, data and rendering-rule contract for the page
   check_naming.py     build guard: no pooled score rendered as a free energy
-  cbc/report_data.py  the artefacts and derived quantities both report editions share
-  build_figures.py    the five figures every document embeds, plus fig6 for study #12
-  build_report.py     the written account (.docx), every number read from an artefact
-  build_report_ko.py  the Korean edition of the same account, same numbers
-  build_deck.py       the conference deck (.html + .pdf), from the same artefacts
-  build_pptx.py       the deck again as editable PowerPoint, parsed from that HTML
-  check_reports.py    guard: the two report editions must describe the same work
-  build_paper.py      the manuscript (.docx), English and Korean, from the draft (not
-                      published here; the generator is kept so the author can rebuild it)
-  build_paper_deck.py the manuscript's conference deck, English and Korean
-  check_paper.py      guard: every number traces to an artefact; the editions agree
-  cbc/paper.py        the format-neutral parser both manuscript renderers share
-  cbc/deck_style.py   the stylesheet and shell every deck shares
+  cbc/report_data.py  the artefacts and derived quantities both report renderers unpack
+  build_figures.py    draws docs/figures/ from the artefacts -- the one generator whose
+                      output is tracked, six figures including fig6 for study #12
+  build_report.py     lays artefact rows out as long-form English, every number read from
+                      an artefact and none typed; what it writes is not tracked
+  build_report_ko.py  the same rows laid out in Korean from the same dict, so the two
+                      cannot drift; what it writes is not tracked
+  build_deck.py       lays the same artefact numbers out as slides, figures inlined; what
+                      it writes is not tracked
+  build_pptx.py       re-lays those slides as PowerPoint by parsing its own HTML rather
+                      than re-authoring them; what it writes is not tracked
+  check_reports.py    guard: the two renderings must state the same numbers -- skips, and
+                      says so, when there is nothing built to compare
+  build_paper.py      typesets the author's prose, English and Korean; neither the prose
+                      nor the output is in this repository, so a clone has nothing to read
+  build_paper_deck.py the same prose laid out as slides, both editions; same absences
+  check_paper.py      guard: every numeral a text states must trace to an artefact --
+                      skips, and says so, when there is no prose to read
+  cbc/paper.py        the format-neutral parser both prose renderers share
+  cbc/deck_style.py   the stylesheet and shell every slide renderer shares
 runs/                 content-addressed prediction artefacts + manifest
 prespec/              registered, hash-locked analysis plans
 memory/               append-only provenance ledger (see memory/DESIGN.md)
@@ -1106,10 +1102,15 @@ data/                 validated, provenance-carrying data
 data/alphafold_db/    deposited AlphaFold models, downloaded under CC BY 4.0
 data/structures.json  51 structures the viewer can open, all under custody
 data/slate.json       the pre-registered studies, assembled from plans and artefacts
-docs/figures/         the five generated figures and five UI captures the documents embed
+docs/figures/         six generated figures and five UI captures -- tracked, and the only
+                      generator output that is
 docs/REFERENCES.json  every citation, with how it was verified
 index.html, app.js    the workbench page
 ```
+
+Every path the `build_*` generators write a document to is ignored, so a clone carries the
+generators and none of their output; what is tracked is the code, the artefacts it reads and
+the figures it draws.
 
 The page is a static site with no build step. Serve it over HTTP — under `file://` the
 browser refuses every `fetch()` as cross-origin, and while the data layer has a `<script>`
