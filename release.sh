@@ -67,9 +67,15 @@ cat <<DONE
   is done -- which is what tells you it is not done.
 
     - take the new VERSION DOI from the Zenodo record
-    - put it in CITATION.cff under identifiers:, in biotools.json (otherID AND the
-      download URL + its version), and in the README version-DOI paragraph
-      (the concept DOI never changes)
+    - append a row for it to zenodo_dois.json -- version, doi, deposited. Do this FIRST:
+      it is the declaration every citation surface is then checked against, and until it
+      is there the guard has nothing to hold them to and says so
+    - put the same DOI in CITATION.cff under identifiers:, in biotools.json (otherID AND
+      the download URL + its version), and in the README version-DOI paragraph, then
+      rebuild data/dataset.json (the Provenance tab copies the block from CITATION.cff).
+      The concept DOI never changes
+    - ./.venv/bin/python platform/check_version_stamps.py --remote confirms the row you
+      just wrote against what Zenodo says the latest version is
     - replace RELEASE-NOTE-GENERATED with RELEASE-NOTE-FROZEN at the top of
       docs/RELEASE_NOTES_v$VERSION.md -- that marker is what makes this version count as
       published, here and in check_version_stamps.py

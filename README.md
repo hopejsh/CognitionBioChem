@@ -1349,22 +1349,30 @@ status is `placeholder` or `not_computed` — those produce a label, never a fig
 }
 ```
 
-**Read this before you paste either block above.** Version 1.1.0 is not yet deposited: it has
-no git tag and no version DOI. The most recent published release is v1.0.0, and the concept
-DOI resolves to that record until 1.1.0 is published. So the two blocks name the version of the
-software you have; the DOI in them resolves, today, to the v1.0.0 deposit of 2026-08-20. If
-that gap matters for what you are writing, say which you mean — and see the two ways to close
-it in `docs/REGISTRATION.md` §1.
+**Both blocks above are safe to paste.** Version 1.1.0 was deposited on 2026-08-23, so the
+version they name and the release the DOI resolves to are the same thing. That was not true
+between 2026-08-20 and 2026-08-23, and if you copied a citation from this file during those
+three days, see the paragraph after next.
 
 Zenodo issues two DOIs and they are not interchangeable. **`10.5281/zenodo.22032684`** is the *concept* DOI
-and always resolves to the newest **published** release — cite this one normally. **`10.5281/zenodo.22032685`**
-is the *version* DOI, permanently fixed to v1.0.0, and is what you cite when the exact bytes matter —
-a reproducibility statement, for instance. It is **not** this tree: study #12,
+and always resolves to the newest **published** release — cite this one normally. **`10.5281/zenodo.22070599`**
+is the *version* DOI, permanently fixed to v1.1.0, and is what you cite when the exact bytes matter —
+a reproducibility statement, for instance. It **is** this tree: the nine-study slate, study #12
+`interface-null-positive-control-v1` included. The version DOI has to be written down by hand
+after each release, because the webhook issues it only once the tag is already pushed: first
+as a row in `zenodo_dois.json`, which declares which DOI belongs to which release, and then
+onto the citation surfaces. `platform/check_version_stamps.py` holds every surface to that
+declaration and fails naming any that still points at an older deposit — which is what a
+release does to four files if nobody looks. Its `--remote` flag resolves the concept DOI
+through the Zenodo API and confirms the declaration against the archive itself.
+
+**If you were given `10.5281/zenodo.22032685`, do not cite it for this work.** That is the
+*previous* version DOI, permanently fixed to the v1.0.0 deposit of 2026-08-20. Study #12,
 `interface-null-positive-control-v1`, was registered 2026-08-22T06:43:11Z, two days after that
 deposit, and it is the study that withdrew the per-candidate reading of the composition-matched
-null. Anyone citing `…22032685` is naming an eight-study slate that does not contain it. The
-version DOI has to be written into `CITATION.cff` by hand after each release, because the
-webhook issues it only once the tag is already pushed.
+null. Anyone citing `…22032685` is naming an eight-study slate that does not contain it, and
+that record will always say eight — a version DOI is frozen to the bytes it was minted for.
+Cite the concept DOI `…22032684`, or the current version DOI `…22070599`, instead.
 
 If your journal uses Research Resource Identifiers, cite **CognitionBioChem
 (RRID:SCR_028851)** inline in the running text; the DOI belongs in the reference list. The

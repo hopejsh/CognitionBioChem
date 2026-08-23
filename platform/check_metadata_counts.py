@@ -282,6 +282,11 @@ UNWATCHED: tuple[tuple[str, str], ...] = (
     ("research/*", "literature and scale-out notes about other people's numbers"),
     ("retractions.jsonl", "the retraction ledger; it holds the withdrawn wording by "
                           "construction, which is the point of it"),
+    ("zenodo_dois.json", "the DOI ledger platform/check_version_stamps.py enforces: one row "
+                         "per Zenodo deposit, appended at release time and never rewritten. "
+                         "It states which DOI belongs to which release and no slate count, "
+                         "and its rows about superseded deposits are records of what was "
+                         "deposited then"),
     # --- the artefacts the counts are READ FROM. Binding a surface count to these would be
     # --- circular: `expected()` reads slate.json, so slate.json cannot be a surface.
     ("data/*.json", "the artefacts this guard reads its expected values FROM"),

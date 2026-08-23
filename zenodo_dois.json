@@ -1,0 +1,47 @@
+{
+  "what_this_file_is": [
+    "The repository's declaration of which Zenodo DOI belongs to which release. One row per",
+    "deposit, appended at release time and never rewritten: a version DOI is frozen to the",
+    "bytes of one deposit forever, so a row that is here is a permanent fact.",
+    "",
+    "platform/check_version_stamps.py enforces it. OFFLINE it holds every live citation",
+    "surface to the DOI declared for the current VERSION, and -- because the superseded rows",
+    "are kept -- it can answer 'that DOI belongs to v1.0.0' about a surface that names an old",
+    "one, which is the sentence that makes the defect obvious. With --remote it resolves the",
+    "concept DOI through the Zenodo API and confirms this file against what Zenodo says the",
+    "latest version is.",
+    "",
+    "WHY THIS IS A FILE OF ITS OWN and not a field in CITATION.cff, codemeta.json or",
+    "biotools.json: each of those IS a live citation surface. A declaration that lived inside",
+    "one of them could only ever prove that surface agreed with itself, and the defect this",
+    "closes is a surface that confidently agreed with itself while naming the wrong deposit.",
+    "The declaration has to be somewhere no reader is ever sent to cite from. It is the same",
+    "arrangement retractions.jsonl has with platform/check_retractions.py: a hand-maintained",
+    "root-level ledger that no surface reads, and a guard that holds the surfaces to it.",
+    "",
+    "AT A RELEASE: the webhook mints the version DOI only after the tag is pushed, so nothing",
+    "can fill this in ahead of time. Append the new row here first, then write the same DOI",
+    "onto CITATION.cff and biotools.json and rebuild data/dataset.json. Run the guard; it",
+    "names every surface that still points at the previous deposit."
+  ],
+  "concept_doi": "10.5281/zenodo.22032684",
+  "concept_note": [
+    "Minted once, for the record as a whole. It always resolves to the newest PUBLISHED",
+    "version and is the DOI a reader normally cites. It is never superseded and never",
+    "appears in the versions list below."
+  ],
+  "versions": [
+    {
+      "version": "1.0.0",
+      "doi": "10.5281/zenodo.22032685",
+      "deposited": "2026-08-20",
+      "note": "Superseded by v1.1.0 and still a correct name for one thing: the bytes of the 2026-08-20 deposit, whose description counts the slate at eight. That record was never corrected in place -- see docs/REGISTRATION.md §1 -- so it will always say eight. Kept here because the guard's whole message depends on it: a surface that names this DOI is told which version it belongs to, and that is what makes the error legible."
+    },
+    {
+      "version": "1.1.0",
+      "doi": "10.5281/zenodo.22070599",
+      "deposited": "2026-08-23",
+      "note": "Current. Record 22070599, built from the corrected .zenodo.json, describing the nine-study slate with study #12 interface-null-positive-control-v1 included. This is the DOI every live citation surface must name while VERSION reads 1.1.0."
+    }
+  ]
+}

@@ -758,41 +758,105 @@ def _identity_mutation(rel: str, scratch: Path) -> str | None:
     return None
 
 
+def _is_published(scratch: Path) -> bool:
+    """Is VERSION itself a published release?
+
+    The repository is legitimately in one of two states and the mutations below are not the
+    same in each. IN PREPARATION, `VERSION` names a version with no tag and no DOI: the
+    disclosure sentence is required, and the pinned stamps name the PREVIOUS release.
+    PUBLISHED, `VERSION` names the release that was just cut: the disclosure must be gone,
+    and the pinned stamps name `VERSION` itself -- not because anyone relabelled them, but
+    because Zenodo minted that DOI for that release.
+
+    This suite used to assume the first state only, so closing a release silently disarmed
+    fourteen of its own slots: five pinned mutations became no-ops (`v1.1.0` -> `v1.1.0`) and
+    nine anchors vanished with the sentence they edited. A mutation suite that stops biting
+    the moment the release procedure is followed is a mutation suite that proves nothing at
+    exactly the moment the citation surfaces change.
+    """
+    return _cur(scratch) in CVS.published_versions(scratch)
+
+
 def _pinned_mutation(rel: str, scratch: Path) -> str | None:
-    """The naive repair: relabel a frozen deposit to follow VERSION."""
+    """Point a pinned reference at a version it cannot name.
+
+    IN PREPARATION that is the naive repair -- relabel the frozen deposit to follow VERSION.
+    PUBLISHED, the naive repair is not expressible: the pin already equals VERSION, so the
+    substitution is the identity and mutates nothing. The rule underneath is the same either
+    way -- a pinned reference must name a release that exists -- so in that state the pin is
+    moved to a version that was never published.
+    """
     cur = _cur(scratch)
     pub = CVS.published_versions(scratch)
     if not pub:
         return None
     pin = pub[-1]
+    target = BOGUS if pin == cur else cur
+    why = ("relabelled to follow VERSION" if target == cur
+           else "moved to a version that was never published")
     if rel in ("CITATION.cff", "README.md"):
-        return _sub_file(scratch, rel, f"fixed to v{pin}", f"fixed to v{cur}")
+        return _sub_file(scratch, rel, f"fixed to v{pin}", f"fixed to v{target}")
     if rel == "biotools.json":
         def edit(d):
             for dl in d.get("download") or []:
-                dl["url"] = dl["url"].replace(f"v{pin}", f"v{cur}")
-                dl["version"] = cur
+                dl["url"] = dl["url"].replace(f"v{pin}", f"v{target}")
+                dl["version"] = target
             for o in d.get("otherID") or []:
                 if isinstance(o.get("version"), str):
-                    o["version"] = o["version"].replace(f"v{pin}", f"v{cur}")
-            return f"download and otherID relabelled v{pin} -> v{cur}"
+                    o["version"] = o["version"].replace(f"v{pin}", f"v{target}")
+            return f"download and otherID v{pin} -> v{target} ({why})"
         return _json_at(scratch, rel, edit)
     if rel.startswith("data/dataset."):
         def edit(d):
             for i in d["citation"].get("identifiers") or []:
                 if isinstance(i.get("description"), str):
-                    i["description"] = i["description"].replace(f"v{pin}", f"v{cur}")
-            return f"version-DOI description relabelled v{pin} -> v{cur}"
+                    i["description"] = i["description"].replace(f"v{pin}", f"v{target}")
+            return f"version-DOI description v{pin} -> v{target} ({why})"
         return _json_at(scratch, rel, edit)
     return None
 
 
-def _drop_disclosure(rel: str, scratch: Path) -> str | None:
-    """Break the sentence's shape without deleting a line, which is how a real edit loses it.
+def _plant_stale_disclosure(rel: str, scratch: Path) -> str | None:
+    """Leave the undeposited-version sentence behind on a surface after the deposit exists.
 
-    Reworded rather than removed: a guard that only notices a missing paragraph would pass on
-    a surface where someone softened the wording and left the version number behind.
+    This is the defect the release procedure actually produces. `release.sh` ends by telling
+    the author to delete the sentence from seven surfaces by hand, which is six chances to
+    delete it from six. The sentence planted is the one that was true yesterday, so the
+    surface reads "not yet deposited" about a version that now has a DOI.
     """
+    cur = _cur(scratch)
+    pub = [v for v in CVS.published_versions(scratch) if v != cur]
+    sentence = CVS.disclosure(cur, pub[-1] if pub else "0.0.0")
+    if rel.endswith((".md", ".cff")):
+        p = materialise(scratch, rel)
+        marker = "# " if rel.endswith(".cff") else ""
+        p.write_text(p.read_text(encoding="utf-8").rstrip("\n")
+                     + f"\n\n{marker}{sentence}\n", encoding="utf-8")
+        return f"{rel}: stale disclosure appended"
+
+    # JSON and the JS shim carry prose in string fields; appending raw text would break the
+    # parse and report as a crash rather than as the guard catching anything.
+    def edit(d):
+        if "citation" in d and isinstance(d["citation"].get("note"), str):
+            d["citation"]["note"] += " " + sentence
+        elif isinstance(d.get("description"), str):
+            d["description"] += " " + sentence
+        else:
+            return None
+        return "stale disclosure appended to a prose field"
+    return _json_at(scratch, rel, edit)
+
+
+def _disclosure_mutation(rel: str, scratch: Path) -> str | None:
+    """Break the disclosure rule on `rel`, in whichever direction this state admits.
+
+    IN PREPARATION the sentence is required, so it is REWORDED rather than removed: a guard
+    that only noticed a missing paragraph would pass on a surface where someone softened the
+    wording and left the version number behind. PUBLISHED there is no sentence to lose, and
+    the rule runs the other way -- the sentence must be ABSENT -- so one is planted.
+    """
+    if _is_published(scratch):
+        return _plant_stale_disclosure(rel, scratch)
     return _sub_file(scratch, rel, "is not yet deposited", "is the current version")
 
 
@@ -804,31 +868,135 @@ def _bump_version(scratch: Path) -> str | None:
     return f"VERSION {cur} -> {major}.{minor + 1}.{patch}, touching no metadata surface"
 
 
-def _freeze_current_note(scratch: Path) -> str | None:
-    """Mark this version's note frozen and change nothing else.
+def _toggle_current_note(scratch: Path) -> str | None:
+    """Flip this version's note between GENERATED and FROZEN, and change nothing else.
 
-    That single edit says the version has been published, so the disclosure sentence on six
-    surfaces becomes false. It is the binding test for the published set: if the guard read a
-    hand-written release list instead of the notes, nothing here would move.
+    That single edit is what decides whether `VERSION` counts as published, so it must move
+    the disclosure rule in whichever direction the tree is currently sitting: freezing an
+    unpublished version's note makes the sentence on seven surfaces false, and unfreezing a
+    published version's note makes its absence a defect. It is the binding test for the
+    published set -- if the guard read a hand-written release list instead of the notes,
+    nothing here would move in either direction.
     """
     cur = _cur(scratch)
-    return _sub_file(scratch, f"docs/RELEASE_NOTES_v{cur}.md",
-                     "<!-- RELEASE-NOTE-GENERATED", "<!-- RELEASE-NOTE-FROZEN")
+    rel = f"docs/RELEASE_NOTES_v{cur}.md"
+    if _is_published(scratch):
+        return _sub_file(scratch, rel, "<!-- RELEASE-NOTE-FROZEN", "<!-- RELEASE-NOTE-GENERATED")
+    return _sub_file(scratch, rel, "<!-- RELEASE-NOTE-GENERATED", "<!-- RELEASE-NOTE-FROZEN")
 
 
-def _cut_the_release(scratch: Path) -> str | None:
-    """The whole release path, executed: freeze the note AND drop the disclosure everywhere.
+def _walk_the_release_path(scratch: Path) -> str | None:
+    """The whole release path, executed, in whichever direction this state admits.
 
     Must stay SILENT. Without this the suite would only ever have shown the guard failing,
     and a guard that cannot go green after the work is done is a guard the author routes
-    around. The pinned stamps still read v1.0.0 here and must still be accepted: 1.0.0 is
-    published, and that is the whole rule.
+    around. Both endpoints of the path are legitimate states and both must be accepted:
+
+    IN PREPARATION -> PUBLISHED: freeze the note and remove the disclosure everywhere. The
+    pinned stamps still name the previous release here and must still be accepted -- they
+    name a release that exists, and that is the whole rule.
+
+    PUBLISHED -> IN PREPARATION: the same tree one step earlier, rebuilt. Unfreezing the note
+    alone does NOT produce it and must not be mistaken for it -- that leaves a version DOI
+    saying "fixed to v1.1.0" in a tree claiming v1.1.0 was never released, which is
+    incoherent, and the guard is right to reject it. The pre-release state is the whole
+    triple: the note unfrozen, the pinned stamps naming the PREVIOUS release, and the
+    disclosure back on every surface. Reconstructing it proves the guard accepts the state a
+    release starts from as well as the one it ends in.
     """
-    if _freeze_current_note(scratch) is None:
+    cur = _cur(scratch)
+    if _is_published(scratch):
+        pub = CVS.published_versions(scratch)
+        if len(pub) < 2:
+            return None       # no earlier release to pin to; the state is not constructible
+        prev = pub[-2]
+        if _toggle_current_note(scratch) is None:
+            return None
+        for rel in ("CITATION.cff", "README.md"):
+            _sub_file(scratch, rel, f"fixed to v{cur}", f"fixed to v{prev}")
+
+        def rewind(d):
+            for dl in d.get("download") or []:
+                dl["url"] = dl["url"].replace(f"v{cur}", f"v{prev}")
+                dl["version"] = prev
+            for o in d.get("otherID") or []:
+                if isinstance(o.get("version"), str):
+                    o["version"] = o["version"].replace(f"v{cur}", f"v{prev}")
+            return "rewound"
+        _json_at(scratch, "biotools.json", rewind)
+
+        def rewind_ds(d):
+            for i in d["citation"].get("identifiers") or []:
+                if isinstance(i.get("description"), str):
+                    i["description"] = i["description"].replace(f"v{cur}", f"v{prev}")
+            return "rewound"
+        for rel in ("data/dataset.json", "data/dataset.js"):
+            _json_at(scratch, rel, rewind_ds)
+
+        # The DOI half of the same state. Before v1.1.0 was deposited there was no v1.1.0
+        # version DOI to name -- the webhook mints it only after the tag is pushed -- so the
+        # citation slots named the v1.0.0 deposit and the declaration had no row for 1.1.0.
+        # Rewinding the version strings alone produces a tree that says 1.1.0 was never
+        # released while four surfaces send the reader to a DOI minted for it, which is not
+        # a state this repository was ever in and not one the guard should accept.
+        decl = CVS.declaration(scratch)
+        here, there = decl.by_version(cur), decl.by_version(prev)
+        moved = 0
+        if here is not None and there is not None:
+            moved = _repoint_slots(scratch, here.doi, there.doi)
+            _drop_declared(scratch, cur)
+
+        sentence = CVS.disclosure(cur, prev)
+        done = [rel for rel in CVS.DISCLOSURE_SURFACES
+                if _plant_disclosure_verbatim(scratch, rel, sentence)]
+        return (f"rewound to the pre-release state: note unfrozen, pinned stamps back to "
+                f"v{prev}, {moved} citation slot(s) back to the v{prev} DOI, the v{cur} row "
+                f"removed from {CVS.DECLARATION}, disclosure restored on {len(done)} "
+                f"surface(s)")
+    if _toggle_current_note(scratch) is None:
         return None
+    # Freezing the note is the moment VERSION becomes published, and a published version
+    # must have a version DOI written down: the release is not closed until the DOI the
+    # webhook minted is in the declaration and on every citation surface. The DOI here is
+    # synthetic -- no deposit exists for an unreleased version, which is the whole reason
+    # this step cannot be automated -- but the *shape* of the finished release is what this
+    # mutation has to produce, and a release that stops at the note is a half-cut release.
+    decl = CVS.declaration(scratch)
+    pub = [v for v in CVS.published_versions(scratch) if v != cur]
+    prev = decl.by_version(pub[-1]) if pub else None
+    minted = f"10.5281/zenodo.{int(decl.concept_record) + 90000000}"
+    _add_declared(scratch, cur, minted, "2026-01-01")
+    moved = _repoint_slots(scratch, prev.doi, minted) if prev else 0
     done = [rel for rel in CVS.DISCLOSURE_SURFACES
             if _sub_file(scratch, rel, "is not yet deposited", "is the current version")]
-    return f"froze this version's note and reworded the disclosure on {len(done)} surface(s)"
+    return (f"froze this version's note, wrote the minted DOI {minted} into "
+            f"{CVS.DECLARATION} and {moved} citation slot(s), and reworded the disclosure "
+            f"on {len(done)} surface(s)")
+
+
+def _plant_disclosure_verbatim(scratch: Path, rel: str, sentence: str) -> str | None:
+    """Put the disclosure on `rel` in the shape that surface holds prose.
+
+    The guard finds the sentence through `_flatten`, which strips `>` quote markers, `#` YAML
+    comments and `//` JS comments -- so a comment is a legitimate carrier and is what the
+    real surfaces use.
+    """
+    if rel.endswith((".md", ".cff")):
+        p = materialise(scratch, rel)
+        marker = "# " if rel.endswith(".cff") else ""
+        p.write_text(p.read_text(encoding="utf-8").rstrip("\n")
+                     + f"\n\n{marker}{sentence}\n", encoding="utf-8")
+        return rel
+
+    def edit(d):
+        if "citation" in d and isinstance(d["citation"].get("note"), str):
+            d["citation"]["note"] += " " + sentence
+        elif isinstance(d.get("description"), str):
+            d["description"] += " " + sentence
+        else:
+            return None
+        return "disclosure restored"
+    return _json_at(scratch, rel, edit)
 
 
 def version_stamp_mutations() -> list[Mutation]:
@@ -847,20 +1015,25 @@ def version_stamp_mutations() -> list[Mutation]:
         slot = Slot("check_version_stamps", "surface", f"{rel} [disclosure]",
                     "the undeposited-version disclosure must be required here")
         out.append(Mutation(slot, f"ver-disclosure:{rel}",
-                            plant=lambda s, rel=rel: _drop_disclosure(rel, s),
+                            plant=lambda s, rel=rel: _disclosure_mutation(rel, s),
                             expect_in_output=rel))
     out += [
         Mutation(Slot("check_version_stamps", "binding", "VERSION",
                       "the identity half is bound to the file, not to a number in this guard"),
                  "ver-bind:version-file", plant=_bump_version,
                  expect_in_output="VERSION says"),
+        # The expected output is a surface name rather than one verdict's wording: this slot
+        # is proved in whichever direction the tree currently sits, and the two directions
+        # produce opposite complaints ("Remove the sentence" vs "does not carry the
+        # undeposited-version disclosure"). What both must do is name the surface.
         Mutation(Slot("check_version_stamps", "binding", "RELEASE-NOTE-FROZEN markers",
-                      "the published set is read from docs/, so freezing a note moves it"),
-                 "ver-bind:frozen-notes", plant=_freeze_current_note,
-                 expect_in_output="Remove the sentence"),
+                      "the published set is read from docs/, so moving a marker moves it"),
+                 "ver-bind:frozen-notes", plant=_toggle_current_note,
+                 expect_in_output="CITATION.cff"),
         Mutation(Slot("check_version_stamps", "rule", "the release path goes green",
                       "a guard that cannot be satisfied is a guard that gets routed around"),
-                 "ver-rule:cut-the-release", plant=_cut_the_release, must="stay-silent"),
+                 "ver-rule:cut-the-release", plant=_walk_the_release_path,
+                 must="stay-silent"),
         Mutation(Slot("check_metadata_counts", "rule", "the nominalised forms",
                       "a count stated as a noun is the same claim as the participle"),
                  "cnt-rule:nominalised", plant=nominalised_form,
@@ -880,6 +1053,384 @@ def version_stamp_mutations() -> list[Mutation]:
                       "coverage satisfied by failing on everything is coverage of nothing"),
                  "cnt-rule:exempted-file", plant=exempted_file, must="stay-silent"),
     ]
+    return out
+
+
+# --------------------------------------------------------------------------- #
+# check_version_stamps: which DEPOSIT a version DOI names
+# --------------------------------------------------------------------------- #
+#
+# The mutations above move version NUMBERS. Every one of them passed on 2026-08-23 while four
+# citation surfaces still carried the DOI Zenodo minted for the v1.0.0 deposit -- because a
+# guard that reads the numeral typed beside an identifier and never the identifier cannot see
+# that. These mutations move the IDENTIFIER and leave every numeral correct, which is the
+# exact state the tree was in.
+#
+# The slots are enumerated from `CVS.doi_slots(REPO)` -- the guard's own reading -- so a
+# citation surface it starts watching without a mutation aimed at it reports UNCOVERED.
+#
+# Two directions again, and they are not symmetrical:
+#
+#   slot     a field a reader cites FROM is pointed at the superseded deposit  -> must fail
+#   prose    a deliberate historical mention loses the version beside it       -> must fail
+#   prose    a deliberate historical mention that keeps it                     -> must be SILENT
+#
+# The third is the one that makes the first two worth anything. This repository keeps true
+# statements about the superseded v1.0.0 DOI on purpose -- README.md holds one of those and a
+# live citation instruction five lines apart -- so a guard that fired on every mention of an
+# old DOI would be satisfied only by deleting the history, and would be turned off.
+
+
+def _decl(scratch: Path):
+    """(declaration, the deposit surfaces must name, the newest superseded deposit)."""
+    decl = CVS.declaration(scratch)
+    tgt = CVS.target_deposit(decl, _cur(scratch), CVS.published_versions(scratch))
+    older = [d for d in decl.deposits if tgt is not None and d.doi != tgt.doi]
+    return decl, tgt, (older[-1] if older else None)
+
+
+def _doi_slot_mutation(rel: str, scratch: Path) -> str | None:
+    """Point one citation slot on `rel` at the previous release's version DOI.
+
+    THE DEFECT, EXACTLY. Nothing else changes: `VERSION` still reads 1.1.0, every identity
+    stamp still equals it, and the description beside the DOI still says "permanently fixed
+    to v1.1.0". Only the identifier moves -- which is what a release does to a repository
+    when the author forgets that the webhook mints a new DOI and the old one is still sitting
+    in four files.
+
+    The slot is located through `CVS.doi_slots`, so the mutation lands where the guard
+    actually looks rather than on the first textual match, which in README.md and
+    CITATION.cff is prose several hundred lines away from the field a reader copies.
+    """
+    decl, tgt, old = _decl(scratch)
+    if tgt is None or old is None:
+        return None
+    slots = [s for s in CVS.doi_slots(scratch) if s.path == rel and s.line]
+    pick = (next((s for s in slots if s.doi == tgt.doi), None)
+            or next((s for s in slots if s.doi == decl.concept), None))
+    if pick is None:
+        return None
+    p = materialise(scratch, rel)
+    lines = p.read_text(encoding="utf-8").splitlines(keepends=True)
+    if pick.doi not in lines[pick.line - 1]:
+        return None
+    lines[pick.line - 1] = lines[pick.line - 1].replace(pick.doi, old.doi, 1)
+    p.write_text("".join(lines), encoding="utf-8")
+    return (f"{rel}:{pick.line} {pick.where}: {pick.doi} -> {old.doi}, the deposit for "
+            f"v{old.version}")
+
+
+def _repoint_slots(scratch: Path, frm: str, to: str) -> int:
+    """Move every citation slot naming `frm` to `to`. Returns how many moved.
+
+    Located through `CVS.doi_slots` so it touches the fields a reader cites from and not the
+    prose that talks about them -- README.md names both DOIs in running text a thousand lines
+    from the blocks anyone copies.
+    """
+    moved = 0
+    for rel in sorted({s.path for s in CVS.doi_slots(scratch)}):
+        picks = [s for s in CVS.doi_slots(scratch)
+                 if s.path == rel and s.doi == frm and s.line]
+        if not picks:
+            continue
+        p = materialise(scratch, rel)
+        lines = p.read_text(encoding="utf-8").splitlines(keepends=True)
+        for s in picks:
+            if frm in lines[s.line - 1]:
+                lines[s.line - 1] = lines[s.line - 1].replace(frm, to, 1)
+                moved += 1
+        p.write_text("".join(lines), encoding="utf-8")
+    return moved
+
+
+def _drop_declared(scratch: Path, version: str) -> None:
+    """Remove one release's row from the declaration -- what the file looked like before the
+    webhook minted that DOI, since nothing can write the row before the tag is pushed."""
+    def edit(d):
+        rows = [r for r in (d.get("versions") or []) if r.get("version") != version]
+        if len(rows) == len(d.get("versions") or []):
+            return None
+        d["versions"] = rows
+        return "row removed"
+    _json_at(scratch, CVS.DECLARATION, edit)
+
+
+def _add_declared(scratch: Path, version: str, doi: str, deposited: str) -> None:
+    """Append the row a release adds by hand once the webhook has answered."""
+    def edit(d):
+        d.setdefault("versions", []).append(
+            {"version": version, "doi": doi, "deposited": deposited,
+             "note": "written down at the release, from the DOI the webhook minted"})
+        return "row appended"
+    _json_at(scratch, CVS.DECLARATION, edit)
+
+
+def _drop_version_doi(scratch: Path) -> str | None:
+    """Delete the version-DOI entry from biotools.json instead of pointing it wrong.
+
+    A surface that stops answering "which deposit is this release" has not become correct by
+    going quiet, and a rule written only as "the DOI you name must be the right one" is
+    silent on a file that names none.
+    """
+    _decl_, tgt, _old = _decl(scratch)
+    if tgt is None:
+        return None
+
+    def edit(d):
+        before = d.get("otherID") or []
+        after = [o for o in before if tgt.doi not in str(o.get("value") or "")]
+        if len(after) == len(before):
+            return None
+        d["otherID"] = after
+        return f"otherID entry naming {tgt.doi} removed"
+    return _json_at(scratch, "biotools.json", edit)
+
+
+def _unqualify_historical(scratch: Path) -> str | None:
+    """Take the version away from README's deliberate mention of the superseded DOI.
+
+    The paragraph stays; only "the v1.0.0 deposit of 2026-08-20" becomes "the earlier
+    deposit". That is the sentence a reader meets after being told not to cite the old DOI,
+    and stripped of the version it names nothing -- an unqualified DOI in running prose reads
+    as the one to cite, which is how this repository's citation instruction went wrong the
+    first time.
+    """
+    _decl_, _tgt, old = _decl(scratch)
+    if old is None:
+        return None
+    return (_sub_file(scratch, "README.md", f"the v{old.version} deposit of {old.deposited}",
+                      "the earlier deposit")
+            or _sub_file(scratch, "README.md", f"v{old.version} deposit", "earlier deposit"))
+
+
+def _qualified_historical(scratch: Path) -> str | None:
+    """Add a NEW, correctly qualified mention of the superseded DOI. Must stay silent.
+
+    Without this the suite would only ever have shown the prose rule firing, and a rule that
+    fires on every mention of an old DOI is a rule whose only green state is a repository
+    with no history in it.
+    """
+    _decl_, _tgt, old = _decl(scratch)
+    if old is None:
+        return None
+    p = materialise(scratch, "docs/REGISTRATION.md")
+    p.write_text(p.read_text(encoding="utf-8").rstrip("\n")
+                 + f"\n\nFor the record: {old.doi} is the v{old.version} deposit of "
+                   f"{old.deposited}, and it is not this tree.\n", encoding="utf-8")
+    return f"a qualified historical mention of {old.doi} appended to docs/REGISTRATION.md"
+
+
+def _retarget_declaration(scratch: Path) -> str | None:
+    """Move the declared DOI for this version and change no surface.
+
+    The binding test. If the mapping were typed into the guard instead of read from
+    `zenodo_dois.json`, this would change nothing and every surface would still pass -- and
+    the declaration would be decoration.
+    """
+    _decl_, tgt, _old = _decl(scratch)
+    if tgt is None:
+        return None
+    fake = "10.5281/zenodo.99999999"
+
+    def edit(d):
+        for row in d.get("versions") or []:
+            if row.get("doi") == tgt.doi:
+                row["doi"] = fake
+                return f"the declared DOI for v{tgt.version}: {tgt.doi} -> {fake}"
+        return None
+    return _json_at(scratch, CVS.DECLARATION, edit)
+
+
+def _undeclared_doi(scratch: Path) -> str | None:
+    """Put a Zenodo DOI nobody declared into a citation slot -- one digit dropped."""
+    decl, tgt, _old = _decl(scratch)
+    if tgt is None:
+        return None
+    typo = decl.concept[:-1]
+    slots = [s for s in CVS.doi_slots(scratch)
+             if s.path == "codemeta.json" and s.doi == decl.concept and s.line]
+    if not slots:
+        return None
+    pick = slots[0]
+    p = materialise(scratch, "codemeta.json")
+    lines = p.read_text(encoding="utf-8").splitlines(keepends=True)
+    lines[pick.line - 1] = lines[pick.line - 1].replace(pick.doi, typo, 1)
+    p.write_text("".join(lines), encoding="utf-8")
+    return f"codemeta.json:{pick.line} {pick.doi} -> {typo}, a record id one digit short"
+
+
+def _remove_declaration(scratch: Path) -> str | None:
+    """Delete the declaration. The guard must refuse, not fall back to reading a surface."""
+    p = scratch / CVS.DECLARATION
+    if not p.exists():
+        return None
+    p.unlink()
+    return f"{CVS.DECLARATION} deleted"
+
+
+def doi_mutations() -> list[Mutation]:
+    out: list[Mutation] = []
+    try:
+        decl = CVS.declaration(REPO)
+        tgt = CVS.target_deposit(decl, _cur(REPO), CVS.published_versions(REPO))
+        older = [d for d in decl.deposits if tgt is not None and d.doi != tgt.doi]
+        old = older[-1] if older else None
+    except SystemExit:
+        return out
+    for rel in sorted({s.path for s in CVS.doi_slots(REPO)}):
+        slot = Slot("check_version_stamps", "surface", f"{rel} [citation-doi]",
+                    "a field a reader is sent to cite from; it must name the deposit for "
+                    "this version, whatever the numeral beside it says")
+        out.append(Mutation(slot, f"ver-doi:{rel}",
+                            plant=lambda s, rel=rel: _doi_slot_mutation(rel, s),
+                            expect_in_output=rel))
+    out += [
+        # The requirement is not only that the guard fails. It is that the failure says which
+        # release the DOI it found belongs to -- "CITATION.cff names 10.5281/zenodo.22032685,
+        # which belongs to v1.0.0" is a fix, and "the DOI is wrong" is a puzzle. Derived from
+        # the declaration, so it cannot be satisfied by a hardcoded sentence.
+        Mutation(Slot("check_version_stamps", "rule",
+                      "the failure names the version the DOI belongs to",
+                      "the sentence that turns a wrong identifier into an obvious defect"),
+                 "ver-doi-rule:names-the-owning-version",
+                 plant=lambda s: _doi_slot_mutation("CITATION.cff", s),
+                 expect_in_output=f"belongs to v{old.version}" if old else "belongs to v"),
+        Mutation(Slot("check_version_stamps", "rule",
+                      "a citation surface must name this version's DOI at all",
+                      "going quiet is not the same as being right"),
+                 "ver-doi-rule:drop-version-doi", plant=_drop_version_doi,
+                 expect_in_output="biotools.json"),
+        Mutation(Slot("check_version_stamps", "rule",
+                      "a superseded DOI in prose needs the version beside it",
+                      "unqualified, it reads as the one to cite"),
+                 "ver-doi-rule:unqualified-historical", plant=_unqualify_historical,
+                 expect_in_output="README.md"),
+        Mutation(Slot("check_version_stamps", "rule",
+                      "a qualified historical mention stays silent",
+                      "the repository keeps true statements about the old deposit on "
+                      "purpose; a rule that forbids them would be turned off"),
+                 "ver-doi-rule:qualified-historical", plant=_qualified_historical,
+                 must="stay-silent"),
+        Mutation(Slot("check_version_stamps", "binding", CVS.DECLARATION,
+                      "the version-to-DOI mapping is read from the declaration, not typed "
+                      "into the guard"),
+                 "ver-doi-bind:retarget-declaration", plant=_retarget_declaration,
+                 expect_in_output="CITATION.cff"),
+        Mutation(Slot("check_version_stamps", "binding", f"{CVS.DECLARATION} must exist",
+                      "with no declaration there is nothing to hold a surface to, and the "
+                      "guard must say so rather than pass"),
+                 "ver-doi-bind:no-declaration", plant=_remove_declaration,
+                 expect_in_output=CVS.DECLARATION),
+        Mutation(Slot("check_version_stamps", "rule",
+                      "a DOI declared for nothing",
+                      "a dropped digit names a record that belongs to someone else"),
+                 "ver-doi-rule:undeclared-doi", plant=_undeclared_doi,
+                 expect_in_output="does not declare"),
+    ]
+    return out
+
+
+# --------------------------------------------------------------------------- #
+# The Zenodo API, proven with a stubbed response instead of declared UNPROVABLE
+# --------------------------------------------------------------------------- #
+
+#: Listed for `--list` so a branch added below and not here shows up as a listing that
+#: disagrees with the run -- the same arrangement GITHUB_ABOUT_IDENTS has.
+ZENODO_REMOTE_IDENTS: tuple[str, ...] = (
+    "ver-remote:zenodo-latest[agrees-and-says-so]",
+    "ver-remote:zenodo-latest[disagrees]",
+    "ver-remote:zenodo-latest[unreachable-is-a-skip]",
+    "ver-remote:zenodo-latest[no-flag-is-a-skip]",
+)
+
+
+def zenodo_remote_proof(scratch_root: Path) -> list[Result]:
+    """`--remote` against a `file://` copy of a Zenodo response.
+
+    `check_retractions`'s GitHub surface stopped being UNPROVABLE the moment someone noticed
+    `gh` is resolved from PATH and the suite could supply its own. The same move works here
+    for a different reason: the guard fetches through `urllib`, which speaks `file://`, so
+    `CBC_ZENODO_RECORD_URL` points it at a response on disk and both answers -- the one that
+    agrees with the declaration and the one that does not -- can be produced without a
+    network and without a Zenodo account.
+
+    Four branches, and two of them are about the OUTPUT rather than the verdict. A remote
+    check that succeeds silently is indistinguishable from one that never ran, which is the
+    failure this whole file exists to make impossible.
+    """
+    clean = shadow(scratch_root / "zenodo")
+    decl = CVS.declaration(clean)
+    tgt = CVS.target_deposit(decl, _cur(clean), CVS.published_versions(clean))
+    older = [d for d in decl.deposits if tgt is not None and d.doi != tgt.doi]
+    if tgt is None or not older:
+        return []
+    old = older[-1]
+
+    def stub(name: str, doi: str, version: str) -> str:
+        p = scratch_root / f"zenodo-{name}.json"
+        p.write_text(json.dumps({
+            "id": int(doi.rsplit(".", 1)[-1]),
+            "doi": doi,
+            "conceptdoi": decl.concept,
+            "conceptrecid": decl.concept_record,
+            "metadata": {"version": version, "publication_date": "2026-08-23"},
+        }), encoding="utf-8")
+        return p.as_uri()
+
+    def slot_for(branch: str) -> Slot:
+        return Slot("check_version_stamps", "surface", f"zenodo:latest [{branch}]",
+                    "the archive itself -- the only authority on which deposit a version "
+                    "DOI names")
+
+    def go(url: str | None, flag: bool) -> tuple[int, str]:
+        env = dict(os.environ)
+        if url is not None:
+            env[CVS.ZENODO_API_ENV] = url
+        cmd = GUARDS["check_version_stamps"] + ["--root", str(clean)]
+        if flag:
+            cmd = cmd + ["--remote"]
+        r = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True, env=env)
+        return r.returncode, r.stdout + r.stderr
+
+    out: list[Result] = []
+
+    code, text = go(stub("agrees", tgt.doi, tgt.version), True)
+    ok = code == 0 and "remote   zenodo:latest" in text and "Zenodo agrees" in text
+    out.append(Result(slot_for("agrees-and-says-so"), ZENODO_REMOTE_IDENTS[0],
+                      "CAUGHT" if ok else "SURVIVED",
+                      "a successful resolve prints the address, the record, the DOI and the "
+                      "version it found" if ok else
+                      f"exit {code} with no `remote` line; a silent success cannot be told "
+                      "apart from a check that never ran"))
+
+    # Zenodo answering that the newest version is the PREVIOUS deposit: what the API would
+    # have said on 2026-08-23 if the v1.1.0 release had minted nothing, which is the failure
+    # mode docs/REGISTRATION.md §1 step 2 records happening once already.
+    code, text = go(stub("stale", old.doi, old.version), True)
+    ok = code != 0 and CVS.DECLARATION in text and old.doi in text
+    out.append(Result(slot_for("disagrees"), ZENODO_REMOTE_IDENTS[1],
+                      "CAUGHT" if ok else "SURVIVED",
+                      f"the guard failed and named {CVS.DECLARATION} and the DOI Zenodo "
+                      "actually returned" if ok else
+                      f"the concept DOI resolved to the v{old.version} deposit and the "
+                      f"guard exited {code}"))
+
+    code, text = go((scratch_root / "no-such-response.json").as_uri(), True)
+    ok = code == 0 and "SKIP" in text and "zenodo:latest" in text
+    out.append(Result(slot_for("unreachable-is-a-skip"), ZENODO_REMOTE_IDENTS[2],
+                      "CAUGHT" if ok else "FALSE-FIRE",
+                      "an unreachable archive is a loud SKIP: it is a fact about the "
+                      "machine, not about the repository" if ok else
+                      f"an unreachable archive produced exit {code} without a SKIP line"))
+
+    code, text = go(None, False)
+    ok = code == 0 and "SKIP" in text and "pass --remote" in text
+    out.append(Result(slot_for("no-flag-is-a-skip"), ZENODO_REMOTE_IDENTS[3],
+                      "CAUGHT" if ok else "FALSE-FIRE",
+                      "without the flag the surface is named as unread, with the address "
+                      "that would have been read" if ok else
+                      f"a run without --remote produced exit {code} and no SKIP line naming "
+                      "the surface"))
     return out
 
 
@@ -1125,7 +1676,7 @@ def report(results: list[Result], verbose: bool) -> int:
 def all_mutations() -> list[Mutation]:
     return (retraction_surface_mutations() + retraction_record_mutations()
             + exemption_mutations() + metadata_surface_mutations() + special_mutations()
-            + version_stamp_mutations())
+            + version_stamp_mutations() + doi_mutations())
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -1146,6 +1697,8 @@ def main(argv: list[str] | None = None) -> int:
         # to print its own names would make a listing cost four guard invocations.
         for ident in GITHUB_ABOUT_IDENTS:
             print(f"  {'check_retractions':<22} {'surface':<10} {ident}")
+        for ident in ZENODO_REMOTE_IDENTS:
+            print(f"  {'check_version_stamps':<22} {'surface':<10} {ident}")
         return 0
 
     print("=" * 78)
@@ -1164,7 +1717,8 @@ def main(argv: list[str] | None = None) -> int:
                 continue
             results.append(run_mutation(m, base, i, a.verbose))
         if not a.only:
-            results += rule_coverage() + github_about_proof(base)
+            results += (rule_coverage() + github_about_proof(base)
+                        + zenodo_remote_proof(base))
         return report(results, a.verbose)
     finally:
         shutil.rmtree(base, ignore_errors=True)

@@ -15,16 +15,23 @@ recorded here so the question is not reopened later.
 
 ## 1. Zenodo — **done**, and a warning about how it went wrong
 
-Concept DOI **10.5281/zenodo.22032684** · v1.0.0 DOI **10.5281/zenodo.22032685**, minted
-2026-08-20.
+Concept DOI **10.5281/zenodo.22032684** · current version DOI **10.5281/zenodo.22070599**
+(v1.1.0), minted 2026-08-23 · superseded version DOI **10.5281/zenodo.22032685** (v1.0.0),
+minted 2026-08-20.
 
-> **Where this repository stands right now.** Version 1.1.0 is not yet deposited: it has no git
-> tag and no version DOI. The most recent published release is v1.0.0, and the concept DOI
-> resolves to that record until 1.1.0 is published. `VERSION`, `CITATION.cff`, `codemeta.json`,
-> `.zenodo.json` and `biotools.json` all read `1.1.0` and describe this tree;
-> `10.5281/zenodo.22032685`, the `v1.0.0` tag URL and the v1.0.0 tarball are pinned to a
-> deposit that already exists and keep reading `1.0.0`, because a version DOI and a pushed tag
-> cannot be relabelled. `platform/check_version_stamps.py` holds both halves apart and fails if
+> **Where this repository stands right now.** Version 1.1.0 is deposited: it was tagged and
+> released on 2026-08-23, and the Zenodo webhook minted version DOI
+> **10.5281/zenodo.22070599** for it. `VERSION`, `CITATION.cff`, `codemeta.json`,
+> `.zenodo.json` and `biotools.json` all read `1.1.0` and describe this tree, and the
+> concept DOI and the current version DOI both now resolve to a record that matches it. The
+> disclosure sentence those five surfaces carried while 1.1.0 was undeposited has been
+> removed, which is the step that closes a release.
+>
+> `10.5281/zenodo.22032685`, the `v1.0.0` tag URL and the v1.0.0 tarball keep reading `1.0.0`
+> and always will, because a version DOI and a pushed tag cannot be relabelled. They are not
+> stale stamps; they are correct names for an older deposit.
+> `platform/check_version_stamps.py` holds the two halves apart — stamps that describe this
+> tree must follow `VERSION`, stamps pinned to a published deposit must not — and fails if
 > either drifts.
 
 > **The mistake that cost an hour.** The release command was first run from the wrong working
@@ -92,34 +99,76 @@ keywords. It is already written, so the deposit needs no manual editing on the Z
 >    description, which is defensible — a version DOI is meant to be frozen to what that
 >    release said — but anyone citing the version DOI still reads the superseded count.
 >
-> Whichever is chosen, the tagged v1.0.0 release and the working tree disagree about the size
-> of the slate, because #12 arrived after the tag. `VERSION` now reads `1.1.0` and
-> `docs/RELEASE_NOTES_v1.1.0.md` — generated from the artefacts by
-> `platform/build_release_notes.py` — describes the slate that contains #12, so route 2 is
-> prepared and `./release.sh 1.1.0` is the command that takes it. The v1.0.0 note is frozen to
-> what that release said and marked as such at the top of the file; it is not edited to match
-> today. All four metadata files now read `1.1.0` and say plainly that 1.1.0 is undeposited, so
-> the disagreement is disclosed rather than silent — but it is not resolved. It resolves only
-> when v1.1.0 is actually cut and the **new version DOI** the webhook mints is written back
-> into `CITATION.cff`, `biotools.json` and the README, and the disclosure sentence is removed
-> from the five surfaces that carry it. Both steps are hand work; `platform/check_version_stamps.py`
-> fails until they are done, which is the point of it.
+> **Route 2 was taken, on 2026-08-23.** The tag was cut by hand — `git tag -a v1.1.0` and a
+> push — and the GitHub Release was published from the web interface. `release.sh` was not
+> used, which is worth recording because §1 step 3 says to use it and the next release should:
+> the script exists so the checklist below cannot be half-remembered. The webhook
+> minted version DOI **10.5281/zenodo.22070599** for a deposit built from the corrected
+> `.zenodo.json`. The concept DOI **10.5281/zenodo.22032684** now resolves to that record, so
+> a reader who follows the concept DOI reaches the **nine**-study slate, study #12 included.
+> The new version DOI was written back into `CITATION.cff`, `biotools.json` and the README,
+> and the disclosure sentence was removed from the surfaces that carried it;
+> `platform/check_version_stamps.py` passes, which is what says the release is closed.
+>
+> Route 1 was **not** taken, and the consequence is permanent and worth stating plainly: the
+> v1.0.0 record still counts the slate at **eight** and always will. Nothing about what
+> happened to that deposit has changed. What has changed is what a reader should be told to
+> do about it — see the paragraph below.
 
-**What the author has to do, and what is deliberately left undone here.** No Zenodo deposit was
-created and no tag was pushed in preparing this. Three things remain, in this order:
+**Where this leaves a reader who was given the old version DOI.** All three steps below have
+now been carried out; they are kept here because the reasoning is what a later release will
+need, and because step 1 has an outcome someone citing this work still has to act on.
 
-1. **Decide route 1 or route 2 above for the already-published v1.0.0 record.** Only route 1 —
-   editing the published record's metadata on zenodo.org — changes what someone citing
-   `10.5281/zenodo.22032685` reads today. Nothing in this repository can do it.
-2. **Cut v1.1.0**: `./release.sh 1.1.0`, from this directory, after reading the confirmation
-   prompt. The Zenodo webhook must be switched on for `hopejsh/CognitionBioChem` first (§1
-   step 2) or the release mints no DOI at all.
-3. **Write the minted version DOI back**, by hand, into `CITATION.cff` (`identifiers:`),
-   `biotools.json` (`otherID` and `download`), and the README's version-DOI paragraph; replace
-   `RELEASE-NOTE-GENERATED` with `RELEASE-NOTE-FROZEN` at the top of
-   `docs/RELEASE_NOTES_v1.1.0.md`; then bump `VERSION` for the next cycle. Only after step 3
-   does `check_version_stamps.py` go green again — until then it names each surface that still
-   points at v1.0.0.
+1. **Route 2 was chosen for the already-published v1.0.0 record, so that record was never
+   corrected.** Only route 1 — editing the published record's metadata on zenodo.org — would
+   change what someone citing `10.5281/zenodo.22032685` reads, and nothing in this repository
+   can do it; that remains true, and it is why the count on that record is still eight.
+   Superseding it does not rewrite it. What a v1.1.0 deposit does change is where to send
+   someone:
+
+   - Anyone who was given `10.5281/zenodo.22032685` — the v1.0.0 deposit — should be
+     pointed at the **concept DOI `10.5281/zenodo.22032684`**, which resolves to the newest
+     published release and today reaches the nine-study slate, **or** at the **current
+     version DOI `10.5281/zenodo.22070599`** if they need to name exact bytes.
+   - `10.5281/zenodo.22032685` stays a correct citation for one thing only: the v1.0.0
+     deposit of 2026-08-20 and the eight-study slate it describes. Cite it only when that is
+     deliberately what you mean.
+   - Route 1 is still available on zenodo.org and would still be the only way to fix what the
+     v1.0.0 record itself says. It was judged unnecessary once the concept DOI resolved to a
+     correct record, and that judgement is recorded here rather than left implicit.
+2. **Cut v1.1.0 — done, 2026-08-23.** By hand rather than through `release.sh`: `git tag -a
+   v1.1.0`, `git push origin v1.1.0`, then Draft a new release in the GitHub web interface
+   against that tag. The Zenodo webhook was already installed on `hopejsh/CognitionBioChem`
+   from the v1.0.0 release, so publishing minted the deposit without further setup; had it
+   been off (§1 step 2) the release would have minted no DOI at all. The deposit is record
+   22070599.
+3. **Write the minted version DOI back — done.** By hand, into `zenodo_dois.json` (the
+   declaration of which DOI belongs to which release, and the file every citation surface is
+   checked against — write this row first), then into `CITATION.cff`
+   (`identifiers:`), `biotools.json` (`otherID` and `download`), and the README's version-DOI
+   paragraph; `RELEASE-NOTE-GENERATED` replaced with `RELEASE-NOTE-FROZEN` at the top of
+   `docs/RELEASE_NOTES_v1.1.0.md`, which is the edit that makes v1.1.0 count as published to
+   `check_version_stamps.py`; and the undeposited-version disclosure removed from the seven
+   surfaces the guard names. `check_version_stamps.py` is green, which is what says the
+   release is closed.
+
+   `VERSION` is deliberately **not** bumped yet. It reads `1.1.0`, the version that is
+   published, so every identity stamp and the current version DOI agree. The next cycle
+   begins by bumping `VERSION` and re-adding the disclosure sentence for the new version —
+   the guard will demand it on every surface in `DISCLOSURE_SURFACES` the moment `VERSION`
+   names a version whose release note is not frozen. Run
+   `./.venv/bin/python platform/check_version_stamps.py --disclosure` for the exact wording
+   rather than typing it, since it is derived from the two version numbers.
+
+   **What v1.1.0 taught, and what now catches it.** On the day this release was cut every
+   version string in the repository correctly read `1.1.0` and four citation surfaces still
+   carried the DOI minted for the v1.0.0 deposit. `check_version_stamps.py` passed: it read
+   the version *number* written beside each DOI and never read the DOI, which is the one
+   property of a version DOI that matters. `zenodo_dois.json` now declares the mapping, the
+   guard holds every citation slot to the DOI declared for `VERSION`, and
+   `--remote` resolves the concept DOI through the Zenodo API to confirm the declaration
+   against the archive. A surface left pointing at an older deposit is now reported by name,
+   with the version that DOI belongs to written into the message.
 
 ## 2. SciCrunch — **done**
 

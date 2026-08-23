@@ -2084,6 +2084,17 @@ def test_release_notes_are_generated_and_published_ones_are_frozen():
       rewrite what a release contained, for the same reason `prespec/` is never rewritten.
       The refusal is exercised here, not merely asserted: the generator is pointed at a
       published note and must decline to write it.
+
+    The first property holds only while `VERSION` is UNPUBLISHED, and this test used to
+    assert it unconditionally. That is wrong for the window every release passes through:
+    between the moment the release is closed -- its note frozen, which is what
+    `check_version_stamps.py` reads as "published" -- and the moment `VERSION` is bumped for
+    the next cycle, `VERSION` names a release that has been deposited, and its note is a
+    record like any other. Asserting "the note for VERSION is never frozen" there would
+    demand that the just-published release be left rewritable, which is the exact property
+    freezing exists to remove. So the state is read from the marker, the same source
+    `build_release_notes.py` and `check_version_stamps.py` both read, and each state gets
+    the assertion that belongs to it.
     """
     print("\n[release notes] the note for VERSION is generated; published notes are frozen")
     gen = REPO / "platform" / "build_release_notes.py"
@@ -2097,13 +2108,25 @@ def test_release_notes_are_generated_and_published_ones_are_frozen():
     if not current.exists():
         return
 
-    r = subprocess.run([sys.executable, str(gen), "--check"],
-                       capture_output=True, text=True, cwd=REPO)
-    check(f"docs/{current.name} is current with platform/build_release_notes.py",
-          r.returncode == 0,
-          "" if r.returncode == 0 else (r.stdout + r.stderr).strip()[-200:])
-    check(f"docs/{current.name} is not frozen, so it follows VERSION",
-          not frozen_re.search(current.read_text()[:4096]))
+    current_is_frozen = bool(frozen_re.search(current.read_text()[:4096]))
+    if current_is_frozen:
+        # VERSION is published: the release has been cut and its note frozen, and VERSION has
+        # not yet been bumped for the next cycle. The note is now a record, so the generator
+        # must refuse it rather than track it -- the same rule every older note is held to.
+        r = subprocess.run([sys.executable, str(gen)],
+                           capture_output=True, text=True, cwd=REPO)
+        refused = r.returncode != 0 and "REFUSED" in r.stdout
+        check(f"docs/{current.name} is frozen, so VERSION {version} is a published release "
+              f"and the generator refuses to rewrite it", refused,
+              "" if refused else (r.stdout + r.stderr).strip()[-200:])
+    else:
+        # VERSION is in preparation: its note is not frozen (this branch's condition), so it
+        # must track the artefacts byte-for-byte.
+        r = subprocess.run([sys.executable, str(gen), "--check"],
+                           capture_output=True, text=True, cwd=REPO)
+        check(f"docs/{current.name} is not frozen, so it follows VERSION and is current "
+              f"with platform/build_release_notes.py", r.returncode == 0,
+              "" if r.returncode == 0 else (r.stdout + r.stderr).strip()[-200:])
 
     published = [n for n in sorted((REPO / "docs").glob("RELEASE_NOTES_v*.md"))
                  if n != current]

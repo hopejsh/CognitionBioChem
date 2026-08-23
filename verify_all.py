@@ -97,7 +97,10 @@ SUITES = [
      [PY, "platform/check_version_stamps.py"], 0,
      "every stamp describing this tree equals VERSION; every reference pinned to a "
      "published deposit -- a version DOI, a tag URL, a release tarball -- names a release "
-     "that exists and is never relabelled to follow VERSION"),
+     "that exists and is never relabelled to follow VERSION; and every citation slot names "
+     "the DOI zenodo_dois.json declares for this version, while a superseded version DOI "
+     "may appear in prose only beside the version it belongs to. Pass --remote to confirm "
+     "the declaration against the Zenodo API"),
     # Listed last because it runs the three guards above some seventy times, against scratch
     # copies of this repository with a defect planted in each. It is the answer to the
     # question those three entries cannot answer about themselves: a green line is
