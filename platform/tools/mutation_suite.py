@@ -1031,6 +1031,10 @@ def run_mutation(m: Mutation, base: Path, i: int, verbose: bool) -> Result:
             return Result(m.slot, m.ident, status, detail, time.time() - t0)
         note = m.plant(scratch)
         if note is None:
+            if _absent_by_design(str(getattr(m.slot, "name", ""))):
+                return Result(m.slot, m.ident, "NOT-IN-CLONE",
+                              "deliberately not published, so a clone has nothing to plant "
+                              "in; it is mutated in a tree that has it", time.time() - t0)
             return Result(m.slot, m.ident, "ANCHOR-LOST",
                           m.note or "the mutation could not be planted", time.time() - t0)
         code, text = run_guard(m.slot.guard, scratch)
@@ -1055,7 +1059,26 @@ def run_mutation(m: Mutation, base: Path, i: int, verbose: bool) -> Result:
         shutil.rmtree(scratch, ignore_errors=True)
 
 
-ORDER = ["SURVIVED", "FALSE-FIRE", "UNCOVERED", "BASELINE-RED", "ANCHOR-LOST", "UNPROVABLE",
+
+
+#: Surfaces the repository deliberately does not publish. paper/ is the author's manuscript
+#: prose, untracked and ignored; docs/*.docx|pptx|pdf|html are generated documents, ignored for
+#: the same reason. Both exist in the author's working tree and ARE mutated there. In a clone
+#: they are absent, and a mutation that cannot be planted because its subject was never
+#: published has not lost its anchor -- it has nothing to say. Reporting that as a defect made
+#: verify_all.py red on every clone while green for the author, which is the exact asymmetry
+#: this repository has already had to fix once.
+_ABSENT_BY_DESIGN = ("paper/", "docs/CognitionBioChem_")
+_ABSENT_SUFFIXES = (".docx", ".pptx", ".pdf", ".html")
+
+
+def _absent_by_design(name: str) -> bool:
+    if any(name.startswith(pfx) for pfx in _ABSENT_BY_DESIGN):
+        return True
+    return name.startswith("docs/") and any(name.endswith(sfx) for sfx in _ABSENT_SUFFIXES)
+
+ORDER = ["SURVIVED", "FALSE-FIRE", "UNCOVERED", "BASELINE-RED", "ANCHOR-LOST",
+         "NOT-IN-CLONE", "UNPROVABLE",
          "CAUGHT"]
 
 
@@ -1069,7 +1092,8 @@ def report(results: list[Result], verbose: bool) -> int:
         print("-" * len(guard))
         for r in sorted(by_guard[guard], key=lambda x: (x.slot.kind, x.slot.name)):
             mark = {"CAUGHT": "  ok  ", "SURVIVED": " SURV ", "FALSE-FIRE": " FIRE ",
-                    "UNCOVERED": " UNCV ", "ANCHOR-LOST": " LOST ", "BASELINE-RED": " RED  ",
+                    "UNCOVERED": " UNCV ", "ANCHOR-LOST": " LOST ",
+                    "NOT-IN-CLONE": " N/A  ", "BASELINE-RED": " RED  ",
                     "UNPROVABLE": " n/a  "}[r.status]
             print(f"  [{mark}] {r.slot.kind:<9} {r.slot.name}")
             if r.status != "CAUGHT" or verbose:
@@ -1079,7 +1103,8 @@ def report(results: list[Result], verbose: bool) -> int:
     print("\n" + "=" * 78)
     print(f"{counts['CAUGHT']} caught, {counts['SURVIVED']} survived, "
           f"{counts['FALSE-FIRE']} false-fire, {counts['UNCOVERED']} uncovered, "
-          f"{counts['ANCHOR-LOST']} anchor-lost, {counts['BASELINE-RED']} baseline-red, "
+          f"{counts['ANCHOR-LOST']} anchor-lost, "
+          f"{counts['NOT-IN-CLONE']} absent-by-design, {counts['BASELINE-RED']} baseline-red, "
           f"{counts['UNPROVABLE']} unprovable")
     bad = counts["SURVIVED"] + counts["FALSE-FIRE"] + counts["UNCOVERED"] \
         + counts["ANCHOR-LOST"] + counts["BASELINE-RED"]
