@@ -3,8 +3,8 @@
 // only so the page still works when opened from a file: URL.
 window.__CBC_SLATE__ = {
   "schema_version": "1.2",
-  "built": "2026-08-22",
-  "git_sha": "b1c10f9-dirty",
+  "built": "2026-08-23",
+  "git_sha": "57d4f49",
   "note": "Assembled by platform/build_slate.py from the registered plans, the study artefacts and the README. No verdict, threshold or p-value is computed here -- all are copied from the artefact that produced them.",
   "counts": {
     "studies": 9,
