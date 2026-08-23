@@ -369,6 +369,17 @@ def main() -> int:
     print("=" * 76)
     verbose = "--verbose" in sys.argv
 
+    # The drafted sections are the author's manuscript and are deliberately not published:
+    # paper/ is untracked and ignored, so a clone does not carry them. This guard therefore
+    # SKIPS rather than fails when they are absent -- a check that cannot run has not passed,
+    # and saying so is the honest report. It still runs in full for whoever holds the prose.
+    if not SRC.exists() or not any(SRC.glob("sec_*.md")):
+        print("\n  paper/ is not present in this checkout.")
+        print("  The manuscript sections are the author's and are not published with the code,")
+        print("  so this guard has nothing to read. SKIPPED -- not passed.")
+        print("\n0 passed, 0 failed, 1 skipped")
+        return 0
+
     files = sorted(SRC.glob("sec_*.md"))
     files = [f for f in files if not re.search(r"\.\w\w\.md$", f.name)]
     if not check("the drafted sections are present", bool(files), f"{len(files)} files"):

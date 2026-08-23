@@ -52,3 +52,11 @@ docs/*.html
 # Word's own lock files, created while a document is open.
 ~$*
 docs/~$*
+
+# The manuscript prose. paper/ held the full text of a paper in two languages -- title,
+# abstract, introduction, methods, results, discussion, conclusions, plus the deck copy -- and
+# publishing the writing is the same disclosure as publishing the .docx, which line 47 already
+# refuses. The repository publishes the study: the plans, the artefacts, the folds, the code and
+# the guards. What the author writes about it is the author's to place.
+# platform/check_paper.py skips rather than fails when this directory is absent.
+paper/

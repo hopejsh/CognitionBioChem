@@ -136,34 +136,38 @@ defect.
 
 ### The manuscript
 
-A paper draft of the study, in English and Korean, with a conference deck for each. The prose
-lives in `paper/` and is rendered by the generators below; the built documents are not tracked
-for the same reason the report is not.
+There is a paper draft of this study, in English and Korean, with a conference deck for each.
+**It is not published here.** The prose lives outside the repository, and `paper/` is ignored, so
+a clone carries the study and not the writing about it — the same line `docs/*.docx` already
+draws, extended to the source the documents are built from. Publishing the sentences is the same
+disclosure as publishing the file they render into.
 
-```bash
-./.venv/bin/python platform/build_paper.py       && ./.venv/bin/python platform/build_paper.py --ko
-./.venv/bin/python platform/build_paper_deck.py  && ./.venv/bin/python platform/build_paper_deck.py --ko
-./.venv/bin/python platform/build_pptx.py docs/CognitionBioChem_Paper_Deck.html
-./.venv/bin/python platform/build_pptx.py docs/CognitionBioChem_Paper_Deck_KO.html
-```
+What the repository publishes is the study itself: the registered plans and their hashes, the
+artefacts with their rows and verdicts, the code that produced them, and the guards that hold
+them to each other. Every number this README states is traceable in `data/` without the
+manuscript.
 
-The library holds 186 PubMed-indexed references and 4 that PubMed does not index. 184 of the
-186 were retrieved through the PubMed E-utilities by the specialist that proposed them,
-re-fetched by an independent checker, and re-fetched a third time directly from NCBI esummary
-and compared on title and first author: 184 of 184 matched. Two — `yin2024` and `unsal2026` —
-were found by the reviewing pass rather than proposed by a specialist and carry a single
-esummary fetch; [`paper/REFERENCES_PAPER.json`](paper/REFERENCES_PAPER.json) records that for
-each entry, and the manuscript's own note above the bibliography says the same. Beyond
-existence, 453 claim-source pairs were checked against the cited abstracts — 402 were
-supported and 46 were corrected, three of them because the cited paper concluded the opposite
-of the sentence citing it.
+Two audits of that draft are worth recording even though the draft is not here, because they
+were run against this repository's artefacts and their results are facts about the study.
 
-The vocabulary was audited the same way. Terms were searched in PubMed and Consensus and ruled
-on in [`paper/TERMINOLOGY_RULINGS.json`](paper/TERMINOLOGY_RULINGS.json), which holds 77
-rulings: 40 replaced as coinages or as terms the field gives to something else, 9 qualified, 4
-defined, and 24 confirmed as standard vocabulary and left alone. `platform/check_paper.py`
-holds the two editions to the same numbers, the same citation order and the same figure order,
-and is one of the suites `verify_all.py` runs.
+The reference library holds 186 PubMed-indexed references and 4 that PubMed does not index. 184
+of the 186 were retrieved through the PubMed E-utilities by the specialist that proposed them,
+re-fetched by an independent checker, and re-fetched a third time directly from NCBI esummary and
+compared on title and first author: 184 of 184 matched. Two — `yin2024` and `unsal2026` — were
+found by the reviewing pass rather than proposed by a specialist and carry a single esummary
+fetch. Beyond existence, 453 claim-source pairs were checked against the cited abstracts: 402
+were supported and 46 were corrected, three of them because the cited paper concluded the
+opposite of the sentence citing it.
+
+The vocabulary was audited the same way. Terms were searched in PubMed and Consensus and ruled on
+in a rulings file held with the draft: 77 rulings, of which 40 replaced coinages or terms the
+field gives to something else, 9 qualified, 4 defined, and 24 confirmed as standard vocabulary
+and left alone.
+
+`platform/check_paper.py` holds the two editions to the same numbers, the same citation order and
+the same figure order. It runs in `verify_all.py` and **skips, reporting that it skipped, when the
+draft is not present** — a guard that cannot read its subject has not passed, and saying so is the
+honest report.
 
 ### The written account and the deck
 
@@ -866,7 +870,7 @@ Bin(16, 1/11) the expectation is **1.45**, P(X ≥ 4) = **0.0511** and P(X ≥ 5
 the observed count misses α by **0.0011** — and the plan stated in the same sentence that four
 would not clear α and five would, which is what makes the margin a result rather than a licence
 to move the line. **The per-candidate reading of the composition-matched null is withdrawn
-throughout this document and in `paper/`.**
+throughout this document, and in the manuscript draft held outside it.**
 
 **And no per-case call was reachable at any outcome those folds could have returned.** With m
 permutations a single complex's empirical p floors at 1/(m + 1) — **0.0909 at ten, above
@@ -1087,7 +1091,8 @@ platform/
   build_deck.py       the conference deck (.html + .pdf), from the same artefacts
   build_pptx.py       the deck again as editable PowerPoint, parsed from that HTML
   check_reports.py    guard: the two report editions must describe the same work
-  build_paper.py      the manuscript (.docx), English and Korean, from paper/
+  build_paper.py      the manuscript (.docx), English and Korean, from the draft (not
+                      published here; the generator is kept so the author can rebuild it)
   build_paper_deck.py the manuscript's conference deck, English and Korean
   check_paper.py      guard: every number traces to an artefact; the editions agree
   cbc/paper.py        the format-neutral parser both manuscript renderers share
@@ -1101,7 +1106,6 @@ data/                 validated, provenance-carrying data
 data/alphafold_db/    deposited AlphaFold models, downloaded under CC BY 4.0
 data/structures.json  51 structures the viewer can open, all under custody
 data/slate.json       the pre-registered studies, assembled from plans and artefacts
-paper/                the manuscript prose, both editions, and its verified reference library
 docs/figures/         the five generated figures and five UI captures the documents embed
 docs/REFERENCES.json  every citation, with how it was verified
 index.html, app.js    the workbench page
