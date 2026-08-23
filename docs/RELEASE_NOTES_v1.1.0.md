@@ -58,7 +58,7 @@ were folded against ten uniform random permutations of each peptide.
   models' per-residue confidence rises from 0.7154 to 0.8637 when Boltz-2 is given an MSA. It
   ships an effective sample size and a mis-registration null, because 156 residues on TREM2 are
   worth about five independent observations.
-- **12 verification suites**, in which every check is itself verified to fail on the defect it
+- **10 verification suites**, in which every check is itself verified to fail on the defect it
   names.
 
 ## What it does not do

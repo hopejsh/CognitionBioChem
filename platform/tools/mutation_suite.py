@@ -14,9 +14,11 @@ repository, and survives on every surface the person making the correction was n
     platform/check_metadata_counts.py  no hand-typed slate count may disagree with the
                                        artefacts it summarises
 
-Both print green today. So did `platform/check_paper.py`, which reported 10 passed / 0 failed
-on a manuscript stating "8 pre-registered studies and 25 hypotheses" while `data/` held 9 and
-28 -- because every one of those numerals really was somewhere in `data/`. A green line is
+Both print green today. So did the prose guard that used to run beside them, which reported
+10 passed / 0 failed on a manuscript stating "8 pre-registered studies and 25 hypotheses"
+while `data/` held 9 and 28 -- because every one of those numerals really was somewhere in
+`data/`. That guard watched writing this repository no longer publishes and is no longer part
+of it; the lesson it taught is why this file exists. A green line is
 indistinguishable from a green line: the reader cannot tell whether the check examined the
 surface and found nothing, or examined nothing.
 

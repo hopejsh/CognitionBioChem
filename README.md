@@ -4,7 +4,7 @@ A structural pharmacology workbench for cognition-related CNS targets. It **runs
 structure prediction**, computes real chemical and physicochemical properties, validates
 every record against a contract, and attaches a provenance record to every value.
 
-[![Verification](https://img.shields.io/badge/verification-12_suites_passing-brightgreen?style=flat-square)](verify_all.py)
+[![Verification](https://img.shields.io/badge/verification-10_suites_passing-brightgreen?style=flat-square)](verify_all.py)
 [![Studies](https://img.shields.io/badge/pre--registered_studies-9-blueviolet?style=flat-square)](prespec/)
 [![Noise floor](https://img.shields.io/badge/pLDDT_noise_floor-2.66_units_measured-informational?style=flat-square)](platform/studies/inference_variance.py)
 [![Data gate](https://img.shields.io/badge/data_gate-138_violations_on_legacy_data-orange?style=flat-square)](platform/validate.py)
@@ -130,11 +130,10 @@ Run everything:
 ./.venv/bin/python verify_all.py
 ```
 
-Twelve suites. Two of them hold a generated document to the artefacts, and both **skip —
-saying so — when there is nothing built to read**, which is the state of every clone. Four
-more are about corrections rather than about results: one fails where any surface still
-asserts a claim this project has since withdrawn, one fails where a count typed beside the
-word *studies* or *suites* no longer matches `data/`, one fails where a version stamp names a
+Ten suites, and every one of them runs in a fresh clone against tracked inputs. Four are
+about corrections rather than about results: one fails where any surface still asserts a
+claim this project has since withdrawn, one fails where a count typed beside the word
+*studies* or *suites* no longer matches `data/`, one fails where a version stamp names a
 release it is not about — `VERSION` said 1.1.0 while ten stamps across six files told a reader
 to cite 1.0.0 — and the last plants those three defects in a scratch copy and fails whichever
 guard shrugs. The data gate is **expected** to exit non-zero on the legacy dataset: a gate
@@ -147,64 +146,42 @@ verdicts, the folds behind them, the code that produced all of it, and the guard
 those to each other. Every number this README states is traceable in `data/`, by a reader who
 clones this and runs the suites.
 
-Long-form writing about the study is not published here, in either language, and neither are
-the documents built from it. `paper/` is ignored, and `docs/*.docx`, `docs/*.pptx`,
-`docs/*.pdf` and `docs/*.html` are ignored with it, so the prose is excluded on the same terms
-as the files it renders into — publishing the sentences is the same disclosure as publishing
-the document. (Those globs are scoped to `docs/`; the workbench page at the repository root is
-tracked and is not one of them.) Writing about a study is the author's, and the author places
-it. What a clone carries is the study and the machinery, and that is the whole of what is
-offered here.
+Long-form writing about the study is not published here, in either language, neither are the
+documents built from it, and neither is the code that builds them. `paper/` is ignored;
+`docs/*.docx`, `docs/*.pptx`, `docs/*.pdf` and `docs/*.html` are ignored with it; and the six
+document generators, the four modules only they imported, and the two guards that watched
+their prose are ignored on the same terms. Publishing the sentences is the same disclosure as
+publishing the file they render into, and publishing the machine that renders them is not
+different in kind. (Those globs are scoped to `docs/`; the workbench page at the repository
+root is tracked and is not one of them.) Writing about a study is the author's, and the author
+places it.
 
-`platform/check_paper.py` is the guard that binds prose to artefacts. It does not read a fact
-sheet; it walks `data/` directly, collects every value the repository actually holds, and
-requires every numeral a text states about this study to trace to one of them or to arithmetic
-on one — with the study's central quantities anchored to the artefact field they come from, so
-a transposition fails even though it would pass a membership test. It runs in `verify_all.py`
-and **skips, reporting that it skipped, when there is no prose to read**, which is the state of
-every clone. A guard that cannot reach its subject has not passed, and saying so is the honest
-report.
+Nothing was deleted to arrive at that. Those files are on the author's disk, and are how the
+author rebuilds a reading copy from their own working tree. They are simply not part of what
+this repository offers — so no command in this README asks you to run one, and no path in it
+names one. The end of `.gitignore` lists each file, and says which others have to come back
+with it if one is ever restored.
 
-### The document generators
+What a clone carries is the study and the machinery that produced it: the plans, the
+artefacts, the folds, the code, and the guards that hold those to each other. Two things under
+`docs/` are part of that and are tracked.
 
-`platform/` holds the generators that turn artefacts into long-form documents, and they are
-part of the platform in the same way `build_dataset.py` is: code, tracked, runnable, guarded.
-**Their output is not.** Every path they write is ignored, so cloning this repository gives you
-the generators and none of the documents — you can produce a set on your own machine, and you
-will not find that set committed here.
-
-| Code | What it reads, and what holds it |
-| --- | --- |
-| `cbc/report_data.py` | The single dict both report editions unpack: the artefacts and the quantities derived from them. Nothing downstream types a number |
-| `build_report.py`, `build_report_ko.py` | The English and Korean editions of the written account. The Korean is not the English with the strings swapped — both read that same dict, so re-run a study and both change together or neither does. References resolve against `docs/REFERENCES.json`; a key that is not in it raises rather than being cited |
-| `check_reports.py` | The guard between the two editions: same figure count, same table count, same paragraph count, and **no number stated in English missing from the Korean**. It runs in `verify_all.py`, and with nothing built to compare it exits 0 saying it skipped — the word it means |
-| `build_deck.py` | The conference deck, every slide's numbers read from `data/` at build time, figures inlined as data URIs so the deck is one file. PDF export needs Google Chrome; without it the generator writes the HTML and reports that it skipped the PDF rather than leaving a stale one beside it |
-| `build_pptx.py` | The PowerPoint renderer. It parses the HTML `build_deck.py` just produced rather than re-authoring the slides, so the deck's prose lives in exactly one place, and it raises rather than silently dropping markup it does not recognise |
-| `build_paper.py`, `build_paper_deck.py`, `cbc/paper.py` | One renderer per output, serving both language editions from one block list, so the editions cannot disagree about a citation number or a figure number. Their input is the prose, which is not in this repository; in a clone they have nothing to render, and they are kept because the author rebuilds from their own working copy |
-| `build_figures.py` | The exception, and the reason it is one: figures drawn from the artefacts, whose **output is tracked**. They were once committed as PNGs with no generator behind them, which is exactly the defect this repository's own guard names elsewhere |
-
-The report and deck chain runs from a fresh clone — it reads only tracked inputs — and writes
-into `docs/`, where every path it touches is ignored:
+[`docs/figures/`](docs/figures/) holds eleven tracked PNGs. The six `fig*.png` are drawn from
+the artefacts by [`platform/build_figures.py`](platform/build_figures.py) — the one generator
+in this neighbourhood that stays, and it stays because its **output is tracked**: figures
+committed with no generator behind them are exactly the defect this repository's own guards
+name elsewhere. The five `ui*.png` are browser captures of the running page, which no script
+can regenerate. `build_figures.py` reads only tracked inputs, so it runs from a fresh clone:
 
 ```bash
-./.venv/bin/python platform/build_figures.py \
-  && ./.venv/bin/python platform/build_report.py \
-  && ./.venv/bin/python platform/build_report_ko.py \
-  && ./.venv/bin/python platform/build_deck.py \
-  && ./.venv/bin/python platform/build_pptx.py
+./.venv/bin/python platform/build_figures.py
 ```
 
-What IS tracked is what those generators read: [`docs/REFERENCES.json`](docs/REFERENCES.json),
-every citation with its PMID, DOI and the record of how it was checked, and
-[`docs/figures/`](docs/figures/), where `fig*.png` are drawn by `build_figures.py` from the
-artefacts and `ui*.png` are browser captures of the running page, which no script can
-regenerate.
-
-`docs/REFERENCES.json` is the smaller, tracked library those generators cite from — 23 entries,
-not the 190 above, which belong to writing held elsewhere. Nineteen of the 23 were resolved
-through the PubMed E-utilities; three through Consensus/Semantic Scholar (two 2026 papers and
-the Boltz-2 preprint, none of them PubMed-indexed); and Holm 1979 is marked as not
-PubMed-indexed with the venue it was checked against. Bibliographic metadata retrieved from PubMed (NLM/NCBI).
+[`docs/REFERENCES.json`](docs/REFERENCES.json) is the citation library — 23 entries, each with
+its PMID, DOI and the record of how it was checked. Nineteen of the 23 were resolved through
+the PubMed E-utilities; three through Consensus/Semantic Scholar (two 2026 papers and the
+Boltz-2 preprint, none of them PubMed-indexed); and Holm 1979 is marked as not PubMed-indexed
+with the venue it was checked against. Bibliographic metadata retrieved from PubMed (NLM/NCBI).
 
 ---
 
@@ -1258,26 +1235,8 @@ platform/
   tools/mutation_suite.py plants the defect each guard exists to catch in a scratch copy
                       and fails the guard that shrugs; slots enumerated from the guards'
                       own surface lists, so an unwatched surface reports UNCOVERED
-  cbc/report_data.py  the artefacts and derived quantities both report renderers unpack
   build_figures.py    draws docs/figures/ from the artefacts -- the one generator whose
                       output is tracked, six figures including fig6 for study #12
-  build_report.py     lays artefact rows out as long-form English, every number read from
-                      an artefact and none typed; what it writes is not tracked
-  build_report_ko.py  the same rows laid out in Korean from the same dict, so the two
-                      cannot drift; what it writes is not tracked
-  build_deck.py       lays the same artefact numbers out as slides, figures inlined; what
-                      it writes is not tracked
-  build_pptx.py       re-lays those slides as PowerPoint by parsing its own HTML rather
-                      than re-authoring them; what it writes is not tracked
-  check_reports.py    guard: the two renderings must state the same numbers -- skips, and
-                      says so, when there is nothing built to compare
-  build_paper.py      typesets the author's prose, English and Korean; neither the prose
-                      nor the output is in this repository, so a clone has nothing to read
-  build_paper_deck.py the same prose laid out as slides, both editions; same absences
-  check_paper.py      guard: every numeral a text states must trace to an artefact --
-                      skips, and says so, when there is no prose to read
-  cbc/paper.py        the format-neutral parser both prose renderers share
-  cbc/deck_style.py   the stylesheet and shell every slide renderer shares
 runs/                 content-addressed prediction artefacts + manifest
 prespec/              registered, hash-locked analysis plans
 retractions.jsonl     one record per withdrawn claim: the regexes that recognise it, the
@@ -1295,9 +1254,10 @@ docs/REFERENCES.json  every citation, with how it was verified
 index.html, app.js    the workbench page
 ```
 
-Every path the `build_*` generators write a document to is ignored, so a clone carries the
-generators and none of their output; what is tracked is the code, the artefacts it reads and
-the figures it draws.
+`platform/` above is the whole of it. The generators that turned these artefacts into
+long-form documents are not published — see *What this repository publishes* — so nothing
+here writes a `.docx`, a `.pptx` or a deck, and `build_figures.py` is the only generator in
+the tree whose output is tracked.
 
 The page is a static site with no build step. Serve it over HTTP — under `file://` the
 browser refuses every `fetch()` as cross-origin, and while the data layer has a `<script>`

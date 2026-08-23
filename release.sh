@@ -75,8 +75,9 @@ cat <<DONE
       published, here and in check_version_stamps.py
     - remove the "is not yet deposited" disclosure sentence from the surfaces that carry
       it (./.venv/bin/python platform/check_version_stamps.py names every one)
-    - rebuild the reading copies, whose version stamps come from CITATION.cff:
-      platform/build_report.py, build_report_ko.py, build_deck.py, build_pptx.py
+    - if you keep reading copies, rebuild them from your own working tree: their version
+      stamps come from CITATION.cff, and the generators that write them are not published
+      here, so this step has nothing to do with a clone
     - bump VERSION for the next cycle, then re-add the disclosure for the new version
 
 DONE

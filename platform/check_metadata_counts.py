@@ -13,10 +13,11 @@ the same count with the verdict totals attached to it.
 
 Why the guards already in the repository could not see it
 ---------------------------------------------------------
-`platform/check_paper.py` binds every numeral in the manuscript to an artefact, and it reports
-10 passed / 0 failed on a document that says "8 pre-registered studies and 25 hypotheses". Two
-reasons, both deliberate: `8` and `25` are members of the 22,054-string set it collects from
-`data/`, and it exempts small counts as the ordinary vocabulary of prose. Neither is a bug. No
+The prose guard that used to run beside this one bound every numeral in the manuscript to an
+artefact, and it reported 10 passed / 0 failed on a document that says "8 pre-registered
+studies and 25 hypotheses". Two reasons, both deliberate: `8` and `25` were members of the
+22,054-string set it collected from `data/`, and it exempted small counts as the ordinary
+vocabulary of prose. Neither was a bug. No
 membership test can distinguish a number with no basis from a number whose basis has MOVED --
 `8` still sources correctly, to last month's slate.
 
@@ -58,10 +59,12 @@ Scope, and what is deliberately NOT bound
   superseded artefact are records of what was true then; rewriting one to match today would
   destroy the property they exist for.
 * Korean editions are scanned with the same English triggers, which will not fire on Korean
-  labels. That gap is covered from the other side: `platform/check_reports.py` requires every
-  number stated in English to appear in the Korean, so once an English count is corrected the
-  parity check forces the Korean to follow. What neither can see is a count that is wrong in
-  both editions and faithfully translated -- which is the state this guard exists to end.
+  labels. This gap is now OPEN, and is recorded rather than papered over. It used to be
+  covered from the other side by a parity guard that required every number stated in English
+  to appear in the Korean, so a corrected English count forced the Korean to follow. That
+  guard watched report editions this repository no longer publishes and is no longer part of
+  it. Nothing in a clone carries a Korean count today; if one ever returns, the parity check
+  has to return with it.
 
 Escape hatch
 ------------
@@ -92,8 +95,9 @@ SURFACES: tuple[str, ...] = (
     ".zenodo.json",
     "docs/REGISTRATION.md",
     "README.md",
-    # The workbench itself, which was on no guard surface list at all -- not this one, not
-    # check_paper.py, not check_reports.py. Every count it displays is read from data/, so
+    # The workbench itself, which was on no guard surface list at all -- not this one, and
+    # not either of the two prose guards that ran alongside it then. Every count it displays
+    # is read from data/, so
     # the assumption was that it could not state a stale one. It could: the Slate tab's
     # notice carried a hand-written bold heading, "Not one study in this slate is
     # confirmatory", directly above the generated paragraph naming #12 as the exception and
@@ -394,23 +398,26 @@ def restricted_for(rel: str) -> frozenset[str] | None:
     return None
 SURFACE_GLOBS: tuple[str, ...] = (
     # The generators, because a sentence typed into one of them is a sentence on every
-    # document it builds. "Not one study in this slate is confirmatory" was hand-written in
-    # build_deck.py, build_report.py and build_report_ko.py as well as in app.js, and the
-    # three .docx/.pptx/.html files they produce are not tracked -- so scanning the built
-    # documents would scan nothing in a fresh clone, while scanning the source catches the
-    # sentence before it is rendered four times. Restricted below to the keys a generator
-    # states about the slate as a whole; the per-study counts it interpolates are values,
-    # not literals, and the ones it writes in prose belong to one study.
+    # artefact it builds. "Not one study in this slate is confirmatory" was hand-written in
+    # three document generators as well as in app.js, and the files they produced were never
+    # tracked -- so scanning built output would scan nothing in a fresh clone, while scanning
+    # the source caught the sentence before it was rendered four times. Those three
+    # generators are no longer published, and this glob now covers the artefact builders that
+    # remain; the reasoning is unchanged and is why the glob is a glob. Restricted below to
+    # the keys a generator states about the slate as a whole; the per-study counts it
+    # interpolates are values, not literals, and the ones it writes in prose belong to one
+    # study.
     "platform/build_*.py",
     "docs/RELEASE_NOTES_*.md",
     "paper/PROJECT_FACTS.md",
     "paper/sec_*.md",
     # The deck copy is prose too, wearing a .json extension. It carried the same stale slate
     # sentence as the drafted sections -- "Eight studies, twenty-five hypotheses" and a slide
-    # stamp reading "8 studies · 25 hypotheses" -- and fans out through
-    # platform/build_paper_deck.py into two .pptx files and their PDFs, which is one more
-    # surface than the manuscript has. Scanning the source rather than the slides is the
-    # point: a count fixed in a built deck is fixed until the next rebuild.
+    # stamp reading "8 studies · 25 hypotheses" -- and it fanned out through a slide renderer
+    # into two .pptx files and their PDFs, which is one more surface than the manuscript has.
+    # Scanning the source rather than the slides is the point: a count fixed in a built deck
+    # is fixed until the next rebuild. Like the rest of paper/, this glob matches nothing in
+    # a clone and is here for the author's working tree.
     "paper/deck_copy*.json",
 )
 
@@ -605,8 +612,8 @@ RULES: list[tuple[str, re.Pattern[str], str]] = [
 WORDED: list[tuple[str, int, re.Pattern[str], str]] = [
     # The pattern was `not one study is confirmatory` and nothing else, so it matched the
     # release note and missed every other copy: app.js said "Not one study IN THIS SLATE is
-    # confirmatory", build_deck.py said "in the slate", build_report.py's section 3.2 said
-    # "not one study in this slate is confirmatory". Four words of filler was the whole
+    # confirmatory", a deck generator said "in the slate", a report generator's section 3.2
+    # said "not one study in this slate is confirmatory". Four words of filler was the whole
     # difference between a guard that fires and a guard that does not, which is why the
     # slate/of-the-N wrappers are spelled out here rather than left to an exact phrase.
     ("studies_confirmatory", 0,
@@ -642,8 +649,8 @@ WORDED: list[tuple[str, int, re.Pattern[str], str]] = [
      re.compile(r"no\s+ledger\s+of\s+(?:such\s+|these\s+|those\s+)?departures?\s+"
                 r"is\s+compiled", re.I),
      "asserts that no ledger of protocol departures is compiled"),
-    # The same denial in the Korean edition. The number-parity check in check_paper.py cannot
-    # see this one: a sentence that states no number is identical in both editions whether it
+    # The same denial in Korean. A number-parity check between editions could not see this
+    # one either: a sentence that states no number is identical in both editions whether it
     # is true or false, so the English correction does not drag the Korean along behind it.
     ("deviations", 0,
      re.compile(r"이탈의\s*목록은\s*여기서\s*작성되지\s*않았"),
@@ -895,9 +902,10 @@ SELF_TEST_WORDED: tuple[tuple[str, str, int], ...] = (
      "deviations", 0),
     ("Not one study is confirmatory", "studies_confirmatory", 0),
     # The three shipped variants that the exact-phrase pattern missed. app.js printed the
-    # first in bold on the Slate tab, platform/build_deck.py the second, and
-    # platform/build_report.py's section 3.2 the third -- all three above or beside a
-    # derived paragraph that named #12 as the exception.
+    # first in bold on the Slate tab; a deck generator printed the second and a report
+    # generator's section 3.2 the third -- all three above or beside a derived paragraph
+    # that named #12 as the exception. The two generators are no longer published; the
+    # variants stay here because a pattern narrowed to one phrasing is the defect.
     ("Not one study in this slate is confirmatory", "studies_confirmatory", 0),
     ("Not one study in the slate is confirmatory", "studies_confirmatory", 0),
     ("not one study in this slate is confirmatory", "studies_confirmatory", 0),

@@ -1118,10 +1118,10 @@ function renderCustody(cu) {
       ${r.gpu_hours ? `<div><span>Cost to regenerate them</span>
         <strong>≈ ${r.gpu_hours.toFixed(1)} GPU-hours</strong></div>` : ''}
     </div>
-    ${/* The command is inside cu.note already — it has to be, because that sentence is
-          republished into the report and the deck where there is no code block beside it.
-          Printing it twice in one notice is noise, so only the basis for the hours goes
-          here. */
+    ${/* The command is inside cu.note already — it has to be, because that sentence has
+          always been republished onto surfaces with no code block beside it, and cu.note is
+          the only copy. Printing it twice in one notice is noise, so only the basis for the
+          hours goes here. */
       r.compute_basis ? `<p class="hint">${esc(r.compute_basis)}</p>` : ''}
     <span class="hint">counted from the artefact's own rows against
       <code>${esc(cu.checked_against)}</code> by
@@ -1175,10 +1175,10 @@ function renderSlate() {
      after study #12's audit came back with an empty deviation list, so the panel contradicted
      itself twice over: the stat card above it read "1 confirmatory — see below" and the
      paragraph directly below it named #12 as the exception. The same sentence was written by
-     hand on three other surfaces -- platform/build_deck.py, platform/build_report.py and
-     platform/build_report_ko.py -- and every one of them is now a reader of
-     sl.confirmatory_headline instead. A heading that states a count is generated from the
-     count, or it eventually says the opposite of the body it introduces. */
+     hand on three long-form surfaces as well, and each was made a reader of
+     sl.confirmatory_headline before those surfaces stopped being published at all. A heading
+     that states a count is generated from the count, or it eventually says the opposite of
+     the body it introduces. */
   const cf = document.getElementById('slate-confirmatory');
   if (cf) cf.innerHTML = `<strong>${esc(sl.confirmatory_headline)}</strong>
     <p>${esc(sl.confirmatory_note)}</p>`;

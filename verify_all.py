@@ -49,20 +49,23 @@ SUITES = [
     ("Naming guard (pooled potency must not be rendered as free energy)",
      [PY, "platform/check_naming.py"], 0,
      "no code path converts affinity_pred_value into kcal/mol or names it an apparent dG"),
-    # Not in the platform suite: both report generators run that suite to take their check
-    # count from it, so a check there comparing the two finished editions is circular.
-    ("Report editions agree (English vs Korean)",
-     [PY, "platform/check_reports.py"], 0,
-     "the two editions describe the same work; no number stated in English is missing "
-     "from the Korean"),
-    # The prose guard was written and then left out of this list, so the command
-    # the README calls "run everything" ran everything except the check on the longest
-    # document in the repository. It walks data/ directly rather than trusting the fact sheet
-    # the drafters worked from, which is the reason it belongs here and not in a build script.
-    ("Prose-to-artefact numeric provenance",
-     [PY, "platform/check_paper.py"], 0,
-     "every numeral the paper states about this study traces to an artefact or to "
-     "arithmetic on one; the two editions agree on numbers, citations and figures"),
+    # RESOLVED, AND RECORDED SO THE HOLE IS NOT MISTAKEN FOR AN OVERSIGHT. Two entries stood
+    # here: check_reports.py, which held the English and Korean report editions to each
+    # other, and check_paper.py, which bound every numeral in the manuscript to an artefact.
+    # Both were guards over prose this repository no longer publishes -- the prose, the six
+    # generators that rendered it and these two guards are all untracked and ignored (see the
+    # block at the end of .gitignore). They ran green for the author, whose working copy has
+    # them, and in a CLONE the files are absent, python exits 2, no evidence line is printed,
+    # and this command reported two FAILs. A suite that can only pass on one machine is not a
+    # suite this file should list.
+    #
+    # Removing them lowered len(SUITES) from twelve to ten, and check_metadata_counts.py
+    # binds that number to every sentence that states a suite count, so this was done as the
+    # one change the note at the bottom of this list prescribes: the two entries and their
+    # EVIDENCE keys dropped, the README badge, the README Quick start line and the
+    # .zenodo.json clause corrected, docs/RELEASE_NOTES_v<VERSION>.md rebuilt with
+    # platform/build_release_notes.py, and check_metadata_counts.py confirmed still exiting 0.
+    #
     # The two guards over the mechanism that produced this repository's misleading claims:
     # a finding is minted once, fans out across dozens of surfaces, is later withdrawn by a
     # measurement made inside this same repository, and survives on every surface the person
@@ -72,9 +75,9 @@ SUITES = [
     ("Retraction guard (a withdrawn claim never travels without its withdrawal)",
      [PY, "platform/check_retractions.py"], 0,
      "every public surface against retractions.jsonl -- README, the page, the citable "
-     "metadata, data/ prose fields, docs/ including the built .docx and .pptx, paper/, "
-     "module docstrings, the generated ledger views -- plus the joins the ledger requires "
-     "on the page; prespec/, data/superseded/ and memory/ledger/ are exempt AS FILES"),
+     "metadata, data/ prose fields, docs/*.md, paper/ where it exists, module docstrings, "
+     "the generated ledger views -- plus the joins the ledger requires on the page; "
+     "prespec/, data/superseded/ and memory/ledger/ are exempt AS FILES"),
     ("Metadata count guard (hand-typed slate counts equal the artefacts)",
      [PY, "platform/check_metadata_counts.py"], 0,
      "every count typed beside studies, hypotheses, plans, suites, candidates or a verdict "
@@ -98,12 +101,14 @@ SUITES = [
     # Listed last because it runs the three guards above some seventy times, against scratch
     # copies of this repository with a defect planted in each. It is the answer to the
     # question those three entries cannot answer about themselves: a green line is
-    # indistinguishable from a green line, and check_paper.py reported 10 passed / 0 failed
-    # on a manuscript whose slate counts were a month out of date. On its first run it found
-    # that the retraction guard could not fail on a .docx or a .pptx -- the whole document
-    # was collapsed to one line, so the word "retracted" anywhere in it acknowledged every
-    # withdrawn claim in it, and the rendered manuscript is exactly where one of the nine
-    # was hiding.
+    # indistinguishable from a green line, and the prose guard that used to sit in this list
+    # reported 10 passed / 0 failed on a manuscript whose slate counts were a month out of
+    # date. On its first run it found that the retraction guard could not fail on a Word or
+    # PowerPoint file -- the whole document was collapsed to one line, so the word
+    # "retracted" anywhere in it acknowledged every withdrawn claim in it, and the rendered
+    # manuscript is exactly where one of the nine was hiding. Those documents are no longer
+    # published and no longer watched; the finding is kept because it is why the reader in
+    # check_retractions.py splits on paragraphs.
     ("Mutation suite (each guard proven able to fail, on every surface it watches)",
      [PY, "platform/tools/mutation_suite.py"], 0,
      "plants the defect each guard exists to catch in a scratch copy and requires the guard "
@@ -143,10 +148,6 @@ EVIDENCE = {
     "Dataset build + provenance audit": re.compile(r"PROVENANCE AUDIT:", re.M),
     "Naming guard (pooled potency must not be rendered as free energy)":
         re.compile(r"^PASS — no code path converts", re.M),
-    "Report editions agree (English vs Korean)":
-        re.compile(r"^\d+ passed, \d+ failed", re.M),
-    "Prose-to-artefact numeric provenance":
-        re.compile(r"^\d+ passed, \d+ failed", re.M),
     # The scale line, not the verdict line: it is printed on both the passing and the failing
     # path, so a crash cannot impersonate either one.
     "Retraction guard (a withdrawn claim never travels without its withdrawal)":

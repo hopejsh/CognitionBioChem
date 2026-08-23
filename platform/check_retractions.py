@@ -21,8 +21,8 @@ Two ways to travel, matched to the two kinds of surface:
   legitimate is the retraction block sitting in the same object. Delete the join and this
   fails.
 
-  PROSE (`*.md`, `*.py`, `*.js`, `*.html`, `*.css`, `*.cff`, `NOTICE`, and the rendered
-  `.docx`/`.pptx`). A withdrawal marker must appear in the same authored block as the match
+  PROSE (`*.md`, `*.py`, `*.js`, `*.html`, `*.css`, `*.cff`, `NOTICE`). A withdrawal marker
+  must appear in the same authored block as the match
   -- the record id, or one of `retractions.WITHDRAWAL_MARKERS`. The README's Slate #7 gate
   paragraph is the shape this is calibrated on: it quotes the retracted clause and withdraws
   it four lines later, and that must pass. `memory/views/claims.md` is the shape that forced
@@ -60,9 +60,13 @@ WHAT IT DOES NOT SEE, STATED RATHER THAN PASSED OVER
   omitted, so the gap is visible.
 * `runs/`, `.venv*/`, `.git/`, `data/pae/`, `data/targets/`, `data/alphafold_db/`: machine
   output, no prose.
-* Text split across XML runs inside `.docx`/`.pptx`. Tags are stripped and whitespace
-  collapsed before matching, which recovers most of it, but a fingerprint broken across a
-  formatting boundary can still escape. Reported in the summary.
+* Anything under `paper/` or any built `.docx`/`.pptx`/`.pdf`/`.html` under `docs/`. Those
+  are not published by this repository and are absent from a clone, so they are not listed in
+  SURFACES. The reader for Word and PowerPoint parts is retained for the day one of them is
+  tracked again; see the note in SURFACES. Its known limit, recorded there rather than lost:
+  text split across XML runs. Tags are stripped and whitespace collapsed before matching,
+  which recovers most of it, but a fingerprint broken across a formatting boundary can still
+  escape.
 """
 
 from __future__ import annotations
@@ -99,8 +103,19 @@ SURFACES: tuple[str, ...] = (
     "data/*.json",
     "data/*.js",
     "docs/*.md",
-    "docs/*.docx",
-    "docs/*.pptx",
+    # `docs/*.docx` and `docs/*.pptx` stood here. Nothing in this repository writes either
+    # one any more: the six document generators are not published (see the block at the end
+    # of .gitignore), so no tree a clone can reach produces a file those patterns would
+    # match, and the surface slots the mutation suite derived from them were no-ops. The
+    # Word/PowerPoint reader below is kept rather than deleted -- it is correct, the mutation
+    # suite is what made it correct, and if a built document is ever tracked again the
+    # pattern comes back here and the reader is already right. Until then it is unreachable,
+    # which is stated rather than left to be discovered.
+    #
+    # `paper/*.md` STAYS. Unlike the two above it is hand-authored prose that still exists in
+    # the author's working tree, where this guard still reads it; in a clone the pattern
+    # matches nothing and the mutation suite already classes it absent-by-design. It is the
+    # same treatment check_metadata_counts.py gives paper/, and the two lists agree on it.
     "paper/*.md",
     "platform/**/*.py",
     "memory/*.py",
@@ -204,9 +219,11 @@ def _office_text(p: Path) -> str:
     acknowledgement rule downstream works on a block of lines, so a one-line document is one
     block, and a document is a block that contains the word "retracted" somewhere -- these
     are papers about a project whose central result was withdrawn, so of course it does. A
-    retracted claim planted anywhere in `docs/CognitionBioChem_Paper.docx` was therefore
-    acknowledged by a sentence forty pages away, and the guard reported the file clean.
-    `platform/tools/mutation_suite.py` plants exactly that and requires this to fail on it.
+    A retracted claim planted anywhere in a forty-page manuscript was therefore acknowledged
+    by a sentence forty pages away, and the guard reported the file clean.
+    `platform/tools/mutation_suite.py` planted exactly that and required this to fail on it.
+    Both the manuscript and the generators that rendered it are unpublished now, so nothing
+    in a clone reaches this function; it is kept correct against the day one does.
 
     A line here is a paragraph, so a reported line number counts paragraphs rather than
     source lines -- there are no source lines in a zip. The withdrawal window is the same one

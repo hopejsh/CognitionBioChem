@@ -30,9 +30,13 @@ Scope
 -----
 This owns ONE region of the file, delimited by the two markers below. The rest -- the target
 table, the candidate table, the headline measurements, the methods list -- stays hand-
-maintained, and `platform/check_paper.py` binds those numbers to `data/` from the other side.
-A generator that rewrote the whole file would have to re-derive prose it does not own, which
-is how a generator starts inventing.
+maintained. A generator that rewrote the whole file would have to re-derive prose it does not
+own, which is how a generator starts inventing.
+
+`paper/` is not published by this repository (see the block at the end of `.gitignore`), so
+in a clone this script has no target. It says so and exits 0 rather than raising: an absent
+subject is not a stale fact sheet, and a traceback would read like one. For the author, whose
+working tree has `paper/`, it behaves exactly as it always did.
 
 Nothing here writes to `prespec/` or `data/superseded/`, which are records of what was true
 then and are never rewritten.
@@ -135,6 +139,13 @@ def splice(text: str, new: str) -> str:
 
 
 def main() -> int:
+    if not TARGET.exists():
+        # Not a failure. paper/ is the author's manuscript workspace and is not published
+        # here, so a clone has nothing to write into. A skip that names its reason is the
+        # honest report; a FileNotFoundError traceback would look like a defect in the data.
+        print(f"SKIP — {TARGET.relative_to(REPO)} is not in this tree. paper/ is not "
+              "published by this repository, so there is no fact sheet to generate.")
+        return 0
     text = TARGET.read_text()
     want = splice(text, block(facts()))
     if "--check" in sys.argv:

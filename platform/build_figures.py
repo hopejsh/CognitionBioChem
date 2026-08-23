@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Build the generated figures: the five docs/CognitionBioChem_Report.docx and the deck
-embed, and fig6, which stands on its own.
+"""Build the generated figures under docs/figures/: fig1-fig5, and fig6.
 
 These figures existed before this file did: they were drawn once, by hand, from a throwaway
 script, and committed as PNGs with no generator behind them. That is precisely the defect
@@ -14,14 +13,16 @@ page reads, and is re-runnable:
 Every label, count and statistic on every axis is read from data/ at draw time. Nothing is
 typed into a title.
 
-fig6 is drawn here but embedded by nothing: the report, the deck and the paper were written
-before study #12 existed and none of them refers to it. It is generated anyway, because the
-alternative is a figure that lives only in a manuscript workspace outside this repository,
-which is the same unreproducible arrangement the paragraph above describes.
+fig1-fig5 were drawn to be embedded in the long-form documents this repository used to
+build. It no longer publishes those documents or the generators that rendered them, and
+these five outlived them: they are tracked, they are re-derivable from data/, and a figure
+of an artefact is worth having whether or not a document embeds it. fig6 never had a
+document to sit in -- the write-ups predate study #12 -- and it was generated anyway for the
+same reason.
 
 The screen captures under docs/figures/ui*.png are not produced here. They are photographs
 of the running page, taken from a browser, and no script can regenerate them; the page they
-show is index.html served over HTTP, and each caption in the report says which tab it is.
+show is index.html served over HTTP.
 """
 
 from __future__ import annotations

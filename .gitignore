@@ -60,3 +60,53 @@ docs/~$*
 # the guards. What the author writes about it is the author's to place.
 # platform/check_paper.py skips rather than fails when this directory is absent.
 paper/
+
+# The generators of those documents, and the two guards over their prose. The entry above
+# refuses to publish the built .docx/.pptx/.html; paper/ refuses to publish the sentences
+# they render. Publishing the machine that writes the sentences is not different in kind, so
+# it goes the same way. These are NOT deleted -- they are on the author's disk and are how
+# the author rebuilds a reading copy from their own working tree; they are simply not part
+# of what this repository publishes.
+#
+# What this repository publishes is the study: the plans, the artefacts, the folds, the
+# code that produces them, and the guards that hold them to the data. Not the write-up.
+#
+# Named one file per line rather than by a platform/build_* glob, because platform/ holds
+# build_dataset.py, build_figures.py, build_slate.py, build_structures.py,
+# build_project_facts.py and build_release_notes.py, every one of which is tracked and must
+# stay tracked. A glob here would silently swallow the artefact builders too.
+#
+# DO NOT ADD THESE BACK. Their absence is the decision, not an oversight:
+platform/build_paper.py
+platform/build_paper_deck.py
+platform/build_report.py
+platform/build_report_ko.py
+platform/build_deck.py
+platform/build_pptx.py
+#
+# The four modules the six above import, and nothing else does. Verified by grepping the
+# whole tree, not just platform/: outside these six the only mentions are prose in README.md
+# and in the two guards below. Each is left here beside its sole consumers so that a reader
+# who restores one of them knows what else has to come back with it.
+# A note per module names its sole consumers, so that a reader who restores one of them
+# knows what else has to come back with it. The notes are on their own lines: git reads `#`
+# as a comment ONLY at the start of a line, so a trailing `# ...` would become part of the
+# pattern and the entry would silently match nothing. These four were written that way first
+# and ignored none of the four files, which is exactly the failure this comment prevents.
+#
+# consumers: build_paper.py, check_paper.py
+platform/cbc/paper.py
+# consumers: build_paper.py, build_report_ko.py
+platform/cbc/hangul.py
+# consumers: build_report.py, build_report_ko.py, build_paper.py
+platform/cbc/report_data.py
+# consumers: build_deck.py, build_paper_deck.py
+platform/cbc/deck_style.py
+#
+# The two guards that watch the prose. check_paper.py binds every numeral in the manuscript
+# to an artefact and check_reports.py holds the two report editions to each other -- both are
+# guards over text that is no longer published, so with the text and its renderers gone they
+# have nothing to watch in a clone. They remain in verify_all.py's SUITES list, which is a
+# loose end recorded rather than quietly patched: see the note there.
+platform/check_paper.py
+platform/check_reports.py

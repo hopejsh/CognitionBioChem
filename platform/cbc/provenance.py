@@ -50,14 +50,16 @@ GENERATED_ARTEFACTS = (
     "data/validation_gate.json", "data/validation_gate.js",
     "data/alphafold_db_comparison.json",
     "data/pae/",
-    # The written account and the deck are generated too, and they carry this same stamp.
-    # Left out of this tuple, build_report.py dirtied the tree by writing its own .docx and
-    # then failed the stamp check it had just run -- the identical self-invalidation this
-    # tuple exists to stop, one directory over.
-    "docs/CognitionBioChem_Report.docx",
-    "docs/CognitionBioChem_Deck.html",
-    "docs/CognitionBioChem_Deck.pdf",
     "docs/figures/fig",
+    # The built documents under docs/ used to be listed here as well -- the report .docx and
+    # the deck .html/.pdf -- because build_report.py dirtied the tree by writing its own
+    # output and then failed the stamp check it had just run. That exclusion is now dead
+    # weight rather than protection, twice over: those documents are ignored, so `git status
+    # --porcelain` never mentions them at all, and the loop below already skips every `??`
+    # line; and the generators that wrote them are no longer published. Their absence from
+    # this tuple is therefore not the bug it once was. Should a built document ever become
+    # tracked again, it belongs back here -- the self-invalidation is a property of
+    # generated output, not of any particular file.
 )
 
 

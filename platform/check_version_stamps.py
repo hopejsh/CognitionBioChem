@@ -71,10 +71,11 @@ Two surfaces deliberately do NOT carry it, and the reasons are not the same:
 Scope
 -----
 Sources, not built documents. `docs/*.docx`, `*.pptx`, `*.pdf` and `*.html` are gitignored
-reading copies that do not exist in a clone, and every version string in them is interpolated
-from `CITATION.cff` by `platform/build_*.py` -- so the stamp is caught here, before it is
-rendered into six documents. The same reasoning `platform/check_metadata_counts.py` gives for
-scanning generators rather than their output.
+reading copies that do not exist in a clone; the generators that wrote them are not published
+here either, and every version string they interpolated came from `CITATION.cff` -- so the
+stamp is caught here, at the source, whether or not anything downstream renders it. The same
+reasoning `platform/check_metadata_counts.py` gives for scanning generators rather than their
+output.
 
 `prespec/`, `data/superseded/` and `memory/ledger/` are not scanned. A record of what was
 registered or believed is never rewritten to match today.
